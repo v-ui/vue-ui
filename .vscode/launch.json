@@ -1,0 +1,43 @@
+{
+   // Use IntelliSense to find out which attributes exist for C# debugging
+   // Use hover for the description of the existing attributes
+   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+   "version": "0.2.0",
+   "configurations": [
+      {
+          "type": "chrome",
+          "request": "launch",
+          "sourceMaps": true,
+          "name": "Launch Chrome against localhost",
+          // your web server url
+          "url": "http://localhost:8080",
+          // set your webroot directory
+          "webRoot": "${workspaceRoot}/view/dist"
+      },
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "vuejs: chrome",
+        "url": "http://localhost:8080",
+        "webRoot": "${workspaceFolder}/view/src",
+        "breakOnLoad": true,
+        "sourceMapPathOverrides": {
+            "webpack:///./src/*": "${webRoot}/*"
+          }
+        },
+        {
+          "type": "firefox",
+          "request": "launch",
+          "name": "vuejs: firefox",
+          "url": "http://localhost:8080",
+          "webRoot": "${workspaceFolder}/src",
+          "pathMappings": [{ "url": "webpack:///src/", "path": "${webRoot}/" }]
+        },
+        {
+            "version": "0.2.0",
+            "configurations": [
+
+            ]
+        }
+    ,]
+}
