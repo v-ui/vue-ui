@@ -25,7 +25,7 @@ const Routers = [
 export default Routers
 
 export { Modules }
-    
+
 /*\
 |*| 路由规则
 |*| 0. 依赖于 vue router（https://router.vuejs.org/zh/）
