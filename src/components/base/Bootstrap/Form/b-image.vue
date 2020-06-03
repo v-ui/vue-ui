@@ -1,8 +1,8 @@
 <template>
-    <input type="image">
+  <input type="image" >
 </template>
 <script>
 export default {
-    name: 'b-image',
-}
+  name: "b-image"
+};
 </script>

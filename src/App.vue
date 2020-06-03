@@ -2,7 +2,7 @@
   <div id="app" class="m-0 p-0 min-vw-100 min-vh-100">
     <template v-if="show">
       <!-- Load Plugin Page -->
-      <router-view></router-view>
+      <router-view />
     </template>
     <template v-else>
       <layout />
@@ -19,7 +19,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // 字体图标
 import '@fortawesome/fontawesome-free/css/all.min.css'
 
-import layout from "@/components/layout/layout-base.vue"
+import layout from "@/components/layout/LayoutBase.vue"
 
 export default {
   components: {

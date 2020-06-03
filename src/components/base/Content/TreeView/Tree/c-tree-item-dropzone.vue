@@ -1,9 +1,9 @@
 <template>
-    <div class="bg-secondary" />
+  <div class="bg-secondary" />
 </template>
 
 <script>
 export default {
-    name: 'c-tree-item-dropzone'
-}
+  name: "c-tree-item-dropzone"
+};
 </script>

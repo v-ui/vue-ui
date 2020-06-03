@@ -1,8 +1,8 @@
 <template>
-    <div class="dropdown-divider" />
+  <div class="dropdown-divider" />
 </template>
 <script>
 export default {
-    name: 'b-dropdown-divider',
-}
+  name: "b-dropdown-divider"
+};
 </script>

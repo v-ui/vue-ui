@@ -1,8 +1,10 @@
 <template>
-    <div v-show="$slots.default" class="card-deck"><slot></slot></div>
+  <div v-show="$slots.default" class="card-deck">
+    <slot />
+  </div>
 </template>
 <script>
 export default {
-    name: 'b-card-deck',
-}
+  name: "b-card-deck"
+};
 </script>

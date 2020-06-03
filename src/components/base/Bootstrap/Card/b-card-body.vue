@@ -1,9 +1,11 @@
 <template>
-    <div v-show="$slots.default" class="card-body"><slot></slot></div>
+  <div v-show="$slots.default" class="card-body">
+    <slot />
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'b-card-body'
-}
+  name: "b-card-body"
+};
 </script>

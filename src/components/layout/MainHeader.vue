@@ -44,7 +44,7 @@
         </ul>
       </div>
     </div>
-    <div class="bg-primary d-flex w-100">
+    <div class="bg-primary border-bottom border-light shadow-sm d-flex w-100">
       <!-- <dropdown-menu /> -->
       <router-link class="btn btn-primary d-inline-flex" to="/" role="button">
         <i class="fas fa-home align-self-center px-1" />

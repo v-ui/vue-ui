@@ -1,13 +1,14 @@
 <template>
-    <video ref="videoPlayer" class="video-js vjs-default-skin">
-        <p class="vjs-no-js">
-            To view this video please enable JavaScript, and consider upgrading to a
-            web browser that
-            <a href="http://videojs.com/html5-video-support/" target="_blank">
-                supports HTML5 video
-            </a>
-        </p>
-    </video>
+  <video ref="videoPlayer" class="video-js vjs-default-skin">
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that
+      <a
+        href="http://videojs.com/html5-video-support/"
+        target="_blank"
+      >supports HTML5 video</a>
+    </p>
+  </video>
 </template>
 
 <script>
@@ -18,127 +19,128 @@
  * https://docs.videojs.com/tutorial-options.html
  * VLC WebPlugin
  * http://localhost:8080/Demo-Content-c-video
-* <video>
-* https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video
-* 视频和音频内容
-* https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content
-* Creating a cross-browser video player
-* https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery/cross_browser_video_player
-* Adding captions and subtitles to HTML5 video
-* https://developer.mozilla.org/zh-CN/docs/Web/Guide/Audio_and_video_delivery/Adding_captions_and_subtitles_to_HTML5_video
-* Guide to media types and formats on the web
-* https://developer.mozilla.org/zh-CN/docs/Web/Media/Formats
-*/
+ * <video>
+ * https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video
+ * 视频和音频内容
+ * https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content
+ * Creating a cross-browser video player
+ * https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery/cross_browser_video_player
+ * Adding captions and subtitles to HTML5 video
+ * https://developer.mozilla.org/zh-CN/docs/Web/Guide/Audio_and_video_delivery/Adding_captions_and_subtitles_to_HTML5_video
+ * Guide to media types and formats on the web
+ * https://developer.mozilla.org/zh-CN/docs/Web/Media/Formats
+ */
 // 不跟踪
-window.HELP_IMPROVE_VIDEOJS = false
-import 'video.js/dist/video-js.css'
-import videojs from 'video.js'
-import plugins from './plugins'
+window.HELP_IMPROVE_VIDEOJS = false;
+import "video.js/dist/video-js.css";
+import videojs from "video.js";
+import plugins from "./plugins";
 
 export default {
-    name: 'c-video',
-    data() {
-        return {
-            player: null,
-            defaultOptions: {
-              fluid: true,
-              // liveui: true,
-              controls: true,
-              autoplay: false,
-              responsive: true,
-              playsinline: true,
-              // LiveDisplay: true,
-              posterImage: true,
-              errorDisplay: true,
-              bigPlayButton: true,
-              // textTrackDisplay: false, // 字幕
-              preloadTextTracks: false,
-              techOrder: ["html5",],
-              preload: "auto", // offeline 后可自动重新加载
-              poster: "http://vjs.zencdn.net/v/oceans.png",
-              playbackRates: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
-              controlBar: {
-                volumePanel: {
-                  inline: false
-                }
-              },
-              userActions: {
-                hotkeys: true,
-              },
-              html5: { hls: { withCredentials: false }},
-              sources: [
-                // {
-                //   type: 'video/mp4',
-                //   src: 'https://vjs.zencdn.net/v/oceans.mp4',
-                // },
-                // {
-                //   type: 'video/webm',
-                //   src: 'https://vjs.zencdn.net/v/oceans.webm'
-                // },
-                // {
-                //   type: 'rtmp/mp4',
-                //   src: 'rtmp://184.72.239.149/vod/&mp4:BigBuckBunny_115k.mov'
-                // },
-                // {
-                //   withCredentials: false,
-                //   type: 'application/x-mpegURL',
-                //   src: 'http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8'
-                // },
-                // {
-                //   withCredentials: false,
-                //   type: "application/x-mpegURL",
-                //   src: "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8"
-                // },
-                // {
-                //   type: 'application/x-mpegURL',
-                //   src: 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8',
-                // },
-                // {
-                //   type: 'application/dash+xml',
-                //   src: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd',
-                // },
-                // {
-                //   type: 'application/x-mpegURL',
-                //   src: 'https://d2zihajmogu5jn.cloudfront.net/advanced-fmp4/master.m3u8',
-                // },
-                // {
-                //   type: "video/mp4",
-                //   src: 'url.mkv',
-                // },
-                { src: 'http://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' },
-                // { src: 'http://vjs.zencdn.net/v/oceans.webm', type: 'video/webm' },
-                // { type: "video/mp4", src: 'url.mkv', },
-                // { type: "video/webm", src: 'url.mkv', },
-                // { type: 'video/x-matroska; codecs="theora, vorbis"', src: "url.mkv", },
-              ],
-            },
-        }
-    },
-    props: {
-        options: {
-            type: Object,
-            default: () => {},
-        }
-    },
-    mounted () {
-      plugins.title.init()
-      plugins.mobileUi.init()
-
-      this.player = videojs(this.$refs.videoPlayer, videojs.mergeOptions(this.defaultOptions, this.options))
-      this.player.addChild('TitleBar', {text: 'The title of the video!'})
-      this.player.mobileUi()
-    },
-    beforeDestroy () {
-        if (this.player) {
-          plugins.mobileUi.dispose()
-          this.player.dispose()
-          this.player = null
-        }
-    },
-    methods: {
-
+  name: "c-video",
+  data() {
+    return {
+      player: null,
+      defaultOptions: {
+        fluid: true,
+        // liveui: true,
+        controls: true,
+        autoplay: false,
+        responsive: true,
+        playsinline: true,
+        // LiveDisplay: true,
+        posterImage: true,
+        errorDisplay: true,
+        bigPlayButton: true,
+        // textTrackDisplay: false, // 字幕
+        preloadTextTracks: false,
+        techOrder: ["html5"],
+        preload: "auto", // offeline 后可自动重新加载
+        poster: "http://vjs.zencdn.net/v/oceans.png",
+        playbackRates: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
+        controlBar: {
+          volumePanel: {
+            inline: false
+          }
+        },
+        userActions: {
+          hotkeys: true
+        },
+        html5: { hls: { withCredentials: false } },
+        sources: [
+          // {
+          //   type: 'video/mp4',
+          //   src: 'https://vjs.zencdn.net/v/oceans.mp4',
+          // },
+          // {
+          //   type: 'video/webm',
+          //   src: 'https://vjs.zencdn.net/v/oceans.webm'
+          // },
+          // {
+          //   type: 'rtmp/mp4',
+          //   src: 'rtmp://184.72.239.149/vod/&mp4:BigBuckBunny_115k.mov'
+          // },
+          // {
+          //   withCredentials: false,
+          //   type: 'application/x-mpegURL',
+          //   src: 'http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8'
+          // },
+          // {
+          //   withCredentials: false,
+          //   type: "application/x-mpegURL",
+          //   src: "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8"
+          // },
+          // {
+          //   type: 'application/x-mpegURL',
+          //   src: 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8',
+          // },
+          // {
+          //   type: 'application/dash+xml',
+          //   src: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd',
+          // },
+          // {
+          //   type: 'application/x-mpegURL',
+          //   src: 'https://d2zihajmogu5jn.cloudfront.net/advanced-fmp4/master.m3u8',
+          // },
+          // {
+          //   type: "video/mp4",
+          //   src: 'url.mkv',
+          // },
+          { src: "http://vjs.zencdn.net/v/oceans.mp4", type: "video/mp4" }
+          // { src: 'http://vjs.zencdn.net/v/oceans.webm', type: 'video/webm' },
+          // { type: "video/mp4", src: 'url.mkv', },
+          // { type: "video/webm", src: 'url.mkv', },
+          // { type: 'video/x-matroska; codecs="theora, vorbis"', src: "url.mkv", },
+        ]
+      }
+    };
+  },
+  props: {
+    options: {
+      type: Object,
+      default: () => {}
     }
-}
+  },
+  mounted() {
+    plugins.title.init();
+    plugins.mobileUi.init();
+
+    this.player = videojs(
+      this.$refs.videoPlayer,
+      videojs.mergeOptions(this.defaultOptions, this.options)
+    );
+    this.player.addChild("TitleBar", { text: "The title of the video!" });
+    this.player.mobileUi();
+  },
+  beforeDestroy() {
+    if (this.player) {
+      plugins.mobileUi.dispose();
+      this.player.dispose();
+      this.player = null;
+    }
+  },
+  methods: {}
+};
 </script>
 
 <style scoped lang="scss">
@@ -166,7 +168,7 @@ $primary-foreground-color: #fff; // #fff default
 // The default color of control backgrounds is mostly black but with a little
 // bit of blue so it can still be seen on all-black video frames, which are common.
 // Try changing to #900
-$primary-background-color: #2B333F;  // #2B333F default
+$primary-background-color: #2b333f; // #2B333F default
 
 // Try changing to true
 $center-big-play-button: true; // true default
@@ -301,7 +303,7 @@ $slider-bg-color: lighten($primary-background-color, 33%);
   /*
     By default, do not show the title bar.
   */
-  padding: .4em;
+  padding: 0.4em;
   position: absolute;
   top: 0;
   left: 0;
@@ -311,7 +313,9 @@ $slider-bg-color: lighten($primary-background-color, 33%);
 .vjs-default-skin.vjs-has-started /deep/ .vjs-title-bar {
   transition: top 0.3s;
 }
-.vjs-default-skin.vjs-has-started.vjs-playing.vjs-user-inactive /deep/ .vjs-title-bar {
+.vjs-default-skin.vjs-has-started.vjs-playing.vjs-user-inactive
+  /deep/
+  .vjs-title-bar {
   visibility: visible;
   top: -3em;
   opacity: 1;
@@ -339,7 +343,9 @@ $slider-bg-color: lighten($primary-background-color, 33%);
 .vjs-default-skin.vjs-has-started /deep/ .vjs-control-bar {
   transition: bottom 0.3s;
 }
-.vjs-default-skin.vjs-has-started.vjs-playing.vjs-user-inactive /deep/ .vjs-control-bar {
+.vjs-default-skin.vjs-has-started.vjs-playing.vjs-user-inactive
+  /deep/
+  .vjs-control-bar {
   bottom: -3em;
   visibility: visible;
   opacity: 1;
@@ -349,5 +355,4 @@ $slider-bg-color: lighten($primary-background-color, 33%);
 .vjs-default-skin.vjs-error /deep/ .vjs-control-bar {
   visibility: hidden;
 }
-
 </style>

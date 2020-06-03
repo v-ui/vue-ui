@@ -33,7 +33,7 @@ export default {
     hash: 'fab fa-slack-hash', // a hash （Anchor point）
     info: 'fas fa-info-circle', // table no data
     email: 'fas fa-envelope', // form b-text input email, a email
-    ip: 'fas fa-info', // form b-text input ip | fas fa-info-circle 
+    ip: 'fas fa-info', // form b-text input ip | fas fa-info-circle
     phone: 'fas fa-mobile-alt', // form b-text input phone
     sms: 'fas fa-sms', // a sms
     tel: 'fas fa-phone', // form b-text input tel, a tel

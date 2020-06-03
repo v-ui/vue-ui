@@ -1,9 +1,8 @@
 <template>
-    <input type="hidden">
+  <input type="hidden" >
 </template>
 <script>
-
 export default {
-    name: 'b-hidden',
-}
+  name: "b-hidden"
+};
 </script>

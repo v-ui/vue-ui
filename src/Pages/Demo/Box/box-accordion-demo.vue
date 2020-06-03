@@ -24,7 +24,7 @@
                 </box-accordion>
             </div>
         </div>
-        
+
         <h2>box-accordion-list</h2>
         <hr>
         <div class="row pt-1">
@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import BoxAccordion from '@/components/Box/Accordion/box-accordion.vue'
-import BoxAccordionList from '@/components/Box/Accordion/box-accordion-list.vue'
+import BoxAccordion from '@/components/box/Accordion/box-accordion.vue'
+import BoxAccordionList from '@/components/box/Accordion/box-accordion-list.vue'
 
 export default {
     name: 'box-accordion-demo',

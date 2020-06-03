@@ -1,27 +1,27 @@
 <template>
-  <div></div>
+  <div />
 </template>
 
 <script>
-import {fs, path} from 'filer'
+import { fs, path } from "filer";
 
 export default {
-  name: 'b-file-browser',
+  name: "b-file-browser",
   created() {
-    this.init()
+    this.init();
   },
   methods: {
     init() {
-      console.log(fs)
-      fs.stat(path.dirname('/'), (error, stat) => {
+      console.log(fs);
+      fs.stat(path.dirname("/"), (error, stat) => {
         if (stat.isDirectory()) {
-          fs.readdir('/', (error, files) => {
-            console.log(files)
-            debugger
-          })
+          fs.readdir("/", (error, files) => {
+            console.log(files);
+            debugger;
+          });
         }
-      })
-    },
-  },
-}
+      });
+    }
+  }
+};
 </script>

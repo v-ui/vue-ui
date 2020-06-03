@@ -1,9 +1,9 @@
 <template>
-  <main class="rounded p-1 m-1">
+  <main class=" border border-primary rounded-lg p-1">
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
     <transition name="component-fade" mode="out-in">
-      <router-view class="min-vh-100" />
+      <router-view class="h-100" />
     </transition>
   </main>
 </template>

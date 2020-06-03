@@ -22,14 +22,14 @@
                 <box-tab-pane id="three2">three</box-tab-pane>
             </box-tab-content>
         </div>
-        
+
     </div>
 </template>
 
 <script>
-import BoxTabList from '@/components/Box/Tabs/box-tab-list.vue'
-import BoxTabContent from '@/components/Box/Tabs/box-tab-content.vue'
-import BoxTabPane from '@/components/Box/Tabs/box-tab-pane.vue';
+import BoxTabList from '@/components/box/Tabs/box-tab-list.vue'
+import BoxTabContent from '@/components/box/Tabs/box-tab-content.vue'
+import BoxTabPane from '@/components/box/Tabs/box-tab-pane.vue';
 
 export default {
     name: 'box-tabs-demo',

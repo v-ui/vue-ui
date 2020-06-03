@@ -1,73 +1,78 @@
 <template>
-    <tr 
-        :class="[row.$class, rowStyle.class && rowStyle.class(row), {'table-active': isChecked }]" 
-        :style="[row.$style, rowStyle.style && rowStyle.style(row)]" 
-        :aria-selected="isSelected" >
-        <table-serial-td 
-            :hideSerial="hideSerial" 
-            :number="index" />
-        <table-select-td 
-            :hideSelect="hideSelect || selectStatus != 2" 
-            v-model="isChecked"/>
-        <template v-for="(col, colIndex) in columns"  >
-            <table-operate-td 
-                :key="colIndex" 
-                v-if="col.$operate >= 0" 
-                :operate="operate" 
-                @tr:oper="type => $emit('tr:oper', {type: type, data: row})"  />
-            <table-td v-else :key="colIndex" :cell="row[col.field] || '-'" :col="col" />
-        </template>
-    </tr>
+  <tr
+    :class="[row.$class, rowStyle.class && rowStyle.class(row), {'table-active': isChecked }]"
+    :style="[row.$style, rowStyle.style && rowStyle.style(row)]"
+    :aria-selected="isSelected"
+  >
+    <table-serial-td :hideSerial="hideSerial" :number="index" />
+    <table-select-td :hideSelect="hideSelect || selectStatus != 2" v-model="isChecked" />
+    <template v-for="(col, colIndex) in columns">
+      <table-operate-td
+        v-if="col.$operate >= 0"
+        :key="colIndex"
+        :operate="operate"
+        @tr:oper="type => $emit('tr:oper', {type: type, data: row})"
+      />
+      <table-td v-else :key="colIndex" :cell="row[col.field] || '-'" :col="col" />
+    </template>
+  </tr>
 </template>
 
 <script>
-import tableTd from './../Td/table-td'
-import tableSerialTd from './../Td/table-serial-td'
-import tableSelectTd from './../Td/table-select-td'
-import tableOperateTd from './../Td/table-operate-td'
+import tableTd from "./../Td/table-td";
+import tableSerialTd from "./../Td/table-serial-td";
+import tableSelectTd from "./../Td/table-select-td";
+import tableOperateTd from "./../Td/table-operate-td";
 
 export default {
-    name: 'table-tr',
-    components: { tableTd, tableSerialTd, tableSelectTd, tableOperateTd, },
-    data () {
-        return {
-            isChecked: this.isSelected,
-        }
-    },
-    props: {
-        primaryKey: [ String, Number, ], 
-        row: Object,
-        index: Number,
-        columns: Array,
-        rowStyle: Object,
-        operate: Array,
-        hideSerial: Boolean,
-        hideSelect: Boolean,
-        selectStatus: Number,
-        selectedOptions: [Array, Object],
-    },
-    computed: {
-        isSelected: function () {
-            let value = this.row[this.primaryKey].value || this.row[this.primaryKey]
-            if (!this.selectedOptions || this.selectStatus == 0) return false
-            if (this.selectStatus == 1) return this.selectedOptions[this.primaryKey] == value
-            else if (this.selectStatus == 2) return this.selectedOptions.some && this.selectedOptions.some(e => e[this.primaryKey] && e[this.primaryKey] == value) 
-            else return false
-        },
-    },
-    watch: {
-        isSelected: function (value) {
-            this.isChecked = value
-        },
-        isChecked: function (value) {
-            this.$emit('tr:checked', value)
-        },
+  name: "table-tr",
+  components: { tableTd, tableSerialTd, tableSelectTd, tableOperateTd },
+  props: {
+    primaryKey: [String, Number],
+    row: Object,
+    index: Number,
+    columns: Array,
+    rowStyle: Object,
+    operate: Array,
+    hideSerial: Boolean,
+    hideSelect: Boolean,
+    selectStatus: Number,
+    selectedOptions: [Array, Object]
+  },
+  data() {
+    return {
+      isChecked: this.isSelected
+    };
+  },
+  computed: {
+    isSelected: function() {
+      let value = this.row[this.primaryKey].value || this.row[this.primaryKey];
+      if (!this.selectedOptions || this.selectStatus == 0) return false;
+      if (this.selectStatus == 1)
+        return this.selectedOptions[this.primaryKey] == value;
+      else if (this.selectStatus == 2)
+        return (
+          this.selectedOptions.some &&
+          this.selectedOptions.some(
+            e => e[this.primaryKey] && e[this.primaryKey] == value
+          )
+        );
+      else return false;
     }
-}
+  },
+  watch: {
+    isSelected: function(value) {
+      this.isChecked = value;
+    },
+    isChecked: function(value) {
+      this.$emit("tr:checked", value);
+    }
+  }
+};
 </script>
 
 <style scoped>
 .hover {
-    background-color: rgba(0, 0, 0, .075)
+  background-color: rgba(0, 0, 0, 0.075);
 }
 </style>

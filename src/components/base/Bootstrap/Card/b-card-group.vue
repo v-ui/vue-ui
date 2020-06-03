@@ -1,8 +1,10 @@
 <template>
-    <div v-show="$slots.default" class="card-group"><slot></slot></div>
+  <div v-show="$slots.default" class="card-group">
+    <slot />
+  </div>
 </template>
 <script>
 export default {
-    name: 'b-card-group',
-}
+  name: "b-card-group"
+};
 </script>

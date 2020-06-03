@@ -1,128 +1,141 @@
 <template>
-    <thead>
-        <template v-for="(headRow, index) in headData">
-            <table-head-tr 
-                v-if="index == 0"
-                :key="index"
-                :row="headRow" 
-                :sort="sort" 
-                :rowCount="rowCount" 
-                :hideSerial="hideSerial"
-                :hideSelect="hideSelect" 
-                :selectStatus="selectStatus" 
-                :sortObj="sortObj" 
-                @table:sort="cell => $emit('table:sort', cell)"
-                v-model="checked" />
-            <table-head-tr 
-                v-else
-                :key="index"
-                :row="headRow" 
-                hideSerial
-                hideSelect 
-                :sort="sort" 
-                :sortObj="sortObj" 
-                @table:sort="cell => $emit('table:sort', cell)" />
-        </template>
-        
-    </thead>
+  <thead>
+    <template v-for="(headRow, index) in headData">
+      <table-head-tr
+        v-if="index == 0"
+        :key="index"
+        v-model="checked"
+        :row="headRow"
+        :sort="sort"
+        :row-count="rowCount"
+        :hide-serial="hideSerial"
+        :hide-select="hideSelect"
+        :select-status="selectStatus"
+        :sort-obj="sortObj"
+        @table:sort="cell => $emit('table:sort', cell)"
+      />
+      <table-head-tr
+        v-else
+        :key="index"
+        :row="headRow"
+        hide-serial
+        hide-select
+        :sort="sort"
+        :sort-obj="sortObj"
+        @table:sort="cell => $emit('table:sort', cell)"
+      />
+    </template>
+  </thead>
 </template>
 
 <script>
-import utilities from '@/components/utilities/index.js'
+import utilities from "@/components/utilities/index.js";
 
-import TableHeadTr from './../Tr/table-head-tr'
+import TableHeadTr from "./../Tr/table-head-tr";
 
 export default {
-    name: 'table-head',
-    components: { TableHeadTr, },
-    model: {
-        prop: 'checked',
-        event: 'change'
+  name: "table-head",
+  components: { TableHeadTr },
+  model: {
+    prop: "checked",
+    event: "change"
+  },
+  props: {
+    head: utilities.props.list,
+    sort: utilities.props.list,
+    hideSerial: Boolean,
+    hideSelect: Boolean,
+    selectStatus: Number,
+    sortObj: Object
+  },
+  data() {
+    return {
+      checked: false,
+      headData: [],
+      rowCount: 1
+    };
+  },
+  computed: {},
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init: function() {
+      this.getRowCount();
+      this.initHeadData();
+      this.getHeadData();
     },
-    data () {
-        return {
-            checked: false,
-            headData: [],
-            rowCount: 1,
+    getRowCount: function() {
+      this.rowCount = this.getTheadRowCount(this.head);
+    },
+    // initHeadData: function (head = this.head) {
+    //     if (!head || head.length == 0) return []
+    //     let rowspan = this.getTheadRowCount(head)
+    //     let vm = this
+    //     head.forEach(e => {
+    //         let colspan = vm.getTheadColCount(e)
+    //         e.colspan = colspan > 1 ? colspan : null
+    //         if (e.children) {
+    //             let c_rowspan = vm.rowCount - rowspan - vm.getTheadRowCount(e.children) - 1
+    //             e.rowspan = c_rowspan > 1 ? c_rowspan : null
+    //             vm.initHeadData(e.children)
+    //         } else {
+    //             let c_rowspan = vm.rowCount == rowspan ? vm.rowCount : vm.rowCount - rowspan + 1 == 1 ? rowspan : vm.rowCount - rowspan + 1// vm.rowCount == rowspan ? vm.rowCount : rowspan == 1 ? vm.rowCount - rowspan : rowspan
+    //             e.rowspan = c_rowspan > 1 ? c_rowspan : null
+    //         }
+    //     })
+    // },
+    initHeadData: function(head = this.head, index = 0) {
+      if (!head || head.length == 0) return [];
+      let vm = this;
+      let hasChildren = head.some(e => e.children);
+      index += hasChildren ? 1 : 0;
+      head.forEach(e => {
+        let colspan = vm.getCellColCount(e);
+        let rowspan = vm.getCellRowCount(e, hasChildren ? index - 1 : index);
+        e.colspan = colspan > 1 ? colspan : null;
+        e.rowspan = rowspan > 1 ? rowspan : null;
+        if (e.children) {
+          if (e.sort) e.sort = false;
+          vm.initHeadData(e.children, index);
         }
+      });
     },
-    props: {
-        head: utilities.props.list,
-        sort: utilities.props.list,
-        hideSerial: Boolean,
-        hideSelect: Boolean,
-        selectStatus: Number,
-        sortObj: Object,
+    getHeadData: function(head = this.head) {
+      if (!head || head.length == 0) return [];
+      this.headData.push([...head]);
+      this.getHeadData(
+        head
+          .filter(e => e.children)
+          .map(e => e.children)
+          .flat()
+      );
     },
-    computed: {
+    getTheadRowCount: function(arr = [], count = 1) {
+      return Math.max(
+        ...arr.map(e =>
+          e.children ? this.getTheadRowCount(e.children, count + 1) : count
+        )
+      );
     },
-    mounted () {
-        this.init()
+    getCellRowCount: function(obj = {}, index) {
+      return obj.children && obj.children.length > 0
+        ? 1
+        : this.rowCount - index;
     },
-    methods: {
-        init: function () {
-            this.getRowCount()
-            this.initHeadData()
-            this.getHeadData()
-        },
-        getRowCount: function () {
-            this.rowCount = this.getTheadRowCount(this.head)
-        },
-        // initHeadData: function (head = this.head) {
-        //     if (!head || head.length == 0) return []
-        //     let rowspan = this.getTheadRowCount(head)
-        //     let vm = this
-        //     head.forEach(e => {
-        //         let colspan = vm.getTheadColCount(e)
-        //         e.colspan = colspan > 1 ? colspan : null
-        //         if (e.children) {
-        //             let c_rowspan = vm.rowCount - rowspan - vm.getTheadRowCount(e.children) - 1
-        //             e.rowspan = c_rowspan > 1 ? c_rowspan : null
-        //             vm.initHeadData(e.children)
-        //         } else {
-        //             let c_rowspan = vm.rowCount == rowspan ? vm.rowCount : vm.rowCount - rowspan + 1 == 1 ? rowspan : vm.rowCount - rowspan + 1// vm.rowCount == rowspan ? vm.rowCount : rowspan == 1 ? vm.rowCount - rowspan : rowspan
-        //             e.rowspan = c_rowspan > 1 ? c_rowspan : null
-        //         }
-        //     })
-        // },
-        initHeadData: function (head = this.head, index = 0) {
-            if (!head || head.length == 0) return []
-            let vm = this
-            let hasChildren = head.some(e => e.children)
-            index += hasChildren ? 1 : 0
-            head.forEach(e => {
-                let colspan = vm.getCellColCount(e)
-                let rowspan = vm.getCellRowCount(e, hasChildren ? index - 1 : index)
-                e.colspan = colspan > 1 ? colspan : null
-                e.rowspan = rowspan > 1 ? rowspan : null
-                if (e.children) {
-                    if (e.sort) e.sort = false
-                    vm.initHeadData(e.children, index)
-                }
-            })
-        },
-        getHeadData: function (head = this.head) {
-            if (!head || head.length == 0) return []
-            this.headData.push([...head])
-            this.getHeadData(head.filter(e => e.children).map(e => e.children).flat())
-        },
-        getTheadRowCount: function (arr = [], count = 1) {
-            return Math.max(...arr.map(e => e.children ? this.getTheadRowCount(e.children, count + 1) : count))
-        },
-        getCellRowCount: function (obj = {}, index) {
-            return obj.children && obj.children.length > 0 ? 1 : this.rowCount - index
-        },
-        getCellColCount: function (obj = {}, count = 1) {
-            return obj.children
-                ? obj.children.filter(e => !e.children).length + obj.children.filter(e => e.children).reduce( (acc, cur) => acc + this.getCellColCount(cur), 0) 
-                : count
-        },
-    },
-    watch: {
-        
-        checked: function (value) {
-            this.$emit('change', value)
-        },
+    getCellColCount: function(obj = {}, count = 1) {
+      return obj.children
+        ? obj.children.filter(e => !e.children).length +
+            obj.children
+              .filter(e => e.children)
+              .reduce((acc, cur) => acc + this.getCellColCount(cur), 0)
+        : count;
     }
-}
+  },
+  watch: {
+    checked: function(value) {
+      this.$emit("change", value);
+    }
+  }
+};
 </script>
