@@ -30,9 +30,9 @@
 
 <script>
 export default {
-  name: "main-menu-nav-item",
+  name: "main-menu-item",
   components: {
-    item: () => import("./item.vue")
+    item: () => import("./main-menu-item.vue")
   },
   data() {
     return {

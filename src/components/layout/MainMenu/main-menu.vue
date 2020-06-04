@@ -19,7 +19,7 @@
 export default {
   name: "main-menu",
   components: {
-    NavItem: () => import("./item")
+    NavItem: () => import("./main-menu-item.vue")
   },
   data() {
     return {

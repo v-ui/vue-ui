@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import MainHeader from "@/components/layout/MainHeader.vue"
-import MainContent from "@/components/layout/MainContent.vue"
-import MainFooter from "@/components/layout/MainFooter.vue"
-import MainMenu from '@/components/layout/MainMenu/nav.vue'
-import MainSection from '@/components/layout/MainSection.vue'
+import MainHeader from "@/components/layout/main-header.vue"
+import MainContent from "@/components/layout/main-content.vue"
+import MainFooter from "@/components/layout/main-footer.vue"
+import MainMenu from '@/components/layout/MainMenu/main-menu.vue'
+import MainSection from '@/components/layout/main-section.vue'
 
 export default {
   name: "layout",
