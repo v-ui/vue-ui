@@ -8,6 +8,12 @@
   </main>
 </template>
 
+<script>
+export default {
+  name:'main-content',
+}
+</script>
+
 <style>
 .component-fade-enter-active,
 .component-fade-leave-active {

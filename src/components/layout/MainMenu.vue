@@ -5,7 +5,7 @@
 <script>
 import MainMenuItem from '@/components/layout/Menu/nav.vue'
 export default {
-  name: 'MainMenu',
+  name: 'main-menu',
   components: {
     MainMenuItem,
   }

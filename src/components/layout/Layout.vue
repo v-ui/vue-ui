@@ -22,7 +22,7 @@ import MainMenu from '@/components/layout/MainMenu/nav.vue'
 import MainSection from '@/components/layout/MainSection.vue'
 
 export default {
-  name: "LayoutBase",
+  name: "layout",
   components: {
     MainHeader,
     MainContent,

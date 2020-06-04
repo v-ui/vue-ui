@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "dropdown-menu-nav-item",
+  name: "main-menu-nav-item",
   components: {
     item: () => import("./item.vue")
   },

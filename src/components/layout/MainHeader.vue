@@ -64,6 +64,7 @@ import UserCard from "@/components/system/User/user-card.vue";
 import NavTabs from "@/components/system/NavTabs/nav-tabs.vue";
 
 export default {
+  name: 'main-header',
   components: {
     LangSelect,
     ThemeSelect,
