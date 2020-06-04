@@ -9,14 +9,14 @@
           :to="model.path"
           class="list-group-item bg-light text-dark border-top-0 text-decoration-none"
         >
-          <font class="text-truncate w-100 d-inline-block">{{ model.name }}</font>
+          <font class="text-truncate w-100 d-inline-block">{{ model.name | upperToHyphenLower }}</font>
         </router-link>
         <router-link
           v-else
           to
           class="list-group-item bg-light text-dark border-top-0 text-decoration-none d-flex justify-content-between"
         >
-          <font class="text-truncate">{{ model.SubsystemName }}</font>
+          <font class="text-truncate">{{ model.SubsystemName | worldUpperCase | firstUpperCase }}</font>
           <i class="fas fa-chevron-down" v-if="!open" />
           <i class="fas fa-chevron-up" v-else />
         </router-link>
@@ -29,11 +29,14 @@
 </template>
 
 <script>
+import utilities from '@/components/utilities/index.js'
+
 export default {
   name: "main-menu-item",
   components: {
     item: () => import("./main-menu-item.vue")
   },
+  filters: { ...utilities.filters, },
   data() {
     return {
       open: false

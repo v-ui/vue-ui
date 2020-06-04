@@ -8,7 +8,7 @@
           to
         >
           <i class="mr-2" :class="item.icon || 'fas fa-dot-circle'" />
-          <font class="text-truncate">{{ item.SubsystemName }}</font>
+          <font class="text-truncate">{{ item.SubsystemName | worldUpperCase | firstUpperCase }}</font>
         </router-link>
       </NavItem>
     </ul>
@@ -16,11 +16,14 @@
 </template>
 
 <script>
+import utilities from '@/components/utilities/index.js'
+
 export default {
   name: "main-menu",
   components: {
     NavItem: () => import("./main-menu-item.vue")
   },
+  filters: { ...utilities.filters, },
   data() {
     return {
       open: false,
