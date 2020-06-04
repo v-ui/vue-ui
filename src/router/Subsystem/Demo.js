@@ -2,6 +2,7 @@
 
 export default {
     SubsystemName: 'Demo',
+    icon: 'fas fa-dice-d6',
     Modules: [
         { path: 'base-icon', name: 'base-icon', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/base-icon.vue'), },
         {

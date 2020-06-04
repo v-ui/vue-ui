@@ -32,13 +32,6 @@
             <user-card class="nav-link" />
           </li>
           <li class="nav-item px-1">
-            <a
-              href="https://github.com/WarehouseManagementSystem/WMS"
-              class="nav-link fab fa-github"
-              target="_bank"
-            />
-          </li>
-          <li class="nav-item px-1">
             <screenfull class="nav-link" />
           </li>
         </ul>

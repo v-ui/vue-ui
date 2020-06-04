@@ -4,7 +4,7 @@
     <div class="d-flex vw-100 vh-100">
       <aside class="d-flex align-items-start bg-primary text-light flex-column" style="max-width: 300px">
         <main-menu class="overflow-auto" />
-        <main-section />
+        <main-section class="border-top border-light" />
       </aside>
       <div class="d-flex align-items-start flex-column w-100 h-100">
         <main-content class="w-100 h-100 overflow-auto m-1" />

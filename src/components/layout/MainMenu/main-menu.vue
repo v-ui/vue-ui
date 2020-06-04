@@ -7,7 +7,7 @@
           class="list-group-item bg-primary text-white text-decoration-none d-flex justify-content-start"
           to
         >
-          <i class="fas fa-dot-circle mr-2" />
+          <i class="mr-2" :class="item.icon || 'fas fa-dot-circle'" />
           <font class="text-truncate">{{ item.SubsystemName }}</font>
         </router-link>
       </NavItem>
