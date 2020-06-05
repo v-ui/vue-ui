@@ -3,7 +3,7 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 <!-- version -->
-[bate0.2.1]:                                https://github.com/WarehouseManagementSystem/WMS/tree/bate0.2.1
+[项目仓库]:                                   https://github.com/v-ui/vue-ui
 
 <!-- links -->
 [Font Awesome]:                             https://fontawesome.com
