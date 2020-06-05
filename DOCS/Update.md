@@ -3,10 +3,6 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 <!-- version -->
-[项目仓库]:                                     https://github.com/WarehouseManagementSystem/WMS
-[项目规范-编码规范]:                            Standard/CodingStandards.md
-[项目规范相关文档]:                             Standard/README.md
-[开发流程规范]:                                 Standard/DevelopStandards.md
 [bate0.2.1]:                                https://github.com/WarehouseManagementSystem/WMS/tree/bate0.2.1
 
 <!-- links -->
@@ -571,10 +567,6 @@
 2019-01-30
 
 * api 项目目录结构调整，项目文件管理更清晰(bate0.1)
-* docs 添加文档 [项目规范-编码规范]
-* docs 修改文档 [项目规范相关文档]
-* docs 修改文档 [开发流程规范]
-
 
 2019-01-26
 
