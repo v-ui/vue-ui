@@ -7,7 +7,8 @@
         <router-link
           v-if="!model.Modules"
           :to="model.path"
-          class="list-group-item bg-light text-dark border-top-0 text-decoration-none"
+          class="list-group-item border-top-0 text-decoration-none bg-light "
+          :class=" $route.path == model.path ? 'text-primary font-weight-bold' : 'text-dark'"
         >
           <font class="text-truncate w-100 d-inline-block">{{ model.name | upperToHyphenLower }}</font>
         </router-link>
@@ -17,8 +18,8 @@
           class="list-group-item bg-light text-dark border-top-0 text-decoration-none d-flex justify-content-between"
         >
           <font class="text-truncate">{{ model.SubsystemName | worldUpperCase | firstUpperCase }}</font>
-          <i class="fas fa-chevron-down" v-if="!open" />
-          <i class="fas fa-chevron-up" v-else />
+          <i class="d-flex align-self-center fas fa-chevron-down" v-if="!open" />
+          <i class="d-flex align-self-center fas fa-chevron-up" v-else />
         </router-link>
       </slot>
     </div>

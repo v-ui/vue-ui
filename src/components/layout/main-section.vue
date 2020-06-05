@@ -3,7 +3,7 @@
     <div>
       <a
         href="https://github.com/v-ui/vue-ui"
-        class="nav-link fab fa-github"
+        class="btn-link text-light fab fa-github"
         target="_bank"
       > v-ui/vue-ui </a>
     </div>
