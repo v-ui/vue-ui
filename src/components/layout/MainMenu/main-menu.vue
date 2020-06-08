@@ -66,7 +66,6 @@ export default {
     InitModules: function(SubsystemName) {
       this.Modules = [];
       for (const item of this.Routers) {
-        debugger;
         if (item.SubsystemName !== SubsystemName) continue;
         this.Modules = [...this.Modules, ...item.Modules];
         this.SubsystemName = SubsystemName;

@@ -334,8 +334,29 @@ export default {
           this.sound.once("unlock", () => {
             this.play();
           });
-        }
+        },
+
       });
+      await this.$nextTick()
+      // 媒体健控制
+      // https://developer.mozilla.org/en-US/docs/Web/API/Media_Session_API
+      // if (navigator && navigator.mediaSession) {
+      //   navigator.mediaSession.metadata = new MediaMetadata({
+      //     title: 'Unforgettable',
+      //     artist: 'Nat King Cole',
+      //     album: 'The Ultimate Collection (Remastered)',
+      //     artwork: [
+      //       { src: 'https://dummyimage.com/96x96',   sizes: '96x96',   type: 'image/png' },
+      //       { src: 'https://dummyimage.com/128x128', sizes: '128x128', type: 'image/png' },
+      //       { src: 'https://dummyimage.com/192x192', sizes: '192x192', type: 'image/png' },
+      //       { src: 'https://dummyimage.com/256x256', sizes: '256x256', type: 'image/png' },
+      //       { src: 'https://dummyimage.com/384x384', sizes: '384x384', type: 'image/png' },
+      //       { src: 'https://dummyimage.com/512x512', sizes: '512x512', type: 'image/png' },
+      //     ]
+      //   });
+      //   navigator.mediaSession.setActionHandler('play', () => this.sound.play());
+      //   navigator.mediaSession.setActionHandler('pause', () => this.sound.pause());
+      // }
 
       this.status = this.sound.state();
       window.URL.revokeObjectURL(this.boblSrc);
