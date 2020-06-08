@@ -5,9 +5,10 @@
   </span>
   <base-a v-else class="badge align-self-center" :class="objClass" :href="href" :style="objStyle">
     <slot />
-    <sr-message>{{ fillsrMsg }}</sr-message>
+    <sr-msg>{{ fillsrMsg }}</sr-msg>
   </base-a>
 </template>
+
 <script>
 import utilities from "@/components/utilities/index.js";
 

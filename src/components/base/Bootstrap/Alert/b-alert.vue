@@ -10,7 +10,7 @@
       @mouseenter="clearTimer()"
       @mouseleave="countDown()"
     >
-      <h4 class="alert-heading" v-if="$slots.header">
+      <h4 v-if="$slots.header" class="alert-heading">
         <slot name="header" />
       </h4>
       <div class="overflow-auto" style="max-height: 200px;">

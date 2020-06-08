@@ -1,25 +1,22 @@
 <template>
-  <div class="card">
+  <div v-show="$slots.default" class="card">
     <slot name="card">
-      <card-header>
+      <div v-show="$slots.header" class="card-header">
         <slot name="header" />
-      </card-header>
-      <card-body>
+      </div>
+      <div class="card-body">
         <slot />
-      </card-body>
-      <card-footer>
+      </div>
+      <div v-show="$slots.footer" class="card-footer">
         <slot name="footer" />
-      </card-footer>
+      </div>
     </slot>
   </div>
 </template>
+
 <script>
-import cardHeader from "./b-card-header";
-import cardBody from "./b-card-body";
-import cardFooter from "./b-card-footer";
 
 export default {
   name: "b-card",
-  components: { cardHeader, cardBody, cardFooter }
 };
 </script>

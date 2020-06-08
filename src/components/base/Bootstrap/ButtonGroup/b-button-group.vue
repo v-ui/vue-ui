@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import utilities from "@/components/utilities/index.js";
+import utilities from "@/components/utilities/index.js"
 
 export default {
   name: "b-button-group",
@@ -15,7 +15,7 @@ export default {
   computed: {
     objClass: function() {
       return `${this.size ? `btn-group-${this.size}` : ""}
-                ${this.vertical ? `btn-group-vertical` : ""}`;
+              ${this.vertical ? `btn-group-vertical` : ""}`
     }
   }
 };
