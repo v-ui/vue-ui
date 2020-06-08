@@ -9,7 +9,7 @@
       :text="item.text"
       :href="item.href"
       :color="item.color || color"
-      :sr-message="item.srMessage"
+      :sr-message="item.srMsg"
       :disabled="disabled || item.disabled"
       :active="select ? select == item.value || select == item.text : item.active"
       @click.native="$emit('click', item.value || item.text)"

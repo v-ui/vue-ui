@@ -9,7 +9,7 @@
     v-on="$listeners"
   >
     <slot>{{ value | worldUpperCase | firstUpperCase }}</slot>
-    <sr-message>{{ fillsrMessage }}</sr-message>
+    <sr-msg>{{ fillsrMsg }}</sr-msg>
   </button>
   <base-a
     v-else
@@ -24,7 +24,7 @@
     v-on="$listeners"
   >
     <slot>{{ value | worldUpperCase | firstUpperCase }}</slot>
-    <sr-message>{{ fillsrMessage }}</sr-message>
+    <sr-message>{{ fillsrMsg }}</sr-message>
   </base-a>
 </template>
 
@@ -32,11 +32,11 @@
 import utilities from "@/components/utilities/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
-import srMessage from "@/components/base/Bootstrap/SrOney/b-sr-only.vue";
+import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 export default {
   name: "b-button",
-  components: { BaseA, srMessage },
+  components: { BaseA, srMsg },
   mixins: [utilities.mixins.form.btn]
 };
 </script>

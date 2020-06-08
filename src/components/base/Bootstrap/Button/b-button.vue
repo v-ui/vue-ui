@@ -15,7 +15,7 @@
     @v-on="$listeners"
   >
     <slot>{{ value }}</slot>
-    <sr-message>{{ fillsrMessage }}</sr-message>
+    <sr-msg>{{ fillsrMsg }}</sr-msg>
   </base-a>
   <input
     v-else-if="target == 'input'"
@@ -45,18 +45,18 @@
     v-on="$listeners"
   >
     <slot>{{ value }}</slot>
-    <sr-message>{{ fillsrMessage }}</sr-message>
+    <sr-message>{{ fillsrMsg }}</sr-message>
   </button>
 </template>
 <script>
-import srMessage from "@/components/base/Bootstrap/SrOney/b-sr-only.vue";
+import srMsg from "@/components/Basic/basic-sr-msg.vue";
 import utilities from "@/components/utilities/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
 export default {
   name: "b-button",
-  components: { BaseA, srMessage },
+  components: { BaseA, srMsg },
   props: {
     color: utilities.props.color,
     href: utilities.props.href,
@@ -64,7 +64,7 @@ export default {
     name: utilities.props.value,
     active: utilities.props.active,
     disabled: utilities.props.disabled,
-    srMessage: utilities.props.srMessage,
+    srMsg: utilities.props.srMsg,
     outline: Boolean,
     target: {
       type: String,
@@ -104,11 +104,11 @@ export default {
     fillName: function() {
       return this.name || this.type;
     },
-    fillsrMessage: function() {
-      if (this.srMessage) {
+    fillsrMsg: function() {
+      if (this.srMsg) {
         return this.variant;
       }
-      return this.srMessage;
+      return this.srMsg;
     }
   }
 };

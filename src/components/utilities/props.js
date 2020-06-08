@@ -97,5 +97,5 @@ export default {
     readonly: Boolean,
     active: Boolean,
     function: Function,
-    srMessage: String,
+    srMsg: String,
 }

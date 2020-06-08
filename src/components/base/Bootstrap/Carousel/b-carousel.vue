@@ -28,7 +28,7 @@
         @click="activeIndex < content.length - 1 ? activeIndex++ : 0"
       >
         <span class="carousel-control-prev-icon" aria-hidden="true" />
-        <sr-message>Previous</sr-message>
+        <sr-msg>Previous</sr-msg>
       </base-a>
       <base-a
         class="carousel-control-next"
@@ -38,14 +38,14 @@
         @click="activeIndex > 0 ? activeIndex-- : content.length - 1"
       >
         <span class="carousel-control-next-icon" aria-hidden="true" />
-        <sr-message>Next</sr-message>
+        <sr-msg>Next</sr-msg>
       </base-a>
     </template>
   </div>
 </template>
 <script>
 import BCarouselItem from "./b-carousel-item";
-import srMessage from "@/components/base/Bootstrap/SrOney/b-sr-only.vue";
+import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
@@ -54,7 +54,7 @@ import utilities from "@/components/utilities/index.js";
 
 export default {
   name: "b-carousel",
-  components: { BCarouselItem, BaseA, srMessage },
+  components: { BCarouselItem, BaseA, srMsg },
   data() {
     return {
       activeIndex: 0
