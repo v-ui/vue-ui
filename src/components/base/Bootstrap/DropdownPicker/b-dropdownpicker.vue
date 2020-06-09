@@ -35,9 +35,9 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import tranDrop from "@/components/transition/tran-drop.vue";
 import BaseButton from "@/components/base/Bootstrap/Button/b-button.vue";
@@ -51,10 +51,10 @@ export default {
     id: {
       type: String,
       default: function() {
-        return "drop-picker-" + util.random.getRandomString();
+        return "drop-picker-" + tool.random.getRandomString();
       }
     },
-    placeholder: utilities.props.text,
+    placeholder: util.props.text,
     show: Boolean,
     disabled: Boolean,
     hideToggle: Boolean,
@@ -69,7 +69,7 @@ export default {
       type: Number,
       default: 0
     },
-    info: utilities.props.text,
+    info: util.props.text,
     value: [String, Number, Date]
   },
   data() {

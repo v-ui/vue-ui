@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
-import utilities from "@/components/utilities/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
 import BSelectOption from "./b-select-option.vue";
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
@@ -59,16 +59,16 @@ import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
 export default {
   name: "b-select",
   inheritAttrs: false,
-  mixins: [utilities.mixins.form.base, utilities.mixins.form.validator],
+  mixins: [util.mixins.form.base, util.mixins.form.validator],
   components: { BSelectOption, BValid, BInfo },
   model: {
     prop: "value",
     event: "change"
   },
   props: {
-    list: utilities.props.list,
-    disabled: utilities.props.disabled,
-    info: utilities.props.value,
+    list: util.props.list,
+    disabled: util.props.disabled,
+    info: util.props.value,
     hideNull: Boolean,
     value: {
       type: [String, Number, Array],
@@ -130,16 +130,16 @@ export default {
     },
     validator: function(e) {
       if (this.disabled) return; // disabled 时不校验
-      util.dom.removeClass(e.target, "is-valid"); // 移除可能的 is-valid
+      tool.dom.removeClass(e.target, "is-valid"); // 移除可能的 is-valid
       // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
       if (!this.validateRequired(this.isSelectedValue)) {
-        util.dom.addClass(e.target, "is-invalid");
+        tool.dom.addClass(e.target, "is-invalid");
         return;
       }
-      util.dom.removeClass(e.target, "is-invalid"); // 移除可能的 is-invalid
+      tool.dom.removeClass(e.target, "is-invalid"); // 移除可能的 is-invalid
       // 当存在 valid slot 或 validInfo 时
       if (this.$slots.valid || this.validInfo)
-        util.dom.addClass(e.target, "is-valid");
+        tool.dom.addClass(e.target, "is-valid");
       this.$emit("valid");
     }
   },

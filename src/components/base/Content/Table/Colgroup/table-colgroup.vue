@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "table-colgroup",
   props: {
-    colgroup: utilities.props.list
+    colgroup: util.props.list
   }
 };
 </script>

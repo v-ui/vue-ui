@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BDatePicker from "@/components/base/Bootstrap/DateTime/Date/DatePicker/b-date-picker.vue";
 
@@ -24,11 +24,11 @@ export default {
   },
 
   props: {
-    value: utilities.props.value,
+    value: util.props.value,
     min: String,
     max: String,
-    placeholder: utilities.props.value,
-    disabled: utilities.props.disabled
+    placeholder: util.props.value,
+    disabled: util.props.disabled
   },
   data() {
     return {

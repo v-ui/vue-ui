@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-pag-item",
   props: {
-    value: utilities.props.value,
+    value: util.props.value,
     disabled: Boolean,
     active: Boolean
   }

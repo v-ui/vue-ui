@@ -44,14 +44,14 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BButton from "@/components/base/Bootstrap/Button/b-button.vue";
 import BText from "./b-text";
 export default {
   name: "b-number",
   components: { BButton, BText },
-  mixins: [utilities.mixins.form.base, utilities.mixins.form.readonly],
+  mixins: [util.mixins.form.base, util.mixins.form.readonly],
   inheritAttrs: false,
   model: {
     prop: "value",
@@ -80,7 +80,7 @@ export default {
       },
       validator: value => !isNaN(value)
     },
-    size: utilities.props.size,
+    size: util.props.size,
     length: [String, Number],
     hideButton: Boolean,
     prompt: Boolean,

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
@@ -21,11 +21,11 @@ export default {
   components: { BaseA, srMsg },
   props: {
     color: {
-      ...utilities.props.color,
+      ...util.props.color,
       default: "danger"
     },
-    href: utilities.props.href,
-    srMsg: utilities.props.srMsg,
+    href: util.props.href,
+    srMsg: util.props.srMsg,
     pill: Boolean
   },
   computed: {

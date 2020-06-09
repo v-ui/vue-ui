@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import tableBodyTr from "./table-body-tr";
 
@@ -39,7 +39,7 @@ export default {
     };
   },
   props: {
-    data: utilities.props.list,
+    data: util.props.list,
     primaryKey: [String, Number],
     columns: {
       type: Array,

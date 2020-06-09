@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
-import utilities from "@/components/utilities/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
 import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
 
@@ -35,15 +35,15 @@ export default {
     event: "change"
   },
   props: {
-    value: utilities.props.text,
-    label: utilities.props.text,
-    info: utilities.props.text,
-    ValidClass: utilities.props.text,
-    disabled: utilities.props.disabled,
+    value: util.props.text,
+    label: util.props.text,
+    info: util.props.text,
+    ValidClass: util.props.text,
+    disabled: util.props.disabled,
     id: {
       type: String,
       default: function() {
-        return "Radio-" + util.random.getRandomString();
+        return "Radio-" + tool.random.getRandomString();
       }
     },
     checked: [String, Boolean],

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BoxAccordion from "./box-accordion";
 
@@ -21,7 +21,7 @@ export default {
   name: "box-accordion-list",
   components: { BoxAccordion },
   props: {
-    list: utilities.props.list,
+    list: util.props.list,
     parent: String
   }
 };

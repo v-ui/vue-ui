@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
@@ -35,11 +35,11 @@ export default {
   name: "b-dropdown-item",
   components: { BaseA, BInfo },
   props: {
-    href: utilities.props.href,
-    text: utilities.props.text,
-    info: utilities.props.text,
-    active: utilities.props.active,
-    disabled: utilities.props.disabled
+    href: util.props.href,
+    text: util.props.text,
+    info: util.props.text,
+    active: util.props.active,
+    disabled: util.props.disabled
   }
 };
 </script>

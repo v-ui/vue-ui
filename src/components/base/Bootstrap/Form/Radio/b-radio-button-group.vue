@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
 
@@ -40,11 +40,11 @@ export default {
     event: "input"
   },
   props: {
-    value: utilities.props.text,
-    list: utilities.props.list,
-    info: utilities.props.text,
-    disabled: utilities.props.disabled,
-    color: utilities.props.color,
+    value: util.props.text,
+    list: util.props.list,
+    info: util.props.text,
+    disabled: util.props.disabled,
+    color: util.props.color,
     name: {
       type: String,
       required: true

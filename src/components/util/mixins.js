@@ -3,9 +3,9 @@
  * 通用混入
 **/
 
-import util from '@/util/index.js'
-import props from '@/components/utilities/props.js'
-import filters from '@/components/utilities/filters.js'
+import tool from '@/tool/index.js'
+import props from '@/components/util/props.js'
+import filters from '@/components/util/filters.js'
 
 export default {
   form: {
@@ -27,7 +27,7 @@ export default {
       computed: {
         // edit 2020-04-15
         // 未校验正确性
-        // 影响范围 所有使用了 utilities.mixins.form.base 的组件
+        // 影响范围 所有使用了 util.mixins.form.base 的组件
         // TODO: 校验正确性
         // objClass: function () {
         //     let size = this.size ? `form-control-${this.size}` : ''
@@ -117,16 +117,16 @@ export default {
           // 验证函数不会对传入的数据进行处理
           const value = e.target ? e.target.value.trim() : e.value.trim()
           // 移除可能的 is-valid
-          util.dom.removeClass(e.target, 'is-valid')
+          tool.dom.removeClass(e.target, 'is-valid')
           // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateRequired(value)) { util.dom.addClass(e.target, 'is-invalid'); return }
+          if (!this.validateRequired(value)) { tool.dom.addClass(e.target, 'is-invalid'); return }
           // 长度验证（传入字符串长度为 0、minlength 小于 0、minlength 大于 maxlength 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateLength(value)) { util.dom.addClass(e.target, 'is-invalid'); return }
+          if (!this.validateLength(value)) { tool.dom.addClass(e.target, 'is-invalid'); return }
           // 正则校验（传入字符串长度为 0、无正则表达式 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateRange(value, regex)) { util.dom.addClass(e.target, 'is-invalid'); return }
-          util.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
+          if (!this.validateRange(value, regex)) { tool.dom.addClass(e.target, 'is-invalid'); return }
+          tool.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
           // 当存在 valid slot 或 validInfo 时
-          if (this.$slots.valid || this.validInfo) util.dom.addClass(e.target, 'is-valid')
+          if (this.$slots.valid || this.validInfo) tool.dom.addClass(e.target, 'is-valid')
           this.$emit('valid')
         },
         // 非空验证（验证通过返回 true）
@@ -144,7 +144,7 @@ export default {
           let maxlength = Number(this.maxlength) || 0
           // 传入字符串长度为 0、minlength 小于 0、minlength 大于 maxlength 不做校验直接返回 true
           if (value.length == 0 || minlength < 0 || minlength >= maxlength) return true
-          const length = util.string.codePointLength(value)
+          const length = tool.string.codePointLength(value)
           if (length < minlength) {
             this.$emit('invalid', 'short')
             return false

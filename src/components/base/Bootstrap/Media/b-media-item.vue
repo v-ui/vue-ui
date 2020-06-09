@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BButton from "@/components/base/Bootstrap/Form/Button/b-button.vue";
 
@@ -34,7 +34,7 @@ export default {
   name: "b-media-item",
   components: { BMedia: () => import("./b-media"), BButton },
   props: {
-    item: utilities.props.item
+    item: util.props.item
   },
   data() {
     return {

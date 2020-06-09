@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import tableHeadTh from "./table-head-th";
 import tableSerialTd from "./../Td/table-serial-td";
@@ -48,8 +48,8 @@ export default {
     };
   },
   props: {
-    row: utilities.props.list,
-    sort: utilities.props.list,
+    row: util.props.list,
+    sort: util.props.list,
     checked: Boolean,
     rowCount: Number,
     hideSerial: Boolean,

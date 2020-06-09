@@ -68,7 +68,7 @@
 
 <script>
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import TableColgroup from "./Colgroup/table-colgroup";
 import TableHead from "./Head/table-head";
@@ -92,7 +92,7 @@ export default {
     };
   },
   props: {
-    list: utilities.props.Object,
+    list: util.props.Object,
     primaryKey: {
       type: [String, Number],
       default: "id",

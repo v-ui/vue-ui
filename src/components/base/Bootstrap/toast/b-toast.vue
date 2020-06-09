@@ -42,7 +42,7 @@
 import moment from "moment";
 
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-toast",
@@ -51,8 +51,8 @@ export default {
     href: String,
     autohide: Boolean,
     time: [String, Number, Array],
-    icon: utilities.props.value,
-    content: utilities.props.value,
+    icon: util.props.value,
+    content: util.props.value,
     delay: {
       type: [Number, String],
       default: 10000,

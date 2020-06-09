@@ -49,8 +49,8 @@ import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
-import util from "@/util/index.js";
-import utilities from "@/components/utilities/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-carousel",
@@ -61,7 +61,7 @@ export default {
     };
   },
   props: {
-    content: utilities.props.content,
+    content: util.props.content,
     indicators: {
       type: Boolean,
       default: false
@@ -80,7 +80,7 @@ export default {
   },
   computed: {
     guid: function() {
-      return "carouselCaptions-" + util.random.getRandomString();
+      return "carouselCaptions-" + tool.random.getRandomString();
     }
   }
 };

@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-navbar-brand",
   props: {
-    href: utilities.props.href,
-    text: utilities.props.text
+    href: util.props.href,
+    text: util.props.text
   }
 };
 </script>

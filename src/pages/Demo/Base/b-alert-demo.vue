@@ -50,7 +50,7 @@ import BAlertLink from '@/components/base/Bootstrap/Alert/b-alert-link.vue'
 
 import BRadioGroup from '@/components/base/Bootstrap/Form/Radio/b-radio-group.vue'
 
-import variables from '@/components/utilities/variables.js'
+import variables from '@/components/util/variables.js'
 export default {
     name: 'b-alert-demo',
     components: { BAlert, BAlertLink, BRadioGroup, },

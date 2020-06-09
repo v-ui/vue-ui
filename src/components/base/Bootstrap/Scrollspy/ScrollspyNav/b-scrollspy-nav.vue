@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BNavbar from "@/components/base/Bootstrap/Navigation/Navbar/b-navbar.vue";
 
@@ -25,9 +25,9 @@ export default {
   },
   props: {
     column: Boolean,
-    list: utilities.props.list,
+    list: util.props.list,
     brand: {
-      ...utilities.props.value,
+      ...util.props.value,
       default: "Contents"
     },
     set: {

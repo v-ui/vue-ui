@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 import TweenLite from "gsap";
 
 export default {
@@ -38,7 +38,7 @@ export default {
         return !isNaN(val) && val >= 0 && val <= 100;
       }
     },
-    color: utilities.props.color,
+    color: util.props.color,
     showValue: Boolean,
     striped: Boolean,
     animated: Boolean

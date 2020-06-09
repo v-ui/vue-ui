@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import tableTr from "./../Tr/table-tr";
 
@@ -34,7 +34,7 @@ export default {
     event: "tr:selected"
   },
   props: {
-    data: utilities.props.list,
+    data: util.props.list,
     primaryKey: [String, Number],
     columns: {
       type: Array,

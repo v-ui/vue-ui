@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import baseButton from "@/components/base/Bootstrap/Button/b-button.vue";
 
@@ -41,9 +41,9 @@ export default {
   name: "date-picker-header",
   components: { baseButton },
   props: {
-    hearderText: utilities.props.value,
-    disabled: utilities.props.disabled,
-    nowDisabled: utilities.props.disabled
+    hearderText: util.props.value,
+    disabled: util.props.disabled,
+    nowDisabled: util.props.disabled
   }
 };
 </script>

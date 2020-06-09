@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "c-tree",
@@ -23,7 +23,7 @@ export default {
     event: "tree:selected"
   },
   props: {
-    list: utilities.props.list,
+    list: util.props.list,
     status: {
       type: [String, Number],
       default: 0,

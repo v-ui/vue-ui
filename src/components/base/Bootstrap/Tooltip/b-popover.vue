@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-popover",
@@ -36,8 +36,8 @@ export default {
     },
     top: [String, Number],
     left: [String, Number],
-    title: utilities.props.value,
-    content: utilities.props.content
+    title: util.props.value,
+    content: util.props.content
   },
   data() {
     return {

@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
-import utilities from "@/components/utilities/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
 import dropdownPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker.vue";
 import yearPicker from "./date-year-picker";
@@ -62,7 +62,7 @@ import datePicker from "./date-date-picker";
 export default {
   name: "b-date-picker",
   components: { dropdownPicker, yearPicker, monthPicker, datePicker },
-  mixins: [utilities.mixins.form.base, utilities.mixins.form.readonly],
+  mixins: [util.mixins.form.base, util.mixins.form.readonly],
   model: {
     prop: "value",
     event: "change"
@@ -84,8 +84,8 @@ export default {
     },
     min: [String, Date],
     max: [String, Date],
-    info: utilities.props.value,
-    placeholder: utilities.props.value
+    info: util.props.value,
+    placeholder: util.props.value
   },
   data() {
     return {
@@ -192,7 +192,7 @@ export default {
             "-" +
             (this.type == "year"
               ? "01"
-              : util.string.padStart(Number(this.date.getMonth() + 1), 2, "0"))
+              : tool.string.padStart(Number(this.date.getMonth() + 1), 2, "0"))
           : value
       );
       if (value == "Invalid Date") return;
@@ -202,20 +202,20 @@ export default {
           return value.getFullYear();
         case "month":
           return this.status === 0
-            ? `${value.getFullYear()}-${util.string.padStart(
+            ? `${value.getFullYear()}-${tool.string.padStart(
                 Number(value.getMonth() + 1),
                 2,
                 "0"
               )}`
-            : `${util.string.padStart(Number(value.getMonth() + 1), 2, "0")}`;
+            : `${tool.string.padStart(Number(value.getMonth() + 1), 2, "0")}`;
         case "date":
           return this.status === 0
-            ? `${value.getFullYear()}-${util.string.padStart(
+            ? `${value.getFullYear()}-${tool.string.padStart(
                 Number(value.getMonth() + 1),
                 2,
                 "0"
-              )}-${util.string.padStart(value.getDate(), 2, "0")}`
-            : `${util.string.padStart(value.getDate(), 2, "0")}`;
+              )}-${tool.string.padStart(value.getDate(), 2, "0")}`
+            : `${tool.string.padStart(value.getDate(), 2, "0")}`;
       }
     },
     month2Year: function(value) {

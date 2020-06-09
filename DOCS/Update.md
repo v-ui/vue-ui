@@ -84,8 +84,8 @@
 [c-video-player]:                           ../view/src/components/base/Content/VideoPlayer
 
 <!-- directive -->
-[v-tip]:                                    ../View/src/components/utilities/directives.js
-[v-lazy]:                                   ../View/src/components/utilities/directives.js
+[v-tip]:                                    ../View/src/components/util/directives.js
+[v-lazy]:                                   ../View/src/components/util/directives.js
 [Bootstrap popovers]:                       https://getbootstrap.com/docs/4.3/components/popovers/
 [Bootstrap tooltips]:                       https://getbootstrap.com/docs/4.3/components/tooltips/
 

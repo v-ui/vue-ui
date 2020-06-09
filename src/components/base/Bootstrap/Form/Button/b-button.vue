@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 import srMsg from "@/components/Basic/basic-sr-msg.vue";
@@ -37,6 +37,6 @@ import srMsg from "@/components/Basic/basic-sr-msg.vue";
 export default {
   name: "b-button",
   components: { BaseA, srMsg },
-  mixins: [utilities.mixins.form.btn]
+  mixins: [util.mixins.form.btn]
 };
 </script>

@@ -38,7 +38,7 @@
   </tran-out-in>
 </template>
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 // import AlertLink from './b-alert-link'
 import srMsg from "@/components/Basic/basic-sr-msg.vue";
@@ -53,11 +53,11 @@ export default {
     TranOutIn
   },
   props: {
-    show: utilities.props.show,
-    color: utilities.props.color,
-    width: utilities.props.width,
-    position: utilities.props.position,
-    srMsg: utilities.props.srMsg,
+    show: util.props.show,
+    color: util.props.color,
+    width: util.props.width,
+    position: util.props.position,
+    srMsg: util.props.srMsg,
     dismissible: Boolean,
     countDownDisdismis: Boolean,
     countDownSec: {

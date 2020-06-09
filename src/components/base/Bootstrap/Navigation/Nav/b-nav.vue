@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import NavItem from "./b-nav-item";
 import NavItemDropdown from "./b-nav-item-dropdown";
@@ -30,9 +30,9 @@ export default {
     event: "click"
   },
   props: {
-    list: utilities.props.list,
-    select: utilities.props.text,
-    set: utilities.props.justify,
+    list: util.props.list,
+    select: util.props.text,
+    set: util.props.justify,
     column: Boolean,
     tabs: Boolean,
     pills: Boolean,

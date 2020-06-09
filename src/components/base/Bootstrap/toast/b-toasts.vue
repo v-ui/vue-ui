@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BToast from "./b-toast";
 
@@ -27,7 +27,7 @@ export default {
   name: "b-toasts",
   components: { BToast },
   props: {
-    list: utilities.props.list
+    list: util.props.list
   }
 };
 </script>

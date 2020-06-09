@@ -1,7 +1,7 @@
 // routers util
-import util from '@/util/index'
+import tool from '@/tool/index'
 
-function IsRouters(routers) { 
+function IsRouters(routers) {
     if (routers
         && routers.Modules
         && typeof (routers.Modules) == 'object'
@@ -13,7 +13,7 @@ function IsRouters(routers) {
         return false
 }
 
-function IsPath(item) { 
+function IsPath(item) {
     if (item
         && item.path
         && typeof (item.path) == `string`
@@ -26,13 +26,13 @@ function IsPath(item) {
         return false
 }
 
-function FormatSubsystemName(routers ,SubsystemName) { 
+function FormatSubsystemName(routers ,SubsystemName) {
     return SubsystemName
         ? SubsystemName + '-' + routers.SubsystemName
         : routers.SubsystemName
 }
 
-function FormatPath(item, SubsystemName) { 
+function FormatPath(item, SubsystemName) {
     return '/' + SubsystemName + '-' + item.path
 }
 
@@ -53,7 +53,7 @@ function FormatRouters(routers, SubsystemName = '', array = []) {
     return array
 }
 
-function FormatModels(routers, SubsystemName = '') { 
+function FormatModels(routers, SubsystemName = '') {
     if (IsRouters(routers) && !routers.hide) {
         SubsystemName = FormatSubsystemName(routers, SubsystemName)
         if (!routers.hide) {
@@ -79,7 +79,7 @@ function FormatModels(routers, SubsystemName = '') {
             }
         }
         if (routers.Modules.length == 0) {
-            // 子系统根结点没有设置 hide: true, 
+            // 子系统根结点没有设置 hide: true,
             // 但所有子模块 和 链接 均设置为 hide: true,
             return {}
         }
@@ -87,18 +87,18 @@ function FormatModels(routers, SubsystemName = '') {
         // 子系统根结点设置 hide: true,
         return {}
     }
-   
+
     return routers
 }
 
-function GetRouters(routers) { 
+function GetRouters(routers) {
     // return FormatRouters(routers)
-    return FormatRouters(util.clone(routers, false))
+    return FormatRouters(tool.clone(routers, false))
 }
 
 function GetModels(models) {
     // return FormatModels(models)
-    return FormatModels(util.clone(models, false))
+    return FormatModels(tool.clone(models, false))
 }
 
 export default {

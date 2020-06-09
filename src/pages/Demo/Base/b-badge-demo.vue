@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import variables from '@/components/utilities/variables.js'
+import variables from '@/components/util/variables.js'
 
 import BBadge from '@/components/base/Bootstrap/Badge/b-badge.vue'
 

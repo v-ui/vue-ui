@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import listItems from "./b-list-item";
 
@@ -30,13 +30,13 @@ export default {
     event: "click"
   },
   props: {
-    list: utilities.props.list,
+    list: util.props.list,
     color: {
-      ...utilities.props.color,
+      ...util.props.color,
       default: "white"
     },
     select: [String, Number],
-    disabled: utilities.props.disabled,
+    disabled: util.props.disabled,
     flush: Boolean,
     inline: Boolean,
     fill: Boolean

@@ -29,7 +29,7 @@
 <script>
 // import TweenLite from "gsap/TweenLite"
 
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BProgressBar from "@/components/base/Bootstrap/Progress/b-progress-bar.vue";
 import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
@@ -38,9 +38,9 @@ export default {
   name: "b-progress",
   components: { BProgressBar, BInfo },
   props: {
-    list: utilities.props.list,
-    color: utilities.props.color,
-    info: utilities.props.value,
+    list: util.props.list,
+    color: util.props.color,
+    info: util.props.value,
     value: {
       type: [Number, String],
       default: 0,

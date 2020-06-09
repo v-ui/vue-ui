@@ -37,7 +37,7 @@
 
 <script>
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import item from "./b-pag-item";
 
@@ -49,7 +49,7 @@ export default {
     event: "change"
   },
   props: {
-    label: utilities.props.label,
+    label: util.props.label,
     separator: {
       type: String,
       default: "-"

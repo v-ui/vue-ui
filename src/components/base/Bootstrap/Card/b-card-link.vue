@@ -4,7 +4,7 @@
   </base-a>
 </template>
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
@@ -12,8 +12,8 @@ export default {
   name: "b-card-link",
   components: { BaseA },
   props: {
-    href: utilities.props.href,
-    text: utilities.props.text
+    href: util.props.href,
+    text: util.props.String,
   }
 };
 </script>

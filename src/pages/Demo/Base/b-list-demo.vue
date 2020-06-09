@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import variables from '@/components/utilities/variables.js'
+import variables from '@/components/util/variables.js'
 
 import BList from '@/components/base/Bootstrap/List/b-list.vue'
 import BListItem from '@/components/base/Bootstrap/List/b-list-item.vue'

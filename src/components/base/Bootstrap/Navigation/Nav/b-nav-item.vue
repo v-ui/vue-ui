@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
@@ -24,12 +24,12 @@ export default {
   inheritAttrs: false,
   props: {
     href: {
-      ...utilities.props.href,
+      ...util.props.href,
       default: "#"
     },
-    text: utilities.props.text,
-    active: utilities.props.active,
-    disabled: utilities.props.disabled
+    text: util.props.text,
+    active: util.props.active,
+    disabled: util.props.disabled
   },
   computed: {
     objClass: function() {

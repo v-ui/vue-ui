@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import pickerHeader from "./date-picker-header";
 import pickerRow from "@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker-row.vue";
@@ -43,7 +43,7 @@ export default {
     min: Date,
     max: Date,
     hideHeader: Boolean,
-    disabled: utilities.props.disabled
+    disabled: util.props.disabled
   },
   data() {
     return {

@@ -6,7 +6,7 @@
   </datalist>
 </template>
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-form-datalist",
@@ -15,7 +15,7 @@ export default {
       type: String,
       required: true
     },
-    datalist: utilities.props.list
+    datalist: util.props.list
   }
 };
 </script>

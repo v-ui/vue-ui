@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import TableHeadTr from "./../Tr/table-head-tr";
 
@@ -41,8 +41,8 @@ export default {
     event: "change"
   },
   props: {
-    head: utilities.props.list,
-    sort: utilities.props.list,
+    head: util.props.list,
+    sort: util.props.list,
     hideSerial: Boolean,
     hideSelect: Boolean,
     selectStatus: Number,

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
@@ -27,15 +27,15 @@ export default {
   name: "b-list-item",
   components: { BaseA, srMsg },
   props: {
-    href: utilities.props.href,
-    text: utilities.props.text,
+    href: util.props.href,
+    text: util.props.text,
     color: {
-      ...utilities.props.color,
+      ...util.props.color,
       default: "white"
     },
-    active: utilities.props.active,
-    disabled: utilities.props.disabled,
-    srMsg: utilities.props.srMsg
+    active: util.props.active,
+    disabled: util.props.disabled,
+    srMsg: util.props.srMsg
   },
   computed: {
     objClass: function() {

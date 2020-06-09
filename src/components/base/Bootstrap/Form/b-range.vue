@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
 
@@ -63,9 +63,9 @@ export default {
     },
     prompt: Boolean,
     hideValue: Boolean,
-    info: utilities.props.value,
-    minValue: utilities.props.value,
-    maxValue: utilities.props.value
+    info: util.props.value,
+    minValue: util.props.value,
+    maxValue: util.props.value
   },
   data() {
     return {

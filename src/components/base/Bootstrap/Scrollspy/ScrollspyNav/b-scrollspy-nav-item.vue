@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BNav from "@/components/base/Bootstrap/Navigation/Nav/b-nav.vue";
 import BNavItem from "@/components/base/Bootstrap/Navigation/Nav/b-nav-item.vue";
@@ -27,7 +27,7 @@ export default {
   },
   props: {
     column: Boolean,
-    list: utilities.props.list
+    list: util.props.list
   }
 };
 </script>

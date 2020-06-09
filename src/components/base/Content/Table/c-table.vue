@@ -68,7 +68,7 @@
 
 <script>
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import tableColgroup from "./Colgroup/table-colgroup";
 import tableHead from "./Head/table-head";
@@ -76,7 +76,7 @@ import tableBody from "./Body/table-body";
 
 export default {
   name: "c-table",
-  mixins: [utilities.mixins.grid.thead],
+  mixins: [util.mixins.grid.thead],
   components: { tableColgroup, tableHead, tableBody },
   model: {
     prop: "selected",
@@ -91,20 +91,20 @@ export default {
     };
   },
   props: {
-    list: utilities.props.Object,
+    list: util.props.Object,
     primaryKey: String,
     isActive: Boolean,
     hideSerial: Boolean,
     hideSelect: Boolean,
     // class table
-    tableTheme: utilities.props.theme,
+    tableTheme: util.props.theme,
     tableSm: Boolean,
     tableHover: Boolean,
     tableStriped: Boolean,
     tableBordered: Boolean,
     tableBorderless: Boolean,
     // class thead
-    theadTheme: utilities.props.theme,
+    theadTheme: util.props.theme,
     selectStatus: {
       type: [String, Number],
       default: 0,

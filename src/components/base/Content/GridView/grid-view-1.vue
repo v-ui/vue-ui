@@ -153,9 +153,9 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 // 参考： https://printjs.crabbly.com/
 import printJS from "print-js";
 
@@ -190,7 +190,7 @@ export default {
   },
   props: {
     list: {
-      ...utilities.props.Object
+      ...util.props.Object
     },
     primaryKey: {
       type: [String, Number],
@@ -202,14 +202,14 @@ export default {
       type: [String, Number],
       validator: value => !isNaN(value) && Number(value) > 0
     },
-    fixedSize: utilities.props.size,
-    tableTheme: utilities.props.theme,
+    fixedSize: util.props.size,
+    tableTheme: util.props.theme,
     tableSm: Boolean,
     tableHover: Boolean,
     tableStriped: Boolean,
     tableBordered: Boolean,
     tableBorderless: Boolean,
-    theadTheme: utilities.props.theme,
+    theadTheme: util.props.theme,
     theadSticky: Boolean,
     hideSerial: Boolean,
     selectStatus: {
@@ -477,12 +477,12 @@ export default {
       for (let i = 0; i < dom1.children.length; i++) {
         dom1.childNodes[i].addEventListener(
           "mouseover",
-          () => util.dom.addClass(dom2.children[i], "hover"),
+          () => tool.dom.addClass(dom2.children[i], "hover"),
           false
         );
         dom1.childNodes[i].addEventListener(
           "mouseout",
-          () => util.dom.removeClass(dom2.children[i], "hover"),
+          () => tool.dom.removeClass(dom2.children[i], "hover"),
           false
         );
       }

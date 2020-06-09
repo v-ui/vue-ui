@@ -16,14 +16,14 @@
   </nav>
 </template>
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 export default {
   name: "b-breadcrumb",
   components: { BaseA },
   props: {
-    content: utilities.props.content
+    content: util.props.content
   }
 };
 </script>

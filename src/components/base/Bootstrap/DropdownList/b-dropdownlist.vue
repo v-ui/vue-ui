@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
-import utilities from "@/components/utilities/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
 import dropdownPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker.vue";
 import dropItem from "@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue";
@@ -64,18 +64,18 @@ export default {
   name: "b-dropdownlist",
   components: { dropdownPicker, dropItem, BText, BValid, BInfo },
   mixins: [
-    utilities.mixins.form.base,
-    utilities.mixins.form.readonly,
-    utilities.mixins.form.validator
+    util.mixins.form.base,
+    util.mixins.form.readonly,
+    util.mixins.form.validator
   ],
   model: {
     prop: "value",
     event: "change"
   },
   props: {
-    list: utilities.props.list,
-    value: utilities.props.value,
-    info: utilities.props.value,
+    list: util.props.list,
+    value: util.props.value,
+    info: util.props.value,
     search: Boolean,
     hideNull: Boolean,
     row: {
@@ -141,7 +141,7 @@ export default {
       this.$el.firstChild.children[1].childNodes.forEach(function(node, i) {
         if (
           (node.className || node.classList) &&
-          util.dom.hasClass(node, "active")
+          tool.dom.hasClass(node, "active")
         )
           index = i < less ? 0 : i;
       });
@@ -150,15 +150,15 @@ export default {
     validator: function(value) {
       if (this.disabled) return; // disabled 时不校验
       let e = this.$refs.dropdownlist.$el;
-      util.dom.removeClass(e, "is-valid"); // 移除可能的 is-valid
+      tool.dom.removeClass(e, "is-valid"); // 移除可能的 is-valid
       // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
       if (!this.validateRequired(value)) {
-        util.dom.addClass(e, "is-invalid");
+        tool.dom.addClass(e, "is-invalid");
         return;
       }
-      util.dom.removeClass(e, "is-invalid"); // 移除可能的 is-invalid
+      tool.dom.removeClass(e, "is-invalid"); // 移除可能的 is-invalid
       // 当存在 valid slot 或 validInfo 时
-      if (this.$slots.valid || this.validInfo) util.dom.addClass(e, "is-valid");
+      if (this.$slots.valid || this.validInfo) tool.dom.addClass(e, "is-valid");
       this.$emit("valid");
     }
   }

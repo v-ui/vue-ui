@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BDropdownHeader from "./b-dropdown-header.vue";
 import BDropdownItem from "./b-dropdown-item.vue";
@@ -34,9 +34,9 @@ export default {
     BDropdownDivider
   },
   props: {
-    list: utilities.props.list,
-    select: utilities.props.value,
-    disabled: utilities.props.disabled
+    list: util.props.list,
+    select: util.props.value,
+    disabled: util.props.disabled
   }
 };
 </script>

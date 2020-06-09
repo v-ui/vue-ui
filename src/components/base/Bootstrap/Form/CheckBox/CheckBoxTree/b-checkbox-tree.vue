@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-checkbox-tree",
@@ -21,8 +21,8 @@ export default {
     event: "input"
   },
   props: {
-    list: utilities.props.list,
-    disabled: utilities.props.disabled,
+    list: util.props.list,
+    disabled: util.props.disabled,
     values: Array
   },
   watch: {

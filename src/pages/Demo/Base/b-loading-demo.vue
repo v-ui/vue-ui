@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import variables from '@/components/utilities/variables.js'
+import variables from '@/components/util/variables.js'
 
 import BLoading from "@/components/base/Bootstrap/Loading/b-loading.vue"
 

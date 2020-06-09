@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-loading",
-  mixins: [utilities.mixins.loading]
+  mixins: [util.mixins.loading]
 };
 </script>

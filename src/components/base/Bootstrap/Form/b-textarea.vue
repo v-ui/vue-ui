@@ -25,8 +25,8 @@
   </div>
 </template>
 <script>
-import util from "@/util/index.js";
-import utilities from "@/components/utilities/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
@@ -35,9 +35,9 @@ export default {
   name: "b-textarea",
   components: { BValid, BInfo },
   mixins: [
-    utilities.mixins.form.base,
-    utilities.mixins.form.readonly,
-    utilities.mixins.form.validator
+    util.mixins.form.base,
+    util.mixins.form.readonly,
+    util.mixins.form.validator
   ],
   inheritAttrs: false,
   props: {
@@ -55,10 +55,10 @@ export default {
       }
     },
     maxlength: {
-      ...utilities.props.maxlength,
+      ...util.props.maxlength,
       default: 1024
     },
-    info: utilities.props.value,
+    info: util.props.value,
     prompt: Boolean,
     resize: Boolean
   },
@@ -84,7 +84,7 @@ export default {
     change: function(e) {
       if (!this.prompt) return;
       let message = "";
-      let codeCount = util.string.codePointLength(e.target.value);
+      let codeCount = tool.string.codePointLength(e.target.value);
       if (this.maxlength >= codeCount)
         message = `已输入 ${codeCount} 个字符，还可输入 ${this.maxlength -
           codeCount} 个字符`;
@@ -94,6 +94,6 @@ export default {
 
       this.message = this.info ? this.info + `(${message})` : message;
     }
-  },
+  }
 };
 </script>

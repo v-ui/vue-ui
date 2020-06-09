@@ -29,7 +29,7 @@
 
 <script>
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import CTree from "./Tree/c-tree";
 import BButtonGroup from "@/components/base/Bootstrap/ButtonGroup/b-button-group.vue";
@@ -43,7 +43,7 @@ export default {
     event: "tree:selected"
   },
   props: {
-    list: utilities.props.list,
+    list: util.props.list,
     primaryKey: {
       type: String,
       default: "id",

@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import variables from '@/components/utilities/variables.js'
+import variables from '@/components/util/variables.js'
 
 import BButton from '@/components/base/Bootstrap/Form/Button/b-button.vue'
 import BReset from '@/components/base/Bootstrap/Form/Button/b-reset.vue'

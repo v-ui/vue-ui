@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import TableHeadTr from "./table-head-tr";
 
@@ -46,8 +46,8 @@ export default {
     };
   },
   props: {
-    head: utilities.props.list,
-    sort: utilities.props.list,
+    head: util.props.list,
+    sort: util.props.list,
     rowCount: {
       type: Number,
       default: 1

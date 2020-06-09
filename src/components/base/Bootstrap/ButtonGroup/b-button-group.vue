@@ -4,12 +4,12 @@
   </div>
 </template>
 <script>
-import utilities from "@/components/utilities/index.js"
+import util from "@/components/util/index.js"
 
 export default {
   name: "b-button-group",
   props: {
-    size: utilities.props.size,
+    size: util.props.size,
     vertical: Boolean
   },
   computed: {

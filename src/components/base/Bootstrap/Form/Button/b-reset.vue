@@ -11,14 +11,14 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-reset",
-  mixins: [utilities.mixins.form.btn],
+  mixins: [util.mixins.form.btn],
   props: {
     value: {
-      ...utilities.props.value,
+      ...util.props.value,
       default: `Reset`
     }
   }

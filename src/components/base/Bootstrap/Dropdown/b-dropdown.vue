@@ -36,9 +36,9 @@
   </div>
 </template>
 <script>
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import tranDrop from "@/components/transition/tran-drop.vue";
 import DropMenu from "./b-dropdown-menu";
@@ -52,12 +52,12 @@ export default {
     };
   },
   props: {
-    list: utilities.props.list,
-    select: utilities.props.value,
-    disabled: utilities.props.disabled,
-    set: utilities.props.set,
+    list: util.props.list,
+    select: util.props.value,
+    disabled: util.props.disabled,
+    set: util.props.set,
     trigger: {
-      ...utilities.props.text,
+      ...util.props.text,
       default: "<Pleace select...>"
     },
     hideToggle: Boolean,
@@ -75,7 +75,7 @@ export default {
   },
   computed: {
     guid: function() {
-      return "dropdown-" + util.random.getRandomString();
+      return "dropdown-" + tool.random.getRandomString();
     },
     icon: function() {
       return config.ui.icon;
@@ -93,7 +93,7 @@ export default {
     if (!el) return;
     let node = el;
     if (!node) return;
-    util.dom.addAttrs(node, {
+    tool.dom.addAttrs(node, {
       id: this.guid,
       "data-toggle": "dropdown",
       "aria-haspopup": "true",
