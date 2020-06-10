@@ -24,7 +24,7 @@
     v-on="$listeners"
   >
     <slot>{{ value | worldUpperCase | firstUpperCase }}</slot>
-    <sr-message>{{ fillsrMsg }}</sr-message>
+    <sr-msg>{{ fillsrMsg }}</sr-msg>
   </base-a>
 </template>
 

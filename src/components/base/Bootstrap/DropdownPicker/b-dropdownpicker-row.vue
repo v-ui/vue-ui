@@ -23,9 +23,9 @@ export default {
   name: "b-dropdownpicker-row",
   components: { item },
   props: {
-    items: util.props.list,
-    disabled: util.props.disabled,
-    colCount: Number
+    items: util.props.Array,
+    disabled: util.props.Boolean,
+    colCount: util.props.UInt,
   },
   methods: {
     click: function(value) {

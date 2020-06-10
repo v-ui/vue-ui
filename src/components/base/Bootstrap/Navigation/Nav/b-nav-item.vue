@@ -27,9 +27,9 @@ export default {
       ...util.props.href,
       default: "#"
     },
-    text: util.props.text,
-    active: util.props.active,
-    disabled: util.props.disabled
+    text: util.props.String,
+    active: util.props.Boolean,
+    disabled: util.props.Boolean
   },
   computed: {
     objClass: function() {

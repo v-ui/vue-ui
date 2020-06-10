@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js"
+
 import dropdownList from "@/components/base/Bootstrap/DropdownList/b-dropdownlist.vue";
 
 export default {
@@ -12,25 +14,25 @@ export default {
     prop: "value",
     event: "change"
   },
+  props: {
+    value: {
+      type,
+      default: () => new Date().getMonth() + 1,
+      validator: value => util.props.UInt.validator(value) && value < 13
+    },
+    start: {
+      ...util.props.UInt,
+      validator: value => util.props.UInt.validator(value) && value < 13
+    },
+    end: {
+      ...util.props.UInt,
+      validator: value => util.props.UInt.validator(value) && value < 13
+    }
+  },
   data() {
     return {
       selectValue: this.value
     };
-  },
-  props: {
-    value: {
-      type: Number,
-      default: () => new Date().getMonth() + 1,
-      validator: value => !isNaN(value) && value > 0 && value < 13
-    },
-    start: {
-      type: Number,
-      validator: value => !isNaN(value) && value > 0 && value < 13
-    },
-    end: {
-      type: Number,
-      validator: value => !isNaN(value) && value > 0 && value < 13
-    }
   },
   computed: {
     list: function() {

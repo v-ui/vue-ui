@@ -5,14 +5,13 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 export default {
   name: "table-serial-td",
   props: {
-    number: {
-      type: Number,
-      validator: value => !isNaN(value) && Number(value) > 0
-    },
-    hideSerial: Boolean
+    number: util.props.UInt,
+    hideSerial: util.props.Boolean
   }
 };
 </script>

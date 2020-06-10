@@ -48,13 +48,10 @@ export default {
     event: "input"
   },
   props: {
-    item: util.props.item,
-    disabled: util.props.disabled,
-    isChecked: Boolean,
-    values: {
-      type: Array,
-      default: () => []
-    }
+    item: util.props.Object,
+    disabled: util.props.Boolean,
+    isChecked: util.props.Boolean,
+    values: util.props.Array,
   },
   data() {
     return {

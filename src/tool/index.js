@@ -15,7 +15,7 @@ import file from './file/index'
 // 解决 storage 兼容性问题
 docStorage.installLocalStorage()
 docStorage.installSessionStorage()
-    
+
 export default {
     // 浏览器存储的相关解决方案
     storage: {

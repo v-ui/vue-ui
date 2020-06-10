@@ -22,8 +22,8 @@ export default {
   name: "b-nav-item-dropdown",
   components: { BDropdownMenu },
   props: {
-    list: util.props.list,
-    text: util.props.value
+    list: util.props.Array,
+    text: util.props.String
   }
-};
+}
 </script>

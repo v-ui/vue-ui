@@ -1,8 +1,11 @@
 <template>
   <div>
     <div v-for="(item, index) in list" :key="index">
-      <b-dropdown-header v-if="item.header" :text="item.header" :info="item.info" />
-      <b-dropdown-divider v-else-if="item.divider" />
+      <h6 v-if="item.header" class="dropdown-header mb-0">
+        <slot>{{ item.header }}</slot>
+        <b-info :info="item.info" />
+      </h6>
+      <div v-else-if="item.divider" class="dropdown-divider" />
       <b-dropdown-item
         v-else-if="item.value"
         :text="item.value"
@@ -20,23 +23,22 @@
 <script>
 import util from "@/components/util/index.js";
 
-import BDropdownHeader from "./b-dropdown-header.vue";
 import BDropdownItem from "./b-dropdown-item.vue";
 import BDropdownItemText from "./b-dropdown-item-text.vue";
-import BDropdownDivider from "./b-dropdown-divider.vue";
+
+import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue"
 
 export default {
   name: "b-dropdown-menu",
   components: {
-    BDropdownHeader,
     BDropdownItem,
     BDropdownItemText,
-    BDropdownDivider
+    BInfo,
   },
   props: {
-    list: util.props.list,
-    select: util.props.value,
-    disabled: util.props.disabled
+    list: util.props.Array,
+    select: util.props.String,
+    disabled: util.props.Boolean,
   }
 };
 </script>

@@ -189,34 +189,26 @@ export default {
     BModal
   },
   props: {
-    list: {
-      ...util.props.Object
-    },
+    list: util.props.Object,
     primaryKey: {
-      type: [String, Number],
+      ...util.props.String,
       default: "id",
-      // required: true,
-      validator: value => value
     },
-    fixed: {
-      type: [String, Number],
-      validator: value => !isNaN(value) && Number(value) > 0
-    },
+    fixed: util.props.UInt,
     fixedSize: util.props.size,
     tableTheme: util.props.theme,
-    tableSm: Boolean,
-    tableHover: Boolean,
-    tableStriped: Boolean,
-    tableBordered: Boolean,
-    tableBorderless: Boolean,
+    tableSm: util.props.Boolean,
+    tableHover: util.props.Boolean,
+    tableStriped: util.props.Boolean,
+    tableBordered: util.props.Boolean,
+    tableBorderless: util.props.Boolean,
     theadTheme: util.props.theme,
-    theadSticky: Boolean,
-    hideSerial: Boolean,
+    theadSticky: util.props.Boolean,
+    hideSerial: util.props.Boolean,
     selectStatus: {
-      type: [String, Number],
-      default: 0, // 0: 默认, 1: 单选, 2: 多选
+      ...util.props.UInt,
       validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value))
-    },
+    },// 0: 默认, 1: 单选, 2: 多选
     selected: [Array, Object],
     printTitle: String
   },

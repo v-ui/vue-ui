@@ -18,7 +18,7 @@ export default {
   mixins: [util.mixins.form.btn],
   props: {
     value: {
-      ...util.props.value,
+      ...util.props.String,
       default: `Reset`
     }
   }

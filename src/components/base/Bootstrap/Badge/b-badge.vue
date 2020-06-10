@@ -25,8 +25,8 @@ export default {
       default: "danger"
     },
     href: util.props.href,
-    srMsg: util.props.srMsg,
-    pill: Boolean
+    srMsg: util.props.String,
+    pill: util.props.Boolean,
   },
   computed: {
     objClass: function() {

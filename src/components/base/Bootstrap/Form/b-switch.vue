@@ -30,9 +30,9 @@ export default {
     event: "input"
   },
   props: {
-    text: util.props.text,
-    info: util.props.info,
-    checked: Boolean,
+    text: util.props.String,
+    info: util.props.String,
+    checked: util.props.Boolean,
     id: {
       type: String,
       default: function() {

@@ -15,7 +15,7 @@
       v-bind="$attrs"
       v-on="inputListeners"
       @blur="validator($event, regex)"
-    />
+    >
     <b-valid v-if="$slots.valid || validInfo" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
     </b-valid>
@@ -67,12 +67,12 @@ export default {
         ].includes(value);
       }
     },
-    placeholder: String,
-    length: [String, Number],
-    info: util.props.value,
-    icon: util.props.value,
-    hideIcon: Boolean,
-    prompt: Boolean
+    placeholder: util.props.String,
+    length: util.props.UInt,
+    info: util.props.String,
+    icon: util.props.String,
+    hideIcon: util.props.Boolean,
+    prompt: util.props.Boolean
   },
   computed: {
     imputType: function() {

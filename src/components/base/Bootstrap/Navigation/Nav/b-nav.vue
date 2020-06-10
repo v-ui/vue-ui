@@ -30,14 +30,14 @@ export default {
     event: "click"
   },
   props: {
-    list: util.props.list,
-    select: util.props.text,
+    list: util.props.Array,
+    select: util.props.String,
     set: util.props.justify,
-    column: Boolean,
-    tabs: Boolean,
-    pills: Boolean,
-    fill: Boolean,
-    justified: Boolean
+    column: util.props.Boolean,
+    tabs: util.props.Boolean,
+    pills: util.props.Boolean,
+    fill: util.props.Boolean,
+    justified: util.props.Boolean
   },
   computed: {
     objClass: function() {

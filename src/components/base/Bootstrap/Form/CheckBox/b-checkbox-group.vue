@@ -43,10 +43,10 @@ export default {
     event: "change"
   },
   props: {
-    list: util.props.list,
-    values: util.props.list,
-    info: util.props.value,
-    disabled: util.props.disabled
+    list: util.props.Array,
+    values: util.props.Array,
+    info: util.props.String,
+    disabled: util.props.Boolean,
   },
   data() {
     return {

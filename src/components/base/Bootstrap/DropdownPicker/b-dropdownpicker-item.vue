@@ -18,11 +18,11 @@ export default {
   name: "b-dropdownpicker-item",
   components: { BaseButton },
   props: {
-    value: util.props.value,
-    text: util.props.value,
-    select: util.props.active,
-    disabled: util.props.disabled,
-    colCount: Number
+    value: util.props.String,
+    text: util.props.String,
+    select: util.props.Boolean,
+    disabled: util.props.Boolean,
+    colCount: util.props.UInt,
   },
   computed: {
     objClass: function() {

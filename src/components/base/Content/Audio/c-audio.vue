@@ -104,6 +104,7 @@ import config from "@/config/index.js";
  * https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Audio_API
  */
 import { Howl } from "howler";
+import util from "@/components/util/index.js";
 
 import CControllerButton from "./c-controller-button";
 import BRange from "@/components/base/Bootstrap/Form/b-range.vue";
@@ -113,19 +114,8 @@ export default {
   name: "c-auido",
   components: { CControllerButton, BRange, BLoading },
   props: {
-    playList: {
-      // 播放列表
-      type: Array,
-      default: () => []
-    },
-    index: {
-      // 序号
-      type: Number,
-      default: 0,
-      validator: function(val) {
-        return !isNaN(val) && val >= 0;
-      }
-    }
+    playList: util.props.Array, // 播放列表
+    index: util.props.UInt, // 序号
   },
   data() {
     return {

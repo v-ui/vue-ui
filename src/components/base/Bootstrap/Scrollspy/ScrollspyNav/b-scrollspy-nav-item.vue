@@ -26,8 +26,8 @@ export default {
     BNavItem
   },
   props: {
-    column: Boolean,
-    list: util.props.list
+    column: util.props.Boolean,
+    list: util.props.Array
   }
 };
 </script>

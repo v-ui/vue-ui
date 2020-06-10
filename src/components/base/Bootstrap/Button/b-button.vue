@@ -45,7 +45,7 @@
     v-on="$listeners"
   >
     <slot>{{ value }}</slot>
-    <sr-message>{{ fillsrMsg }}</sr-message>
+    <sr-msg>{{ fillsrMsg }}</sr-msg>
   </button>
 </template>
 <script>
@@ -61,11 +61,11 @@ export default {
     color: util.props.color,
     href: util.props.href,
     size: util.props.size,
-    name: util.props.value,
-    active: util.props.active,
-    disabled: util.props.disabled,
-    srMsg: util.props.srMsg,
-    outline: Boolean,
+    name: util.props.String,
+    active: util.props.Boolean,
+    disabled: util.props.Boolean,
+    srMsg: util.props.String,
+    outline: util.props.Boolean,
     target: {
       type: String,
       default: "button",
@@ -77,15 +77,11 @@ export default {
       validator: value => ["button", "reset", "submit"].includes(value)
     },
     value: {
-      ...util.props.value,
-      default: function() {
-        return `${this.type.substring(0, 1).toUpperCase()}${this.type.substring(
-          1
-        )}`;
-      }
+      ...util.props.String,
+      default: ''
     },
-    block: Boolean,
-    tabindex: Number,
+    block: util.props.Boolean,
+    tabindex: util.props.Int,
     autocomplete: {
       type: String,
       default: "off"

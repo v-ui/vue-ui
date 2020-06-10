@@ -40,13 +40,13 @@ export default {
     event: "input"
   },
   props: {
-    value: util.props.text,
-    list: util.props.list,
-    info: util.props.text,
-    disabled: util.props.disabled,
+    value: util.props.String,
+    list: util.props.Array,
+    info: util.props.String,
+    disabled: util.props.Boolean,
     color: util.props.color,
     name: {
-      type: String,
+      ...util.props.String,
       required: true
     }
   }

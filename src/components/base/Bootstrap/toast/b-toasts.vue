@@ -27,7 +27,7 @@ export default {
   name: "b-toasts",
   components: { BToast },
   props: {
-    list: util.props.list
+    list: util.props.Array,
   }
 };
 </script>

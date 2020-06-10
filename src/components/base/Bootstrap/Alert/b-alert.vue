@@ -53,17 +53,16 @@ export default {
     TranOutIn
   },
   props: {
-    show: util.props.show,
+    show: util.props.Boolean,
     color: util.props.color,
     width: util.props.width,
     position: util.props.position,
-    srMsg: util.props.srMsg,
-    dismissible: Boolean,
-    countDownDisdismis: Boolean,
+    srMsg: util.props.String,
+    dismissible: util.props.Boolean,
+    countDownDisdismis: util.props.Boolean,
     countDownSec: {
-      type: [String, Number],
+      ...util.props.UInt,
       default: 5,
-      validator: value => !isNaN(value)
     }
   },
   data() {

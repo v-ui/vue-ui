@@ -29,7 +29,7 @@
             :select="select"
             :disabled="disabled"
             @click="item => $emit('menuClick', item)"
-          ></drop-menu>
+          />
         </slot>
       </div>
     </tran-drop>
@@ -52,26 +52,23 @@ export default {
     };
   },
   props: {
-    list: util.props.list,
-    select: util.props.value,
-    disabled: util.props.disabled,
+    list: util.props.Array,
+    select: util.props.String,
+    disabled: util.props.Boolean,
     set: util.props.set,
     trigger: {
-      ...util.props.text,
+      ...util.props.String,
       default: "<Pleace select...>"
     },
-    hideToggle: Boolean,
+    hideToggle: util.props.Boolean,
     menuAlign: {
       type: String,
       default: "",
       validator: value => ["", "left", "right"].includes(value)
     },
-    menWidth: Boolean,
-    menuHeight: String,
-    scroll: {
-      type: Number,
-      default: 0
-    }
+    menWidth: util.props.Boolean,
+    menuHeight: util.props.String,
+    scroll: util.props.UInt,
   },
   computed: {
     guid: function() {

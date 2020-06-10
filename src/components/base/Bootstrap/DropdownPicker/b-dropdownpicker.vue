@@ -54,22 +54,19 @@ export default {
         return "drop-picker-" + tool.random.getRandomString();
       }
     },
-    placeholder: util.props.text,
-    show: Boolean,
-    disabled: Boolean,
-    hideToggle: Boolean,
-    showFooter: Boolean,
-    menuWidth: Boolean,
-    menuHeight: String,
+    placeholder: util.props.String,
+    show: util.props.Boolean,
+    disabled: util.props.Boolean,
+    hideToggle: util.props.Boolean,
+    showFooter: util.props.Boolean,
+    menuWidth: util.props.Boolean,
+    menuHeight: util.props.String,
     canHide: {
-      type: Boolean,
+      ...util.props.Boolean,
       default: true
     },
-    scroll: {
-      type: Number,
-      default: 0
-    },
-    info: util.props.text,
+    scroll: util.props.Uint,
+    info: util.props.String,
     value: [String, Number, Date]
   },
   data() {

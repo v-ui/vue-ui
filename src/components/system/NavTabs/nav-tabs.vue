@@ -189,7 +189,7 @@ export default {
       newValue ? this.bindHideEvents() : this.unbindHideEvents();
     },
     "pathList.length": function() {
-      sessionStorage.System_NavTabs_PathList = JSON.stringify(this.pathList);
+      sessionStorage.System_NavTabs_PathList = JSON.stringify(this.pathList, null, ['pathInfo', 'index']);
     }
   }
 };

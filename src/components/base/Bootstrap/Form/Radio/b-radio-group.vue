@@ -45,13 +45,13 @@ export default {
   },
 
   props: {
-    value: String,
-    list: util.props.list,
-    info: util.props.value,
-    disabled: util.props.disabled,
+    value: util.props.String,
+    list: util.props.Array,
+    info: util.props.String,
+    disabled: util.props.Boolean,
     name: {
-      type: String,
-      required: true
+      ...util.props.String,
+      required: true,
     }
   },
   data() {

@@ -82,6 +82,27 @@ export default {
     prop: "selected",
     event: "table:selected"
   },
+  props: {
+    list: util.props.Object,
+    primaryKey: {
+      ...util.props.String,
+      default: "id",
+    },
+    sortObj: util.props.Object,
+    tableClass: util.props.String,
+    theadClass: util.props.String,
+    isActive: util.props.Boolean,
+    hideHead: util.props.Boolean,
+    hideData: util.props.Boolean,
+    hideFoot: util.props.Boolean,
+    hideSerial: util.props.Boolean,
+    hideSelect: util.props.Boolean,
+    selectStatus: {
+      ...util.props.UInt,
+      validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value)),
+    },// 0: 默认, 1: 单选, 2: 多选
+    selected: [Array, Object]
+  },
   data() {
     return {
       colgroup: [],
@@ -90,29 +111,6 @@ export default {
       theadCheckboxChecked: false,
       selectedOptions: this.selected
     };
-  },
-  props: {
-    list: util.props.Object,
-    primaryKey: {
-      type: [String, Number],
-      default: "id",
-      validator: value => value
-    },
-    sortObj: Object,
-    tableClass: String,
-    theadClass: String,
-    isActive: Boolean,
-    hideHead: Boolean,
-    hideData: Boolean,
-    hideFoot: Boolean,
-    hideSerial: Boolean,
-    hideSelect: Boolean,
-    selectStatus: {
-      type: [String, Number],
-      default: 0, // 0: 默认, 1: 单选, 2: 多选
-      validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value))
-    },
-    selected: [Array, Object]
   },
   computed: {
     status: function() {

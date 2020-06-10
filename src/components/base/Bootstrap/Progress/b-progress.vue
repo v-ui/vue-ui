@@ -38,19 +38,16 @@ export default {
   name: "b-progress",
   components: { BProgressBar, BInfo },
   props: {
-    list: util.props.list,
+    list: util.props.Array,
     color: util.props.color,
-    info: util.props.value,
+    info: util.props.String,
     value: {
-      type: [Number, String],
-      default: 0,
-      validator: function(val) {
-        return !isNaN(val) && val >= 0 && val <= 100;
-      }
+      ...util.props.UNumber,
+      validator: value => util.props.UNumber.validator(value) && value <= 100,
     },
-    showValue: Boolean,
-    striped: Boolean,
-    animated: Boolean
+    showValue: util.props.Boolean,
+    striped: util.props.Boolean,
+    animated: util.props.Boolean
   },
   data() {
     return {

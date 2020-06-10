@@ -24,10 +24,10 @@ export default {
   name: "b-navbar",
   components: { BNavBrand, BNavToggler, BNavbarItems },
   props: {
-    list: util.props.list,
-    brand: util.props.value,
+    list: util.props.Array,
+    brand: util.props.String,
     href: util.props.href,
-    hideToggler: Boolean
+    hideToggler: util.props.Boolean,
   },
   data() {
     return {

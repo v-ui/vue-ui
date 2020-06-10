@@ -11,7 +11,7 @@ export default {
   name: "b-navbar-brand",
   props: {
     href: util.props.href,
-    text: util.props.text
+    text: util.props.String
   }
 };
 </script>

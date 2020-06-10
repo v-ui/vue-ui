@@ -34,7 +34,7 @@ export default {
   name: "b-media-item",
   components: { BMedia: () => import("./b-media"), BButton },
   props: {
-    item: util.props.item
+    item: util.props.Object,
   },
   data() {
     return {

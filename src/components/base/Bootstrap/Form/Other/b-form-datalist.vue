@@ -15,7 +15,7 @@ export default {
       type: String,
       required: true
     },
-    datalist: util.props.list
+    datalist: util.props.Array,
   }
 };
 </script>

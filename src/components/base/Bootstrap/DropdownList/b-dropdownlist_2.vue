@@ -66,15 +66,14 @@ export default {
     event: "change"
   },
   props: {
-    list: util.props.list,
-    value: util.props.value,
-    info: util.props.value,
-    search: Boolean,
-    hideNull: Boolean,
+    list: util.props.Array,
+    value: util.props.String,
+    info: util.props.String,
+    search: util.props.Boolean,
+    hideNull: util.props.Boolean,
     row: {
-      type: [String, Number],
+      ...util.props.UInt,
       default: 10,
-      validator: val => !isNaN(val) && Number(val) > 0
     }
   },
   data() {

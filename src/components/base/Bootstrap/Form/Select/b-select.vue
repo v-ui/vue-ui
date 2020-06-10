@@ -66,10 +66,10 @@ export default {
     event: "change"
   },
   props: {
-    list: util.props.list,
-    disabled: util.props.disabled,
-    info: util.props.value,
-    hideNull: Boolean,
+    list: util.props.Array,
+    disabled: util.props.Boolean,
+    info: util.props.String,
+    hideNull: util.props.Boolean,
     value: {
       type: [String, Number, Array],
       default: function() {
@@ -81,11 +81,8 @@ export default {
       default: function() {
         return this.multiple ? this.list.length + 1 : null;
       },
-      validator: function(val) {
-        return !isNaN(val) && Number(val) > 0;
-      }
     },
-    multiple: Boolean
+    multiple: util.props.Boolean,
   },
   data() {
     return {

@@ -72,8 +72,8 @@ export default {
     event: "input"
   },
   props: {
-    value: Object,
-    disabled: util.props.disabled
+    value: util.props.Object,
+    disabled: util.props.Boolean,
   },
   data() {
     return {

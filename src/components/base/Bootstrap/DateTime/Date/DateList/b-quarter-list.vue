@@ -12,7 +12,6 @@ export default {
     prop: "value",
     event: "change"
   },
-
   props: {
     value: {
       type: Number,
@@ -26,21 +25,15 @@ export default {
           ? 3
           : 4;
       },
-      validator: function(value) {
-        return !isNaN(value) && value > 0 && value < 5;
-      }
+      validator: value => !isNaN(value) && value > 0 && value < 5
     },
     start: {
       type: Number,
-      validator: function(value) {
-        return !isNaN(value) && value > 0 && value < 5;
-      }
+      validator: value => !isNaN(value) && value > 0 && value < 5,
     },
     end: {
       type: Number,
-      validator: function(value) {
-        return !isNaN(value) && value > 0 && value < 5;
-      }
+      validator: value => !isNaN(value) && value > 0 && value < 5,
     }
   },
   data() {

@@ -7,7 +7,9 @@ import tool from '@/tool/index.js'
 
 // v-tip
 // 注册一个全局自定义指令 `v-tip`(用于提示弹窗)
-Vue.directive('tip', (el, binding) => {
+Vue.directive('tip', (element, binding) => {
+  var el = binding.value && binding.value.element || element
+
   let arg = binding.arg || 'tooltip'
   if (!['tooltip', 'popover'].includes(arg)) return
   if (!binding.value) return
@@ -53,7 +55,6 @@ Vue.directive('modal', (el, binding) => {
 // 延迟调用 在元素进入/快进入可是范围时执行回调函数
 // 常用于图片等数据的延迟加载
 Vue.directive('lazy', (el, binding) => {
-  debugger
   let cellback = binding.value.cellback || binding.value
   let option = Object.assign({ root: null, rootMargin: '50px', threshold: 0, }, binding.value.option || {})
   let initObserver = new IntersectionObserver(changes => {

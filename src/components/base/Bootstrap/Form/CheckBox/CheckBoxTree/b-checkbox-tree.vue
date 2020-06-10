@@ -21,9 +21,9 @@ export default {
     event: "input"
   },
   props: {
-    list: util.props.list,
-    disabled: util.props.disabled,
-    values: Array
+    list: util.props.Array,
+    disabled: util.props.Boolean,
+    values: util.props.Array,
   },
   watch: {
     "values.length": function() {

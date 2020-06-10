@@ -51,8 +51,8 @@ export default {
     },
     min: Date,
     max: Date,
-    hideHeader: Boolean,
-    disabled: util.props.disabled
+    hideHeader: util.props.Boolean,
+    disabled: util.props.Boolean,
   },
   data() {
     return {

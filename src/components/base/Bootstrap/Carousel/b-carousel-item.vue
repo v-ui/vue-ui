@@ -13,7 +13,7 @@ import util from "@/components/util/index.js";
 export default {
   name: "b-carousel-item",
   props: {
-    item: util.props.item
+    item: util.props.Object,
   },
   computed: {
     imgSrc: function() {

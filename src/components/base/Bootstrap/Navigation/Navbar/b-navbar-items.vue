@@ -12,7 +12,7 @@ export default {
   name: "b-navbar-items",
   components: { BNav },
   props: {
-    list: util.props.list
+    list: util.props.Array,
   }
 };
 </script>

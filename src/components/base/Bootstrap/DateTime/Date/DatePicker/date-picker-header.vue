@@ -11,21 +11,18 @@
         class="fas fa-angle-left border-0 bg-white text-muted"
         style="height: 2.5em"
         :disabled="disabled"
-        value
         @click.stop="$emit('forward')"
       />
       <base-button
         class="fas fa-circle border-0 bg-white text-muted"
         style="height: 2.5em"
         :disabled="disabled || nowDisabled"
-        value
         @click.stop="$emit('checknow')"
       />
       <base-button
         class="fas fa-angle-right border-0 bg-white text-muted"
         style="height: 2.5em"
         :disabled="disabled"
-        value
         @click.stop="$emit('backward')"
       />
     </font>
@@ -41,9 +38,9 @@ export default {
   name: "date-picker-header",
   components: { baseButton },
   props: {
-    hearderText: util.props.value,
-    disabled: util.props.disabled,
-    nowDisabled: util.props.disabled
+    hearderText: util.props.String,
+    disabled: util.props.Boolean,
+    nowDisabled: util.props.Boolean,
   }
 };
 </script>

@@ -8,10 +8,12 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 export default {
   name: "c-controller-button",
   props: {
-    icon: String
+    icon: util.props.String,
   }
 };
 </script>

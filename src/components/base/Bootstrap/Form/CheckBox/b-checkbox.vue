@@ -43,22 +43,25 @@ export default {
     event: "change"
   },
   props: {
-    value: util.props.text,
-    label: util.props.text,
+    value: util.props.String,
+    label: util.props.String,
     id: {
       type: String,
       default: function() {
         return "Checkbox-" + tool.random.getRandomString();
       }
     },
-    indeterminate: Number,
-    checked: Boolean,
-    defaultState: Boolean,
-    inline: Boolean,
-    disabled: Boolean,
-    ValidClass: String,
-    unvalid: Boolean,
-    info: String
+    indeterminate: {
+      ...util.props.Uint,
+      validator: value => [0, 1, 2].includes(Number(value))
+    },
+    checked: util.props.Boolean,
+    defaultState: util.props.Boolean,
+    inline: util.props.Boolean,
+    disabled: util.props.Boolean,
+    ValidClass: util.props.String,
+    unvalid: util.props.Boolean,
+    info: util.props.String,
   },
   data() {
     return {

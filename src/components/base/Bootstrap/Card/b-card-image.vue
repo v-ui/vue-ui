@@ -10,12 +10,10 @@ export default {
   props: {
     src: util.props.src,
     top: {
-      type: Boolean,
+      ...util.props.Boolean,
       default: true
     },
-    alt: {
-      type: String
-    }
+    alt: util.props.String,
   },
   computed: {
     isTop: function() {

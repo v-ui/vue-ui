@@ -1,7 +1,7 @@
 <template>
-  <BasicDiv v-show="$slots.default" class="card-columns">
+  <div v-show="$slots.default" class="card-columns">
     <slot />
-  </BasicDiv>
+  </div>
 </template>
 <script>
 export default {

@@ -15,7 +15,7 @@ export default {
   name: "b-media",
   components: { BMediaItem },
   props: {
-    list: util.props.list,
+    list: util.props.Array,
   }
 };
 </script>

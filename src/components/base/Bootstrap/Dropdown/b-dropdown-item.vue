@@ -36,10 +36,10 @@ export default {
   components: { BaseA, BInfo },
   props: {
     href: util.props.href,
-    text: util.props.text,
-    info: util.props.text,
-    active: util.props.active,
-    disabled: util.props.disabled
+    text: util.props.String,
+    info: util.props.String,
+    active: util.props.Boolean,
+    disabled: util.props.Boolean,
   }
 };
 </script>

@@ -18,9 +18,9 @@ import util from "@/components/util/index.js";
 export default {
   name: "b-pag-item",
   props: {
-    value: util.props.value,
-    disabled: Boolean,
-    active: Boolean
+    value: util.props.String,
+    disabled: util.props.Boolean,
+    active: util.props.Boolean,
   }
 };
 </script>

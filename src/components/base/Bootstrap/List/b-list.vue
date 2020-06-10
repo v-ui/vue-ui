@@ -9,7 +9,7 @@
       :text="item.text"
       :href="item.href"
       :color="item.color || color"
-      :sr-message="item.srMsg"
+      :sr-msg="item.srMsg"
       :disabled="disabled || item.disabled"
       :active="select ? select == item.value || select == item.text : item.active"
       @click.native="$emit('click', item.value || item.text)"
@@ -30,16 +30,16 @@ export default {
     event: "click"
   },
   props: {
-    list: util.props.list,
+    list: util.props.Array,
     color: {
       ...util.props.color,
       default: "white"
     },
-    select: [String, Number],
-    disabled: util.props.disabled,
-    flush: Boolean,
-    inline: Boolean,
-    fill: Boolean
+    select: util.props.String,
+    disabled: util.props.Boolean,
+    flush: util.props.Boolean,
+    inline: util.props.Boolean,
+    fill: util.props.Boolean,
   }
 };
 </script>

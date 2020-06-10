@@ -26,9 +26,9 @@ import util from "@/components/util/index.js";
 export default {
   name: "table-head-th",
   props: {
-    cell: Object,
-    sortObj: Object,
-    sort: util.props.list
+    cell: util.props.Object,
+    sortObj: util.props.Object,
+    sort: util.props.Array,
   },
   computed: {
     icon: function() {

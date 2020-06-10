@@ -19,110 +19,110 @@
 [filepond]:                                 https://github.com/pqina/filepond
 <!-- bootstrap 组件 -->
 [bootstrap alert]:                          https://getbootstrap.com/docs/4.3/components/alerts/
-[b-alert]:                                  ../View/src/components/base/Bootstrap/Alert
+[b-alert]:                                  ../src/components/base/Bootstrap/Alert
 [bootstrap badge]:                          https://getbootstrap.com/docs/4.3/components/badge/
-[b-badge]:                                  ../View/src/components/base/Bootstrap/Badge
-[b-sr-only]:                                ../View/src/components/base/Bootstrap/SrOney
+[b-badge]:                                  ../src/components/base/Bootstrap/Badge
+[b-sr-only]:                                ../src/components/base/Bootstrap/SrOney
 [bootstrap Breadcrumb]:                     https://getbootstrap.com/docs/4.3/components/breadcrumb/
-[b-breadcrumb]:                             ../View/src/components/base/Bootstrap/Breadcrumb
+[b-breadcrumb]:                             ../src/components/base/Bootstrap/Breadcrumb
 [bootstrap button]:                         https://getbootstrap.com/docs/4.3/components/buttons/
-[b-button]:                                 ../View/src/components/base/Bootstrap/Button
+[b-button]:                                 ../src/components/base/Bootstrap/Button
 [bootstrap button group]:                   https://getbootstrap.com/docs/4.3/components/button-group/
-[b-button-group]:                           ../View/src/components/base/Bootstrap/ButtonGroup
+[b-button-group]:                           ../src/components/base/Bootstrap/ButtonGroup
 [bootstrap card]:                           https://getbootstrap.com/docs/4.3/components/card/
-[b-card]:                                   ../View/src/components/base/Bootstrap/Card
+[b-card]:                                   ../src/components/base/Bootstrap/Card
 [bootstrap Carousel]:                       https://getbootstrap.com/docs/4.3/components/carousel/
-[b-carousel]:                               ../View/src/components/base/Bootstrap/Carousel
+[b-carousel]:                               ../src/components/base/Bootstrap/Carousel
 [bootstrap dropdown]:                       https://getbootstrap.com/docs/4.3/components/dropdowns/
-[b-dropdown]:                               ../View/src/components/base/Bootstrap/Dropdown
+[b-dropdown]:                               ../src/components/base/Bootstrap/Dropdown
 [Bootstrap forms]:                           https://getbootstrap.com/docs/4.3/components/forms/
-[formconter]:                               ../View/src/components/base/Bootstrap/FormConter
-[dropdownlist]:                             ../View/src/components/base/Bootstrap/Dropdownlist
-[dropdownPicker]:                           ../View/src/components/base/Bootstrap/dropdownPicker
-[dateTime]:                                 ../View/src/components/base/Bootstrap/DateTime
-[date]:                                     ../View/src/components/base/Bootstrap/DateTime/Date
-[dateList]:                                 ../View/src/components/base/Bootstrap/DateTime/Date/DateList
-[DatePicker]:                               ../View/src/components/base/Bootstrap/DateTime/Date/DatePicker
-[time]:                                     ../View/src/components/base/Bootstrap/DateTime/Time
-[timeList]:                                 ../View/src/components/base/Bootstrap/DateTime/Time/TimeList
-[b-list]:                                   ../View/src/components/base/Bootstrap/List
+[formconter]:                               ../src/components/base/Bootstrap/FormConter
+[dropdownlist]:                             ../src/components/base/Bootstrap/Dropdownlist
+[dropdownPicker]:                           ../src/components/base/Bootstrap/dropdownPicker
+[dateTime]:                                 ../src/components/base/Bootstrap/DateTime
+[date]:                                     ../src/components/base/Bootstrap/DateTime/Date
+[dateList]:                                 ../src/components/base/Bootstrap/DateTime/Date/DateList
+[DatePicker]:                               ../src/components/base/Bootstrap/DateTime/Date/DatePicker
+[time]:                                     ../src/components/base/Bootstrap/DateTime/Time
+[timeList]:                                 ../src/components/base/Bootstrap/DateTime/Time/TimeList
+[b-list]:                                   ../src/components/base/Bootstrap/List
 [Bootstrap list Group]:                     https://getbootstrap.com/docs/4.3/components/list-group/
-[b-nav]:                                    ../View/src/components/base/Bootstrap/Navigation/Nav
+[b-nav]:                                    ../src/components/base/Bootstrap/Navigation/Nav
 [Bootstrap navs]:                           https://getbootstrap.com/docs/4.3/components/navs/
-[b-pag]:                                    ../View/src/components/base/Bootstrap/Navigation/Pagination
+[b-pag]:                                    ../src/components/base/Bootstrap/Navigation/Pagination
 [Bootstrap pagination]:                     https://getbootstrap.com/docs/4.3/components/pagination/
-[b-progress]:                               ../View/src/components/base/Bootstrap/Progress/
+[b-progress]:                               ../src/components/base/Bootstrap/Progress/
 [Bootstrap progress]:                       https://getbootstrap.com/docs/4.3/components/progress/
-[b-loading]:                                ../View/src/components/base/Bootstrap/Loading/
+[b-loading]:                                ../src/components/base/Bootstrap/Loading/
 [Bootstrap spinners]:                       https://getbootstrap.com/docs/4.3/components/spinners/
-[b-toast]:                                  ../View/src/components/base/Bootstrap/toast/
-[b-toasts]:                                 ../View/src/components/base/Bootstrap/toast/
+[b-toast]:                                  ../src/components/base/Bootstrap/toast/
+[b-toasts]:                                 ../src/components/base/Bootstrap/toast/
 [Bootstrap Toasts]:                         https://getbootstrap.com/docs/4.3/components/toasts/
-[b-modal]:                                  ../View/src/components/base/Bootstrap/Modal/
+[b-modal]:                                  ../src/components/base/Bootstrap/Modal/
 [Bootstrap Modal]:                          https://getbootstrap.com/docs/4.3/components/modal/
-[b-media]:                                  ../View/src/components/base/Bootstrap/Media/
+[b-media]:                                  ../src/components/base/Bootstrap/Media/
 [Bootstrap Media]:                          https://getbootstrap.com/docs/4.3/components/media-object/
-[b-collapse]:                               ../View/src/components/base/Bootstrap/Collapse
+[b-collapse]:                               ../src/components/base/Bootstrap/Collapse
 [Bootstrap Collapse]:                       https://getbootstrap.com/docs/4.3/components/collapse/
-[box-accordion]:                            ../View/src/components/Box/Accordion
-[box-accordion-list]:                       ../View/src/components/Box/Accordion
-[b-navbar]:                                 ../View/src/components/base/Bootstrap/Navigation/Navbar/
+[box-accordion]:                            ../src/components/Box/Accordion
+[box-accordion-list]:                       ../src/components/Box/Accordion
+[b-navbar]:                                 ../src/components/base/Bootstrap/Navigation/Navbar/
 [Bootstrap Navbar]:                         https://getbootstrap.com/docs/4.3/components/navbar/
-[b-scrollspy]:                              ../View/src/components/base/Bootstrap/Scrollspy
+[b-scrollspy]:                              ../src/components/base/Bootstrap/Scrollspy
 [Bootstrap Scrollspy]:                      https://getbootstrap.com/docs/4.3/components/scrollspy/
-[box-tabs]:                                 ../View/src/components/Box/Tabs
-[base-a]:                                   ../View/src/components/base/BaseA
-[b-button]:                                 .../View/src/components/base/Bootstrap/Form/Button
-[b-reset]:                                  .../View/src/components/base/Bootstrap/Form/Button
-[b-submit]:                                 .../View/src/components/base/Bootstrap/Form/Button
+[box-tabs]:                                 ../src/components/Box/Tabs
+[base-a]:                                   ../src/components/base/BaseA
+[b-button]:                                 .../src/components/base/Bootstrap/Form/Button
+[b-reset]:                                  .../src/components/base/Bootstrap/Form/Button
+[b-submit]:                                 .../src/components/base/Bootstrap/Form/Button
 [b-button-group]:                           https://getbootstrap.com/docs/4.3/components/button-group/
-[lang-select]:                              ../View/src/components/system/LangSelect
-[theme-select]:                             ../View/src/components/system/ThemeSelect
-[c-audio]:                                  ../View/src/components/base/Content/Audio
+[lang-select]:                              ../src/components/system/LangSelect
+[theme-select]:                             ../src/components/system/ThemeSelect
+[c-audio]:                                  ../src/components/base/Content/Audio
 [c-video]:                                  ../view/src/components/base/Content/Video
 [c-image]:                                  ../view/src/components/base/Bootstrap/Image
 [c-video-player]:                           ../view/src/components/base/Content/VideoPlayer
 
 <!-- directive -->
-[v-tip]:                                    ../View/src/components/util/directives.js
-[v-lazy]:                                   ../View/src/components/util/directives.js
+[v-tip]:                                    ../src/components/util/directives.js
+[v-lazy]:                                   ../src/components/util/directives.js
 [Bootstrap popovers]:                       https://getbootstrap.com/docs/4.3/components/popovers/
 [Bootstrap tooltips]:                       https://getbootstrap.com/docs/4.3/components/tooltips/
 
 <!-- Plugin -->
-[theme]:                                    ../View/srcplugin/themes
+[theme]:                                    ../srcplugin/themes
 
 <!-- pages -->
-[b-text-demo]:                              ../View/src/Pages/Demo/Form/b-text-demo.vue
-[b-textarea-demo]:                          ../View/src/Pages/Demo/Form/b-text-demo.vue
-[b-number-demo]:                            ../View/src/Pages/Demo/Form/b-number-demo.vue
-[b-radio-demo]:                             ../View/src/Pages/Demo/Form/b-radio-demo.vue
-[b-checkbox-demo]:                          ../View/src/Pages/Demo/Form/b-checkbox-demo.vue
-[b-checkbox-tree-demo]:                     ../View/src/Pages/Demo/Form/b-checkbox-tree-demo.vue
-[b-switch-demo]:                            ../View/src/Pages/Demo/Form/b-switch-demo.vue
-[b-range-demo]:                             ../View/src/Pages/Demo/Form/b-range-demo.vue
-[b-select-demo]:                            ../View/src/Pages/Demo/Form/b-select-demo.vue
-[b-dropdown-demo]:                          ../View/src/Pages/Demo/Base/b-dropdown-demo.vue
-[b-datetime-demo]:                          ../View/src/Pages/Demo/Base/b-datetime-demo.vue
-[b-list-demo]:                              ../View/src/Pages/Demo/Base/b-list-demo.vue
-[b-nav-demo]:                               ../View/src/Pages/Demo/Base/b-nav-demo.vue
-[b-pag-demo]:                               ../View/src/Pages/Demo/Base/b-pag-demo.vue
-[b-tooltip-demo]:                           ../View/src/Pages/Demo/Directive/b-tooltip-demo.vue
-[b-progress-demo]:                          ../View/src/Pages/Demo/Base/b-progress-demo.vue
-[b-loading-demo]:                           .../View/src/Pages/Demo/Base/b-loading-demo.vue
-[b-toast-demo]:                             ../View/src/Pages/Demo/Base/b-toast-demo.vue
-[b-modal-demo]:                             ../View/src/Pages/Demo/Base/b-modal-demo.vue
-[b-media-demo]:                             ../View/src/Pages/Demo/Base/b-media-demo.vue
-[b-collapse-demo]:                          ../View/src/Pages/Demo/Base/b-collapse-demo.vue
-[box-accordion-demo]:                       ../View/src/Pages/Demo/Box/box-accordion-demo.vue
-[b-scrollspy-demo]:                         ../View/src/Pages/Demo/Base/b-scrollspy-demo.vue
-[box-tabs-demo]:                            ../View/src/Pages/Demo/Box/box-tabs-demo.vue
-[base-a-demo]:                              ../View/src/Pages/Demo/Base/base-a-demo.vue
-[b-card-demo]:                              ../View/src/Pages/Demo/Base/b-card-demo.vue
-[b-badge-demo]:                             ../View/src/Pages/Demo/Base/b-badge-demo.vue
-[b-button-demo]:                            ../View/src/Pages/Demo/Form/b-button-demo.vue
-[b-alert-demo]:                             ../View/src/Pages/Demo/Base/b-alert-demo.vue
-[c-audio-demo]:                             ../View/src/Pages/Demo/Content/c-audio-demo.vue
+[b-text-demo]:                              ../src/Pages/Demo/Form/b-text-demo.vue
+[b-textarea-demo]:                          ../src/Pages/Demo/Form/b-text-demo.vue
+[b-number-demo]:                            ../src/Pages/Demo/Form/b-number-demo.vue
+[b-radio-demo]:                             ../src/Pages/Demo/Form/b-radio-demo.vue
+[b-checkbox-demo]:                          ../src/Pages/Demo/Form/b-checkbox-demo.vue
+[b-checkbox-tree-demo]:                     ../src/Pages/Demo/Form/b-checkbox-tree-demo.vue
+[b-switch-demo]:                            ../src/Pages/Demo/Form/b-switch-demo.vue
+[b-range-demo]:                             ../src/Pages/Demo/Form/b-range-demo.vue
+[b-select-demo]:                            ../src/Pages/Demo/Form/b-select-demo.vue
+[b-dropdown-demo]:                          ../src/Pages/Demo/Base/b-dropdown-demo.vue
+[b-datetime-demo]:                          ../src/Pages/Demo/Base/b-datetime-demo.vue
+[b-list-demo]:                              ../src/Pages/Demo/Base/b-list-demo.vue
+[b-nav-demo]:                               ../src/Pages/Demo/Base/b-nav-demo.vue
+[b-pag-demo]:                               ../src/Pages/Demo/Base/b-pag-demo.vue
+[b-tooltip-demo]:                           ../src/Pages/Demo/Directive/b-tooltip-demo.vue
+[b-progress-demo]:                          ../src/Pages/Demo/Base/b-progress-demo.vue
+[b-loading-demo]:                           .../src/Pages/Demo/Base/b-loading-demo.vue
+[b-toast-demo]:                             ../src/Pages/Demo/Base/b-toast-demo.vue
+[b-modal-demo]:                             ../src/Pages/Demo/Base/b-modal-demo.vue
+[b-media-demo]:                             ../src/Pages/Demo/Base/b-media-demo.vue
+[b-collapse-demo]:                          ../src/Pages/Demo/Base/b-collapse-demo.vue
+[box-accordion-demo]:                       ../src/Pages/Demo/Box/box-accordion-demo.vue
+[b-scrollspy-demo]:                         ../src/Pages/Demo/Base/b-scrollspy-demo.vue
+[box-tabs-demo]:                            ../src/Pages/Demo/Box/box-tabs-demo.vue
+[base-a-demo]:                              ../src/Pages/Demo/Base/base-a-demo.vue
+[b-card-demo]:                              ../src/Pages/Demo/Base/b-card-demo.vue
+[b-badge-demo]:                             ../src/Pages/Demo/Base/b-badge-demo.vue
+[b-button-demo]:                            ../src/Pages/Demo/Form/b-button-demo.vue
+[b-alert-demo]:                             ../src/Pages/Demo/Base/b-alert-demo.vue
+[c-audio-demo]:                             ../src/Pages/Demo/Content/c-audio-demo.vue
 [c-video-demo]:                             ../view/src/Pages/Demo/Content/c-video-demo.vue
 [c-video-player]:                           ../view/src/Pages/Demo/Content/c-video-player-demo.vue
 

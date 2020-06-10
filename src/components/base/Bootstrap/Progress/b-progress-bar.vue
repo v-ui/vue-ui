@@ -18,30 +18,22 @@ export default {
   name: "b-progress-bar",
   props: {
     value: {
-      type: [Number, String],
-      default: 0,
-      validator: function(val) {
-        return !isNaN(val) && val >= 0 && val <= 100;
-      }
+      ...util.props.UNumber,
+      validator: value => util.props.UNumber.validator(value) && value <= 100,
     },
     min: {
-      type: [Number, String],
-      default: 0,
-      validator: function(val) {
-        return !isNaN(val) && val >= 0 && val <= 100;
-      }
+      ...util.props.UNumber,
+      validator: value => util.props.UNumber.validator(value) && value <= 100,
     },
     max: {
-      type: [Number, String],
+      ...util.props.UNumber,
       default: 100,
-      validator: function(val) {
-        return !isNaN(val) && val >= 0 && val <= 100;
-      }
+      validator: value => util.props.UNumber.validator(value) && value <= 100,
     },
     color: util.props.color,
-    showValue: Boolean,
-    striped: Boolean,
-    animated: Boolean
+    showValue: util.props.Boolean,
+    striped: util.props.Boolean,
+    animated: util.props.Boolean
   },
   data() {
     return {

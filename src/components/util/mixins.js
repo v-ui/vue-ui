@@ -25,15 +25,11 @@ export default {
         tempClass: String,
       },
       computed: {
-        // edit 2020-04-15
-        // 未校验正确性
-        // 影响范围 所有使用了 util.mixins.form.base 的组件
-        // TODO: 校验正确性
-        // objClass: function () {
-        //     let size = this.size ? `form-control-${this.size}` : ''
-        //     let border = !this.border ? 'border-0' : ''
-        //     return `${this.tempClass} bg-${this.color} text-${this.textColor} ${size} ${border} text-${this.textAlign}`
-        // },
+        objClass: function () {
+            let size = this.size ? `form-control-${this.size}` : ''
+            let border = !this.border ? 'border-0' : ''
+            return `${this.tempClass} bg-${this.color} text-${this.textColor} ${size} ${border} text-${this.textAlign}`
+        },
         inputListeners: function () {
           var vm = this
           // `Object.assign` 将所有的对象合并为一个新对象

@@ -19,7 +19,7 @@ import util from "@/components/util/index.js";
 export default {
   name: "table-foot",
   props: {
-    foot: util.props.list
+    foot: util.props.Array,
   }
 };
 </script>

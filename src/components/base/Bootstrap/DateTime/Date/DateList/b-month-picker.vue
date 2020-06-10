@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import util from "@/components/util/index.js";
+import util from "@/components/util/index.js"
 
-import BDatePicker from "@/components/base/Bootstrap/DateTime/Date/DatePicker/b-date-picker.vue";
+import BDatePicker from "@/components/base/Bootstrap/DateTime/Date/DatePicker/b-date-picker.vue"
 
 export default {
   name: "b-year-picker",
@@ -22,13 +22,12 @@ export default {
     prop: "value",
     event: "change"
   },
-
   props: {
-    value: util.props.value,
-    min: String,
-    max: String,
-    placeholder: util.props.value,
-    disabled: util.props.disabled
+    value: util.props.String,
+    min: util.props.String,
+    max: util.props.String,
+    placeholder: util.props.String,
+    disabled: util.props.Boolean,
   },
   data() {
     return {

@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import CImage from "@/components/base/Bootstrap/Image/c-image.vue";
+import CImage from "@/components/base/Content/Image/c-image.vue";
 
 export default {
   name: "v-video-list-card",

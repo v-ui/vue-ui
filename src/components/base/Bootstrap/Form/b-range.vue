@@ -6,6 +6,7 @@
         class="col-auto text-right text-monospace pl-0 pr-1"
       >{{ fillMinValue }}</span>
       <input
+        ref="range"
         type="range"
         class="custom-range col"
         :min="min"
@@ -39,20 +40,14 @@ export default {
     event: "input"
   },
   props: {
-    min: {
-      type: [Number, String],
-      default: 0,
-      validator: value => !isNaN(value)
-    },
+    min: util.props.Number,
     max: {
-      type: [Number, String],
-      default: 100,
-      validator: value => !isNaN(value)
+      ...util.props.Number,
+      default: 100
     },
     step: {
-      type: [Number, String],
-      default: 1,
-      validator: value => !isNaN(value)
+      ...util.props.Number,
+      default: 1
     },
     value: {
       type: [Number, String],
@@ -61,15 +56,15 @@ export default {
       },
       validator: value => !isNaN(value)
     },
-    prompt: Boolean,
-    hideValue: Boolean,
-    info: util.props.value,
-    minValue: util.props.value,
-    maxValue: util.props.value
+    prompt: util.props.Boolean,
+    hideValue: util.props.Boolean,
+    info: util.props.String,
+    minValue: util.props.String,
+    maxValue: util.props.String
   },
   data() {
     return {
-      select: Number(this.value)
+      select: Number(this.value),
     };
   },
   computed: {
@@ -96,7 +91,7 @@ export default {
     },
     fillMaxValue: function() {
       return this.maxValue ? this.maxValue : Number(this.max);
-    }
+    },
   },
   watch: {
     value: function(value) {

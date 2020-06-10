@@ -20,7 +20,6 @@
 import util from "@/components/util/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
-
 import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 export default {
@@ -28,14 +27,14 @@ export default {
   components: { BaseA, srMsg },
   props: {
     href: util.props.href,
-    text: util.props.text,
+    text: util.props.String,
     color: {
       ...util.props.color,
       default: "white"
     },
-    active: util.props.active,
-    disabled: util.props.disabled,
-    srMsg: util.props.srMsg
+    active: util.props.Boolean,
+    disabled: util.props.Boolean,
+    srMsg: util.props.String
   },
   computed: {
     objClass: function() {

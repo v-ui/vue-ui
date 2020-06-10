@@ -49,38 +49,26 @@ export default {
     event: "change"
   },
   props: {
-    label: util.props.label,
+    label: util.props.String,
     separator: {
       type: String,
       default: "-"
     },
     active: {
-      type: [Number, String],
+      ...util.props.UInt,
       default: 1,
-      validator: function(val) {
-        return !isNaN(val) && Number(val) > 0 && Number(val) % 1 == 0;
-      }
     },
     start: {
-      type: [Number, String],
+      ...util.props.UInt,
       default: 1,
-      validator: function(val) {
-        return !isNaN(val) && Number(val) > 0 && Number(val) % 1 == 0;
-      }
     },
     end: {
-      type: [Number, String],
-      validator: function(val) {
-        return !isNaN(val) && Number(val) > 0 && Number(val) % 1 == 0;
-      },
+      ...util.props.UInt,
       required: true
     },
     total: {
-      type: [Number, String],
+      ...util.props.UInt,
       default: 10,
-      validator: function(val) {
-        return !isNaN(val) && Number(val) >= 10 && Number(val) % 1 == 0;
-      }
     }
   },
   data() {

@@ -24,18 +24,16 @@ export default {
     BNavbar
   },
   props: {
-    column: Boolean,
-    list: util.props.list,
+    column: util.props.Boolean,
+    list: util.props.Array,
     brand: {
-      ...util.props.value,
+      ...util.props.String,
       default: "Contents"
     },
     set: {
       type: String,
       default: "top",
-      validator: function(val) {
-        return ["top", "left", "right"].includes(val);
-      }
+      validator: value => ["top", "left", "right"].includes(value),
     }
   }
 };

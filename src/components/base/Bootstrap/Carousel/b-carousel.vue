@@ -44,13 +44,13 @@
   </div>
 </template>
 <script>
-import BCarouselItem from "./b-carousel-item";
-import srMsg from "@/components/Basic/basic-sr-msg.vue";
+import tool from "@/tool/index.js"
+import util from "@/components/util/index.js"
 
-import BaseA from "@/components/base/Content/A/c-a.vue";
+import BCarouselItem from "./b-carousel-item"
+import srMsg from "@/components/Basic/basic-sr-msg.vue"
 
-import tool from "@/tool/index.js";
-import util from "@/components/util/index.js";
+import BaseA from "@/components/base/Content/A/c-a.vue"
 
 export default {
   name: "b-carousel",
@@ -61,22 +61,11 @@ export default {
     };
   },
   props: {
-    content: util.props.content,
-    indicators: {
-      type: Boolean,
-      default: false
-    },
-    control: {
-      type: Boolean,
-      default: false
-    },
-    fade: {
-      type: Boolean,
-      default: false
-    },
-    interval: {
-      type: Number
-    }
+    content: util.props.String,
+    indicators: util.props.Boolean,
+    control: util.props.Boolean,
+    fade: util.props.Boolean,
+    interval: util.props.Number
   },
   computed: {
     guid: function() {

@@ -84,8 +84,8 @@ export default {
     },
     min: [String, Date],
     max: [String, Date],
-    info: util.props.value,
-    placeholder: util.props.value
+    info: util.props.String,
+    placeholder: util.props.String,
   },
   data() {
     return {

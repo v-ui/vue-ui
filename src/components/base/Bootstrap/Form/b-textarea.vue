@@ -42,25 +42,17 @@ export default {
   inheritAttrs: false,
   props: {
     rows: {
-      type: [Number, String],
+      ...util.props.UInt,
       default: 3,
-      validator: value => {
-        return value > 0;
-      }
     },
-    cols: {
-      type: [Number, String],
-      validator: value => {
-        return value > 0;
-      }
-    },
+    cols: util.props.UInt,
     maxlength: {
-      ...util.props.maxlength,
+      ...util.props.UInt,
       default: 1024
     },
-    info: util.props.value,
-    prompt: Boolean,
-    resize: Boolean
+    info: util.props.String,
+    prompt: util.props.Boolean,
+    resize: util.props.Boolean
   },
   data() {
     return {

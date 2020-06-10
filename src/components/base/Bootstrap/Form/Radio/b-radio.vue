@@ -35,11 +35,11 @@ export default {
     event: "change"
   },
   props: {
-    value: util.props.text,
-    label: util.props.text,
-    info: util.props.text,
-    ValidClass: util.props.text,
-    disabled: util.props.disabled,
+    value: util.props.String,
+    label: util.props.String,
+    info: util.props.String,
+    ValidClass: util.props.String,
+    disabled: util.props.Boolean,
     id: {
       type: String,
       default: function() {
@@ -47,7 +47,7 @@ export default {
       }
     },
     checked: [String, Boolean],
-    inline: Boolean
+    inline: util.props.Boolean,
   },
   computed: {
     inputListeners: function() {

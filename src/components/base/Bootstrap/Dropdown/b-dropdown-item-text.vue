@@ -13,8 +13,8 @@ export default {
   name: "b-dropdown-item-text",
   components: { BInfo },
   props: {
-    text: util.props.text,
-    info: util.props.text
+    text: util.props.String,
+    info: util.props.String
   }
 };
 </script>

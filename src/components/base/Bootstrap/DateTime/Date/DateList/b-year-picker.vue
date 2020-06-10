@@ -22,11 +22,11 @@ export default {
     event: "change"
   },
   props: {
-    value: util.props.value,
-    min: String,
-    max: String,
-    placeholder: util.props.value,
-    disabled: util.props.disabled
+    value: util.props.String,
+    min: util.props.String,
+    max: util.props.String,
+    placeholder: util.props.String,
+    disabled: util.props.Boolean,
   },
   data() {
     return {

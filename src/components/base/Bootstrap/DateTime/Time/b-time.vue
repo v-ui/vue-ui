@@ -32,8 +32,8 @@ export default {
       default: "hh:mm:ss",
       validator: value => ["hh:mm", "hh:mm:ss"].includes(value)
     },
-    value: util.props.value,
-    info: util.props.value,
+    value: util.props.String,
+    info: util.props.String,
     min: {
       type: [String, Date]
       // default: '00:00:00',
