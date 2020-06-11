@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 import tableBodyTd from "./table-body-td";
 import tableSerialTd from "./../Td/table-serial-td";
 import tableSelectTd from "./../Td/table-select-td";
@@ -28,14 +30,14 @@ export default {
   name: "table--body-tr",
   components: { tableBodyTd, tableSerialTd, tableSelectTd, tableOperateTd },
   props: {
-    primaryKey: [String, Number],
-    row: Object,
+    primaryKey: util.props.String,
+    row: util.props.Object,
     index: Number,
-    columns: Array,
-    rowStyle: Object,
-    operate: Array,
-    hideSerial: Boolean,
-    hideSelect: Boolean,
+    columns: util.props.Array,
+    rowStyle: util.props.Object,
+    operate: util.props.Array,
+    hideSerial: util.props.Boolean,
+    hideSelect: util.props.Boolean,
     selectStatus: Number,
     selectedOptions: [Array, Object]
   },

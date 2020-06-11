@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 import CVideo from "@/components/base/Content/Video/c-video.vue";
 // import CVideoList from '@/components/base/Content/VideoPlayer/Plugins/Playlist/list/list.vue'
 // import CVideoListCard from '@/components/base/Content/VideoPlayer/Plugins/Playlist/ListCard/list-card.vue'
@@ -25,6 +27,9 @@ import CVideoSelector from "@/components/base/Content/VideoPlayer/Plugins/Playli
 export default {
   name: "c-video-player",
   components: { CVideo, CVideoSelector },
+  props: {
+    playList: util.props.Array,
+  },
   data() {
     return {
       list: [
@@ -58,12 +63,6 @@ export default {
         }
       ]
     };
-  },
-  props: {
-    playList: {
-      type: Array,
-      default: () => []
-    }
   }
 };
 </script>

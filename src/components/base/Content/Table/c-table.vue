@@ -76,11 +76,34 @@ import tableBody from "./Body/table-body";
 
 export default {
   name: "c-table",
-  mixins: [util.mixins.grid.thead],
   components: { tableColgroup, tableHead, tableBody },
+  mixins: [util.mixins.grid.thead],
   model: {
     prop: "selected",
     event: "table:selected"
+  },
+  props: {
+    list: util.props.Object,
+    primaryKey: util.props.String,
+    isActive: util.props.Boolean,
+    hideSerial: util.props.Boolean,
+    hideSelect: util.props.Boolean,
+    // class table
+    tableTheme: util.props.theme,
+    tableSm: util.props.Boolean,
+    tableHover: util.props.Boolean,
+    tableStriped: util.props.Boolean,
+    tableBordered: util.props.Boolean,
+    tableBorderless: util.props.Boolean,
+    // class thead
+    theadTheme: util.props.theme,
+    selectStatus: {
+      ...util.props.UInt,
+      // 0: 默认, 1: 单选, 2: 多选
+      validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value))
+    },
+    selected: [Array, Object],
+    sortObj: util.props.Object
   },
   data() {
     return {
@@ -89,30 +112,6 @@ export default {
       theadSelected: false,
       selectedOptions: this.selected
     };
-  },
-  props: {
-    list: util.props.Object,
-    primaryKey: String,
-    isActive: Boolean,
-    hideSerial: Boolean,
-    hideSelect: Boolean,
-    // class table
-    tableTheme: util.props.theme,
-    tableSm: Boolean,
-    tableHover: Boolean,
-    tableStriped: Boolean,
-    tableBordered: Boolean,
-    tableBorderless: Boolean,
-    // class thead
-    theadTheme: util.props.theme,
-    selectStatus: {
-      type: [String, Number],
-      default: 0,
-      // 0: 默认, 1: 单选, 2: 多选
-      validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value))
-    },
-    selected: [Array, Object],
-    sortObj: Object
   },
   computed: {
     // class table

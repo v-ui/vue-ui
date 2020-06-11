@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 /**
  * video.js
  * https://videojs.com/
@@ -30,14 +32,19 @@
  * Guide to media types and formats on the web
  * https://developer.mozilla.org/zh-CN/docs/Web/Media/Formats
  */
+
 // 不跟踪
 window.HELP_IMPROVE_VIDEOJS = false;
+
 import "video.js/dist/video-js.css";
 import videojs from "video.js";
 import plugins from "./plugins";
 
 export default {
   name: "c-video",
+  props: {
+    options: util.props.Object,
+  },
   data() {
     return {
       player: null,
@@ -114,12 +121,6 @@ export default {
         ]
       }
     };
-  },
-  props: {
-    options: {
-      type: Object,
-      default: () => {}
-    }
   },
   mounted() {
     plugins.title.init();

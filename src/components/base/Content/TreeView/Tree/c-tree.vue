@@ -23,21 +23,19 @@ export default {
     event: "tree:selected"
   },
   props: {
-    list: util.props.list,
+    list: util.props.Array,
     status: {
       type: [String, Number],
       default: 0,
-      validator: value => {
-        // 0: default,1: edit,2: Single choice, 3: Multiple choice
-        return !isNaN(value) && [0, 1, 2, 3].includes(Number(value));
-      }
+      validator: value => !isNaN(value) && [0, 1, 2, 3].includes(Number(value)),
+      // 0: default,1: edit,2: Single choice, 3: Multiple choice
     },
     primaryKey: {
       type: String,
       default: "id",
       require: true
     },
-    selected: Object
+    selected: util.props.Object
   },
   data() {
     return {

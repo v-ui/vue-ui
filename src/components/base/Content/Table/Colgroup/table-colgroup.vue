@@ -10,7 +10,7 @@ import util from "@/components/util/index.js";
 export default {
   name: "table-colgroup",
   props: {
-    colgroup: util.props.list
+    colgroup: util.props.Array,
   }
 };
 </script>

@@ -42,20 +42,20 @@ export default {
     prop: "checked",
     event: "change"
   },
+  props: {
+    row: util.props.Array,
+    sort: util.props.Array,
+    checked: util.props.Boolean,
+    rowCount: Number,
+    hideSerial: util.props.Boolean,
+    hideSelect: util.props.Boolean,
+    selectStatus: Number,
+    sortObj: util.props.Object,
+  },
   data() {
     return {
       isChecked: this.checked
     };
-  },
-  props: {
-    row: util.props.list,
-    sort: util.props.list,
-    checked: Boolean,
-    rowCount: Number,
-    hideSerial: Boolean,
-    hideSelect: Boolean,
-    selectStatus: Number,
-    sortObj: Object
   },
   watch: {
     checked: function(value) {

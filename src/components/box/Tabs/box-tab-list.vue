@@ -34,11 +34,11 @@ export default {
   name: "box-tab-list",
   components: { BNav, BNavItem },
   props: {
-    list: util.props.list,
-    column: Boolean,
-    pills: Boolean,
-    fill: Boolean,
-    justified: Boolean
+    list: util.props.Array,
+    column: util.props.Boolean,
+    pills: util.props.Boolean,
+    fill: util.props.Boolean,
+    justified: util.props.Boolean,
   }
 };
 </script>

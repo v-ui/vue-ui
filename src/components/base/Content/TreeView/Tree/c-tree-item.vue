@@ -30,8 +30,8 @@
       </div>
       <!-- icon -->
       <div class="d-table-cell pr-1">
-        <font v-if="!editItem">{{ item.label }}</font>
-        <b-text />
+        <font v-if="!editItem">{{ item.value }}</font>
+        <b-text v-else ref="edior" :value="item.value" @blur="editorBlur" />
       </div>
       <!-- label or edit -->
     </div>
@@ -63,14 +63,14 @@ export default {
   name: "c-tree-item",
   components: { CTree: () => import("./c-tree"), BText },
   props: {
-    item: util.props.item,
+    item: util.props.Object,
     status: Number,
     primaryKey: {
       type: String,
       default: "id",
       require: true
     },
-    selected: Object
+    selected: util.props.Object,
   },
   data() {
     return {
@@ -88,11 +88,12 @@ export default {
       return config.ui.icon;
     },
     objClass: function() {
+      let disabled = !this.canEdit && !this.isSelected ? 'text-black-50' : ''
       let isHover = this.hover
         ? "bg-light text-primary font-weight-bolder"
         : "";
       let beChecked = this.isSelected ? "text-light bg-primary" : "";
-      return `${beChecked} ${isHover}`;
+      return `${disabled} ${beChecked} ${isHover}`;
     },
     itemClass: function() {
       let beChecked = this.isSelected ? "" : "text-secondary";
@@ -105,12 +106,10 @@ export default {
       return this.status == 1 && !this.item.disabled;
     },
     isSelected: function() {
-      return (
-        this.selectedOption &&
+      return this.selectedOption &&
         this.item[this.primaryKey] &&
         this.selectedOption[this.primaryKey] &&
-        this.selectedOption[this.primaryKey] == this.item[this.primaryKey]
-      );
+        this.selectedOption[this.primaryKey] === this.item[this.primaryKey]
     }
   },
   methods: {

@@ -38,13 +38,13 @@ export default {
     item: () => import("./main-menu-item.vue")
   },
   filters: { ...util.filters, },
+  props: {
+    model: util.props.Object,
+  },
   data() {
     return {
       open: false
     };
-  },
-  props: {
-    model: Object
   },
   created() {
     this.open = false;

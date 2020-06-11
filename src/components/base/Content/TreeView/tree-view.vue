@@ -15,13 +15,13 @@
           <i :class="icon.delete" />
         </b-button>
       </b-button-group>
-      <hr class="my-2">
+      <hr class="my-2" />
     </div>
     <c-tree
       v-model="selectedOption"
       :list="list"
       :status="statusNu"
-      primary-key="label"
+      :primary-key="primaryKey"
       :selected="selectedOption"
     />
   </div>
@@ -43,7 +43,7 @@ export default {
     event: "tree:selected"
   },
   props: {
-    list: util.props.list,
+    list: util.props.Array,
     primaryKey: {
       type: String,
       default: "id",
@@ -52,12 +52,10 @@ export default {
     status: {
       type: [String, Number],
       default: 0,
-      validator: value => {
-        // 0: default,1: edit,2: Single choice, 3: Multiple choice
-        return !isNaN(value) && [0, 1, 2, 3].includes(Number(value));
-      }
+      validator: value => !isNaN(value) && [0, 1, 2, 3].includes(Number(value)),
+      // 0: default,1: edit,2: Single choice, 3: Multiple choice
     },
-    selected: Object
+    selected: util.props.Object,
   },
   data() {
     return {

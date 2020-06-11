@@ -40,22 +40,19 @@ export default {
     prop: "selected",
     event: "thead:selected"
   },
+  props: {
+    head: util.props.Array,
+    sort: util.props.Array,
+    rowCount: Number,
+    hideSerial: util.props.Boolean,
+    hideSelect: util.props.Boolean,
+    selectStatus: Number,
+    sortObj: util.props.Object,
+  },
   data() {
     return {
       selected: false
     };
-  },
-  props: {
-    head: util.props.list,
-    sort: util.props.list,
-    rowCount: {
-      type: Number,
-      default: 1
-    },
-    hideSerial: Boolean,
-    hideSelect: Boolean,
-    selectStatus: Number,
-    sortObj: Object
   },
   watch: {
     selected: function(value) {

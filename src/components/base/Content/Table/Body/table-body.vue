@@ -33,25 +33,22 @@ export default {
     prop: "selected",
     event: "tr:selected"
   },
+  props: {
+    data: util.props.Array,
+    primaryKey: util.props.String,
+    columns: util.props.Array,
+    rowStyle: util.props.Object,
+    operate: util.props.Array,
+    hideSerial: util.props.Boolean,
+    hideSelect: util.props.Boolean,
+    selectStatus: Number, // 0: 默认, 1: 单选, 2: 多选
+    selected: [Array, Object],
+    theadSelected: util.props.Boolean
+  },
   data() {
     return {
       selectedOptions: this.selected
     };
-  },
-  props: {
-    data: util.props.list,
-    primaryKey: [String, Number],
-    columns: {
-      type: Array,
-      default: () => []
-    },
-    rowStyle: Object,
-    operate: Array,
-    hideSerial: Boolean,
-    hideSelect: Boolean,
-    selectStatus: Number, // 0: 默认, 1: 单选, 2: 多选
-    selected: [Array, Object],
-    theadSelected: Boolean
   },
   methods: {
     trOper: function(data) {

@@ -21,8 +21,8 @@ export default {
   name: "box-accordion-list",
   components: { BoxAccordion },
   props: {
-    list: util.props.list,
-    parent: String
+    list: util.props.Array,
+    parent: util.props.String,
   }
 };
 </script>

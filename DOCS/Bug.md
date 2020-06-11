@@ -6,4 +6,8 @@
 
 [Scrollspy](../src/components/base/Bootstrap/Scrollspy)
 
-- [ ] 滚动内容为与标题联动（2020-06-09）
+- [ ] 滚动内容未与标题联动（2020-06-09）
+
+[c-tree-item](../src/components/base/Content/TreeView/Tree/c-tree-item.vue)
+
+- [已解决（2020-06-10）] 项目无法选中（2020-06-10）

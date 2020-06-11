@@ -19,13 +19,12 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 export default {
   name: "v-video-list",
   props: {
-    list: {
-      type: Array,
-      default: () => {}
-    }
+    list: util.props.Array,
   }
 };
 </script>

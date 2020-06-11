@@ -10,10 +10,12 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 export default {
   name: "box-tab-pane",
   props: {
-    active: Boolean
+    active: util.props.Boolean
   }
 };
 </script>
