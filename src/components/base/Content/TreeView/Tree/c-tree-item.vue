@@ -31,7 +31,7 @@
       <!-- icon -->
       <div class="d-table-cell pr-1">
         <font v-if="!editItem">{{ item.value }}</font>
-        <b-text v-else ref="edior" :value="item.value" @blur="editorBlur" />
+        <b-text v-else ref="edior" :value="item.value" size="sm" @blur="editorBlur" />
       </div>
       <!-- label or edit -->
     </div>
