@@ -46,11 +46,6 @@ import DropMenu from "./b-dropdown-menu";
 export default {
   name: "b-dropdown",
   components: { tranDrop, DropMenu },
-  data() {
-    return {
-      menuStyle: 0
-    };
-  },
   props: {
     list: util.props.Array,
     select: util.props.String,
@@ -68,7 +63,12 @@ export default {
     },
     menWidth: util.props.Boolean,
     menuHeight: util.props.String,
-    scroll: util.props.UInt,
+    scroll: util.props.UInt
+  },
+  data() {
+    return {
+      menuStyle: 0
+    };
   },
   computed: {
     guid: function() {

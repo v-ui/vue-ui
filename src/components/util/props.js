@@ -99,7 +99,10 @@ export default {
       return value > 0 && value <= 100
     }
   },
-  href: String,
+  href: {
+    type: String,
+    default: '#',
+  },
   src: String,
 
   // text: [String, Number, Array,],
@@ -130,7 +133,7 @@ export default {
   Array: { type: Array, default: () => [], validator: value => type.validArray(value) },
   Object: { type: Object, default: () => ({}), validator: value => type.validObject(value) },
   Function: { type: Function, default: null, validator: value => type.validFunction(value) },
-  RegExp: { type: RegExp, default: new RegExp(), validator: value => type.validRegExp(value) },
+  // RegExp: { type: [String, Number, RegExp], default: () => new RegExp(), validator: value => type.validRegExp(value) },
 }
 
 export { type }

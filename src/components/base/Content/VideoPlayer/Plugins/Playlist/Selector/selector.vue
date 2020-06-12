@@ -26,14 +26,14 @@ import BButton from "@/components/base/Bootstrap/Form/Button/b-button.vue";
 export default {
   name: "c-video-selector",
   components: { BList, BButton },
+  props: {
+    total: util.props.UInt,
+  },
   data() {
     return {
       selected: 1,
       pageSize: 100
     };
-  },
-  props: {
-    total: util.props.UInt,
   },
   computed: {
     totalNu: function() {

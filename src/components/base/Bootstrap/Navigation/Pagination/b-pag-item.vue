@@ -20,7 +20,7 @@ export default {
   props: {
     value: util.props.String,
     disabled: util.props.Boolean,
-    active: util.props.Boolean,
+    active: util.props.Boolean
   }
 };
 </script>

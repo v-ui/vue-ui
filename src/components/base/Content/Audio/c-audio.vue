@@ -81,7 +81,7 @@
       <div class="col-auto align-items-center">
         <font>
           {{ seekTime }}
-          <br />
+          <br>
           {{ durationTime }}
         </font>
       </div>

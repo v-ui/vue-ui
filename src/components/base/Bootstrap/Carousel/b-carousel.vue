@@ -1,4 +1,4 @@
-<template v-if="content && content.length > 0" >
+<template v-if="content && content.length > 0">
   <div :id="guid" class="carousel slide" :class="{'carousel-fade': fade}" data-ride="carousel">
     <ol v-if="indicators" class="carousel-indicators">
       <li
@@ -44,28 +44,28 @@
   </div>
 </template>
 <script>
-import tool from "@/tool/index.js"
-import util from "@/components/util/index.js"
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
-import BCarouselItem from "./b-carousel-item"
-import srMsg from "@/components/Basic/basic-sr-msg.vue"
+import BCarouselItem from "./b-carousel-item";
+import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
-import BaseA from "@/components/base/Content/A/c-a.vue"
+import BaseA from "@/components/base/Content/A/c-a.vue";
 
 export default {
   name: "b-carousel",
   components: { BCarouselItem, BaseA, srMsg },
-  data() {
-    return {
-      activeIndex: 0
-    };
-  },
   props: {
     content: util.props.String,
     indicators: util.props.Boolean,
     control: util.props.Boolean,
     fade: util.props.Boolean,
     interval: util.props.Number
+  },
+  data() {
+    return {
+      activeIndex: 0
+    };
   },
   computed: {
     guid: function() {

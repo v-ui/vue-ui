@@ -19,10 +19,10 @@ export default {
         textAlign: props.setX,
         size: props.size,
         border: {
-          type: Boolean,
+          ...props.Boolean,
           default: true,
         },
-        tempClass: String,
+        tempClass: props.String,
       },
       computed: {
         objClass: function () {
@@ -59,10 +59,10 @@ export default {
         textColor: props.textColor,
         size: props.size,
         href: props.href,
-        active: Boolean,
-        disabled: Boolean,
-        outline: Boolean,
-        block: Boolean,
+        active: props.Boolean,
+        disabled: props.Boolean,
+        outline: props.Boolean,
+        block: props.Boolean,
       },
       computed: {
         objClass: function () {
@@ -80,30 +80,16 @@ export default {
     }, // btn
     validator: {
       props: {
-        required: {
-          type: Boolean,
-          default: false,
-        },
-        minlength: {
-          type: [String, Number],
-          default: 0,
-          validator: (value) => {
-            // 这个值必须匹配下列字符串中的一个
-            return value >= 0
-          },
-        },
+        required: props.Boolean,
+        minlength: props.UInt,
         maxlength: {
-          type: [String, Number],
+          ...props.UInt,
           default: 64,
-          validator: (value) => {
-            // 这个值必须匹配下列字符串中的一个
-            return value >= 0
-          },
         },
         pattern: [String, RegExp],
-        validInfo: String,
-        invalidInfo: String,
-        unvalid: Boolean,
+        validInfo: props.String,
+        invalidInfo: props.String,
+        unvalid: props.Boolean,
       },
       methods: {
         validator: function (e, regex = this.pattern) {
