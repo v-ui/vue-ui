@@ -43,7 +43,6 @@ export default {
     prop: "value",
     event: "input"
   },
-
   props: {
     value: util.props.String,
     list: util.props.Array,

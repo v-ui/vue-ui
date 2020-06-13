@@ -1,9 +1,11 @@
-<template>
+<template functional>
   <div
-    v-if="$slots.default"
+    v-if="slots().default"
     class="tab-pane fade overflow-auto"
-    :class="{'show active': active}"
+    :class="{'show active': props.active}"
     role="tabpanel"
+    v-bind="data.attrs"
+    v-on="listeners"
   >
     <slot />
   </div>
@@ -15,7 +17,7 @@ import util from "@/components/util/index.js";
 export default {
   name: "box-tab-pane",
   props: {
-    active: util.props.Boolean
+    active: util.props.Boolean,
   }
 };
 </script>

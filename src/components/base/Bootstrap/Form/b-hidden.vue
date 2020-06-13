@@ -1,5 +1,5 @@
-<template>
-  <input type="hidden" >
+<template functional>
+  <input type="hidden">
 </template>
 <script>
 export default {

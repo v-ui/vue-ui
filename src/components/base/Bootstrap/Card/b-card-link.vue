@@ -12,8 +12,11 @@ export default {
   name: "b-card-link",
   components: { BaseA },
   props: {
-    href: util.props.href,
-    text: util.props.String,
+    href: {
+      ...util.props.href,
+      default: "#"
+    },
+    text: util.props.String
   }
 };
 </script>

@@ -1,13 +1,13 @@
-<template>
-  <div v-show="$slots.default" class="card">
+<template functional>
+  <div v-if="slots().default" class="card" v-bind="data.attrs" v-on="listeners">
     <slot name="card">
-      <div v-show="$slots.header" class="card-header">
+      <div v-if="slots().header" class="card-header">
         <slot name="header" />
       </div>
       <div class="card-body">
         <slot />
       </div>
-      <div v-show="$slots.footer" class="card-footer">
+      <div v-if="slots().footer" class="card-footer">
         <slot name="footer" />
       </div>
     </slot>
@@ -15,8 +15,7 @@
 </template>
 
 <script>
-
 export default {
-  name: "b-card",
+  name: "b-card"
 };
 </script>

@@ -1,5 +1,5 @@
-<template>
-  <p v-show="$slots.default" class="card-text">
+<template functional>
+  <p v-if="slots().default" class="card-text" v-bind="data.attrs" v-on="listeners">
     <slot />
   </p>
 </template>

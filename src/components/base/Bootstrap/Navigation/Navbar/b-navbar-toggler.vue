@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <button
     class="navbar-toggler"
     type="button"

@@ -1,5 +1,5 @@
-<template>
-  <div v-show="$slots.default && state" :class="`${this.state}-${this.type}`">
+<template functional>
+  <div v-show="slots().default && props.state" :class="`${props.state}-${props.type}`">
     <slot />
   </div>
 </template>
@@ -12,18 +12,12 @@ export default {
     state: {
       type: String,
       required: true,
-      validator: function(value) {
-        // 这个值必须匹配下列字符串中的一个
-        return ["valid", "invalid"].includes(value);
-      }
+      validator: value => ["valid", "invalid"].includes(value),
     },
     type: {
       type: String,
       default: config.ui.forms.validInfoType,
-      validator: function(value) {
-        // 这个值必须匹配下列字符串中的一个
-        return ["feedback", "tooltip"].includes(value);
-      }
+      validator: value => ["feedback", "tooltip"].includes(value),
     }
   }
 };

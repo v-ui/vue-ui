@@ -1,5 +1,5 @@
-<template>
-  <h6 v-show="$slots.default" class="card-subtitle text-muted">
+<template functional>
+  <h6 v-if="slots().default" class="card-subtitle text-muted" v-bind="data.attrs" v-on="listeners">
     <slot />
   </h6>
 </template>

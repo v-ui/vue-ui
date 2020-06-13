@@ -1,5 +1,7 @@
-<template>
-  <small v-if="info" class="form-text" :class="'text-' + textColor">{{ info }}</small>
+<template functional>
+  <small v-if="props.info" class="form-text" :class="'text-' + props.textColor" v-bind="data.attrs" v-on="listeners">
+    {{ props.info }}
+  </small>
 </template>
 <script>
 import util from "@/components/util/index.js";

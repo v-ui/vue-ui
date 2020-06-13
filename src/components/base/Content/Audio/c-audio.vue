@@ -9,34 +9,34 @@
       <!-- 控制器 -->
       <div class="col-auto row mx-1 px-0">
         <c-controller-button
-          v-show="showStepBackward"
+          v-if="showStepBackward"
           :icon="icon.stepBackward"
           :disabled="disabledStepBackward"
         />
         <b-loading
-          v-show="status == EStatus.loading"
+          v-if="status == EStatus.loading"
           class="btn btn-outline-primary rounded-circle"
           status="grow"
         />
         <c-controller-button
-          v-show="status == EStatus.loading"
+          v-if="status == EStatus.loading"
           :icon="icon.stop"
-          @click.native="stopload"
+          @click="stopload"
         />
         <c-controller-button
-          v-show="showPlay"
+          v-if="showPlay"
           :icon="icon.play"
           :disabled="disabledPlay"
-          @click.native="play"
+          @click="play"
         />
         <c-controller-button
-          v-show="showPause"
+          v-if="showPause"
           :icon="icon.pause"
           :disabled="disabledPause"
-          @click.native="pause"
+          @click="pause"
         />
         <c-controller-button
-          v-show="showStepForward"
+          v-if="showStepForward"
           :icon="icon.stepForward"
           :disabled="disabledStepForward"
         />
@@ -50,7 +50,7 @@
         <c-controller-button
           class="mr-1"
           :icon="mute ? icon.volumeMute : icon.volumeUp"
-          @click.native="audioMuteClick"
+          @click="audioMuteClick"
         />
         <vue-page-transition name="fade-in-right" class="d-none d-lg-inline">
           <b-range
@@ -68,7 +68,7 @@
         <font
           v-if="isError"
           class="text-danger"
-        >Play Error: File not found or In an unsupported format</font>
+        > Play Error: File not found or In an unsupported format </font>
         <b-range
           v-else
           hide-value

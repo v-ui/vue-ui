@@ -51,9 +51,7 @@ export default {
     },
     value: {
       type: [Number, String],
-      default: function(value) {
-        return !isNaN(value) ? Number(value) : Number(this.min);
-      },
+      default: value => !isNaN(value) ? Number(value) : Number(this.min),
       validator: value => !isNaN(value)
     },
     prompt: util.props.Boolean,

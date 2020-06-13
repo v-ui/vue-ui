@@ -1,4 +1,3 @@
-
 <template>
   <img :src="src" :class="isTop" :alt="alt" />
 </template>

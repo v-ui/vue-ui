@@ -1,6 +1,6 @@
-<template>
-  <datalist :id="id">
-    <template v-for="(value, index) in datalist">
+<template functional>
+  <datalist :id="props.id" v-bind="data.attrs" v-on="listeners">
+    <template v-for="(value, index) in props.datalist">
       <option :value="value" :key="index" />
     </template>
   </datalist>
@@ -15,7 +15,7 @@ export default {
       type: String,
       required: true
     },
-    datalist: util.props.Array,
+    datalist: util.props.Array
   }
 };
 </script>

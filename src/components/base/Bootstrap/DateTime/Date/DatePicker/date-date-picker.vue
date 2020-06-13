@@ -42,7 +42,6 @@ export default {
     prop: "value",
     event: "change"
   },
-
   props: {
     value: {
       type: [String, Number, Date],

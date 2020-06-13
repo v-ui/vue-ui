@@ -99,10 +99,7 @@ export default {
       return value > 0 && value <= 100
     }
   },
-  href: {
-    type: String,
-    default: '#',
-  },
+  href: String,
   src: String,
 
   // text: [String, Number, Array,],

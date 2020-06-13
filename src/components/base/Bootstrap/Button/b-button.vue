@@ -49,9 +49,9 @@
   </button>
 </template>
 <script>
-import srMsg from "@/components/Basic/basic-sr-msg.vue";
 import util from "@/components/util/index.js";
 
+import srMsg from "@/components/Basic/basic-sr-msg.vue";
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
 export default {

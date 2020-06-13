@@ -15,24 +15,22 @@
         <i :class="icon.caretDown" class="px-1" />
       </slot>
     </div>
-    <tran-drop>
-      <div
-        ref="menu"
-        class="dropdown-menu overflow-auto shadow-sm"
-        :class="menuClass"
-        :style="{'max-height': menuHeight}"
-        :aria-labelledby="guid"
-      >
-        <slot>
-          <drop-menu
-            :list="list"
-            :select="select"
-            :disabled="disabled"
-            @click="item => $emit('menuClick', item)"
-          />
-        </slot>
-      </div>
-    </tran-drop>
+    <div
+      ref="menu"
+      class="dropdown-menu overflow-auto shadow-sm"
+      :class="menuClass"
+      :style="{'max-height': menuHeight}"
+      :aria-labelledby="guid"
+    >
+      <slot>
+        <drop-menu
+          :list="list"
+          :select="select"
+          :disabled="disabled"
+          @click="item => $emit('menuClick', item)"
+        />
+      </slot>
+    </div>
   </div>
 </template>
 <script>
@@ -40,12 +38,11 @@ import tool from "@/tool/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
-import tranDrop from "@/components/transition/tran-drop.vue";
 import DropMenu from "./b-dropdown-menu";
 
 export default {
   name: "b-dropdown",
-  components: { tranDrop, DropMenu },
+  components: { DropMenu },
   props: {
     list: util.props.Array,
     select: util.props.String,

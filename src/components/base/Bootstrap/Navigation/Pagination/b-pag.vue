@@ -1,12 +1,12 @@
 <template>
   <nav aria-label="Page navigation">
     <ul class="pagination m-0">
-      <item :disabled="startDisabled" @click.native="startClick">
+      <item :disabled="startDisabled" @click="startClick">
         <slot name="start">
           <i :class="icon.stepBackward" />
         </slot>
       </item>
-      <item :disabled="previousDisabled" @click.native="previousClick">
+      <item :disabled="previousDisabled" @click="previousClick">
         <slot name="previous">
           <i :class="icon.caretLeft" />
         </slot>
@@ -18,15 +18,15 @@
           :value="value"
           :active="select == value"
           :disabled="separator === value"
-          @click.native="itemClick(value)"
+          @click="itemClick(value)"
         />
       </slot>
-      <item :disabled="nextDisabled" @click.native="nextClick">
+      <item :disabled="nextDisabled" @click="nextClick">
         <slot name="next">
           <i :class="icon.caretRight" />
         </slot>
       </item>
-      <item :disabled="endDisabled" @click.native="endClick">
+      <item :disabled="endDisabled" @click="endClick">
         <slot name="end">
           <i :class="icon.stepForward" />
         </slot>

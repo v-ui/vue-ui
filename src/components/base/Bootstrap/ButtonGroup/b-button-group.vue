@@ -10,7 +10,7 @@ export default {
   name: "b-button-group",
   props: {
     size: util.props.size,
-    vertical: Boolean
+    vertical: util.props.Boolean
   },
   computed: {
     objClass: function() {

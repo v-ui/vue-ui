@@ -20,7 +20,7 @@
       >
         <slot />
         <footer v-show="showFooter" class="text-right">
-          <hr >
+          <hr>
           <base-button
             outline
             value="确 定"

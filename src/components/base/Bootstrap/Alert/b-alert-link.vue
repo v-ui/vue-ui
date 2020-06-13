@@ -11,7 +11,10 @@ export default {
   name: "b-alert-link",
   components: { BaseA },
   props: {
-    href: util.props.href
+    href: {
+      ...util.props.href,
+      default: '#',
+    },
   }
 };
 </script>

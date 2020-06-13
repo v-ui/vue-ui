@@ -1,5 +1,8 @@
-<template>
-  <div class="collapse">
+<template functional>
+  <div
+    class="collapse"
+    v-bind="data.attrs"
+    v-on="listeners">
     <div class="card card-body">
       <slot />
     </div>

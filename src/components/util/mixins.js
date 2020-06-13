@@ -58,7 +58,10 @@ export default {
         color: props.color,
         textColor: props.textColor,
         size: props.size,
-        href: props.href,
+        href: {
+          ...props.href,
+          default: '',
+        },
         active: props.Boolean,
         disabled: props.Boolean,
         outline: props.Boolean,
@@ -171,9 +174,7 @@ export default {
       status: {
         type: String,
         default: 'border',
-        validator: function (val) {
-          return ['border', 'grow'].includes(val)
-        },
+        validator: value => ['border', 'grow'].includes(value),
       },
       size: props.size,
     },
