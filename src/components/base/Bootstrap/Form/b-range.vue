@@ -6,6 +6,7 @@
         class="col-auto text-right text-monospace pl-0 pr-1"
       >{{ fillMinValue }}</span>
       <input
+        ref="range"
         type="range"
         class="custom-range col"
         :min="min"
@@ -26,7 +27,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
 
@@ -39,37 +40,29 @@ export default {
     event: "input"
   },
   props: {
-    min: {
-      type: [Number, String],
-      default: 0,
-      validator: value => !isNaN(value)
-    },
+    min: util.props.Number,
     max: {
-      type: [Number, String],
-      default: 100,
-      validator: value => !isNaN(value)
+      ...util.props.Number,
+      default: 100
     },
     step: {
-      type: [Number, String],
-      default: 1,
-      validator: value => !isNaN(value)
+      ...util.props.Number,
+      default: 1
     },
     value: {
       type: [Number, String],
-      default: function(value) {
-        return !isNaN(value) ? Number(value) : Number(this.min);
-      },
+      default: value => !isNaN(value) ? Number(value) : Number(this.min),
       validator: value => !isNaN(value)
     },
-    prompt: Boolean,
-    hideValue: Boolean,
-    info: utilities.props.value,
-    minValue: utilities.props.value,
-    maxValue: utilities.props.value
+    prompt: util.props.Boolean,
+    hideValue: util.props.Boolean,
+    info: util.props.String,
+    minValue: util.props.String,
+    maxValue: util.props.String
   },
   data() {
     return {
-      select: Number(this.value)
+      select: Number(this.value),
     };
   },
   computed: {
@@ -96,7 +89,7 @@ export default {
     },
     fillMaxValue: function() {
       return this.maxValue ? this.maxValue : Number(this.max);
-    }
+    },
   },
   watch: {
     value: function(value) {

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import item from "./b-dropdownpicker-item";
 
@@ -23,9 +23,9 @@ export default {
   name: "b-dropdownpicker-row",
   components: { item },
   props: {
-    items: utilities.props.list,
-    disabled: utilities.props.disabled,
-    colCount: Number
+    items: util.props.Array,
+    disabled: util.props.Boolean,
+    colCount: util.props.UInt,
   },
   methods: {
     click: function(value) {

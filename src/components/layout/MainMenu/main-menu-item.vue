@@ -30,21 +30,21 @@
 </template>
 
 <script>
-import utilities from '@/components/utilities/index.js'
+import util from '@/components/util/index.js'
 
 export default {
   name: "main-menu-item",
   components: {
     item: () => import("./main-menu-item.vue")
   },
-  filters: { ...utilities.filters, },
+  filters: { ...util.filters, },
+  props: {
+    model: util.props.Object,
+  },
   data() {
     return {
       open: false
     };
-  },
-  props: {
-    model: Object
   },
   created() {
     this.open = false;

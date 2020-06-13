@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js"
+
 import dropdownList from "@/components/base/Bootstrap/DropdownList/b-dropdownlist.vue";
 
 export default {
@@ -14,17 +16,17 @@ export default {
   },
   props: {
     value: {
-      type: Number,
+      type: util.props.UInt,
       default: () => new Date().getMinutes(),
-      validator: value => !isNaN(value) && value >= 0 && value < 60
+      validator: value => util.props.UInt.validator(value) && value < 60
     },
     start: {
-      type: Number,
-      validator: value => !isNaN(value) && value >= 0 && value < 60
+      type: util.props.UInt,
+      validator: value => util.props.UInt.validator(value) && value < 60
     },
     end: {
-      type: Number,
-      validator: value => !isNaN(value) && value >= 0 && value < 60
+      type: util.props.UInt,
+      validator: value => util.props.UInt.validator(value) && value < 60
     }
   },
   data() {

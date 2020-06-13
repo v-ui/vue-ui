@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BCheckbox from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox.vue";
 
@@ -48,13 +48,10 @@ export default {
     event: "input"
   },
   props: {
-    item: utilities.props.item,
-    disabled: utilities.props.disabled,
-    isChecked: Boolean,
-    values: {
-      type: Array,
-      default: () => []
-    }
+    item: util.props.Object,
+    disabled: util.props.Boolean,
+    isChecked: util.props.Boolean,
+    values: util.props.Array,
   },
   data() {
     return {

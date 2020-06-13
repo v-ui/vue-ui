@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import redio from "./b-radio";
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
@@ -37,21 +37,20 @@ import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
 export default {
   name: "b-radio-group",
   components: { redio, BValid, BInfo },
-  mixins: [utilities.mixins.form.base, utilities.mixins.form.validator],
+  mixins: [util.mixins.form.base, util.mixins.form.validator],
   inheritAttrs: false,
   model: {
     prop: "value",
     event: "input"
   },
-
   props: {
-    value: String,
-    list: utilities.props.list,
-    info: utilities.props.value,
-    disabled: utilities.props.disabled,
+    value: util.props.String,
+    list: util.props.Array,
+    info: util.props.String,
+    disabled: util.props.Boolean,
     name: {
-      type: String,
-      required: true
+      ...util.props.String,
+      required: true,
     }
   },
   data() {

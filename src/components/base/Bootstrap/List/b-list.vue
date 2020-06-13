@@ -9,7 +9,7 @@
       :text="item.text"
       :href="item.href"
       :color="item.color || color"
-      :sr-message="item.srMessage"
+      :sr-msg="item.srMsg"
       :disabled="disabled || item.disabled"
       :active="select ? select == item.value || select == item.text : item.active"
       @click.native="$emit('click', item.value || item.text)"
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import listItems from "./b-list-item";
 
@@ -30,16 +30,16 @@ export default {
     event: "click"
   },
   props: {
-    list: utilities.props.list,
+    list: util.props.Array,
     color: {
-      ...utilities.props.color,
+      ...util.props.color,
       default: "white"
     },
-    select: [String, Number],
-    disabled: utilities.props.disabled,
-    flush: Boolean,
-    inline: Boolean,
-    fill: Boolean
+    select: util.props.String,
+    disabled: util.props.Boolean,
+    flush: util.props.Boolean,
+    inline: util.props.Boolean,
+    fill: util.props.Boolean,
   }
 };
 </script>

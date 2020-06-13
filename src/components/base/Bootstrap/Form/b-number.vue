@@ -27,7 +27,7 @@
       v-bind="$attrs"
       v-on="inputListeners"
       @click="click($event)"
-      @input="input"
+      @change="change"
       @blur="blur($event)"
     />
     <b-button
@@ -44,34 +44,28 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BButton from "@/components/base/Bootstrap/Button/b-button.vue";
 import BText from "./b-text";
 export default {
   name: "b-number",
   components: { BButton, BText },
-  mixins: [utilities.mixins.form.base, utilities.mixins.form.readonly],
+  mixins: [util.mixins.form.base, util.mixins.form.readonly],
   inheritAttrs: false,
   model: {
     prop: "value",
-    event: "input"
+    event: "change"
   },
   props: {
-    min: {
-      type: [String, Number],
-      default: 0,
-      validator: value => !isNaN(value)
-    },
+    min: util.props.Number,
     max: {
-      type: [String, Number],
+      ...util.props.Number,
       default: 100,
-      validator: value => !isNaN(value)
     },
     step: {
-      type: [String, Number],
+      ...util.props.UNumber,
       default: 1,
-      validator: value => !isNaN(value)
     },
     value: {
       type: [String, Number],
@@ -80,11 +74,11 @@ export default {
       },
       validator: value => !isNaN(value)
     },
-    size: utilities.props.size,
-    length: [String, Number],
-    hideButton: Boolean,
-    prompt: Boolean,
-    info: String
+    size: util.props.size,
+    length: util.props.UInt,
+    hideButton: util.props.Boolean,
+    prompt: util.props.Boolean,
+    info: util.props.String
   },
   data() {
     return {
@@ -121,9 +115,9 @@ export default {
         // 或覆写一些监听器的行为
         {
           // 这里确保组件配合 `v-model` 的工作
-          input: function() {
+          change: function() {
             if (vm.number === "") return;
-            vm.$emit("input", !isNaN(vm.number) ? vm.number : vm.dateMin);
+            vm.$emit("change", !isNaN(vm.number) ? vm.number : vm.dateMin);
           }
         }
       );
@@ -178,13 +172,13 @@ export default {
       if (this.readonly || this.disabled) return;
       if (this.number == 0) event.target.value = "";
     },
-    input: function() {
+    change: function() {
       if (this.number === "") return;
       if (this.number < this.dateMin) this.number = this.dateMin;
       if (this.number > this.dateMax) this.number = this.dateMax;
       this.number = this.formatNumber(this.number);
       // 配合 v-model
-      this.$emit("input", this.number);
+      this.$emit("change", this.number);
     },
     blur: function() {
       if (!event.target.value)
@@ -194,13 +188,13 @@ export default {
       if (this.disabled || this.readonly) return;
       this.number = Number(this.number);
       this.number -= this.dateStep;
-      this.input();
+      this.change();
     },
     add: function() {
       if (this.disabled || this.readonly) return;
       this.number = Number(this.number);
       this.number += this.dateStep;
-      this.input();
+      this.change();
     }
   },
   watch: {

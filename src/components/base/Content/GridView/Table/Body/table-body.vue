@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import tableTr from "./../Tr/table-tr";
 
@@ -34,19 +34,19 @@ export default {
     event: "tr:selected"
   },
   props: {
-    data: utilities.props.list,
-    primaryKey: [String, Number],
-    columns: {
-      type: Array,
-      default: () => []
-    },
-    rowStyle: Object,
-    operate: Array,
-    hideSerial: Boolean,
-    hideSelect: Boolean,
-    selectStatus: Number, // 0: 默认, 1: 单选, 2: 多选
+    data: util.props.Array,
+    primaryKey: util.props.String,
+    columns: util.props.Array,
+    rowStyle: util.props.Object,
+    operate: util.props.Array,
+    hideSerial: util.props.Boolean,
+    hideSelect: util.props.Boolean,
+    selectStatus: {
+      ...util.props.UInt,
+      validator: value => [0, 1, 2].includes(value),
+    }, // 0: 默认, 1: 单选, 2: 多选
     selected: [Array, Object],
-    theadCheckboxChecked: Boolean
+    theadCheckboxChecked: util.props.Boolean
   },
   data() {
     return {

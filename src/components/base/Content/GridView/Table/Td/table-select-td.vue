@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 import BCheckbox from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox.vue";
 
 export default {
@@ -14,14 +16,14 @@ export default {
     prop: "checked",
     event: "tr:checked"
   },
+  props: {
+    checked: util.props.Boolean,
+    hideSelect: util.props.Boolean,
+  },
   data() {
     return {
       isChecked: this.checked
     };
-  },
-  props: {
-    checked: Boolean,
-    hideSelect: Boolean
   },
   watch: {
     checked: function(value) {

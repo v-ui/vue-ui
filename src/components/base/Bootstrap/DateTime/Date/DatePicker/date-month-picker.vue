@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
-import utilities from "@/components/utilities/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
 import pickerHeader from "./date-picker-header";
 import pickerRow from "@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker-row.vue";
@@ -45,14 +45,14 @@ export default {
         new Date(
           new Date().getFullYear() +
             "-" +
-            util.string.padStart(new Date().getMonth()),
+            tool.string.padStart(new Date().getMonth()),
           2
         )
     },
     min: Date,
     max: Date,
-    hideHeader: Boolean,
-    disabled: utilities.props.disabled
+    hideHeader: util.props.Boolean,
+    disabled: util.props.Boolean,
   },
   data() {
     return {
@@ -91,7 +91,7 @@ export default {
           let date = new Date(this.formatMonth(this.year, value));
           arr.push({
             value: value,
-            text: util.string.padStart(value + 1, 2),
+            text: tool.string.padStart(value + 1, 2),
             select: value == selectMonth && selectYeaer == this.year,
             disabled: date < this.min || date > this.max
           });
@@ -128,7 +128,7 @@ export default {
       this.year += 1;
     },
     formatMonth: function(year, month) {
-      return new Date(year + "-" + util.string.padStart(Number(month + 1), 2));
+      return new Date(year + "-" + tool.string.padStart(Number(month + 1), 2));
     }
   },
   watch: {

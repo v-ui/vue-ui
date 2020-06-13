@@ -8,34 +8,33 @@
     :disabled="disabled"
   >
     <slot>{{ text }}</slot>
-    <sr-message>{{ srMessage || color }}</sr-message>
+    <sr-msg>{{ srMsg || color }}</sr-msg>
   </base-a>
   <li v-else class="list-group-item text-truncate" :class="objClass" :aria-disabled="disabled">
     <slot>{{ text }}</slot>
-    <sr-message>{{ srMessage }}</sr-message>
+    <sr-msg>{{ srMsg }}</sr-msg>
   </li>
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
-
-import srMessage from "@/components/base/Bootstrap/SrOney/b-sr-only.vue";
+import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 export default {
   name: "b-list-item",
-  components: { BaseA, srMessage },
+  components: { BaseA, srMsg },
   props: {
-    href: utilities.props.href,
-    text: utilities.props.text,
+    href: util.props.href,
+    text: util.props.String,
     color: {
-      ...utilities.props.color,
+      ...util.props.color,
       default: "white"
     },
-    active: utilities.props.active,
-    disabled: utilities.props.disabled,
-    srMessage: utilities.props.srMessage
+    active: util.props.Boolean,
+    disabled: util.props.Boolean,
+    srMsg: util.props.String
   },
   computed: {
     objClass: function() {

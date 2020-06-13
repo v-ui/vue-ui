@@ -15,7 +15,7 @@
     @v-on="$listeners"
   >
     <slot>{{ value }}</slot>
-    <sr-message>{{ fillsrMessage }}</sr-message>
+    <sr-msg>{{ fillsrMsg }}</sr-msg>
   </base-a>
   <input
     v-else-if="target == 'input'"
@@ -45,27 +45,27 @@
     v-on="$listeners"
   >
     <slot>{{ value }}</slot>
-    <sr-message>{{ fillsrMessage }}</sr-message>
+    <sr-msg>{{ fillsrMsg }}</sr-msg>
   </button>
 </template>
 <script>
-import srMessage from "@/components/base/Bootstrap/SrOney/b-sr-only.vue";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
+import srMsg from "@/components/Basic/basic-sr-msg.vue";
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
 export default {
   name: "b-button",
-  components: { BaseA, srMessage },
+  components: { BaseA, srMsg },
   props: {
-    color: utilities.props.color,
-    href: utilities.props.href,
-    size: utilities.props.size,
-    name: utilities.props.value,
-    active: utilities.props.active,
-    disabled: utilities.props.disabled,
-    srMessage: utilities.props.srMessage,
-    outline: Boolean,
+    color: util.props.color,
+    href: util.props.href,
+    size: util.props.size,
+    name: util.props.String,
+    active: util.props.Boolean,
+    disabled: util.props.Boolean,
+    srMsg: util.props.String,
+    outline: util.props.Boolean,
     target: {
       type: String,
       default: "button",
@@ -77,15 +77,11 @@ export default {
       validator: value => ["button", "reset", "submit"].includes(value)
     },
     value: {
-      ...utilities.props.value,
-      default: function() {
-        return `${this.type.substring(0, 1).toUpperCase()}${this.type.substring(
-          1
-        )}`;
-      }
+      ...util.props.String,
+      default: ''
     },
-    block: Boolean,
-    tabindex: Number,
+    block: util.props.Boolean,
+    tabindex: util.props.Int,
     autocomplete: {
       type: String,
       default: "off"
@@ -104,11 +100,11 @@ export default {
     fillName: function() {
       return this.name || this.type;
     },
-    fillsrMessage: function() {
-      if (this.srMessage) {
+    fillsrMsg: function() {
+      if (this.srMsg) {
         return this.variant;
       }
-      return this.srMessage;
+      return this.srMsg;
     }
   }
 };

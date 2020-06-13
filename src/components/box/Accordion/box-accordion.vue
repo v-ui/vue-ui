@@ -26,17 +26,19 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
+
 import "@/components/base/Bootstrap/Collapse/v-collapse.js";
 
 export default {
   name: "box-accordion",
   props: {
-    title: String,
-    content: String,
-    control: String,
-    parent: String,
-    show: Boolean
+    title: util.props.String,
+    content: util.props.String,
+    control: util.props.String,
+    parent: util.props.String,
+    show: util.props.Boolean
   },
   data() {
     return {
@@ -45,7 +47,7 @@ export default {
   },
   computed: {
     id: function() {
-      return "accordion-item-" + util.random.getRandomString();
+      return "accordion-item-" + tool.random.getRandomString();
     }
   }
 };

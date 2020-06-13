@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "table-foot",
   props: {
-    foot: utilities.props.list
+    foot: util.props.Array,
   }
 };
 </script>

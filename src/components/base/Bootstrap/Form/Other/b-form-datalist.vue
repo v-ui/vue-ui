@@ -1,12 +1,12 @@
-<template>
-  <datalist :id="id">
-    <template v-for="(value, index) in datalist">
+<template functional>
+  <datalist :id="props.id" v-bind="data.attrs" v-on="listeners">
+    <template v-for="(value, index) in props.datalist">
       <option :value="value" :key="index" />
     </template>
   </datalist>
 </template>
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-form-datalist",
@@ -15,7 +15,7 @@ export default {
       type: String,
       required: true
     },
-    datalist: utilities.props.list
+    datalist: util.props.Array
   }
 };
 </script>

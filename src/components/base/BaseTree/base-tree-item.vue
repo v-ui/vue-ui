@@ -19,7 +19,7 @@ export default {
     item: () => import("./base-tree-item.vue")
   },
   props: {
-    model: Object
+    model: Object,
   },
   data: function() {
     return {

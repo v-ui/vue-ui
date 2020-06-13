@@ -54,16 +54,15 @@
 </template>
 
 <script>
-import CImage from "@/components/base/Bootstrap/Image/c-image.vue";
+import util from "@/components/util/index.js";
+
+import CImage from "@/components/base/Content/Image/c-image.vue";
 
 export default {
   name: "v-video-list-card",
   components: { CImage },
   props: {
-    list: {
-      type: Array,
-      default: () => {}
-    }
+    list: util.props.Array,
   }
 };
 </script>

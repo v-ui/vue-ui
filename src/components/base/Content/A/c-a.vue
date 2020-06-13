@@ -12,28 +12,28 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "c-a",
   props: {
     href: {
-      ...utilities.props.href,
+      ...util.props.href,
       required: true
     },
-    text: utilities.props.value,
-    rel: utilities.props.value,
-    icon: utilities.props.value,
+    text: util.props.String,
+    rel: util.props.String,
+    icon: util.props.String,
     target: {
-      type: String,
+      ...util.props.String,
       default: "_self",
       validator: value => ["_self", "_blank"].includes(value)
     },
-    disabled: utilities.props.disabled,
-    download: utilities.props.value,
-    hideIcon: Boolean
+    disabled: util.props.Boolean,
+    download: util.props.String,
+    hideIcon: util.props.Boolean,
   },
   computed: {
     kind: function() {
@@ -76,14 +76,14 @@ export default {
     }
   },
   mounted() {
-    if (this.disabled) util.dom.addAttr(this.$el, "index", "-1");
-    if (this.download) util.dom.addAttr(this.$el, "download", this.download);
+    if (this.disabled) tool.dom.addAttr(this.$el, "index", "-1");
+    if (this.download) tool.dom.addAttr(this.$el, "download", this.download);
   },
   watch: {
     disabled: function(val) {
       val
-        ? util.dom.addAttr(this.$el, "index", "-1")
-        : util.dom.removeAttr(this.$el, "index");
+        ? tool.dom.addAttr(this.$el, "index", "-1")
+        : tool.dom.removeAttr(this.$el, "index");
     }
   }
 };

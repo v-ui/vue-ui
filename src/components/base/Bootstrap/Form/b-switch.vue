@@ -15,28 +15,28 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
-import utilities from "@/components/utilities/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
 import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
 
 export default {
   name: "b-switch",
   components: { BInfo },
-  mixins: [utilities.mixins.form.base],
+  mixins: [util.mixins.form.base],
   inheritAttrs: false,
   model: {
     prop: "checked",
     event: "input"
   },
   props: {
-    text: utilities.props.text,
-    info: utilities.props.info,
-    checked: Boolean,
+    text: util.props.String,
+    info: util.props.String,
+    checked: util.props.Boolean,
     id: {
       type: String,
       default: function() {
-        return "Switch-" + util.random.getRandomString();
+        return "Switch-" + tool.random.getRandomString();
       }
     }
   },

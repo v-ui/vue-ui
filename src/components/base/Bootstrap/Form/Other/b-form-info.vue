@@ -1,15 +1,17 @@
-<template>
-  <small v-if="info" class="form-text" :class="'text-' + textColor">{{ info }}</small>
+<template functional>
+  <small v-if="props.info" class="form-text" :class="'text-' + props.textColor" v-bind="data.attrs" v-on="listeners">
+    {{ props.info }}
+  </small>
 </template>
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-form-info",
   props: {
-    info: utilities.props.value,
+    info: util.props.String,
     textColor: {
-      ...utilities.props.textColor,
+      ...util.props.textColor,
       default: "muted"
     }
   }

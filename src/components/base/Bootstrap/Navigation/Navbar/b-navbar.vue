@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
-import utilities from "@/components/utilities/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
 import BNavBrand from "./b-navbar-brand";
 import BNavToggler from "./b-navbar-toggler";
@@ -24,14 +24,14 @@ export default {
   name: "b-navbar",
   components: { BNavBrand, BNavToggler, BNavbarItems },
   props: {
-    list: utilities.props.list,
-    brand: utilities.props.value,
-    href: utilities.props.href,
-    hideToggler: Boolean
+    list: util.props.Array,
+    brand: util.props.String,
+    href: util.props.href,
+    hideToggler: util.props.Boolean,
   },
   data() {
     return {
-      id: "Navbar-" + util.random.getRandomString()
+      id: "Navbar-" + tool.random.getRandomString()
     };
   },
 };

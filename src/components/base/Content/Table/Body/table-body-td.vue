@@ -12,11 +12,13 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 export default {
   name: "table-body-td",
   props: {
     cell: [Object, String, Number, Boolean],
-    col: Object
+    col: util.props.Object
   },
   computed: {
     value: function() {

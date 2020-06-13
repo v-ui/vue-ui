@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import checkbox from "./b-checkbox";
 import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
@@ -36,17 +36,17 @@ import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
 export default {
   name: "b-checkbox-group",
   components: { checkbox, BInfo },
-  mixins: [utilities.mixins.form.base, utilities.mixins.form.validator],
+  mixins: [util.mixins.form.base, util.mixins.form.validator],
   inheritAttrs: false,
   model: {
     prop: "values",
     event: "change"
   },
   props: {
-    list: utilities.props.list,
-    values: utilities.props.list,
-    info: utilities.props.value,
-    disabled: utilities.props.disabled
+    list: util.props.Array,
+    values: util.props.Array,
+    info: util.props.String,
+    disabled: util.props.Boolean,
   },
   data() {
     return {

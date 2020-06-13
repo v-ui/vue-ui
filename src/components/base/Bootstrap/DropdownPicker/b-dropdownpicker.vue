@@ -20,7 +20,7 @@
       >
         <slot />
         <footer v-show="showFooter" class="text-right">
-          <hr >
+          <hr>
           <base-button
             outline
             value="确 定"
@@ -35,9 +35,9 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import tranDrop from "@/components/transition/tran-drop.vue";
 import BaseButton from "@/components/base/Bootstrap/Button/b-button.vue";
@@ -51,25 +51,22 @@ export default {
     id: {
       type: String,
       default: function() {
-        return "drop-picker-" + util.random.getRandomString();
+        return "drop-picker-" + tool.random.getRandomString();
       }
     },
-    placeholder: utilities.props.text,
-    show: Boolean,
-    disabled: Boolean,
-    hideToggle: Boolean,
-    showFooter: Boolean,
-    menuWidth: Boolean,
-    menuHeight: String,
+    placeholder: util.props.String,
+    show: util.props.Boolean,
+    disabled: util.props.Boolean,
+    hideToggle: util.props.Boolean,
+    showFooter: util.props.Boolean,
+    menuWidth: util.props.Boolean,
+    menuHeight: util.props.String,
     canHide: {
-      type: Boolean,
+      ...util.props.Boolean,
       default: true
     },
-    scroll: {
-      type: Number,
-      default: 0
-    },
-    info: utilities.props.text,
+    scroll: util.props.Uint,
+    info: util.props.String,
     value: [String, Number, Date]
   },
   data() {

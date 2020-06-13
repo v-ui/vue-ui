@@ -6,7 +6,7 @@
         <h1 class="pb-1">{{ title || 'Title' }}</h1>
         <div>
           <span>Author: {{ author || 'Author' }}</span>
-          <br />
+          <br>
           <span>
             Time:
             <time>{{ time || 'Time' }}</time>
@@ -61,7 +61,8 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
 import BScrollspyNav from "./ScrollspyNav/b-scrollspy-nav";
 
@@ -72,20 +73,18 @@ export default {
     id: {
       type: String,
       default: function() {
-        return util.random.getRandomString();
+        return tool.random.getRandomString();
       }
     },
     set: {
       type: String,
       default: "top",
-      validator: function(val) {
-        return ["top", "left", "right"].includes(val);
-      }
+      validator: value => ["top", "left", "right"].includes(value),
     },
-    title: String,
-    author: String,
+    title: util.props.String,
+    author: util.props.String,
     time: [Date, String],
-    info: String
+    info: util.props.String,
   },
    data() {
     return {

@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 /*
   图片 API
   https://www.cnblogs.com/lgqrlchinese/p/11386857.html
@@ -27,9 +29,9 @@
 export default {
   name: "c-image",
   props: {
-    src: String,
-    alt: String,
-    list: Array
+    src: util.props.src,
+    alt: util.props.String,
+    list: util.props.Array,
   },
   data() {
     return {

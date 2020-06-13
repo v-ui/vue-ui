@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BNumber from "@/components/base/Bootstrap/FormConter/b-number.vue";
 import BRange from "@/components/base/Bootstrap/FormConter/b-range.vue";
@@ -72,8 +72,8 @@ export default {
     event: "input"
   },
   props: {
-    value: Object,
-    disabled: utilities.props.disabled
+    value: util.props.Object,
+    disabled: util.props.Boolean,
   },
   data() {
     return {

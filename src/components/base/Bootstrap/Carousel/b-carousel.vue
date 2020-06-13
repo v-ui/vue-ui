@@ -1,4 +1,4 @@
-<template v-if="content && content.length > 0" >
+<template v-if="content && content.length > 0">
   <div :id="guid" class="carousel slide" :class="{'carousel-fade': fade}" data-ride="carousel">
     <ol v-if="indicators" class="carousel-indicators">
       <li
@@ -28,7 +28,7 @@
         @click="activeIndex < content.length - 1 ? activeIndex++ : 0"
       >
         <span class="carousel-control-prev-icon" aria-hidden="true" />
-        <sr-message>Previous</sr-message>
+        <sr-msg>Previous</sr-msg>
       </base-a>
       <base-a
         class="carousel-control-next"
@@ -38,49 +38,38 @@
         @click="activeIndex > 0 ? activeIndex-- : content.length - 1"
       >
         <span class="carousel-control-next-icon" aria-hidden="true" />
-        <sr-message>Next</sr-message>
+        <sr-msg>Next</sr-msg>
       </base-a>
     </template>
   </div>
 </template>
 <script>
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
+
 import BCarouselItem from "./b-carousel-item";
-import srMessage from "@/components/base/Bootstrap/SrOney/b-sr-only.vue";
+import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
-import util from "@/util/index.js";
-import utilities from "@/components/utilities/index.js";
-
 export default {
   name: "b-carousel",
-  components: { BCarouselItem, BaseA, srMessage },
+  components: { BCarouselItem, BaseA, srMsg },
+  props: {
+    content: util.props.String,
+    indicators: util.props.Boolean,
+    control: util.props.Boolean,
+    fade: util.props.Boolean,
+    interval: util.props.Number
+  },
   data() {
     return {
       activeIndex: 0
     };
   },
-  props: {
-    content: utilities.props.content,
-    indicators: {
-      type: Boolean,
-      default: false
-    },
-    control: {
-      type: Boolean,
-      default: false
-    },
-    fade: {
-      type: Boolean,
-      default: false
-    },
-    interval: {
-      type: Number
-    }
-  },
   computed: {
     guid: function() {
-      return "carouselCaptions-" + util.random.getRandomString();
+      return "carouselCaptions-" + tool.random.getRandomString();
     }
   }
 };

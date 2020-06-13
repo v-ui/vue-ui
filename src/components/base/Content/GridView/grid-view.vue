@@ -171,9 +171,9 @@
 // 参考： https://printjs.crabbly.com/
 import printJS from "print-js";
 
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import CTable from "@/components/base/Content/Table/c-table.vue";
 
@@ -205,36 +205,28 @@ export default {
     BModal
   },
   props: {
-    list: {
-      ...utilities.props.Object
-    },
+    list: util.props.Object,
     primaryKey: {
-      type: [String, Number],
+      ...util.props.String,
       default: "id",
-      // required: true,
-      validator: value => value
     },
-    fixed: {
-      type: [String, Number],
-      validator: value => !isNaN(value) && Number(value) > 0
-    },
-    fixedSize: utilities.props.size,
-    tableTheme: utilities.props.theme,
-    tableSm: Boolean,
-    tableHover: Boolean,
-    tableStriped: Boolean,
-    tableBordered: Boolean,
-    tableBorderless: Boolean,
-    theadTheme: utilities.props.theme,
-    theadSticky: Boolean,
-    hideSerial: Boolean,
+    fixed: util.props.UInt,
+    fixedSize: util.props.size,
+    tableTheme: util.props.theme,
+    tableSm: util.props.Boolean,
+    tableHover: util.props.Boolean,
+    tableStriped: util.props.Boolean,
+    tableBordered: util.props.Boolean,
+    tableBorderless: util.props.Boolean,
+    theadTheme: util.props.theme,
+    theadSticky: util.props.Boolean,
+    hideSerial: util.props.Boolean,
     selectStatus: {
-      type: [String, Number],
-      default: 0, // 0: 默认, 1: 单选, 2: 多选
+      ...util.props.UInt,
       validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value))
-    },
+    },// 0: 默认, 1: 单选, 2: 多选
     selected: [Array, Object],
-    printTitle: String
+    printTitle: util.props.String
   },
   data() {
     return {
@@ -482,12 +474,12 @@ export default {
       for (let i = 0; i < dom1.children.length; i++) {
         dom1.childNodes[i].addEventListener(
           "mouseover",
-          () => util.dom.addClass(dom2.children[i], "hover"),
+          () => tool.dom.addClass(dom2.children[i], "hover"),
           false
         );
         dom1.childNodes[i].addEventListener(
           "mouseout",
-          () => util.dom.removeClass(dom2.children[i], "hover"),
+          () => tool.dom.removeClass(dom2.children[i], "hover"),
           false
         );
       }
@@ -537,13 +529,13 @@ export default {
       if (!item || !item.type) return;
       switch (item.type) {
         case "xml":
-          util.file.xml.writer(this.data);
+          tool.file.xml.writer(this.data);
           break;
         case "csv":
-          util.file.csv.writer(this.data);
+          tool.file.csv.writer(this.data);
           break;
         case "txt":
-          util.file.txt.writer(this.data);
+          tool.file.txt.writer(this.data);
           break;
         // case 'sql':
 
@@ -552,10 +544,10 @@ export default {
 
         //     break;
         case "json":
-          util.file.json.writer(this.data);
+          tool.file.json.writer(this.data);
           break;
         case "ms-excel":
-          util.file.excel.writer(this.data);
+          tool.file.excel.writer(this.data);
           break;
         default:
           break;

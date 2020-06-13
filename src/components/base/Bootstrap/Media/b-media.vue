@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BMediaItem from "./b-media-item";
 
@@ -15,7 +15,7 @@ export default {
   name: "b-media",
   components: { BMediaItem },
   props: {
-    list: utilities.props.list,
+    list: util.props.Array,
   }
 };
 </script>

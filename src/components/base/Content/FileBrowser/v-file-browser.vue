@@ -17,7 +17,6 @@ export default {
         if (stat.isDirectory()) {
           fs.readdir("/", (error, files) => {
             console.log(files);
-            debugger;
           });
         }
       });

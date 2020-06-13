@@ -4,7 +4,7 @@ import router from '@/router'
 import store from '@/store'
 
 // vue directives
-import '@/components/utilities/directives.js'
+import '@/components/util/directives.js'
 // 第三方库
 import i18n from '@/lang/index.js'
 /********************/
@@ -17,6 +17,7 @@ Vue.use(theme)
 Vue.use(VuePageTransition)
 
 Vue.config.productionTip = false
+
 /* eslint-disable */
 new Vue({
   router,

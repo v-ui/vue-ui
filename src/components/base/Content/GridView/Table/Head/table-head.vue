@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import TableHeadTr from "./../Tr/table-head-tr";
 
@@ -41,12 +41,15 @@ export default {
     event: "change"
   },
   props: {
-    head: utilities.props.list,
-    sort: utilities.props.list,
-    hideSerial: Boolean,
-    hideSelect: Boolean,
-    selectStatus: Number,
-    sortObj: Object
+    head: util.props.Array,
+    sort: util.props.Array,
+    hideSerial: util.props.Boolean,
+    hideSelect: util.props.Boolean,
+    selectStatus: {
+      ...util.props.UInt,
+      validator: value => [0, 1, 2].includes(value),
+    }, // 0: 默认, 1: 单选, 2: 多选
+    sortObj: util.props.Object,
   },
   data() {
     return {

@@ -15,7 +15,7 @@
       v-bind="$attrs"
       v-on="inputListeners"
       @blur="validator($event, regex)"
-    />
+    >
     <b-valid v-if="$slots.valid || validInfo" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
     </b-valid>
@@ -32,9 +32,9 @@
   </div>
 </template>
 <script>
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
@@ -43,9 +43,9 @@ export default {
   name: "b-text",
   components: { BValid, BInfo },
   mixins: [
-    utilities.mixins.form.base,
-    utilities.mixins.form.readonly,
-    utilities.mixins.form.validator
+    util.mixins.form.base,
+    util.mixins.form.readonly,
+    util.mixins.form.validator
   ],
   inheritAttrs: false,
   props: {
@@ -67,12 +67,12 @@ export default {
         ].includes(value);
       }
     },
-    placeholder: String,
-    length: [String, Number],
-    info: utilities.props.value,
-    icon: utilities.props.value,
-    hideIcon: Boolean,
-    prompt: Boolean
+    placeholder: util.props.String,
+    length: util.props.UInt,
+    info: util.props.String,
+    icon: util.props.String,
+    hideIcon: util.props.Boolean,
+    prompt: util.props.Boolean
   },
   computed: {
     imputType: function() {
@@ -102,7 +102,7 @@ export default {
       if (["number"].includes(this.type)) return null;
       const o = Object.getOwnPropertyDescriptor(config.regex, this.type);
       return this.pattern
-        ? util.string.toRegExp(this.pattern.toString())
+        ? tool.string.toRegExp(this.pattern.toString())
         : (o && o.value) || null;
     }
   }

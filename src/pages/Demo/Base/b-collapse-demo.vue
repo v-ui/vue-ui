@@ -1,25 +1,33 @@
 <template>
-    <div>
-        <h2>b-collapse</h2>
-        <hr>
-        <a class="btn btn-primary" role="button" v-coll:control="'#el'">Toggle first element</a>
-        <button class="btn btn-primary" type="button" v-coll:[control]="'#el'" >Toggle second element</button>
-        <b-collapse id="el">
-            content
-        </b-collapse>
-    </div>
+  <div>
+    <h2>b-collapse</h2>
+    <hr>
+    <a class="btn btn-primary" role="button" v-coll:control="`#${id}`">Toggle first element</a>
+    <button class="btn btn-primary" type="button" v-coll:control="`#${id}`">Toggle second element</button>
+    <b-collapse :id="id">content</b-collapse>
+  </div>
 </template>
 
 <script>
-import BCollapse from '@/components/base/Bootstrap/Collapse/index.js'
+import tool from "@/tool/index.js";
+
+import BCollapse from "@/components/base/Bootstrap/Collapse/index.js";
 
 export default {
-    name: 'b-collapse-demo',
-    components: { BCollapse,},
-    data () {
-        return {
-            control: 'control info'
-        }
+  name: "b-collapse-demo",
+  components: { BCollapse },
+  props: {
+    id: {
+      type: String,
+      default: function() {
+        return "Collapse-" + tool.random.getRandomString();
+      }
     }
-}
+  },
+  data() {
+    return {
+      control: "control info"
+    };
+  }
+};
 </script>

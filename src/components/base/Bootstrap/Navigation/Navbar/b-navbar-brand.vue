@@ -1,17 +1,20 @@
-<template>
-  <a class="navbar-brand" :href="href">
-    <slot>{{ text }}</slot>
+<template functional>
+  <a class="navbar-brand" :href="props.href">
+    <slot>{{ props.text }}</slot>
   </a>
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-navbar-brand",
   props: {
-    href: utilities.props.href,
-    text: utilities.props.text
+    href: {
+      ...util.props.href,
+      default: '#',
+    },
+    text: util.props.String
   }
 };
 </script>

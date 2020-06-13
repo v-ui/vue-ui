@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
-import utilities from "@/components/utilities/index.js";
+import tool from "@/tool/index.js";
+import util from "@/components/util/index.js";
 
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
@@ -36,29 +36,32 @@ import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
 export default {
   name: "b-checkbox",
   inheritAttrs: false,
-  mixins: [utilities.mixins.form.base, utilities.mixins.form.validator],
+  mixins: [util.mixins.form.base, util.mixins.form.validator],
   components: { BValid, BInfo },
   model: {
     prop: "checked",
     event: "change"
   },
   props: {
-    value: utilities.props.text,
-    label: utilities.props.text,
+    value: util.props.String,
+    label: util.props.String,
     id: {
       type: String,
       default: function() {
-        return "Checkbox-" + util.random.getRandomString();
+        return "Checkbox-" + tool.random.getRandomString();
       }
     },
-    indeterminate: Number,
-    checked: Boolean,
-    defaultState: Boolean,
-    inline: Boolean,
-    disabled: Boolean,
-    ValidClass: String,
-    unvalid: Boolean,
-    info: String
+    indeterminate: {
+      ...util.props.Uint,
+      validator: value => [0, 1, 2].includes(Number(value))
+    },
+    checked: util.props.Boolean,
+    defaultState: util.props.Boolean,
+    inline: util.props.Boolean,
+    disabled: util.props.Boolean,
+    ValidClass: util.props.String,
+    unvalid: util.props.Boolean,
+    info: util.props.String,
   },
   data() {
     return {
@@ -93,16 +96,16 @@ export default {
       if (this.unvalid) return; // unvalid 时不校验
       if (this.disabled) return; // disabled 时不校验
       if (!this.required) return;
-      util.dom.removeClass(e.target, "is-valid"); // 移除可能的 is-valid
+      tool.dom.removeClass(e.target, "is-valid"); // 移除可能的 is-valid
       // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
       if (!e.target.checked) {
-        util.dom.addClass(e.target, "is-invalid");
+        tool.dom.addClass(e.target, "is-invalid");
         return;
       }
-      util.dom.removeClass(e.target, "is-invalid"); // 移除可能的 is-invalid
+      tool.dom.removeClass(e.target, "is-invalid"); // 移除可能的 is-invalid
       // 当存在 valid slot 或 validInfo 时
       if (this.$slots.valid || this.validInfo)
-        util.dom.addClass(e.target, "is-valid");
+        tool.dom.addClass(e.target, "is-valid");
       this.$emit("valid");
     },
     setIndeterminate: function(val) {
@@ -114,7 +117,7 @@ export default {
           this.$refs.checkbox.indeterminate = false;
         this.isChecked = false;
       } else if (val == 1) {
-        util.dom.addAttr(this.$refs.checkbox, "indeterminate", "true");
+        tool.dom.addAttr(this.$refs.checkbox, "indeterminate", "true");
         this.isChecked = false;
       } else {
         if (this.$refs.checkbox.indeterminate)

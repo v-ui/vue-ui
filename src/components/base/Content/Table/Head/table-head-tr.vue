@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import tableHeadTh from "./table-head-th";
 import tableSerialTd from "./../Td/table-serial-td";
@@ -42,20 +42,20 @@ export default {
     prop: "checked",
     event: "change"
   },
+  props: {
+    row: util.props.Array,
+    sort: util.props.Array,
+    checked: util.props.Boolean,
+    rowCount: Number,
+    hideSerial: util.props.Boolean,
+    hideSelect: util.props.Boolean,
+    selectStatus: Number,
+    sortObj: util.props.Object,
+  },
   data() {
     return {
       isChecked: this.checked
     };
-  },
-  props: {
-    row: utilities.props.list,
-    sort: utilities.props.list,
-    checked: Boolean,
-    rowCount: Number,
-    hideSerial: Boolean,
-    hideSelect: Boolean,
-    selectStatus: Number,
-    sortObj: Object
   },
   watch: {
     checked: function(value) {

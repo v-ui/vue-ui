@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 /**
  * filepond
  * https://pqina.nl/filepond
@@ -42,8 +44,8 @@ export default {
   name: "b-file",
   inheritAttrs: false,
   props: {
-    info: String,
-    multiple: Boolean
+    info: util.props.String,
+    multiple: util.props.Boolean,
   },
   created() {},
   destroy() {

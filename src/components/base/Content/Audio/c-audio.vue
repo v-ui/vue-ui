@@ -9,34 +9,34 @@
       <!-- 控制器 -->
       <div class="col-auto row mx-1 px-0">
         <c-controller-button
-          v-show="showStepBackward"
+          v-if="showStepBackward"
           :icon="icon.stepBackward"
           :disabled="disabledStepBackward"
         />
         <b-loading
-          v-show="status == EStatus.loading"
+          v-if="status == EStatus.loading"
           class="btn btn-outline-primary rounded-circle"
           status="grow"
         />
         <c-controller-button
-          v-show="status == EStatus.loading"
+          v-if="status == EStatus.loading"
           :icon="icon.stop"
-          @click.native="stopload"
+          @click="stopload"
         />
         <c-controller-button
-          v-show="showPlay"
+          v-if="showPlay"
           :icon="icon.play"
           :disabled="disabledPlay"
-          @click.native="play"
+          @click="play"
         />
         <c-controller-button
-          v-show="showPause"
+          v-if="showPause"
           :icon="icon.pause"
           :disabled="disabledPause"
-          @click.native="pause"
+          @click="pause"
         />
         <c-controller-button
-          v-show="showStepForward"
+          v-if="showStepForward"
           :icon="icon.stepForward"
           :disabled="disabledStepForward"
         />
@@ -50,7 +50,7 @@
         <c-controller-button
           class="mr-1"
           :icon="mute ? icon.volumeMute : icon.volumeUp"
-          @click.native="audioMuteClick"
+          @click="audioMuteClick"
         />
         <vue-page-transition name="fade-in-right" class="d-none d-lg-inline">
           <b-range
@@ -68,7 +68,7 @@
         <font
           v-if="isError"
           class="text-danger"
-        >Play Error: File not found or In an unsupported format</font>
+        > Play Error: File not found or In an unsupported format </font>
         <b-range
           v-else
           hide-value
@@ -81,7 +81,7 @@
       <div class="col-auto align-items-center">
         <font>
           {{ seekTime }}
-          <br />
+          <br>
           {{ durationTime }}
         </font>
       </div>
@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
 import config from "@/config/index.js";
 
 /**
@@ -104,6 +104,7 @@ import config from "@/config/index.js";
  * https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Audio_API
  */
 import { Howl } from "howler";
+import util from "@/components/util/index.js";
 
 import CControllerButton from "./c-controller-button";
 import BRange from "@/components/base/Bootstrap/Form/b-range.vue";
@@ -113,19 +114,8 @@ export default {
   name: "c-auido",
   components: { CControllerButton, BRange, BLoading },
   props: {
-    playList: {
-      // 播放列表
-      type: Array,
-      default: () => []
-    },
-    index: {
-      // 序号
-      type: Number,
-      default: 0,
-      validator: function(val) {
-        return !isNaN(val) && val >= 0;
-      }
-    }
+    playList: util.props.Array, // 播放列表
+    index: util.props.UInt, // 序号
   },
   data() {
     return {
@@ -241,12 +231,12 @@ export default {
       let minutes = Math.floor((secs - hour * 60 * 60) / 60) || 0;
       let seconds = secs - hour * 60 * 60 - minutes * 60 || 0;
       return this.duration - 60 * 60 > 0
-        ? `${hour}:${util.string.padStart(
+        ? `${hour}:${tool.string.padStart(
             minutes,
             2,
             "0"
-          )}:${util.string.padStart(seconds, 2, "0")}`
-        : `${minutes}:${util.string.padStart(seconds, 2, "0")}`;
+          )}:${tool.string.padStart(seconds, 2, "0")}`
+        : `${minutes}:${tool.string.padStart(seconds, 2, "0")}`;
     },
     // ----- sound event ------
     onload: function() {

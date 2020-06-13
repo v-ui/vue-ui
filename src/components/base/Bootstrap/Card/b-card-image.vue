@@ -1,21 +1,18 @@
-
 <template>
   <img :src="src" :class="isTop" :alt="alt" />
 </template>
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-card-image",
   props: {
-    src: utilities.props.src,
+    src: util.props.src,
     top: {
-      type: Boolean,
+      ...util.props.Boolean,
       default: true
     },
-    alt: {
-      type: String
-    }
+    alt: util.props.String,
   },
   computed: {
     isTop: function() {

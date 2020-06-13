@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BDatePicker from "@/components/base/Bootstrap/DateTime/Date/DatePicker/b-date-picker.vue";
 
@@ -22,11 +22,11 @@ export default {
     event: "change"
   },
   props: {
-    value: utilities.props.value,
-    min: String,
-    max: String,
-    placeholder: utilities.props.value,
-    disabled: utilities.props.disabled
+    value: util.props.String,
+    min: util.props.String,
+    max: util.props.String,
+    placeholder: util.props.String,
+    disabled: util.props.Boolean,
   },
   data() {
     return {

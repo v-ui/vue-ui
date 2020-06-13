@@ -21,23 +21,21 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-popover",
   props: {
-    show: Boolean,
+    show: util.props.Boolean,
     set: {
       type: String,
       default: "right",
-      validator: function(val) {
-        return ["top", "bottom", "left", "right"].includes(val);
-      }
+      validator: value => ["top", "bottom", "left", "right"].includes(value),
     },
-    top: [String, Number],
-    left: [String, Number],
-    title: utilities.props.value,
-    content: utilities.props.content
+    top: util.props.Int,
+    left: util.props.Int,
+    title: util.props.String,
+    content: util.props.String
   },
   data() {
     return {

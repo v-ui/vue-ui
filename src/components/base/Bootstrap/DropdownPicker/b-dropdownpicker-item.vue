@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BaseButton from "@/components/base/Bootstrap/Button/b-button.vue";
 
@@ -18,11 +18,11 @@ export default {
   name: "b-dropdownpicker-item",
   components: { BaseButton },
   props: {
-    value: utilities.props.value,
-    text: utilities.props.value,
-    select: utilities.props.active,
-    disabled: utilities.props.disabled,
-    colCount: Number
+    value: util.props.String,
+    text: util.props.String,
+    select: util.props.Boolean,
+    disabled: util.props.Boolean,
+    colCount: util.props.UInt,
   },
   computed: {
     objClass: function() {

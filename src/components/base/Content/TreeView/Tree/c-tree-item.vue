@@ -30,8 +30,8 @@
       </div>
       <!-- icon -->
       <div class="d-table-cell pr-1">
-        <font v-if="!editItem">{{ item.label }}</font>
-        <b-text />
+        <font v-if="!editItem">{{ item.value }}</font>
+        <b-text v-else ref="edior" :value="item.value" size="sm" @blur="editorBlur" />
       </div>
       <!-- label or edit -->
     </div>
@@ -49,9 +49,9 @@
 </template>
 
 <script>
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 import BText from "@/components/base/Bootstrap/Form/b-text.vue";
 
@@ -63,14 +63,14 @@ export default {
   name: "c-tree-item",
   components: { CTree: () => import("./c-tree"), BText },
   props: {
-    item: utilities.props.item,
+    item: util.props.Object,
     status: Number,
     primaryKey: {
       type: String,
       default: "id",
       require: true
     },
-    selected: Object
+    selected: util.props.Object,
   },
   data() {
     return {
@@ -88,11 +88,12 @@ export default {
       return config.ui.icon;
     },
     objClass: function() {
+      let disabled = !this.canEdit && !this.isSelected ? 'text-black-50' : ''
       let isHover = this.hover
         ? "bg-light text-primary font-weight-bolder"
         : "";
       let beChecked = this.isSelected ? "text-light bg-primary" : "";
-      return `${beChecked} ${isHover}`;
+      return `${disabled} ${beChecked} ${isHover}`;
     },
     itemClass: function() {
       let beChecked = this.isSelected ? "" : "text-secondary";
@@ -105,12 +106,10 @@ export default {
       return this.status == 1 && !this.item.disabled;
     },
     isSelected: function() {
-      return (
-        this.selectedOption &&
+      return this.selectedOption &&
         this.item[this.primaryKey] &&
         this.selectedOption[this.primaryKey] &&
-        this.selectedOption[this.primaryKey] == this.item[this.primaryKey]
-      );
+        this.selectedOption[this.primaryKey] === this.item[this.primaryKey]
     }
   },
   methods: {
@@ -130,7 +129,7 @@ export default {
       this.editItem = true;
       await this.$nextTick();
       // 自动全选 editor 中的内容
-      await util.document.setCursorPos(this.$refs.edior.$refs.text);
+      await tool.document.setCursorPos(this.$refs.edior.$refs.text);
     },
     editValid: function() {
       this.editError = false;
@@ -162,7 +161,7 @@ export default {
       let target = this.$refs.dropzone;
       if (this.isFolder) {
         if (!this.$store.state.timer) {
-          util.dom.addClass(target, "bg-light");
+          tool.dom.addClass(target, "bg-light");
           this.$store.commit("startTimer", {
             cellback: () => (this.open = true)
           });
@@ -174,27 +173,27 @@ export default {
             event.y - currentTarget.offsetTop < currentTarget.offsetHeight / 2
               ? "top"
               : "bottom";
-        util.dom.addClass(target, "border-primary");
-        util.dom.removeClass(target, `border-top`);
-        util.dom.removeClass(target, `border-bottom`);
-        util.dom.addClass(target, `border-${this.dropStatus}`);
+        tool.dom.addClass(target, "border-primary");
+        tool.dom.removeClass(target, `border-top`);
+        tool.dom.removeClass(target, `border-bottom`);
+        tool.dom.addClass(target, `border-${this.dropStatus}`);
       }
     },
     dragleave: function() {
       let target = this.$refs.dropzone;
-      util.dom.removeClass(target, "border-primary");
-      util.dom.removeClass(target, `border-top`);
-      util.dom.removeClass(target, `border-bottom`);
-      util.dom.removeClass(target, "bg-light");
+      tool.dom.removeClass(target, "border-primary");
+      tool.dom.removeClass(target, `border-top`);
+      tool.dom.removeClass(target, `border-bottom`);
+      tool.dom.removeClass(target, "bg-light");
       if (this.isFolder && this.$store.state.timer)
         this.$store.commit("stopTimer");
     },
     drop: function(event) {
       let target = this.$refs.dropzone;
-      util.dom.removeClass(target, "border-primary");
-      util.dom.removeClass(target, `border-top`);
-      util.dom.removeClass(target, `border-bottom`);
-      util.dom.removeClass(target, "bg-light");
+      tool.dom.removeClass(target, "border-primary");
+      tool.dom.removeClass(target, `border-top`);
+      tool.dom.removeClass(target, `border-bottom`);
+      tool.dom.removeClass(target, "bg-light");
       this.dropStatus = "default";
       if (this.isFolder && this.$store.state.timer)
         this.$store.commit("stopTimer");

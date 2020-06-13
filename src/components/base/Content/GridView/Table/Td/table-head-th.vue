@@ -21,14 +21,14 @@
 
 <script>
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "table-head-th",
   props: {
-    cell: Object,
-    sortObj: Object,
-    sort: utilities.props.list
+    cell: util.props.Object,
+    sortObj: util.props.Object,
+    sort: util.props.Array,
   },
   computed: {
     icon: function() {

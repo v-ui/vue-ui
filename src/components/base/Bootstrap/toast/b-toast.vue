@@ -42,21 +42,20 @@
 import moment from "moment";
 
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 export default {
   name: "b-toast",
   props: {
-    title: String,
-    href: String,
-    autohide: Boolean,
+    title: util.props.String,
+    href: util.props.String,
+    autohide: util.props.Boolean,
     time: [String, Number, Array],
-    icon: utilities.props.value,
-    content: utilities.props.value,
+    icon: util.props.String,
+    content: util.props.String,
     delay: {
-      type: [Number, String],
+      ...util.props.UInt,
       default: 10000,
-      validator: val => !isNaN(val) && Number(val) > 0
     },
     status: {
       type: String,

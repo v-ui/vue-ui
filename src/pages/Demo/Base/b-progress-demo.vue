@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import variables from '@/components/utilities/variables.js'
+import variables from '@/components/util/variables.js'
 
 import BProgress from '@/components/base/Bootstrap/Progress/b-progress.vue'
 

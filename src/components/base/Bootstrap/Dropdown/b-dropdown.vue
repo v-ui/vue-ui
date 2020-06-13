@@ -15,67 +15,61 @@
         <i :class="icon.caretDown" class="px-1" />
       </slot>
     </div>
-    <tran-drop>
-      <div
-        ref="menu"
-        class="dropdown-menu overflow-auto shadow-sm"
-        :class="menuClass"
-        :style="{'max-height': menuHeight}"
-        :aria-labelledby="guid"
-      >
-        <slot>
-          <drop-menu
-            :list="list"
-            :select="select"
-            :disabled="disabled"
-            @click="item => $emit('menuClick', item)"
-          ></drop-menu>
-        </slot>
-      </div>
-    </tran-drop>
+    <div
+      ref="menu"
+      class="dropdown-menu overflow-auto shadow-sm"
+      :class="menuClass"
+      :style="{'max-height': menuHeight}"
+      :aria-labelledby="guid"
+    >
+      <slot>
+        <drop-menu
+          :list="list"
+          :select="select"
+          :disabled="disabled"
+          @click="item => $emit('menuClick', item)"
+        />
+      </slot>
+    </div>
   </div>
 </template>
 <script>
-import util from "@/util/index.js";
+import tool from "@/tool/index.js";
 import config from "@/config/index.js";
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
-import tranDrop from "@/components/transition/tran-drop.vue";
 import DropMenu from "./b-dropdown-menu";
 
 export default {
   name: "b-dropdown",
-  components: { tranDrop, DropMenu },
-  data() {
-    return {
-      menuStyle: 0
-    };
-  },
+  components: { DropMenu },
   props: {
-    list: utilities.props.list,
-    select: utilities.props.value,
-    disabled: utilities.props.disabled,
-    set: utilities.props.set,
+    list: util.props.Array,
+    select: util.props.String,
+    disabled: util.props.Boolean,
+    set: util.props.set,
     trigger: {
-      ...utilities.props.text,
+      ...util.props.String,
       default: "<Pleace select...>"
     },
-    hideToggle: Boolean,
+    hideToggle: util.props.Boolean,
     menuAlign: {
       type: String,
       default: "",
       validator: value => ["", "left", "right"].includes(value)
     },
-    menWidth: Boolean,
-    menuHeight: String,
-    scroll: {
-      type: Number,
-      default: 0
-    }
+    menWidth: util.props.Boolean,
+    menuHeight: util.props.String,
+    scroll: util.props.UInt
+  },
+  data() {
+    return {
+      menuStyle: 0
+    };
   },
   computed: {
     guid: function() {
-      return "dropdown-" + util.random.getRandomString();
+      return "dropdown-" + tool.random.getRandomString();
     },
     icon: function() {
       return config.ui.icon;
@@ -93,7 +87,7 @@ export default {
     if (!el) return;
     let node = el;
     if (!node) return;
-    util.dom.addAttrs(node, {
+    tool.dom.addAttrs(node, {
       id: this.guid,
       "data-toggle": "dropdown",
       "aria-haspopup": "true",

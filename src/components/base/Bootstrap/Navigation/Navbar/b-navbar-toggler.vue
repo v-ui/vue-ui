@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <button
     class="navbar-toggler"
     type="button"
@@ -15,11 +15,13 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 export default {
   name: "b-navbar-toggler",
   props: {
     target: {
-      type: String,
+      ...util.props.String,
       required: true
     }
   }

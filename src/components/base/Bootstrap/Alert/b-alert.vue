@@ -10,18 +10,21 @@
       @mouseenter="clearTimer()"
       @mouseleave="countDown()"
     >
-      <alert-header v-if="$slots.header">
+      <h4 v-if="$slots.header" class="alert-heading">
         <slot name="header" />
-      </alert-header>
+      </h4>
       <div class="overflow-auto" style="max-height: 200px;">
         <slot>
           <!-- <alert-link>{{countDownSec}}</alert-link> -->
         </slot>
-        <sr-message>{{ fillsrMessage }}</sr-message>
+        <sr-msg>{{ fillsrMsg }}</sr-msg>
       </div>
-      <alert-footer v-if="$slots.footer">
-        <slot name="footer" />
-      </alert-footer>
+      <div v-if="$slots.footer">
+        <hr>
+        <p class="mb-0">
+          <slot name="footer" />
+        </p>
+      </div>
       <button
         v-if="showDismisLable"
         type="button"
@@ -35,12 +38,10 @@
   </tran-out-in>
 </template>
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js";
 
 // import AlertLink from './b-alert-link'
-import AlertHeader from "./b-alert-header";
-import AlertFooter from "./b-alert-footer";
-import srMessage from "@/components/base/Bootstrap/SrOney/b-sr-only.vue";
+import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 import TranOutIn from "@/components/transition/tran-out-in.vue";
 
@@ -48,23 +49,20 @@ export default {
   name: "b-alert",
   components: {
     // AlertLink,
-    AlertHeader,
-    AlertFooter,
-    srMessage,
+    srMsg,
     TranOutIn
   },
   props: {
-    show: utilities.props.show,
-    color: utilities.props.color,
-    width: utilities.props.width,
-    position: utilities.props.position,
-    srMessage: utilities.props.srMessage,
-    dismissible: Boolean,
-    countDownDisdismis: Boolean,
+    show: util.props.Boolean,
+    color: util.props.color,
+    width: util.props.width,
+    position: util.props.position,
+    srMsg: util.props.String,
+    dismissible: util.props.Boolean,
+    countDownDisdismis: util.props.Boolean,
     countDownSec: {
-      type: [String, Number],
+      ...util.props.UInt,
       default: 5,
-      validator: value => !isNaN(value)
     }
   },
   data() {
@@ -104,8 +102,8 @@ export default {
       return !this.countDownDisdismis || this.dismissible;
       //return this.dismissible
     },
-    fillsrMessage: function() {
-      return this.srMessage || this.variant;
+    fillsrMsg: function() {
+      return this.srMsg || this.variant;
     }
   },
   created() {

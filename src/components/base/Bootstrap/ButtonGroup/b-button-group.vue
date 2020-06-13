@@ -4,18 +4,18 @@
   </div>
 </template>
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js"
 
 export default {
   name: "b-button-group",
   props: {
-    size: utilities.props.size,
-    vertical: Boolean
+    size: util.props.size,
+    vertical: util.props.Boolean
   },
   computed: {
     objClass: function() {
       return `${this.size ? `btn-group-${this.size}` : ""}
-                ${this.vertical ? `btn-group-vertical` : ""}`;
+              ${this.vertical ? `btn-group-vertical` : ""}`
     }
   }
 };

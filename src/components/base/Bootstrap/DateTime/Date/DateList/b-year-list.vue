@@ -2,6 +2,8 @@
   <dropdown-list v-model="selectValue" :list="list" @change="change" hide-null />
 </template>
 <script>
+import util from "@/components/util/index.js"
+
 import dropdownList from "@/components/base/Bootstrap/DropdownList/b-dropdownlist.vue";
 
 export default {
@@ -13,18 +15,11 @@ export default {
   },
   props: {
     value: {
-      type: Number,
+      ...util.props.UInt,
       default: () => new Date().getFullYear(),
-      validator: value => !isNaN(value)
     },
-    start: {
-      type: Number,
-      validator: value => !isNaN(value)
-    },
-    end: {
-      type: Number,
-      validator: value => !isNaN(value)
-    }
+    start: util.props.UInt,
+    end: util.props.UInt,
   },
   data() {
     return {

@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import utilities from "@/components/utilities/index.js";
+import util from "@/components/util/index.js"
 
-import pickerHeader from "./date-picker-header";
-import pickerRow from "@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker-row.vue";
+import pickerHeader from "./date-picker-header"
+import pickerRow from "@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker-row.vue"
 
 export default {
   name: "date-year-picker",
@@ -42,8 +42,8 @@ export default {
     },
     min: Date,
     max: Date,
-    hideHeader: Boolean,
-    disabled: utilities.props.disabled
+    hideHeader: util.props.Boolean,
+    disabled: util.props.Boolean,
   },
   data() {
     return {

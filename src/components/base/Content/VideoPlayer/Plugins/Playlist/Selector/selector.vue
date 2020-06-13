@@ -18,26 +18,22 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 import BList from "@/components/base/Bootstrap/List/b-list.vue";
 import BButton from "@/components/base/Bootstrap/Form/Button/b-button.vue";
 
 export default {
   name: "c-video-selector",
   components: { BList, BButton },
+  props: {
+    total: util.props.UInt,
+  },
   data() {
     return {
       selected: 1,
       pageSize: 100
     };
-  },
-  props: {
-    total: {
-      type: [Number, String],
-      default: 0,
-      validator: function(val) {
-        return !isNaN(val) && Number(val) > 0 && Number(val) % 1 == 0;
-      }
-    }
   },
   computed: {
     totalNu: function() {

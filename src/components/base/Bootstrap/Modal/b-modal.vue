@@ -36,17 +36,19 @@
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 import config from "@/config/index.js";
 
 export default {
   name: "b-modal",
   props: {
-    title: String,
-    icon: String,
-    content: String,
-    scrol: Boolean, //modal-dialog-scrollable
-    center: Boolean, // modal-dialog-centered
-    hideFooter: Boolean,
+    title: util.props.String,
+    icon: util.props.String,
+    content: util.props.String,
+    scrol: util.props.Boolean, //modal-dialog-scrollable
+    center: util.props.Boolean, // modal-dialog-centered
+    hideFooter: util.props.Boolean,
     size: {
       type: String,
       default: "",
@@ -55,7 +57,7 @@ export default {
       }
     }, // modal-xl modal-lg modal-sm
     labelledby: {
-      type: String,
+      ...util.props.String,
       default: "Modal Dialog"
     },
     status: {
