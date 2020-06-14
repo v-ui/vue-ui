@@ -51,7 +51,7 @@ import dropItem from "@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue";
 import BText from "@/components/base/Bootstrap/Form/b-text.vue";
 
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
-import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
+import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
   name: "b-dropdownlist",

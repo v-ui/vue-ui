@@ -54,7 +54,7 @@ import util from "@/components/util/index.js";
 
 import BSelectOption from "./b-select-option.vue";
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
-import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
+import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
   name: "b-select",

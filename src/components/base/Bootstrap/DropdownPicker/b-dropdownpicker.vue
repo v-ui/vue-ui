@@ -42,7 +42,7 @@ import util from "@/components/util/index.js";
 import tranDrop from "@/components/transition/tran-drop.vue";
 import BaseButton from "@/components/base/Bootstrap/Button/b-button.vue";
 
-import BInfo from "@/components/base/Bootstrap/Form/Other/b-form-info.vue";
+import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
   name: "b-dropdownpicker",
