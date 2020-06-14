@@ -7,7 +7,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "b-form-info",
+  name: "basic-info",
   props: {
     info: util.props.String,
     textColor: {
