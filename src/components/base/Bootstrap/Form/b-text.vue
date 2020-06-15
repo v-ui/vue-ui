@@ -32,7 +32,7 @@
   </div>
 </template>
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
@@ -102,7 +102,7 @@ export default {
       if (["number"].includes(this.type)) return null;
       const o = Object.getOwnPropertyDescriptor(config.regex, this.type);
       return this.pattern
-        ? tool.string.toRegExp(this.pattern.toString())
+        ? tools.string.toRegExp(this.pattern.toString())
         : (o && o.value) || null;
     }
   }

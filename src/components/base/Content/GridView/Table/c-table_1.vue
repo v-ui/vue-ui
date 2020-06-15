@@ -776,7 +776,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 
 export default {
   name: "c-table",
@@ -801,12 +801,12 @@ export default {
       for (let i = 0; i < dom1.children.length; i++) {
         dom1.childNodes[i].addEventListener(
           "mouseover",
-          () => tool.dom.addClass(dom2.children[i], "hover"),
+          () => tools.dom.addClass(dom2.children[i], "hover"),
           false
         );
         dom1.childNodes[i].addEventListener(
           "mouseout",
-          () => tool.dom.removeClass(dom2.children[i], "hover"),
+          () => tools.dom.removeClass(dom2.children[i], "hover"),
           false
         );
       }

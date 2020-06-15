@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
@@ -51,7 +51,7 @@ export default {
     id: {
       type: String,
       default: function() {
-        return "drop-picker-" + tool.random.getRandomString();
+        return "drop-picker-" + tools.random.getRandomString();
       }
     },
     placeholder: util.props.String,

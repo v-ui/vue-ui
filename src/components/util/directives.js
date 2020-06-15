@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import jQuery from 'jquery'
 
-import tool from '@/tool/index.js'
+import tools from '@/tools/index.js'
 // directives
 // 通用指令
 
@@ -45,7 +45,7 @@ Vue.directive('tip', (element, binding) => {
 // v-modal
 // 注册一个全局自定义指令 `v-modal`(用于模态弹窗， 与 v-model 不同)
 Vue.directive('modal', (el, binding) => {
-  tool.dom.addAttrs(el, {
+  tools.dom.addAttrs(el, {
     'data-toggle': 'modal',
     'data-target': binding.value
   })

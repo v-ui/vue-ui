@@ -1,17 +1,17 @@
 import v from './variables'
-import tool from '@/tool/index.js'
+import tools from '@/tools/index.js'
 
 const validators = {
-  String: value => tool.obj.type.isString(value),
-  Number: value => tool.obj.type.isNumber(value) || tool.obj.type.isString(value) && !isNaN(value),
-  UNumber: value => tool.obj.type.isNumber(value) || tool.obj.type.isString(value) && !isNaN(value) && Number(value) >= 0,
-  Int: value => tool.obj.type.isNumber(value) || tool.obj.type.isString(value) && !isNaN(value) && Number(value) % 1 === 0,
-  UInt: value => tool.obj.type.isNumber(value) || tool.obj.type.isString(value) && !isNaN(value) && Number(value) % 1 === 0 && Number(value) >= 0,
-  Boolean: value => tool.obj.type.isBoolean(value),
-  Array: value => tool.obj.type.isArray(value),
-  Object: value => tool.obj.type.isObject(value),
-  Function: value => tool.obj.type.isFunction(value),
-  RegExp: value => tool.obj.type.isRegExp(value),
+  String: value => tools.obj.type.isString(value),
+  Number: value => tools.obj.type.isNumber(value) || tools.obj.type.isString(value) && !isNaN(value),
+  UNumber: value => tools.obj.type.isNumber(value) || tools.obj.type.isString(value) && !isNaN(value) && Number(value) >= 0,
+  Int: value => tools.obj.type.isNumber(value) || tools.obj.type.isString(value) && !isNaN(value) && Number(value) % 1 === 0,
+  UInt: value => tools.obj.type.isNumber(value) || tools.obj.type.isString(value) && !isNaN(value) && Number(value) % 1 === 0 && Number(value) >= 0,
+  Boolean: value => tools.obj.type.isBoolean(value),
+  Array: value => tools.obj.type.isArray(value),
+  Object: value => tools.obj.type.isObject(value),
+  Function: value => tools.obj.type.isFunction(value),
+  RegExp: value => tools.obj.type.isRegExp(value),
 }
 
 let type = {}

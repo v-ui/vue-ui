@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 
 import BCollapse from "@/components/base/Bootstrap/Collapse/index.js";
 
@@ -20,7 +20,7 @@ export default {
     id: {
       type: String,
       default: function() {
-        return "Collapse-" + tool.random.getRandomString();
+        return "Collapse-" + tools.random.getRandomString();
       }
     }
   },

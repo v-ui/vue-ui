@@ -43,7 +43,7 @@
 <script>
 // 弃用 2019-08-07
 
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import drop from "@/components/base/Bootstrap/Dropdown/b-dropdown.vue";
@@ -128,7 +128,7 @@ export default {
       this.$el.firstChild.children[1].childNodes.forEach(function(node, i) {
         if (
           (node.className || node.classList) &&
-          tool.dom.hasClass(node, "active")
+          tools.dom.hasClass(node, "active")
         )
           index = i < less ? 0 : i;
       });
@@ -137,15 +137,15 @@ export default {
     validator: function(value) {
       if (this.disabled) return; // disabled 时不校验
       let e = this.$refs.dropdownlist.$el;
-      tool.dom.removeClass(e, "is-valid"); // 移除可能的 is-valid
+      tools.dom.removeClass(e, "is-valid"); // 移除可能的 is-valid
       // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
       if (!this.validateRequired(value)) {
-        tool.dom.addClass(e, "is-invalid");
+        tools.dom.addClass(e, "is-invalid");
         return;
       }
-      tool.dom.removeClass(e, "is-invalid"); // 移除可能的 is-invalid
+      tools.dom.removeClass(e, "is-invalid"); // 移除可能的 is-invalid
       // 当存在 valid slot 或 validInfo 时
-      if (this.$slots.valid || this.validInfo) tool.dom.addClass(e, "is-valid");
+      if (this.$slots.valid || this.validInfo) tools.dom.addClass(e, "is-valid");
       this.$emit("valid");
     }
   }

@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BScrollspyNav from "./ScrollspyNav/b-scrollspy-nav";
@@ -73,7 +73,7 @@ export default {
     id: {
       type: String,
       default: function() {
-        return tool.random.getRandomString();
+        return tools.random.getRandomString();
       }
     },
     set: {

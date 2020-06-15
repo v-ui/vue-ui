@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
@@ -129,7 +129,7 @@ export default {
       this.editItem = true;
       await this.$nextTick();
       // 自动全选 editor 中的内容
-      await tool.document.setCursorPos(this.$refs.edior.$refs.text);
+      await tools.document.setCursorPos(this.$refs.edior.$refs.text);
     },
     editValid: function() {
       this.editError = false;
@@ -161,7 +161,7 @@ export default {
       let target = this.$refs.dropzone;
       if (this.isFolder) {
         if (!this.$store.state.timer) {
-          tool.dom.addClass(target, "bg-light");
+          tools.dom.addClass(target, "bg-light");
           this.$store.commit("startTimer", {
             cellback: () => (this.open = true)
           });
@@ -173,27 +173,27 @@ export default {
             event.y - currentTarget.offsetTop < currentTarget.offsetHeight / 2
               ? "top"
               : "bottom";
-        tool.dom.addClass(target, "border-primary");
-        tool.dom.removeClass(target, `border-top`);
-        tool.dom.removeClass(target, `border-bottom`);
-        tool.dom.addClass(target, `border-${this.dropStatus}`);
+        tools.dom.addClass(target, "border-primary");
+        tools.dom.removeClass(target, `border-top`);
+        tools.dom.removeClass(target, `border-bottom`);
+        tools.dom.addClass(target, `border-${this.dropStatus}`);
       }
     },
     dragleave: function() {
       let target = this.$refs.dropzone;
-      tool.dom.removeClass(target, "border-primary");
-      tool.dom.removeClass(target, `border-top`);
-      tool.dom.removeClass(target, `border-bottom`);
-      tool.dom.removeClass(target, "bg-light");
+      tools.dom.removeClass(target, "border-primary");
+      tools.dom.removeClass(target, `border-top`);
+      tools.dom.removeClass(target, `border-bottom`);
+      tools.dom.removeClass(target, "bg-light");
       if (this.isFolder && this.$store.state.timer)
         this.$store.commit("stopTimer");
     },
     drop: function(event) {
       let target = this.$refs.dropzone;
-      tool.dom.removeClass(target, "border-primary");
-      tool.dom.removeClass(target, `border-top`);
-      tool.dom.removeClass(target, `border-bottom`);
-      tool.dom.removeClass(target, "bg-light");
+      tools.dom.removeClass(target, "border-primary");
+      tools.dom.removeClass(target, `border-top`);
+      tools.dom.removeClass(target, `border-bottom`);
+      tools.dom.removeClass(target, "bg-light");
       this.dropStatus = "default";
       if (this.isFolder && this.$store.state.timer)
         this.$store.commit("stopTimer");

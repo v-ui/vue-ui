@@ -44,7 +44,7 @@
   </div>
 </template>
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BCarouselItem from "./b-carousel-item";
@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     guid: function() {
-      return "carouselCaptions-" + tool.random.getRandomString();
+      return "carouselCaptions-" + tools.random.getRandomString();
     }
   }
 };

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import pickerHeader from "./date-picker-header";
@@ -45,7 +45,7 @@ export default {
         new Date(
           new Date().getFullYear() +
             "-" +
-            tool.string.padStart(new Date().getMonth()),
+            tools.string.padStart(new Date().getMonth()),
           2
         )
     },
@@ -91,7 +91,7 @@ export default {
           let date = new Date(this.formatMonth(this.year, value));
           arr.push({
             value: value,
-            text: tool.string.padStart(value + 1, 2),
+            text: tools.string.padStart(value + 1, 2),
             select: value == selectMonth && selectYeaer == this.year,
             disabled: date < this.min || date > this.max
           });
@@ -128,7 +128,7 @@ export default {
       this.year += 1;
     },
     formatMonth: function(year, month) {
-      return new Date(year + "-" + tool.string.padStart(Number(month + 1), 2));
+      return new Date(year + "-" + tools.string.padStart(Number(month + 1), 2));
     }
   },
   watch: {

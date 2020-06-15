@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BInfo from "@/components/Basic/basic-info.vue";
@@ -36,7 +36,7 @@ export default {
     id: {
       type: String,
       default: function() {
-        return "Switch-" + tool.random.getRandomString();
+        return "Switch-" + tools.random.getRandomString();
       }
     }
   },

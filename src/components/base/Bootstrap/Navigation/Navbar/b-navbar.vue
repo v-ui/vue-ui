@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BNavBrand from "./b-navbar-brand";
@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      id: "Navbar-" + tool.random.getRandomString()
+      id: "Navbar-" + tools.random.getRandomString()
     };
   },
 };

@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import dropdownPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker.vue";
@@ -192,7 +192,7 @@ export default {
             "-" +
             (this.type == "year"
               ? "01"
-              : tool.string.padStart(Number(this.date.getMonth() + 1), 2, "0"))
+              : tools.string.padStart(Number(this.date.getMonth() + 1), 2, "0"))
           : value
       );
       if (value == "Invalid Date") return;
@@ -202,20 +202,20 @@ export default {
           return value.getFullYear();
         case "month":
           return this.status === 0
-            ? `${value.getFullYear()}-${tool.string.padStart(
+            ? `${value.getFullYear()}-${tools.string.padStart(
                 Number(value.getMonth() + 1),
                 2,
                 "0"
               )}`
-            : `${tool.string.padStart(Number(value.getMonth() + 1), 2, "0")}`;
+            : `${tools.string.padStart(Number(value.getMonth() + 1), 2, "0")}`;
         case "date":
           return this.status === 0
-            ? `${value.getFullYear()}-${tool.string.padStart(
+            ? `${value.getFullYear()}-${tools.string.padStart(
                 Number(value.getMonth() + 1),
                 2,
                 "0"
-              )}-${tool.string.padStart(value.getDate(), 2, "0")}`
-            : `${tool.string.padStart(value.getDate(), 2, "0")}`;
+              )}-${tools.string.padStart(value.getDate(), 2, "0")}`
+            : `${tools.string.padStart(value.getDate(), 2, "0")}`;
       }
     },
     month2Year: function(value) {

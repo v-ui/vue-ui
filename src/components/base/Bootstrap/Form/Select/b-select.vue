@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BSelectOption from "./b-select-option.vue";
@@ -127,16 +127,16 @@ export default {
     },
     validator: function(e) {
       if (this.disabled) return; // disabled 时不校验
-      tool.dom.removeClass(e.target, "is-valid"); // 移除可能的 is-valid
+      tools.dom.removeClass(e.target, "is-valid"); // 移除可能的 is-valid
       // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
       if (!this.validateRequired(this.isSelectedValue)) {
-        tool.dom.addClass(e.target, "is-invalid");
+        tools.dom.addClass(e.target, "is-invalid");
         return;
       }
-      tool.dom.removeClass(e.target, "is-invalid"); // 移除可能的 is-invalid
+      tools.dom.removeClass(e.target, "is-invalid"); // 移除可能的 is-invalid
       // 当存在 valid slot 或 validInfo 时
       if (this.$slots.valid || this.validInfo)
-        tool.dom.addClass(e.target, "is-valid");
+        tools.dom.addClass(e.target, "is-valid");
       this.$emit("valid");
     }
   },
