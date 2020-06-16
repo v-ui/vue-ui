@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import pickerHeader from "./date-picker-header";
@@ -49,9 +49,9 @@ export default {
         new Date(
           new Date().getFullYear() +
             "-" +
-            tool.string.padStart(new Date().getMonth(), 2) +
+            tools.string.padStart(new Date().getMonth(), 2) +
             "-" +
-            tool.string.padStart(new Date().getDate(), 2)
+            tools.string.padStart(new Date().getDate(), 2)
         )
     },
     min: Date,
@@ -71,7 +71,7 @@ export default {
   computed: {
     now: () => new Date(),
     hearderText: function() {
-      return this.year + "-" + tool.string.padStart(Number(this.month + 1), 2);
+      return this.year + "-" + tools.string.padStart(Number(this.month + 1), 2);
     },
     total: function() {
       return new Date(this.year, this.month + 1, 0).getDate();
@@ -103,7 +103,7 @@ export default {
             let date = new Date(this.formatDate(this.year, this.month, value));
             arr.push({
               value: value,
-              text: tool.string.padStart(value, 2),
+              text: tools.string.padStart(value, 2),
               select:
                 value == selectDate &&
                 selectYear == this.year &&
@@ -159,9 +159,9 @@ export default {
       return new Date(
         year +
           "-" +
-          tool.string.padStart(Number(month + 1), 2) +
+          tools.string.padStart(Number(month + 1), 2) +
           "-" +
-          tool.string.padStart(date, 2)
+          tools.string.padStart(date, 2)
       );
     }
   },

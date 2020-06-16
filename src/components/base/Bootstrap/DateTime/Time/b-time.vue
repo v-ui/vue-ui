@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BText from "@/components/base/Bootstrap/Form/b-text.vue";
@@ -133,7 +133,7 @@ export default {
     },
     formatValue: function(value, call) {
       let s = value.length > 0 ? ":" : "";
-      return s + tool.string.padStart(call, 2, "0");
+      return s + tools.string.padStart(call, 2, "0");
     },
     formatDate: function(value) {
       if (value < this.dateMin) {
@@ -157,7 +157,7 @@ export default {
     setSelectArea: function(element, start = 0) {
       if (start < 0) return;
       if (start <= this.selectArea.one.end) {
-        tool.document.setCursorPos(
+        tools.document.setCursorPos(
           element,
           this.selectArea.one.start,
           this.selectArea.one.end
@@ -166,13 +166,13 @@ export default {
         start >= this.selectArea.two.start &&
         start <= this.selectArea.two.end
       ) {
-        tool.document.setCursorPos(
+        tools.document.setCursorPos(
           element,
           this.selectArea.two.start,
           this.selectArea.two.end
         );
       } else if (start >= this.selectArea.three.start) {
-        tool.document.setCursorPos(
+        tools.document.setCursorPos(
           element,
           this.selectArea.three.start,
           element.value.length
@@ -226,7 +226,7 @@ export default {
           // 当分段字符数超过 2 时会导致选择区域错误
           let str = value
             .split(":")
-            .map(e => tool.string.padStart(e, 2, "0"))
+            .map(e => tools.string.padStart(e, 2, "0"))
             .find(function(element) {
               return element.toString().length > 2;
             });

@@ -12,12 +12,12 @@
       <template
         v-if="item.children && item.children.length && item.children.length > 0"
       >
-        <br />
+        <br>
         <b-button
           class="border-0 bg-transparent px-0"
           text-color="primary"
           @click="show = !show"
-        >{{show ? 'Hide' : 'Show More...'}}</b-button>
+        >{{ show ? 'Hide' : 'Show More...' }}</b-button>
         <b-media v-if="show" :list="item.children" />
         <hr v-if="show">
       </template>

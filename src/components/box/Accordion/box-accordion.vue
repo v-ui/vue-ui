@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import "@/components/base/Bootstrap/Collapse/v-collapse.js";
@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     id: function() {
-      return "accordion-item-" + tool.random.getRandomString();
+      return "accordion-item-" + tools.random.getRandomString();
     }
   }
 };

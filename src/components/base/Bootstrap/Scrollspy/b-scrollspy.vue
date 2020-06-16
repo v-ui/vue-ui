@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BScrollspyNav from "./ScrollspyNav/b-scrollspy-nav";
@@ -72,9 +72,7 @@ export default {
   props: {
     id: {
       type: String,
-      default: function() {
-        return tool.random.getRandomString();
-      }
+      default: () => tools.random.getRandomString(),
     },
     set: {
       type: String,

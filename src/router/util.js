@@ -1,5 +1,5 @@
 // routers util
-import tool from '@/tool/index'
+import tools from '@/tools/index'
 
 function IsRouters(routers) {
     if (routers
@@ -93,12 +93,12 @@ function FormatModels(routers, SubsystemName = '') {
 
 function GetRouters(routers) {
     // return FormatRouters(routers)
-    return FormatRouters(tool.clone(routers, false))
+    return FormatRouters(tools.clone(routers, false))
 }
 
 function GetModels(models) {
     // return FormatModels(models)
-    return FormatModels(tool.clone(models, false))
+    return FormatModels(tools.clone(models, false))
 }
 
 export default {

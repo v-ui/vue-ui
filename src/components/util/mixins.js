@@ -3,7 +3,7 @@
  * 通用混入
 **/
 
-import tool from '@/tool/index.js'
+import tools from '@/tools/index.js'
 import props from '@/components/util/props.js'
 import filters from '@/components/util/filters.js'
 
@@ -102,16 +102,16 @@ export default {
           // 验证函数不会对传入的数据进行处理
           const value = e.target ? e.target.value.trim() : e.value.trim()
           // 移除可能的 is-valid
-          tool.dom.removeClass(e.target, 'is-valid')
+          tools.dom.removeClass(e.target, 'is-valid')
           // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateRequired(value)) { tool.dom.addClass(e.target, 'is-invalid'); return }
+          if (!this.validateRequired(value)) { tools.dom.addClass(e.target, 'is-invalid'); return }
           // 长度验证（传入字符串长度为 0、minlength 小于 0、minlength 大于 maxlength 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateLength(value)) { tool.dom.addClass(e.target, 'is-invalid'); return }
+          if (!this.validateLength(value)) { tools.dom.addClass(e.target, 'is-invalid'); return }
           // 正则校验（传入字符串长度为 0、无正则表达式 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateRange(value, regex)) { tool.dom.addClass(e.target, 'is-invalid'); return }
-          tool.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
+          if (!this.validateRange(value, regex)) { tools.dom.addClass(e.target, 'is-invalid'); return }
+          tools.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
           // 当存在 valid slot 或 validInfo 时
-          if (this.$slots.valid || this.validInfo) tool.dom.addClass(e.target, 'is-valid')
+          if (this.$slots.valid || this.validInfo) tools.dom.addClass(e.target, 'is-valid')
           this.$emit('valid')
         },
         // 非空验证（验证通过返回 true）
@@ -129,7 +129,7 @@ export default {
           let maxlength = Number(this.maxlength) || 0
           // 传入字符串长度为 0、minlength 小于 0、minlength 大于 maxlength 不做校验直接返回 true
           if (value.length == 0 || minlength < 0 || minlength >= maxlength) return true
-          const length = tool.string.codePointLength(value)
+          const length = tools.string.codePointLength(value)
           if (length < minlength) {
             this.$emit('invalid', 'short')
             return false
@@ -165,27 +165,6 @@ export default {
       },
     }, // readonly
   }, // form
-  loading: {
-    props: {
-      color: {
-        ...props.textColor,
-        default: 'body',
-      },
-      status: {
-        type: String,
-        default: 'border',
-        validator: value => ['border', 'grow'].includes(value),
-      },
-      size: props.size,
-    },
-    computed: {
-      objClass: function () {
-        let color = this.color ? `text-${this.color}` : ''
-        let size = this.size ? `spinner-border-${this.size}` : ''
-        return `spinner-${this.status} ${color} ${size}`
-      },
-    },
-  }, // loading
   grid: {
     thead: {
       data() {

@@ -1,5 +1,5 @@
 <template>
-  <img :src="src" :class="isTop" :alt="alt" />
+  <img :src="src" :class="isTop" :alt="alt">
 </template>
 <script>
 import util from "@/components/util/index.js";

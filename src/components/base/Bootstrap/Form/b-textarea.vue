@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
@@ -76,7 +76,7 @@ export default {
     change: function(e) {
       if (!this.prompt) return;
       let message = "";
-      let codeCount = tool.string.codePointLength(e.target.value);
+      let codeCount = tools.string.codePointLength(e.target.value);
       if (this.maxlength >= codeCount)
         message = `已输入 ${codeCount} 个字符，还可输入 ${this.maxlength -
           codeCount} 个字符`;

@@ -121,7 +121,7 @@
             hideNull
           />条&nbsp;&nbsp;
           <b-pagination start="1" :end="pageCount" v-model.number="pageNumber">
-            <b-number />
+            <b-number v-model.number="pageNumber" />
             <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
           </b-pagination>
         </font>
@@ -171,7 +171,7 @@
 // 参考： https://printjs.crabbly.com/
 import printJS from "print-js";
 
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
@@ -474,12 +474,12 @@ export default {
       for (let i = 0; i < dom1.children.length; i++) {
         dom1.childNodes[i].addEventListener(
           "mouseover",
-          () => tool.dom.addClass(dom2.children[i], "hover"),
+          () => tools.dom.addClass(dom2.children[i], "hover"),
           false
         );
         dom1.childNodes[i].addEventListener(
           "mouseout",
-          () => tool.dom.removeClass(dom2.children[i], "hover"),
+          () => tools.dom.removeClass(dom2.children[i], "hover"),
           false
         );
       }
@@ -529,13 +529,13 @@ export default {
       if (!item || !item.type) return;
       switch (item.type) {
         case "xml":
-          tool.file.xml.writer(this.data);
+          tools.file.xml.writer(this.data);
           break;
         case "csv":
-          tool.file.csv.writer(this.data);
+          tools.file.csv.writer(this.data);
           break;
         case "txt":
-          tool.file.txt.writer(this.data);
+          tools.file.txt.writer(this.data);
           break;
         // case 'sql':
 
@@ -544,10 +544,10 @@ export default {
 
         //     break;
         case "json":
-          tool.file.json.writer(this.data);
+          tools.file.json.writer(this.data);
           break;
         case "ms-excel":
-          tool.file.excel.writer(this.data);
+          tools.file.excel.writer(this.data);
           break;
         default:
           break;

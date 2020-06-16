@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
@@ -48,7 +48,7 @@ export default {
     id: {
       type: String,
       default: function() {
-        return "Checkbox-" + tool.random.getRandomString();
+        return "Checkbox-" + tools.random.getRandomString();
       }
     },
     indeterminate: {
@@ -96,16 +96,16 @@ export default {
       if (this.unvalid) return; // unvalid 时不校验
       if (this.disabled) return; // disabled 时不校验
       if (!this.required) return;
-      tool.dom.removeClass(e.target, "is-valid"); // 移除可能的 is-valid
+      tools.dom.removeClass(e.target, "is-valid"); // 移除可能的 is-valid
       // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
       if (!e.target.checked) {
-        tool.dom.addClass(e.target, "is-invalid");
+        tools.dom.addClass(e.target, "is-invalid");
         return;
       }
-      tool.dom.removeClass(e.target, "is-invalid"); // 移除可能的 is-invalid
+      tools.dom.removeClass(e.target, "is-invalid"); // 移除可能的 is-invalid
       // 当存在 valid slot 或 validInfo 时
       if (this.$slots.valid || this.validInfo)
-        tool.dom.addClass(e.target, "is-valid");
+        tools.dom.addClass(e.target, "is-valid");
       this.$emit("valid");
     },
     setIndeterminate: function(val) {
@@ -117,7 +117,7 @@ export default {
           this.$refs.checkbox.indeterminate = false;
         this.isChecked = false;
       } else if (val == 1) {
-        tool.dom.addAttr(this.$refs.checkbox, "indeterminate", "true");
+        tools.dom.addAttr(this.$refs.checkbox, "indeterminate", "true");
         this.isChecked = false;
       } else {
         if (this.$refs.checkbox.indeterminate)

@@ -9,6 +9,28 @@ import util from "@/components/util/index.js";
 
 export default {
   name: "b-loading",
-  mixins: [util.mixins.loading]
+  props: {
+    color: {
+      ...util.props.textColor,
+      default: "body"
+    },
+    status: {
+      type: String,
+      default: "border",
+      validator: value => ["border", "grow"].includes(value)
+    },
+    size: {
+      type: String,
+      default: "border",
+      validator: value => ["sm"].includes(value)
+    },
+  },
+  computed: {
+    objClass: function() {
+      let color = this.color ? `text-${this.color}` : "";
+      let size = this.size ? `spinner-border-${this.size}` : "";
+      return `spinner-${this.status} ${color} ${size}`;
+    }
+  }
 };
 </script>

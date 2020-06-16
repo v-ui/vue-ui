@@ -16,7 +16,7 @@ export default {
   },
   props: {
     value: {
-      type,
+      type: util.props.UInt,
       default: () => new Date().getMonth() + 1,
       validator: value => util.props.UInt.validator(value) && value < 13
     },

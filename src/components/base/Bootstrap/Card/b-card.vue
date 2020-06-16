@@ -1,21 +1,24 @@
 <template functional>
-  <div v-if="slots().default" class="card" v-bind="data.attrs" v-on="listeners">
+  <basic-slot class="card">
     <slot name="card">
-      <div v-if="slots().header" class="card-header">
+      <basic-slot class="card-header">
         <slot name="header" />
-      </div>
-      <div class="card-body">
+      </basic-slot>
+      <basic-slot class="card-body">
         <slot />
-      </div>
-      <div v-if="slots().footer" class="card-footer">
+      </basic-slot>
+      <basic-slot class="card-footer">
         <slot name="footer" />
-      </div>
+      </basic-slot>
     </slot>
-  </div>
+  </basic-slot>
 </template>
 
 <script>
+
+import '@/components/Basic/basic-slot.js'
+
 export default {
-  name: "b-card"
+  name: "b-card",
 };
 </script>

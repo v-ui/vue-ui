@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
@@ -76,14 +76,14 @@ export default {
     }
   },
   mounted() {
-    if (this.disabled) tool.dom.addAttr(this.$el, "index", "-1");
-    if (this.download) tool.dom.addAttr(this.$el, "download", this.download);
+    if (this.disabled) tools.dom.addAttr(this.$el, "index", "-1");
+    if (this.download) tools.dom.addAttr(this.$el, "download", this.download);
   },
   watch: {
     disabled: function(val) {
       val
-        ? tool.dom.addAttr(this.$el, "index", "-1")
-        : tool.dom.removeAttr(this.$el, "index");
+        ? tools.dom.addAttr(this.$el, "index", "-1")
+        : tools.dom.removeAttr(this.$el, "index");
     }
   }
 };

@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 
 /**
@@ -231,12 +231,12 @@ export default {
       let minutes = Math.floor((secs - hour * 60 * 60) / 60) || 0;
       let seconds = secs - hour * 60 * 60 - minutes * 60 || 0;
       return this.duration - 60 * 60 > 0
-        ? `${hour}:${tool.string.padStart(
+        ? `${hour}:${tools.string.padStart(
             minutes,
             2,
             "0"
-          )}:${tool.string.padStart(seconds, 2, "0")}`
-        : `${minutes}:${tool.string.padStart(seconds, 2, "0")}`;
+          )}:${tools.string.padStart(seconds, 2, "0")}`
+        : `${minutes}:${tools.string.padStart(seconds, 2, "0")}`;
     },
     // ----- sound event ------
     onload: function() {

@@ -34,7 +34,7 @@
   </div>
 </template>
 <script>
-import tool from "@/tool/index.js";
+import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     guid: function() {
-      return "dropdown-" + tool.random.getRandomString();
+      return "dropdown-" + tools.random.getRandomString();
     },
     icon: function() {
       return config.ui.icon;
@@ -87,7 +87,7 @@ export default {
     if (!el) return;
     let node = el;
     if (!node) return;
-    tool.dom.addAttrs(node, {
+    tools.dom.addAttrs(node, {
       id: this.guid,
       "data-toggle": "dropdown",
       "aria-haspopup": "true",
