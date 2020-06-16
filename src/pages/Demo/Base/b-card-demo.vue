@@ -187,13 +187,8 @@
 
 <script>
 import BCard from "@/components/base/Bootstrap/Card/b-card.vue";
-import BCardTitle from "@/components/base/Bootstrap/Card/b-card-title.vue";
-import BCardSubtitle from "@/components/base/Bootstrap/Card/b-card-subtitle.vue";
-import BCardText from "@/components/base/Bootstrap/Card/b-card-text.vue";
 import BCardLink from "@/components/base/Bootstrap/Card/b-card-link.vue";
-import BCardGroup from "@/components/base/Bootstrap/Card/b-card-group.vue";
-import BCardDeck from "@/components/base/Bootstrap/Card/b-card-deck.vue";
-import BCardColumns from "@/components/base/Bootstrap/Card/b-card-columns.vue";
+import '@/components/base/Bootstrap/Card/b-card-sub-components.js'
 
 import BNav from "@/components/base/Bootstrap/Navigation/Nav/b-nav.vue";
 import BList from "@/components/base/Bootstrap/List/b-list.vue";
@@ -202,15 +197,9 @@ export default {
   name: "b-card-demo",
   components: {
     BCard,
-    BCardTitle,
-    BCardSubtitle,
-    BCardText,
     BCardLink,
-    BCardGroup,
-    BCardDeck,
-    BCardColumns,
     BNav,
-    BList
+    BList,
   },
   data() {
     return {
@@ -226,6 +215,6 @@ export default {
         { text: "disabled", disabled: true }
       ]
     };
-  }
+  },
 };
 </script>

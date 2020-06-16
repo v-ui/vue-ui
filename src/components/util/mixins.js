@@ -165,27 +165,6 @@ export default {
       },
     }, // readonly
   }, // form
-  loading: {
-    props: {
-      color: {
-        ...props.textColor,
-        default: 'body',
-      },
-      status: {
-        type: String,
-        default: 'border',
-        validator: value => ['border', 'grow'].includes(value),
-      },
-      size: props.size,
-    },
-    computed: {
-      objClass: function () {
-        let color = this.color ? `text-${this.color}` : ''
-        let size = this.size ? `spinner-border-${this.size}` : ''
-        return `spinner-${this.status} ${color} ${size}`
-      },
-    },
-  }, // loading
   grid: {
     thead: {
       data() {

@@ -72,9 +72,7 @@ export default {
   props: {
     id: {
       type: String,
-      default: function() {
-        return tools.random.getRandomString();
-      }
+      default: () => tools.random.getRandomString(),
     },
     set: {
       type: String,

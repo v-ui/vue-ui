@@ -121,7 +121,7 @@
             hideNull
           />条&nbsp;&nbsp;
           <b-pagination start="1" :end="pageCount" v-model.number="pageNumber">
-            <b-number />
+            <b-number v-model.number="pageNumber" />
             <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
           </b-pagination>
         </font>
