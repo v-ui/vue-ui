@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import BButton from "@/components/base/Bootstrap/Form/Button/b-button.vue";
+import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
   name: "b-tooltip-demo",

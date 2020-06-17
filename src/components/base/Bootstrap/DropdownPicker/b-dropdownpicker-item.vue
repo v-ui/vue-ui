@@ -12,7 +12,7 @@
 <script>
 import util from "@/components/util/index.js";
 
-import BButton from "@/components/base/Bootstrap/Form/Button/b-button.vue";
+import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
   name: "b-dropdownpicker-item",

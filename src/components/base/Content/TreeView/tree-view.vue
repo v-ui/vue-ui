@@ -33,7 +33,7 @@ import util from "@/components/util/index.js";
 
 import CTree from "./Tree/c-tree";
 import BButtonGroup from "@/components/base/Bootstrap/ButtonGroup/b-button-group.vue";
-import BButton from "@/components/base/Bootstrap/Form/Button/b-button.vue";
+import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
   name: "tree-view",

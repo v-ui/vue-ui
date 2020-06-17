@@ -40,7 +40,7 @@ import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 import tranDrop from "@/components/transition/tran-drop.vue";
-import BButton from "@/components/base/Bootstrap/Form/Button/b-button.vue";
+import BButton from "@/components/Basic/Button/basic-button.vue";
 
 import BInfo from "@/components/Basic/basic-info.vue";
 
