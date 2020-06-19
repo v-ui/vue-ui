@@ -129,7 +129,7 @@ export default {
   Boolean: { type: Boolean, default: false, validator: value => type.validBoolean(value) },
   Array: { type: Array, default: () => [], validator: value => type.validArray(value) },
   Object: { type: Object, default: () => ({}), validator: value => type.validObject(value) },
-  Function: { type: Function, default: null, validator: value => type.validFunction(value) },
+  Function: { type: Function, validator: value => type.validFunction(value) },
   // RegExp: { type: [String, Number, RegExp], default: () => new RegExp(), validator: value => type.validRegExp(value) },
 }
 

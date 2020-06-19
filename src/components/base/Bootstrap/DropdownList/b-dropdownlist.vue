@@ -2,7 +2,7 @@
   <div class="form-group">
     <dropdown-picker
       ref="dropdownlist"
-      class="form-control p-0"
+      class="p-0"
       :class="[cClass, readonlyClass]"
       menu-width
       :show="show"

@@ -2,8 +2,8 @@
   <div class="form-group">
     <drop
       ref="dropdownlist"
-      class="form-control p-0"
-      :class="[cClass, readonlyClass]"
+      class="p-0"
+      ::class="[cClass, readonlyClass]"
       menu-width
       :scroll="scroll"
       :trigger="trigger"

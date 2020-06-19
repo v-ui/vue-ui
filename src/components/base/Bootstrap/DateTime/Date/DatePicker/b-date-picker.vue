@@ -1,6 +1,5 @@
 <template>
   <dropdown-picker
-    class="form-control"
     :class="[cClass, readonlyClass]"
     :placeholder="fillPlaceholder"
     :value="showValue"

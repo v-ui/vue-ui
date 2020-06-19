@@ -3,7 +3,6 @@
     <input
       ref="text"
       :type="cImputType"
-      class="form-control"
       :class="[cClass, readonlyClass]"
       :style="cStyle"
       :size="Number(length)"
@@ -45,7 +44,7 @@ export default {
   mixins: [
     util.mixins.form.base,
     util.mixins.form.readonly,
-    util.mixins.form.validator
+    util.mixins.form.validator,
   ],
   inheritAttrs: false,
   props: {
@@ -70,6 +69,7 @@ export default {
     placeholder: util.props.String,
     length: util.props.UInt,
     icon: util.props.String,
+    readonly: util.props.Boolean,
     hideIcon: util.props.Boolean,
     info: util.props.String,
   },

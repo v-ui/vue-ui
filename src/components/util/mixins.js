@@ -54,7 +54,7 @@ export default {
       filters: { ...filters },
       props: {
         value: {
-          ...props.value,
+          ...props.String,
           default: `Button`,
         },
         color: props.color,
@@ -169,12 +169,12 @@ export default {
     }, // validator
     readonly: {
       props: {
-        readonly: props.readonly,
-        disabled: props.disabled,
+        readonly: props.Boolean,
+        disabled: props.Boolean,
       },
       computed: {
         readonlyClass: function () {
-          return this.readonly ? 'form-control-plaintext' : ''
+          return this.readonly ? 'form-control-plaintext' : 'form-control'
         },
       },
     }, // readonly

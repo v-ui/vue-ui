@@ -1,7 +1,6 @@
 <template>
   <div>
     <textarea
-      class="form-control"
       :class="[cClass, readonlyClass]"
       :style="cStyle"
       :rows="Number(rows)"
