@@ -61,12 +61,12 @@
             <b-select class="col-5" :list="list" required multiple></b-select>
         </div>
         <div class="row">
-            <font class="col-1">success<br />error:</font>
+            <font class="col-1">success<br>error:</font>
             <b-select class="col-5" :list="list" invalidInfo="error" validInfo="success" required></b-select>
             <b-select class="col-5" :list="list" invalidInfo="error" validInfo="success" required multiple></b-select>
         </div>
         <div class="row">
-            <font class="col-1">success<br />error(2):</font>
+            <font class="col-1">success<br>error(2):</font>
             <b-select class="col-5" :list="list" required>
                 <template #invalid>
                     you can add anlything invalidInfo or DOM
@@ -124,7 +124,7 @@ export default {
                 {value: 'option3', text: 'option3'},
                 {value: 'disabled option', text: 'disabled option', disabled: true},
             ],
-            
+
             value: 'option1',
             value1: ['option1', 'option2'],
             value2: 'option1-1',

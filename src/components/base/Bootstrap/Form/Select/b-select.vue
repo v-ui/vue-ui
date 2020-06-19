@@ -2,7 +2,7 @@
   <div class="form-group my-0">
     <select
       class="custom-select"
-      :class="[objClass, sizeClass]"
+      :class="[cClass, sizeClass]"
       :size="row"
       :multiple="multiple"
       :disabled="disabled"

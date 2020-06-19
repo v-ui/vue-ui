@@ -23,7 +23,7 @@
             <b-switch class="col-11" text="switch text" info="info text"></b-switch>
         </div>
         <div class="row">
-            <font class="col-1">v-model<br />{{ checked }}:</font>
+            <font class="col-1">v-model<br>{{ checked }}:</font>
             <b-switch class="col-11" text="switch text" v-model="checked"></b-switch>
         </div>
     </div>

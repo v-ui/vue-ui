@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>v-tip('tooltip', 'popover')</h2>
-    <hr />
+    <br>
     <div class="row py-1">
       <font class="col-1">default:</font>
       <b-button class="col-auto" v-tip>nothing</b-button>

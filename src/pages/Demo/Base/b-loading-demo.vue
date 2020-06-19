@@ -8,7 +8,7 @@
         </div>
         <div class="row py-1">
             <font class="col-1">status:</font>
-            <font class="col-1">border<br />(default):</font>
+            <font class="col-1">border<br>(default):</font>
             <b-loading status='border'></b-loading>
             <font class="col-1">grow:</font>
             <b-loading status='grow'></b-loading>

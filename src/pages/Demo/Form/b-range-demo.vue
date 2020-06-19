@@ -27,15 +27,15 @@
             <b-range class="col-11" disabled></b-range>
         </div>
         <div class="row">
-            <font class="col-1">min-value<br />max-value:</font>
+            <font class="col-1">min-value<br>max-value:</font>
             <b-range class="col-11" min-value="min value" max-value="max value"></b-range>
         </div>
         <div class="row">
-            <font class="col-1">min<br />max<br />step:</font>
+            <font class="col-1">min<br>max<br>step:</font>
             <b-range class="col-11" min="-10" max="10" step="5"></b-range>
         </div>
         <div class="row">
-            <font class="col-1">v-model<br />{{ value }}:</font>
+            <font class="col-1">v-model<br>{{ value }}:</font>
             <b-range class="col-11" v-model.number="value"></b-range>
         </div>
     </div>

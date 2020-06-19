@@ -23,7 +23,7 @@
             <b-list class="col-11" :list="list4" inline></b-list>
         </div>
         <div class="row py-1">
-            <font class="col-1">inline<br />fill:</font>
+            <font class="col-1">inline<br>fill:</font>
             <b-list class="col-11" :list="list4" inline fill></b-list>
         </div>
         <div class="row py-1">

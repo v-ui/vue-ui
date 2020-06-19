@@ -2,8 +2,8 @@
   <div>
     <textarea
       class="form-control"
-      :class="[objClass, readonlyClass]"
-      :style="objStyle"
+      :class="[cClass, readonlyClass]"
+      :style="cStyle"
       :rows="Number(rows)"
       :cols="Number(cols)"
       :readonly="readonly"
@@ -60,7 +60,7 @@ export default {
     };
   },
   computed: {
-    objStyle: function() {
+    cStyle: function() {
       return this.resize ? "" : "resize: none";
     }
   },

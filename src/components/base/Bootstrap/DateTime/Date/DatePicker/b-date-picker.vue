@@ -1,7 +1,7 @@
 <template>
   <dropdown-picker
     class="form-control"
-    :class="[objClass, readonlyClass]"
+    :class="[cClass, readonlyClass]"
     :placeholder="fillPlaceholder"
     :value="showValue"
     :info="message"

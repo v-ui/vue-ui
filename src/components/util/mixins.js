@@ -13,7 +13,7 @@ export default {
       props: {
         color: {
           ...props.color,
-          default: 'transparent',
+          default: null,
         },
         textColor: props.textColor,
         textAlign: props.setX,
@@ -22,13 +22,15 @@ export default {
           ...props.Boolean,
           default: true,
         },
-        tempClass: props.String,
       },
       computed: {
-        objClass: function () {
+        cClass: function () {
             let size = this.size ? `form-control-${this.size}` : ''
             let border = !this.border ? 'border-0' : ''
-            return `${this.tempClass} bg-${this.color} text-${this.textColor} ${size} ${border} text-${this.textAlign}`
+            let color = this.color ? `bg-${this.color}` : ''
+            let textColor = this.textColor ? `text-${this.textColor}` : ''
+            let textAlign = this.textAlign ? `text-${this.textAlign}` : ''
+            return `${color} ${textColor} ${size} ${border} ${textAlign}`
         },
         inputListeners: function () {
           var vm = this
@@ -93,6 +95,7 @@ export default {
         validInfo: props.String,
         invalidInfo: props.String,
         unvalid: props.Boolean,
+        valid: props.Function,
       },
       methods: {
         validator: function (e, regex = this.pattern) {
@@ -109,7 +112,10 @@ export default {
           if (!this.validateLength(value)) { tools.dom.addClass(e.target, 'is-invalid'); return }
           // 正则校验（传入字符串长度为 0、无正则表达式 不做校验直接返回 true，验证通过返回 true）
           if (!this.validateRange(value, regex)) { tools.dom.addClass(e.target, 'is-invalid'); return }
-          tools.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
+          // 自定义验证（用户自定义验证函数，验证通过返回 true）
+          if (!this.validateCustomize(value, this.valid)) { tools.dom.addClass(e.target, 'is-invalid'); return }
+          // 移除可能的 is-invalid
+          tools.dom.removeClass(e.target, 'is-invalid')
           // 当存在 valid slot 或 validInfo 时
           if (this.$slots.valid || this.validInfo) tools.dom.addClass(e.target, 'is-valid')
           this.$emit('valid')
@@ -151,6 +157,10 @@ export default {
           }
           return true
         },
+        // 自定义验证（用户自定义验证函数，验证通过返回 true）
+        validateCustomize: function (value, valid) {
+          return valid(value)
+        }
       },
     }, // validator
     readonly: {
