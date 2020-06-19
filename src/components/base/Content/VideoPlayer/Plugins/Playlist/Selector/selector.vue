@@ -21,7 +21,7 @@
 import util from "@/components/util/index.js";
 
 import BList from "@/components/base/Bootstrap/List/b-list.vue";
-import BButton from "@/components/base/Bootstrap/Form/Button/b-button.vue";
+import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
   name: "c-video-selector",

@@ -46,7 +46,7 @@
 <script>
 import util from "@/components/util/index.js";
 
-import BButton from "@/components/base/Bootstrap/Button/b-button.vue";
+import BButton from "@/components/Basic/Button/basic-button.vue";
 import BText from "./b-text";
 export default {
   name: "b-number",

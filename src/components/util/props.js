@@ -34,7 +34,7 @@ export default {
     default: 'primary',
     validator: (value) => {
       // 这个值必须匹配下列字符串中的一个
-      return v.base.color.bg.includes(value)
+      return v.base.color.bg.includes(value) || value === null
     }
   },
   textColor: {

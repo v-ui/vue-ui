@@ -14,7 +14,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "b-submit",
+  name: "basic-submit",
   mixins: [util.mixins.form.btn],
   props: {
     value: {

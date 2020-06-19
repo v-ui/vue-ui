@@ -2,7 +2,7 @@
     <div class="Form">
         <h2>b-number</h2>
         <hr>
-        
+
         <div class="row">
             <font class="col-1">int:</font>
             <b-number class="col-11"></b-number>
@@ -48,15 +48,15 @@
             <b-number class="col-11" prompt></b-number>
         </div>
         <div class="row">
-            <font class="col-1">info<br/>prompt:</font>
+            <font class="col-1">info<br>prompt:</font>
             <b-number class="col-11" info="info text" step="0.1" prompt></b-number>
         </div>
         <div class="row">
-            <font class="col-1">v-model:<br />({{ number }})</font>
+            <font class="col-1">v-model:<br>({{ number }})</font>
             <b-number class="col-11" v-model.number="number" ></b-number>
         </div>
         <div class="row">
-            <font class="col-1">min<br />max:</font>
+            <font class="col-1">min<br>max:</font>
             <b-number class="col-11" min="5" max="10" placeholder="只能输入 5-10 之间的数" ></b-number>
         </div>
     </div>

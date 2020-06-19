@@ -21,7 +21,7 @@
         <slot />
         <footer v-show="showFooter" class="text-right">
           <hr>
-          <base-button
+          <b-button
             outline
             value="确 定"
             :disabled="disabled || !canHide"
@@ -40,13 +40,13 @@ import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 import tranDrop from "@/components/transition/tran-drop.vue";
-import BaseButton from "@/components/base/Bootstrap/Button/b-button.vue";
+import BButton from "@/components/Basic/Button/basic-button.vue";
 
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
   name: "b-dropdownpicker",
-  components: { tranDrop, BaseButton, BInfo },
+  components: { tranDrop, BButton, BInfo },
   props: {
     id: {
       type: String,

@@ -72,9 +72,9 @@
 [Bootstrap Scrollspy]:                      https://getbootstrap.com/docs/4.3/components/scrollspy/
 [box-tabs]:                                 ../src/components/Box/Tabs
 [base-a]:                                   ../src/components/base/BaseA
-[b-button]:                                 .../src/components/base/Bootstrap/Form/Button
-[b-reset]:                                  .../src/components/base/Bootstrap/Form/Button
-[b-submit]:                                 .../src/components/base/Bootstrap/Form/Button
+[basic-button]:                             .../src/components/basic/Button
+[basic-reset]:                              .../src/components/basic/Button
+[basic-submit]:                             .../src/components/basic/Button
 [b-button-group]:                           https://getbootstrap.com/docs/4.3/components/button-group/
 [lang-select]:                              ../src/components/system/LangSelect
 [theme-select]:                             ../src/components/system/ThemeSelect
@@ -186,7 +186,7 @@
 
 2019-09-23
 
-* view 组件 add [b-button] [b-reset] [b-submit] [b-button-demo]
+* view 组件 add [basic-button] [basic-reset] [basic-submit] [b-button-demo]
 
 2019-09-22
 

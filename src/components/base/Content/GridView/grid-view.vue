@@ -177,7 +177,7 @@ import util from "@/components/util/index.js";
 
 import CTable from "@/components/base/Content/Table/c-table.vue";
 
-import BButton from "@/components/base/Bootstrap/Form/Button/b-button.vue";
+import BButton from "@/components/Basic/Button/basic-button.vue";
 import BButtonGroup from "@/components/base/Bootstrap/ButtonGroup/b-button-group.vue";
 import BButtonToolbar from "@/components/base/Bootstrap/ButtonGroup/b-btn-toolbar.vue";
 import BDropdown from "@/components/base/Bootstrap/Dropdown/b-dropdown.vue";

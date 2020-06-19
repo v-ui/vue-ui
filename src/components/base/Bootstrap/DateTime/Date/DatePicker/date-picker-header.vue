@@ -1,30 +1,36 @@
 <template>
   <header>
     <font class="row text-center mx-1">
-      <base-button
+      <b-button
         class="col font-weight-bold border-0 bg-white text-body h5"
         style="height: 2.5em"
         :value="hearderText"
         @click.stop="$emit('clickHeader')"
       />
-      <base-button
-        class="fas fa-angle-left border-0 bg-white text-muted"
+      <b-button
+        class="border-0 bg-white text-body"
         style="height: 2.5em"
         :disabled="disabled"
         @click.stop="$emit('forward')"
-      />
-      <base-button
-        class="fas fa-circle border-0 bg-white text-muted"
+      >
+        <i class="fas fa-angle-left" />
+      </b-button>
+      <b-button
+        class="border-0 bg-white text-body"
         style="height: 2.5em"
         :disabled="disabled || nowDisabled"
         @click.stop="$emit('checknow')"
-      />
-      <base-button
-        class="fas fa-angle-right border-0 bg-white text-muted"
+      >
+        <i class="fas fa-circle" />
+      </b-button>
+      <b-button
+        class="border-0 bg-white text-body"
         style="height: 2.5em"
         :disabled="disabled"
         @click.stop="$emit('backward')"
-      />
+      >
+        <i class="fas fa-angle-right" />
+      </b-button>
     </font>
   </header>
 </template>
@@ -32,11 +38,11 @@
 <script>
 import util from "@/components/util/index.js";
 
-import baseButton from "@/components/base/Bootstrap/Button/b-button.vue";
+import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
   name: "date-picker-header",
-  components: { baseButton },
+  components: { BButton },
   props: {
     hearderText: util.props.String,
     disabled: util.props.Boolean,

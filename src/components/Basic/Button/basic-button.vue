@@ -35,7 +35,7 @@ import BaseA from "@/components/base/Content/A/c-a.vue";
 import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 export default {
-  name: "b-button",
+  name: "basic-button",
   components: { BaseA, srMsg },
   mixins: [util.mixins.form.btn]
 };

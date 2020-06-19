@@ -3,7 +3,7 @@
     <dropdown-picker
       ref="dropdownlist"
       class="form-control p-0"
-      :class="[objClass, readonlyClass]"
+      :class="[cClass, readonlyClass]"
       menu-width
       :show="show"
       :value="trigger"

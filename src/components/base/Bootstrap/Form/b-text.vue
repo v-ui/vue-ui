@@ -2,19 +2,19 @@
   <div>
     <input
       ref="text"
-      :type="imputType"
+      :type="cImputType"
       class="form-control"
-      :class="[objClass, readonlyClass, { 'h-100': !info}]"
-      :style="objstyle"
+      :class="[cClass, readonlyClass]"
+      :style="cStyle"
       :size="Number(length)"
       :readonly="readonly"
       :aria-readonly="readonly"
       :disabled="disabled"
       :aria-disabled="disabled"
-      :placeholder="fillPlaceholder"
+      :placeholder="cPlaceholder"
       v-bind="$attrs"
       v-on="inputListeners"
-      @blur="validator($event, regex)"
+      @blur="validator($event, cRegex)"
     >
     <b-valid v-if="$slots.valid || validInfo" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
@@ -24,10 +24,10 @@
     </b-valid>
     <b-info :info="info" />
     <i
-      v-if="!hideIcon && fillIcon"
+      v-if="!hideIcon && cIcon"
       class="text-muted text-center position-absolute"
-      :class="fillIcon"
-      style="top: 0.7em;left:1.5em; width:1em;"
+      :class="cIcon"
+      style="top: 0.7em; left:1.5em; width: 1em;"
     />
   </div>
 </template>
@@ -69,36 +69,35 @@ export default {
     },
     placeholder: util.props.String,
     length: util.props.UInt,
-    info: util.props.String,
     icon: util.props.String,
     hideIcon: util.props.Boolean,
-    prompt: util.props.Boolean
+    info: util.props.String,
   },
   computed: {
-    imputType: function() {
+    cImputType: function() {
       if (this.type == "phone") return "tel";
       if (this.type == "ip") return "text";
       return this.type;
     },
-    fillPlaceholder: function() {
+    cPlaceholder: function() {
       const o = Object.getOwnPropertyDescriptor(
         config.ui.forms.placeholder,
         this.type
       );
-      return this.placeholder ? this.placeholder : (o && o.value) || null;
+      return this.placeholder || (o && o.value) || null;
     },
-    fillIcon: function() {
+    cIcon: function() {
       if (["number"].includes(this.type)) return;
       const o = Object.getOwnPropertyDescriptor(config.ui.icon, this.type);
-      return this.icon ? this.icon : (o && o.value) || null;
+      return this.icon || (o && o.value) || null;
     },
-    objstyle: function() {
+    cStyle: function() {
       let o = {};
-      if (!this.hideIcon && this.fillIcon)
+      if (!this.hideIcon && this.cIcon)
         Object.assign(o, { "padding-left": "2em" });
       return o;
     },
-    regex: function() {
+    cRegex: function() {
       if (["number"].includes(this.type)) return null;
       const o = Object.getOwnPropertyDescriptor(config.regex, this.type);
       return this.pattern

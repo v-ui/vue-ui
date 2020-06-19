@@ -1,22 +1,22 @@
 <template>
-  <base-button
+  <b-button
     class="rounded-pill text-monospace bg-white my-1"
     :class="objClass"
     :value="value"
     :disabled="disabled"
     style="min-width: 3em"
     @click.stop="$emit('click', value)"
-  >{{ text }}</base-button>
+  >{{ text }}</b-button>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
 
-import BaseButton from "@/components/base/Bootstrap/Button/b-button.vue";
+import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
   name: "b-dropdownpicker-item",
-  components: { BaseButton },
+  components: { BButton },
   props: {
     value: util.props.String,
     text: util.props.String,

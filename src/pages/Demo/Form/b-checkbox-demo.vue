@@ -46,7 +46,7 @@
             <b-checkbox class="col-11" label="label text" info="a checkbox help info" inline></b-checkbox>
         </div>
         <div class="row">
-            <font class="col-1">v-model:<br />({{ checked }})</font>
+            <font class="col-1">v-model:<br>({{ checked }})</font>
             <b-checkbox class="col-auto" v-model="checked" value="one" label="one" name="v-model-checkbox"></b-checkbox>
         </div>
         <div class="row">
@@ -54,11 +54,11 @@
             <b-checkbox class="col-11" label="required checkbox" required></b-checkbox>
         </div>
         <div class="row">
-            <font class="col-1">success<br />error:</font>
+            <font class="col-1">success<br>error:</font>
             <b-checkbox class="col-11" label="required checkbox" invalidInfo="error" validInfo="success" required></b-checkbox>
         </div>
         <div class="row">
-            <font class="col-1">success<br />error(2):</font>
+            <font class="col-1">success<br>error(2):</font>
             <b-checkbox class="col-11" label="required checkbox" required>
                 <template #invalid>
                     you can add anlything invalidInfo or DOM
@@ -91,7 +91,7 @@
             <b-checkbox-group class="col-11" :list="list" :values="values" info="checkbox group info" inline></b-checkbox-group>
         </div>
         <div class="row">
-            <font class="col-1">v-model:<br/>({{values}})</font>
+            <font class="col-1">v-model:<br>({{values}})</font>
             <b-checkbox-group class="col-11" :list="list" name="checkbox-v-model" v-model="values" inline></b-checkbox-group>
         </div>
         <div class="row">
@@ -99,11 +99,11 @@
             <b-checkbox-group class="col-11" :list="list" name="group-required" required></b-checkbox-group>
         </div>
         <div class="row">
-            <font class="col-1">success<br />error:</font>
+            <font class="col-1">success<br>error:</font>
             <b-checkbox-group class="col-11" :list="list" name="group-valide-one" required invalidInfo="error" validInfo="success"></b-checkbox-group>
         </div>
         <div class="row">
-            <font class="col-1">success<br />error(2):</font>
+            <font class="col-1">success<br>error(2):</font>
             <b-checkbox-group class="col-11" :list="list" name="group-valide-two" required>
                 <template #invalid>
                     you can add anlything invalidInfo or DOM

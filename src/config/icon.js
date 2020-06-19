@@ -38,6 +38,7 @@ export default {
     sms: 'fas fa-sms', // a sms
     tel: 'fas fa-phone', // form b-text input tel, a tel
     url: 'fas fa-link', // form b-text input url, a link
+    password: 'fas fa-lock',
     list: 'fas fa-list',
     thList: 'fas fa-th-list',
     listAlt: 'fas fa-list-alt',

@@ -3,7 +3,7 @@
     <drop
       ref="dropdownlist"
       class="form-control p-0"
-      :class="[objClass, readonlyClass]"
+      :class="[cClass, readonlyClass]"
       menu-width
       :scroll="scroll"
       :trigger="trigger"

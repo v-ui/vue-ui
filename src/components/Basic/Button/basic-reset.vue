@@ -14,7 +14,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "b-reset",
+  name: "basic-reset",
   mixins: [util.mixins.form.btn],
   props: {
     value: {

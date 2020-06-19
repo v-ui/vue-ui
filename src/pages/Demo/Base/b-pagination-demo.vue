@@ -11,7 +11,7 @@
             <b-pag class="col-11" end="25" active="10"></b-pag>
         </div>
         <div class="row py-1">
-            <font class="col-1">v-model<br/>{{value}}:</font>
+            <font class="col-1">v-model<br>{{value}}:</font>
             <b-pag class="col-11" end="25" v-model="value"></b-pag>
         </div>
     </div>

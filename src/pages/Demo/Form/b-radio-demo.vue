@@ -41,7 +41,7 @@
             <b-radio class="col-11" label="label text" info="a radio help info"></b-radio>
         </div>
         <div class="row">
-            <font class="col-1">v-model:<br />({{ checked }})</font>
+            <font class="col-1">v-model:<br>({{ checked }})</font>
             <b-radio class="col-auto" v-model="checked" value="one" label="one" name="v-model-radio"></b-radio>
             <b-radio class="col-auto" v-model="checked" value="two" label="two" name="v-model-radio"></b-radio>
         </div>
@@ -69,7 +69,7 @@
             <b-radio-group class="col-11" :list="list" name="group-info" info="info message" inline></b-radio-group>
         </div>
         <div class="row">
-            <font class="col-1">v-model:<br/>({{value}})</font>
+            <font class="col-1">v-model:<br>({{value}})</font>
             <b-radio-group class="col-11" :list="list" name="group-v-model" v-model="value" inline></b-radio-group>
         </div>
         <div class="row">
@@ -77,11 +77,11 @@
             <b-radio-group class="col-11" :list="list" name="group-required" required></b-radio-group>
         </div>
         <div class="row">
-            <font class="col-1">success<br />error:</font>
+            <font class="col-1">success<br>error:</font>
             <b-radio-group class="col-11" :list="list" name="group-valide-one" required invalidInfo="error" validInfo="success"></b-radio-group>
         </div>
         <div class="row">
-            <font class="col-1">success<br />error(2):</font>
+            <font class="col-1">success<br>error(2):</font>
             <b-radio-group class="col-11" :list="list" name="group-valide-two" required>
                 <template #invalid>
                     you can add anlything invalidInfo or DOM
@@ -111,7 +111,7 @@
             <b-radio-button-group name="info-button-group" :list="buttongrouplist" info="button group info"></b-radio-button-group>
         </div>
         <div class="row">
-            <font class="col-1">v-model:<br/>({{buttongroupvalue}})</font>
+            <font class="col-1">v-model:<br>({{buttongroupvalue}})</font>
             <b-radio-button-group name="v-model-button-group" :list="buttongrouplist" v-model="buttongroupvalue"></b-radio-button-group>
         </div> -->
     </div>
