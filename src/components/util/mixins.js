@@ -159,7 +159,11 @@ export default {
         },
         // 自定义验证（用户自定义验证函数，验证通过返回 true）
         validateCustomize: function (value, valid) {
-          return valid(value)
+          if (!valid(value)) {
+            this.$emit('invalid', 'valid')
+            return false
+          }
+          return true
         }
       },
     }, // validator
