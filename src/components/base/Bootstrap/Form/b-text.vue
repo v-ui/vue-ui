@@ -13,7 +13,7 @@
       :placeholder="cPlaceholder"
       v-bind="$attrs"
       v-on="inputListeners"
-      @blur="validator($event, cRegex)"
+      @blur="validator($event, null, cRegex)"
     >
     <b-valid v-if="$slots.valid || validInfo" state="valid">
       <slot name="valid">{{ validInfo }}</slot>

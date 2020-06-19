@@ -98,12 +98,14 @@ export default {
         valid: props.Function,
       },
       methods: {
-        validator: function (e, regex = this.pattern) {
+        validator: function (e, data, regex = this.pattern) {
           if (this.unvalid) return // 不做验证
           if (this.readonly) return // readonly 时不校验
           if (this.disabled) return // disabled 时不校验
           // 验证函数不会对传入的数据进行处理
-          const value = e.target ? e.target.value.trim() : e.value.trim()
+          const dataValue = data && data.trim && data.trim()
+          const targetValue = e.target ? e.target.value.trim() : e.value.trim()
+          const value = dataValue || targetValue
           // 移除可能的 is-valid
           tools.dom.removeClass(e.target, 'is-valid')
           // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
@@ -134,7 +136,7 @@ export default {
           let minlength = Number(this.minlength) || 0
           let maxlength = Number(this.maxlength) || 0
           // 传入字符串长度为 0、minlength 小于 0、minlength 大于 maxlength 不做校验直接返回 true
-          if (value.length == 0 || minlength < 0 || minlength >= maxlength) return true
+          if (value.length === 0 || minlength < 0 || minlength >= maxlength) return true
           const length = tools.string.codePointLength(value)
           if (length < minlength) {
             this.$emit('invalid', 'short')
@@ -149,7 +151,7 @@ export default {
         // 正则校验（验证通过返回 true）
         validateRange: function (value, regex) {
           // 传入字符串长度为 0、无正则表达式 不做校验直接返回 true
-          if (value.length == 0 || !regex) return true
+          if (value.length === 0 || !regex) return true
           var patternRegex = new RegExp(regex);
           if (!value.match(patternRegex)) {
             this.$emit('invalid', 'regex')
@@ -159,6 +161,8 @@ export default {
         },
         // 自定义验证（用户自定义验证函数，验证通过返回 true）
         validateCustomize: function (value, valid) {
+          // 传入的字符串为空，无自定义验证函数，不做校验直接返回 true
+          if (value.length === 0 || !valid) return true
           if (!valid(value)) {
             this.$emit('invalid', 'valid')
             return false

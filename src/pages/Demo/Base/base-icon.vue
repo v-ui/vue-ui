@@ -2,7 +2,7 @@
   <div class="mx-2">
     <h2>Icon</h2>参考链接：
     <base-a class="px-1" href="https://fontawesome.com" text="fontawesome"></base-a>
-    <hr />
+    <hr>
     <div class="row">
       <div
         v-for="(value, key) in icon"

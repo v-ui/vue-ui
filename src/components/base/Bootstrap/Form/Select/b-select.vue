@@ -1,7 +1,7 @@
 <template>
   <div class="form-group my-0">
     <select
-      class="custom-select"
+      class="form-control"
       :class="[cClass, sizeClass]"
       :size="row"
       :multiple="multiple"
@@ -10,7 +10,7 @@
       v-bind="$attrs"
       v-on="inputListeners"
       @change.stop="change"
-      @blur.stop="validator"
+      @blur="validator($event, isSelectedValue);"
     >
       <slot>
         <option
@@ -26,16 +26,6 @@
           :multiple="multiple"
           :is-selected-value="isSelectedValue"
         />
-        <!-- <option
-                    v-for="item in list"
-                    :key="item.value"
-                    :value="item.value"
-                    :selected="isSelected(item.value)"
-                    :aria-selected="isSelected(item.value)"
-                    :disabled="item.disabled"
-                    :aria-disabled="item.disabled" >
-                    {{ item.text || item.value }}
-        </option>-->
       </slot>
     </select>
     <b-valid v-if="validInfo || $slots.valid" state="valid">
@@ -49,7 +39,6 @@
 </template>
 
 <script>
-import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BSelectOption from "./b-select-option.vue";
@@ -91,7 +80,7 @@ export default {
   },
   computed: {
     sizeClass: function() {
-      return this.size ? `custom-select-${this.size}` : "";
+      return this.size ? `form-select-${this.size}` : "";
     },
     inputListeners: function() {
       var vm = this;
@@ -111,6 +100,11 @@ export default {
       );
     }
   },
+  watch: {
+    value: function() {
+      this.isSelectedValue = this.value;
+    }
+  },
   methods: {
     isSelected: function(val) {
       return this.multiple
@@ -123,28 +117,10 @@ export default {
             .call(event.target.options, o => o.selected && o.value)
             .map(o => ("_value" in o ? o._value : o.value))
         : event.target.value;
-      this.validator(event);
+      this.validator(event, this.isSelectedValue);
     },
-    validator: function(e) {
-      if (this.disabled) return; // disabled 时不校验
-      tools.dom.removeClass(e.target, "is-valid"); // 移除可能的 is-valid
-      // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
-      if (!this.validateRequired(this.isSelectedValue)) {
-        tools.dom.addClass(e.target, "is-invalid");
-        return;
-      }
-      tools.dom.removeClass(e.target, "is-invalid"); // 移除可能的 is-invalid
-      // 当存在 valid slot 或 validInfo 时
-      if (this.$slots.valid || this.validInfo)
-        tools.dom.addClass(e.target, "is-valid");
-      this.$emit("valid");
-    }
   },
-  watch: {
-    value: function() {
-      this.isSelectedValue = this.value;
-    }
-  }
+
 };
 </script>
 

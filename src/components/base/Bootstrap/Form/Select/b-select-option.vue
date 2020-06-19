@@ -6,8 +6,12 @@
     :aria-selected="isSelected(item.value || item)"
     :disabled="item.disabled"
     :aria-disabled="item.disabled"
-  >{{ item.text || item.value || item }}</option>
-  <optgroup v-else :label="item.label" :disabled="item.disabled" :aria-disabled="item.disabled">
+  >{{ item.label || item.value || item }}</option>
+  <optgroup
+    v-else
+    :label="item.label"
+    :disabled="item.disabled"
+    :aria-disabled="item.disabled">
     <b-select-option
       v-for="(child, index) in item.children"
       :key="index"

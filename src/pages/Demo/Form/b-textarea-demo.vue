@@ -86,9 +86,9 @@
         class="col-11"
         :valid="valid"
         placeholder="自定义校验函数"
-        invalidInfo="无输入或输入空格，验证失败"
-        validInfo="输入内容（除空格外），验证成功"
-        info="输入内容（除空格外），验证成功（这里是这么定义的，你可以自定义）"
+        invalidInfo="输入少于三个字符，验证成功，验证失败"
+        validInfo="输入大于两个字符，验证成功，验证成功"
+        info="输入大于两个字符，验证成功，验证成功（这里是这么定义的，你可以自定义）"
       />
     </div>
     <div class="row">
@@ -130,7 +130,7 @@ export default {
   },
   methods: {
     valid: function(value) {
-      return value.length > 0;
+      return value.length > 2;
     }
   }
 };
