@@ -5,7 +5,7 @@
         :id="item.id"
         :key="item.key ? item.key : (item.id ? item.id : index)"
         :color="color"
-        :label="item.label || item.value || item"
+        :label="item.label"
         unvalid
         :value="item.value || item"
         :valid-class="ValidClass"

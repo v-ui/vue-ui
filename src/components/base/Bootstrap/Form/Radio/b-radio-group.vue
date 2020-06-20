@@ -7,7 +7,7 @@
         v-bind="$attrs"
         :name="name"
         :value="item.value || item"
-        :label="item.label || item.value || item"
+        :label="item.label"
         :checked="value"
         :disabled="item.disabled || disabled"
         v-on="inputListeners"
