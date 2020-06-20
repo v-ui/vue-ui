@@ -31,8 +31,8 @@
     </div>
     <div class="row">
       <font class="col-1">info:</font>
-      <b-select class="col-5" :list="list" info="info text" />
-      <b-select class="col-5" :list="list" info="info text" multiple />
+      <b-select class="col-5" :list="list" info="info label" />
+      <b-select class="col-5" :list="list" info="info label" multiple />
     </div>
     <div class="row">
       <font class="col-1">row:</font>
@@ -120,40 +120,40 @@ export default {
   data() {
     return {
       list: [
-        { value: "option1", text: "option1" },
-        { value: "option2", text: "option2" },
-        { value: "disabled option", text: "disabled option", disabled: true }
+        { value: "option1", label: "label option1" },
+        { value: "option2", label: "label option2" },
+        { value: "disabled option", label: "disabled label option", disabled: true }
       ],
       list2: [
-        { value: "option1", text: "option1" },
-        { value: "option2", text: "option2" },
-        { value: "option3", text: "option3" },
-        { value: "option4", text: "option4" },
-        { value: "option5", text: "option5" },
-        { value: "option6", text: "option6" },
-        { value: "option7", text: "option7" },
-        { value: "disabled option", text: "disabled option", disabled: true }
+        { value: "option1", label: "label option1" },
+        { value: "option2", label: "label option2" },
+        { value: "option3", label: "label option3" },
+        { value: "option4", label: "label option4" },
+        { value: "option5", label: "label option5" },
+        { value: "option6", label: "label option6" },
+        { value: "option7", label: "label option7" },
+        { value: "disabled option", label: "disabled label option", disabled: true }
       ],
       list3: [
         {
           label: "option group 1",
           children: [
-            { value: "option1-1", text: "option1-1" },
-            { value: "option1-2", text: "option1-2" },
-            { value: "option1-3", text: "option1-3" }
+            { value: "option1-1", label: "label option1-1" },
+            { value: "option1-2", label: "label option1-2" },
+            { value: "option1-3", label: "label option1-3" }
           ]
         },
         {
           label: "option group 2",
           disabled: true,
           children: [
-            { value: "option2-1", text: "option2-1" },
-            { value: "option2-2", text: "option2-2" },
-            { value: "option2-3", text: "option2-3" }
+            { value: "option2-1", label: "label option2-1" },
+            { value: "option2-2", label: "label option2-2" },
+            { value: "option2-3", label: "label option2-3" }
           ]
         },
-        { value: "option3", text: "option3" },
-        { value: "disabled option", text: "disabled option", disabled: true }
+        { value: "option3", label: "label option3" },
+        { value: "disabled option", label: "disabled label option", disabled: true }
       ],
 
       value: "option1",

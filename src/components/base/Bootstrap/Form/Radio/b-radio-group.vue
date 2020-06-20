@@ -6,20 +6,18 @@
         :valid-class="ValidClass"
         v-bind="$attrs"
         :name="name"
-        :label="item.label"
-        :value="item.value"
+        :value="item.value || item"
+        :label="item.label || item.value || item"
         :checked="value"
         :disabled="item.disabled || disabled"
         v-on="inputListeners"
         @input="validator($event)"
       >
-        <template #valid v-if="list.length - 1 == index">
-          <b-valid key="valid" v-if="validInfo || $slots.valid" state="valid">
-            <slot name="valid">{{ validInfo }}</slot>
-          </b-valid>
-          <b-valid key="invalid" v-if="invalidInfo || $slots.invalid" state="invalid">
-            <slot name="invalid">{{ invalidInfo }}</slot>
-          </b-valid>
+        <template v-if="list.length - 1 == index" #valid>
+          <slot name="valid">{{ validInfo }}</slot>
+        </template>
+        <template v-if="list.length - 1 == index" #invalid>
+          <slot name="invalid">{{ invalidInfo }}</slot>
         </template>
       </redio>
     </template>
@@ -31,12 +29,11 @@
 import util from "@/components/util/index.js";
 
 import redio from "./b-radio";
-import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
   name: "b-radio-group",
-  components: { redio, BValid, BInfo },
+  components: { redio, BInfo },
   mixins: [util.mixins.form.base, util.mixins.form.validator],
   inheritAttrs: false,
   model: {

@@ -10,7 +10,6 @@
       v-bind="$attrs"
       v-on="inputListeners"
       @change.stop="change"
-      @blur="validator($event, isSelectedValue);"
     >
       <slot>
         <option
@@ -47,9 +46,9 @@ import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
   name: "b-select",
-  inheritAttrs: false,
-  mixins: [util.mixins.form.base, util.mixins.form.validator],
   components: { BSelectOption, BValid, BInfo },
+  mixins: [util.mixins.form.base, util.mixins.form.validator],
+  inheritAttrs: false,
   model: {
     prop: "value",
     event: "change"
@@ -95,6 +94,7 @@ export default {
           // 这里确保组件配合 `v-model` 的工作
           change: function() {
             vm.$emit("change", vm.isSelectedValue);
+            vm.validator(event, vm.isSelectedValue)
           }
         }
       );

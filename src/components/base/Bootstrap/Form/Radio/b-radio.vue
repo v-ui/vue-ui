@@ -6,16 +6,20 @@
       :class="ValidClass"
       :id="id"
       :value="value"
-      :checked="value ? checked == value : checked"
-      :aria-checked="value ? checked  == value : checked"
+      :checked="value ? checked === value : checked"
+      :aria-checked="value ? checked === value : checked"
       :disabled="disabled"
       :aria-disabled="disabled"
       v-bind="$attrs"
       v-on="inputListeners"
     >
     <label class="custom-control-label" :for="id">{{ label || value }}</label>
-    <font v-if="inline" />
-    <slot name="valid" />
+    <b-valid v-if="validInfo || $slots.valid" state="valid">
+      <slot name="valid">{{ validInfo }}</slot>
+    </b-valid>
+    <b-valid v-if="invalidInfo || $slots.invalid" state="invalid">
+      <slot name="invalid">{{ invalidInfo }}</slot>
+    </b-valid>
     <b-info :class="{ 'pl-1': inline }" :info="info" />
   </div>
 </template>
@@ -25,11 +29,13 @@ import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BInfo from "@/components/Basic/basic-info.vue";
+import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 
 export default {
   name: "b-radio",
+  components: { BInfo, BValid },
+  mixins: [util.mixins.form.base, util.mixins.form.validator],
   inheritAttrs: false,
-  components: { BInfo },
   model: {
     prop: "checked",
     event: "change"

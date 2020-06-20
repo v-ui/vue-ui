@@ -4,14 +4,14 @@
       <checkbox
         :id="item.id"
         :key="item.key ? item.key : (item.id ? item.id : index)"
-        v-bind="$attrs"
         :color="color"
-        :label="item.label"
+        :label="item.label || item.value || item"
         unvalid
-        :value="item.value"
+        :value="item.value || item"
         :valid-class="ValidClass"
         :checked="values.includes(item.value)"
         :disabled="item.disabled || disabled"
+        v-bind="$attrs"
         v-on="inputListeners"
         @input="getCheckedValues($event)"
       >
@@ -46,7 +46,7 @@ export default {
     list: util.props.Array,
     values: util.props.Array,
     info: util.props.String,
-    disabled: util.props.Boolean,
+    disabled: util.props.Boolean
   },
   data() {
     return {
@@ -67,6 +67,7 @@ export default {
           // 这里确保组件配合 `v-model` 的工作
           change: function() {
             vm.$emit("change", vm.values);
+            vm.validator(event);
           }
         }
       );
@@ -83,11 +84,15 @@ export default {
       this.validator();
     },
     validator: function() {
+      if (this.unvalid) return; // 不做验证
+      if (!this.required) return; // required false 时不校验
       if (this.disabled) return; // disabled 时不校验
-      if (!this.required) return;
+      // 移除可能的 is-valid
+      this.ValidClass = "";
       // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
       if (!this.values || this.values.length == 0) {
         this.ValidClass = "is-invalid";
+        this.$emit("invalid", "required");
         return;
       }
       this.ValidClass = ""; // 移除可能的 is-invalid

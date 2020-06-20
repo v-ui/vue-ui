@@ -25,12 +25,12 @@ export default {
       },
       computed: {
         cClass: function () {
-            let size = this.size ? `form-control-${this.size}` : ''
-            let border = !this.border ? 'border-0' : ''
-            let color = this.color ? `bg-${this.color}` : ''
-            let textColor = this.textColor ? `text-${this.textColor}` : ''
-            let textAlign = this.textAlign ? `text-${this.textAlign}` : ''
-            return `${color} ${textColor} ${size} ${border} ${textAlign}`
+          let size = this.size ? `form-control-${this.size}` : ''
+          let border = !this.border ? 'border-0' : ''
+          let color = this.color ? `bg-${this.color}` : ''
+          let textColor = this.textColor ? `text-${this.textColor}` : ''
+          let textAlign = this.textAlign ? `text-${this.textAlign}` : ''
+          return `${color} ${textColor} ${size} ${border} ${textAlign}`
         },
         inputListeners: function () {
           var vm = this
@@ -103,9 +103,9 @@ export default {
           if (this.readonly) return // readonly 时不校验
           if (this.disabled) return // disabled 时不校验
           // 验证函数不会对传入的数据进行处理
-          const dataValue = data && data.trim && data.trim()
+          const hasData = !tools.obj.type.isNull(data)
           const targetValue = e.target ? e.target.value.trim() : e.value.trim()
-          const value = dataValue || targetValue
+          const value = hasData ? ( data.trim ? data.trim() : data ) : targetValue
           // 移除可能的 is-valid
           tools.dom.removeClass(e.target, 'is-valid')
           // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
@@ -125,7 +125,20 @@ export default {
         // 非空验证（验证通过返回 true）
         validateRequired: function (value) {
           // required 为 false 不做校验直接返回 true
-          if (this.required && value.length == 0) {
+          if (!this.required) return true
+          if ((tools.obj.type.isString(value) || tools.obj.type.isArray(value)) && value.length === 0) {
+            this.$emit('invalid', 'required')
+            return false
+          }
+          if (tools.obj.type.isBoolean(value) && !value) {
+            this.$emit('invalid', 'required')
+            return false
+          }
+          return true
+        },
+        validateRequiredForCheckbox: function (checked) {
+          // required 为 false 不做校验直接返回 true
+          if (this.required && !checked) {
             this.$emit('invalid', 'required')
             return false
           }
