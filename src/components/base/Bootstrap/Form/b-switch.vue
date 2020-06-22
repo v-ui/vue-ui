@@ -9,7 +9,7 @@
       v-bind="$attrs"
       v-on="inputListeners"
     >
-    <label class="custom-control-label" :for="id">{{ text }}</label>
+    <label class="custom-control-label" :for="id">{{ label }}</label>
     <b-info :info="info" />
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
     event: "input"
   },
   props: {
-    text: util.props.String,
+    label: util.props.String,
     info: util.props.String,
     checked: util.props.Boolean,
     id: {
