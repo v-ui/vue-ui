@@ -88,7 +88,6 @@ export default {
     this.selectedValues = value
   },
   chekboxIschecked: function (value) {
-    debugger
     if (!this.isFolder) {
       if (value) this.selectedValues.push(this.item)
       else value.splic(this.selectedMap.indexOf(this.item[this.primaryKey]), 1)
