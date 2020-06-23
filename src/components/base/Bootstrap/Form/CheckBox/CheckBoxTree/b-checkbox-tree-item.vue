@@ -1,37 +1,32 @@
 <template>
   <div>
-    <div class="d-table-row" @click.stop="open = !open">
-      <div class="d-table-cell" style="width: 15px">
+    <div class="d-table-row">
+      <div class="d-table-cell" style="width: 15px" @click="open = !open">
         <i v-if="isFolder" class="fas" :class="open ? 'fa-caret-down' : 'fa-caret-right'" />
       </div>
       <b-checkbox
-        ref="checkbox"
-        v-model="checked"
+        v-model="chekboxIschecked"
         class="d-table-cell"
         :value="item.value"
         :label="item.label"
         :disabled="disabledCheckbox"
-        :default-state="defaultState"
         :indeterminate="indeterminate"
-        @input="changed = true"
       />
       <b-info v-if="isFolder" class="d-table-cell pl-1" :info="`(${item.children.length})`" />
     </div>
     <b-checkbox-tree
-      v-show="open"
-      v-if="isFolder && (open || changed)"
-      v-model="values"
-      class="mx-4"
-      :checked="checked"
+      v-if="open"
+      v-model="selectedValues"
       :list="item.children"
-      :disabled="disabledCheckboxTree"
+      :primary-key="primaryKey"
+      :disabled="disabledChildren"
+      class="ml-4"
     />
   </div>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
-
 import BCheckbox from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox.vue";
 
 import BInfo from "@/components/Basic/basic-info.vue";
@@ -40,98 +35,63 @@ export default {
   name: "b-checkbox-tree-item",
   components: {
     BCheckbox,
-    BCheckboxTree: () => import("./b-checkbox-tree"),
+    BCheckboxTree: () => import("./b-checkbox-tree.vue"),
     BInfo
-  },
-  model: {
-    prop: "values",
-    event: "input"
   },
   props: {
     item: util.props.Object,
     disabled: util.props.Boolean,
-    isChecked: util.props.Boolean,
-    values: util.props.Array,
+    selected: util.props.Array,
+    primaryKey: util.props.String,
+    checkChildren: util.props.Boolean,
   },
   data() {
     return {
-      open: this.item.open,
-      checked: false,
-      changed: false,
-      defaultState: false,
-      selectedValues: this.values
+      open: false,
+      chekboxIschecked: this.checkedCheckbox,
+      selectedValues: this.selected,
     };
   },
   computed: {
-    isFolder: function() {
-      return (
-        this.item.children &&
-        this.item.children.length &&
-        this.item.children.length > 0
-      );
+    isFolder: function () {
+      return this.item && this.item.children;
     },
-    disabledCheckbox: function() {
-      return (
-        this.disabled ||
-        this.item.disabled ||
-        (this.item.children &&
-          !(this.item.children.length || this.item.children.length > 0))
-      );
+    disabledCheckbox: function () {
+      return this.disabled || this.item.disabled
     },
-    disabledCheckboxTree: function() {
-      return this.disabled || this.item.disabled;
+    disabledChildren: function () {
+      return this.disabledCheckbox || this.item.children.disabled
     },
-    indeterminate: function() {
-      if (!this.isFolder || !this.selectedValues) return;
-      if (this.checked) return 2;
-      const c = this.item.children.map(e => e.value);
-      let n = this.valuesMap.filter(e => c.includes(e)).length;
-      if (n == 0) return 0;
-      else if (n == this.item.children.length) return 2;
-      else return 1;
+    selectedMap: function () {
+      return this.selectedValues.map(e => e[this.primaryKey])
     },
-    valuesMap: function() {
-      return (
-        (this.selectedValues &&
-          this.selectedValues.map &&
-          this.selectedValues.map(e => e.value)) ||
-        []
-      );
-    }
-  },
-  mounted() {
-    if (this.selectedValues && this.selectedValues.map && !this.isFolder)
-      this.defaultState = this.selectedValues
-        .map(e => e.value)
-        .includes(this.item.value);
-    this.checked = this.defaultState || this.indeterminate == 2;
-  },
-  methods: {
-    push: function(arr, item) {
-      if (!this.valuesMap.includes(item.value)) arr.push(item);
+    checkedCheckbox: function () {
+      return this.item[this.primaryKey] && this.selectedMap.includes(this.item[this.primaryKey])
     },
-    splice: function(arr, item) {
-      if (this.valuesMap.includes(item))
-        arr.splice(this.valuesMap.indexOf(item), 1);
+    indeterminate: function () {
+      if (!this.isFolder) {
+        return this.checkedCheckbox ? 2 : 0
+      } else {
+        let count = this.item.children.filter(e => e[this.primaryKey] && this.selectedMap.includes(e[this.primaryKey])).length
+        if (count === 0) return 0
+        if (count === this.item.children.length) return 2
+        return 1
+      }
     }
   },
   watch: {
-    isChecked: function(val) {
-      this.checked = val;
-    },
-    checked: function(val) {
-      if (this.disabledCheckboxTree) return;
-      if (val) {
-        if (!this.isFolder) {
-          this.push(this.selectedValues, {
-            value: this.item.value,
-            label: this.item.label
-          });
-        }
-      } else {
-        this.splice(this.selectedValues, this.item.value);
-      }
-      this.$emit("input", this.selectedValues);
+    checkedCheckbox: function (value) {
+      this.chekboxIschecked = value
+    }
+  },
+  selected: function (value) {
+    this.selectedValues = value
+  },
+  chekboxIschecked: function (value) {
+    debugger
+    if (!this.isFolder) {
+      if (value) this.selectedValues.push(this.item)
+      else value.splic(this.selectedMap.indexOf(this.item[this.primaryKey]), 1)
     }
   }
 };

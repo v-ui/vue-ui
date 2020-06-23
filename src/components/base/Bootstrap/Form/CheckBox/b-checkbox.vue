@@ -9,12 +9,13 @@
       :value="value"
       :disabled="disabled"
       :aria-disabled="disabled"
-      :checked="disabled ? defaultState : isChecked"
-      :aria-checked="disabled ? defaultState : isChecked"
+      :checked="isChecked"
+      :aria-checked="isChecked"
       v-bind="$attrs"
       v-on="inputListeners"
     >
-    <label class="custom-control-label" :for="id">{{ label || value }}</label>
+    <label class="custom-control-label" :for="id">
+      <slot>{{ label || value }}</slot></label>
     <b-valid v-if="validInfo || $slots.valid" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
     </b-valid>
@@ -53,9 +54,9 @@ export default {
     indeterminate: {
       ...util.props.Uint,
       validator: value => [0, 1, 2].includes(Number(value))
+      // 0 未选择，1 部分选择， 2 全选
     },
     checked: util.props.Boolean,
-    defaultState: util.props.Boolean,
     inline: util.props.Boolean,
     disabled: util.props.Boolean,
     validClass: util.props.String,

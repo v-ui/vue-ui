@@ -13,7 +13,7 @@
       v-bind="$attrs"
       v-on="inputListeners"
     >
-    <label class="custom-control-label" :for="id">{{ label || value }}</label>
+    <label class="custom-control-label" :for="id"><slot>{{ label || value }}</slot></label>
     <b-valid v-if="validInfo || $slots.valid" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
     </b-valid>
