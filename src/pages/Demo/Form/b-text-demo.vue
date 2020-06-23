@@ -23,20 +23,30 @@
       <b-text class="col-11" placeholder="placeholder text" />
     </div>
     <div class="row">
-      <font class="col-1">size(sm):</font>
-      <b-text class="col-11" value="sm size" size="sm" />
-    </div>
-    <div class="row">
-      <font class="col-1">size(lg):</font>
-      <b-text class="col-11" value="lg size" size="lg" />
-    </div>
-    <div class="row">
       <font class="col-1">length:</font>
       <b-text class="col-auto" value="10 length" :length="10" />
     </div>
     <div class="row">
       <font class="col-1" for="info">info:</font>
       <b-text class="col-11" info="info" id="info" />
+    </div>
+    <br>
+    <h4>b-form-label</h4>
+    <hr>
+    <div class="row">
+      <font class="col-1">size(sm):</font>
+      <b-form-label for="sm" class="col-1" size="sm">sm size label</b-form-label>
+      <b-text id="sm" class="col-10" value="sm size" size="sm" />
+    </div>
+    <div class="row">
+      <font class="col-1">size(default):</font>
+      <b-form-label for="default" class="col-1">default size label</b-form-label>
+      <b-text id="default" class="col-10" value="sm size" />
+    </div>
+    <div class="row">
+      <font class="col-1">size(lg):</font>
+      <b-form-label for="lg" class="col-1" size="lg">lg size label</b-form-label>
+      <b-text id="lg" class="col-10" value="lg size" size="lg" />
     </div>
     <br>
     <h4>图标</h4>
@@ -157,11 +167,13 @@
 
 <script>
 import BText from "@/components/base/Bootstrap/Form/b-text.vue";
+import BFormLabel from '@/components/base/Bootstrap/Form/b-form-lanel.vue'
 
 export default {
   name: "b-text-demo",
   components: {
-    BText
+    BText,
+    BFormLabel
   },
   data() {
     return {
