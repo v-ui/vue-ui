@@ -25,7 +25,11 @@ export default {
       },
       computed: {
         cClass: function () {
-          let size = this.size ? `form-control-${this.size}` : ''
+          let size = ''
+          if (!this.sizeClass) {
+            debugger
+            size = this.size ? `form-control-${this.size}` : ''
+          }
           let border = !this.border ? 'border-0' : ''
           let color = this.color ? `bg-${this.color}` : ''
           let textColor = this.textColor ? `text-${this.textColor}` : ''
@@ -105,7 +109,6 @@ export default {
           // 验证函数不会对传入的数据进行处理
           const hasData = !tools.obj.type.isNull(data)
           const targetValue = e.target ? e.target.value.trim() : e.value.trim()
-          debugger
           const value = hasData ? ( data.trim ? data.trim() : data ) : targetValue
           // 移除可能的 is-valid
           tools.dom.removeClass(e.target, 'is-valid')

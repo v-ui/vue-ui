@@ -42,7 +42,6 @@ export default {
   name: "b-text",
   components: { BasicText, BValid, BInfo },
   mixins: [
-    util.mixins.form.base,
     util.mixins.form.readonly,
     util.mixins.form.validator
   ],

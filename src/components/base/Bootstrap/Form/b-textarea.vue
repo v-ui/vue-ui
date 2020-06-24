@@ -34,7 +34,6 @@ export default {
   name: "b-textarea",
   components: { BasicTextarea, BValid, BInfo },
   mixins: [
-    util.mixins.form.base,
     util.mixins.form.readonly,
     util.mixins.form.validator
   ],

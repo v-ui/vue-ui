@@ -41,7 +41,7 @@
     <div class="row">
       <font class="col-1">size(default):</font>
       <b-form-label for="default" class="col-1">default size label</b-form-label>
-      <b-text id="default" class="col-10" value="sm size" />
+      <b-text id="default" class="col-10" value="default size" />
     </div>
     <div class="row">
       <font class="col-1">size(lg):</font>
