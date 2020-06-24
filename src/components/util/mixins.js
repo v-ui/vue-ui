@@ -102,7 +102,7 @@ export default {
         valid: props.Function,
       },
       methods: {
-        validator: function (e, data = null, regex = this.pattern) {
+        validator: function (e, data = null, regex = this.pattern || null) {
           if (this.unvalid) return // 不做验证
           if (this.readonly) return // readonly 时不校验
           if (this.disabled) return // disabled 时不校验
