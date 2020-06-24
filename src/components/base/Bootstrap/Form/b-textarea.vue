@@ -1,8 +1,7 @@
 <template>
   <div>
     <basic-textarea
-      v-model="value"
-      :class="[cClass, readonlyClass]"
+      v-model="dataValue"
       :resize="resize"
       :rows="Number(rows)"
       :cols="Number(cols)"
@@ -61,11 +60,13 @@ export default {
   },
   data() {
     return {
-      message: ""
+      message: "",
+      dataValue: this.value,
     };
   },
   watch: {
     value: function(value) {
+      this.dataValue = value
       this.$emit("input", value);
     }
   },

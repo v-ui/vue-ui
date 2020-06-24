@@ -98,13 +98,14 @@ export default {
         valid: props.Function,
       },
       methods: {
-        validator: function (e, data, regex = this.pattern) {
+        validator: function (e, data = null, regex = this.pattern) {
           if (this.unvalid) return // 不做验证
           if (this.readonly) return // readonly 时不校验
           if (this.disabled) return // disabled 时不校验
           // 验证函数不会对传入的数据进行处理
           const hasData = !tools.obj.type.isNull(data)
           const targetValue = e.target ? e.target.value.trim() : e.value.trim()
+          debugger
           const value = hasData ? ( data.trim ? data.trim() : data ) : targetValue
           // 移除可能的 is-valid
           tools.dom.removeClass(e.target, 'is-valid')
@@ -131,14 +132,6 @@ export default {
             return false
           }
           if (tools.obj.type.isBoolean(value) && !value) {
-            this.$emit('invalid', 'required')
-            return false
-          }
-          return true
-        },
-        validateRequiredForCheckbox: function (checked) {
-          // required 为 false 不做校验直接返回 true
-          if (this.required && !checked) {
             this.$emit('invalid', 'required')
             return false
           }

@@ -1,10 +1,9 @@
 <template>
   <div>
     <basic-text
-      v-model="value"
+      v-model="dataValue"
       ref="text"
       :type="cImputType"
-      :class="[cClass, readonlyClass]"
       :style="cStyle"
       :length="Number(length)"
       :readonly="readonly"
@@ -78,6 +77,11 @@ export default {
     hideIcon: util.props.Boolean,
     info: util.props.String
   },
+  data() {
+    return {
+      dataValue: this.value
+    }
+  },
   computed: {
     cImputType: function() {
       if (this.type == "phone") return "tel";
@@ -112,6 +116,7 @@ export default {
   },
   watch: {
     value: function(value) {
+      this.dataValue = value
       this.$emit("input", value);
     }
   }

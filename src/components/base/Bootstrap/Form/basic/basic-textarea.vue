@@ -1,6 +1,5 @@
 <template>
   <textarea
-  v-model="value"
     :class="[cClass, readonlyClass]"
     :style="cStyle"
     :rows="Number(rows)"
@@ -9,6 +8,7 @@
     :aria-readonly="readonly"
     :disabled="disabled"
     :aria-disabled="disabled"
+    v-bind="$attrs"
     v-on="inputListeners"
   />
 </template>
@@ -21,8 +21,8 @@ export default {
     util.mixins.form.base,
     util.mixins.form.readonly,
   ],
+  inheritAttrs: false,
   props: {
-    value: util.props.String,
     rows: {
       ...util.props.UInt,
       default: 3
@@ -39,6 +39,5 @@ export default {
       return this.resize ? "" : "resize: none";
     }
   },
-}
+};
 </script>
-
