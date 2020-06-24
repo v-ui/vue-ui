@@ -27,7 +27,6 @@ export default {
         cClass: function () {
           let size = ''
           if (!this.sizeClass) {
-            debugger
             size = this.size ? `form-control-${this.size}` : ''
           }
           let border = !this.border ? 'border-0' : ''

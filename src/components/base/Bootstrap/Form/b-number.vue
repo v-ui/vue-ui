@@ -1,71 +1,67 @@
 <template>
-  <div class="row" @keyup.up="add" @keyup.down="subn">
-    <b-button
-      v-if="!readonly && !hideButton"
-      class="col-auto"
-      outline
-      :size="size"
-      value="-"
-      :style="btnstyle"
-      :disabled="subbuttomdisabled"
-      @click="subn"
-    />
-    <b-text
-      ref="textBox"
-      v-model.number="number"
-      class="col h-100 px-0"
-      unvalid
-      text-align="center"
-      :size="size"
-      :min="dateMin"
-      :max="dateMax"
-      :step="dateStep"
-      :length="length"
-      :info="message"
-      :disabled="disabled"
-      :readonly="readonly"
-      v-bind="$attrs"
-      v-on="inputListeners"
-      @click="click($event)"
-      @change="change"
-      @blur="blur($event)"
-    />
-    <b-button
-      v-if="!readonly && !hideButton"
-      class="col-auto"
-      outline
-      value="+"
-      :size="size"
-      :style="btnstyle"
-      :disabled="addbuttondisabled"
-      @click="add"
-    />
+  <div>
+    <b-input-group :size="size" @keyup.native.up="add" @keyup.native.down="subn">
+      <b-input-group-prepend v-if="!readonly && !hideButton">
+        <basic-button outline value="-" :disabled="subbuttomdisabled" @click="subn" />
+      </b-input-group-prepend>
+      <basic-text
+        v-model.number="number"
+        text-align="center"
+        :min="dateMin"
+        :max="dateMax"
+        :step="dateStep"
+        :length="length"
+        :disabled="disabled"
+        :readonly="readonly"
+        v-bind="$attrs"
+        v-on="$listeners"
+        @click.native="click($event)"
+        @change.native="change"
+      />
+      <b-input-group-prepend v-if="!readonly && !hideButton">
+        <basic-button outline value="+" :disabled="addbuttondisabled" @click="add" />
+      </b-input-group-prepend>
+    </b-input-group>
+    <b-info :info="msg" />
   </div>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
 
-import BButton from "@/components/Basic/Button/basic-button.vue";
-import BText from "./b-text";
+import BasicText from "@/components/base/Bootstrap/Form/Basic/basic-text.vue";
+import BasicButton from "@/components/Basic/Button/basic-button.vue";
+
+import BInputGroup from "@/components/base/Bootstrap/Form/InputGroup/b-input-group.vue";
+import BInputGroupPrepend from "@/components/base/Bootstrap/Form/InputGroup/b-input-group-prepend.vue";
+// import BInputGroupText from "@/components/base/Bootstrap/Form/InputGroup/b-input-group-text.vue";
+
+import BInfo from "@/components/Basic/basic-info.vue";
+
 export default {
   name: "b-number",
-  components: { BButton, BText },
-  mixins: [util.mixins.form.base, util.mixins.form.readonly],
+  components: {
+    BasicText,
+    BasicButton,
+    BInputGroup,
+    BInputGroupPrepend,
+    BInfo
+  },
+  mixins: [util.mixins.form.readonly],
   inheritAttrs: false,
   model: {
     prop: "value",
-    event: "change"
+    event: "number:changed"
   },
   props: {
     min: util.props.Number,
     max: {
       ...util.props.Number,
-      default: 100,
+      default: 100
     },
     step: {
       ...util.props.UNumber,
-      default: 1,
+      default: 1
     },
     value: {
       type: [String, Number],
@@ -84,8 +80,7 @@ export default {
     return {
       number: 0,
       setPrecision: 0,
-      btnstyle: {},
-      message: ""
+      msg: ""
     };
   },
   computed: {
@@ -103,52 +98,29 @@ export default {
     },
     addbuttondisabled: function() {
       return this.number >= this.dateMax || this.disabled;
-    },
-    inputListeners: function() {
-      var vm = this;
-      // `Object.assign` 将所有的对象合并为一个新对象
-      return Object.assign(
-        {},
-        // 我们从父级添加所有的监听器
-        this.$listeners,
-        // 然后我们添加自定义监听器，
-        // 或覆写一些监听器的行为
-        {
-          // 这里确保组件配合 `v-model` 的工作
-          change: function() {
-            if (vm.number === "") return;
-            vm.$emit("change", !isNaN(vm.number) ? vm.number : vm.dateMin);
-          }
-        }
-      );
     }
+  },
+  watch: {
+    value: function(value) {
+      this.number = this.toNmuber(value);
+    },
   },
   mounted() {
     this.getPrecision();
     this.innitNumber();
     this.initInfo();
-    this.initButtonHeight();
   },
   methods: {
-    initButtonHeight: function() {
-      this.$nextTick(function() {
-        // 通过 text 的高度确定 button 的高度
-        if (this.readonly || this.hideButton) return;
-        this.btnstyle = {
-          height: this.$refs.textBox.$refs.text.offsetHeight + "px"
-        };
-      });
-    },
     innitNumber: function() {
       this.number = this.formatNumber(this.toNmuber(this.value, this.dateMin));
     },
     initInfo: function() {
-      this.message = this.info || "";
+      this.msg = this.info || "";
       if (this.prompt) {
         let str = `${this.formatNumber(this.min)}-${this.formatNumber(
           this.max
         )},精度: ${this.formatNumber(this.step)}`;
-        this.message += this.info ? `(${str})` : str;
+        this.msg += this.info ? `(${str})` : str;
       }
     },
     toNmuber: function(str, n = 0) {
@@ -172,17 +144,14 @@ export default {
       if (this.readonly || this.disabled) return;
       if (this.number == 0) event.target.value = "";
     },
-    change: function() {
+    change: async function() {
       if (this.number === "") return;
       if (this.number < this.dateMin) this.number = this.dateMin;
       if (this.number > this.dateMax) this.number = this.dateMax;
       this.number = this.formatNumber(this.number);
+      event.target.value = this.number;
       // 配合 v-model
-      this.$emit("change", this.number);
-    },
-    blur: function() {
-      if (!event.target.value)
-        event.target.value = this.formatNumber(this.dateMin);
+      this.$emit("number:changed", this.number);
     },
     subn: function() {
       if (this.disabled || this.readonly) return;
@@ -195,11 +164,6 @@ export default {
       this.number = Number(this.number);
       this.number += this.dateStep;
       this.change();
-    }
-  },
-  watch: {
-    value: function(value) {
-      this.number = this.toNmuber(value);
     }
   }
 };
