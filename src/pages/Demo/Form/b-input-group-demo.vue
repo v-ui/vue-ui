@@ -2,6 +2,8 @@
   <div class="Form">
     <h2>b-input-group</h2>
     <hr />
+    <h3>基础</h3>
+    <br />
     <div class="row py-1">
       <font class="col-1">default:</font>
       <div class="col-11">
@@ -81,6 +83,16 @@
       </div>
     </div>
     <div class="row py-1">
+      <font class="col-1">info:</font>
+      <b-input-group info="info text">
+        <b-input-group-prepend>
+          <b-input-group-text>More Controls</b-input-group-text>
+        </b-input-group-prepend>
+        <basic-text />
+        <basic-select />
+      </b-input-group>
+    </div>
+    <div class="row py-1">
       <font class="col-1">size:</font>
       <div class="col-11">
         <div class="row">
@@ -155,6 +167,7 @@
 </template>
 
 <script>
+
 import BInputGroup from "@/components/base/Bootstrap/Form/InputGroup/b-input-group.vue";
 import BInputGroupPrepend from "@/components/base/Bootstrap/Form/InputGroup/b-input-group-prepend.vue";
 import BInputGroupText from "@/components/base/Bootstrap/Form/InputGroup/b-input-group-text.vue";
@@ -178,6 +191,11 @@ export default {
     BRadio,
     BasicSelect,
     BasicButton
-  }
+  },
+  data() {
+    return {
+      value: '',
+    }
+  },
 };
 </script>
