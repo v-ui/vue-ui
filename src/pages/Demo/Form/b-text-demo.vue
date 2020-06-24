@@ -8,19 +8,19 @@
     <hr>
     <div class="row">
       <font class="col-1">default:</font>
-      <b-text class="col-11" value="default text" />
+      <b-text class="col-11" value="default value" />
     </div>
     <div class="row">
       <font class="col-1">readonly:</font>
-      <b-text class="col-11" value="readonly text" readonly />
+      <b-text class="col-11" value="readonly value" readonly />
     </div>
     <div class="row">
       <font class="col-1">disabled:</font>
-      <b-text class="col-11" value="disabled text" disabled />
+      <b-text class="col-11" value="disabled value" disabled />
     </div>
     <div class="row">
       <font class="col-1">placeholder:</font>
-      <b-text class="col-11" placeholder="placeholder text" />
+      <b-text class="col-11" placeholder="placeholder value" />
     </div>
     <div class="row">
       <font class="col-1">length:</font>

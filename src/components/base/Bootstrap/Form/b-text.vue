@@ -1,20 +1,19 @@
 <template>
   <div>
-    <input
+    <basic-text
+      v-model="value"
       ref="text"
       :type="cImputType"
       :class="[cClass, readonlyClass]"
       :style="cStyle"
-      :size="Number(length)"
+      :length="Number(length)"
       :readonly="readonly"
-      :aria-readonly="readonly"
       :disabled="disabled"
-      :aria-disabled="disabled"
       :placeholder="cPlaceholder"
       v-bind="$attrs"
-      v-on="inputListeners"
-      @blur="validator($event,null, cRegex)"
-    >
+      v-on="$listeners"
+      @blur.native="validator($event,null, cRegex)"
+    />
     <b-valid v-if="$slots.valid || validInfo" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
     </b-valid>
@@ -35,18 +34,24 @@ import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
+import BasicText from "@/components/base/Bootstrap/Form/basic/basic-text.vue";
+
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
   name: "b-text",
-  components: { BValid, BInfo },
+  components: { BasicText, BValid, BInfo },
   mixins: [
     util.mixins.form.base,
     util.mixins.form.readonly,
-    util.mixins.form.validator,
+    util.mixins.form.validator
   ],
   inheritAttrs: false,
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
   props: {
     type: {
       type: String,
@@ -66,11 +71,12 @@ export default {
         ].includes(value);
       }
     },
+    value: util.props.String,
     placeholder: util.props.String,
     length: util.props.UInt,
     icon: util.props.String,
     hideIcon: util.props.Boolean,
-    info: util.props.String,
+    info: util.props.String
   },
   computed: {
     cImputType: function() {
@@ -102,6 +108,11 @@ export default {
       return this.pattern
         ? tools.string.toRegExp(this.pattern.toString())
         : (o && o.value) || null;
+    }
+  },
+  watch: {
+    value: function(value) {
+      this.$emit("input", value);
     }
   }
 };
