@@ -7,15 +7,15 @@
     <hr>
     <div class="row">
       <font class="col-1">default:</font>
-      <b-textarea class="col-11" value="default text" />
+      <b-textarea class="col-11" value="default value" />
     </div>
     <div class="row">
       <font class="col-1">readonly:</font>
-      <b-textarea class="col-11" value="readonly text" readonly />
+      <b-textarea class="col-11" value="readonly value" readonly />
     </div>
     <div class="row">
       <font class="col-1">disabled:</font>
-      <b-textarea class="col-11" value="disabled text" disabled />
+      <b-textarea class="col-11" value="disabled value" disabled />
     </div>
     <div class="row">
       <font class="col-1">placeholder:</font>

@@ -9,7 +9,7 @@
           <b-input-group-prepend>
             <b-input-group-text>Text</b-input-group-text>
           </b-input-group-prepend>
-          <b-text />
+          <basic-text />
         </b-input-group>
         <br />
         <b-input-group>
@@ -25,7 +25,7 @@
               <b-checkbox />
             </b-input-group-text>
           </b-input-group-prepend>
-          <b-text />
+          <basic-text />
         </b-input-group>
         <br />
         <b-input-group>
@@ -34,7 +34,7 @@
               <b-radio />
             </b-input-group-text>
           </b-input-group-prepend>
-          <b-text />
+          <basic-text />
         </b-input-group>
         <br />
         <b-input-group>
@@ -67,15 +67,15 @@
           <b-input-group-prepend>
             <b-input-group-text>More Controls</b-input-group-text>
           </b-input-group-prepend>
-          <b-text />
-          <b-text />
+          <basic-text />
+          <basic-text />
         </b-input-group>
         <br />
         <b-input-group>
           <b-input-group-prepend>
             <b-input-group-text>More Controls</b-input-group-text>
           </b-input-group-prepend>
-          <b-text />
+          <basic-text />
           <b-select />
         </b-input-group>
       </div>
@@ -90,13 +90,13 @@
               <b-input-group-prepend>
                 <b-input-group-text>Text</b-input-group-text>
               </b-input-group-prepend>
-              <b-text />
+              <basic-text />
             </b-input-group>
           </div>
           <div class="col-5">
             <b-input-group size="sm">
               <b-input-group-prepend>
-                <b-input-group-text>Text</b-input-group-text>
+                <b-input-group-text>select and button</b-input-group-text>
               </b-input-group-prepend>
               <b-select />
               <b-input-group-prepend>
@@ -112,13 +112,13 @@
               <b-input-group-prepend>
                 <b-input-group-text>Text</b-input-group-text>
               </b-input-group-prepend>
-              <b-text />
+              <basic-text />
             </b-input-group>
           </div>
           <div class="col-5">
             <b-input-group>
               <b-input-group-prepend>
-                <b-input-group-text>Text</b-input-group-text>
+                <b-input-group-text>select and button</b-input-group-text>
               </b-input-group-prepend>
               <b-select />
               <b-input-group-prepend>
@@ -134,13 +134,13 @@
               <b-input-group-prepend>
                 <b-input-group-text>Text</b-input-group-text>
               </b-input-group-prepend>
-              <b-text />
+              <basic-text />
             </b-input-group>
           </div>
           <div class="col-5">
             <b-input-group size="lg">
               <b-input-group-prepend>
-                <b-input-group-text>Text</b-input-group-text>
+                <b-input-group-text>select and button</b-input-group-text>
               </b-input-group-prepend>
               <b-select />
               <b-input-group-prepend>
@@ -159,7 +159,7 @@ import BInputGroup from "@/components/base/Bootstrap/Form/InputGroup/b-input-gro
 import BInputGroupPrepend from "@/components/base/Bootstrap/Form/InputGroup/b-input-group-prepend.vue";
 import BInputGroupText from "@/components/base/Bootstrap/Form/InputGroup/b-input-group-text.vue";
 
-import BText from "@/components/base/Bootstrap/Form/b-text.vue";
+import BasicText from "@/components/base/Bootstrap/Form/basic/basic-text.vue";
 import BTextarea from "@/components/base/Bootstrap/Form/b-textarea.vue";
 import BCheckbox from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox.vue";
 import BRadio from "@/components/base/Bootstrap/Form/Radio/b-radio.vue";
@@ -172,7 +172,7 @@ export default {
     BInputGroup,
     BInputGroupPrepend,
     BInputGroupText,
-    BText,
+    BasicText,
     BTextarea,
     BCheckbox,
     BRadio,

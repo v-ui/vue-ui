@@ -1,18 +1,17 @@
 <template>
   <div>
-    <textarea
+    <basic-textarea
+      v-model="value"
       :class="[cClass, readonlyClass]"
-      :style="cStyle"
+      :resize="resize"
       :rows="Number(rows)"
       :cols="Number(cols)"
       :readonly="readonly"
-      :aria-readonly="readonly"
       :disabled="disabled"
-      :aria-disabled="disabled"
       v-bind="$attrs"
-      v-on="inputListeners"
-      @input.stop="change"
-      @blur="validator"
+      v-on="$listeners"
+      @input.native.stop="change"
+      @blur.native="validator"
     />
     <b-valid v-if="validInfo || $slots.valid" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
@@ -27,22 +26,29 @@
 import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
+import BasicTextarea from "@/components/base/Bootstrap/Form/basic/basic-textarea.vue";
+
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
   name: "b-textarea",
-  components: { BValid, BInfo },
+  components: { BasicTextarea, BValid, BInfo },
   mixins: [
     util.mixins.form.base,
     util.mixins.form.readonly,
     util.mixins.form.validator
   ],
   inheritAttrs: false,
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
   props: {
+    value: util.props.String,
     rows: {
       ...util.props.UInt,
-      default: 3,
+      default: 3
     },
     cols: util.props.UInt,
     maxlength: {
@@ -58,9 +64,9 @@ export default {
       message: ""
     };
   },
-  computed: {
-    cStyle: function() {
-      return this.resize ? "" : "resize: none";
+  watch: {
+    value: function(value) {
+      this.$emit("input", value);
     }
   },
   mounted() {
