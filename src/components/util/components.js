@@ -6,11 +6,6 @@ const initFuncSlotContainer = function (components) {
   }
 }
 
-export default {
-  newFuncSlotCompoment,
-  initFuncSlotContainer,
- }
-
 const newFuncSlotCompoment = function (name, value) {
   Vue.component(name, {
     functional: true,
@@ -27,4 +22,9 @@ const newFuncSlotCompoment = function (name, value) {
     },
   })
 }
+
+export default {
+  newFuncSlotCompoment,
+  initFuncSlotContainer,
+ }
 

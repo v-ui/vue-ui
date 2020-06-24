@@ -1,7 +1,7 @@
 <template>
   <div class="form-group my-0">
     <select
-      class="form-control"
+      class="custom-select"
       :class="[cClass, sizeClass]"
       :size="row"
       :multiple="multiple"
