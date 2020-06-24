@@ -33,7 +33,7 @@ import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
-import BasicText from "@/components/base/Bootstrap/Form/basic/basic-text.vue";
+import BasicText from "@/components/base/Bootstrap/Form/Basic/basic-text.vue";
 
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/Basic/basic-info.vue";

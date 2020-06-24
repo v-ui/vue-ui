@@ -25,7 +25,7 @@
 import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import BasicTextarea from "@/components/base/Bootstrap/Form/basic/basic-textarea.vue";
+import BasicTextarea from "@/components/base/Bootstrap/Form/Basic/basic-textarea.vue";
 
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/Basic/basic-info.vue";

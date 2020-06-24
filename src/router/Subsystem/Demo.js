@@ -53,7 +53,7 @@ export default {
         { path: 'b-range', name: 'b-range', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-range-demo.vue'), },
         { path: 'b-file', name: 'b-file', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-file-demo.vue'), },
         // { path: 'b-hidden', name: 'b-hidden', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-hidden-demo.vue'), },
-        { path: 'b-unput-group', name: 'b-unput-group', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-unput-group-demo.vue'), },
+        { path: 'b-input-group', name: 'b-unput-group', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-input-group-demo.vue'), },
 
       ]
     },

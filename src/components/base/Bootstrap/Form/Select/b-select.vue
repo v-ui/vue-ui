@@ -26,7 +26,7 @@
 <script>
 import util from "@/components/util/index.js";
 
-import BasicSelect from '@/components/base/Bootstrap/Form/basic/select/basic-select.vue'
+import BasicSelect from '@/components/base/Bootstrap/Form/Basic/Select/basic-select.vue'
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/Basic/basic-info.vue";
 
