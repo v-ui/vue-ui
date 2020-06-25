@@ -1,25 +1,28 @@
 <template>
   <div>
     <b-input-group :size="size" @keyup.native.up="add" @keyup.native.down="subn">
-      <b-input-group-prepend v-if="!readonly && !hideButton">
-        <basic-button outline value="-" :disabled="subbuttomdisabled" @click="subn" />
+      <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
+        <basic-button outline :disabled="subButtomDisabled" @click="subn">
+          <slot name="sub">{{ subValue }}</slot>
+        </basic-button>
       </b-input-group-prepend>
       <basic-text
         v-model.number="number"
-        text-align="center"
+        :text-align="textAlign"
         :min="dateMin"
         :max="dateMax"
         :step="dateStep"
-        :length="length"
         :disabled="disabled"
-        :readonly="readonly"
+        :readonly="readonly || textReadonly"
         v-bind="$attrs"
         v-on="$listeners"
         @click.native="click($event)"
         @change.native="change"
       />
-      <b-input-group-prepend v-if="!readonly && !hideButton">
-        <basic-button outline value="+" :disabled="addbuttondisabled" @click="add" />
+      <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
+        <basic-button outline :disabled="addButtonDisabled" @click="add">
+          <slot name="add">{{ subValue }}</slot>
+        </basic-button>
       </b-input-group-prepend>
     </b-input-group>
     <b-info :info="msg" />
@@ -59,6 +62,10 @@ export default {
       ...util.props.Number,
       default: 100
     },
+    accuracy: {
+      ...util.props.Int,
+      default: -1
+    },
     step: {
       ...util.props.UNumber,
       default: 1
@@ -70,8 +77,20 @@ export default {
       },
       validator: value => !isNaN(value)
     },
+    subValue: {
+      ...util.props.String,
+      default: "-"
+    },
+    addValue: {
+      ...util.props.String,
+      default: "+"
+    },
+    textAlign: {
+      ...util.props.setX,
+      default: "center"
+    },
+    textReadonly: util.props.Boolean,
     size: util.props.size,
-    length: util.props.UInt,
     hideButton: util.props.Boolean,
     prompt: util.props.Boolean,
     info: util.props.String
@@ -93,17 +112,20 @@ export default {
     dateMax: function() {
       return this.toNmuber(this.max, 100);
     },
-    subbuttomdisabled: function() {
+    dataAccuracy: function() {
+      return this.toNmuber(this.accuracy);
+    },
+    subButtomDisabled: function() {
       return this.number <= this.dateMin || this.disabled;
     },
-    addbuttondisabled: function() {
+    addButtonDisabled: function() {
       return this.number >= this.dateMax || this.disabled;
     }
   },
   watch: {
     value: function(value) {
       this.number = this.toNmuber(value);
-    },
+    }
   },
   mounted() {
     this.getPrecision();
@@ -131,6 +153,10 @@ export default {
       return str.length !== 2 ? 0 : str[1].length;
     },
     getPrecision: function() {
+      if (this.dataAccuracy >= 0) {
+        this.setPrecision = this.dataAccuracy;
+        return;
+      }
       // 返回精度最高的
       this.setPrecision = Math.max(
         this.getNumberPrecision(this.dateStep),
@@ -141,6 +167,7 @@ export default {
       return Number.parseFloat(value).toFixed(this.setPrecision);
     },
     click: function(event) {
+      if (this.textReadonly) return
       if (this.readonly || this.disabled) return;
       if (this.number == 0) event.target.value = "";
     },
