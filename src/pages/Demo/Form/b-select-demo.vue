@@ -112,7 +112,7 @@
 </template>
 
 <script>
-import BSelect from "@/components/base/Bootstrap/Form/Select/b-select.vue";
+import BSelect from "@/components/base/Bootstrap/Form/b-select.vue";
 
 export default {
   name: "b-select-demo",

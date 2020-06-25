@@ -183,7 +183,7 @@ import BButtonToolbar from "@/components/base/Bootstrap/ButtonGroup/b-btn-toolba
 import BDropdown from "@/components/base/Bootstrap/Dropdown/b-dropdown.vue";
 
 import BNumber from "@/components/base/Bootstrap/Form/b-number.vue";
-import BSelect from "@/components/base/Bootstrap/Form/Select/b-select.vue";
+import BSelect from "@/components/base/Bootstrap/Form/b-select.vue";
 import BPagination from "@/components/base/Bootstrap/Navigation/Pagination/b-pag";
 
 import BModal from "@/components/base/Bootstrap/Modal/b-modal.vue";
