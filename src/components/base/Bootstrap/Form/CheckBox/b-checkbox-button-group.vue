@@ -4,19 +4,16 @@
       class="btn"
       :class="[objClass, {'disabled' : disabled}]"
       :disabled="disabled"
-      :aria-pressed="active"
       :aria-disabled="disabled"
-
+      @click="selected = !selected"
     >
       <input
         type="checkbox"
         :value="value"
-        :checked="checked"
-        :aria-checked="checked"
+        :checked="selected"
+        :aria-checked="selected"
         :disabled="disabled"
         :aria-disabled="disabled"
-        v-bind="$attrs"
-        v-on="inputListeners"
       >
       {{ label || value || 'Checkbox Button' }}
     </label>
@@ -31,12 +28,11 @@ import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
   name: "b-checkbox-button-group",
-  components: {BInfo},
+  components: { BInfo },
   mixins: [util.mixins.form.btn],
-  inheritAttrs: false,
   model: {
     prop: "checked",
-    event: "change"
+    event: "checkbox:checked"
   },
   props: {
     value: util.props.String,
@@ -45,29 +41,18 @@ export default {
     checked: util.props.Boolean,
     disabled: util.props.Boolean
   },
-  computed: {
-    inputListeners: function() {
-      var vm = this;
-      // `Object.assign` 将所有的对象合并为一个新对象
-      return Object.assign(
-        {},
-        // 我们从父级添加所有的监听器
-        this.$listeners,
-        // 然后我们添加自定义监听器，
-        // 或覆写一些监听器的行为
-        {
-          // 这里确保组件配合 `v-model` 的工作
-          change: function(event) {
-            vm.$emit("change", event.target.checked);
-          }
-        }
-      );
+  data() {
+    return {
+      selected: this.checked,
     }
   },
   watch: {
-    checked: function(val) {
-      this.active = val;
+    checked: function(value) {
+      this.selected = value
+    },
+    selected: function(value) {
+      this.$emit('checkbox:checked', value)
     }
-  }
+  },
 };
 </script>

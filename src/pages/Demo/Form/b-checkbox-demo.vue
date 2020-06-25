@@ -172,7 +172,7 @@
         <template #valid>you can add anlything validInfo or DOM</template>
       </b-checkbox-group>
     </div>
-    <!-- <h2>b-checkbox-button-group</h2>
+    <h2>b-checkbox-button-group</h2>
     <br />
     <h4>基础属性</h4>
     <hr />
@@ -207,18 +207,18 @@
         ({{ checked }})
       </font>
       <b-checkbox-button-group class="col-11" v-model="checked" name="v-model-button-group" />
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
 import BCheckbox from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox.vue";
 import BCheckboxGroup from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox-group.vue";
-// import BCheckboxButtonGroup from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox-button-group.vue";
+import BCheckboxButtonGroup from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox-button-group.vue";
 
 export default {
   name: "b-checkbox-demo",
-  components: { BCheckbox, BCheckboxGroup, },
+  components: { BCheckbox, BCheckboxGroup, BCheckboxButtonGroup, },
   data() {
     return {
       checked: true,

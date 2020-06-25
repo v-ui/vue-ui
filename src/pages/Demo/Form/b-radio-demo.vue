@@ -123,7 +123,7 @@
       </b-radio-group>
     </div>
     <hr>
-    <!-- <h2>b-radio-button-group</h2>
+    <h2>b-radio-button-group</h2>
     <hr>
     <div class="row">
       <font class="col-1">default:</font>
@@ -156,18 +156,18 @@
         name="v-model-button-group"
         :list="buttongrouplist"
       />
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
 import BRadio from "@/components/base/Bootstrap/Form/Radio/b-radio.vue";
 import BRadioGroup from "@/components/base/Bootstrap/Form/Radio/b-radio-group.vue";
-// import BRadioButtonGroup from "@/components/base/Bootstrap/Form/Radio/b-radio-button-group.vue";
+import BRadioButtonGroup from "@/components/base/Bootstrap/Form/Radio/b-radio-button-group.vue";
 
 export default {
   name: "b-radio-demo",
-  components: { BRadio, BRadioGroup, },
+  components: { BRadio, BRadioGroup, BRadioButtonGroup, },
   data() {
     return {
       checked: "one",

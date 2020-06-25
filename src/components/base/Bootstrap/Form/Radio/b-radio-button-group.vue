@@ -6,6 +6,7 @@
         :key="index"
         class="btn"
         :class="[`btn-${item.color || color}`, { active: item.value == value, disabled: disabled || item.disabled }]"
+        @click="selected = item.value"
       >
         <input
           type="radio"
@@ -14,11 +15,9 @@
           autocomplete="off"
           :value="item.value"
           :checked="item.value == value"
-          :aria-checked="item.value == value"
+          :aria-checked="item.value == selected"
           :disabled="disabled || item.disabled"
           :aria-diasbled="disabled || item.disabled"
-          v-bind="$attrs"
-          v-on="inputListeners"
         >
         {{ item.label }}
       </label>
@@ -35,10 +34,9 @@ import BInfo from "@/components/Basic/basic-info.vue";
 export default {
   name: "b-radio-button-group",
   components: { BInfo },
-  inheritAttrs: false,
   model: {
     prop: "value",
-    event: "change"
+    event: "raido:checked"
   },
   props: {
     value: util.props.String,
@@ -51,24 +49,18 @@ export default {
       required: true
     }
   },
-  computed: {
-    inputListeners: function() {
-      var vm = this;
-      // `Object.assign` 将所有的对象合并为一个新对象
-      return Object.assign(
-        {},
-        // 我们从父级添加所有的监听器
-        this.$listeners,
-        // 然后我们添加自定义监听器，
-        // 或覆写一些监听器的行为
-        {
-          // 这里确保组件配合 `v-model` 的工作
-          change: function() {
-            vm.$emit("change", event.target.value);
-          }
-        }
-      );
+  data() {
+    return {
+      selected: this.value,
     }
+  },
+  watch: {
+    value: function(value) {
+      this.selected = value
+    },
+    selected: function(value) {
+      this.$emit('raido:checked', value)
+    },
   },
 };
 </script>
