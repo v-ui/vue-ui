@@ -15,7 +15,7 @@
         :value="select"
         v-bind="$attrs"
         v-on="inputListeners"
-      >
+      />
       <span
         v-if="prompt || maxValue"
         class="col-auto text-left text-monospace pl-1 pr-0"
@@ -50,9 +50,10 @@ export default {
       default: 1
     },
     value: {
-      type: [Number, String],
-      default: value => !isNaN(value) ? Number(value) : Number(this.min),
-      validator: value => !isNaN(value)
+      ...util.props.Number,
+      default: function(value) {
+        !isNaN(value) ? Number(value) : this.dataMin
+      },
     },
     prompt: util.props.Boolean,
     hideValue: util.props.Boolean,
@@ -62,10 +63,19 @@ export default {
   },
   data() {
     return {
-      select: Number(this.value),
+      select: this.dataValue,
     };
   },
   computed: {
+    dataValue: function() {
+      return this.toNumber(this.value);
+    },
+    dataMin: function () {
+      return this.toNumber(this.min)
+    },
+    dataMax: function () {
+      return this.toNumber(this.max)
+    },
     inputListeners: function() {
       var vm = this;
       // `Object.assign` 将所有的对象合并为一个新对象
@@ -85,15 +95,20 @@ export default {
       );
     },
     fillMinValue: function() {
-      return this.minValue ? this.minValue : Number(this.min);
+      return this.minValue ? this.minValue : this.dataMin;
     },
     fillMaxValue: function() {
-      return this.maxValue ? this.maxValue : Number(this.max);
-    },
+      return this.maxValue ? this.maxValue : this.dataMax;
+    }
   },
   watch: {
     value: function(value) {
       this.select = Number(value);
+    }
+  },
+  methods: {
+    toNumber: function(str, n = 0) {
+      return Number(str) || n;
     }
   }
 };
