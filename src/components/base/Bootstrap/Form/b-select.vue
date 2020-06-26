@@ -1,7 +1,7 @@
 <template>
   <div class="form-group my-0">
     <basic-select
-      v-model="dataValue"
+      v-model="selectedValue"
       :list="list"
       :size="size"
       :row="row"
@@ -9,7 +9,7 @@
       :disabled="disabled"
       v-bind="$attrs"
       v-on="$listeners"
-      @change.native="validator"
+      @change.native="validator($event, selectedValue)"
     >
       <slot />
     </basic-select>
@@ -36,17 +36,16 @@ export default {
   mixins: [util.mixins.form.base, util.mixins.form.validator],
   inheritAttrs: false,
   model: {
-    prop: "value",
-    event: "change"
+    prop: "selected",
+    event: "select:selected"
   },
   props: {
     list: util.props.Array,
-    select: util.props.String,
     disabled: util.props.Boolean,
     info: util.props.String,
     hideNull: util.props.Boolean,
-    value: {
-      type: [String, Number, Array],
+    selected: {
+      type: [String, Number, Array, Object],
       default: function() {
         return this.multiple ? [] : "";
       }
@@ -61,13 +60,13 @@ export default {
   },
   data() {
     return {
-      dataValue: this.value,
+      selectedValue: this.selected,
     }
   },
   watch: {
-    value: function(value) {
-      this.dataValue = value
-      this.$emit('input', value)
+    selected: function(value) {
+      this.selectedValue = value
+      this.$emit('select:selected', value)
     }
   },
 };

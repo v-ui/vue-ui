@@ -156,10 +156,10 @@ export default {
         { value: "disabled option", label: "disabled label option", disabled: true }
       ],
 
-      value: "option1",
-      value1: ["option1", "option2"],
+      value: { value: "option2", label: "label option2" },
+      value1: [{ value: "option1", label: "label option1" }, { value: "option2", label: "label option2" }],
       value2: "option1-1",
-      value3: ["option1-1", "option2-2"]
+      value3: [{ value: "option1-1", label: "label option1-1" }, { value: "option2-2", label: "label option2-2" }]
     };
   }
 };

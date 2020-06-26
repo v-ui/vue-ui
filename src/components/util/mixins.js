@@ -191,6 +191,75 @@ export default {
       },
     }, // readonly
   }, // form
+  select: {
+    select: {
+      model: {
+        prop: 'selected',
+        event: 'select:selected',
+      },
+      props: {
+        list: props.Array,
+        selected: {
+          type: [String, Number, Array, Object],
+          default: function() {
+            return this.isMultiple ? [] : "";
+          }
+        },
+        primaryKey: {
+          ...props.String,
+          default: 'id',
+        },
+        multiple: props.Boolean,
+      },
+      data() {
+        return {
+          selectedValue: this.selected,
+          isMultiple: this.multiple,
+          nullValue: '<Pleace select...>',
+        }
+      },
+      watch: {
+        selected: function(value) {
+          this.selectedValue = value
+        },
+        selectedValue: function(value) {
+          this.$emit('select:selected', value)
+        },
+      },
+    },
+    selectItem: {
+      props: {
+        item: {
+          type: [String, Number, Array, Object],
+          validator: function(value) {
+            var self = this
+            return !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value) ||
+            value.every && value.every(e => e[self.primaryKey]) ||
+            tools.obj.type.isObject(value) && value[self.primaryKey]
+          },
+        },
+        selected: [String, Number, Array, Object],
+        primaryKey: {
+          ...props.String,
+          default: 'id',
+        },
+        isMultiple: props.Boolean,
+      },
+      computed: {
+        selectedMap: function() {
+          return this.isMultiple
+          ? this.selected && this.selected.map && this.selected.map(e => e[this.primaryKey] || e)
+          : this.selected && this.selected[this.primaryKey] || this.selected
+        },
+        isSelected: function() {
+          if (!this.selectedMap || this.selectedMap && this.selectedMap.length === 0) return false
+          return this.isMultiple
+          ? this.selectedMap.includes && this.selectedMap.includes(this.item[this.primaryKey] || this.item)
+          : (this.item && this.item[this.primaryKey] || this.item) === this.selectedMap
+        },
+      },
+    },
+  },
   grid: {
     thead: {
       data() {
