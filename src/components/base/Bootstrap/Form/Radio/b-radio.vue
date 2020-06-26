@@ -3,7 +3,8 @@
     <input
       type="radio"
       class="custom-control-input"
-      :class="ValidClass"
+      :class="mixClass"
+      :style="mixStyle"
       :id="id"
       :value="value"
       :checked="value ? checked === value : checked"
@@ -34,17 +35,16 @@ import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 export default {
   name: "b-radio",
   components: { BInfo, BValid },
-  mixins: [util.mixins.form.base, util.mixins.form.validator],
+  mixins: [ util.mixins.base.style, util.mixins.form.base, util.mixins.form.validator],
   inheritAttrs: false,
   model: {
     prop: "checked",
-    event: "change"
+    event: "radio:change"
   },
   props: {
     value: util.props.String,
     label: util.props.String,
     info: util.props.String,
-    ValidClass: util.props.String,
     disabled: util.props.Boolean,
     id: {
       type: String,
@@ -68,7 +68,7 @@ export default {
         {
           // 这里确保组件配合 `v-model` 的工作
           change: function(event) {
-            vm.$emit("change", event.target.value);
+            vm.$emit("radio:change", event.target.value);
           }
         }
       );

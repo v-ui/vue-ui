@@ -32,7 +32,7 @@ export default {
   mixins: [util.mixins.form.btn],
   model: {
     prop: "checked",
-    event: "checkbox:checked"
+    event: "checkbox:change"
   },
   props: {
     value: util.props.String,
@@ -51,7 +51,7 @@ export default {
       this.selected = value
     },
     selected: function(value) {
-      this.$emit('checkbox:checked', value)
+      this.$emit('checkbox:change', value)
     }
   },
 };

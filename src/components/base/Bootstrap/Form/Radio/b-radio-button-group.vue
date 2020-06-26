@@ -36,7 +36,7 @@ export default {
   components: { BInfo },
   model: {
     prop: "value",
-    event: "raido:checked"
+    event: "raido:change"
   },
   props: {
     value: util.props.String,
@@ -59,7 +59,7 @@ export default {
       this.selected = value
     },
     selected: function(value) {
-      this.$emit('raido:checked', value)
+      this.$emit('raido:change', value)
     },
   },
 };

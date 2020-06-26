@@ -66,11 +66,8 @@ export default {
       this.selectedValue = this.isMultiple
         ? Array.prototype.filter
             .call(event.target.options, o => o.selected && o.value)
-            .map(o =>
-              o.value == this.nullValue
-                ? null
-                : list.find(e => (e.value || e) == o.value)
-            )
+            .map(o => o.value == this.nullValue ? null : list.find(e => (e.value || e) == o.value)
+            ).filter(e => e)
         : list.find(e => (e.value || e) == event.target.value);
     }
   }

@@ -8,6 +8,14 @@ import props from '@/components/util/props.js'
 import filters from '@/components/util/filters.js'
 
 export default {
+  base: {
+    style: {
+      props: {
+        mixStyle: String,
+        mixClass: String,
+      },
+    },
+  },
   form: {
     base: {
       props: {
@@ -75,11 +83,11 @@ export default {
       computed: {
         objClass: function () {
           return `btn-${this.outline ? 'outline-' : ''}${this.color}
-                        ${this.textColor ? `text-${this.textColor}` : ''}
-                        ${this.size ? `btn-${this.size}` : ''}
-                        ${this.block ? 'btn-block' : ''}
-                        ${this.active ? 'active' : ''}
-                        ${(this.disabled && this.href) ? 'disabled' : ''}`
+                  ${this.textColor ? `text-${this.textColor}` : ''}
+                  ${this.size ? `btn-${this.size}` : ''}
+                  ${this.block ? 'btn-block' : ''}
+                  ${this.active ? 'active' : ''}
+                  ${(this.disabled && this.href) ? 'disabled' : ''}`
         },
         fillsrMsg: function () {
           return this.srMsg ? this.color : this.srMsg
@@ -100,30 +108,67 @@ export default {
         unvalid: props.Boolean,
         valid: props.Function,
       },
+      data() {
+        return {
+          validClass: 'is-valid',
+          inValidClass: 'is-invalid'
+        }
+      },
       methods: {
-        validator: function (e, data = null, regex = this.pattern || null) {
+        validator: function (e, data = null, regex = this.pattern || null, resetCallback = null, validateCallback = null, inValidateCallback = null) {
           if (this.unvalid) return // 不做验证
           if (this.readonly) return // readonly 时不校验
           if (this.disabled) return // disabled 时不校验
           // 验证函数不会对传入的数据进行处理
           const hasData = !tools.obj.type.isNull(data)
-          const targetValue = e.target ? e.target.value.trim() : e.value.trim()
-          const value = hasData ? ( data.trim ? data.trim() : data ) : targetValue
-          // 移除可能的 is-valid
-          tools.dom.removeClass(e.target, 'is-valid')
+          const value = hasData ? ( data.trim ? data.trim() : data ) : ( e.target ? e.target.value.trim() : e.value.trim() )
+          this.validateReset(e, resetCallback)
           // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateRequired(value)) { tools.dom.addClass(e.target, 'is-invalid'); return }
+          if (!this.validateRequired(value)) { this.inValidateDone(e, inValidateCallback); return }
           // 长度验证（传入字符串长度为 0、minlength 小于 0、minlength 大于 maxlength 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateLength(value)) { tools.dom.addClass(e.target, 'is-invalid'); return }
+          if (!this.validateLength(value)) { this.inValidateDone(e, inValidateCallback); return }
           // 正则校验（传入字符串长度为 0、无正则表达式 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateRange(value, regex)) { tools.dom.addClass(e.target, 'is-invalid'); return }
+          if (!this.validateRange(value, regex)) { this.inValidateDone(e, inValidateCallback); return }
           // 自定义验证（用户自定义验证函数，验证通过返回 true）
-          if (!this.validateCustomize(value, this.valid)) { tools.dom.addClass(e.target, 'is-invalid'); return }
+          if (!this.validateCustomize(value, this.valid)) { this.inValidateDone(e, inValidateCallback); return }
           // 移除可能的 is-invalid
-          tools.dom.removeClass(e.target, 'is-invalid')
+          this.removeInValidClass(e)
+          // 验证成功
           // 当存在 valid slot 或 validInfo 时
-          if (this.$slots.valid || this.validInfo) tools.dom.addClass(e.target, 'is-valid')
+          if (this.$slots.valid || this.validInfo) this.validateDone(e, validateCallback)
           this.$emit('valid')
+        },
+        // 开始验证时 复位 之前的状态
+        validateReset: function(e, resetCallback = null) {
+          tools.obj.type.isFunction(resetCallback)
+          ? resetCallback()
+          : this.removeInValidClass(e) // 移除可能的 is-valid
+        },
+        // 验证成功后 执行的方法
+        validateDone: function(e, validateCallback = null) {
+          tools.obj.type.isFunction(validateCallback)
+          ? validateCallback()
+          : this.addValidClass(e)
+        },
+        // 验证失败后 执行的方法
+        inValidateDone: function(e, inValidateCallback = null) {
+          inValidateCallback ? inValidateCallback() : this.addInValidClass(e)
+        },
+        // 验证成功后 添加 class
+        addValidClass: function(e) {
+          tools.dom.addClass(e.target, this.validClass)
+        },
+        // 移除 验证成功 的 class
+        removeValidClass: function(e) {
+          tools.dom.removeClass(e.target, this.validClass)
+        },
+        // 验证失败后 添加 class
+        addInValidClass: function(e) {
+          tools.dom.addClass(e.target, this.inValidClass)
+        },
+        // 移除 验证失败 的 class
+        removeInValidClass: function(e) {
+          tools.dom.removeClass(e.target, this.inValidClass)
         },
         // 非空验证（验证通过返回 true）
         validateRequired: function (value) {
@@ -247,8 +292,9 @@ export default {
       },
       computed: {
         selectedMap: function() {
+          const self = this
           return this.isMultiple
-          ? this.selected && this.selected.map && this.selected.map(e => e[this.primaryKey] || e)
+          ? this.selected && this.selected.map && this.selected.map(e => e && e[self.primaryKey] || e)
           : this.selected && this.selected[this.primaryKey] || this.selected
         },
         isSelected: function() {

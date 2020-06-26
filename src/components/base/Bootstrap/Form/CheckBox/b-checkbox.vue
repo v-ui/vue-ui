@@ -5,7 +5,8 @@
       type="checkbox"
       :id="id"
       class="custom-control-input"
-      :class="validClass"
+      :class="mixClass"
+      :style="mixStyle"
       :value="value"
       :disabled="disabled"
       :aria-disabled="disabled"
@@ -36,11 +37,11 @@ import BInfo from "@/components/Basic/basic-info.vue";
 export default {
   name: "b-checkbox",
   components: { BValid, BInfo },
-  mixins: [util.mixins.form.base, util.mixins.form.validator],
+  mixins: [ util.mixins.base.style, util.mixins.form.base, util.mixins.form.validator ],
   inheritAttrs: false,
   model: {
     prop: "checked",
-    event: "change"
+    event: "checkbox:change"
   },
   props: {
     value: util.props.String,
@@ -59,12 +60,11 @@ export default {
     checked: util.props.Boolean,
     inline: util.props.Boolean,
     disabled: util.props.Boolean,
-    validClass: util.props.String,
     info: util.props.String,
   },
   data() {
     return {
-      isChecked: false
+      isChecked: this.checked,
     };
   },
   computed: {
@@ -80,7 +80,7 @@ export default {
         {
           // 这里确保组件配合 `v-model` 的工作
           change: function(event) {
-            vm.$emit("change", event.target.checked);
+            vm.$emit("checkbox:change", event.target.checked);
             vm.validator(event, event.target.checked)
           }
         }
@@ -96,7 +96,6 @@ export default {
     }
   },
   mounted() {
-    this.isChecked = this.checked;
     if (this.indeterminate) this.setIndeterminate(Number(this.indeterminate));
   },
   methods: {
