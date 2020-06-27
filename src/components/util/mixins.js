@@ -142,7 +142,7 @@ export default {
         validateReset: function(e, resetCallback = null) {
           tools.obj.type.isFunction(resetCallback)
           ? resetCallback()
-          : this.removeInValidClass(e) // 移除可能的 is-valid
+          : this.removeValidClass(e) // 移除可能的 is-valid
         },
         // 验证成功后 执行的方法
         validateDone: function(e, validateCallback = null) {
