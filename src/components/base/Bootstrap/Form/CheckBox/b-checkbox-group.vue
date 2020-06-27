@@ -60,7 +60,7 @@ export default {
         if (this.values.includes(event.target.value))
           this.values.splice(this.values.indexOf(event.target.value), 1);
       }
-      this.validator(event, this.values, null,
+      this.validator(event, this.values,
         () => { this.validateClass = '' },
         () => { this.validateClass = this.validClass },
         () => { this.validateClass = this.inValidClass },

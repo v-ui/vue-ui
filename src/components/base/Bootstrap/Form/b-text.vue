@@ -11,7 +11,7 @@
       :placeholder="cPlaceholder"
       v-bind="$attrs"
       v-on="$listeners"
-      @blur.native="validator($event,null, cRegex)"
+      @blur.native="validator($event)"
     />
     <b-valid v-if="$slots.valid || validInfo" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
@@ -105,7 +105,7 @@ export default {
         Object.assign(o, { "padding-left": "2em" });
       return o;
     },
-    cRegex: function() {
+    defaultRegex: function() {
       if (["number"].includes(this.type)) return null;
       const o = Object.getOwnPropertyDescriptor(config.regex, this.type);
       return this.pattern

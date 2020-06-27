@@ -111,63 +111,71 @@ export default {
       data() {
         return {
           validClass: 'is-valid',
-          inValidClass: 'is-invalid'
+          inValidClass: 'is-invalid',
         }
       },
       methods: {
-        validator: function (e, data = null, regex = this.pattern || null, resetCallback = null, validateCallback = null, inValidateCallback = null) {
+        validator: function (e, data = null, resetCallback = null, validateCallback = null, inValidateCallback = null) {
           if (this.unvalid) return // 不做验证
           if (this.readonly) return // readonly 时不校验
           if (this.disabled) return // disabled 时不校验
           // 验证函数不会对传入的数据进行处理
           const hasData = !tools.obj.type.isNull(data)
-          const value = hasData ? ( data.trim ? data.trim() : data ) : ( e.target ? e.target.value.trim() : e.value.trim() )
+          const value = hasData ? (data.trim ? data.trim() : data) : (e.target ? e.target.value.trim() : e.value.trim())
+          // 开始验证时 复位 之前的状态
           this.validateReset(e, resetCallback)
-          // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateRequired(value)) { this.inValidateDone(e, inValidateCallback); return }
-          // 长度验证（传入字符串长度为 0、minlength 小于 0、minlength 大于 maxlength 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateLength(value)) { this.inValidateDone(e, inValidateCallback); return }
-          // 正则校验（传入字符串长度为 0、无正则表达式 不做校验直接返回 true，验证通过返回 true）
-          if (!this.validateRange(value, regex)) { this.inValidateDone(e, inValidateCallback); return }
-          // 自定义验证（用户自定义验证函数，验证通过返回 true）
-          if (!this.validateCustomize(value, this.valid)) { this.inValidateDone(e, inValidateCallback); return }
           // 移除可能的 is-invalid
           this.removeInValidClass(e)
+          // 验证失败
+          if (!this.validating(value)) { this.inValidateDone(e, inValidateCallback); return }
           // 验证成功
           // 当存在 valid slot 或 validInfo 时
           if (this.$slots.valid || this.validInfo) this.validateDone(e, validateCallback)
           this.$emit('valid')
         },
+        // 验证集合 通过返回 true，不通过返回 false
+        validating: function (value) {
+          // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
+          if (!this.validateRequired(value)) return false
+          // 长度验证（传入字符串长度为 0、minlength 小于 0、minlength 大于 maxlength 不做校验直接返回 true，验证通过返回 true）
+          if (!this.validateLength(value)) return false
+          // 正则校验（传入字符串长度为 0、无正则表达式 不做校验直接返回 true，验证通过返回 true）
+          if (!this.validateRange(value)) return false
+          // 自定义验证（用户自定义验证函数，验证通过返回 true）
+          if (!this.validateCustomize(value, this.valid)) return false
+          // 验证成功
+          return true
+        },
         // 开始验证时 复位 之前的状态
-        validateReset: function(e, resetCallback = null) {
+        validateReset: function (e, resetCallback = null) {
           tools.obj.type.isFunction(resetCallback)
-          ? resetCallback()
-          : this.removeValidClass(e) // 移除可能的 is-valid
+            ? resetCallback()
+            : this.removeValidClass(e) // 移除可能的 is-valid
         },
         // 验证成功后 执行的方法
-        validateDone: function(e, validateCallback = null) {
+        validateDone: function (e, validateCallback = null) {
           tools.obj.type.isFunction(validateCallback)
-          ? validateCallback()
-          : this.addValidClass(e)
+            ? validateCallback()
+            : this.addValidClass(e)
         },
         // 验证失败后 执行的方法
-        inValidateDone: function(e, inValidateCallback = null) {
+        inValidateDone: function (e, inValidateCallback = null) {
           inValidateCallback ? inValidateCallback() : this.addInValidClass(e)
         },
         // 验证成功后 添加 class
-        addValidClass: function(e) {
+        addValidClass: function (e) {
           tools.dom.addClass(e.target, this.validClass)
         },
         // 移除 验证成功 的 class
-        removeValidClass: function(e) {
+        removeValidClass: function (e) {
           tools.dom.removeClass(e.target, this.validClass)
         },
         // 验证失败后 添加 class
-        addInValidClass: function(e) {
+        addInValidClass: function (e) {
           tools.dom.addClass(e.target, this.inValidClass)
         },
         // 移除 验证失败 的 class
-        removeInValidClass: function(e) {
+        removeInValidClass: function (e) {
           tools.dom.removeClass(e.target, this.inValidClass)
         },
         // 非空验证（验证通过返回 true）
@@ -202,7 +210,7 @@ export default {
           return true
         },
         // 正则校验（验证通过返回 true）
-        validateRange: function (value, regex) {
+        validateRange: function (value, regex = this.defaultRegex || this.pattern) {
           // 传入字符串长度为 0、无正则表达式 不做校验直接返回 true
           if (value.length === 0 || !regex) return true
           var patternRegex = new RegExp(regex);
@@ -246,7 +254,7 @@ export default {
         list: props.Array,
         selected: {
           type: [String, Number, Array, Object],
-          default: function() {
+          default: function () {
             return this.isMultiple ? [] : "";
           }
         },
@@ -264,10 +272,10 @@ export default {
         }
       },
       watch: {
-        selected: function(value) {
+        selected: function (value) {
           this.selectedValue = value
         },
-        selectedValue: function(value) {
+        selectedValue: function (value) {
           this.$emit('select:selected', value)
         },
       },
@@ -276,11 +284,11 @@ export default {
       props: {
         item: {
           type: [String, Number, Array, Object],
-          validator: function(value) {
+          validator: function (value) {
             var self = this
             return !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value) ||
-            value.every && value.every(e => e[self.primaryKey]) ||
-            tools.obj.type.isObject(value) && value[self.primaryKey]
+              value.every && value.every(e => e[self.primaryKey]) ||
+              tools.obj.type.isObject(value) && value[self.primaryKey]
           },
         },
         selected: [String, Number, Array, Object],
@@ -291,17 +299,17 @@ export default {
         isMultiple: props.Boolean,
       },
       computed: {
-        selectedMap: function() {
+        selectedMap: function () {
           const self = this
           return this.isMultiple
-          ? this.selected && this.selected.map && this.selected.map(e => e && e[self.primaryKey] || e)
-          : this.selected && this.selected[this.primaryKey] || this.selected
+            ? this.selected && this.selected.map && this.selected.map(e => e && e[self.primaryKey] || e)
+            : this.selected && this.selected[this.primaryKey] || this.selected
         },
-        isSelected: function() {
+        isSelected: function () {
           if (!this.selectedMap || this.selectedMap && this.selectedMap.length === 0) return false
           return this.isMultiple
-          ? this.selectedMap.includes && this.selectedMap.includes(this.item[this.primaryKey] || this.item)
-          : (this.item && this.item[this.primaryKey] || this.item) === this.selectedMap
+            ? this.selectedMap.includes && this.selectedMap.includes(this.item[this.primaryKey] || this.item)
+            : (this.item && this.item[this.primaryKey] || this.item) === this.selectedMap
         },
       },
     },

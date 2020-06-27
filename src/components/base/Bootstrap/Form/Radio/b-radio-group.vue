@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     input: function(e) {
-      this.validator(e, null, null,
+      this.validator(e, null,
         () => { this.validateClass = '' },
         () => { this.validateClass = this.validClass },
         () => { this.validateClass = this.inValidClass },
