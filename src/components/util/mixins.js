@@ -96,17 +96,17 @@ export default {
     }, // btn
     validator: {
       props: {
+        unvalid: props.Boolean,
         required: props.Boolean,
-        minlength: props.UInt,
+        minlength: props.Int,
         maxlength: {
           ...props.UInt,
           default: 64,
         },
         pattern: [String, RegExp],
+        valid: props.Function,
         validInfo: props.String,
         invalidInfo: props.String,
-        unvalid: props.Boolean,
-        valid: props.Function,
       },
       data() {
         return {
