@@ -124,8 +124,6 @@ export default {
           const value = hasData ? (data.trim ? data.trim() : data) : (e.target ? e.target.value.trim() : e.value.trim())
           // 开始验证时 复位 之前的状态
           this.validateReset(e, resetCallback)
-          // 移除可能的 is-invalid
-          this.removeInValidClass(e)
           // 验证失败
           if (!this.validating(value)) { this.inValidateDone(e, inValidateCallback); return }
           // 验证成功
@@ -148,15 +146,16 @@ export default {
         },
         // 开始验证时 复位 之前的状态
         validateReset: function (e, resetCallback = null) {
-          tools.obj.type.isFunction(resetCallback)
-            ? resetCallback()
-            : this.removeValidClass(e) // 移除可能的 is-valid
+          if (tools.obj.type.isFunction(resetCallback)) {
+            resetCallback()
+          } else {
+            this.removeValidClass(e) // 移除可能的 is-valid
+            this.removeInValidClass(e) // 移除可能的 is-invalid
+          }
         },
         // 验证成功后 执行的方法
         validateDone: function (e, validateCallback = null) {
-          tools.obj.type.isFunction(validateCallback)
-            ? validateCallback()
-            : this.addValidClass(e)
+          validateCallback ? validateCallback() : this.addValidClass(e)
         },
         // 验证失败后 执行的方法
         inValidateDone: function (e, inValidateCallback = null) {
@@ -164,6 +163,7 @@ export default {
         },
         // 验证成功后 添加 class
         addValidClass: function (e) {
+          this.removeInValidClass(e) // 添加前 移除可能的 失败验证 class
           tools.dom.addClass(e.target, this.validClass)
         },
         // 移除 验证成功 的 class
@@ -172,6 +172,7 @@ export default {
         },
         // 验证失败后 添加 class
         addInValidClass: function (e) {
+          this.removeInValidClass(e) // 添加前 移除可能的 成功验证 class
           tools.dom.addClass(e.target, this.inValidClass)
         },
         // 移除 验证失败 的 class
