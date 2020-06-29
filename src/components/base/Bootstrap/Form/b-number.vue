@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-input-group :size="size" @keyup.native.up="add" @keyup.native.down="subn">
+    <b-input-group :size="size">
       <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
         <basic-button outline :disabled="subButtomDisabled" @click="subn">
           <slot name="sub">{{ subValue }}</slot>
@@ -9,15 +9,19 @@
       <basic-text
         v-model.number="number"
         :text-align="textAlign"
-        :min="dateMin"
-        :max="dateMax"
-        :step="dateStep"
+        :min="dataMin"
+        :max="dataMax"
+        :step="dataStep"
         :disabled="disabled"
         :readonly="readonly || textReadonly"
         v-bind="$attrs"
         v-on="$listeners"
         @click.native="click($event)"
         @change.native="change"
+        @keyup.native.exact.up="add"
+        @keyup.native.exact.down="subn"
+        @keyup.native.shift.exact.up="superAdd"
+        @keyup.native.shift.exact.down="superSubn"
       />
       <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
         <basic-button outline :disabled="addButtonDisabled" @click="add">
@@ -103,23 +107,23 @@ export default {
     };
   },
   computed: {
-    dateStep: function() {
+    dataStep: function() {
       return this.toNmuber(this.step);
     },
-    dateMin: function() {
+    dataMin: function() {
       return this.toNmuber(this.min);
     },
-    dateMax: function() {
+    dataMax: function() {
       return this.toNmuber(this.max, 100);
     },
     dataAccuracy: function() {
       return this.toNmuber(this.accuracy);
     },
     subButtomDisabled: function() {
-      return this.number <= this.dateMin || this.disabled;
+      return this.number <= this.dataMin || this.disabled;
     },
     addButtonDisabled: function() {
-      return this.number >= this.dateMax || this.disabled;
+      return this.number >= this.dataMax || this.disabled;
     }
   },
   watch: {
@@ -134,7 +138,7 @@ export default {
   },
   methods: {
     innitNumber: function() {
-      this.number = this.formatNumber(this.toNmuber(this.value, this.dateMin));
+      this.number = this.formatNumber(this.toNmuber(this.value, this.dataMin));
     },
     initInfo: function() {
       this.msg = this.info || "";
@@ -159,7 +163,7 @@ export default {
       }
       // 返回精度最高的
       this.setPrecision = Math.max(
-        this.getNumberPrecision(this.dateStep),
+        this.getNumberPrecision(this.dataStep),
         this.getNumberPrecision(this.toNmuber(this.value))
       );
     },
@@ -173,8 +177,8 @@ export default {
     },
     change: async function() {
       if (this.number === "") return;
-      if (this.number < this.dateMin) this.number = this.dateMin;
-      if (this.number > this.dateMax) this.number = this.dateMax;
+      if (this.number < this.dataMin) this.number = this.dataMin;
+      if (this.number > this.dataMax) this.number = this.dataMax;
       this.number = this.formatNumber(this.number);
       event.target.value = this.number;
       // 配合 v-model
@@ -183,15 +187,27 @@ export default {
     subn: function() {
       if (this.disabled || this.readonly) return;
       this.number = Number(this.number);
-      this.number -= this.dateStep;
+      this.number -= this.dataStep;
       this.change();
     },
     add: function() {
       if (this.disabled || this.readonly) return;
       this.number = Number(this.number);
-      this.number += this.dateStep;
+      this.number += this.dataStep;
       this.change();
-    }
+    },
+    superSubn: function() {
+      if (this.disabled || this.readonly) return
+      this.number = Number(this.number)
+      this.number -= this.dataStep * 10
+      this.change()
+    },
+    superAdd: function() {
+      if (this.disabled || this.readonly) return
+      this.number = Number(this.number)
+      this.number += this.dataStep * 10
+      this.change()
+    },
   }
 };
 </script>
