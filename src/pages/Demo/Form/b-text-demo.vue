@@ -167,7 +167,7 @@
 
 <script>
 import BText from "@/components/base/Bootstrap/Form/b-text.vue";
-import BFormLabel from '@/components/base/Bootstrap/Form/b-form-lanel.vue'
+import BFormLabel from '@/components/base/Bootstrap/Form/Other/b-form-lanel.vue'
 
 export default {
   name: "b-text-demo",
