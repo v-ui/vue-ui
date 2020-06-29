@@ -7,8 +7,8 @@
       :style="mixStyle"
       :id="id"
       :value="value"
-      :checked="value ? checked === value : checked"
-      :aria-checked="value ? checked === value : checked"
+      :checked="isChecked"
+      :aria-checked="isChecked"
       :disabled="disabled"
       :aria-disabled="disabled"
       v-bind="$attrs"
@@ -52,8 +52,13 @@ export default {
         return "Radio-" + tools.random.getRandomString();
       }
     },
-    checked: [String, Boolean],
+    checked: [String, Boolean, ],
     inline: util.props.Boolean,
+  },
+  data() {
+    return {
+      checkedValue: this.checked,
+    }
   },
   computed: {
     inputListeners: function() {
@@ -72,7 +77,17 @@ export default {
           }
         }
       );
-    }
-  }
+    },
+    isChecked: function() {
+      if (tools.obj.type.isBoolean(this.checkedValue)) return this.checkedValue
+      else if (tools.obj.type.isString(this.checkedValue)) return this.checkedValue === this.value
+      return false
+    },
+  },
+  watch: {
+    checked: function(value) {
+      this.checkedValue = value
+    },
+  },
 };
 </script>

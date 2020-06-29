@@ -10,8 +10,8 @@
       :value="value"
       :disabled="disabled"
       :aria-disabled="disabled"
-      :checked="isChecked"
-      :aria-checked="isChecked"
+      :checked="checkedValue"
+      :aria-checked="checkedValue"
       v-bind="$attrs"
       v-on="inputListeners"
     >
@@ -64,7 +64,7 @@ export default {
   },
   data() {
     return {
-      isChecked: this.checked,
+      checkedValue: this.checked,
     };
   },
   computed: {
@@ -92,29 +92,13 @@ export default {
       this.setIndeterminate(val);
     },
     checked: function(val) {
-      this.isChecked = val;
+      this.checkedValue = val;
     }
   },
   mounted() {
     if (this.indeterminate) this.setIndeterminate(Number(this.indeterminate));
   },
   methods: {
-    // validator: function(e) {
-    //   if (this.unvalid) return; // unvalid 时不校验
-    //   if (this.disabled) return; // disabled 时不校验
-    //   if (!this.required) return;
-    //   tools.dom.removeClass(e.target, "is-valid"); // 移除可能的 is-valid
-    //   // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
-    //   if (!e.target.checked) {
-    //     tools.dom.addClass(e.target, "is-invalid");
-    //     return;
-    //   }
-    //   tools.dom.removeClass(e.target, "is-invalid"); // 移除可能的 is-invalid
-    //   // 当存在 valid slot 或 validInfo 时
-    //   if (this.$slots.valid || this.validInfo)
-    //     tools.dom.addClass(e.target, "is-valid");
-    //   this.$emit("valid");
-    // },
     setIndeterminate: function(val) {
       // 0 - 未 选 择
       // 1 - 部分选择
@@ -122,14 +106,14 @@ export default {
       if (val == 0) {
         if (this.$refs.checkbox.indeterminate)
           this.$refs.checkbox.indeterminate = false;
-        this.isChecked = false;
+        this.checkedValue = false;
       } else if (val == 1) {
         tools.dom.addAttr(this.$refs.checkbox, "indeterminate", "true");
-        this.isChecked = false;
+        this.checkedValue = false;
       } else {
         if (this.$refs.checkbox.indeterminate)
           this.$refs.checkbox.indeterminate = false;
-        this.isChecked = true;
+        this.checkedValue = true;
       }
     }
   },

@@ -33,30 +33,18 @@ import BInfo from "@/components/Basic/basic-info.vue";
 export default {
   name: "b-select",
   components: { BasicSelect, BValid, BInfo },
-  mixins: [util.mixins.form.base, util.mixins.form.validator],
+  mixins: [util.mixins.form.base, util.mixins.select.select, util.mixins.form.validator],
   inheritAttrs: false,
-  model: {
-    prop: "selected",
-    event: "select:selected"
-  },
   props: {
-    list: util.props.Array,
     disabled: util.props.Boolean,
     info: util.props.String,
     hideNull: util.props.Boolean,
-    selected: {
-      type: [String, Number, Array, Object],
-      default: function() {
-        return this.multiple ? [] : "";
-      }
-    },
     row: {
       type: [Number, String],
       default: function() {
         return this.multiple ? this.list.length + 1 : null;
       },
     },
-    multiple: util.props.Boolean,
   },
   data() {
     return {

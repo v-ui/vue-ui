@@ -227,7 +227,7 @@ export default {
         { value: "value2", label: "value2" },
         { value: "disabled radio", label: "disabled checkbox", disabled: true }
       ],
-      values: ["value2"]
+      values: [{ value: "value2", label: "value2" }],
     };
   }
 };

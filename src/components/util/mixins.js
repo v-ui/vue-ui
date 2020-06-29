@@ -246,6 +246,68 @@ export default {
     }, // readonly
   }, // form
   select: {
+    check: {
+      model: {
+        prop: 'checked',
+        event: 'check:change',
+      },
+      props: {
+        list: {
+          ...props.Array,
+          validator: function (value) {
+            var self = this
+            return !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value) ||
+              value.every && value.every(e => e[self.primaryKey]) ||
+              tools.obj.type.isObject(value) && value[self.primaryKey]
+          },
+        },
+        checked: {
+          type: [Array, Object],
+        },
+        primaryKey: {
+          ...props.String,
+          default: 'id',
+        },
+      },
+      data() {
+        return {
+          isMultiple: false,
+          checkedValues: null,
+        }
+      },
+      mounted() {
+        if (this.isMultiple) {
+          this.checkedValues = this.checked && tools.obj.type.isArray(this.checked) ? this.checked : []
+        } else {
+          this.checkedValues = this.checked && tools.obj.type.isObject(this.checked) ? this.checked : {}
+        }
+      },
+      watch: {
+        checked: function (value) {
+          this.checkedValues = value
+        },
+        checkedValues: function (value) {
+          this.$emit('check:change', value)
+        },
+      },
+      computed: {
+        checkedMap: function () {
+          const self = this
+          return this.isMultiple
+            ? this.checkedValues && this.checkedValues.map && this.checkedValues.map(e => e && e[self.primaryKey] || e)
+            : this.checkedValues && this.checkedValues[this.primaryKey] || this.checkedValues
+        },
+      },
+      methods: {
+        isChecked: function(item) {
+          if (!this.checkedMap || this.checkedMap && this.checkedMap.length === 0) return false
+          debugger
+          return this.isMultiple
+            ? this.checkedMap.includes && this.checkedMap.includes(item[this.primaryKey] || item)
+            : (item && item[this.primaryKey] || item) === this.checkedMap
+        },
+      },
+    },
     select: {
       model: {
         prop: 'selected',

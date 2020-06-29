@@ -1,18 +1,18 @@
 <template>
   <div>
     <template v-for="(item, index) in list">
-      <redio
+      <b-redio
         :key="index"
-        v-bind="$attrs"
         :mix-class="validateClass"
         unvalid
         :name="name"
         :value="item.value || item"
         :label="item.label"
-        :checked="value"
+        :checked="isChecked(item)"
         :disabled="item.disabled || disabled"
-        v-on="inputListeners"
-        @input="input($event)"
+        v-bind="$attrs"
+        v-on="$listeners"
+        @input="input($event, item)"
       >
         <template v-if="list.length - 1 == index" #valid>
           <slot name="valid">{{ validInfo }}</slot>
@@ -20,7 +20,7 @@
         <template v-if="list.length - 1 == index" #invalid>
           <slot name="invalid">{{ invalidInfo }}</slot>
         </template>
-      </redio>
+      </b-redio>
     </template>
     <b-info :info="info" />
   </div>
@@ -29,21 +29,19 @@
 <script>
 import util from "@/components/util/index.js";
 
-import redio from "./b-radio";
+import BRedio from "./b-radio";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
   name: "b-radio-group",
-  components: { redio, BInfo },
-  mixins: [util.mixins.form.base, util.mixins.form.validator],
+  components: { BRedio, BInfo },
+  mixins: [util.mixins.select.check, util.mixins.form.validator],
   inheritAttrs: false,
-  model: {
-    prop: "value",
-    event: "raido:change"
-  },
   props: {
-    value: util.props.String,
-    list: util.props.Array,
+    primaryKey: {
+      ...util.props.String,
+      default: "value"
+    },
     info: util.props.String,
     disabled: util.props.Boolean,
     name: {
@@ -53,16 +51,20 @@ export default {
   },
   data() {
     return {
-      validateClass: ""
+      validateClass: "",
+      isMultiple: false,
     };
   },
   methods: {
-    input: function(e) {
-      this.validator(e, null,
-        () => { this.validateClass = '' },
-        () => { this.validateClass = this.validClass },
-        () => { this.validateClass = this.inValidClass },
-      )
+    input: function(event, item) {
+      if (event.target.checked) {
+        this.checkedValues = item
+          this.validator(event, this.checkedValues,
+          () => { this.validateClass = '' },
+          () => { this.validateClass = this.validClass },
+          () => { this.validateClass = this.inValidClass },
+        )
+      }
     },
   },
 };

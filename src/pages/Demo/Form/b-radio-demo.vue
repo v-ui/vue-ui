@@ -176,7 +176,7 @@ export default {
         { value: "value2", label: "value2" },
         { value: "disabled radio", label: "disabled radio", disabled: true }
       ],
-      value: "value2",
+      value: { value: "value2", label: "value2" },
       buttongrouplist: [
         { value: "value1", label: "value1" },
         { value: "value2", label: "value2" },

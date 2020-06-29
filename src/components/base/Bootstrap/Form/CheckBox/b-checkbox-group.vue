@@ -8,11 +8,11 @@
         unvalid
         :label="item.label"
         :value="item.value || item"
-        :checked="values.includes(item.value)"
+        :checked="isChecked(item)"
         :disabled="item.disabled || disabled"
         v-bind="$attrs"
         v-on="$listeners"
-        @input="getCheckedValues($event)"
+        @input="input($event, item)"
       >
         <template v-if="list.length - 1 == index" #valid>
           <slot name="valid">{{ validInfo }}</slot>
@@ -35,37 +35,36 @@ import BInfo from "@/components/Basic/basic-info.vue";
 export default {
   name: "b-checkbox-group",
   components: { BCheckbox, BInfo },
-  mixins: [util.mixins.form.base, util.mixins.form.validator],
+  mixins: [util.mixins.select.check, util.mixins.form.validator],
   inheritAttrs: false,
-  model: {
-    prop: "values",
-    event: "chebox:change"
-  },
   props: {
-    list: util.props.Array,
-    values: util.props.Array,
+    primaryKey: {
+      ...util.props.String,
+      default: "value"
+    },
     info: util.props.String,
     disabled: util.props.Boolean
   },
   data() {
     return {
-      validateClass: ""
+      validateClass: "",
+      isMultiple: true,
     };
   },
   methods: {
-    getCheckedValues: function(event) {
+    input: function(event, item) {
       if (event.target.checked) {
-        this.values.push(event.target.value);
+        this.checkedValues.push(item);
       } else {
-        if (this.values.includes(event.target.value))
-          this.values.splice(this.values.indexOf(event.target.value), 1);
+        let index = this.checkedMap.indexOf(event.target.value);
+        if (index >= 0) this.checkedValues.splice(index, 1);
       }
-      this.validator(event, this.values,
-        () => { this.validateClass = '' },
-        () => { this.validateClass = this.validClass },
-        () => { this.validateClass = this.inValidClass },
-      )
-    },
-  }
+      this.validator( event, this.checkedValues,
+        () => { this.validateClass = ""; },
+        () => { this.validateClass = this.validClass; },
+        () => { this.validateClass = this.inValidClass; }
+      );
+    }
+  },
 };
 </script>
