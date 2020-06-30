@@ -21,8 +21,8 @@ export default {
     },
     size: {
       type: String,
-      default: "border",
-      validator: value => ["sm"].includes(value)
+      default: "",
+      validator: value => ['', "sm"].includes(value)
     },
   },
   computed: {

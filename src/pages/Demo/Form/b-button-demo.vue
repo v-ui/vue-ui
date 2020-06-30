@@ -160,7 +160,7 @@ export default {
   components: { BasicButton, BasicReset, BasicSubmit, BButtonGroup, BButtonToolbar },
   data() {
     return {
-      colors: variables.base.color.bg,
+      colors: variables.base.color.base,
       BTextValue: "BTextValue",
       list: [
         { value: "value1", text: "text1" },

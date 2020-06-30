@@ -7,16 +7,14 @@
       style="min-width: 300px; max-width: 600px;"
       :style="objStyle"
       role="alert"
-      @mouseenter="clearTimer()"
-      @mouseleave="countDown()"
+      @mouseenter="clearTimer"
+      @mouseleave="countDown"
     >
       <h4 v-if="$slots.header" class="alert-heading">
         <slot name="header" />
       </h4>
       <div class="overflow-auto" style="max-height: 200px;">
-        <slot>
-          <!-- <alert-link>{{countDownSec}}</alert-link> -->
-        </slot>
+        <slot />
         <sr-msg>{{ fillsrMsg }}</sr-msg>
       </div>
       <div v-if="$slots.footer">
@@ -40,15 +38,12 @@
 <script>
 import util from "@/components/util/index.js";
 
-// import AlertLink from './b-alert-link'
 import srMsg from "@/components/Basic/basic-sr-msg.vue";
-
 import TranOutIn from "@/components/transition/tran-out-in.vue";
 
 export default {
   name: "b-alert",
   components: {
-    // AlertLink,
     srMsg,
     TranOutIn
   },
@@ -67,14 +62,15 @@ export default {
   },
   data() {
     return {
-      isShow: false,
+      isShow: this.show,
       dismissCountDownTimerId: null
     };
   },
   computed: {
     objClass: function() {
-      return `alert-${this.color}
-                ${this.showDismisLable ? "alert-dismissible" : ""}`;
+      let color = this.color ? `alert-${this.color}` : ''
+      let showDismisLable = `${this.showDismisLable ? "alert-dismissible" : ""}`
+      return `${color} ${showDismisLable}`
     },
     objStyle: function() {
       let position = {};
@@ -103,15 +99,8 @@ export default {
       //return this.dismissible
     },
     fillsrMsg: function() {
-      return this.srMsg || this.variant;
+      return this.srMsg || this.color;
     }
-  },
-  created() {
-    this.isShow = this.show;
-    if (this.countDownDisdismis) this.countDown();
-  },
-  destroyed() {
-    this.clearTimer();
   },
   watch: {
     show: function(newVal) {
@@ -123,6 +112,12 @@ export default {
     variant: function(newVal, oldVal) {
       if (newVal !== oldVal) this.reset();
     }
+  },
+  created() {
+    if (this.countDownDisdismis) this.countDown();
+  },
+  destroyed() {
+    this.clearTimer();
   },
   methods: {
     alert: function() {
