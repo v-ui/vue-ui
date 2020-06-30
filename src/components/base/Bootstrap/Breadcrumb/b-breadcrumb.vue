@@ -9,7 +9,7 @@
         :aria-current="obj.isActive ? 'page' : ''"
       >
         <slot>
-          <base-a :href="obj.path">{{obj.name}}</base-a>
+          <base-a :href="obj.path">{{ obj.label }}</base-a>
         </slot>
       </li>
     </ol>
