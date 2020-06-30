@@ -4,7 +4,7 @@
       v-show="$slots.default && isShow"
       class="alert position-absolute"
       :class="objClass"
-      style="min-width: 300px; max-width: 600px;"
+      style="min-width: 300px;"
       :style="objStyle"
       role="alert"
       @mouseenter="clearTimer"
@@ -50,7 +50,7 @@ export default {
   props: {
     show: util.props.Boolean,
     color: util.props.color,
-    width: util.props.width,
+    size: util.props.size,
     position: util.props.position,
     srMsg: util.props.String,
     dismissible: util.props.Boolean,
@@ -70,7 +70,11 @@ export default {
     objClass: function() {
       let color = this.color ? `alert-${this.color}` : ''
       let showDismisLable = `${this.showDismisLable ? "alert-dismissible" : ""}`
-      return `${color} ${showDismisLable}`
+      let size = ''
+      if (this.size === 'lg') size = 'w-75'
+      else if (this.size == 'sm') size = 'w-25'
+      else size = 'w-50'
+      return `${color} ${showDismisLable} ${size}`
     },
     objStyle: function() {
       let position = {};
@@ -91,7 +95,7 @@ export default {
           position = { bottom: 0, right: 0 };
           break;
       }
-      return Object.assign(position, { width: `${this.width}%` });
+      return position
     },
     showDismisLable: function() {
       // 保证在任何时候弹出框都可以关闭
