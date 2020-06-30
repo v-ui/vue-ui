@@ -61,7 +61,6 @@ export default {
     {
       SubsystemName: 'Box',
       Modules: [
-        { path: 'box-accordion', name: 'box-accordion', component: async () => await import(/* webpackChunkName: "box" */'@/pages/Demo/Box/box-accordion-demo.vue'), },
         { path: 'box-tabs', name: 'box-tabs', component: async () => await import(/* webpackChunkName: "box" */'@/pages/Demo/Box/box-tabs-demo.vue'), },
       ]
     },

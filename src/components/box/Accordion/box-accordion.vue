@@ -1,21 +1,11 @@
 <template>
   <div class="card">
-    <div class="card-header d-flex justify-content-between">
-      <h4 class="mb-0">{{ title }}</h4>
-      <i
-        v-if="isShow"
-        v-coll:[id].show="'#' + id"
-        role="button"
-        class="fas fa-chevron-up mb-0"
-        @click="isShow = false"
-      />
-      <i
-        v-else
-        v-coll:[id]="'#' + id"
-        class="fas fa-chevron-down collapsed mb-0"
-        role="button"
-        @click="isShow = true"
-      />
+    <div class="card-header d-flex justify-content-between" v-coll:[id]="'#' + id"  @click="isShow = !isShow">
+      <slot name="header">
+        <h4 class="mb-0">{{ title }}</h4>
+      </slot>
+      <i v-if="isShow"  role="button" class="fas fa-chevron-up mb-0" />
+      <i v-else  class="fas fa-chevron-down collapsed mb-0" role="button" />
     </div>
     <div :id="id" class="collapse" :class="{ show: show }" :data-parent="parent">
       <div class="card-body">
