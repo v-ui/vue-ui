@@ -12,7 +12,7 @@ export default {
   props: {
     color: {
       ...util.props.textColor,
-      default: "body"
+      default: ""
     },
     status: {
       type: String,

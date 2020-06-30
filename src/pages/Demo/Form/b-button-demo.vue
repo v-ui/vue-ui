@@ -31,12 +31,23 @@
     </div>
     <div class="row py-1">
       <font class="col-1">size:</font>
-      <font class="mx-1">default:</font>
+      <font class="col-auto">default:</font>
       <basic-button value="text" />
-      <font class="mx-1">lg:</font>
+      <font class="col-auto">lg:</font>
       <basic-button value="lg size" size="lg" />
-      <font class="mx-1">sm:</font>
+      <font class="col-auto">sm:</font>
       <basic-button value="sm size" size="sm" />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">loading:</font>
+      <font class="col-auto">default:</font>
+      <basic-button loading />
+      <font class="col-auto">outline:</font>
+      <basic-button loading outline />
+      <font class="col-auto">lg size:</font>
+      <basic-button loading size="lg" />
+      <font class="col-auto">sm size:</font>
+      <basic-button loading size="sm" />
     </div>
     <div class="row my-1">
       <font class="col-1">color:</font>

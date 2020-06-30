@@ -6,79 +6,79 @@
     <hr />
     <div class="row">
       <font class="col-1">int:</font>
-      <b-number class="col-11" />
+      <b-number />
     </div>
     <div class="row">
       <font class="col-1">float:</font>
-      <b-number class="col-11" value="0.5" />
+      <b-number value="0.5" />
     </div>
     <div class="row">
       <font class="col-1">step:</font>
-      <b-number class="col-11" value="0.5" step="0.1" />
+      <b-number value="0.5" step="0.1" />
     </div>
     <div class="row">
       <font class="col-1">readonly:</font>
-      <b-number class="col-11" readonly />
+      <b-number readonly />
     </div>
     <div class="row">
       <font class="col-1">disabled:</font>
-      <b-number class="col-11" disabled />
+      <b-number disabled />
     </div>
     <div class="row">
       <font class="col-1">textReadonly:</font>
-      <b-number class="col-11" textReadonly />
+      <b-number textReadonly />
     </div>
     <div class="row">
       <font class="col-1">placeholder:</font>
-      <b-number class="col-11" placeholder="placeholder text" />
+      <b-number placeholder="placeholder text" />
     </div>
     <div class="row">
       <font class="col-1">
         min
         <br />max:
       </font>
-      <b-number class="col-11" min="5" max="10" placeholder="只能输入 5-10 之间的数" />
+      <b-number min="5" max="10" placeholder="只能输入 5-10 之间的数" />
     </div>
     <div class="row">
       <font class="col-1">hideButton:</font>
-      <b-number class="col-11" placeholder="hidebutton text" hideButton />
+      <b-number placeholder="hidebutton text" hideButton />
     </div>
     <div class="row">
       <font class="col-1">size(lg):</font>
-      <b-number class="col-11" size="lg" />
+      <b-number size="lg" />
     </div>
     <div class="row">
       <font class="col-1">size(sm):</font>
-      <b-number class="col-11" size="sm" />
+      <b-number size="sm" />
     </div>
     <div class="row">
       <font class="col-1">info:</font>
-      <b-number class="col-11" info="info text" />
+      <b-number info="info text" />
     </div>
     <div class="row">
       <font class="col-1">prompt:</font>
-      <b-number class="col-11" prompt />
+      <b-number prompt />
     </div>
     <div class="row">
       <font class="col-1">
         info
         <br />prompt:
       </font>
-      <b-number class="col-11" info="info text" step="0.1" prompt />
+      <b-number info="info text" step="0.1" prompt />
     </div>
     <div class="row">
       <font class="col-1">
         subValue
         <br />addValue
       </font>
-      <b-number class="col-11" subValue="sub" addValue="add" step="0.1" />
+      <b-number subValue="sub" addValue="add" step="0.1" />
     </div>
     <div class="row">
       <font class="col-1">
         sub slot
         <br />add slot
       </font>
-      <b-number class="col-11" step="0.1">
+      <b-number step="0.1">
         <template slot="sub">sub slot</template>
         <template slot="add">add slot</template>
       </b-number>
@@ -106,19 +106,19 @@
     <hr />
     <div>
       default(accuracy 小于 0, value = 1，step = 1（默认）, 无小数位)
-      <b-number class="col-auto" value="1" prompt />
+      <b-number value="1" prompt />
     </div>
     <div>
       default(accuracy 小于 0, value = 1， step = 0.1, 1 位小数)
-      <b-number class="col-auto" value="1" step="0.1" prompt />
+      <b-number value="1" step="0.1" prompt />
     </div>
     <div>
       default(accuracy 小于 0, 初始化传入 value = 0.1 step = 0.02, 2 位小数)
-      <b-number class="col-auto" value="0.1" step="0.002" prompt />
+      <b-number value="0.1" step="0.002" prompt />
     </div>
     <div>
       default(accuracy = 3, 初始化传入 value = 0.1 step = 0.02, 3 位小数)
-      <b-number class="col-auto" value="0.1" step="0.02" accuracy="3" prompt />
+      <b-number value="0.1" step="0.02" accuracy="3" prompt />
     </div>
     <br />
     <h4>v-model</h4>
@@ -129,7 +129,7 @@
         <br />
         ({{ number }})
       </font>
-      <b-number class="col-11" v-model.number="number" />
+      <b-number v-model.number="number" />
     </div>
   </div>
 </template>

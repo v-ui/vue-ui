@@ -3,11 +3,12 @@
     v-if="!href"
     class="btn"
     :class="objClass"
-    :disabled="disabled"
+    :disabled="isDisabled"
+    :aria-disabled="isDisabled"
     :aria-pressed="active"
-    :aria-disabled="disabled"
     v-on="$listeners"
   >
+    <slot name="loading"><b-loading v-show="loading" size='sm' class="mr-1" /></slot>
     <slot>{{ value | worldUpperCase | firstUpperCase }}</slot>
     <sr-msg>{{ fillsrMsg }}</sr-msg>
   </button>
@@ -18,11 +19,13 @@
     :href="href"
     :active="active"
     :aria-pressed="active"
-    :disabled="disabled"
+    :disabled="isDisabled"
+    :aria-disabled="isDisabled"
     data-toggle="button"
     role="button"
     v-on="$listeners"
   >
+    <slot name="loading"><b-loading v-show="loading" size='sm' class="mr-1" /></slot>
     <slot>{{ value | worldUpperCase | firstUpperCase }}</slot>
     <sr-msg>{{ fillsrMsg }}</sr-msg>
   </base-a>
@@ -32,11 +35,12 @@
 import util from "@/components/util/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
+import BLoading from '@/components/base/Bootstrap/Loading/b-loading.vue'
 import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 export default {
   name: "basic-button",
-  components: { BaseA, srMsg },
+  components: { BaseA, BLoading, srMsg },
   mixins: [util.mixins.form.btn]
 };
 </script>

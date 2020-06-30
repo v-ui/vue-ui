@@ -79,6 +79,7 @@ export default {
         disabled: props.Boolean,
         outline: props.Boolean,
         block: props.Boolean,
+        loading: props.Boolean,
       },
       computed: {
         objClass: function () {
@@ -91,6 +92,9 @@ export default {
         },
         fillsrMsg: function () {
           return this.srMsg ? this.color : this.srMsg
+        },
+        isDisabled: function () {
+          return this.disabled || this.loading
         },
       },
     }, // btn
