@@ -1,11 +1,11 @@
 <template>
-  <span v-if="!href" class="badge align-self-center" :class="objClass" :style="objStyle">
+  <span v-if="!href" class="badge" :class="objClass" :style="objStyle">
     <slot />
-    <sr-msg>{{ fillsrMsg }}</sr-msg>
+    <sr-msg v-if="!this.$slots.default">{{ fillsrMsg }}</sr-msg>
   </span>
-  <base-a v-else class="badge align-self-center" :class="objClass" :href="href" :style="objStyle">
+  <base-a v-else class="badge" :class="objClass" :href="href" :style="objStyle">
     <slot />
-    <sr-msg>{{ fillsrMsg }}</sr-msg>
+    <sr-msg v-if="!this.$slots.default">{{ fillsrMsg }}</sr-msg>
   </base-a>
 </template>
 
@@ -22,7 +22,7 @@ export default {
   props: {
     color: {
       ...util.props.color,
-      default: "danger"
+      default: "info"
     },
     href: util.props.href,
     srMsg: util.props.String,
@@ -30,9 +30,9 @@ export default {
   },
   computed: {
     objClass: function() {
-      return `badge-${this.color} ${
-        !this.$slots.default || this.pill ? "badge-pill" : ""
-      }`;
+      let color = this.color ? `badge-${this.color}` : ''
+      let pill = !this.$slots.default || this.pill ? 'badge-pill' : ''
+      return `${color} ${pill}`;
     },
     objStyle: function() {
       return !this.$slots.default ? "height: 15px" : null;
