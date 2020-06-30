@@ -14,8 +14,9 @@ export default {
   },
   computed: {
     objClass: function() {
-      return `${this.size ? `btn-group-${this.size}` : ""}
-              ${this.vertical ? `btn-group-vertical` : ""}`
+      let size = this.size ? `btn-group-${this.size}` : ""
+      let vertical = this.vertical ? `btn-group-vertical` : ""
+      return `${size} ${vertical}`
     }
   }
 };
