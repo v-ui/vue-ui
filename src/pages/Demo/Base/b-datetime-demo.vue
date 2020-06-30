@@ -1,5 +1,5 @@
 <template>
-    <div class="Form">
+    <div>
         <h2>b-date-picker</h2>
         <hr>
         <div class="row mx-0">

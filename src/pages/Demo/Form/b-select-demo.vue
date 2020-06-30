@@ -1,5 +1,5 @@
 <template>
-  <div class="Form">
+  <div>
     <h2>b-select</h2>
     <hr>
     <h4>基础属性</h4>

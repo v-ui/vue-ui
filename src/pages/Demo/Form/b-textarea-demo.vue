@@ -1,5 +1,5 @@
 <template>
-  <div class="Form">
+  <div>
     <h2>b-textarea</h2>
     <hr>
     <br>

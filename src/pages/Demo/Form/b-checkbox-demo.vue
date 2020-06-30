@@ -1,6 +1,6 @@
 
 <template>
-  <div class="Form">
+  <div>
     <h2>b-checkbox</h2>
     <br />
     <h4>基础属性</h4>

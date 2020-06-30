@@ -1,5 +1,5 @@
 <template>
-  <div class="Form">
+  <div>
     <h2>b-input-group</h2>
     <hr />
     <h3>基础</h3>

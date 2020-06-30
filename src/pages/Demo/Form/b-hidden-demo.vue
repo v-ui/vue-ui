@@ -1,5 +1,5 @@
 <template>
-    <div class="Form">
+    <div>
         <h2>b-hidden(hidden 为隐藏元素)</h2>
         <hr>
         <div class="row">

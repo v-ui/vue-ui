@@ -1,5 +1,5 @@
 <template>
-  <div class="Form">
+  <div>
     <h2>b-dropdown</h2>
     <hr>
     <div class="row">

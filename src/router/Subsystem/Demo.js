@@ -21,6 +21,7 @@ export default {
         { path: 'b-nav', name: 'b-nav', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-nav-demo.vue'), },
         { path: 'b-pagination', name: 'b-pagination', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-pagination-demo.vue'), },
         { path: 'b-progress', name: 'b-progress', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-progress-demo.vue'), },
+        { path: 'b-swiper', name: 'b-swiper', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-swiper-demo.vue'), },
         { path: 'b-toast', name: 'b-toast', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-toast-demo.vue'), },
         { path: 'b-scrollspy', name: 'b-scrollspy', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-scrollspy-demo.vue'), },
       ]

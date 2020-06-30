@@ -1,5 +1,5 @@
 <template>
-  <div class="Form">
+  <div>
     <h2>b-button</h2>basic-button 中的属性在 basic-reset basic-submit 中是通用的
     <hr>
     <div class="row py-1">
