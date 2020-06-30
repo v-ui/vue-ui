@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>b-card</h2>
-    <hr>
+    <hr />
     <h3>Base</h3>
     <b-card>
       <b-card-title>Card Title</b-card-title>
@@ -21,9 +21,8 @@
     <h3>Header with nav</h3>
     <div>
       b-nav 的使用请参考
-      <a href="Demo-Base-b-nav">b-nav</a>
-      <br>
-      请勿加入 dropdown，这会对辅助技术用户不友好
+      <base-a href="Demo-Base-b-nav">b-nav</base-a>
+      <br />请勿加入 dropdown，这会对辅助技术用户不友好
     </div>
     <div class="row mx-1">
       <b-card>
@@ -44,7 +43,7 @@
         <b-card-link href="#">Card link</b-card-link>
       </b-card>
     </div>
-    <h3>Body(default)</h3>
+    <h3>(default)</h3>
     <b-card>
       <template #header>
         <b-card-title>Card Title</b-card-title>
@@ -53,6 +52,9 @@
         <b-card-text>Card Body</b-card-text>
       </template>
     </b-card>
+    <h3>Body</h3>
+    与 default 不同，使用 body slot 会替换 card-body 容器，一般用于复杂组件<br>
+    参考：<base-a href="#image">image</base-a> 和 <base-a href="#card-with-list">Card with list</base-a>
     <h3>Footer</h3>
     <div class="row mx-1">
       <div class="col-1" />
@@ -68,6 +70,36 @@
         <b-card-text>Card Footer</b-card-text>
       </template>
     </b-card>
+    <h3>image</h3>
+    <div class="row mx-1">
+      <b-card class="text-primary">
+        <template #image>
+          <b-card-image src="https://unsplash.it/720/560?random" />
+        </template>
+        <b-card-title>Card Title</b-card-title>
+        <b-card-subtitle>Card Subtitle</b-card-subtitle>
+        <b-card-text>Card text</b-card-text>
+        <template #footer>
+          <b-card-text>Card Footer</b-card-text>
+        </template>
+      </b-card>
+      <div class="col-1" />
+      <b-card>
+        <template #image>
+          <b-card-image src="https://unsplash.it/720/560?random" :top="false" />
+        </template>
+        <template #body>
+          <b-card-img-overlay>
+            <b-card-title>Card Title</b-card-title>
+            <b-card-subtitle>Card Subtitle</b-card-subtitle>
+            <b-card-text>Card text</b-card-text>
+          </b-card-img-overlay>
+        </template>
+        <template #footer>
+          <b-card-text>Card Footer</b-card-text>
+        </template>
+      </b-card>
+    </div>
     <h3>Card Group</h3>
     <b-card-group>
       <b-card>
@@ -166,8 +198,9 @@
         <b-card-text>Card text</b-card-text>
       </b-card>
     </b-card-columns>
-    <h3>Card with list</h3>b-list 的使用请参考
-    <a href="Demo-Base-b-list">b-list</a>
+    <h3>Card with list</h3>
+    b-list 的使用请参考
+    <base-a href="Demo-Base-b-list">b-list</base-a>
     <b-card>
       <template #header>
         <b-card-title>Card Nine</b-card-title>
@@ -176,7 +209,9 @@
         <b-card-text>Card text</b-card-text>
         <b-card-text>Card text</b-card-text>
       </template>
-      <b-list :list="list" flush />
+      <template #body>
+        <b-list :list="list" flush />
+      </template>
       <template #footer>
         <b-card-text>Card text</b-card-text>
         <b-card-link>Card link</b-card-link>
@@ -188,9 +223,11 @@
 <script>
 import BCard from "@/components/base/Bootstrap/Card/b-card.vue";
 import BCardLink from "@/components/base/Bootstrap/Card/b-card-link.vue";
-import '@/components/base/Bootstrap/Card/b-card-sub-components.js'
+import BCardImage from "@/components/base/Bootstrap/Card/b-card-image.vue";
+import "@/components/base/Bootstrap/Card/b-card-sub-components.js";
 
 import BNav from "@/components/base/Bootstrap/Navigation/Nav/b-nav.vue";
+import BaseA from "@/components/base/Content/A/c-a.vue";
 import BList from "@/components/base/Bootstrap/List/b-list.vue";
 
 export default {
@@ -198,8 +235,10 @@ export default {
   components: {
     BCard,
     BCardLink,
+    BCardImage,
     BNav,
-    BList,
+    BaseA,
+    BList
   },
   data() {
     return {
@@ -215,6 +254,6 @@ export default {
         { text: "disabled", disabled: true }
       ]
     };
-  },
+  }
 };
 </script>

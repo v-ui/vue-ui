@@ -25,6 +25,7 @@ import util from "@/components/util/index.js";
 /*
   图片 API
   https://www.cnblogs.com/lgqrlchinese/p/11386857.html
+  https://unsplash.it/1600/900?random
 */
 export default {
   name: "c-image",
