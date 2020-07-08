@@ -2,11 +2,10 @@
   <div class="form-group">
     <dropdown-picker
       ref="dropdownlist"
-      class="p-0"
       :class="[cClass, readonlyClass]"
       menu-width
       :show="show"
-      :value="trigger"
+      :label="trigger"
       :scroll="scroll"
       :disabled="disabled"
       :menu-height="menuHeight"

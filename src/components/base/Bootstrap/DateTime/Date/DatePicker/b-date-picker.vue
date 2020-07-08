@@ -2,7 +2,7 @@
   <dropdown-picker
     :class="[cClass, readonlyClass]"
     :placeholder="fillPlaceholder"
-    :value="showValue"
+    :label="showValue"
     :info="message"
     :show="show"
     show-footer
