@@ -1,43 +1,36 @@
 <template>
   <div class="form-group">
-    <dropdown-picker
+    <b-dropdown-picker
       ref="dropdownlist"
-      :class="[cClass, readonlyClass]"
+      :class="[readonlyClass]"
       menu-width
       :show="show"
-      :label="trigger"
-      :scroll="scroll"
+      :label="label"
       :disabled="disabled"
       :menu-height="menuHeight"
+      :placeholder="placeholder"
       @showOrHide="showOrHide"
     >
-      <b-text
-        v-if="search"
-        v-model="searchText"
-        hide-icon
-        class="m-1"
-        type="search"
-        :border="false"
-      />
-      <drop-item
+      <b-dropdown-header v-if="search" @click.native="headerClick">
+        <b-text v-model="searchText" hide-icon type="search" size="sm" :border="false" />
+      </b-dropdown-header>
+      <b-dropdown-divider v-if="search" />
+      <b-dropdown-item
         v-if="!searchText && !hideNull"
-        ref="item"
-        value
+        :label="placeholder"
         :disabled="disabled"
-        text="<Pleace select...>"
         @click.native="menuClick"
       />
-      <drop-item
+      <b-dropdown-item
         v-for="item in searchList"
         :key="item.value"
         :info="item.info"
-        :text="item.value"
-        :value="item.value"
+        :label="item.label"
         :active="item.value == selectValue"
         :disabled="item.disabled || disabled"
         @click.native="menuClick(item)"
       />
-    </dropdown-picker>
+    </b-dropdown-picker>
     <b-valid v-if="validInfo || $slots.valid" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
     </b-valid>
@@ -49,11 +42,12 @@
 </template>
 
 <script>
-import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import dropdownPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdown-picker.vue";
-import dropItem from "@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue";
+import BDropdownPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdown-picker.vue";
+import BDropdownHeader from "@/components/base/Bootstrap/Dropdown/b-dropdown-header.vue";
+import BDropdownDivider from '@/components/base/Bootstrap/Dropdown/b-dropdown-divider.vue'
+import BDropdownItem from "@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue";
 import BText from "@/components/base/Bootstrap/Form/b-text.vue";
 
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
@@ -61,7 +55,15 @@ import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
   name: "b-dropdown-list",
-  components: { dropdownPicker, dropItem, BText, BValid, BInfo },
+  components: {
+    BDropdownPicker,
+    BDropdownHeader,
+    BDropdownDivider,
+    BDropdownItem,
+    BText,
+    BValid,
+    BInfo
+  },
   mixins: [
     util.mixins.form.base,
     util.mixins.form.readonly,
@@ -79,85 +81,51 @@ export default {
     hideNull: util.props.Boolean,
     row: {
       ...util.props.UInt,
-      default: 10,
+      default: 10
     }
   },
   data() {
     return {
       show: null,
-      scroll: 0,
+      label: null,
       searchText: null,
       menuHeight: "0px",
       selectValue: this.value,
-      trigger: "<Pleace select...>"
+      placeholder: '<Pleace select...>',
     };
   },
   computed: {
     searchList: function() {
       return this.searchText
-        ? this.list.filter(
-            e =>
-              e.value &&
-              (e.value.includes(this.searchText) ||
-                e.text.includes(this.searchText))
-          )
-        : this.list;
+        ? this.list.filter(e => e.value && (e.value.includes(this.searchText) || e.label.includes(this.searchText)))
+        : this.list
     }
   },
   mounted: function() {
-    this.menuHeight = this.row * 32 + 10 + "px";
-    this.getScroll();
-    this.setTrigger(this.value);
+    this.menuHeight = this.row * 32 + 10 + "px"
+    this.setTrigger(this.value)
   },
   methods: {
     setTrigger: function(value) {
-      if (this.list && this.list.length && this.list.find) {
-        let obj = this.list.find(function(e) {
-          if (e.value == value) return e;
-        });
-        this.trigger = obj && obj.text ? obj.text : "<Pleace select...>";
-      } else {
-        this.trigger = "<Pleace select...>";
-      }
+      let obj =
+        this.list &&
+        this.list.find &&
+        this.list.find(e => { if (e.value == value) return e })
+      this.label = (obj && obj.label) || null
+    },
+    headerClick: function() {
+      this.show = true
     },
     menuClick: function(item) {
-      this.getScroll();
-      this.selectValue = item.value;
-      this.setTrigger(this.selectValue);
-      this.$emit("change", this.selectValue);
-      this.validator(this.selectValue);
-      this.searchText = null; // 清空查询字段
-      this.show = false;
+      this.show = false
+      this.selectValue = item.value
+      this.searchText = null // 清空查询字段
+      this.setTrigger(this.selectValue)
+      this.$emit("change", this.selectValue)
+      this.validator(this.$refs.dropdownlist.$el, this.selectValue)
     },
     showOrHide: function(value) {
-      this.show = value;
-    },
-    getScroll: async function() {
-      await this.$nextTick();
-      let index = 0;
-      const less = Number(this.row) / 2;
-      this.$el.firstChild.children[1].childNodes.forEach(function(node, i) {
-        if (
-          (node.className || node.classList) &&
-          tools.dom.hasClass(node, "active")
-        )
-          index = i < less ? 0 : i;
-      });
-      this.scroll = (index - less) * 32 + 10;
-    },
-    validator: function(value) {
-      if (this.disabled) return; // disabled 时不校验
-      let e = this.$refs.dropdownlist.$el;
-      tools.dom.removeClass(e, "is-valid"); // 移除可能的 is-valid
-      // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
-      if (!this.validateRequired(value)) {
-        tools.dom.addClass(e, "is-invalid");
-        return;
-      }
-      tools.dom.removeClass(e, "is-invalid"); // 移除可能的 is-invalid
-      // 当存在 valid slot 或 validInfo 时
-      if (this.$slots.valid || this.validInfo) tools.dom.addClass(e, "is-valid");
-      this.$emit("valid");
+      this.show = value
     }
   }
 };

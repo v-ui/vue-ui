@@ -1,6 +1,6 @@
 <template>
   <h6 class="dropdown-header mb-0">
-    <slot>{{ text }}</slot>
+    <slot>{{ label }}</slot>
     <b-info :info="info" />
   </h6>
 </template>
@@ -13,7 +13,7 @@ export default {
   name: "b-dropdown-header",
   components: { BInfo },
   props: {
-    text: util.props.String,
+    label: util.props.String,
     info: util.props.String,
   }
 };

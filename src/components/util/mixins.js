@@ -124,15 +124,16 @@ export default {
           if (this.readonly) return // readonly 时不校验
           if (this.disabled) return // disabled 时不校验
           // 验证函数不会对传入的数据进行处理
+          const elm = e.target || e
           const hasData = !tools.obj.type.isNull(data)
-          const value = hasData ? (data.trim ? data.trim() : data) : (e.target ? e.target.value.trim() : e.value.trim())
+          const value = hasData ? (data.trim ? data.trim() : data) : (elm.value && elm.value.trim && elm.value.trim() || '')
           // 开始验证时 复位 之前的状态
-          this.validateReset(e, resetCallback)
+          this.validateReset(elm, resetCallback)
           // 验证失败
-          if (!this.validating(value)) { this.inValidateDone(e, inValidateCallback); return }
+          if (!this.validating(value)) { this.inValidateDone(elm, inValidateCallback); return }
           // 验证成功
           // 当存在 valid slot 或 validInfo 时
-          if (this.$slots.valid || this.validInfo) this.validateDone(e, validateCallback)
+          if (this.$slots.valid || this.validInfo) this.validateDone(elm, validateCallback)
           this.$emit('valid')
         },
         // 验证集合 通过返回 true，不通过返回 false
@@ -168,20 +169,20 @@ export default {
         // 验证成功后 添加 class
         addValidClass: function (e) {
           this.removeInValidClass(e) // 添加前 移除可能的 失败验证 class
-          tools.dom.addClass(e.target, this.validClass)
+          tools.dom.addClass(e, this.validClass)
         },
         // 移除 验证成功 的 class
         removeValidClass: function (e) {
-          tools.dom.removeClass(e.target, this.validClass)
+          tools.dom.removeClass(e, this.validClass)
         },
         // 验证失败后 添加 class
         addInValidClass: function (e) {
           this.removeInValidClass(e) // 添加前 移除可能的 成功验证 class
-          tools.dom.addClass(e.target, this.inValidClass)
+          tools.dom.addClass(e, this.inValidClass)
         },
         // 移除 验证失败 的 class
         removeInValidClass: function (e) {
-          tools.dom.removeClass(e.target, this.inValidClass)
+          tools.dom.removeClass(e, this.inValidClass)
         },
         // 非空验证（验证通过返回 true）
         validateRequired: function (value) {
@@ -305,7 +306,6 @@ export default {
       methods: {
         isChecked: function(item) {
           if (!this.checkedMap || this.checkedMap && this.checkedMap.length === 0) return false
-          debugger
           return this.isMultiple
             ? this.checkedMap.includes && this.checkedMap.includes(item[this.primaryKey] || item)
             : (item && item[this.primaryKey] || item) === this.checkedMap

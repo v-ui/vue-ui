@@ -1,7 +1,7 @@
 <template>
-  <div :id="id" class="px-1 align-items-center">
-    <div ref="dropdownpicker" :readonly="disabled" @click="isShow = disabled ? !disabled : !isShow">
-      <div class="d-flex justify-content-between align-items-center" @click="click">
+  <div :id="id" class="px-0 align-items-center" :class="{'bg-light': disabled}" :disabled="disabled" :aria-disabled="disabled">
+    <div ref="dropdownPicker" @click="isShow = disabled ? !disabled : !isShow">
+      <div class="d-flex justify-content-between align-items-center px-2">
         <slot name="trigger">
           <font :class="fontClass">{{ label || placeholder }}</font>
         </slot>
@@ -13,7 +13,7 @@
     <tran-drop>
       <div
         v-show="isShow"
-        ref="menu"
+        ref="dropdownMenu"
         class="position-absolute bg-white overflow-auto border rounded shadow-sm my-1 p-1"
         :style="[menuStyle, {'max-height': menuHeight}]"
         style=" z-index: 1000;"
@@ -47,7 +47,6 @@ export default {
     hideToggle: util.props.Boolean,
     menuWidth: util.props.Boolean,
     menuHeight: util.props.String,
-    scroll: util.props.Uint,
     label: [String, Number, Date]
   },
   data() {
@@ -84,20 +83,15 @@ export default {
     },
     initMenuWidth: function() {
        this.menuStyle = this.menuWidth && {
-        width: `${this.$refs.dropdownpicker.offsetWidth}px`
+        width: `${this.$refs.dropdownPicker.offsetWidth}px`
       };
     },
     hindeMenu: function(event) {
-      const e = event.target;
+      const e = event.target
       // 判断鼠标点击位置是否在菜单内，如果是则不隐藏，如果不是则隐藏
-      let isIn = tools.dom.isElementIm(this.$refs.menu, e)
-      if (!isIn) this.isShow = false
+      let isInDropdownPicker = tools.dom.isElementIm(this.$refs.dropdownPicker, e)
+      if (!isInDropdownPicker) this.isShow = false
     },
-    click: function() {
-      let { $refs, scroll } = this;
-      // 使用延时以等待 menu 显示后设置 scrollTop ,否则无效
-      setTimeout(() => ($refs.menu.scrollTop = scroll), 100);
-    }
   },
 };
 </script>

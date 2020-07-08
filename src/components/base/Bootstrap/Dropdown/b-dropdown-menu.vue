@@ -8,7 +8,7 @@
       <div v-else-if="item.divider" class="dropdown-divider" />
       <b-dropdown-item
         v-else-if="item.value"
-        :text="item.value"
+        :label="item.value"
         :href="item.href"
         :info="item.info"
         :active="select ? select == item.value : item.active"

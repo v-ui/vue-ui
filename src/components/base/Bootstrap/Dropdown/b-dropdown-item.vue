@@ -8,7 +8,7 @@
     :href="href"
     hide-icon
   >
-    <slot>{{ text }}</slot>
+    <slot>{{ label }}</slot>
     <b-info :info="info" :textColor="active ? 'light' : 'muted'" />
   </base-a>
   <button
@@ -20,7 +20,7 @@
     :aria-disabled="disabled"
     type="button"
   >
-    <slot>{{ text }}</slot>
+    <slot>{{ label }}</slot>
     <b-info :info="info" :textColor="active ? 'light' : 'muted'" />
   </button>
 </template>
@@ -36,7 +36,7 @@ export default {
   components: { BaseA, BInfo },
   props: {
     href: util.props.href,
-    text: util.props.String,
+    label: util.props.String,
     info: util.props.String,
     active: util.props.Boolean,
     disabled: util.props.Boolean,
