@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import dropdownList from "@/components/base/Bootstrap/DropdownList/b-dropdownlist.vue";
+import dropdownList from "@/components/base/Bootstrap/DropdownList/b-dropdown-list.vue";
 
 export default {
   name: "b-quarter-list",

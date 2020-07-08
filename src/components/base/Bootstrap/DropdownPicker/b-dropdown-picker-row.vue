@@ -17,10 +17,10 @@
 <script>
 import util from "@/components/util/index.js";
 
-import item from "./b-dropdownpicker-item";
+import item from "./b-dropdown-picker-item";
 
 export default {
-  name: "b-dropdownpicker-row",
+  name: "b-dropdown-picker-row",
   components: { item },
   props: {
     items: util.props.Array,

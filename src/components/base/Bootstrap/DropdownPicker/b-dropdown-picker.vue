@@ -45,7 +45,7 @@ import BButton from "@/components/Basic/Button/basic-button.vue";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-dropdownpicker",
+  name: "b-dropdown-picker",
   components: { tranDrop, BButton, BInfo },
   props: {
     id: {

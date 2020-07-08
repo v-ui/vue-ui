@@ -62,7 +62,7 @@ import util from "@/components/util/index.js";
 
 import BNumber from "@/components/base/Bootstrap/FormConter/b-number.vue";
 import BRange from "@/components/base/Bootstrap/FormConter/b-range.vue";
-import BDropPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker.vue";
+import BDropPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdown-picker.vue";
 
 export default {
   name: "b-color",

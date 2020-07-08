@@ -1,35 +1,44 @@
 <template>
   <div class="form-group">
-    <drop
+    <dropdown-picker
       ref="dropdownlist"
       class="p-0"
-      ::class="[cClass, readonlyClass]"
+      :class="[cClass, readonlyClass]"
       menu-width
+      :show="show"
+      :value="trigger"
       :scroll="scroll"
-      :trigger="trigger"
+      :disabled="disabled"
       :menu-height="menuHeight"
+      @showOrHide="showOrHide"
     >
-      <template #trigger v-if="search">
-        <b-text type="search" :border="false" v-model="searchText" />
-      </template>
+      <b-text
+        v-if="search"
+        v-model="searchText"
+        hide-icon
+        class="m-1"
+        type="search"
+        :border="false"
+      />
       <drop-item
         v-if="!searchText && !hideNull"
         ref="item"
         value
         :disabled="disabled"
         text="<Pleace select...>"
-        @click.native="click"
+        @click.native="menuClick"
       />
       <drop-item
         v-for="item in searchList"
         :key="item.value"
-        :text="item.text"
+        :info="item.info"
+        :text="item.value"
         :value="item.value"
-        :active="item.value == value"
+        :active="item.value == selectValue"
         :disabled="item.disabled || disabled"
-        @click.native="menuClick"
+        @click.native="menuClick(item)"
       />
-    </drop>
+    </dropdown-picker>
     <b-valid v-if="validInfo || $slots.valid" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
     </b-valid>
@@ -41,12 +50,10 @@
 </template>
 
 <script>
-// 弃用 2019-08-07
-
 import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import drop from "@/components/base/Bootstrap/Dropdown/b-dropdown.vue";
+import dropdownPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdown-picker.vue";
 import dropItem from "@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue";
 import BText from "@/components/base/Bootstrap/Form/b-text.vue";
 
@@ -54,8 +61,8 @@ import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-dropdownlist",
-  components: { drop, dropItem, BText, BValid, BInfo },
+  name: "b-dropdown-list",
+  components: { dropdownPicker, dropItem, BText, BValid, BInfo },
   mixins: [
     util.mixins.form.base,
     util.mixins.form.readonly,
@@ -78,12 +85,12 @@ export default {
   },
   data() {
     return {
-      time: "",
-      date: {
-        hh: 0,
-        mm: 0,
-        ss: 0
-      }
+      show: null,
+      scroll: 0,
+      searchText: null,
+      menuHeight: "0px",
+      selectValue: this.value,
+      trigger: "<Pleace select...>"
     };
   },
   computed: {
@@ -114,12 +121,17 @@ export default {
         this.trigger = "<Pleace select...>";
       }
     },
-    menuClick: function(event) {
+    menuClick: function(item) {
       this.getScroll();
-      this.setTrigger(event.target.value);
-      this.$emit("change", event.target.value);
-      this.validator(event.target.value);
+      this.selectValue = item.value;
+      this.setTrigger(this.selectValue);
+      this.$emit("change", this.selectValue);
+      this.validator(this.selectValue);
       this.searchText = null; // 清空查询字段
+      this.show = false;
+    },
+    showOrHide: function(value) {
+      this.show = value;
     },
     getScroll: async function() {
       await this.$nextTick();

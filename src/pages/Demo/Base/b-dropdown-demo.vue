@@ -76,35 +76,35 @@
         <b-dropdown-item text="item text" />
       </b-dropdown>
     </div>
-    <h2>b-dropdownlist</h2>
+    <h2>b-dropdown-list</h2>
     <hr>
     <div class="row">
       <font class="col-1">default:</font>
-      <b-dropdiwnlist class="col-11" />
+      <b-dropdiwn-list class="col-11" />
     </div>
     <div class="row">
       <font class="col-1">hide-null:</font>
-      <b-dropdiwnlist class="col-11" hide-null />
+      <b-dropdiwn-list class="col-11" hide-null />
     </div>
     <div class="row">
       <font class="col-1">disabled:</font>
-      <b-dropdiwnlist class="col-11" disabled />
+      <b-dropdiwn-list class="col-11" disabled />
     </div>
     <div class="row">
       <font class="col-1">list:</font>
-      <b-dropdiwnlist class="col-11" :list="list" />
+      <b-dropdiwn-list class="col-11" :list="list" />
     </div>
     <div class="row">
       <font class="col-1">search:</font>
-      <b-dropdiwnlist class="col-11" :list="list" search />
+      <b-dropdiwn-list class="col-11" :list="list" search />
     </div>
     <div class="row">
       <font class="col-1">value:</font>
-      <b-dropdiwnlist class="col-11" :list="list" value="value1" />
+      <b-dropdiwn-list class="col-11" :list="list" value="value1" />
     </div>
     <div class="row">
       <font class="col-1">row:</font>
-      <b-dropdiwnlist class="col-11" :list="list" value="value5" row="3" />
+      <b-dropdiwn-list class="col-11" :list="list" value="value5" row="3" />
     </div>
     <div class="row">
       <font class="col-1">
@@ -112,32 +112,32 @@
         <br>
         {{ value1 }}:
       </font>
-      <b-dropdiwnlist class="col-11" :list="list" v-model="value1" />
+      <b-dropdiwn-list class="col-11" :list="list" v-model="value1" />
     </div>
     <div class="row">
       <font class="col-1">info:</font>
-      <b-dropdiwnlist class="col-11" :list="list" info="info text" />
+      <b-dropdiwn-list class="col-11" :list="list" info="info text" />
     </div>
     <div class="row">
       <font class="col-1">required:</font>
-      <b-dropdiwnlist class="col-11" :list="list" required />
+      <b-dropdiwn-list class="col-11" :list="list" required />
     </div>
     <div class="row">
       <font class="col-1">
         success
         <br>error:
       </font>
-      <b-dropdiwnlist class="col-11" :list="list" invalidInfo="error" validInfo="success" required />
+      <b-dropdiwn-list class="col-11" :list="list" invalidInfo="error" validInfo="success" required />
     </div>
     <div class="row">
       <font class="col-1">
         success
         <br>error(2):
       </font>
-      <b-dropdiwnlist class="col-11" :list="list" required>
+      <b-dropdiwn-list class="col-11" :list="list" required>
         <template #invalid>you can add anlything invalidInfo or DOM</template>
         <template #valid>you can add anlything validInfo or DOM</template>
-      </b-dropdiwnlist>
+      </b-dropdiwn-list>
     </div>
   </div>
 </template>
@@ -149,7 +149,7 @@ import BDropdownItem from "@/components/base/Bootstrap/Dropdown/b-dropdown-item.
 import BDropdownItemText from "@/components/base/Bootstrap/Dropdown/b-dropdown-item-text.vue";
 import BDropdownDivider from "@/components/base/Bootstrap/Dropdown/b-dropdown-divider.vue";
 
-import BDropdiwnlist from "@/components/base/Bootstrap/DropdownList/b-dropdownlist.vue";
+import BDropdiwnList from "@/components/base/Bootstrap/DropdownList/b-dropdown-list.vue";
 
 export default {
   name: "b-dropdown-demo",
@@ -159,7 +159,7 @@ export default {
     BDropdownItem,
     BDropdownItemText,
     BDropdownDivider,
-    BDropdiwnlist
+    BDropdiwnList
   },
   data() {
     return {

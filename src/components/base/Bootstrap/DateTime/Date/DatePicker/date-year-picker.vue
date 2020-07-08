@@ -26,7 +26,7 @@
 import util from "@/components/util/index.js"
 
 import pickerHeader from "./date-picker-header"
-import pickerRow from "@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker-row.vue"
+import pickerRow from "@/components/base/Bootstrap/DropdownPicker/b-dropdown-picker-row.vue"
 
 export default {
   name: "date-year-picker",

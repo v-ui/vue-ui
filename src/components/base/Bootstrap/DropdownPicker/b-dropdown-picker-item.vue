@@ -15,7 +15,7 @@ import util from "@/components/util/index.js";
 import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
-  name: "b-dropdownpicker-item",
+  name: "b-dropdown-picker-item",
   components: { BButton },
   props: {
     value: util.props.String,

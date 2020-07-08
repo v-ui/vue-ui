@@ -53,7 +53,7 @@
 import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import dropdownPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker.vue";
+import dropdownPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdown-picker.vue";
 import yearPicker from "./date-year-picker";
 import monthPicker from "./date-month-picker";
 import datePicker from "./date-date-picker";
