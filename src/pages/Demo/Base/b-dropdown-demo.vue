@@ -99,10 +99,6 @@
       <b-dropdiwn-list class="col-11" :list="list" search />
     </div>
     <div class="row">
-      <font class="col-1">value:</font>
-      <b-dropdiwn-list class="col-11" :list="list" value="value1" />
-    </div>
-    <div class="row">
       <font class="col-1">row:</font>
       <b-dropdiwn-list class="col-11" :list="list" value="value5" row="3" />
     </div>

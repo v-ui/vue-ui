@@ -9,7 +9,6 @@
       :disabled="disabled"
       :menu-height="menuHeight"
       :placeholder="placeholder"
-      @showOrHide="showOrHide"
     >
       <b-dropdown-header v-if="search" @click.native="headerClick">
         <b-text v-model="searchText" hide-icon type="search" size="sm" :border="false" />
@@ -26,7 +25,7 @@
         :key="item.value"
         :info="item.info"
         :label="item.label"
-        :active="item.value == selectValue"
+        :active="isChecked(item)"
         :disabled="item.disabled || disabled"
         @click.native="menuClick(item)"
       />
@@ -67,15 +66,10 @@ export default {
   mixins: [
     util.mixins.form.base,
     util.mixins.form.readonly,
-    util.mixins.form.validator
+    util.mixins.form.validator,
+    util.mixins.select.check,
   ],
-  model: {
-    prop: "value",
-    event: "change"
-  },
   props: {
-    list: util.props.Array,
-    value: util.props.String,
     info: util.props.String,
     search: util.props.Boolean,
     hideNull: util.props.Boolean,
@@ -90,7 +84,6 @@ export default {
       label: null,
       searchText: null,
       menuHeight: "0px",
-      selectValue: this.value,
       placeholder: '<Pleace select...>',
     };
   },
@@ -118,16 +111,11 @@ export default {
     },
     menuClick: function(item) {
       this.show = false
-      this.selectValue = item.value
+      this.checkedValues = this.primaryKey ? item : item && item.value || item
       this.searchText = null // 清空查询字段
-      this.setTrigger(this.selectValue)
-      this.$emit("change", this.selectValue)
-      this.validator(this.$refs.dropdownlist.$el, this.selectValue)
+      this.setTrigger(this.checkedValues)
+      this.validator(this.$refs.dropdownlist.$el, this.checkedValues)
     },
-    showOrHide: function(value) {
-      this.show = value
-    }
   }
 };
 </script>
-
