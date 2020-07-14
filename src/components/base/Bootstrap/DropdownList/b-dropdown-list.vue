@@ -96,7 +96,7 @@ export default {
   },
   mounted: function() {
     this.menuHeight = this.row * 32 + 10 + "px"
-    this.setTrigger(this.value)
+    this.setTrigger(this.checkedValues)
   },
   methods: {
     setTrigger: function(value) {
