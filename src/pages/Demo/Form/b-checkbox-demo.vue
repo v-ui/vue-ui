@@ -131,6 +131,20 @@
       <font class="col-1">
         v-model:
         <br />
+        ({{values1}})
+      </font>
+      <b-checkbox-group
+        v-model="values1"
+        class="col-11"
+        :list="list"
+        name="checkbox-v-model"
+        inline
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        v-model:
+        <br />
         ({{values}})
       </font>
       <b-checkbox-group
@@ -138,6 +152,7 @@
         class="col-11"
         :list="list"
         name="checkbox-v-model"
+        primary-key="value"
         inline
       />
     </div>
@@ -228,6 +243,7 @@ export default {
         { value: "disabled radio", label: "disabled checkbox", disabled: true }
       ],
       values: [{ value: "value2", label: "value2" }],
+      values1: ["value2"],
     };
   }
 };

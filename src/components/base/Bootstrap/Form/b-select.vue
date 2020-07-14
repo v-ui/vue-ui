@@ -7,6 +7,7 @@
       :row="row"
       :multiple="multiple"
       :disabled="disabled"
+      :primary-key="keyValue"
       v-bind="$attrs"
       v-on="$listeners"
       @change.native="validator($event, selectedValue)"
@@ -36,6 +37,7 @@ export default {
   mixins: [util.mixins.form.base, util.mixins.select.select, util.mixins.form.validator],
   inheritAttrs: false,
   props: {
+    primaryKey: util.props.Boolean,
     disabled: util.props.Boolean,
     info: util.props.String,
     hideNull: util.props.Boolean,
@@ -48,13 +50,7 @@ export default {
   },
   data() {
     return {
-      selectedValue: this.selected,
-    }
-  },
-  watch: {
-    selected: function(value) {
-      this.selectedValue = value
-      this.$emit('select:selected', value)
+      keyValue: this.primaryKey ? 'value' : null
     }
   },
 };

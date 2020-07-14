@@ -65,10 +65,6 @@
       <b-radio-group class="col-11" :list="list" name="group-default" />
     </div>
     <div class="row">
-      <font class="col-1">value:</font>
-      <b-radio-group class="col-11" :list="list" name="group-value" :value="value" />
-    </div>
-    <div class="row">
       <font class="col-1">disabled:</font>
       <b-radio-group class="col-11" :list="list" name="group-disabled" disabled inline />
     </div>
@@ -85,11 +81,19 @@
     <hr>
     <div class="row">
       <font class="col-1">
-        v-model:
+        default: 接收/返回字符串
         <br>
-        ({{value}})
+        ({{ value1 }})
       </font>
-      <b-radio-group class="col-11" :list="list" name="group-v-model" v-model="value" inline />
+      <b-radio-group class="col-11" :list="list" name="group-v-model" v-model="value1" inline />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        接收/返回对象
+        <br>
+        ({{ value2 }})
+      </font>
+      <b-radio-group class="col-11" :list="list" name="group-v-model" v-model="value2" primary-key="value" inline />
     </div>
     <br>
     <h4>校验</h4>
@@ -176,7 +180,8 @@ export default {
         { value: "value2", label: "value2" },
         { value: "disabled radio", label: "disabled radio", disabled: true }
       ],
-      value: { value: "value2", label: "value2" },
+      value1: "value2",
+      value2: { value: "value2", label: "value2" },
       buttongrouplist: [
         { value: "value1", label: "value1" },
         { value: "value2", label: "value2" },

@@ -38,10 +38,6 @@ export default {
   mixins: [util.mixins.select.check, util.mixins.form.validator],
   inheritAttrs: false,
   props: {
-    primaryKey: {
-      ...util.props.String,
-      default: "value"
-    },
     info: util.props.String,
     disabled: util.props.Boolean,
     name: {
@@ -58,8 +54,10 @@ export default {
   methods: {
     input: function(event, item) {
       if (event.target.checked) {
-        this.checkedValues = item
-          this.validator(event, this.checkedValues,
+        this.checkedValues = this.primaryKey ? item : item && item.value || item
+        this.validator(
+          event,
+          this.checkedValues,
           () => { this.validateClass = '' },
           () => { this.validateClass = this.validClass },
           () => { this.validateClass = this.inValidClass },

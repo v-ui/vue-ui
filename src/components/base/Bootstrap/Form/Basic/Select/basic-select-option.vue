@@ -13,7 +13,8 @@
       :key="index"
       :item="child"
       :selected="selected"
-      :isMultiple="isMultiple"
+      :primary-key="primaryKey"
+      :is-multiple="isMultiple"
     />
   </optgroup>
 </template>
@@ -25,11 +26,5 @@ export default {
   name: "basic-select-option",
   components: { BasicSelectOption: () => import("./basic-select-option.vue") },
   mixins: [util.mixins.select.selectItem],
-  props: {
-    primaryKey: {
-      ...util.props.String,
-      default: "value"
-    }
-  }
 };
 </script>

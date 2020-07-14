@@ -20,7 +20,8 @@
         v-for="(item, index) in list"
         :key="index"
         :item="item"
-        :isMultiple="isMultiple"
+        :is-multiple="isMultiple"
+        :primary-key="primaryKey"
         :selected="selectedValue"
       />
     </slot>
@@ -37,10 +38,6 @@ export default {
   components: { BasicSelectOption },
   mixins: [util.mixins.form.base, util.mixins.select.select],
   props: {
-    primaryKey: {
-      ...util.props.String,
-      default: "value"
-    },
     disabled: util.props.Boolean,
     hideNull: util.props.Boolean,
     row: {
@@ -63,12 +60,15 @@ export default {
       let list = this.list
         .map(e => (e.children ? [...e.children] : e))
         .reduce((acc, val) => acc.concat(val), []);
-      this.selectedValue = this.isMultiple
-        ? Array.prototype.filter
+      if (this.isMultiple) {
+        this.selectedValue = Array.prototype.filter
             .call(event.target.options, o => o.selected && o.value)
-            .map(o => o.value == this.nullValue ? null : list.find(e => (e.value || e) == o.value)
-            ).filter(e => e)
-        : list.find(e => (e.value || e) == event.target.value);
+            .map(o => o.value === this.nullValue ? null : list.find(e => (e.value || e) === o.value)
+            ).map(e => this.primaryKey ? e : e && e.value || e)
+      } else {
+        let result = list.find(e => (e.value || e) === event.target.value)
+        this.selectedValue = this.primaryKey ? result : result && result.value || result
+      }
     }
   }
 };

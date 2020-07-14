@@ -38,10 +38,6 @@ export default {
   mixins: [util.mixins.select.check, util.mixins.form.validator],
   inheritAttrs: false,
   props: {
-    primaryKey: {
-      ...util.props.String,
-      default: "value"
-    },
     info: util.props.String,
     disabled: util.props.Boolean
   },
@@ -54,7 +50,7 @@ export default {
   methods: {
     input: function(event, item) {
       if (event.target.checked) {
-        this.checkedValues.push(item);
+        this.checkedValues.push(this.primaryKey ? item : item && item.value || item);
       } else {
         let index = this.checkedMap.indexOf(event.target.value);
         if (index >= 0) this.checkedValues.splice(index, 1);

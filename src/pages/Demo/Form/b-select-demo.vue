@@ -52,7 +52,7 @@
     <h4>v-model</h4>
     <hr>
     <div class="row">
-      <font class="col-1">v-model:</font>
+      <font class="col-1">default: 接收/返回字符串</font>
       <div class="col-10 row">
         <b-select class="col-3" :list="list" v-model="value" :info="'selected: ' + value" />
         <b-select
@@ -68,6 +68,29 @@
           class="col-3"
           :list="list3"
           :info="'selected: ' + value3"
+          multiple
+        />
+      </div>
+    </div>
+    <div class="row">
+      <font class="col-1">接收/返回对象</font>
+      <div class="col-10 row">
+        <b-select class="col-3" :list="list" v-model="value4" :info="'selected: ' + value4" primary-key />
+        <b-select
+          v-model="value5"
+          class="col-3"
+          :list="list"
+          :info="'selected: ' + value5"
+          primary-key
+          multiple
+        />
+        <b-select class="col-3" :list="list3" v-model="value6" :info="'selected: ' + value6" primary-key />
+        <b-select
+          v-model="value7"
+          class="col-3"
+          :list="list3"
+          :info="'selected: ' + value7"
+          primary-key
           multiple
         />
       </div>
@@ -156,10 +179,15 @@ export default {
         { value: "disabled option", label: "disabled label option", disabled: true }
       ],
 
-      value: { value: "option2", label: "label option2" },
-      value1: [{ value: "option1", label: "label option1" }, { value: "option2", label: "label option2" }],
+      value: "option2",
+      value1: ["option1", "option2"],
       value2: "option1-1",
-      value3: [{ value: "option1-1", label: "label option1-1" }, { value: "option2-2", label: "label option2-2" }]
+      value3: ["option1-1","option2-2", "label option2-2"],
+
+      value4: { value: "option2", label: "label option2" },
+      value5: [{ value: "option1", label: "label option1" }, { value: "option2", label: "label option2" }],
+      value6: { value: "option1-1", label: "label option1-1" },
+      value7: [{ value: "option1-1", label: "label option1-1" }, { value: "option2-2", label: "label option2-2" }]
     };
   }
 };

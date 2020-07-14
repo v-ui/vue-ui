@@ -259,19 +259,14 @@ export default {
       props: {
         list: {
           ...props.Array,
-          validator: function (value) {
-            var self = this
-            return !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value) ||
-              value.every && value.every(e => e[self.primaryKey]) ||
-              tools.obj.type.isObject(value) && value[self.primaryKey]
-          },
+          validator: value => !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value),
         },
         checked: {
-          type: [Array, Object],
+          type: [String, Number, Array, Object],
         },
         primaryKey: {
           ...props.String,
-          default: 'id',
+          default: null,
         },
       },
       data() {
@@ -281,11 +276,9 @@ export default {
         }
       },
       mounted() {
-        if (this.isMultiple) {
-          this.checkedValues = this.checked && tools.obj.type.isArray(this.checked) ? this.checked : []
-        } else {
-          this.checkedValues = this.checked && tools.obj.type.isObject(this.checked) ? this.checked : {}
-        }
+        this.checkedValues = this.isMultiple
+          ? this.checked && tools.obj.type.isArray(this.checked) ? this.checked : []
+          : this.checked && (tools.obj.type.isObject(this.checked) || tools.obj.type.isString(this.checked)) ? this.checked : null
       },
       watch: {
         checked: function (value) {
@@ -307,8 +300,8 @@ export default {
         isChecked: function(item) {
           if (!this.checkedMap || this.checkedMap && this.checkedMap.length === 0) return false
           return this.isMultiple
-            ? this.checkedMap.includes && this.checkedMap.includes(item[this.primaryKey] || item)
-            : (item && item[this.primaryKey] || item) === this.checkedMap
+            ? this.checkedMap.includes && this.checkedMap.includes(item[this.primaryKey || 'value'] || item)
+            : (item && item[this.primaryKey || 'value'] || item) === this.checkedMap
         },
       },
     },
@@ -318,16 +311,16 @@ export default {
         event: 'select:selected',
       },
       props: {
+        primaryKey: {
+          ...props.String,
+          default: null,
+        },
         list: props.Array,
         selected: {
           type: [String, Number, Array, Object],
           default: function () {
             return this.isMultiple ? [] : "";
-          }
-        },
-        primaryKey: {
-          ...props.String,
-          default: 'id',
+          },
         },
         multiple: props.Boolean,
       },
@@ -349,20 +342,15 @@ export default {
     },
     selectItem: {
       props: {
-        item: {
-          type: [String, Number, Array, Object],
-          validator: function (value) {
-            var self = this
-            return !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value) ||
-              value.every && value.every(e => e[self.primaryKey]) ||
-              tools.obj.type.isObject(value) && value[self.primaryKey]
-          },
-        },
-        selected: [String, Number, Array, Object],
         primaryKey: {
           ...props.String,
-          default: 'id',
+          default: null,
         },
+        item: {
+          type: [String, Number, Array, Object],
+          validator: value => !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value),
+        },
+        selected: [String, Number, Array, Object],
         isMultiple: props.Boolean,
       },
       computed: {
@@ -375,8 +363,8 @@ export default {
         isSelected: function () {
           if (!this.selectedMap || this.selectedMap && this.selectedMap.length === 0) return false
           return this.isMultiple
-            ? this.selectedMap.includes && this.selectedMap.includes(this.item[this.primaryKey] || this.item)
-            : (this.item && this.item[this.primaryKey] || this.item) === this.selectedMap
+            ? this.selectedMap.includes && this.selectedMap.includes(this.item[this.primaryKey || 'value'] || this.item)
+            : (this.item && this.item[this.primaryKey || 'value'] || this.item) === this.selectedMap
         },
       },
     },
@@ -449,5 +437,6 @@ export default {
         },
       }
     }, // thead
+
   }, // grid - grid view & table
 }

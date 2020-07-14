@@ -12,14 +12,14 @@
           // your web server url
           "url": "http://localhost:8080",
           // set your webroot directory
-          "webRoot": "${workspaceRoot}/view/dist"
+          "webRoot": "${workspaceRoot}/dist"
       },
       {
         "type": "chrome",
         "request": "launch",
         "name": "vuejs: chrome",
         "url": "http://localhost:8080",
-        "webRoot": "${workspaceFolder}/view/src",
+        "webRoot": "${workspaceFolder}/src",
         "breakOnLoad": true,
         "sourceMapPathOverrides": {
             "webpack:///./src/*": "${webRoot}/*"
