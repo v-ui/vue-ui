@@ -292,7 +292,7 @@ export default {
         checkedMap: function () {
           const self = this
           return this.isMultiple
-            ? this.checkedValues && this.checkedValues.map && this.checkedValues.map(e => e && e[self.primaryKey] || e)
+            ? this.checkedValues && this.checkedValues.map && this.checkedValues.map(e => e && e[self.primaryKey || 'value'] || e)
             : this.checkedValues && this.checkedValues[this.primaryKey] || this.checkedValues
         },
       },

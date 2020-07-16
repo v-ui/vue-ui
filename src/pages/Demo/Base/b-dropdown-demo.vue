@@ -1,7 +1,9 @@
 <template>
   <div>
     <h2>b-dropdown</h2>
-    <hr>
+    <hr />
+    <h4>基础属性</h4>
+    <hr />
     <div class="row">
       <font class="col-1">default:</font>
       <b-dropdown class="col-auto" :list="list2" />
@@ -77,7 +79,9 @@
       </b-dropdown>
     </div>
     <h2>b-dropdown-list</h2>
-    <hr>
+    <hr />
+    <h4>基础属性</h4>
+    <hr />
     <div class="row">
       <font class="col-1">default:</font>
       <b-dropdiwn-list class="col-11" />
@@ -87,8 +91,13 @@
       <b-dropdiwn-list class="col-11" hide-null />
     </div>
     <div class="row">
+      <font class="col-1">multiple:</font>
+      <b-dropdiwn-list class="col-11" :list="list" multiple />
+    </div>
+    <div class="row">
       <font class="col-1">disabled:</font>
-      <b-dropdiwn-list class="col-11" disabled />
+      <b-dropdiwn-list class="col-5" disabled />
+      <b-dropdiwn-list class="col-5" v-model="value2" multiple disabled />
     </div>
     <div class="row">
       <font class="col-1">list:</font>
@@ -103,17 +112,31 @@
       <b-dropdiwn-list class="col-11" :list="list" value="value5" row="3" />
     </div>
     <div class="row">
+      <font class="col-1">info:</font>
+      <b-dropdiwn-list class="col-11" :list="list" info="info label" />
+    </div>
+    <br />
+    <h4>v-model</h4>
+    <hr />
+    <div class="row">
       <font class="col-1">
         v-model
-        <br>
+        <br />
         {{ value1 }}:
       </font>
       <b-dropdiwn-list class="col-11" :list="list" v-model="value1" />
     </div>
     <div class="row">
-      <font class="col-1">info:</font>
-      <b-dropdiwn-list class="col-11" :list="list" info="info label" />
+      <font class="col-1">
+        v-model
+        <br />
+        {{ value2 }}:
+      </font>
+      <b-dropdiwn-list class="col-11" :list="list" v-model="value2" multiple />
     </div>
+    <br />
+    <h4>校验</h4>
+    <hr />
     <div class="row">
       <font class="col-1">required:</font>
       <b-dropdiwn-list class="col-11" :list="list" required />
@@ -121,14 +144,20 @@
     <div class="row">
       <font class="col-1">
         success
-        <br>error:
+        <br />error:
       </font>
-      <b-dropdiwn-list class="col-11" :list="list" invalidInfo="error" validInfo="success" required />
+      <b-dropdiwn-list
+        class="col-11"
+        :list="list"
+        invalidInfo="error"
+        validInfo="success"
+        required
+      />
     </div>
     <div class="row">
       <font class="col-1">
         success
-        <br>error(2):
+        <br />error(2):
       </font>
       <b-dropdiwn-list class="col-11" :list="list" required>
         <template #invalid>you can add anlything invalidInfo or DOM</template>
@@ -178,7 +207,12 @@ export default {
         { value: "a active", href: "#", active: true },
         { value: "a disabled", href: "#", disabled: true }
       ],
-      value1: "value1"
+      value1: "value1",
+      value2: [
+        { value: "value1", label: "text1" },
+        { value: "value2", label: "text2" },
+        { value: "value3", label: "text3" },
+      ],
     };
   }
 };
