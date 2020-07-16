@@ -91,5 +91,14 @@ export default {
       this.checkedValue = value
     },
   },
+  methods: {
+    // 验证集合 通过返回 true，不通过返回 false
+    validating: function (value) {
+      // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
+      if (!this.validateRequired(value)) return false
+      // 验证成功
+      return true
+    },
+  },
 };
 </script>

@@ -139,18 +139,21 @@
     <hr />
     <div class="row">
       <font class="col-1">required:</font>
-      <b-dropdiwn-list class="col-11" :list="list" required />
+      <b-dropdiwn-list class="col-5" :list="list" required />
+      <b-dropdiwn-list class="col-5" :list="list" multiple required />
     </div>
     <div class="row">
       <font class="col-1">
         success
         <br />error:
       </font>
+      <b-dropdiwn-list class="col-5" :list="list" invalidInfo="error" validInfo="success" required />
       <b-dropdiwn-list
-        class="col-11"
+        class="col-5"
         :list="list"
         invalidInfo="error"
         validInfo="success"
+        multiple
         required
       />
     </div>
@@ -159,7 +162,11 @@
         success
         <br />error(2):
       </font>
-      <b-dropdiwn-list class="col-11" :list="list" required>
+      <b-dropdiwn-list class="col-5" :list="list" required>
+        <template #invalid>you can add anlything invalidInfo or DOM</template>
+        <template #valid>you can add anlything validInfo or DOM</template>
+      </b-dropdiwn-list>
+      <b-dropdiwn-list class="col-5" :list="list" multiple required>
         <template #invalid>you can add anlything invalidInfo or DOM</template>
         <template #valid>you can add anlything validInfo or DOM</template>
       </b-dropdiwn-list>
@@ -211,8 +218,8 @@ export default {
       value2: [
         { value: "value1", label: "text1" },
         { value: "value2", label: "text2" },
-        { value: "value3", label: "text3" },
-      ],
+        { value: "value3", label: "text3" }
+      ]
     };
   }
 };

@@ -16,7 +16,7 @@
             {{ item[primaryKey] || item.label || item.value || item }}
             <i v-if="!disabled" class="fas fa-times-circle text-muted pl-1" style="cursor: pointer" @click.stop="deleteItem(item)"/>
           </b-badge>
-          <label v-show="!checkedValues || checkedValues.length === 0">{{ placeholder }}</label>
+          <label v-show="!checkedValues || checkedValues.length === 0" class="m-0">{{ placeholder }}</label>
         </div>
       </template>
       <b-dropdown-header v-if="search" @click.native="headerClick">
@@ -88,7 +88,12 @@ export default {
     },
     info: util.props.String,
     search: util.props.Boolean,
-    hideNull: util.props.Boolean,
+    hideNull: {
+      ...util.props.Boolean,
+      default: function() {
+        return this.multiple
+      }
+    },
     row: {
       ...util.props.UInt,
       default: 10
@@ -128,9 +133,9 @@ export default {
     },
     menuClick: function(item) {
       this.show = false
-      if (!item) return
       let value = this.primaryKey ? item : item && item.value || item
       if (this.isMultiple) {
+        if (!value) return
         let index = this.checkedMap.indexOf(value)
         if (index >= 0) this.checkedValues.splice(index, 1)
         else this.checkedValues.push(value)
@@ -145,6 +150,7 @@ export default {
       let value = this.primaryKey ? item : item && item.value || item
       let index = this.checkedMap.indexOf(value)
       if (index >= 0) this.checkedValues.splice(index, 1)
+      this.validator(this.$refs.dropdownlist.$el, this.checkedValues)
     },
     // 验证集合 通过返回 true，不通过返回 false
     validating: function (value) {
