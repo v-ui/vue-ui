@@ -49,7 +49,6 @@ export default {
         { path: 'b-radio', name: 'b-radio', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-radio-demo.vue'), },
         { path: 'b-select', name: 'b-select', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-select-demo.vue'), },
         { path: 'b-checkbox', name: 'b-checkbox', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-checkbox-demo.vue'), },
-        { path: 'b-checkbox-tree', name: 'b-checkbox-tree', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-checkbox-tree-demo.vue'), },
         { path: 'b-switch', name: 'b-switch', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-switch-demo.vue'), },
         { path: 'b-range', name: 'b-range', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-range-demo.vue'), },
         { path: 'b-file', name: 'b-file', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-file-demo.vue'), },
