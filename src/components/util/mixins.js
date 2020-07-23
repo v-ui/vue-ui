@@ -133,6 +133,15 @@ export default {
           if (this.$slots.valid || this.validInfo) this.validateDone(elm, validateCallback)
           this.$emit('valid')
         },
+        // 开始验证时 复位 之前的状态
+        validateReset: function (e, resetCallback = null) {
+          if (tools.obj.type.isFunction(resetCallback)) {
+            resetCallback()
+          } else {
+            this.removeValidClass(e) // 移除可能的 is-valid
+            this.removeInValidClass(e) // 移除可能的 is-invalid
+          }
+        },
         // 验证集合 通过返回 true，不通过返回 false
         validating: function (value) {
           // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
@@ -145,15 +154,6 @@ export default {
           if (!this.validateCustomize(value, this.valid)) return false
           // 验证成功
           return true
-        },
-        // 开始验证时 复位 之前的状态
-        validateReset: function (e, resetCallback = null) {
-          if (tools.obj.type.isFunction(resetCallback)) {
-            resetCallback()
-          } else {
-            this.removeValidClass(e) // 移除可能的 is-valid
-            this.removeInValidClass(e) // 移除可能的 is-invalid
-          }
         },
         // 验证成功后 执行的方法
         validateDone: function (e, validateCallback = null) {
@@ -313,12 +313,7 @@ export default {
           default: null,
         },
         list: props.Array,
-        selected: {
-          type: [String, Number, Array, Object],
-          default: function () {
-            return this.isMultiple ? [] : "";
-          },
-        },
+        selected: [String, Number, Array, Object],
         multiple: props.Boolean,
       },
       data() {

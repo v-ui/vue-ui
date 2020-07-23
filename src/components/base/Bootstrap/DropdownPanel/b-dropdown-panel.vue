@@ -66,7 +66,7 @@ export default {
     return {
       show: false,
       label: null,
-      placeholder: '<Pleace select...>',
+      placeholder: '<Place select...>',
     }
   },
   watch: {

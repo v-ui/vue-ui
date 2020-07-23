@@ -50,7 +50,7 @@ export default {
     set: util.props.set,
     trigger: {
       ...util.props.String,
-      default: "<Pleace select...>"
+      default: "<Place select...>"
     },
     hideToggle: util.props.Boolean,
     menuAlign: {

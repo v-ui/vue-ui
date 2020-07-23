@@ -91,10 +91,6 @@
       <b-dropdown-list class="col-11" hide-null />
     </div>
     <div class="row">
-      <font class="col-1">multiple:</font>
-      <b-dropdown-list class="col-11" :list="list" multiple />
-    </div>
-    <div class="row">
       <font class="col-1">disabled:</font>
       <b-dropdown-list class="col-5" disabled />
       <b-dropdown-list class="col-5" v-model="value2" multiple disabled />
@@ -114,6 +110,10 @@
     <div class="row">
       <font class="col-1">info:</font>
       <b-dropdown-list class="col-11" :list="list" info="info label" />
+    </div>
+    <div class="row">
+      <font class="col-1">multiple:</font>
+      <b-dropdown-list class="col-11" :list="list" multiple />
     </div>
     <br />
     <h4>v-model</h4>
@@ -171,7 +171,6 @@
         <template #valid>you can add anlything validInfo or DOM</template>
       </b-dropdown-list>
     </div>
-
     <h2>b-dropdown-panel</h2>
     <hr />
     <h4>基础属性</h4>
@@ -181,29 +180,12 @@
       <b-dropdown-panel class="col-auto" />
     </div>
     <div class="row">
-      <font class="col-1">hide-null:</font>
-      <b-dropdown-panel class="col-auto" hide-null />
-    </div>
-    <div class="row">
-      <font class="col-1">multiple:</font>
-      <b-dropdown-panel class="col-auto" :list="list" multiple />
-    </div>
-    <div class="row">
       <font class="col-1">disabled:</font>
       <b-dropdown-panel class="col-auto" disabled />
-      <b-dropdown-panel class="col-auto" v-model="value2" multiple disabled />
     </div>
     <div class="row">
       <font class="col-1">list:</font>
       <b-dropdown-panel class="col-auto" :list="list" />
-    </div>
-    <div class="row">
-      <font class="col-1">search:</font>
-      <b-dropdown-panel class="col-auto" :list="list" search />
-    </div>
-    <div class="row">
-      <font class="col-1">row:</font>
-      <b-dropdown-panel class="col-auto" :list="list" value="value5" row="3" />
     </div>
     <div class="row">
       <font class="col-1">info:</font>
@@ -218,7 +200,7 @@
         <br />
         {{ value1 }}:
       </font>
-      <b-dropdown-panel class="col-auto" :list="list" v-model="value1" />
+      <b-dropdown-panel class="col-11" :list="list" v-model="value1" />
     </div>
     <div class="row">
       <font class="col-1">
@@ -226,24 +208,24 @@
         <br />
         {{ value2 }}:
       </font>
-      <b-dropdown-panel class="col-auto" :list="list" v-model="value2" multiple />
+      <b-dropdown-panel class="col-11" :list="list" v-model="value2" multiple />
     </div>
     <br />
     <h4>校验</h4>
     <hr />
     <div class="row">
       <font class="col-1">required:</font>
-      <b-dropdown-panel class="col-auto" :list="list" required />
-      <b-dropdown-panel class="col-auto" :list="list" multiple required />
+      <b-dropdown-panel class="col-5" :list="list" required />
+      <b-dropdown-panel class="col-5" :list="list" multiple required />
     </div>
     <div class="row">
       <font class="col-1">
         success
         <br />error:
       </font>
-      <b-dropdown-panel class="col-auto" :list="list" invalidInfo="error" validInfo="success" required />
+      <b-dropdown-panel class="col-5" :list="list" invalidInfo="error" validInfo="success" required />
       <b-dropdown-panel
-        class="col-auto"
+        class="col-5"
         :list="list"
         invalidInfo="error"
         validInfo="success"
@@ -256,11 +238,11 @@
         success
         <br />error(2):
       </font>
-      <b-dropdown-panel class="col-auto" :list="list" required>
+      <b-dropdown-panel class="col-5" :list="list" required>
         <template #invalid>you can add anlything invalidInfo or DOM</template>
         <template #valid>you can add anlything validInfo or DOM</template>
       </b-dropdown-panel>
-      <b-dropdown-panel class="col-auto" :list="list" multiple required>
+      <b-dropdown-panel class="col-5" :list="list" multiple required>
         <template #invalid>you can add anlything invalidInfo or DOM</template>
         <template #valid>you can add anlything validInfo or DOM</template>
       </b-dropdown-panel>
