@@ -1,26 +1,24 @@
 <template>
-  <div class="form-group" ref="dropdownpanel">
+  <div class="form-group" >
     <b-dropdown-picker
-
+      ref="dropdownpanel"
       :class="[readonlyClass]"
       menu-width
+      :menuWidth="false"
       :show="show"
       :label="label"
+      :placeholder="placeholder"
       :disabled="disabled"
-      :menuWidth="false"
-      :placeholder="placeholder">
-      <!-- <template #icon>
-        <i class="far fa-calendar-alt" />
-      </template> -->
-      <template #default>
-        <b-dropdown-panel-row
-          v-model="selectedValuess"
-          :list="list"
-          :primary-key="primaryKey"
-          :multiple="isMultiple"
-          :col-count="colCount"
-        />
-      </template>
+      :multiple="isMultiple"
+      @deleteItem="deleteItem"
+    >
+      <b-dropdown-panel-row
+        v-model="selectedValues"
+        :list="list"
+        :primary-key="primaryKey"
+        :multiple="isMultiple"
+        :col-count="colCount"
+      />
     </b-dropdown-picker>
     <b-valid v-if="validInfo || $slots.valid" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
@@ -57,21 +55,29 @@ export default {
   },
   props: {
     info: util.props.String,
-    colCount: {
-      ...util.props.UInt,
-      default: 6,
-    }
+    colCount: util.props.UInt,
   },
   data() {
     return {
       show: false,
-      label: null,
       placeholder: '<Place select...>',
     }
   },
+  computed: {
+    label: function() {
+      return this.isMultiple
+        ? this.selectedValues && this.selectedValues.map && this.selectedValues.map(e => e[this.primaryKey] || e.label || e.value || e ) || null
+        : this.selectedValues && (this.selectedValues[this.primaryKey] || this.selectedValues.label || this.selectedValues.value || this.selectedValues) || null
+    },
+  },
   watch: {
-    selectedValuess: function(value) {
-      this.validator(this.$refs.dropdownpanel, value)
+    selectedValues: function(value) {
+      this.validator(this.$refs.dropdownpanel.$el, value)
+    },
+  },
+  methods: {
+    deleteItem: function(index) {
+      if (index >= 0) this.selectedValues.splice(index, 1)
     },
   },
 }

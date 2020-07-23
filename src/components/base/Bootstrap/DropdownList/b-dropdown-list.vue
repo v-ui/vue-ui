@@ -6,19 +6,12 @@
       menu-width
       :show="show"
       :label="label"
+      :placeholder="placeholder"
       :disabled="disabled"
       :menu-height="menuHeight"
-      :placeholder="placeholder"
+      :multiple="isMultiple"
+      @deleteItem="deleteItem"
     >
-      <template v-if="isMultiple" #trigger>
-        <div class="d-flex align-content-between flex-wrap">
-          <b-badge v-for="(item, key) in checkedValues" :key="key" class="m-1" color="primary">
-            {{ item[primaryKey] || item.label || item.value || item }}
-            <i v-if="!disabled" class="fas fa-times-circle text-muted pl-1" style="cursor: pointer" @click.stop="deleteItem(item)"/>
-          </b-badge>
-          <label v-show="!checkedValues || checkedValues.length === 0" class="m-0">{{ placeholder }}</label>
-        </div>
-      </template>
       <b-dropdown-header v-if="search" @click.native="headerClick">
         <b-text v-model="searchText" hide-icon type="search" size="sm" />
       </b-dropdown-header>
@@ -57,7 +50,6 @@ import BDropdownHeader from "@/components/base/Bootstrap/Dropdown/b-dropdown-hea
 import BDropdownDivider from '@/components/base/Bootstrap/Dropdown/b-dropdown-divider.vue'
 import BDropdownItem from "@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue";
 
-import BBadge from '@/components/base/Bootstrap/Badge/b-badge.vue'
 import BText from "@/components/base/Bootstrap/Form/b-text.vue";
 
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
@@ -70,7 +62,6 @@ export default {
     BDropdownHeader,
     BDropdownDivider,
     BDropdownItem,
-    BBadge,
     BText,
     BValid,
     BInfo
@@ -102,7 +93,6 @@ export default {
   data() {
     return {
       show: null,
-      label: null,
       searchText: null,
       menuHeight: "0px",
       isMultiple: this.multiple,
@@ -114,20 +104,17 @@ export default {
       return this.searchText
         ? this.list.filter(e => e.value && (e.value.includes(this.searchText) || e.label.includes(this.searchText)))
         : this.list
-    }
+    },
+    label: function() {
+      return this.isMultiple
+        ? this.checkedValues && this.checkedValues.map && this.checkedValues.map(e => e[this.primaryKey] || e.label || e.value || e ) || null
+        : this.checkedValues && (this.checkedValues[this.primaryKey] || this.checkedValues.label || this.checkedValues.value || this.checkedValues) || null
+    },
   },
   mounted: function() {
     this.menuHeight = this.row * 32 + 10 + "px"
-    this.setTrigger(this.checkedValues)
   },
   methods: {
-    setTrigger: function(value) {
-      let obj =
-        this.list &&
-        this.list.find &&
-        this.list.find(e => { if (e.value === value) return e })
-      this.label = (obj && obj.label) || null
-    },
     headerClick: function() {
       this.show = true
     },
@@ -141,14 +128,11 @@ export default {
         else this.checkedValues.push(value)
       } else {
         this.checkedValues = value
-        this.setTrigger(this.checkedValues)
       }
       this.searchText = null // 清空查询字段
       this.validator(this.$refs.dropdownlist.$el, this.checkedValues)
     },
-    deleteItem: function(item) {
-      let value = this.primaryKey ? item : item && item.value || item
-      let index = this.checkedMap.indexOf(value)
+    deleteItem: function(index) {
       if (index >= 0) this.checkedValues.splice(index, 1)
       this.validator(this.$refs.dropdownlist.$el, this.checkedValues)
     },

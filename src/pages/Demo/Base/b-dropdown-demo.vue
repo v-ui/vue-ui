@@ -105,7 +105,7 @@
     </div>
     <div class="row">
       <font class="col-1">row:</font>
-      <b-dropdown-list class="col-11" :list="list" value="value5" row="3" />
+      <b-dropdown-list class="col-11" :list="list" row="3" />
     </div>
     <div class="row">
       <font class="col-1">info:</font>
@@ -182,6 +182,7 @@
     <div class="row">
       <font class="col-1">disabled:</font>
       <b-dropdown-panel class="col-auto" disabled />
+      <b-dropdown-panel class="col-auto" v-model="value2" multiple disabled />
     </div>
     <div class="row">
       <font class="col-1">list:</font>
@@ -200,7 +201,7 @@
         <br />
         {{ value1 }}:
       </font>
-      <b-dropdown-panel class="col-11" :list="list" v-model="value1" />
+      <b-dropdown-panel class="col-auto" :list="list" v-model="value1" />
     </div>
     <div class="row">
       <font class="col-1">
@@ -208,24 +209,24 @@
         <br />
         {{ value2 }}:
       </font>
-      <b-dropdown-panel class="col-11" :list="list" v-model="value2" multiple />
+      <b-dropdown-panel class="col-auto" :list="list" v-model="value2" multiple />
     </div>
     <br />
     <h4>校验</h4>
     <hr />
     <div class="row">
       <font class="col-1">required:</font>
-      <b-dropdown-panel class="col-5" :list="list" required />
-      <b-dropdown-panel class="col-5" :list="list" multiple required />
+      <b-dropdown-panel class="col-auto" :list="list" required />
+      <b-dropdown-panel class="col-auto" :list="list" multiple required />
     </div>
     <div class="row">
       <font class="col-1">
         success
         <br />error:
       </font>
-      <b-dropdown-panel class="col-5" :list="list" invalidInfo="error" validInfo="success" required />
+      <b-dropdown-panel class="col-auto" :list="list" invalidInfo="error" validInfo="success" required />
       <b-dropdown-panel
-        class="col-5"
+        class="col-auto"
         :list="list"
         invalidInfo="error"
         validInfo="success"
@@ -238,11 +239,11 @@
         success
         <br />error(2):
       </font>
-      <b-dropdown-panel class="col-5" :list="list" required>
+      <b-dropdown-panel class="col-auto" :list="list" required>
         <template #invalid>you can add anlything invalidInfo or DOM</template>
         <template #valid>you can add anlything validInfo or DOM</template>
       </b-dropdown-panel>
-      <b-dropdown-panel class="col-5" :list="list" multiple required>
+      <b-dropdown-panel class="col-auto" :list="list" multiple required>
         <template #invalid>you can add anlything invalidInfo or DOM</template>
         <template #valid>you can add anlything validInfo or DOM</template>
       </b-dropdown-panel>

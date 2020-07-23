@@ -318,9 +318,9 @@ export default {
       },
       data() {
         return {
-          selectedValues: this.selected,
           isMultiple: this.multiple,
           nullValue: '<Place select...>',
+          selectedValues: this.selected || (this.multiple ? [] : ''),
         }
       },
       watch: {

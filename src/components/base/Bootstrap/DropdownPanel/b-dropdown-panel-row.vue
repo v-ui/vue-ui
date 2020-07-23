@@ -7,7 +7,7 @@
       :item="item"
       :is-multiple="isMultiple"
       :primary-key="primaryKey"
-      :selected="selectedValuess"
+      :selected="selectedValues"
       :col-count="colCount"
       :disabled="item.disabled || disabled"
       @click="click"
@@ -32,12 +32,12 @@ export default {
     click: function(item) {
       let value = this.primaryKey ? item : item && item.value || item
       if (this.isMultiple) {
-        let index = this.selectedValuess.indexOf(value)
+        let index = this.selectedValues.indexOf(value)
         index >= 0
-          ? this.selectedValuess.splice(index, 1)
-          : this.selectedValuess.push(value)
+          ? this.selectedValues.splice(index, 1)
+          : this.selectedValues.push(value)
       } else {
-        this.selectedValuess = value
+        this.selectedValues = value
       }
     },
   },

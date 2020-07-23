@@ -3,7 +3,14 @@
     <div ref="dropdownPicker" @click="isShow = disabled ? !disabled : !isShow">
       <div class="d-flex justify-content-between align-items-center px-1">
         <slot name="trigger">
-          <font :class="fontClass">{{ label || placeholder }}</font>
+          <font v-if="!multiple" :class="fontClass">{{ label || placeholder }}</font>
+          <div v-else class="d-flex align-content-between flex-wrap">
+            <b-badge v-for="(item, key) in label" :key="key" class="m-1" color="primary">
+              {{ item }}
+              <i v-if="!disabled" class="fas fa-times-circle text-muted pl-1" style="cursor: pointer" @click.stop="$emit('deleteItem', key)"/>
+            </b-badge>
+            <label v-show="!label || label.length === 0" class="m-0">{{ placeholder }}</label>
+          </div>
         </slot>
         <slot name="icon" v-if="!hideToggle">
           <i :class="icon.caretDown" />
@@ -29,11 +36,12 @@ import tools from "@/tools/index.js"
 import config from "@/config/index.js"
 import util from "@/components/util/index.js"
 
+import BBadge from '@/components/base/Bootstrap/Badge/b-badge.vue'
 import tranDrop from "@/components/transition/tran-drop.vue"
 
 export default {
   name: "b-dropdown-picker",
-  components: { tranDrop, },
+  components: { BBadge, tranDrop, },
   props: {
     id: {
       type: String,
@@ -43,11 +51,12 @@ export default {
     },
     placeholder: util.props.String,
     show: util.props.Boolean,
+    multiple: util.props.Boolean,
     disabled: util.props.Boolean,
     hideToggle: util.props.Boolean,
     menuWidth: util.props.Boolean,
     menuHeight: util.props.String,
-    label: [String, Number, Date]
+    label: [ Array, String, Number, Object, Date, ],
   },
   data() {
     return {
