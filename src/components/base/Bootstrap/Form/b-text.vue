@@ -72,6 +72,10 @@ export default {
     value: util.props.String,
     placeholder: util.props.String,
     length: util.props.UInt,
+    maxlength: {
+      ...util.props.UInt,
+      default: 64,
+    },
     icon: util.props.String,
     hideIcon: util.props.Boolean,
     info: util.props.String

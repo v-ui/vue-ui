@@ -103,10 +103,7 @@ export default {
         unvalid: props.Boolean,
         required: props.Boolean,
         minlength: props.Int,
-        maxlength: {
-          ...props.UInt,
-          default: 64,
-        },
+        maxlength: props.UInt,
         pattern: [String, RegExp],
         valid: props.Function,
         validInfo: props.String,
@@ -326,16 +323,16 @@ export default {
       },
       data() {
         return {
-          selectedValue: this.selected,
+          selectedValues: this.selected,
           isMultiple: this.multiple,
-          nullValue: '<Pleace select...>',
+          nullValue: '<Place select...>',
         }
       },
       watch: {
         selected: function (value) {
-          this.selectedValue = value
+          this.selectedValues = value
         },
-        selectedValue: function (value) {
+        selectedValues: function (value) {
           this.$emit('select:selected', value)
         },
       },
@@ -357,7 +354,7 @@ export default {
         selectedMap: function () {
           const self = this
           return this.isMultiple
-            ? this.selected && this.selected.map && this.selected.map(e => e && e[self.primaryKey] || e)
+            ? this.selected && this.selected.map && this.selected.map(e => e && e[self.primaryKey || 'value'] || e)
             : this.selected && this.selected[this.primaryKey] || this.selected
         },
         isSelected: function () {

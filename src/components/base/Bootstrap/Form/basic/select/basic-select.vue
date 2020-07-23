@@ -22,7 +22,7 @@
         :item="item"
         :is-multiple="isMultiple"
         :primary-key="primaryKey"
-        :selected="selectedValue"
+        :selected="selectedValues"
       />
     </slot>
   </select>
@@ -61,13 +61,13 @@ export default {
         .map(e => (e.children ? [...e.children] : e))
         .reduce((acc, val) => acc.concat(val), []);
       if (this.isMultiple) {
-        this.selectedValue = Array.prototype.filter
+        this.selectedValues = Array.prototype.filter
             .call(event.target.options, o => o.selected && o.value)
             .map(o => o.value === this.nullValue ? null : list.find(e => (e.value || e) === o.value)
             ).filter(e => e).map(e => this.primaryKey ? e : e && e.value || e)
       } else {
         let result = list.find(e => (e.value || e) === event.target.value)
-        this.selectedValue = this.primaryKey ? result : result && result.value || result
+        this.selectedValues = this.primaryKey ? result : result && result.value || result
       }
     }
   }

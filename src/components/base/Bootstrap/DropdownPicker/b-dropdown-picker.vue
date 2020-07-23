@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" class="align-items-center h-auto px-0" :class="{'bg-light': disabled}" :disabled="disabled" :aria-disabled="disabled">
+  <div :id="id" class="align-items-center h-auto px-0" :class="{'bg-light': disabled}" style="min-width: 360px" :disabled="disabled" :aria-disabled="disabled">
     <div ref="dropdownPicker" @click="isShow = disabled ? !disabled : !isShow">
       <div class="d-flex justify-content-between align-items-center px-1">
         <slot name="trigger">
