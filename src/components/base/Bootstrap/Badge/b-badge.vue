@@ -31,11 +31,13 @@ export default {
   computed: {
     objClass: function() {
       let color = this.color ? `badge-${this.color}` : ''
+      let border = this.color ? `border border-${this.color}`: 'border border-dark'
       let pill = !this.$slots.default || this.pill ? 'badge-pill' : ''
-      return `${color} ${pill}`;
+      return `${color} ${border} ${pill}`;
     },
     objStyle: function() {
-      return !this.$slots.default ? "height: 15px" : null;
+      let height = !this.$slots.default ? "height: 15px" : null;
+      return `${height}; `
     },
     fillsrMsg: function() {
       return this.srMsg || this.color;

@@ -12,25 +12,29 @@
       :multiple="isMultiple"
       @deleteItem="deleteItem"
     >
-      <b-dropdown-header v-if="search" @click.native="headerClick">
-        <b-text v-model="searchText" hide-icon type="search" size="sm" />
-      </b-dropdown-header>
-      <b-dropdown-divider v-if="search" />
-      <b-dropdown-item
-        v-if="!searchText && !hideNull"
-        :label="placeholder"
-        :disabled="disabled"
-        @click.native="menuClick(null)"
-      />
-      <b-dropdown-item
-        v-for="item in searchList"
-        :key="item.value"
-        :info="item.info"
-        :label="item.label"
-        :active="isChecked(item)"
-        :disabled="item.disabled || disabled"
-        @click.native="menuClick(item)"
-      />
+      <template #trigger><slot name="trigger" /></template>
+      <template #icon><slot name="icon" /></template>
+      <slot>
+        <b-dropdown-header v-if="search" @click.native="headerClick">
+          <b-text v-model="searchText" hide-icon type="search" size="sm" />
+        </b-dropdown-header>
+        <b-dropdown-divider v-if="search" />
+        <b-dropdown-item
+          v-if="!searchText && !hideNull"
+          :label="placeholder"
+          :disabled="disabled"
+          @click.native="menuClick(null)"
+        />
+        <b-dropdown-item
+          v-for="item in searchList"
+          :key="item.value"
+          :info="item.info"
+          :label="item.label"
+          :active="isChecked(item)"
+          :disabled="item.disabled || disabled"
+          @click.native="menuClick(item)"
+        />
+      </slot>
     </b-dropdown-picker>
     <b-valid v-if="validInfo || $slots.valid" state="valid">
       <slot name="valid">{{ validInfo }}</slot>

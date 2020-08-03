@@ -12,13 +12,17 @@
       :multiple="isMultiple"
       @deleteItem="deleteItem"
     >
-      <b-dropdown-panel-row
-        v-model="selectedValues"
-        :list="list"
-        :primary-key="primaryKey"
-        :multiple="isMultiple"
-        :col-count="colCount"
-      />
+      <template #trigger><slot name="trigger" /></template>
+      <template #icon><slot name="icon" /></template>
+      <slot>
+        <b-dropdown-panel-row
+          v-model="selectedValues"
+          :list="list"
+          :primary-key="primaryKey"
+          :multiple="isMultiple"
+          :col-count="colCount"
+        />
+      </slot>
     </b-dropdown-picker>
     <b-valid v-if="validInfo || $slots.valid" state="valid">
       <slot name="valid">{{ validInfo }}</slot>
