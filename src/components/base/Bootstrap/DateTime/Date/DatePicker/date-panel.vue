@@ -3,7 +3,7 @@
     <picker-header
       :disabled="disabled"
       :hearder-text="hearderText"
-      :now-disabled="nowDisabled"
+      :disabled-now="disabledNow"
       @clickHeader="clickHeader"
       @forward="forward"
       @checknow="checknow"
@@ -40,14 +40,11 @@ export default {
     hearderText: util.props.String,
     hideHeader: util.props.Boolean,
     disabled: util.props.Boolean,
+    disabledNow: util.props.Boolean,
   },
   computed: {
-    now: () => new Date(),
     rowCount: function() {
       return Math.ceil(this.total / this.colCount);
-    },
-    nowDisabled: function() {
-      return this.now < this.min || this.now > this.max;
     },
   },
   methods: {

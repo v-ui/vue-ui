@@ -1,12 +1,13 @@
 <template>
   <date-panel
-    v-model="selected"
+    v-model="selectedValue"
     :total="total"
     :col-count="colCount"
     :min="min"
     :max="max"
     :list="list"
     :disabled="disabled"
+    :disabled-now="disabledNow"
     :hide-header="hideHeader"
     :hearder-text="headerText"
     @panel:forward="forward"

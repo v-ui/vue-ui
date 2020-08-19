@@ -81,25 +81,25 @@ let base = {
     return {
       total: 0,
       colCount: 0,
-      selected: null,
+      selectedValues: null,
     }
   },
   computed: {
     rowCount: function() {
       return Math.ceil(this.total / this.colCount);
     },
-    nowDisabled: function() {
-      return this.now < this.min || this.now > this.max;
-    },
     headerText: function() {
       return null
+    },
+    disabledNow: function() {
+      return false
     },
     list: function() {
       return []
     },
   },
   watch: {
-    selected: function(value) {
+    selectedValues: function(value) {
       this.start = this.formatStart(value)
       // 配合 v-model 工作
       this.$emit("selected:changed", value);
@@ -123,6 +123,9 @@ let year = {
     headerText: function() {
       return `${this.start} - ${this.start + this.total - 1}`
     },
+    disabledNow: function() {
+      return this.disabledItem(this.year)
+    },
     list: function() {
       let arr = [];
       for (let i = 0; i < this.total; i++) {
@@ -130,21 +133,21 @@ let year = {
         arr.push({
           value: value,
           label: value,
-          status: this.validator(value, this.year, this.selected),
-          disabled: value < this.moment(this.min).year() || value > this.moment(this.max).year()
+          status: this.validator(value, this.year, this.selectedValues),
+          disabled: this.disabledItem(value),
         });
       }
       return arr
     },
   },
   watch: {
-    selected: function(value) {
+    selectedValues: function(value) {
       this.start = this.formatStart(value)
       this.$emit('year2Month', value)
     }
   },
   mounted() {
-    this.selected = this.moment(this.value).year() || this.year
+    this.selectedValues = this.moment(this.value).year() || this.year
   },
   methods: {
     formatStart: function(val) {
@@ -153,11 +156,14 @@ let year = {
       //   : Math.floor(val / this.total) * this.total + 1;
       return Math.floor(val / this.total) * this.total
     },
+    disabledItem: function(value) {
+      return value < this.moment(this.min).year() || value > this.moment(this.max).year()
+    },
     forward: function() {
       this.start -= this.total;
     },
     checknow: function() {
-      this.selected = this.year;
+      this.selectedValues = this.year;
     },
     backward: function() {
       this.start += this.total;

@@ -18,7 +18,7 @@
       <b-button
         class="border-0 bg-white text-body"
         style="height: 2.5em"
-        :disabled="disabled || nowDisabled"
+        :disabled="disabled || disabledNow"
         @click.stop="$emit('checknow')"
       >
         <i class="fas fa-circle" />
@@ -46,7 +46,7 @@ export default {
   props: {
     hearderText: util.props.String,
     disabled: util.props.Boolean,
-    nowDisabled: util.props.Boolean,
+    disabledNow: util.props.Boolean,
   }
 };
 </script>
