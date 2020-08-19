@@ -8,8 +8,8 @@
       :label="label"
       :placeholder="placeholder"
       :disabled="disabled"
-      :menu-height="menuHeight"
       :multiple="isMultiple"
+      :menu-height="menuHeight"
       @deleteItem="deleteItem"
     >
       <template #trigger><slot name="trigger" /></template>
@@ -77,10 +77,7 @@ export default {
     util.mixins.select.check,
   ],
   props: {
-    multiple: {
-      ...util.props.Boolean,
-      default: false,
-    },
+    multiple: util.props.Boolean,
     info: util.props.String,
     search: util.props.Boolean,
     hideNull: {
@@ -96,7 +93,7 @@ export default {
   },
   data() {
     return {
-      show: null,
+      show: false,
       searchText: null,
       menuHeight: "0px",
       isMultiple: this.multiple,

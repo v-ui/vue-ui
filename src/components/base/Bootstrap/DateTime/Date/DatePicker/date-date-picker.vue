@@ -17,9 +17,7 @@
         :col-count="colCount"
       />
       <picker-row
-        v-for="(items, index) in lists"
-        :key="index"
-        :items="items"
+        :list="lists"
         :disabled="disabled"
         :col-count="colCount"
         @click="click"
@@ -33,7 +31,7 @@ import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import pickerHeader from "./date-picker-header";
-import pickerRow from "@/components/base/Bootstrap/DropdownPicker/b-dropdown-picker-row.vue";
+import pickerRow from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel-row.vue"
 
 export default {
   name: "date-date-picker",

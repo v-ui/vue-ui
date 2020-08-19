@@ -5,9 +5,18 @@ import status from './status'
 import operate from './operate'
 import placeholder from './placeholder'
 
+// 格式化 local 数据
+function formatLocak(str) {
+  if (!str || str.length === 0) return null
+  if (!str.includes('-')) return str
+  let local = str
+  let arr = local.split('-')
+  return arr[0] + '-' + arr[1].toUpperCase()
+}
+
 export default {
     lang: {
-        defaultLocale: 'zh-CN',// default Locale
+        defaultLocale: formatLocak(navigator.language || navigator.userLanguage) || 'en-US',// default Locale
         fallbackLocale: 'en-US',// fallback Locale
         langsList: [
             { code: 'en-US', name: 'English' },
@@ -45,7 +54,7 @@ export default {
         icon: icon, // icons
         status: status, // status
     }, // UI config
-    
-    regex: regex, // regex
+
+    regex: regex, //regex
     // routes: routes, // routes config
 }

@@ -1,18 +1,16 @@
 <template>
   <dropdown-picker
-    :class="[cClass, readonlyClass]"
     :placeholder="fillPlaceholder"
     :label="showValue"
     :info="message"
     :show="show"
-    show-footer
     :disabled="disabled"
-    @showOrHide="showOrHide"
+
   >
     <template #icon>
       <i class="far fa-calendar-alt" />
     </template>
-    <template v-if="show">
+    <template>
       <year-picker
         v-if="pickertType === 'year'"
         v-model="selectValue"
@@ -20,7 +18,7 @@
         :min="dateMin"
         :max="dateMax"
         :disabled="disabled"
-        :hide-eader="hideHeader"
+        :hide-header="hideHeader"
         @year2Month="year2Month"
       />
       <month-picker
@@ -53,7 +51,7 @@
 import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import dropdownPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdown-picker.vue";
+import dropdownPicker from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel.vue";
 import yearPicker from "./date-year-picker";
 import monthPicker from "./date-month-picker";
 import datePicker from "./date-date-picker";
@@ -88,10 +86,10 @@ export default {
   },
   data() {
     return {
-      show: null,
+      show: false,
       date: null,
       pickertType: "",
-      selectValue: null
+      selectValue: null,
     };
   },
   computed: {
@@ -254,9 +252,6 @@ export default {
       this.selectValue = new Date(value);
       this.show = false;
     },
-    showOrHide: function(value) {
-      this.show = value;
-    }
   },
   watch: {
     selectValue: function(value) {

@@ -1,39 +1,30 @@
 <template>
-  <div>
-    <picker-header
-      v-if="!hideHeader"
-      :disabled="disabled"
-      :hearder-text="hearderText"
-      :now-disabled="nowDisabled"
-      @clickHeader="clickHeader"
-      @forward="forward"
-      @checknow="checknow"
-      @backward="backward"
-    />
-    <hr>
-    <div class="text-center mx-3">
-      <picker-row
-        v-for="(items, index) in lists"
-        :key="index"
-        :items="items"
-        :col-count="colCount"
-        :disabled="disabled"
-        @click="click"
-      />
-    </div>
-  </div>
+  <date-panel
+    v-model="date.month"
+    :total="total"
+    :col-count="3"
+    :min="min"
+    :max="max"
+    :list="lists"
+    :disabled="disabled"
+    :hide-header="hideHeader"
+    :hearder-text="hearderText"
+    @panel:clickHeader="clickHeader"
+    @panel:forward="forward"
+    @panel:checknow="checknow"
+    @panel:backward="backward"
+  />
 </template>
 
 <script>
 import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import pickerHeader from "./date-picker-header";
-import pickerRow from "@/components/base/Bootstrap/DropdownPicker/b-dropdown-picker-row.vue";
+import DatePanel from '@/components/base/Bootstrap/DateTime/Date/DatePicker/date-panel.vue'
 
 export default {
   name: "date-month-picker",
-  components: { pickerHeader, pickerRow },
+  components: { DatePanel },
   model: {
     prop: "value",
     event: "change"
@@ -65,40 +56,25 @@ export default {
   },
   computed: {
     now: () => new Date(),
-    rowCount: function() {
-      return Math.ceil(this.total / this.colCount);
-    },
     hearderText: function() {
       return this.year;
-    },
-    nowDisabled: function() {
-      return this.now < this.min || this.now > this.max;
     },
     lists: function() {
       if (!this.year || isNaN(this.year)) return;
       let arrs = [];
-      for (let i = 0; i < this.rowCount; i++) {
-        let arr = [];
-        const max =
-          this.total < this.colCount * (i + 1)
-            ? this.total % this.colCount
-            : this.colCount;
+       for (let i = 0; i < this.total; i++) {
+          let value = 0 + i
         const d = new Date(this.selectValue);
         const selectYeaer = d.getFullYear();
         const selectMonth = d.getMonth();
-        for (let n = 0; n < max; n++) {
-          let value = 0 + i * this.colCount + n;
           let date = new Date(this.formatMonth(this.year, value));
-          arr.push({
+          arrs.push({
             value: value,
-            text: tools.string.padStart(value + 1, 2),
-            select: value == selectMonth && selectYeaer == this.year,
+            label: tools.string.padStart(value + 1, 2),
+            selected: value == selectMonth && selectYeaer == this.year,
             disabled: date < this.min || date > this.max
           });
-        }
-        arrs.push(arr);
-      }
-
+       }
       return arrs;
     }
   },
@@ -109,11 +85,7 @@ export default {
   },
   methods: {
     clickHeader: function() {
-      this.$emit("month2Year", this.selectValue);
-    },
-    click: function(value) {
-      this.selectValue = this.formatMonth(this.year, value);
-      this.$emit("month2Date", this.selectValue);
+      this.$emit("month2Year", this.date);
     },
     forward: function() {
       this.year -= 1;
@@ -122,7 +94,6 @@ export default {
       this.year = this.now.getFullYear();
       this.month = this.now.getMonth();
       this.selectValue = this.formatMonth(this.year, this.month);
-      this.$emit("month2Date", this.selectValue);
     },
     backward: function() {
       this.year += 1;
@@ -132,9 +103,9 @@ export default {
     }
   },
   watch: {
-    selectValue: function(val) {
+    selectValue: function(value) {
       // 配合 v-model 工作
-      this.$emit("change", val);
+      this.$emit("change", value);
     }
   }
 };

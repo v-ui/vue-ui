@@ -15,11 +15,11 @@ export default {
     return {
       locale: this.$i18n.locale,
       langs: config.lang.langsList.map(e => ({value: e.name, code: e.code})), // 支持的语言列表
-    }; 
+    };
   },
   computed: {
     select: function () {
-      return this.langs.find && this.langs.find(e => e.code == this.locale).value
+      return this.langs.find && this.langs.find(e => e.code.toLowerCase() == this.locale.toLowerCase()).value
     },
   },
   mounted() {

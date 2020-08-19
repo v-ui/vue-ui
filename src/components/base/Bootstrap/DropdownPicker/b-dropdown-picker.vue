@@ -1,7 +1,7 @@
 <template>
-  <div :id="id" class="align-items-center h-auto px-0" :class="{'bg-light': disabled}" style="min-width: 360px" :disabled="disabled" :aria-disabled="disabled">
-    <div ref="dropdownPicker" @click="isShow = disabled ? !disabled : !isShow">
-      <div class="d-flex justify-content-between align-items-center px-1">
+  <div :id="id" class="align-items-center h-auto px-0" :class="{'bg-light': disabled}" style="min-width: 320px" :disabled="disabled" :aria-disabled="disabled">
+    <div ref="dropdownPicker" class="h-100" @click="clickTrigger">
+      <div class="d-flex justify-content-between align-items-center h-100 px-1">
         <slot name="trigger">
           <font v-if="!multiple" :class="fontClass">{{ label || placeholder }}</font>
           <div v-else class="d-flex align-content-between flex-wrap">
@@ -61,6 +61,7 @@ export default {
   data() {
     return {
       isShow: this.show,
+      isInDropdownMenur: false,
       menuStyle: ""
     };
   },
@@ -73,11 +74,10 @@ export default {
     }
   },
   watch: {
-    isShow: function(newValue) {
-      newValue
+    isShow: function(value) {
+      value
         ? document.addEventListener("mousedown", this.hindeMenu)
         : document.removeEventListener("mousedown", this.hindeMenu)
-      this.$emit("showOrHide", newValue);
     },
     show: function(value) {
       this.isShow = value;
@@ -85,6 +85,9 @@ export default {
   },
   mounted() {
     this.init()
+  },
+  destroyed() {
+    document.removeEventListener("mousedown", this.hindeMenu)
   },
   methods: {
     init: function() {
@@ -95,11 +98,15 @@ export default {
         width: `${this.$refs.dropdownPicker.offsetWidth}px`
       };
     },
+    clickTrigger: function() {
+      if (this.disabled) return
+      this.isShow = !this.isShow
+    },
     hindeMenu: function(event) {
       const e = event.target
       // 判断鼠标点击位置是否在菜单内，如果是则不隐藏，如果不是则隐藏
-      let isInDropdownPicker = tools.dom.isElementIm(this.$refs.dropdownPicker, e)
-      if (!isInDropdownPicker) this.isShow = false
+      this.isInDropdownPicker = tools.dom.isElementIm(this.$refs.dropdownPicker, e)
+      this.isShow = this.isInDropdownPicker
     },
   },
 };

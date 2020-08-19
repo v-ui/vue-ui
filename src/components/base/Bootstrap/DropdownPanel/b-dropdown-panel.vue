@@ -1,13 +1,13 @@
 <template>
-  <div class="form-group" >
+  <div class="form-group">
     <b-dropdown-picker
       ref="dropdownpanel"
       :class="[readonlyClass]"
       menu-width
       :menuWidth="false"
+      :label="fillLabel"
       :show="show"
-      :label="label"
-      :placeholder="placeholder"
+      :placeholder="fillPlaceholder"
       :disabled="disabled"
       :multiple="isMultiple"
       @deleteItem="deleteItem"
@@ -45,33 +45,33 @@ import BInfo from "@/components/Basic/basic-info.vue"
 
 export default {
   name: 'b-dropdown-panel',
-  mixins: [
-    util.mixins.form.base,
-    util.mixins.form.readonly,
-    util.mixins.form.validator,
-    util.mixins.select.select,
-  ],
   components: {
     BDropdownPicker,
     BDropdownPanelRow,
     BValid,
     BInfo,
   },
+  mixins: [
+    util.mixins.form.base,
+    util.mixins.form.readonly,
+    util.mixins.form.validator,
+    util.mixins.select.select,
+  ],
   props: {
+    label: util.props.String,
     info: util.props.String,
+    show: util.props.Boolean,
     colCount: util.props.UInt,
-  },
-  data() {
-    return {
-      show: false,
-      placeholder: '<Place select...>',
-    }
+    placeholder: util.props.String,
   },
   computed: {
-    label: function() {
-      return this.isMultiple
+    fillLabel: function() {
+      return this.label || (this.isMultiple
         ? this.selectedValues && this.selectedValues.map && this.selectedValues.map(e => e[this.primaryKey] || e.label || e.value || e ) || null
-        : this.selectedValues && (this.selectedValues[this.primaryKey] || this.selectedValues.label || this.selectedValues.value || this.selectedValues) || null
+        : this.selectedValues && (this.selectedValues[this.primaryKey] || this.selectedValues.label || this.selectedValues.value || this.selectedValues) || null)
+    },
+    fillPlaceholder: function() {
+      return this.placeholder || '<Place select...>'
     },
   },
   watch: {
