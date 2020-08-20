@@ -1,5 +1,5 @@
 <template>
-  <dropdown-picker
+  <dropdown-panel
     :placeholder="fillPlaceholder"
     :label="showValue"
     :info="message"
@@ -11,7 +11,7 @@
       <i class="far fa-calendar-alt" />
     </template>
     <template>
-      <year-picker
+      <year-panel
         v-if="pickertType === 'year'"
         v-model="selectValue"
         style="min-width: 18em"
@@ -21,7 +21,7 @@
         :hide-header="hideHeader"
         @year2Month="year2Month"
       />
-      <month-picker
+      <month-panel
         v-if="pickertType === 'month'"
         v-model="selectValue"
         style="min-width: 15em"
@@ -32,7 +32,7 @@
         @month2Year="month2Year"
         @month2Date="month2Date"
       />
-      <date-picker
+      <date-panel
         v-if="pickertType === 'date'"
         v-model="selectValue"
         style="min-width: 22em"
@@ -44,21 +44,21 @@
         @dateChecked="dateChecked"
       />
     </template>
-  </dropdown-picker>
+  </dropdown-panel>
 </template>
 
 <script>
 import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import dropdownPicker from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel.vue";
-import yearPicker from "./date-year-picker";
-import monthPicker from "./date-month-picker";
-import datePicker from "./date-date-picker";
+import dropdownPanel from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel.vue";
+import yearPanel from "./Panel/date-year-panel";
+import monthPanel from "./Panel/date-month-panel";
+import datePanel from "./Panel/date-date-panel";
 
 export default {
   name: "b-date-picker",
-  components: { dropdownPicker, yearPicker, monthPicker, datePicker },
+  components: { dropdownPanel, yearPanel, monthPanel, datePanel },
   mixins: [util.mixins.form.base, util.mixins.form.readonly],
   model: {
     prop: "value",

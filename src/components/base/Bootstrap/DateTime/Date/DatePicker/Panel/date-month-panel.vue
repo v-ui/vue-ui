@@ -19,12 +19,12 @@
 // import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import DatePanel from '@/components/base/Bootstrap/DateTime/Date/DatePicker/date-panel.vue'
+import DatePanel from "../Basic/date-panel.vue";
 
 export default {
-  name: "date-month-picker",
+  name: "date-month-panel",
   components: { DatePanel },
-  mixins: [ util.mixins.date.month, ],
+  mixins: [util.mixins.date.month],
   // model: {
   //   prop: "value",
   //   event: "change"

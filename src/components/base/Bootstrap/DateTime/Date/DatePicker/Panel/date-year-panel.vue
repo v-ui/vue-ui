@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import util from "@/components/util/index.js"
+import util from "@/components/util/index.js";
 
-import DatePanel from '@/components/base/Bootstrap/DateTime/Date/DatePicker/date-panel.vue'
+import DatePanel from "../Basic/date-panel.vue";
 
 export default {
-  name: "date-year-picker",
-  components: { DatePanel, },
-  mixins: [ util.mixins.date.year, ],
+  name: "date-year-panel",
+  components: { DatePanel },
+  mixins: [util.mixins.date.year],
 };
 </script>

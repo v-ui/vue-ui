@@ -1,5 +1,5 @@
 <template>
-<date-panel
+  <date-panel
     v-model="date"
     :list="list"
     :col-count="colCount"
@@ -15,7 +15,7 @@
   >
     <template #week>
       <picker-row
-        class=" border-bottom border-primary"
+        class="border-bottom border-primary"
         :list="weekList"
         :col-count="colCount"
         disabled
@@ -27,12 +27,12 @@
 <script>
 import util from "@/components/util/index.js";
 
-import DatePanel from '@/components/base/Bootstrap/DateTime/Date/DatePicker/date-panel.vue'
-import pickerRow from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel-row.vue"
+import DatePanel from "../Basic/date-panel";
+import pickerRow from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel-row.vue";
 
 export default {
-  name: "date-date-picker",
+  name: "date-date-panel",
   components: { DatePanel, pickerRow },
-  mixins: [ util.mixins.date.date, ],
+  mixins: [util.mixins.date.date],
 };
 </script>
