@@ -206,7 +206,6 @@ let month = {
   },
   watch: {
     month: function(value) {
-      debugger
       this.selectedValues = this.formatMonth(this.year, value)
       this.$emit('month2Date', this.selectedValues)
     }

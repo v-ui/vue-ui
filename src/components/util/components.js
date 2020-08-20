@@ -10,7 +10,6 @@ const newFuncSlotCompoment = function (name, value) {
   Vue.component(name, {
     functional: true,
     render: function (createElement, context) {
-      debugger
       if (!context.slots().default) return
       return createElement(
         value && value.el || 'div',
