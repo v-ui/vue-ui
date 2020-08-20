@@ -122,7 +122,7 @@
       </font>
       <b-time class="col-4" type="hh:mm:ss" v-model="hhmmss"></b-time>
     </div>
-    <h2>b-year-picker</h2>
+    <!-- <h2>b-year-picker</h2>
     <hr />
     <div class="row mx-0">
       <font class="col-1">default:</font>
@@ -168,7 +168,7 @@
         {{ month1 }}:
       </font>
       <b-month-picker class="col-5" v-model="month1"></b-month-picker>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -176,12 +176,12 @@
 import BDatePicker from "@/components/base/Bootstrap/DateTime/Date/DatePicker/b-date-picker.vue";
 import BTime from "@/components/base/Bootstrap/DateTime/Time/b-time.vue";
 
-import BYearPicker from "@/components/base/Bootstrap/DateTime/Date/DateList/b-year-picker.vue";
-import BMonthPicker from "@/components/base/Bootstrap/DateTime/Date/DateList/b-month-picker.vue";
+// import BYearPicker from "@/components/base/Bootstrap/DateTime/Date/DateList/b-year-picker.vue";
+// import BMonthPicker from "@/components/base/Bootstrap/DateTime/Date/DateList/b-month-picker.vue";
 
 export default {
   name: "b-datetime-demo",
-  components: { BDatePicker, BTime, BYearPicker, BMonthPicker },
+  components: { BDatePicker, BTime,  },
   data() {
     return {
       year: "2018",

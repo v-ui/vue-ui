@@ -39,6 +39,7 @@ export default {
       } else {
         this.selectedValues = value
       }
+      this.$emit('click', this.selectedValues)
     },
   },
 };

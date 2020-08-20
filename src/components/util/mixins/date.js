@@ -81,8 +81,6 @@ let base = {
   },
   data() {
     return {
-      total: 0,
-      colCount: 0,
       selectedValues: null,
     }
   },
@@ -102,7 +100,6 @@ let base = {
   },
   watch: {
     selectedValues: function(value) {
-      this.start = this.formatStart(value)
       // 配合 v-model 工作
       this.$emit("selected:changed", value);
     }
@@ -129,6 +126,7 @@ let year = {
       return this.disabledItem(this.year)
     },
     list: function() {
+      if (!this.start || isNaN(this.start)) return
       let arr = [];
       for (let i = 0; i < this.total; i++) {
         let value = this.start + i
@@ -153,9 +151,6 @@ let year = {
   },
   methods: {
     formatStart: function(val) {
-      // return val % this.total == 0
-      //   ? Math.floor(val / this.total) * this.total - (this.total - 1)
-      //   : Math.floor(val / this.total) * this.total + 1;
       return Math.floor(val / this.total) * this.total
     },
     disabledItem: function(value) {
@@ -169,6 +164,9 @@ let year = {
     },
     backward: function() {
       this.start += this.total;
+    },
+    checked: function(value) {
+      this.selectedValues = value
     },
   },
 }
@@ -184,21 +182,22 @@ let month = {
     }
   },
   computed: {
-    now: () => new Date(),
     headerText: function() {
       return this.year;
+    },
+    disabledNow: function() {
+      return this.disabledItem(this.formatMonth(this.year, this.month))
     },
     list: function() {
       if (!this.year || isNaN(this.year)) return;
       let arr = [];
        for (let i = 0; i < this.total; i++) {
-        let value = 0 + i;
-          let date = this.formatMonth(this.year, value);
+          let date = this.formatMonth(this.year, i);
           arr.push({
-            value: value,
-            label: tools.string.padStart(value + 1, 2),
-            status: this.validator(this.formatMonth(this.year, value), this.formatMonth(this.moment().year(), this.moment().month()) , this.selectedValues),
-            disabled: date < this.min || date > this.max
+            value: i,
+            label: tools.string.padStart(i + 1, 2),
+            status: this.validator(date, this.formatMonth(this.moment().year(), this.moment().month()) , this.selectedValues),
+            disabled: this.disabledItem(date),
           });
        }
       return arr;
@@ -214,9 +213,13 @@ let month = {
     let date = this.moment(this.value)
     this.year = date.year()
     this.month = date.month()
-    this.selectedValues = this.formatMonth(this.year, this.month);
+    this.selectedValues = this.formatMonth(this.year, this.month)
   },
   methods: {
+    disabledItem: function(value) {
+      return (this.moment(this.min).isValid() && value.isBefore(this.moment([this.moment(this.min).year(), this.moment(this.min).month()]))) ||
+            (this.moment(this.max).isValid() && value.isAfter(this.moment(this.moment(this.max).year(), this.moment(this.max).month())))
+    },
     clickHeader: function() {
       this.$emit("month2Year", this.selectedValues);
     },
@@ -226,14 +229,123 @@ let month = {
     checknow: function() {
       this.year = this.moment().year();
       this.month = this.moment().month();
-      this.selectedValues = this.formatMonth(this.year, this.month);
+      this.selectedValues = this.formatMonth(this.year, this.month)
     },
     backward: function() {
       this.year += 1;
     },
     formatMonth: function(year, month) {
       return this.moment([year, month]);
+    },
+    checked: function(value) {
+      this.month = value
+      this.selectedValues = this.formatMonth(this.year, this.month)
+    },
+  },
+}
+
+let date = {
+  mixins: [ base, ],
+  data() {
+    return {
+      colCount: 7,
+      year: null,
+      month: null,
+      date: null,
     }
+  },
+  computed: {
+    total: function() {
+      return this.moment([this.year, this.month]).daysInMonth()
+    },
+    headerText: function() {
+      return this.moment([this.year, this.month]).format('YYYY-MM')
+    },
+    disabledNow: function() {
+      return this.disabledItem(this.formatDate(this.year, this.month, this.date))
+    },
+    weekList: function() {
+      return this.moment.localeData().weekdaysMin()
+    },
+    list: function() {
+
+      if (!this.year || isNaN(this.year)) return
+      if (isNaN(this.month) || this.month < 0 ) return
+
+      let arr = []
+      let value = 1
+      let flag = false
+      let day = this.moment([this.year, this.month, 1]).day()
+
+      for (let i = 0; i < this.total; i++) {
+        flag = i >= day - 1
+        if (!flag) {
+          arr.push({ label: "  " });
+        } else {
+          let date = this.formatDate(this.year, this.month, value)
+          arr.push({
+            value: value,
+            label: tools.string.padStart(value, 2),
+            status: this.validator(date, this.formatDate(this.moment().year(), this.moment().month(), this.moment().date()) , this.selectedValues),
+            disabled: this.disabledItem(date),
+          });
+          value++
+        }
+      }
+      return arr
+    },
+  },
+  watch: {
+    date: function(value) {
+      debugger
+      this.selectedValues = this.formatDate(this.year, this.month, value)
+      this.$emit('dateChecked', this.selectedValues)
+    }
+  },
+  mounted() {
+    let date = this.moment(this.value)
+    this.year = date.year()
+    this.month = date.month()
+    this.date = date.date()
+    this.selectedValues = this.formatMonth(this.year, this.month, this.date)
+  },
+  methods: {
+    disabledItem: function(value) {
+      return (this.moment(this.min).isValid() && value.isBefore(this.moment([this.moment(this.min).year(), this.moment(this.min).month(), this.moment(this.min).date()]))) ||
+            (this.moment(this.max).isValid() && value.isAfter(this.moment(this.moment(this.max).year(), this.moment(this.max).month(), this.moment(this.max).date())))
+    },
+    clickHeader: function() {
+      this.$emit("date2Month", this.selectedValues)
+    },
+    forward: function() {
+      if (this.month === 0) {
+        this.year -= 1
+        this.month = 11
+      } else {
+        this.month -= 1
+      }
+    },
+    checknow: function() {
+      this.year = this.moment().year();
+      this.month = this.moment().month();
+      this.date = this.moment().date()
+      this.selectedValues = this.formatMonth(this.year, this.month, this.date)
+    },
+    backward: function() {
+      if (this.month === 11) {
+        this.year += 1
+        this.month = 0
+      } else {
+        this.month += 1
+      }
+    },
+    formatDate: function(year, month, date) {
+      return this.moment([year, month, date])
+    },
+    checked: function(value) {
+      this.date = value
+      this.selectedValues = this.formatDate(this.year, this.month, this.date)
+    },
   },
 }
 
@@ -242,4 +354,5 @@ export default {
   base,
   year,
   month,
+  date,
 }

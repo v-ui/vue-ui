@@ -1,6 +1,5 @@
 <template>
   <date-panel
-    v-model="selectedValues"
     :list="list"
     :col-count="colCount"
     :disabled="disabled"
@@ -10,6 +9,7 @@
     @panel:forward="forward"
     @panel:checknow="checknow"
     @panel:backward="backward"
+    @panel:checked="checked"
   />
 </template>
 

@@ -4,12 +4,14 @@
     :list="list"
     :col-count="colCount"
     :disabled="disabled"
+    :disabled-now="disabledNow"
     :hide-header="hideHeader"
     :header-text="headerText"
     @panel:clickHeader="clickHeader"
     @panel:forward="forward"
     @panel:checknow="checknow"
     @panel:backward="backward"
+    @panel:checked="checked"
   />
 </template>
 

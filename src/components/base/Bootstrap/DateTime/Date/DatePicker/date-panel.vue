@@ -2,21 +2,22 @@
   <div>
     <picker-header
       :disabled="disabled"
-      :header-text="headerText"
       :disabled-now="disabledNow"
+      :header-text="headerText"
       @clickHeader="clickHeader"
       @forward="forward"
       @checknow="checknow"
       @backward="backward"
     />
-    <hr>
-    <div class="text-center mx-3">
+    <hr v-show="!$slots.week">
+    <div class="text-center">
+      <slot name="week" />
       <picker-row
-        v-model="checkedValues"
         :list="list"
         :primary-key="primaryKey"
         :col-count="colCount"
         :disabled="disabled"
+        @click="click"
       />
     </div>
   </div>
@@ -31,8 +32,8 @@ import pickerRow from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-pane
 export default {
   name: 'date-panel',
   components: { pickerHeader, pickerRow, },
-  mixins: [ util.mixins.select.check, ],
   props: {
+    list: util.props.Array,
     colCount: util.props.UInt,
     headerText: util.props.String,
     hideHeader: util.props.Boolean,
@@ -59,6 +60,9 @@ export default {
     backward: function() {
       this.$emit('panel:backward')
       this.$emit('canntHide')
+    },
+    click: function(value) {
+      this.$emit('panel:checked', value)
     },
   },
 }
