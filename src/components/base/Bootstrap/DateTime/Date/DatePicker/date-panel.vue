@@ -2,7 +2,7 @@
   <div>
     <picker-header
       :disabled="disabled"
-      :hearder-text="hearderText"
+      :header-text="headerText"
       :disabled-now="disabledNow"
       @clickHeader="clickHeader"
       @forward="forward"
@@ -33,11 +33,8 @@ export default {
   components: { pickerHeader, pickerRow, },
   mixins: [ util.mixins.select.check, ],
   props: {
-    min: Date,
-    max: Date,
-    total: util.props.UInt,
     colCount: util.props.UInt,
-    hearderText: util.props.String,
+    headerText: util.props.String,
     hideHeader: util.props.Boolean,
     disabled: util.props.Boolean,
     disabledNow: util.props.Boolean,

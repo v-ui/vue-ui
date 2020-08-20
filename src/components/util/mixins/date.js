@@ -1,3 +1,5 @@
+import tools from "@/tools"
+
 import moment from './moment'
 import props from '@/components/util/props.js'
 
@@ -25,19 +27,19 @@ let status = {
         }
       },
       validNow: function(value, now) {
-        return value === now
+        return value.isSame(now)
       },
       validSelect: function(value, selected) {
-        return value === selected
+        return value.isSame(selected)
       },
       validStart: function(value, start) {
-        return value === start
+        return value.isSame(start)
       },
       validEnd: function(value, end) {
-        return value === end
+        return value.isSame(end)
       },
       validBetween: function(value, start, end) {
-        return value > start && value < end
+        return value.isBetween(start, end)
       },
     },
   },
@@ -133,7 +135,7 @@ let year = {
         arr.push({
           value: value,
           label: value,
-          status: this.validator(value, this.year, this.selectedValues),
+          status: this.validator(this.moment(value), this.moment(this.year), this.moment(this.selectedValues)),
           disabled: this.disabledItem(value),
         });
       }
@@ -171,8 +173,74 @@ let year = {
   },
 }
 
+let month = {
+  mixins: [ base, ],
+  data() {
+    return {
+      total: 12,
+      colCount: 3,
+      year: null,
+      month: null,
+    }
+  },
+  computed: {
+    now: () => new Date(),
+    headerText: function() {
+      return this.year;
+    },
+    list: function() {
+      if (!this.year || isNaN(this.year)) return;
+      let arr = [];
+       for (let i = 0; i < this.total; i++) {
+        let value = 0 + i;
+          let date = this.formatMonth(this.year, value);
+          arr.push({
+            value: value,
+            label: tools.string.padStart(value + 1, 2),
+            status: this.validator(this.formatMonth(this.year, value), this.formatMonth(this.moment().year(), this.moment().month()) , this.selectedValues),
+            disabled: date < this.min || date > this.max
+          });
+       }
+      return arr;
+    }
+  },
+  watch: {
+    month: function(value) {
+      debugger
+      this.selectedValues = this.formatMonth(this.year, value)
+      this.$emit('month2Date', this.selectedValues)
+    }
+  },
+  mounted() {
+    let date = this.moment(this.value)
+    this.year = date.year()
+    this.month = date.month()
+    this.selectedValues = this.formatMonth(this.year, this.month);
+  },
+  methods: {
+    clickHeader: function() {
+      this.$emit("month2Year", this.selectedValues);
+    },
+    forward: function() {
+      this.year -= 1;
+    },
+    checknow: function() {
+      this.year = this.moment().year();
+      this.month = this.moment().month();
+      this.selectedValues = this.formatMonth(this.year, this.month);
+    },
+    backward: function() {
+      this.year += 1;
+    },
+    formatMonth: function(year, month) {
+      return this.moment([year, month]);
+    }
+  },
+}
+
 export default {
   status,
   base,
   year,
+  month,
 }

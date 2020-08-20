@@ -3,7 +3,7 @@
     <picker-header
       v-if="!hideHeader"
       :disabled="disabled"
-      :hearder-text="hearderText"
+      :header-text="headerText"
       :now-disabled="nowDisabled"
       @clickHeader="clickHeader"
       @forward="forward"
@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     now: () => new Date(),
-    hearderText: function() {
+    headerText: function() {
       return this.year + "-" + tools.string.padStart(Number(this.month + 1), 2);
     },
     total: function() {

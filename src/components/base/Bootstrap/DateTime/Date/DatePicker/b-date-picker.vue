@@ -182,6 +182,7 @@ export default {
   },
   methods: {
     formatDate: function(value) {
+      debugger
       if (!value) return;
       value = new Date(
         value.toString().length < 7
@@ -239,9 +240,11 @@ export default {
       this.pickertType = "month";
     },
     month2Date: function(value) {
-      this.date.setFullYear(value.getFullYear());
-      this.date.setMonth(value.getMonth());
+      debugger
+      this.date.setFullYear(value.year());
+      this.date.setMonth(value.month());
       this.selectValue = this.date;
+      debugger
       if (this.canHide) {
         this.show = false;
         return;

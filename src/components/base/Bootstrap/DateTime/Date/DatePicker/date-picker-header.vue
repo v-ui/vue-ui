@@ -4,7 +4,7 @@
       <b-button
         class="col font-weight-bold border-0 bg-white text-body h5"
         style="height: 2.5em"
-        :value="hearderText"
+        :value="headerText"
         @click.stop="$emit('clickHeader')"
       />
       <b-button
@@ -44,7 +44,7 @@ export default {
   name: "date-picker-header",
   components: { BButton },
   props: {
-    hearderText: util.props.String,
+    headerText: util.props.String,
     disabled: util.props.Boolean,
     disabledNow: util.props.Boolean,
   }

@@ -1,15 +1,12 @@
 <template>
   <date-panel
-    v-model="selectedValue"
-    :total="total"
-    :col-count="colCount"
-    :min="min"
-    :max="max"
+    v-model="selectedValues"
     :list="list"
+    :col-count="colCount"
     :disabled="disabled"
     :disabled-now="disabledNow"
     :hide-header="hideHeader"
-    :hearder-text="headerText"
+    :header-text="headerText"
     @panel:forward="forward"
     @panel:checknow="checknow"
     @panel:backward="backward"
