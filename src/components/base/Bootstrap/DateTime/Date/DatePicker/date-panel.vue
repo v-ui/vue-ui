@@ -14,7 +14,6 @@
       <slot name="week" />
       <picker-row
         :list="list"
-        :primary-key="primaryKey"
         :col-count="colCount"
         :disabled="disabled"
         @click="click"
