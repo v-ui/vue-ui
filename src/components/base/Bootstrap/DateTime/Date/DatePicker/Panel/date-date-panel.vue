@@ -15,7 +15,7 @@
   >
     <template #week>
       <picker-row
-        class="border-bottom border-primary"
+        class="border-bottom border-primary mb-1"
         :list="weekList"
         :col-count="colCount"
         disabled

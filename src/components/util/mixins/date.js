@@ -74,8 +74,8 @@ let base = {
     value: {
       type: [String, Number, Date, Object],
     },
-    min: Date,
-    max: Date,
+    min: Object,
+    max: Object,
     hideHeader: props.Boolean,
     disabled: props.Boolean,
   },
@@ -111,12 +111,10 @@ let year = {
       total: 10,
       colCount: 4,
       start: 0,
+      year: null,
     }
   },
   computed: {
-    year: function() {
-      return this.moment().year()
-    },
     headerText: function() {
       return `${this.start} - ${this.start + this.total - 1}`
     },
@@ -128,43 +126,53 @@ let year = {
         arr.push({
           value: value,
           label: value,
-          status: this.validator(this.moment(value), this.moment(this.year), this.moment(this.selectedValues)),
-          disabled: this.disabledItem(value),
+          status: this.validator(this.moment([value]), this.moment([this.moment().year()]), this.selectedValues),
+          disabled: this.disabledItem(this.moment([value])),
         });
       }
       return arr
     },
   },
   watch: {
-    selectedValues: function(value) {
+    year: function(value) {
       this.start = this.formatStart(value)
-      this.$emit('year2Month', value)
+      this.selectedValues = this.formatYear(value)
+      this.$emit('year2Month', this.selectedValues)
     }
   },
   mounted() {
-    this.selectedValues = this.moment(this.value).year() || this.year
+    let date = this.moment(this.value)
+    this.year = date.year()
+    this.selectedValues = this.formatYear()
 
-    this.disabledNow = this.disabledItem(this.year)
+    this.disabledNow = this.disabledItem(this.moment([this.moment().year()]))
   },
   methods: {
     formatStart: function(val) {
       return Math.floor(val / this.total) * this.total
     },
     disabledItem: function(value) {
-      return value < this.moment(this.min).year() || value > this.moment(this.max).year()
+      return (this.min.isValid() && value.isBefore(this.moment([this.min.year()]))) ||
+            (this.max.isValid() && value.isAfter(this.moment([this.max.year()])))
+      // return value < this.moment(this.min).year() || value > this.moment(this.max).year()
     },
     forward: function() {
       this.start -= this.total;
     },
     checknow: function() {
-      this.selectedValues = this.year;
+      this.year = this.moment().year()
+      this.selectedValues = this.formatYear();
     },
     backward: function() {
       this.start += this.total;
     },
     checked: function(value) {
-      this.selectedValues = value
+      this.year = value
+      this.selectedValues = this.formatYear()
     },
+    formatYear: function (year = this.year) {
+      return this.moment([year])
+    }
   },
 }
 
@@ -213,10 +221,8 @@ let month = {
   },
   methods: {
     disabledItem: function(value) {
-      let min = this.moment(this.min)
-      let max = this.moment(this.max)
-      return (min.isValid() && value.isBefore(this.moment([min.year(), min.month()]))) ||
-            (max.isValid() && value.isAfter(this.moment([max.year(), max.month()])))
+      return (this.min.isValid() && value.isBefore(this.moment([this.min.year(), this.min.month()]))) ||
+            (this.max.isValid() && value.isAfter(this.moment([this.max.year(), this.max.month()])))
     },
     clickHeader: function() {
       this.$emit("month2Year", this.selectedValues);
@@ -273,7 +279,7 @@ let date = {
       let day = this.moment([this.year, this.month, 1]).day()
 
       for (let i = 0; i < this.total; i++) {
-        flag = i >= day - 1
+        flag = i >= day
         if (!flag) {
           arr.push({ label: "  " });
         } else {
@@ -307,10 +313,8 @@ let date = {
   },
   methods: {
     disabledItem: function(value) {
-      let min = this.moment(this.min)
-      let max = this.moment(this.max)
-      return (this.moment(this.min).isValid() && value.isBefore(this.moment([min.year(), min.month(), min.date()]))) ||
-            (this.moment(this.max).isValid() && value.isAfter(this.moment([max.year(), max.month(), max.date()])))
+      return (this.min.isValid() && value.isBefore(this.moment([this.min.year(), this.min.month(), this.min.date()]))) ||
+            (this.max.isValid() && value.isAfter(this.moment([this.max.year(), this.max.month(), this.max.date()])))
     },
     clickHeader: function() {
       this.$emit("date2Month", this.selectedValues)

@@ -7,9 +7,8 @@ export default {
         moment,
       }
     },
-    async created () {
-      await this.$nextTick()
-      await this.moment.locale(this.$i18n.locale)
+     mounted () {
+       this.moment.locale(this.$i18n.locale || 'en-US')
     },
     watch: {
       '$i18n.locale': function(value) {

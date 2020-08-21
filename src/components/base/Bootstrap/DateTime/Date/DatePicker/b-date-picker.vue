@@ -5,7 +5,6 @@
     :info="message"
     :show="show"
     :disabled="disabled"
-
   >
     <template #icon>
       <i class="far fa-calendar-alt" />
@@ -48,7 +47,6 @@
 </template>
 
 <script>
-import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import dropdownPanel from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel.vue";
@@ -59,25 +57,30 @@ import datePanel from "./Panel/date-date-panel";
 export default {
   name: "b-date-picker",
   components: { dropdownPanel, yearPanel, monthPanel, datePanel },
-  mixins: [util.mixins.form.base, util.mixins.form.readonly],
+  mixins: [
+    util.mixins.form.base,
+    util.mixins.form.readonly,
+    util.mixins.moment.base,
+    util.mixins.date.status.type,
+  ],
   model: {
     prop: "value",
-    event: "change"
+    event: "change",
   },
   props: {
     type: {
       type: String,
       default: "date",
-      validator: value => ["year", "month", "date"].includes(value)
+      validator: (value) => ["year", "month", "date"].includes(value),
     },
     value: {
-      type: [String, Number, Date],
-      default: () => new Date()
+      type: [String, Number, Date, Object],
+      default: () => new Date(),
     },
     status: {
       type: Number,
       default: 0,
-      validator: value => [0, 1].includes(value)
+      validator: (value) => [0, 1].includes(value),
     },
     min: [String, Date],
     max: [String, Date],
@@ -93,31 +96,31 @@ export default {
     };
   },
   computed: {
-    fillPlaceholder: function() {
+    fillPlaceholder: function () {
       if (this.placeholder) return this.placeholder;
       else {
         switch (this.type) {
-          case "year":
+          case this.enumTypeStatus.year:
             return "yyyy";
-          case "month":
+          case this.enumTypeStatus.month:
             return "yyyy-MM";
-          case "date":
-            return "yyyy-MM:dd";
+          case this.enumTypeStatus.date:
+            return "yyyy-MM-dd";
           default:
             return "error";
         }
       }
     },
-    showValue: function() {
+    showValue: function () {
       return this.formatDate(this.selectValue);
     },
-    canHide: function() {
+    canHide: function () {
       return this.type == this.pickertType;
     },
-    hideHeader: function() {
+    hideHeader: function () {
       return this.status !== 0;
     },
-    dateMin: function() {
+    dateMin: function () {
       let time = this.min;
       if (this.status !== 0) {
         switch (this.type) {
@@ -129,9 +132,10 @@ export default {
             break;
         }
       }
-      return new Date(time);
+
+      return this.moment(new Date(time));
     },
-    dateMax: function() {
+    dateMax: function () {
       let time = this.max;
       if (this.status !== 0) {
         switch (this.type) {
@@ -143,121 +147,96 @@ export default {
             break;
         }
       }
-      return new Date(time);
+      return this.moment(new Date(time));
     },
-    fillInfo: function() {
-      if (
-        this.dateMin.toString() == "Invalid Date" &&
-        this.dateMax.toString() == "Invalid Date"
-      )
+    fillInfo: function () {
+      let minIsValid = this.dateMin.isValid()
+      let maxIsValid = this.dateMax.isValid()
+      if (!minIsValid && !maxIsValid)
         return ``;
-      else if (
-        this.dateMin.toString() != "Invalid Date" &&
-        this.dateMax.toString() != "Invalid Date"
-      )
-        return `${this.formatDate(this.dateMin)}~${this.formatDate(
-          this.dateMax
-        )}`;
-      else if (this.dateMin.toString() == "Invalid Date")
+      else if (minIsValid && maxIsValid)
+        return `${this.formatDate(this.dateMin)}~${this.formatDate(this.dateMax)}`;
+      else if (!minIsValid)
         return `...~${this.formatDate(this.dateMax)}`;
-      else if (this.dateMax.toString() == "Invalid Date")
+      else if (!maxIsValid)
         return `${this.formatDate(this.dateMin)}~...`;
       return "";
     },
-    message: function() {
+    message: function () {
       if (this.info && this.fillInfo) return `(${this.fillInfo}) ${this.info}`;
       else if (this.fillInfo) return this.fillInfo;
       else if (this.info) return this.info;
       return "";
-    }
-  },
-  mounted() {
-    this.pickertType = this.type;
-    let v =
-      this.value && this.value.toString().length < 7
-        ? this.value + "-01"
-        : this.value;
-    this.date = !isNaN(Date.parse(v)) ? new Date(v) : new Date();
-    this.selectValue = this.date;
-  },
-  methods: {
-    formatDate: function(value) {
-      if (!value) return;
-      value = new Date(
-        value.toString().length < 7
-          ? value +
-            "-" +
-            (this.type == "year"
-              ? "01"
-              : tools.string.padStart(Number(this.date.getMonth() + 1), 2, "0"))
-          : value
-      );
-      if (value == "Invalid Date") return;
-
-      switch (this.type) {
-        case "year":
-          return value.getFullYear();
-        case "month":
-          return this.status === 0
-            ? `${value.getFullYear()}-${tools.string.padStart(
-                Number(value.getMonth() + 1),
-                2,
-                "0"
-              )}`
-            : `${tools.string.padStart(Number(value.getMonth() + 1), 2, "0")}`;
-        case "date":
-          return this.status === 0
-            ? `${value.getFullYear()}-${tools.string.padStart(
-                Number(value.getMonth() + 1),
-                2,
-                "0"
-              )}-${tools.string.padStart(value.getDate(), 2, "0")}`
-            : `${tools.string.padStart(value.getDate(), 2, "0")}`;
-      }
-    },
-    month2Year: function(value) {
-      let d = new Date(value);
-      this.date.setFullYear(d.getFullYear());
-      this.date.setMonth(d.getMonth());
-      this.selectValue = this.date;
-      this.pickertType = "year";
-    },
-    year2Month: function(value) {
-      this.date.setFullYear(value);
-      this.selectValue = this.date;
-      if (this.canHide) {
-        this.show = false;
-        return;
-      }
-      this.pickertType = "month";
-    },
-    date2Month: function(value) {
-      this.date.setFullYear(value.getFullYear());
-      this.date.setMonth(value.getMonth());
-      this.date.setDate(value.getDate());
-      this.selectValue = this.date;
-      this.pickertType = "month";
-    },
-    month2Date: function(value) {
-      this.date.setFullYear(value.year());
-      this.date.setMonth(value.month());
-      this.selectValue = this.date;
-      if (this.canHide) {
-        this.show = false;
-        return;
-      }
-      this.pickertType = "date";
-    },
-    dateChecked: function(value) {
-      this.selectValue = new Date(value);
-      this.show = false;
     },
   },
   watch: {
-    selectValue: function(value) {
+    selectValue: function (value) {
       // 配合 v-model 工作
       this.$emit("change", this.formatDate(value));
-    }
-  }
+    },
+  },
+  mounted() {
+    this.pickertType = this.type;
+    let date = this.moment(this.value)
+    this.date = date.isValid() ? date : this.moment();
+    this.selectValue = this.date;
+  },
+  methods: {
+    formatDate: function (value) {
+      if (!value) return;
+      let date = value
+      if (!date.isValid()) return;
+
+      switch (this.type) {
+        case this.enumTypeStatus.year:
+          return value.year();
+        case this.enumTypeStatus.month:
+          return this.status === 0
+            ? value.format('YYYY-MM')
+            : value.format('MM')
+        case this.enumTypeStatus.date:
+          return this.status === 0
+            ? value.format('YYYY-MM-DD')
+            : value.format('DD')
+      }
+    },
+    month2Year: function (value) {
+      this.date.year(value.year());
+      this.date.month(value.month());
+      this.selectValue = this.date;
+      this.pickertType = this.enumTypeStatus.year;
+    },
+    year2Month: function (value) {
+      this.date.year(value.year());
+      this.selectValue = this.date;
+      if (this.canHide) {
+        this.show = false;
+        return;
+      }
+      this.pickertType = this.enumTypeStatus.month;
+    },
+    date2Month: function (value) {
+      this.date.year(value.year());
+      this.date.month(value.month());
+      this.date.date(value.date());
+      this.selectValue = this.date;
+      this.pickertType = this.enumTypeStatus.month;
+    },
+    month2Date: function (value) {
+      this.date.year(value.year());
+      this.date.month(value.month());
+      this.selectValue = this.date;
+      if (this.canHide) {
+        this.show = false;
+        return;
+      }
+      this.pickertType = this.enumTypeStatus.date;
+    },
+    dateChecked: function (value) {
+      this.selectValue = value;
+      this.show = false;
+    },
+  },
+
 };
 </script>
