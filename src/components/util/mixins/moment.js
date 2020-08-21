@@ -7,8 +7,8 @@ export default {
         moment,
       }
     },
-     mounted () {
-       this.moment.locale(this.$i18n.locale || 'en-US')
+    mounted () {
+      this.moment.locale(this.$i18n.locale || 'en-US')
     },
     watch: {
       '$i18n.locale': function(value) {

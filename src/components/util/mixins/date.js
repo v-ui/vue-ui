@@ -81,6 +81,12 @@ let base = {
   },
   data() {
     return {
+      year: 0,
+      month: 0,
+      date: 1,
+      now: null,
+      dateMin: null,
+      dateMax: null,
       disabledNow: false,
       selectedValues: null,
     }
@@ -102,6 +108,20 @@ let base = {
       this.$emit("selected:changed", value);
     }
   },
+  methods: {
+    format(year = this.year, month = this.month, date = this.date) {
+      return this.moment([year, month, date])
+    },
+    disabledItem: function(
+      value,
+      min = this.dateMin || [this.min.year(), this.min.month(), this.min.date()],
+      max = this.dateMax || [this.max.year(), this.max.month(), this.max.date()]
+    ) {
+      return (this.min.isValid() && value.isBefore(this.moment(min))) ||
+            (this.max.isValid() && value.isAfter(this.moment(max)))
+      // return value < this.moment(this.min).year() || value > this.moment(this.max).year()
+    },
+  },
 }
 
 let year = {
@@ -111,7 +131,6 @@ let year = {
       total: 10,
       colCount: 4,
       start: 0,
-      year: null,
     }
   },
   computed: {
@@ -126,7 +145,7 @@ let year = {
         arr.push({
           value: value,
           label: value,
-          status: this.validator(this.moment([value]), this.moment([this.moment().year()]), this.selectedValues),
+          status: this.validator(this.moment([value]), this.now, this.selectedValues),
           disabled: this.disabledItem(this.moment([value])),
         });
       }
@@ -136,43 +155,37 @@ let year = {
   watch: {
     year: function(value) {
       this.start = this.formatStart(value)
-      this.selectedValues = this.formatYear(value)
+      this.selectedValues = this.format(value)
       this.$emit('year2Month', this.selectedValues)
     }
   },
   mounted() {
     let date = this.moment(this.value)
     this.year = date.year()
-    this.selectedValues = this.formatYear()
-
-    this.disabledNow = this.disabledItem(this.moment([this.moment().year()]))
+    this.selectedValues = this.format()
+    this.dateMin = [this.min.year()]
+    this.dateMax = [this.max.year()]
+    this.now = this.moment([this.moment().year()])
+    this.disabledNow = this.disabledItem(this.now)
   },
   methods: {
     formatStart: function(val) {
       return Math.floor(val / this.total) * this.total
-    },
-    disabledItem: function(value) {
-      return (this.min.isValid() && value.isBefore(this.moment([this.min.year()]))) ||
-            (this.max.isValid() && value.isAfter(this.moment([this.max.year()])))
-      // return value < this.moment(this.min).year() || value > this.moment(this.max).year()
     },
     forward: function() {
       this.start -= this.total;
     },
     checknow: function() {
       this.year = this.moment().year()
-      this.selectedValues = this.formatYear();
+      this.selectedValues = this.format();
     },
     backward: function() {
       this.start += this.total;
     },
     checked: function(value) {
       this.year = value
-      this.selectedValues = this.formatYear()
+      this.selectedValues = this.format()
     },
-    formatYear: function (year = this.year) {
-      return this.moment([year])
-    }
   },
 }
 
@@ -182,8 +195,6 @@ let month = {
     return {
       total: 12,
       colCount: 3,
-      year: null,
-      month: null,
     }
   },
   computed: {
@@ -194,11 +205,11 @@ let month = {
       if (!this.year || isNaN(this.year)) return;
       let arr = [];
        for (let i = 0; i < this.total; i++) {
-          let date = this.formatMonth(i);
+          let date = this.format(this.year, i)
           arr.push({
             value: i,
             label: tools.string.padStart(i + 1, 2),
-            status: this.validator(date, this.moment([this.moment().year(), this.moment().month()]) , this.selectedValues),
+            status: this.validator(date, this.now , this.selectedValues),
             disabled: this.disabledItem(date),
           });
        }
@@ -207,7 +218,7 @@ let month = {
   },
   watch: {
     month: function(value) {
-      this.selectedValues = this.formatMonth(value)
+      this.selectedValues = this.format(this.year, value)
       this.$emit('month2Date', this.selectedValues)
     }
   },
@@ -215,15 +226,13 @@ let month = {
     let date = this.moment(this.value)
     this.year = date.year()
     this.month = date.month()
-    this.selectedValues = this.formatMonth()
-
-    this.disabledNow = this.disabledItem(this.moment([this.moment().year(), this.moment().month()]))
+    this.selectedValues = this.format()
+    this.dateMin = [this.min.year(), this.min.month()]
+    this.dateMax = [this.max.year(), this.max.month()]
+    this.now = this.moment([this.moment().year(), this.moment().month()])
+    this.disabledNow = this.disabledItem(this.now)
   },
   methods: {
-    disabledItem: function(value) {
-      return (this.min.isValid() && value.isBefore(this.moment([this.min.year(), this.min.month()]))) ||
-            (this.max.isValid() && value.isAfter(this.moment([this.max.year(), this.max.month()])))
-    },
     clickHeader: function() {
       this.$emit("month2Year", this.selectedValues);
     },
@@ -233,17 +242,14 @@ let month = {
     checknow: function() {
       this.year = this.moment().year();
       this.month = this.moment().month();
-      this.selectedValues = this.formatMonth()
+      this.selectedValues = this.format()
     },
     backward: function() {
       this.year += 1;
     },
     checked: function(value) {
       this.month = value
-      this.selectedValues = this.formatMonth()
-    },
-    formatMonth: function(month = this.month, year = this.year) {
-      return this.moment([year, month]);
+      this.selectedValues = this.format()
     },
   },
 }
@@ -253,9 +259,6 @@ let date = {
   data() {
     return {
       colCount: 7,
-      year: null,
-      month: null,
-      date: null,
     }
   },
   computed: {
@@ -283,11 +286,11 @@ let date = {
         if (!flag) {
           arr.push({ label: "  " });
         } else {
-          let date = this.formatDate(value)
+          let date = this.format(this.year, this.month, value)
           arr.push({
             value: value,
             label: tools.string.padStart(value, 2),
-            status: this.validator(date, this.moment([this.moment().year(), this.moment().month(), this.moment().date()]) , this.selectedValues),
+            status: this.validator(date, this.now , this.selectedValues),
             disabled: this.disabledItem(date),
           });
           value++
@@ -298,7 +301,7 @@ let date = {
   },
   watch: {
     date: function(value) {
-      this.selectedValues = this.formatDate(value)
+      this.selectedValues = this.format(this.year, this.month, value)
       this.$emit('dateChecked', this.selectedValues)
     }
   },
@@ -307,15 +310,13 @@ let date = {
     this.year = date.year()
     this.month = date.month()
     this.date = date.date()
-    this.selectedValues = this.formatDate()
-
-    this.disabledNow = this.disabledItem(this.moment([this.moment().year(), this.moment().month(), this.moment().date()]))
+    this.selectedValues = this.format()
+    this.dateMin = [this.min.year(), this.min.month(), this.min.date()]
+    this.dateMax = [this.max.year(), this.max.month(), this.max.date()]
+    this.now = this.moment([this.moment().year(), this.moment().month(), this.moment().date()])
+    this.disabledNow = this.disabledItem(this.now)
   },
   methods: {
-    disabledItem: function(value) {
-      return (this.min.isValid() && value.isBefore(this.moment([this.min.year(), this.min.month(), this.min.date()]))) ||
-            (this.max.isValid() && value.isAfter(this.moment([this.max.year(), this.max.month(), this.max.date()])))
-    },
     clickHeader: function() {
       this.$emit("date2Month", this.selectedValues)
     },
@@ -331,7 +332,7 @@ let date = {
       this.year = this.moment().year();
       this.month = this.moment().month();
       this.date = this.moment().date()
-      this.selectedValues = this.formatDate()
+      this.selectedValues = this.format()
     },
     backward: function() {
       if (this.month === 11) {
@@ -343,10 +344,7 @@ let date = {
     },
     checked: function(value) {
       this.date = value
-      this.selectedValues = this.formatDate()
-    },
-    formatDate: function(date = this.date, month = this.month, year = this.year) {
-      return this.moment([year, month, date])
+      this.selectedValues = this.format()
     },
   },
 }
