@@ -3,13 +3,14 @@
     <picker-header
       :disabled="disabled"
       :disabled-now="disabledNow"
+      :diesable-header-click="diesableHeaderClick"
       :header-text="headerText"
       @clickHeader="clickHeader"
       @forward="forward"
       @checknow="checknow"
       @backward="backward"
     />
-    <hr v-show="!$slots.week">
+    <hr v-show="!$slots.week" class="my-1">
     <div class="text-center">
       <slot name="week" />
       <picker-row
@@ -37,6 +38,7 @@ export default {
     headerText: util.props.String,
     hideHeader: util.props.Boolean,
     disabled: util.props.Boolean,
+    diesableHeaderClick: util.props.Boolean,
     disabledNow: util.props.Boolean,
   },
   computed: {
@@ -47,18 +49,15 @@ export default {
   methods: {
     clickHeader: function() {
       this.$emit('panel:clickHeader')
-      this.$emit('canntHide')
     },
     forward: function() {
       this.$emit('panel:forward')
-      this.$emit('canntHide')
     },
     checknow: function() {
       this.$emit('panel:checknow')
     },
     backward: function() {
       this.$emit('panel:backward')
-      this.$emit('canntHide')
     },
     click: function(value) {
       this.$emit('panel:checked', value)

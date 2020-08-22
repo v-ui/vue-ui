@@ -6,6 +6,7 @@
     :disabled-now="disabledNow"
     :hide-header="hideHeader"
     :header-text="headerText"
+    :diesable-header-click="true"
     @panel:forward="forward"
     @panel:checknow="checknow"
     @panel:backward="backward"

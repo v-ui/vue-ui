@@ -5,6 +5,7 @@
         class="col font-weight-bold border-0 bg-white text-body h5"
         style="height: 2.5em"
         :value="headerText"
+        :disabled="diesableHeaderClick"
         @click.stop="$emit('clickHeader')"
       />
       <b-button
@@ -46,6 +47,7 @@ export default {
   props: {
     headerText: util.props.String,
     disabled: util.props.Boolean,
+    diesableHeaderClick: util.props.Boolean,
     disabledNow: util.props.Boolean,
   }
 };

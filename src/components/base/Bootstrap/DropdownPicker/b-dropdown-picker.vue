@@ -1,7 +1,7 @@
 <template>
   <div :id="id" class="align-items-center h-auto px-0" :class="{'bg-light': disabled}" style="min-width: 320px" :disabled="disabled" :aria-disabled="disabled">
     <div ref="dropdownPicker" class="h-100" @click="clickTrigger">
-      <div class="d-flex justify-content-between align-items-center h-100 px-1">
+      <div ref="dropdownTrigger" class="d-flex justify-content-between align-items-center h-100 px-1">
         <slot name="trigger">
           <font v-if="!multiple" :class="fontClass">{{ label || placeholder }}</font>
           <div v-else class="d-flex align-content-between flex-wrap">
@@ -51,6 +51,10 @@ export default {
     },
     placeholder: util.props.String,
     show: util.props.Boolean,
+    canHide: {
+      ...util.props.Boolean,
+      default: true,
+    },
     multiple: util.props.Boolean,
     disabled: util.props.Boolean,
     hideToggle: util.props.Boolean,
@@ -61,7 +65,6 @@ export default {
   data() {
     return {
       isShow: this.show,
-      isInDropdownMenur: false,
       menuStyle: ""
     };
   },
@@ -81,7 +84,7 @@ export default {
     },
     show: function(value) {
       this.isShow = value;
-    }
+    },
   },
   mounted() {
     this.init()
@@ -102,11 +105,14 @@ export default {
       if (this.disabled) return
       this.isShow = !this.isShow
     },
-    hindeMenu: function(event) {
-      const e = event.target
+    hindeMenu: async function(event) {
       // 判断鼠标点击位置是否在菜单内，如果是则不隐藏，如果不是则隐藏
-      this.isInDropdownPicker = tools.dom.isElementIm(this.$refs.dropdownPicker, e)
-      this.isShow = this.isInDropdownPicker
+      if (tools.dom.isElementIm(this.$refs.dropdownTrigger, event.target)) return
+      // if (this.canHide) {
+      //   this.isShow = !this.isShow
+      //   return
+      // }
+      this.isShow = this.canHide ? tools.dom.isElementIm(this.$refs.dropdownMenu, event.target) : true
     },
   },
 };

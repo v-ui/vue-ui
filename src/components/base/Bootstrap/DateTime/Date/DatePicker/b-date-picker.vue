@@ -3,7 +3,7 @@
     :placeholder="fillPlaceholder"
     :label="showValue"
     :info="message"
-    :show="show"
+    :canHide="canHide"
     :disabled="disabled"
   >
     <template #icon>
@@ -11,17 +11,17 @@
     </template>
     <template>
       <year-panel
-        v-if="pickertType === 'year'"
+        v-if="pickertType === enumTypeStatus.year"
         v-model="selectValue"
         style="min-width: 18em"
         :min="dateMin"
         :max="dateMax"
         :disabled="disabled"
         :hide-header="hideHeader"
-        @year2Month="year2Month"
+        @year:checked="yearChecked"
       />
       <month-panel
-        v-if="pickertType === 'month'"
+        v-if="pickertType === enumTypeStatus.month"
         v-model="selectValue"
         style="min-width: 15em"
         :min="dateMin"
@@ -29,10 +29,10 @@
         :disabled="disabled"
         :hide-header="hideHeader"
         @month2Year="month2Year"
-        @month2Date="month2Date"
+        @month:checked="monthChecked"
       />
       <date-panel
-        v-if="pickertType === 'date'"
+        v-if="pickertType === enumTypeStatus.date"
         v-model="selectValue"
         style="min-width: 22em"
         :min="dateMin"
@@ -40,7 +40,7 @@
         :disabled="disabled"
         :hide-header="hideHeader"
         @date2Month="date2Month"
-        @dateChecked="dateChecked"
+        @date:checked="dateChecked"
       />
     </template>
   </dropdown-panel>
@@ -89,7 +89,6 @@ export default {
   },
   data() {
     return {
-      show: false,
       date: null,
       pickertType: "",
       selectValue: null,
@@ -115,7 +114,7 @@ export default {
       return this.formatDate(this.selectValue);
     },
     canHide: function () {
-      return this.type == this.pickertType;
+      return this.type === this.pickertType;
     },
     hideHeader: function () {
       return this.status !== 0;
@@ -206,13 +205,10 @@ export default {
       this.selectValue = this.date;
       this.pickertType = this.enumTypeStatus.year;
     },
-    year2Month: function (value) {
+    yearChecked: function (value) {
       this.date.year(value.year());
       this.selectValue = this.date;
-      if (this.canHide) {
-        this.show = false;
-        return;
-      }
+      if (this.canHide) return
       this.pickertType = this.enumTypeStatus.month;
     },
     date2Month: function (value) {
@@ -222,19 +218,15 @@ export default {
       this.selectValue = this.date;
       this.pickertType = this.enumTypeStatus.month;
     },
-    month2Date: function (value) {
+    monthChecked: function (value) {
       this.date.year(value.year());
       this.date.month(value.month());
       this.selectValue = this.date;
-      if (this.canHide) {
-        this.show = false;
-        return;
-      }
+      if (this.canHide) return
       this.pickertType = this.enumTypeStatus.date;
     },
     dateChecked: function (value) {
       this.selectValue = value;
-      this.show = false;
     },
   },
 

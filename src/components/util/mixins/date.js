@@ -119,7 +119,6 @@ let base = {
     ) {
       return (this.min.isValid() && value.isBefore(this.moment(min))) ||
             (this.max.isValid() && value.isAfter(this.moment(max)))
-      // return value < this.moment(this.min).year() || value > this.moment(this.max).year()
     },
   },
 }
@@ -156,7 +155,6 @@ let year = {
     year: function(value) {
       this.start = this.formatStart(value)
       this.selectedValues = this.format(value)
-      this.$emit('year2Month', this.selectedValues)
     }
   },
   mounted() {
@@ -178,6 +176,7 @@ let year = {
     checknow: function() {
       this.year = this.moment().year()
       this.selectedValues = this.format();
+      this.$emit('year:checked', this.selectedValues)
     },
     backward: function() {
       this.start += this.total;
@@ -185,6 +184,7 @@ let year = {
     checked: function(value) {
       this.year = value
       this.selectedValues = this.format()
+      this.$emit('year:checked', this.selectedValues)
     },
   },
 }
@@ -219,7 +219,6 @@ let month = {
   watch: {
     month: function(value) {
       this.selectedValues = this.format(this.year, value)
-      this.$emit('month2Date', this.selectedValues)
     }
   },
   mounted() {
@@ -243,6 +242,7 @@ let month = {
       this.year = this.moment().year();
       this.month = this.moment().month();
       this.selectedValues = this.format()
+      this.$emit('month:checked', this.selectedValues)
     },
     backward: function() {
       this.year += 1;
@@ -250,6 +250,7 @@ let month = {
     checked: function(value) {
       this.month = value
       this.selectedValues = this.format()
+      this.$emit('month:checked', this.selectedValues)
     },
   },
 }
@@ -302,7 +303,6 @@ let date = {
   watch: {
     date: function(value) {
       this.selectedValues = this.format(this.year, this.month, value)
-      this.$emit('dateChecked', this.selectedValues)
     }
   },
   mounted() {
@@ -333,6 +333,7 @@ let date = {
       this.month = this.moment().month();
       this.date = this.moment().date()
       this.selectedValues = this.format()
+      this.$emit('date:checked', this.selectedValues)
     },
     backward: function() {
       if (this.month === 11) {
@@ -345,6 +346,7 @@ let date = {
     checked: function(value) {
       this.date = value
       this.selectedValues = this.format()
+      this.$emit('date:checked', this.selectedValues)
     },
   },
 }

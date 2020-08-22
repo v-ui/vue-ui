@@ -6,7 +6,7 @@
       menu-width
       :menuWidth="false"
       :label="fillLabel"
-      :show="show"
+      :canHide="canHide"
       :placeholder="fillPlaceholder"
       :disabled="disabled"
       :multiple="isMultiple"
@@ -60,7 +60,10 @@ export default {
   props: {
     label: util.props.String,
     info: util.props.String,
-    show: util.props.Boolean,
+    canHide: {
+      ...util.props.Boolean,
+      default: true,
+    },
     colCount: util.props.UInt,
     placeholder: util.props.String,
   },
