@@ -278,11 +278,12 @@ let date = {
       if (isNaN(this.month) || this.month < 0 ) return
 
       let arr = []
+      let i = 0
       let value = 1
       let flag = false
       let day = this.moment([this.year, this.month, 1]).day()
 
-      for (let i = 0; i < this.total; i++) {
+      while (value <= this.total) {
         flag = i >= day
         if (!flag) {
           arr.push({ label: "  " });
@@ -296,6 +297,7 @@ let date = {
           });
           value++
         }
+        i++
       }
       return arr
     },

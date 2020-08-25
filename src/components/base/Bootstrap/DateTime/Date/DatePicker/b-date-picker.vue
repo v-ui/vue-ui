@@ -5,6 +5,7 @@
     :info="message"
     :canHide="canHide"
     :disabled="disabled"
+    @hiding="hiding"
   >
     <template #icon>
       <i class="far fa-calendar-alt" />
@@ -229,6 +230,5 @@ export default {
       this.selectValue = value;
     },
   },
-
 };
 </script>

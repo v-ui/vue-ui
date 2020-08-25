@@ -106,13 +106,20 @@ export default {
       this.isShow = !this.isShow
     },
     hindeMenu: async function(event) {
-      // 判断鼠标点击位置是否在菜单内，如果是则不隐藏，如果不是则隐藏
+      // 判断鼠标点击的位置是否在含有 control class 的元素内，是则返回
+      let i = 0
+      let doms = document.getElementsByClassName('date-header-controler')
+      while (doms[i]) {
+        if (tools.dom.isElementIm(doms[i], event.target)) return
+        i++
+      }
+      // 判断鼠标点击位置是否在菜单内，如果是则返回
       if (tools.dom.isElementIm(this.$refs.dropdownTrigger, event.target)) return
-      // if (this.canHide) {
-      //   this.isShow = !this.isShow
-      //   return
-      // }
-      this.isShow = this.canHide ? tools.dom.isElementIm(this.$refs.dropdownMenu, event.target) : true
+      if (this.canHide) {
+        this.isShow = !this.isShow
+        return
+      }
+      this.isShow = tools.dom.isElementIm(this.$refs.dropdownMenu, event.target)
     },
   },
 };
