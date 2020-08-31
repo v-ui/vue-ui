@@ -127,8 +127,8 @@ let year = {
   mixins: [ base, ],
   data() {
     return {
-      total: 10,
-      colCount: 4,
+      total: 15,
+      colCount: 3,
       start: 0,
     }
   },
@@ -168,7 +168,9 @@ let year = {
   },
   methods: {
     formatStart: function(val) {
-      return Math.floor(val / this.total) * this.total
+      return val % this.total == 0
+        ? Math.floor(val / this.total) * this.total - (this.total - 1)
+        : Math.floor(val / this.total) * this.total + 1
     },
     forward: function() {
       this.start -= this.total;

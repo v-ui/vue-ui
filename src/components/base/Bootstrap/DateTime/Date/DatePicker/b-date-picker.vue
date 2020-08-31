@@ -10,14 +10,17 @@
       <i class="far fa-calendar-alt" />
     </template>
     <template>
-      <date-panel-select
-        v-model="selectValue"
-        :type="type"
-        :min="dateMin"
-        :max="dateMax"
-        :disabled="disabled"
-        :hide-header="false"
-      />
+      <di class="d-flex">
+        <date-panel-select
+          v-model="selectValue"
+          class="flex-fill"
+          :type="type"
+          :min="dateMin"
+          :max="dateMax"
+          :disabled="disabled"
+          :hide-header="false"
+        />
+      </di>
     </template>
   </dropdown-panel>
 </template>
