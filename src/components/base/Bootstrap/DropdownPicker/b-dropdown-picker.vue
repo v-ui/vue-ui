@@ -108,7 +108,7 @@ export default {
     hindeMenu: async function(event) {
       // 判断鼠标点击的位置是否在含有 control class 的元素内，是则返回
       let i = 0
-      let doms = document.getElementsByClassName('date-header-controler')
+      let doms = document.getElementsByClassName('date-panel-cannt-hide')
       while (doms[i]) {
         if (tools.dom.isElementIm(doms[i], event.target)) return
         i++

@@ -1,5 +1,5 @@
 <template>
-  <date-panel
+  <date-panel-temp
     :list="list"
     :col-count="colCount"
     :disabled="disabled"
@@ -17,11 +17,11 @@
 <script>
 import util from "@/components/util/index.js";
 
-import DatePanel from "../Basic/date-panel.vue";
+import DatePanelTemp from "../Basic/date-panel-temp.vue";
 
 export default {
   name: "date-year-panel",
-  components: { DatePanel },
+  components: { DatePanelTemp },
   mixins: [util.mixins.date.year],
 };
 </script>

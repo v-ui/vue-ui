@@ -1,6 +1,6 @@
 <template>
   <div>
-    <picker-header
+    <panel-header
       :disabled="disabled"
       :disabled-now="disabledNow"
       :diesable-header-click="diesableHeaderClick"
@@ -13,7 +13,7 @@
     <hr v-show="!$slots.week" class="my-1">
     <div class="text-center">
       <slot name="week" />
-      <picker-row
+      <panel-row
         :list="list"
         :col-count="colCount"
         :disabled="disabled"
@@ -26,12 +26,12 @@
 <script>
 import util from "@/components/util/index.js";
 
-import pickerHeader from "./date-picker-header";
-import pickerRow from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel-row.vue"
+import panelHeader from "./date-panel-header";
+import panelRow from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel-row.vue"
 
 export default {
-  name: 'date-panel',
-  components: { pickerHeader, pickerRow, },
+  name: 'date-panel-temp',
+  components: { panelHeader, panelRow, },
   props: {
     list: util.props.Array,
     colCount: util.props.UInt,

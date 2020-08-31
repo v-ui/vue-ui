@@ -1,6 +1,6 @@
 <template>
   <b-button
-    class="rounded-pill bg-transparent my-1"
+    class="my-1"
     :class="objClass"
     style="min-width: 3em"
     :disabled="disabled"
@@ -27,21 +27,22 @@ export default {
       return this.item.label || this.item[this.primaryKey] || this.item.value || this.item
     },
     objClass: function() {
-      let s = ''
-      let sta = ''
+      let base = 'bg-transparent rounded-pill'
+      let select = ''
+      let status = ''
       if (this.item.status) {
-        if (this.item.status.now) sta = 'border-0 text-danger '
-        if (this.item.status.start || this.item.status.end) sta = 'border border-primary text-info '
-        if (this.item.status.between) sta = 'text-secondary '
-        if (this.item.status.selected) sta = "border border-primary text-primary "
-        if (sta.length === 0) sta = 'border-0 text-body'
+        if (this.item.status.now) status = 'border-0 bg-transparent text-danger '
+        if (this.item.status.start || this.item.status.end) status = 'border border-primary text-info '
+        if (this.item.status.between) status = 'rounded-0 bg-primary text-secondary '
+        if (this.item.status.selected) status = "bg-transparent text-primary "
+        if (status.length === 0) status = 'border-0 bg-transparent text-body'
       } else {
-        s = this.isSelected
+        select = this.isSelected
           ? "border border-primary text-primary"
           : "border-0 text-body";
       }
-      const c = 12 % this.colCount == 0 ? `col-${12 / this.colCount}` : "col-auto";
-      return s + " " + c + ' ' + sta;
+      const col = 12 % this.colCount == 0 ? `col-${12 / this.colCount}` : "col-auto";
+      return `${base} ${select} ${col} ${status}`
     },
   }
 };

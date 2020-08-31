@@ -1,5 +1,5 @@
 <template>
-  <date-panel
+  <date-panel-temp
     v-model="month"
     :list="list"
     :col-count="colCount"
@@ -19,11 +19,11 @@
 // import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import DatePanel from "../Basic/date-panel.vue";
+import DatePanelTemp from "../Basic/date-panel-temp.vue";
 
 export default {
   name: "date-month-panel",
-  components: { DatePanel },
+  components: { DatePanelTemp },
   mixins: [util.mixins.date.month],
   // model: {
   //   prop: "value",

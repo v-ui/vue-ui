@@ -2,14 +2,14 @@
   <header>
     <font class="row text-center mx-1">
       <b-button
-        class="date-header-controler col font-weight-bold border-0 bg-white text-body h5"
+        class="date-panel-cannt-hide col font-weight-bold border-0 bg-white text-body h5"
         style="height: 2.5em"
         :value="headerText"
         :disabled="diesableHeaderClick"
         @click.stop="$emit('clickHeader')"
       />
       <b-button
-        class="date-header-controler border-0 bg-white text-body"
+        class="date-panel-cannt-hide border-0 bg-white text-body"
         style="height: 2.5em"
         :disabled="disabled"
         @click.stop="$emit('forward')"
@@ -25,7 +25,7 @@
         <i class="fas fa-circle" />
       </b-button>
       <b-button
-        class="date-header-controler border-0 bg-white text-body"
+        class="date-panel-cannt-hide border-0 bg-white text-body"
         style="height: 2.5em"
         :disabled="disabled"
         @click.stop="$emit('backward')"
@@ -42,7 +42,7 @@ import util from "@/components/util/index.js";
 import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
-  name: "date-picker-header",
+  name: "date-panel-header",
   components: { BButton },
   props: {
     headerText: util.props.String,
