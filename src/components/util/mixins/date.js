@@ -1,5 +1,5 @@
 import tools from "@/tools"
-
+import config from '@/config'
 import moment from './moment'
 import props from '@/components/util/props.js'
 
@@ -269,7 +269,7 @@ let date = {
       return this.moment([this.year, this.month]).daysInMonth()
     },
     headerText: function() {
-      return this.moment([this.year, this.month]).format('YYYY-MM')
+      return this.moment([this.year, this.month]).format(config.ui.date.month)
     },
     weekList: function() {
       return this.moment.localeData().weekdaysMin()
