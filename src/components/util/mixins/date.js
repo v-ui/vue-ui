@@ -17,14 +17,17 @@ let status = {
       }
     },
     methods: {
-      validator: function(value, now = null, selected = null,  start = null, end = null) {
-        return {
-          now: (now && this.validNow(value, now)) || false,
-          selected: (selected && this.validSelect(value, selected)) || false,
-          start: (start && this.validStart(value, start)) || false,
-          end: (end && this.validEnd(value, end)) || false,
-          between: (start && end && this.validBetween(value, start, end)) || false,
+      validator: function(value, now = null, selected = null) {
+        let isSelected = false, isStart = false, isEnd = false, isBetween = false
+        let isNow = (now && this.validNow(value, now)) || false
+        if (this.range) {
+          isStart = (this.selectedStart && this.validStart(value, this.selectedStart)) || false
+          isEnd = (this.selectedEnd && this.validEnd(value, this.selectedEnd)) || false
+          isBetween = (this.selectedStart && this.selectedEnd && this.validBetween(value, this.selectedStart, this.selectedEnd)) || false
+        } else {
+          isSelected = (selected && this.validSelect(value, selected)) || false
         }
+        return { now: isNow, selected: isSelected, start: isStart, end: isEnd, between: isBetween, }
       },
       validNow: function(value, now) {
         return value.isSame(now)
@@ -71,11 +74,12 @@ let base = {
     event: "selected:changed"
   },
   props: {
-    value: {
-      type: [String, Number, Date, Object],
-    },
+    value: [String, Number, Date, Object],
     min: Object,
     max: Object,
+    range: props.Boolean,
+    selectedStart: [String, Number, Date, Object],
+    selectedEnd: [String, Number, Date, Object],
     hideHeader: props.Boolean,
     disabled: props.Boolean,
   },
@@ -103,10 +107,20 @@ let base = {
     },
   },
   watch: {
+    value: {
+      handler: function(value) {
+        this.initValue && this.initValue(value)
+      },
+      deep: true,
+    },
     selectedValues: function(value) {
       // 配合 v-model 工作
       this.$emit("selected:changed", value);
     }
+  },
+  mounted() {
+    this.initValue && this.initValue(this.value)
+    this.selectedValues = this.format()
   },
   methods: {
     format(year = this.year, month = this.month, date = this.date) {
@@ -154,19 +168,20 @@ let year = {
   watch: {
     year: function(value) {
       this.start = this.formatStart(value)
-      this.selectedValues = this.format(value)
     }
   },
   mounted() {
-    let date = this.moment(this.value)
-    this.year = date.year()
-    this.selectedValues = this.format()
+    this.start = this.formatStart(this.year)
     this.dateMin = [this.min.year()]
     this.dateMax = [this.max.year()]
     this.now = this.moment([this.moment().year()])
     this.disabledNow = this.disabledItem(this.now)
   },
   methods: {
+    initValue: function(value) {
+      let date = value && value.isValid && value.isValid() ? value : this.moment()
+      this.year = date.year()
+    },
     formatStart: function(val) {
       return val % this.total == 0
         ? Math.floor(val / this.total) * this.total - (this.total - 1)
@@ -218,22 +233,18 @@ let month = {
       return arr;
     }
   },
-  watch: {
-    month: function(value) {
-      this.selectedValues = this.format(this.year, value)
-    }
-  },
   mounted() {
-    let date = this.moment(this.value)
-    this.year = date.year()
-    this.month = date.month()
-    this.selectedValues = this.format()
     this.dateMin = [this.min.year(), this.min.month()]
     this.dateMax = [this.max.year(), this.max.month()]
     this.now = this.moment([this.moment().year(), this.moment().month()])
     this.disabledNow = this.disabledItem(this.now)
   },
   methods: {
+    initValue: function(value) {
+      let date = value && value.isValid && value.isValid() ? value : this.moment()
+      this.year = date.year()
+      this.month = date.month()
+    },
     clickHeader: function() {
       this.$emit("month2Year", this.selectedValues);
     },
@@ -304,23 +315,19 @@ let date = {
       return arr
     },
   },
-  watch: {
-    date: function(value) {
-      this.selectedValues = this.format(this.year, this.month, value)
-    }
-  },
   mounted() {
-    let date = this.moment(this.value)
-    this.year = date.year()
-    this.month = date.month()
-    this.date = date.date()
-    this.selectedValues = this.format()
     this.dateMin = [this.min.year(), this.min.month(), this.min.date()]
     this.dateMax = [this.max.year(), this.max.month(), this.max.date()]
     this.now = this.moment([this.moment().year(), this.moment().month(), this.moment().date()])
     this.disabledNow = this.disabledItem(this.now)
   },
   methods: {
+    initValue: function(value) {
+      let date = value && value.isValid && value.isValid() ? value : this.moment()
+      this.year = date.year()
+      this.month = date.month()
+      this.date = date.date()
+    },
     clickHeader: function() {
       this.$emit("date2Month", this.selectedValues)
     },

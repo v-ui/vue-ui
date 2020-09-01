@@ -9,6 +9,9 @@
       :max="max"
       :disabled="disabled"
       :hide-header="false"
+      :range="range"
+      :selectedStart="selectedStart"
+      :selectedEnd="selectedEnd"
       @year:checked="yearChecked"
     />
     <month-panel
@@ -20,6 +23,9 @@
       :max="max"
       :disabled="disabled"
       :hide-header="false"
+      :range="range"
+      :selectedStart="selectedStart"
+      :selectedEnd="selectedEnd"
       @month2Year="month2Year"
       @month:checked="monthChecked"
     />
@@ -32,6 +38,9 @@
       :max="max"
       :disabled="disabled"
       :hide-header="false"
+      :range="range"
+      :selectedStart="selectedStart"
+      :selectedEnd="selectedEnd"
       @date2Month="date2Month"
       @date:checked="dateChecked"
     />
@@ -69,6 +78,9 @@ export default {
     },
     min: [String, Date, Object],
     max: [String, Date, Object],
+    range: util.props.Boolean,
+    selectedStart: [String, Number, Date, Object],
+    selectedEnd: [String, Number, Date, Object],
   },
   data() {
     return {
@@ -83,6 +95,12 @@ export default {
     },
   },
   watch: {
+    value: function(value) {
+      this.date = value
+    },
+    date: function(value) {
+      this.selectedValue = value
+    },
     selectedValue: function (value) {
       // 配合 v-model 工作
       this.$emit("change", value);
@@ -90,20 +108,16 @@ export default {
   },
   mounted() {
     this.pickertType = this.type;
-    let date = this.moment(this.value);
-    this.date = date.isValid() ? date : this.moment();
-    this.selectedValue = this.date;
+    this.date = this.value;
   },
   methods: {
     month2Year: function (value) {
       this.date.year(value.year());
       this.date.month(value.month());
-      this.selectedValue = this.date;
       this.pickertType = this.enumTypeStatus.year;
     },
     yearChecked: function (value) {
       this.date.year(value.year());
-      this.selectedValue = this.date;
       if (this.canHide) return;
       this.pickertType = this.enumTypeStatus.month;
     },
@@ -111,13 +125,11 @@ export default {
       this.date.year(value.year());
       this.date.month(value.month());
       this.date.date(value.date());
-      this.selectedValue = this.date;
       this.pickertType = this.enumTypeStatus.month;
     },
     monthChecked: function (value) {
       this.date.year(value.year());
       this.date.month(value.month());
-      this.selectedValue = this.date;
       if (this.canHide) return;
       this.pickertType = this.enumTypeStatus.date;
     },

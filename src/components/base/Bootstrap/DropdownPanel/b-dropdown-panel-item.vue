@@ -3,6 +3,7 @@
     class="my-1"
     :class="objClass"
     style="min-width: 3em"
+    :style="objStyle"
     :disabled="disabled"
     :aria-selected="isSelected || (item.status && item.status.selected)"
     @click.stop="$emit('click', item)"
@@ -27,23 +28,24 @@ export default {
       return this.item.label || this.item[this.primaryKey] || this.item.value || this.item
     },
     objClass: function() {
-      let base = 'bg-transparent rounded-pill'
       let select = ''
       let status = ''
       if (this.item.status) {
         if (this.item.status.now) status = 'border-0 bg-transparent text-danger '
-        if (this.item.status.start || this.item.status.end) status = 'border border-primary text-info '
-        if (this.item.status.between) status = 'rounded-0 bg-primary text-secondary '
-        if (this.item.status.selected) status = "bg-transparent text-primary "
+        if (this.item.status.start || this.item.status.end || this.item.status.between) status = 'rounded-0 bg-primary'
+        if (this.item.status.selected) status = "rounded-pill bg-transparent text-primary "
         if (status.length === 0) status = 'border-0 bg-transparent text-body'
       } else {
         select = this.isSelected
-          ? "border border-primary text-primary"
-          : "border-0 text-body";
+          ? "border border-primary rounded-pill bg-transparent  text-primary"
+          : "border-0 rounded-pill bg-transparent text-body";
       }
       const col = 12 % this.colCount == 0 ? `col-${12 / this.colCount}` : "col-auto";
-      return `${base} ${select} ${col} ${status}`
+      return `${select} ${col} ${status}`
     },
+    objStyle: function () {
+      return this.item && this.item.status && this.item.status.between ? 'opacity: .3' : ''
+    }
   }
 };
 </script>

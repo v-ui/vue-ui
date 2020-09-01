@@ -18,6 +18,9 @@
           :min="dateMin"
           :max="dateMax"
           :disabled="disabled"
+          :range="range"
+          :selectedStart="selectedValue1"
+          :selectedEnd="selectedValue2"
           :hide-header="false"
         />
         <date-panel-select
@@ -28,6 +31,9 @@
           :min="dateMin"
           :max="dateMax"
           :disabled="disabled"
+          :range="range"
+          :selectedStart="selectedValue1"
+          :selectedEnd="selectedValue2"
           :hide-header="false"
         />
       </div>
@@ -74,33 +80,38 @@ export default {
   data() {
     return {
       pickertType: "",
-      selectedValues: null,
       // 默认使用 selectedValue1，
       // 当 range 为 True 时才使用 selectedValue2，
       // 此时 selectedValue1 相当于 start，selectedValue2 相当于 end
       selectedValue1: null,
       selectedValue2: null,
+      selectedValues: this.range ? {start: null, end: null} : null,
 
     };
   },
   computed: {
     fillPlaceholder: function () {
       if (this.placeholder) return this.placeholder;
-      else {
-        switch (this.type) {
-          case this.enumTypeStatus.year:
-            return config.ui.date.year
-          case this.enumTypeStatus.month:
-            return config.ui.date.month
-          case this.enumTypeStatus.date:
-            return config.ui.date.date
-          default:
-            return "error";
-        }
+
+      switch (this.type) {
+        case this.enumTypeStatus.year:
+          return this.range
+            ? config.ui.date.year + " - " +  config.ui.date.year
+            : config.ui.date.year
+        case this.enumTypeStatus.month:
+          return this.range
+            ? config.ui.date.month + " - " +  config.ui.date.month
+            : config.ui.date.month
+        case this.enumTypeStatus.date:
+          return this.range
+            ? config.ui.date.date + " - " +  config.ui.date.date
+            : config.ui.date.date
+        default:
+          return "error";
       }
     },
     showValue: function () {
-      return this.range
+      return this.range && this.selectedValues.start && this.selectedValues.end
         ? this.formatDate(this.selectedValues.start) + ' - ' + this.formatDate(this.selectedValues.end)
         : this.formatDate(this.selectedValues)
     },
@@ -140,7 +151,7 @@ export default {
         : this.selectedValues = value
     },
     selectedValue2: function (value) {
-        this.selectedValues.end = value
+      this.selectedValues.end = value
     },
     selectedValues: {
       handler: function (value) {
@@ -170,7 +181,7 @@ export default {
   },
   methods: {
     formatDate: function (value) {
-      if (!value || !value.isValid()) return;
+      if (!value || !value.isValid || !value.isValid()) return;
 
       switch (this.type) {
         case this.enumTypeStatus.year:
