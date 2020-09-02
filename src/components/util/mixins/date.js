@@ -126,8 +126,8 @@ let base = {
       min = this.dateMin || [this.min.year(), this.min.month(), this.min.date()],
       max = this.dateMax || [this.max.year(), this.max.month(), this.max.date()]
     ) {
-      return (this.min.isValid() && value.isBefore(this.moment(min))) ||
-            (this.max.isValid() && value.isAfter(this.moment(max)))
+      return (this.min.isValid() && (value.isBefore(this.moment(min)) || value.isSame(this.moment(min)))) ||
+            (this.max.isValid() && (value.isAfter(this.moment(max)) || value.isSame(this.moment(min))))
     },
   },
 }
