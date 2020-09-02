@@ -12,28 +12,28 @@
     <template>
       <div class="d-flex">
         <date-panel-select
-          v-model="selectedValue1"
+          v-model="selectedValueStart"
           class="flex-fill"
           :type="type"
           :min="dateMin"
-          :max="dateMax"
+          :max="range ? rangeStartMax : dateMax"
           :disabled="disabled"
           :range="range"
-          :selectedStart="selectedValue1"
-          :selectedEnd="selectedValue2"
+          :selectedStart="selectedValueStart"
+          :selectedEnd="selectedValueEnd"
           :hide-header="false"
         />
         <date-panel-select
           v-if="range"
-          v-model="selectedValue2"
+          v-model="selectedValueEnd"
           class="flex-fill"
           :type="type"
-          :min="dateMin"
+          :min="range ? rangeEndMin : dateMin"
           :max="dateMax"
           :disabled="disabled"
           :range="range"
-          :selectedStart="selectedValue1"
-          :selectedEnd="selectedValue2"
+          :selectedStart="selectedValueStart"
+          :selectedEnd="selectedValueEnd"
           :hide-header="false"
         />
       </div>
@@ -80,11 +80,11 @@ export default {
   data() {
     return {
       pickertType: "",
-      // 默认使用 selectedValue1，
-      // 当 range 为 True 时才使用 selectedValue2，
-      // 此时 selectedValue1 相当于 start，selectedValue2 相当于 end
-      selectedValue1: null,
-      selectedValue2: null,
+      // 默认使用 selectedValueStart，
+      // 当 range 为 True 时才使用 selectedValueEnd，
+      // 此时 selectedValueStart 相当于 start，selectedValueEnd 相当于 end
+      selectedValueStart: null,
+      selectedValueEnd: null,
       selectedValues: this.range ? {start: null, end: null} : null,
 
     };
@@ -124,6 +124,27 @@ export default {
     dateMax: function () {
       return this.moment(new Date(this.max));
     },
+    rangeStartMax: function() {
+      return this.selectedValueEnd && this.selectedValueEnd.isValid && this.selectedValueEnd.isValid() ? this.selectedValueEnd : this.dateMax
+    },
+    rangeEndMin: function() {
+      if (this.selectedValueStart && this.selectedValueStart.isValid && this.selectedValueStart.isValid()) {
+        // let start = this.selectedValueStart.clone()
+        // switch (this.type) {
+        //   case this.enumTypeStatus.year:
+        //   return start.add(1, 'y')
+        // case this.enumTypeStatus.month:
+        //   return start.add(1, 'm')
+        // case this.enumTypeStatus.date:
+        //   return start.add(1, 'd')
+        // default:
+        //   return start
+        // }
+        return this.selectedValueStart
+      } else {
+        return this.dateMin
+      }
+    },
     fillInfo: function () {
       let minIsValid = this.dateMin.isValid()
       let maxIsValid = this.dateMax.isValid()
@@ -145,12 +166,12 @@ export default {
     },
   },
   watch: {
-    selectedValue1: function (value) {
+    selectedValueStart: function (value) {
       this.range
         ? this.selectedValues.start = value
         : this.selectedValues = value
     },
-    selectedValue2: function (value) {
+    selectedValueEnd: function (value) {
       this.selectedValues.end = value
     },
     selectedValues: {
@@ -170,12 +191,12 @@ export default {
       date.end = this.moment(this.value.end);
       date.start = date.start.isValid() ? date.start : this.moment();
       date.end = date.end.isValid() ? date.end : this.moment();
-      this.selectedValue1 = date.start
-      this.selectedValue2 = date.end
+      this.selectedValueStart = date.start
+      this.selectedValueEnd = date.end
     } else {
       let date = this.moment(this.value);
       date = date.isValid() ? date : this.moment();
-      this.selectedValue1 = date
+      this.selectedValueStart = date
     }
 
   },

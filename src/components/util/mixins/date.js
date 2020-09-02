@@ -89,8 +89,6 @@ let base = {
       month: 0,
       date: 1,
       now: null,
-      dateMin: null,
-      dateMax: null,
       disabledNow: false,
       selectedValues: null,
     }
@@ -150,6 +148,12 @@ let year = {
     headerText: function() {
       return `${this.start} - ${this.start + this.total - 1}`
     },
+    dateMin: function() {
+      return [this.min.year()]
+    },
+    dateMax: function() {
+      return [this.max.year()]
+    },
     list: function() {
       if (!this.start || isNaN(this.start)) return
       let arr = [];
@@ -172,8 +176,6 @@ let year = {
   },
   mounted() {
     this.start = this.formatStart(this.year)
-    this.dateMin = [this.min.year()]
-    this.dateMax = [this.max.year()]
     this.now = this.moment([this.moment().year()])
     this.disabledNow = this.disabledItem(this.now)
   },
@@ -218,6 +220,12 @@ let month = {
     headerText: function() {
       return this.year;
     },
+    dateMin: function() {
+      return [this.min.year(), this.min.month()]
+    },
+    dateMax: function() {
+      return [this.max.year(), this.max.month()]
+    },
     list: function() {
       if (!this.year || isNaN(this.year)) return;
       let arr = [];
@@ -234,8 +242,6 @@ let month = {
     }
   },
   mounted() {
-    this.dateMin = [this.min.year(), this.min.month()]
-    this.dateMax = [this.max.year(), this.max.month()]
     this.now = this.moment([this.moment().year(), this.moment().month()])
     this.disabledNow = this.disabledItem(this.now)
   },
@@ -261,7 +267,9 @@ let month = {
       this.year += 1;
     },
     checked: function(value) {
-      this.month = value
+      // TODO: 解决 mixins-select 中遇到 0 的问题，
+      // 待解决后改回： this.month = value
+      this.month = value && value.value === 0 ? value.value : value
       this.selectedValues = this.format()
       this.$emit('month:checked', this.selectedValues)
     },
@@ -284,6 +292,12 @@ let date = {
     },
     weekList: function() {
       return this.moment.localeData().weekdaysMin()
+    },
+    dateMin: function() {
+      return [this.min.year(), this.min.month(), this.min.date()]
+    },
+    dateMax: function() {
+      return [this.max.year(), this.max.month(), this.max.date()]
     },
     list: function() {
 
@@ -316,8 +330,6 @@ let date = {
     },
   },
   mounted() {
-    this.dateMin = [this.min.year(), this.min.month(), this.min.date()]
-    this.dateMax = [this.max.year(), this.max.month(), this.max.date()]
     this.now = this.moment([this.moment().year(), this.moment().month(), this.moment().date()])
     this.disabledNow = this.disabledItem(this.now)
   },

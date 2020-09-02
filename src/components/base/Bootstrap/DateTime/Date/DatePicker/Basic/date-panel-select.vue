@@ -1,29 +1,29 @@
 <template>
-  <div>
+  <div :class="{ 'date-panel-cannt-hide': range }">
     <year-panel
       v-if="pickertType === enumTypeStatus.year"
-      v-model="selectedValue"
+      :value="selectedValue"
       :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.year }"
       style="min-width: 18em"
       :min="min"
       :max="max"
       :disabled="disabled"
       :hide-header="false"
-      :range="range"
+      :range="type === enumTypeStatus.year && range"
       :selectedStart="selectedStart"
       :selectedEnd="selectedEnd"
       @year:checked="yearChecked"
     />
     <month-panel
       v-if="pickertType === enumTypeStatus.month"
-      v-model="selectedValue"
+      :value="selectedValue"
       :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.month }"
       style="min-width: 15em"
       :min="min"
       :max="max"
       :disabled="disabled"
       :hide-header="false"
-      :range="range"
+      :range="type === enumTypeStatus.month && range"
       :selectedStart="selectedStart"
       :selectedEnd="selectedEnd"
       @month2Year="month2Year"
@@ -31,14 +31,14 @@
     />
     <date-panel
       v-if="pickertType === enumTypeStatus.date"
-      v-model="selectedValue"
+      :value="selectedValue"
       :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.date }"
       style="min-width: 22em"
       :min="min"
       :max="max"
       :disabled="disabled"
       :hide-header="false"
-      :range="range"
+      :range="type === enumTypeStatus.date && range"
       :selectedStart="selectedStart"
       :selectedEnd="selectedEnd"
       @date2Month="date2Month"
@@ -84,7 +84,6 @@ export default {
   },
   data() {
     return {
-      date: null,
       pickertType: "",
       selectedValue: null,
     };
@@ -96,9 +95,6 @@ export default {
   },
   watch: {
     value: function(value) {
-      this.date = value
-    },
-    date: function(value) {
       this.selectedValue = value
     },
     selectedValue: function (value) {
@@ -108,28 +104,28 @@ export default {
   },
   mounted() {
     this.pickertType = this.type;
-    this.date = this.value;
+    this.selectedValue = this.value
   },
   methods: {
     month2Year: function (value) {
-      this.date.year(value.year());
-      this.date.month(value.month());
+      this.selectedValue.year(value.year());
+      this.selectedValue.month(value.month());
       this.pickertType = this.enumTypeStatus.year;
     },
     yearChecked: function (value) {
-      this.date.year(value.year());
+      this.selectedValue.year(value.year());
       if (this.canHide) return;
       this.pickertType = this.enumTypeStatus.month;
     },
     date2Month: function (value) {
-      this.date.year(value.year());
-      this.date.month(value.month());
-      this.date.date(value.date());
+      this.selectedValue.year(value.year());
+      this.selectedValue.month(value.month());
+      this.selectedValue.date(value.date());
       this.pickertType = this.enumTypeStatus.month;
     },
     monthChecked: function (value) {
-      this.date.year(value.year());
-      this.date.month(value.month());
+      this.selectedValue.year(value.year());
+      this.selectedValue.month(value.month());
       if (this.canHide) return;
       this.pickertType = this.enumTypeStatus.date;
     },
