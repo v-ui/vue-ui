@@ -125,22 +125,35 @@ export default {
       return this.moment(new Date(this.max));
     },
     rangeStartMax: function() {
-      return this.selectedValueEnd && this.selectedValueEnd.isValid && this.selectedValueEnd.isValid() ? this.selectedValueEnd : this.dateMax
+      if (this.selectedValueEnd && this.selectedValueEnd.isValid && this.selectedValueEnd.isValid()) {
+        let start = this.selectedValueEnd.clone()
+        switch (this.type) {
+          case this.enumTypeStatus.year:
+          return start.subtract(1, 'y')
+        case this.enumTypeStatus.month:
+          return start.subtract(1, 'm')
+        case this.enumTypeStatus.date:
+          return start.subtract(1, 'd')
+        default:
+          return start
+        }
+      } else {
+        return this.dateMax
+      }
     },
     rangeEndMin: function() {
       if (this.selectedValueStart && this.selectedValueStart.isValid && this.selectedValueStart.isValid()) {
-        // let start = this.selectedValueStart.clone()
-        // switch (this.type) {
-        //   case this.enumTypeStatus.year:
-        //   return start.add(1, 'y')
-        // case this.enumTypeStatus.month:
-        //   return start.add(1, 'm')
-        // case this.enumTypeStatus.date:
-        //   return start.add(1, 'd')
-        // default:
-        //   return start
-        // }
-        return this.selectedValueStart
+        let start = this.selectedValueStart.clone()
+        switch (this.type) {
+          case this.enumTypeStatus.year:
+          return start.add(1, 'y')
+        case this.enumTypeStatus.month:
+          return start.add(1, 'm')
+        case this.enumTypeStatus.date:
+          return start.add(1, 'd')
+        default:
+          return start
+        }
       } else {
         return this.dateMin
       }
