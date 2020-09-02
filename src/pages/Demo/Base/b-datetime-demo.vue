@@ -66,23 +66,23 @@
       <b-date-picker class="col-2" type="date" v-model="date" />
     </div>
     <div class="row mx-0">
-      <font class="col-1">v-model:</font>
+      <font class="col-1">v-model(range):</font>
       <font class="col-1">
         year
         <br />
-        {{ year }}:
+        {{ yearR }}:
       </font>
       <b-date-picker class="col-2" type="year" range v-model="yearR" />
       <font class="col-1">
         month
         <br />
-        {{ month }}:
+        {{ monthR }}:
       </font>
       <b-date-picker class="col-2" type="month" range v-model="monthR" />
       <font class="col-1">
         date
         <br />
-        {{ date }}:
+        {{ dateR }}:
       </font>
       <b-date-picker class="col-2" type="date" range v-model="dateR" />
     </div>

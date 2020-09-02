@@ -2,7 +2,7 @@
   <div :class="{ 'date-panel-cannt-hide': range }">
     <year-panel
       v-if="pickertType === enumTypeStatus.year"
-      :value="selectedValue"
+      v-model="selectedValues"
       :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.year }"
       style="min-width: 18em"
       :min="min"
@@ -16,7 +16,7 @@
     />
     <month-panel
       v-if="pickertType === enumTypeStatus.month"
-      :value="selectedValue"
+      v-model="selectedValues"
       :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.month }"
       style="min-width: 15em"
       :min="min"
@@ -31,7 +31,7 @@
     />
     <date-panel
       v-if="pickertType === enumTypeStatus.date"
-      :value="selectedValue"
+      v-model="selectedValues"
       :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.date }"
       style="min-width: 22em"
       :min="min"
@@ -85,7 +85,7 @@ export default {
   data() {
     return {
       pickertType: "",
-      selectedValue: null,
+      selectedValues: null,
     };
   },
   computed: {
@@ -94,43 +94,43 @@ export default {
     },
   },
   watch: {
-    value: function(value) {
-      this.selectedValue = value
+    value: function (value) {
+      this.selectedValues = value
     },
-    selectedValue: function (value) {
+    selectedValues: function (value) {
       // 配合 v-model 工作
       this.$emit("change", value);
     },
   },
   mounted() {
     this.pickertType = this.type;
-    this.selectedValue = this.value
+    this.selectedValues = this.value
   },
   methods: {
     month2Year: function (value) {
-      this.selectedValue.year(value.year());
-      this.selectedValue.month(value.month());
+      this.selectedValues.year(value.year());
+      this.selectedValues.month(value.month());
       this.pickertType = this.enumTypeStatus.year;
     },
     yearChecked: function (value) {
-      this.selectedValue.year(value.year());
+      this.selectedValues.year(value.year());
       if (this.canHide) return;
       this.pickertType = this.enumTypeStatus.month;
     },
     date2Month: function (value) {
-      this.selectedValue.year(value.year());
-      this.selectedValue.month(value.month());
-      this.selectedValue.date(value.date());
+      this.selectedValues.year(value.year());
+      this.selectedValues.month(value.month());
+      this.selectedValues.date(value.date());
       this.pickertType = this.enumTypeStatus.month;
     },
     monthChecked: function (value) {
-      this.selectedValue.year(value.year());
-      this.selectedValue.month(value.month());
+      this.selectedValues.year(value.year());
+      this.selectedValues.month(value.month());
       if (this.canHide) return;
       this.pickertType = this.enumTypeStatus.date;
     },
     dateChecked: function (value) {
-      this.selectedValue = value;
+      this.selectedValues = value;
     },
   },
 };

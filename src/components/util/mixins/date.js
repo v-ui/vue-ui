@@ -17,13 +17,13 @@ let status = {
       }
     },
     methods: {
-      validator: function(value, now = null, selected = null) {
+      validator: function(value, now = null, selected = null, start = null, end = null) {
         let isSelected = false, isStart = false, isEnd = false, isBetween = false
         let isNow = (now && this.validNow(value, now)) || false
         if (this.range) {
-          isStart = (this.selectedStart && this.validStart(value, this.selectedStart)) || false
-          isEnd = (this.selectedEnd && this.validEnd(value, this.selectedEnd)) || false
-          isBetween = (this.selectedStart && this.selectedEnd && this.validBetween(value, this.selectedStart, this.selectedEnd)) || false
+          isStart = (start && this.validStart(value, start)) || false
+          isEnd = (end && this.validEnd(value, end)) || false
+          isBetween = (start && end && this.validBetween(value, start, end)) || false
         } else {
           isSelected = (selected && this.validSelect(value, selected)) || false
         }
@@ -105,11 +105,8 @@ let base = {
     },
   },
   watch: {
-    value: {
-      handler: function(value) {
-        this.initValue && this.initValue(value)
-      },
-      deep: true,
+    value: function(value) {
+      this.initValue && this.initValue(value)
     },
     selectedValues: function(value) {
       // 配合 v-model 工作
@@ -162,7 +159,7 @@ let year = {
         arr.push({
           value: value,
           label: value,
-          status: this.validator(this.moment([value]), this.now, this.selectedValues),
+          status: this.validator(this.moment([value]), this.now, this.selectedValues, this.selectedStart, this.selectedEnd),
           disabled: this.disabledItem(this.moment([value])),
         });
       }
@@ -234,7 +231,7 @@ let month = {
           arr.push({
             value: i,
             label: tools.string.padStart(i + 1, 2),
-            status: this.validator(date, this.now , this.selectedValues),
+            status: this.validator(date, this.now , this.selectedValues, this.selectedStart, this.selectedEnd),
             disabled: this.disabledItem(date),
           });
        }
@@ -319,7 +316,7 @@ let date = {
           arr.push({
             value: value,
             label: tools.string.padStart(value, 2),
-            status: this.validator(date, this.now , this.selectedValues),
+            status: this.validator(date, this.now , this.selectedValues, this.selectedStart, this.selectedEnd),
             disabled: this.disabledItem(date),
           });
           value++
