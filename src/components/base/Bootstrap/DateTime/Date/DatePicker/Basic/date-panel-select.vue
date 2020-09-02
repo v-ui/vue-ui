@@ -2,7 +2,7 @@
   <div :class="{ 'date-panel-cannt-hide': range }">
     <year-panel
       v-if="pickertType === enumTypeStatus.year"
-      v-model="selectedValues"
+      :value="selectedValues"
       :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.year }"
       style="min-width: 18em"
       :min="min"
@@ -16,7 +16,7 @@
     />
     <month-panel
       v-if="pickertType === enumTypeStatus.month"
-      v-model="selectedValues"
+      :value="selectedValues"
       :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.month }"
       style="min-width: 15em"
       :min="min"
@@ -31,7 +31,7 @@
     />
     <date-panel
       v-if="pickertType === enumTypeStatus.date"
-      v-model="selectedValues"
+      :value="selectedValues"
       :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.date }"
       style="min-width: 22em"
       :min="min"
@@ -107,30 +107,29 @@ export default {
     this.selectedValues = this.value
   },
   methods: {
+    formatDate: function(year = this.selectedValues.year(), month = this.selectedValues.month(), date = this.selectedValues.date()) {
+      return this.moment([year, month, date])
+    },
     month2Year: function (value) {
-      this.selectedValues.year(value.year());
-      this.selectedValues.month(value.month());
+      this.selectedValues = this.formatDate(value.year(), value.month())
       this.pickertType = this.enumTypeStatus.year;
     },
     yearChecked: function (value) {
-      this.selectedValues.year(value.year());
+      this.selectedValues = this.formatDate(value.year())
       if (this.canHide) return;
       this.pickertType = this.enumTypeStatus.month;
     },
     date2Month: function (value) {
-      this.selectedValues.year(value.year());
-      this.selectedValues.month(value.month());
-      this.selectedValues.date(value.date());
+      this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
       this.pickertType = this.enumTypeStatus.month;
     },
     monthChecked: function (value) {
-      this.selectedValues.year(value.year());
-      this.selectedValues.month(value.month());
+      this.selectedValues = this.formatDate(value.year(), value.month())
       if (this.canHide) return;
       this.pickertType = this.enumTypeStatus.date;
     },
     dateChecked: function (value) {
-      this.selectedValues = value;
+      this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
     },
   },
 };

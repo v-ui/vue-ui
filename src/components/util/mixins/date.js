@@ -69,10 +69,10 @@ let status = {
 
 let base = {
   mixins: [ moment.base, status.select, ],
-  model: {
-    prop: "value",
-    event: "selected:changed"
-  },
+  // model: {
+  //   prop: "value",
+  //   event: "selected:changed"
+  // },
   props: {
     value: [String, Number, Date, Object],
     min: Object,
@@ -108,10 +108,10 @@ let base = {
     value: function(value) {
       this.initValue && this.initValue(value)
     },
-    selectedValues: function(value) {
-      // 配合 v-model 工作
-      this.$emit("selected:changed", value);
-    }
+    // selectedValues: function(value) {
+    //   // 配合 v-model 工作
+    //   this.$emit("selected:changed", value);
+    // }
   },
   mounted() {
     this.initValue && this.initValue(this.value)
