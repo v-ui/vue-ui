@@ -126,16 +126,16 @@ export default {
     },
     rangeStartMax: function() {
       if (this.selectedValueEnd && this.selectedValueEnd.isValid && this.selectedValueEnd.isValid()) {
-        let start = this.selectedValueEnd.clone()
+        let end = this.selectedValueEnd.clone()
         switch (this.type) {
           case this.enumTypeStatus.year:
-          return start.subtract(1, 'y')
+          return end.subtract(1, 'y')
         case this.enumTypeStatus.month:
-          return start.subtract(1, 'm')
+          return end.subtract(1, 'm')
         case this.enumTypeStatus.date:
-          return start.subtract(1, 'd')
+          return end.subtract(1, 'd')
         default:
-          return start
+          return end
         }
       } else {
         return this.dateMax
