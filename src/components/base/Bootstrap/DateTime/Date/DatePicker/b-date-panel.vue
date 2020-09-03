@@ -50,10 +50,7 @@ export default {
       default: "date",
       validator: (value) => ["year", "month", "date"].includes(value),
     },
-    value: {
-      type: [String, Number, Date, Object],
-      default: () => new Date(),
-    },
+    value: [String, Number, Date, Object],
     min: [Date, Object],
     max: [Date, Object],
     range: util.props.Boolean,
@@ -124,24 +121,12 @@ export default {
   },
   mounted() {
     this.pickertType = this.type;
-    this.init()
-  },
-  methods: {
-    init: function(value = this.value) {
-      if (this.range) {
-        let date = {}
-        date.start = this.moment(value.start);
-        date.end = this.moment(value.end);
-        date.start = date.start.isValid() ? date.start : this.moment();
-        date.end = date.end.isValid() ? date.end : this.moment();
-        this.selectedValueStart = date.start
-        this.selectedValueEnd = date.end
-      } else {
-        let date = this.moment(value);
-        date = date.isValid() ? date : this.moment();
-        this.selectedValueStart = date
-      }
-    },
+    if (this.range) {
+      if (this.value.start) this.selectedValueStart = this.moment(this.value.start)
+      if (this.value.end) this.selectedValueEnd = this.moment(this.value.end)
+    } else {
+      if (this.value) this.selectedValueStart = this.moment(this.value)
+    }
   },
 }
 </script>

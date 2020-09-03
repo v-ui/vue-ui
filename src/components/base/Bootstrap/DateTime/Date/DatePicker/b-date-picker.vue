@@ -47,10 +47,7 @@ export default {
       default: "date",
       validator: (value) => ["year", "month", "date"].includes(value),
     },
-    value: {
-      type: [String, Number, Date, Object],
-      default: () => new Date(),
-    },
+    value: [String, Number, Date, Object],
     min: [String, Date],
     max: [String, Date],
     info: util.props.String,
