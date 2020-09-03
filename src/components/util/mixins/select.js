@@ -43,7 +43,7 @@ export default {
       checkedMap: function () {
         const self = this
         return this.isMultiple
-          ? this.checkedValues && this.checkedValues.map && this.checkedValues.map(e => (e && tools.obj.type.isNull(e[self.primaryKey || 'value']) || tools.obj.type.isUndefined(e[self.primaryKey || 'value'])) ? e[self.primaryKey || 'value'] : e)
+          ? this.checkedValues && this.checkedValues.map && this.checkedValues.map(e => (e && e[self.primaryKey || 'value'] || e))
           : this.checkedValues && this.checkedValues[this.primaryKey] || this.checkedValues
       },
     },
@@ -103,7 +103,7 @@ export default {
       selectedMap: function () {
         const self = this
         return this.isMultiple
-          ? this.selected && this.selected.map && this.selected.map(e => (e && tools.obj.type.isNull(e[self.primaryKey || 'value']) || tools.obj.type.isUndefined(e[self.primaryKey || 'value'])) ? e[self.primaryKey || 'value'] : e)
+          ? this.selected && this.selected.map && this.selected.map(e => e && e[self.primaryKey || 'value'] || e)
           : this.selected && this.selected[this.primaryKey] || this.selected
       },
       isSelected: function () {

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <font class="row text-center mx-1">
+    <font class="row text-center">
       <b-button
         class="date-panel-cannt-hide col font-weight-bold border-0 bg-white text-body h5"
         style="height: 2.5em"
