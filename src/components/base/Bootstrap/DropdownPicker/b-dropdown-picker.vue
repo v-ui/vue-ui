@@ -21,7 +21,7 @@
       <div
         v-show="isShow"
         ref="dropdownMenu"
-        class="position-absolute bg-white overflow-auto border rounded shadow-sm my-1 p-1"
+        class="card position-absolute rounded shadow-sm my-1"
         :style="[menuStyle, {'max-height': menuHeight}]"
         style=" z-index: 1000;"
       >

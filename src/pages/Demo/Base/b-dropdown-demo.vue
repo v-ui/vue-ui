@@ -104,10 +104,6 @@
       <b-dropdown-list class="col-11" :list="list" search />
     </div>
     <div class="row">
-      <font class="col-1">row:</font>
-      <b-dropdown-list class="col-11" :list="list" row="3" />
-    </div>
-    <div class="row">
       <font class="col-1">info:</font>
       <b-dropdown-list class="col-11" :list="list" info="info label" />
     </div>

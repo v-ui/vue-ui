@@ -1,6 +1,6 @@
 <template>
   <b-button
-    class="my-1"
+    class="rounded-pill my-1"
     :class="objClass"
     style="min-width: 3em"
     :style="objStyle"
@@ -33,12 +33,12 @@ export default {
       if (this.item.status) {
         if (this.item.status.now) status = 'border-0 bg-transparent text-danger '
         if (this.item.status.start || this.item.status.end || this.item.status.between) status = 'rounded-0 bg-primary'
-        if (this.item.status.selected) status = "rounded-pill bg-transparent text-primary "
+        if (this.item.status.selected) status = "bg-transparent text-primary "
         if (status.length === 0) status = 'border-0 bg-transparent text-body'
       } else {
         select = this.isSelected
-          ? "border border-primary rounded-pill bg-transparent  text-primary"
-          : "border-0 rounded-pill bg-transparent text-body";
+          ? "border bg-transparent border-primary text-primary"
+          : "border-0 bg-transparent text-body";
       }
       const col = 12 % this.colCount == 0 ? `col-${12 / this.colCount}` : "col-auto";
       return `${select} ${col} ${status}`

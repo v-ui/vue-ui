@@ -9,7 +9,6 @@
       :placeholder="placeholder"
       :disabled="disabled"
       :multiple="isMultiple"
-      :menu-height="menuHeight"
       @deleteItem="deleteItem"
     >
       <template #trigger><slot name="trigger" /></template>
@@ -86,10 +85,6 @@ export default {
         return this.multiple
       }
     },
-    row: {
-      ...util.props.UInt,
-      default: 10
-    }
   },
   data() {
     return {
@@ -111,9 +106,6 @@ export default {
         ? this.checkedValues && this.checkedValues.map && this.checkedValues.map(e => e[this.primaryKey] || e.label || e.value || e ) || null
         : this.checkedValues && (this.checkedValues[this.primaryKey] || this.checkedValues.label || this.checkedValues.value || this.checkedValues) || null
     },
-  },
-  mounted: function() {
-    this.menuHeight = this.row * 32 + 10 + "px"
   },
   methods: {
     headerClick: function() {
