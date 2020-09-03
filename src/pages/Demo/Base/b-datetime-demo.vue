@@ -15,6 +15,10 @@
       <b-date-picker class="col-11" info="info text" />
     </div>
     <div class="row mx-0">
+      <font class="col-1">placeholder:</font>
+      <b-date-picker class="col-11" placeholder="Place Check the Date" />
+    </div>
+    <div class="row mx-0">
       <font class="col-1">type:</font>
       <font class="col-1">year:</font>
       <b-date-picker class="col-2" type="year" />

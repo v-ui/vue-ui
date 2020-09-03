@@ -18,7 +18,7 @@
       </b-button>
       <b-button
         class="border-0 bg-white text-body"
-        :class="{ 'date-panel-cannt-hide': disabled }"
+        :class="{ 'date-panel-cannt-hide': disabled || disabledNow }"
         style="height: 2.5em"
         :disabled="disabled || disabledNow"
         @click.stop="$emit('checknow')"
