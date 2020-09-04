@@ -9,9 +9,7 @@
         <a v-else :href="item.href">{{ item.title }}</a>
       </h5>
       {{ item.content }}
-      <template
-        v-if="item.children && item.children.length && item.children.length > 0"
-      >
+      <template v-if="item.children && item.children.length && item.children.length > 0">
         <br>
         <b-button
           class="border-0 bg-transparent px-0"
