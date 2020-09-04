@@ -6,7 +6,7 @@
       v-else
       :key="index"
       :class="{'flex-fill': fill}"
-      :text="item.label"
+      :label="item.label"
       :href="item.href"
       :color="item.color || color"
       :sr-msg="item.srMsg"

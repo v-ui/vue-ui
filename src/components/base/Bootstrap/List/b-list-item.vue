@@ -7,11 +7,11 @@
     :class="objClass"
     :disabled="disabled"
   >
-    <slot>{{ text }}</slot>
+    <slot>{{ label }}</slot>
     <sr-msg>{{ srMsg || color }}</sr-msg>
   </base-a>
   <li v-else class="list-group-item text-truncate" :class="objClass" :aria-disabled="disabled">
-    <slot>{{ text }}</slot>
+    <slot>{{ label }}</slot>
     <sr-msg>{{ srMsg }}</sr-msg>
   </li>
 </template>
@@ -27,7 +27,7 @@ export default {
   components: { BaseA, srMsg },
   props: {
     href: util.props.href,
-    text: util.props.String,
+    label: util.props.String,
     color: {
       ...util.props.color,
       default: "white"
