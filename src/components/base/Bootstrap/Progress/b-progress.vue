@@ -1,34 +1,35 @@
 <template>
   <div>
-    <div class="progress">
-      <template v-if="list && list.length > 0">
+    <div class="row mx-0 align-items-center">
+      <div class="progress col px-0" :style="objStyle">
+        <template v-if="list && list.length > 0">
+          <b-progress-bar
+            v-for="(item, index) in list"
+            :key="index"
+            :striped="striped"
+            :value="item.value"
+            :animated="animated"
+            :show-value="showValue"
+            :color="item.color || color"
+          />
+        </template>
         <b-progress-bar
-          v-for="(item, index) in list"
-          :key="index"
+          v-else
+          :color="color"
+          :value="value"
           :striped="striped"
-          :value="item.value"
           :animated="animated"
           :show-value="showValue"
-          :color="item.color || color"
         />
-        <!-- <span v-if="showValue" class="text-white position-absolute" :style="spanStyle">{{ `${sum}%` }}</span> -->
-      </template>
-      <b-progress-bar
-        v-else
-        :color="color"
-        :value="now"
-        :striped="striped"
-        :animated="animated"
-        :show-value="showValue"
-      />
+      </div>
+      <label class="col-1 m-0 p-0 pl-1">{{ tweenedNumber }}%</label>
     </div>
     <b-info :info="info" />
   </div>
 </template>
 
 <script>
-// import TweenLite from "gsap/TweenLite"
-
+import TweenLite from "gsap";
 import util from "@/components/util/index.js";
 
 import BProgressBar from "@/components/base/Bootstrap/Progress/b-progress-bar.vue";
@@ -41,6 +42,7 @@ export default {
     list: util.props.Array,
     color: util.props.color,
     info: util.props.String,
+    size: util.props.size,
     value: {
       ...util.props.UNumber,
       validator: value => util.props.UNumber.validator(value) && value <= 100,
@@ -51,37 +53,37 @@ export default {
   },
   data() {
     return {
-      now: this.value
-      // offsetWidth: 0,
-    };
+      total: 0,
+      tweenedNumber: 0,
+    }
   },
   computed: {
-    // sum: function () {
-    //     return this.list && this.list.length > 0
-    //             ? this.list.map( el => isNaN(el.value) ? 0 : Number(el.value) ).reduce((acc, cur) => acc + cur, 0)
-    //             : this.now
-    // },
-    // spanStyle: function () {
-    //     return this.offsetWidth == 0 ? {} : {
-    //         left: this.offsetWidth / 2 - 6 + 'px'
-    //     }
-    // },
+    objStyle: function() {
+      let height = '10'
+      if (this.size === 'sm') height = '5'
+      else if (this.size === 'lg') height = ''
+      return {height: `${height}px`}
+    }
+  },
+  watch: {
+    value: function(val, old) {
+      this.showAnimat(val, old);
+    },
+    tweenedNumber: function() {
+      this.$emit("animating");
+    }
+  },
+  mounted() {
+    this.total = this.list && this.list.length > 0
+        ? this.list.reduce((acc, cur) => acc.value && cur.value ? acc.value + cur.value : cur.value)
+        : this.value
+    this.showAnimat(this.total)
   },
   methods: {
-    // getOffsetWidth: function () {
-    //     let offsetWidth = 0
-    //     const nodes = this.$el.children[0].childNodes
-    //     for (var i = 0; i < nodes.length - 1; i++) {
-    //         offsetWidth += nodes[i].offsetWidth
-    //     }
-    //     return offsetWidth
-    // },
-    // showAnimat: function (number) {
-    //     TweenLite.to(this.$data, .5, { offsetWidth: number });
-    // },
-    // animating: function () {
-    //     this.showAnimat(this.getOffsetWidth())
-    // },
-  }
+    showAnimat: function(number, oldNumber = 0) {
+      this.tweenedNumber = oldNumber;
+      TweenLite.to(this.$data, 1, { tweenedNumber: number });
+    }
+  },
 };
 </script>
