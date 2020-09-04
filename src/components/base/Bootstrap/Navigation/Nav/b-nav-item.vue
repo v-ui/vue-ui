@@ -8,7 +8,7 @@
       :disabled="disabled"
       v-bind="$attrs"
     >
-      <slot>{{ text }}</slot>
+      <slot>{{ label }}</slot>
     </base-a>
   </li>
 </template>
@@ -27,7 +27,7 @@ export default {
       ...util.props.href,
       default: "#"
     },
-    text: util.props.String,
+    label: util.props.String,
     active: util.props.Boolean,
     disabled: util.props.Boolean
   },

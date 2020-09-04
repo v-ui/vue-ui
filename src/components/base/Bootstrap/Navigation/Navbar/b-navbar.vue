@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <b-nav-brand v-if="$slots.brand || brand" :text="brand">
+    <b-nav-brand v-if="$slots.brand || brand" :brand="brand">
       <slot name="brand" />
     </b-nav-brand>
     <b-nav-toggler v-if="$slots.toggler || !hideToggler" :target="id">

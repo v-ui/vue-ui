@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- TODO: debug with item.label and item.value -->
     <div v-for="(item, index) in list" :key="index">
       <h6 v-if="item.header" class="dropdown-header mb-0">
         <slot>{{ item.header }}</slot>
@@ -8,7 +9,7 @@
       <div v-else-if="item.divider" class="dropdown-divider" />
       <b-dropdown-item
         v-else-if="item.value"
-        :label="item.value"
+        :label="item.label || item.value"
         :href="item.href"
         :info="item.info"
         :active="select ? select == item.value : item.active"

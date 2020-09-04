@@ -134,7 +134,7 @@ export default {
           arrs.push({
             id: e.id,
             target: this.map[e.tagName.toLowerCase()],
-            text: e.textContent
+            label: e.textContent
           });
         }
       }
@@ -181,7 +181,7 @@ export default {
       return contents;
     },
     HTarget2Content: function(e) {
-      return { text: e.text, href: `#${e.id}` };
+      return { label: e.label, href: `#${e.id}` };
     }
   }
 };

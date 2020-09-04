@@ -1,6 +1,6 @@
 <template functional>
   <a class="navbar-brand" :href="props.href">
-    <slot>{{ props.text }}</slot>
+    <slot>{{ props.brand }}</slot>
   </a>
 </template>
 
@@ -14,7 +14,7 @@ export default {
       ...util.props.href,
       default: '#',
     },
-    text: util.props.String
+    brand: util.props.String
   }
 };
 </script>

@@ -22,49 +22,49 @@
         <b-dropdown-header label="header text" />
         <b-dropdown-header label="header text" info="info text" />
         <b-dropdown-divider />
-        <b-dropdown-item-text label="text" />
-        <b-dropdown-item-text label="text" info="info text" />
-        <b-dropdown-item label="item text" />
-        <b-dropdown-item label="item text" info="info text" />
+        <b-dropdown-item-text text="text" />
+        <b-dropdown-item-text text="text" info="info text" />
+        <b-dropdown-item label="item label" />
+        <b-dropdown-item label="item label" info="info text" />
         <b-dropdown-item href="href text" />
         <b-dropdown-item href="href text" info="info text" />
-        <b-dropdown-item label="active text" active />
-        <b-dropdown-item label="active text" info="info text" active />
-        <b-dropdown-item label="disabled text" disabled />
-        <b-dropdown-item label="disabled text" info="info text" disabled />
+        <b-dropdown-item label="active label" active />
+        <b-dropdown-item label="active label" info="info text" active />
+        <b-dropdown-item label="disabled label" disabled />
+        <b-dropdown-item label="disabled label" info="info text" disabled />
       </b-dropdown>
     </div>
     <div class="row">
       <font class="col-1">trigger:</font>
       <b-dropdown class="col-auto" trigger="trigger text">
-        <b-dropdown-item label="item text" />
+        <b-dropdown-item label="item label" />
       </b-dropdown>
     </div>
     <div class="row">
       <font class="col-1">trigger(2):</font>
       <b-dropdown class="col-auto">
         <template #trigger>you can add anlything text or DOM</template>
-        <b-dropdown-item label="item text" />
+        <b-dropdown-item label="item label" />
       </b-dropdown>
     </div>
     <div class="row">
       <font class="col-1">toggle:</font>
       <b-dropdown class="col-3" menu-weight>
         <template #icon>you can add anlything</template>
-        <b-dropdown-item label="item text" />
+        <b-dropdown-item label="item label" />
       </b-dropdown>
       <font class="col-3">只建议添加图标</font>
     </div>
     <div class="row">
       <font class="col-1">hide-toggle:</font>
       <b-dropdown class="col-auto" hide-toggle>
-        <b-dropdown-item label="item text" />
+        <b-dropdown-item label="item label" />
       </b-dropdown>
     </div>
     <div class="row">
       <font class="col-1">menu-weight:</font>
       <b-dropdown class="col-11" menu-weight>
-        <b-dropdown-item label="item text" />
+        <b-dropdown-item label="item label" />
       </b-dropdown>
     </div>
     <div class="row">
@@ -271,15 +271,15 @@ export default {
   data() {
     return {
       list: [
-        { value: "value1", label: "text1", info: "info text" },
-        { value: "value2", label: "text2", info: "info text" },
-        { value: "value3", label: "text3" },
-        { value: "value4", label: "text4" },
-        { value: "value5", label: "text5" },
+        { value: "value1", label: "label1", info: "info text" },
+        { value: "value2", label: "label2", info: "info text" },
+        { value: "value3", label: "label3" },
+        { value: "value4", label: "label4" },
+        { value: "value5", label: "label5" },
         { value: "value6", label: "disabled", disabled: true }
       ],
       list2: [
-        { header: "header text", divider: true, text: "text", item: "item" },
+        { header: "header label", divider: true, text: "text", item: "item" },
         { divider: true, text: "text", item: "item" },
         { text: "text", item: "item" },
         { value: "value" },
@@ -291,9 +291,9 @@ export default {
       ],
       value1: "value1",
       value2: [
-        { value: "value1", label: "text1" },
-        { value: "value2", label: "text2" },
-        { value: "value3", label: "text3" }
+        { value: "value1", label: "label1" },
+        { value: "value2", label: "label2" },
+        { value: "value3", label: "label3" }
       ]
     };
   }

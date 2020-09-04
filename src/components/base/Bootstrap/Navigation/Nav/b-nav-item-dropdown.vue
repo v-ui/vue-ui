@@ -6,7 +6,7 @@
       role="button"
       aria-haspopup="true"
       aria-expanded="false"
-    >{{ text }}</a>
+    >{{ label }}</a>
     <div class="dropdown-menu">
       <b-dropdown-menu :list="list" />
     </div>
@@ -23,7 +23,7 @@ export default {
   components: { BDropdownMenu },
   props: {
     list: util.props.Array,
-    text: util.props.String
+    label: util.props.String
   }
 }
 </script>

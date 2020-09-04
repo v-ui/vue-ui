@@ -37,14 +37,14 @@ export default {
   data() {
     return {
       list: [
-        { text: "one", href: "#one", active: true },
-        { text: "two", href: "#two", active: false },
-        { text: "three", href: "#three", active: false }
+        { label: "one", href: "#one", active: true },
+        { label: "two", href: "#two", active: false },
+        { label: "three", href: "#three", active: false }
       ],
       list2: [
-        { text: "one", href: "#one2", active: true },
-        { text: "two", href: "#two2", active: false },
-        { text: "three", href: "#three2", active: false }
+        { label: "one", href: "#one2", active: true },
+        { label: "two", href: "#two2", active: false },
+        { label: "three", href: "#three2", active: false }
       ]
     };
   }

@@ -2,15 +2,15 @@
   <ul class="nav" :class="objClass">
     <slot v-if="$slots.default" />
     <template v-else v-for="(item, index) in list">
-      <nav-item-dropdown v-if="item.dropdown" :key="index" :list="item.list" :text="item.text" />
+      <nav-item-dropdown v-if="item.dropdown" :key="index" :list="item.list" :label="item.label" />
       <nav-item
         v-else
         :key="index"
-        :text="item.text"
+        :label="item.label"
         :href="item.href"
         :disabled="item.disabled"
-        :active="select ? select == item.text || select == item.value : item.active"
-        @click.native="$emit('click', item.value || item.text)"
+        :active="select ? select == item.label || select == item.value : item.active"
+        @click.native="$emit('click', item.value || item.label)"
       />
     </template>
   </ul>

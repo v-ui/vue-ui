@@ -12,7 +12,7 @@
         v-for="(item, index) in list"
         :key="index"
         role="tab"
-        :text="item.text"
+        :label="item.label"
         :href="item.href"
         :active="item.active"
         :disabled="item.disabled"

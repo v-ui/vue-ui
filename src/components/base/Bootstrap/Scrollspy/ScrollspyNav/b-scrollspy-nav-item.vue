@@ -1,7 +1,7 @@
 <template>
   <div class="w-100">
     <b-nav pills :column="column" v-for="(item, index) in list" :key="index">
-      <b-nav-item class="w-100" :href="item.href" :text="item.text" />
+      <b-nav-item class="w-100" :href="item.href" :label="item.label" />
       <li
         v-if="item.children && item.children.length && item.children.length > 0"
         class="nav-item w-100"
