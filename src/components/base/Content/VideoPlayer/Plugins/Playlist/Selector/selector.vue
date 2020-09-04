@@ -67,7 +67,7 @@ export default {
         let end = this.pageCount === e ? this.totalNu : e * this.pageSize;
         return {
           value: e,
-          text: `${start} - ${end}`
+          label: `${start} - ${end}`
         };
       });
     }

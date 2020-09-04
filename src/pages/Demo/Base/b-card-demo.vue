@@ -243,15 +243,15 @@ export default {
   data() {
     return {
       nav: [
-        { text: "active href", href: "#", active: true },
-        { text: "text1" },
-        { text: "text2" },
-        { text: "disabled text", disabled: true }
+        { label: "active href", href: "#", active: true },
+        { label: "label1" },
+        { label: "label2" },
+        { label: "disabled label", disabled: true }
       ],
       list: [
-        { text: "text1" },
-        { text: "text2" },
-        { text: "disabled", disabled: true }
+        { label: "label1" },
+        { label: "label2" },
+        { label: "disabled", disabled: true }
       ]
     };
   }

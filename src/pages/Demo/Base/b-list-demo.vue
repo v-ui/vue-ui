@@ -12,7 +12,7 @@
         </div>
         <div class="row py-1">
             <font class="col-1">select:</font>
-            <b-list class="col-11" :list="list2" select="text1"></b-list>
+            <b-list class="col-11" :list="list2" select="label1"></b-list>
         </div>
         <div class="row py-1">
             <font class="col-1">flush:</font>
@@ -43,7 +43,7 @@
                     <small>5 days ago</small>
                     </div>
                     <p class="mb-1">More difficult DOM you can add in</p>
-                    <small>More text...</small>
+                    <small>More label...</small>
                 </b-list-item>
             </b-list>
         </div>
@@ -69,26 +69,26 @@ export default {
         return {
             colors: variables.base.color.bg,
             list: [
-                {text: 'text1'},
-                {text: 'text2', active: true,},
-                {text: 'text3', disabled: true,},
-                {text: 'href1', href: "#"},
-                {text: 'href2', href: "#", active: true,},
-                {text: 'href3', href: "#", disabled: true,},
+                {label: 'label1'},
+                {label: 'label2', active: true,},
+                {label: 'label3', disabled: true,},
+                {label: 'href1', href: "#"},
+                {label: 'href2', href: "#", active: true,},
+                {label: 'href3', href: "#", disabled: true,},
             ],
             list2: [
-                {text: 'text1'},
-                {text: 'text2', active: true,},
-                {text: 'href1', href: "#"},
-                {text: 'href2', href: "#", active: true,},
+                {label: 'label1'},
+                {label: 'label2', active: true,},
+                {label: 'href1', href: "#"},
+                {label: 'href2', href: "#", active: true,},
             ],
             list3: [
-                {text: 'text1'},
-                {text: 'href1', href: "#"},
+                {label: 'label1'},
+                {label: 'href1', href: "#"},
             ],
             list4: [
-                {text: 'text1'},
-                {text: 'toooooooooooooo loooooong'},
+                {label: 'label1'},
+                {label: 'toooooooooooooo loooooong'},
             ],
         }
     }

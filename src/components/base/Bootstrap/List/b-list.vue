@@ -6,13 +6,13 @@
       v-else
       :key="index"
       :class="{'flex-fill': fill}"
-      :text="item.text"
+      :text="item.label"
       :href="item.href"
       :color="item.color || color"
       :sr-msg="item.srMsg"
       :disabled="disabled || item.disabled"
-      :active="select ? select == item.value || select == item.text : item.active"
-      @click.native="$emit('click', item.value || item.text)"
+      :active="select ? select == item.value || select == item.label : item.active"
+      @click.native="$emit('click', item.value || item.label)"
     />
   </ul>
 </template>
