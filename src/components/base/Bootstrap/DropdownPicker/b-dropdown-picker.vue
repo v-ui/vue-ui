@@ -18,14 +18,17 @@
       </div>
     </div>
     <tran-drop>
+      <!-- TODO: edit max-height -->
       <div
         v-show="isShow"
         ref="dropdownMenu"
-        class="card position-absolute rounded shadow-sm my-1"
-        :style="[menuStyle, {'max-height': menuHeight}]"
+        class="card position-absolute overflow-auto rounded shadow-sm my-1"
+        :style="[menuStyle, {'max-height': '50em'}]"
         style=" z-index: 1000;"
       >
-        <slot />
+        <div class="m-0 y-0">
+          <slot />
+        </div>
       </div>
     </tran-drop>
   </div>
@@ -59,7 +62,6 @@ export default {
     disabled: util.props.Boolean,
     hideToggle: util.props.Boolean,
     menuWidth: util.props.Boolean,
-    menuHeight: util.props.String,
     label: [ Array, String, Number, Object, Date, ],
   },
   data() {
