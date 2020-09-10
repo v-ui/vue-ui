@@ -3,21 +3,19 @@
     class="progress-bar"
     :class="obbjClass"
     role="progressbar"
-    :style="`width: ${tweenedNumber}%`"
+    :style="`width: ${tweenNumber}%`"
     :aria-valuenow="value"
     :aria-valuemin="min"
     :aria-valuemax="max"
-  >
-  <!-- {{ showValue ? `${value}%` : '' }} -->
-  </div>
+  />
 </template>
 
 <script>
-import TweenLite from "gsap";
 import util from "@/components/util/index.js";
 
 export default {
-  name: "b-progress-bar",
+  name: "b-progress-bar-item",
+  mixins: [ util.mixins.animate.progress, ],
   props: {
     value: {
       ...util.props.UNumber,
@@ -38,8 +36,8 @@ export default {
   },
   data() {
     return {
-      tweenedNumber: 0,
-    };
+      targetNumber: this.value,
+    }
   },
   computed: {
     obbjClass: function () {
@@ -48,23 +46,6 @@ export default {
       if (this.animated) c += " progress-bar-animated ";
 
       return c;
-    },
-  },
-  mounted() {
-    this.showAnimat(this.value);
-  },
-  methods: {
-    showAnimat: function (number, oldNumber) {
-      this.tweenedNumber = oldNumber;
-      TweenLite.to(this.$data, 0.5, { tweenedNumber: number });
-    },
-  },
-  watch: {
-    value: function (val, old) {
-      this.showAnimat(val, old);
-    },
-    tweenedNumber: function () {
-      this.$emit("animating");
     },
   },
 };

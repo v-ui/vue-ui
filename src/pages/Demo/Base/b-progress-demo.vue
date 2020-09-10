@@ -17,6 +17,13 @@
       <b-progress class="col-4" :list="list" />
     </div>
     <div class="row py-1">
+      <font class="col-1">status:</font>
+      <font class="col-1">line(default):</font>
+      <b-progress class="col-4" value="80" />
+      <font class="col-1">circle:</font>
+      <b-progress class="col-4" status="circle" value="80" />
+    </div>
+    <div class="row py-1">
       <font class="col-1">striped:</font>
       <font class="col-1">one:</font>
       <b-progress class="col-4" value="80" striped />
@@ -28,14 +35,7 @@
       <font class="col-1">one:</font>
       <b-progress class="col-4" value="80" striped animated />
       <font class="col-1">list:</font>
-      <b-progress class="col-4" :list="list" animated />
-    </div>
-    <div class="row py-1">
-      <font class="col-1">show-value:</font>
-      <font class="col-1">one:</font>
-      <b-progress class="col-4" value="5" showValue />
-      <font class="col-1">list:</font>
-      <b-progress class="col-4" :list="list" showValue />
+      <b-progress class="col-4" :list="list" striped animated />
     </div>
     <div class="row py-1">
       <font class="col-1">info:</font>
