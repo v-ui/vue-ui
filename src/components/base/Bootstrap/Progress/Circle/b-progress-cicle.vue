@@ -1,25 +1,130 @@
 <template>
-  <svg version="1.1" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    version="1.1"
+    :width="width"
+    :height="width"
+    xmlns="http://www.w3.org/2000/svg"
+    :viewBox="viewBox"
+    style="border: 1px solid #aaa; display:block;"
+  >
     <path
-      d="M100,20 A80,80 -30 1,1 99,20"
+      :d="BgPd"
       fill="none"
       class="progress-bg"
-      stroke-width="10"
+      :stroke-width="strong"
       stroke-linecap="round"
     />
     <path
-      d="M100,20 A80,80 -30 0,1 180,100"
+      :d="Pd"
       fill="none"
       class="stroke-primary"
-      stroke-width="10"
+      :stroke-width="strong"
       stroke-linecap="round"
     />
+    <text x="0%" y="0%" text-anchor="middle">{{ parseInt(tweenNumber) || 0 }}%</text>
   </svg>
 </template>
 
 <script>
+import util from "@/components/util/index.js";
+
 export default {
   name: 'b-progress-circle',
+  mixins: [ util.mixins.animate.progress, ],
+  props: {
+    width: util.props.UInt,
+    value: {
+      ...util.props.UNumber,
+      validator: (value) => util.props.UNumber.validator(value) && value <= 100,
+    },
+    strong: util.props.UNumber,
+  },
+  data() {
+    return {
+      // 比例
+      p: 0.9,
+      targetNumber: this.value,
+    }
+  },
+  computed: {
+    viewBox: function() {
+      let length = Math.floor(this.width * (this.p + 0.2))
+      return `-${Math.floor(length / 2)} -${Math.floor(length / 2)} ${length} ${length}`
+    },
+    // A - r 圆的半径
+    r: function() {
+      return this.width / 2 * this.p
+    },
+    // M 起始点
+    M: function() {
+      return {
+        x: 0,
+        y: -this.r,
+      }
+    },
+    // M string
+    Ms: function() {
+      return `M${this.M.x} ${this.M.y}`
+    },
+    // background A
+    // A - rx,ry xAxisRotate LargeArcFlag,SweepFlag x,y
+    BgA: function() {
+      return {
+        rx: this.r,
+        ry: this.r,
+        xAxisRotate: 0,
+        LargeArcFlag: 1,
+        SweepFlag: 1,
+        x: -1,
+        y: -this.r
+      }
+    },
+    // background A string
+    BgAs: function() {
+      return this.A2As(this.BgA)
+    },
+    // background path d
+    BgPd: function() {
+      return `${this.Ms} ${this.BgAs}`
+    },
+    // deg 弧度
+    deg: function() {
+      return 360 / 100 * Math.PI / 180 * this.tweenNumber || 0
+    },
+    // A - rx,ry xAxisRotate LargeArcFlag,SweepFlag x,y
+    A: function() {
+      return {
+        rx: this.r,
+        ry: this.r,
+        xAxisRotate: 0,
+        LargeArcFlag: this.deg > Math.PI ? 1 : 0,
+        SweepFlag: 1,
+        x: this.deg === 2 * Math.PI ? -1 : Math.sin(this.deg) * this.r,
+        y: -Math.cos(this.deg) * this.r,
+      }
+    },
+    // A string
+    As: function() {
+      return this.A2As(this.A)
+    },
+    // path d
+    Pd: function() {
+      return `${this.Ms} ${this.As}`
+    },
+  },
+  watch: {
+    value: function(value) {
+      this.targetNumber = value
+    },
+  },
+  methods: {
+    A2As: function(A) {
+      return `A${A.rx || 0},${A.ry || 0}
+              ${A.xAxisRotate || 0}
+              ${A.LargeArcFlag || 0},${A.SweepFlag || 0}
+              ${A.x || 0},${A.y || 0}`
+    },
+  },
 }
 </script>
 

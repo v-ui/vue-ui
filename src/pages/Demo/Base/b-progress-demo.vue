@@ -2,6 +2,13 @@
   <div>
     <h2>b-progress</h2>
     <hr />
+    <br>
+    <div class="row py-1">
+      <font class="col-1">range:</font>
+      <b-range class="col-11" v-model.number="range" />
+    </div>
+    <h4>基本属性</h4>
+    <hr>
     <div class="row py-1">
       <font class="col-1">default:</font>
       <font class="col-1">one:</font>
@@ -12,59 +19,74 @@
     <div class="row py-1">
       <font class="col-1">value:</font>
       <font class="col-1">one:</font>
-      <b-progress class="col-4" value="80" />
+      <b-progress class="col-4" :value="range" />
       <font class="col-1">list:</font>
       <b-progress class="col-4" :list="list" />
     </div>
     <div class="row py-1">
-      <font class="col-1">status:</font>
-      <font class="col-1">line(default):</font>
-      <b-progress class="col-4" value="80" />
-      <font class="col-1">circle:</font>
-      <b-progress class="col-4" status="circle" value="80" />
-    </div>
-    <div class="row py-1">
       <font class="col-1">striped:</font>
       <font class="col-1">one:</font>
-      <b-progress class="col-4" value="80" striped />
+      <b-progress class="col-4" :value="range" striped />
       <font class="col-1">list:</font>
       <b-progress class="col-4" :list="list" striped />
     </div>
     <div class="row py-1">
       <font class="col-1">animated:</font>
       <font class="col-1">one:</font>
-      <b-progress class="col-4" value="80" striped animated />
+      <b-progress class="col-4" :value="range" striped animated />
       <font class="col-1">list:</font>
       <b-progress class="col-4" :list="list" striped animated />
     </div>
     <div class="row py-1">
       <font class="col-1">info:</font>
       <font class="col-1">one:</font>
-      <b-progress class="col-4" value="80" info="info text" />
+      <b-progress class="col-4" :value="range" info="info text" />
       <font class="col-1">list:</font>
       <b-progress class="col-4" :list="list" info="info text" />
     </div>
     <div class="row py-1">
       <font class="col-1">size(sm):</font>
       <font class="col-1">one:</font>
-      <b-progress class="col-4" value="80" size="sm" />
+      <b-progress class="col-4" :value="range" size="sm" />
       <font class="col-1">list:</font>
       <b-progress class="col-4" :list="list" size="sm" />
     </div>
     <div class="row py-1">
       <font class="col-1">size(default):</font>
       <font class="col-1">one:</font>
-      <b-progress class="col-4" value="80" />
+      <b-progress class="col-4" :value="range" />
       <font class="col-1">list:</font>
       <b-progress class="col-4" :list="list" />
     </div>
     <div class="row py-1">
       <font class="col-1">size(lg):</font>
       <font class="col-1">one:</font>
-      <b-progress class="col-4" value="80" size="lg" />
+      <b-progress class="col-4" :value="range" size="lg" />
       <font class="col-1">list:</font>
       <b-progress class="col-4" :list="list" size="lg" />
     </div>
+    <br>
+    <h4>circle</h4>
+    <hr>
+    <div class="row py-1">
+      <font class="col-1">default:</font>
+      <b-progress class="col-2" status="circle" />
+      <font class="col-1">value:</font>
+      <b-progress class="col-2" status="circle" :value="range"/>
+      <font class="col-1">info:</font>
+      <b-progress class="col-2" status="circle" :value="range" info="info text" />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">size(sm):</font>
+      <b-progress class="col-2" status="circle" :value="range" size="sm" />
+      <font class="col-1">size(default):</font>
+      <b-progress class="col-2" status="circle" :value="range"/>
+      <font class="col-1">size(lg):</font>
+      <b-progress class="col-2" status="circle" :value="range" size="lg" />
+    </div>
+    <br>
+    <h4>color</h4>
+    <hr>
     <div class="row py-1">
       <font class="col-1">color:</font>
       <div class="col-11">
@@ -82,11 +104,14 @@ import variables from "@/components/util/variables.js";
 
 import BProgress from "@/components/base/Bootstrap/Progress/b-progress.vue";
 
+import BRange from '@/components/base/Bootstrap/Form/b-range.vue'
+
 export default {
   name: "b-progress-demo",
-  components: { BProgress },
+  components: { BProgress, BRange },
   data() {
     return {
+      range: 80,
       colors: variables.base.color.bg,
       list0: [
         { value: 0 },

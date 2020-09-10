@@ -1,6 +1,6 @@
 <template>
   <div class="row mx-0 align-items-center">
-    <div class="progress col px-0" :style="objStyle">
+    <div class="progress col px-0" :style="{ height: `${strong}px` }">
       <template v-if="list && list.length > 0">
         <b-bar-item
           v-for="(item, index) in list"
@@ -19,7 +19,7 @@
         :animated="animated"
       />
     </div>
-    <label class="col-1 m-0 p-0 pl-1">{{ parseInt(tweenNumber) }}%</label>
+    <label class="col-1 m-0 p-0 pl-1">{{ parseInt(tweenNumber) || 0 }}%</label>
   </div>
 </template>
 
@@ -35,8 +35,7 @@ export default {
   props: {
     list: util.props.Array,
     color: util.props.color,
-    info: util.props.String,
-    size: util.props.size,
+    strong: util.props.UNumber,
     value: {
       ...util.props.UNumber,
       validator: (value) => util.props.UNumber.validator(value) && value <= 100,
@@ -44,12 +43,14 @@ export default {
     striped: util.props.Boolean,
     animated: util.props.Boolean,
   },
-  computed: {
-    objStyle: function () {
-      let height = "10";
-      if (this.size === "sm") height = "5";
-      else if (this.size === "lg") height = "15";
-      return { height: `${height}px` };
+  data() {
+    return {
+      targetNumber: this.value,
+    }
+  },
+  watch: {
+    value: function(value) {
+      this.targetNumber = value
     },
   },
   created() {

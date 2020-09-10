@@ -3,7 +3,7 @@
     class="progress-bar"
     :class="obbjClass"
     role="progressbar"
-    :style="`width: ${tweenNumber}%`"
+    :style="`width: ${tweenNumber || 0}%`"
     :aria-valuenow="value"
     :aria-valuemin="min"
     :aria-valuemax="max"
@@ -48,5 +48,11 @@ export default {
       return c;
     },
   },
+  watch: {
+    value: function(value) {
+      this.targetNumber = value
+    },
+  },
+
 };
 </script>

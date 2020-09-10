@@ -8,10 +8,15 @@ let base = {
   },
   data() {
     return {
-      opt: {delay: 0.3, ease: "expo"},
+      opt: {delay: 0.5,},
       tweenNumber: 0,
       targetNumber: 0,
     };
+  },
+  watch: {
+    targetNumber: function (value) {
+      this.showAnimate(value);
+    },
   },
   mounted() {
     this.showAnimate(this.targetNumber);
