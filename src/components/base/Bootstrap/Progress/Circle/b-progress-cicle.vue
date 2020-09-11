@@ -5,8 +5,8 @@
     :height="width"
     xmlns="http://www.w3.org/2000/svg"
     :viewBox="viewBox"
-    style="border: 1px solid #aaa; display:block;"
   >
+    <!-- style="border: 1px solid #aaa; display:block;" -->
     <path
       :d="BgPd"
       fill="none"
@@ -21,7 +21,8 @@
       :stroke-width="strong"
       stroke-linecap="round"
     />
-    <text x="0%" y="0%" text-anchor="middle">{{ parseInt(tweenNumber) || 0 }}%</text>
+    <text x="0%" :y="info ? '-4%' : '0%'" text-anchor="middle" dominant-baseline="central">{{ parseInt(tweenNumber) || 0 }}%</text>
+    <text x="0%" y="4%" text-anchor="middle" dominant-baseline="central">{{ info }}</text>
   </svg>
 </template>
 
@@ -38,6 +39,7 @@ export default {
       validator: (value) => util.props.UNumber.validator(value) && value <= 100,
     },
     strong: util.props.UNumber,
+    info: util.props.String,
   },
   data() {
     return {

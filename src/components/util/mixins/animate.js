@@ -22,8 +22,7 @@ let base = {
     this.showAnimate(this.targetNumber);
   },
   methods: {
-    showAnimate: function (number, oldNumber) {
-      this.tweenNumber = oldNumber;
+    showAnimate: function (number) {
       TweenLite.to(this.target && this.target.keys && this.target.keys().length > 0 ? this.target : this.$data, { tweenNumber: number, ...this.opt });
     },
   },

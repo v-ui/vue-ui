@@ -14,56 +14,56 @@
       <font class="col-1">one:</font>
       <b-progress class="col-4" />
       <font class="col-1">list:</font>
-      <b-progress class="col-4" :list="list0" />
+      <b-progress class="col-4" :color="colorArr" :value="range" />
     </div>
     <div class="row py-1">
       <font class="col-1">value:</font>
       <font class="col-1">one:</font>
       <b-progress class="col-4" :value="range" />
       <font class="col-1">list:</font>
-      <b-progress class="col-4" :list="list" />
+      <b-progress class="col-4" :color="colorArr" :value="range" />
     </div>
     <div class="row py-1">
       <font class="col-1">striped:</font>
       <font class="col-1">one:</font>
       <b-progress class="col-4" :value="range" striped />
       <font class="col-1">list:</font>
-      <b-progress class="col-4" :list="list" striped />
+      <b-progress class="col-4" :color="colorArr" :value="range" striped />
     </div>
     <div class="row py-1">
       <font class="col-1">animated:</font>
       <font class="col-1">one:</font>
       <b-progress class="col-4" :value="range" striped animated />
       <font class="col-1">list:</font>
-      <b-progress class="col-4" :list="list" striped animated />
+      <b-progress class="col-4" :color="colorArr" :value="range" striped animated />
     </div>
     <div class="row py-1">
       <font class="col-1">info:</font>
       <font class="col-1">one:</font>
       <b-progress class="col-4" :value="range" info="info text" />
       <font class="col-1">list:</font>
-      <b-progress class="col-4" :list="list" info="info text" />
+      <b-progress class="col-4" :color="colorArr" :value="range" info="info text" />
     </div>
     <div class="row py-1">
       <font class="col-1">size(sm):</font>
       <font class="col-1">one:</font>
       <b-progress class="col-4" :value="range" size="sm" />
       <font class="col-1">list:</font>
-      <b-progress class="col-4" :list="list" size="sm" />
+      <b-progress class="col-4" :color="colorArr" :value="range" size="sm" />
     </div>
     <div class="row py-1">
       <font class="col-1">size(default):</font>
       <font class="col-1">one:</font>
       <b-progress class="col-4" :value="range" />
       <font class="col-1">list:</font>
-      <b-progress class="col-4" :list="list" />
+      <b-progress class="col-4" :color="colorArr" :value="range" />
     </div>
     <div class="row py-1">
       <font class="col-1">size(lg):</font>
       <font class="col-1">one:</font>
       <b-progress class="col-4" :value="range" size="lg" />
       <font class="col-1">list:</font>
-      <b-progress class="col-4" :list="list" size="lg" />
+      <b-progress class="col-4" :color="colorArr" :value="range" size="lg" />
     </div>
     <br>
     <h4>circle</h4>
@@ -78,11 +78,11 @@
     </div>
     <div class="row py-1">
       <font class="col-1">size(sm):</font>
-      <b-progress class="col-2" status="circle" :value="range" size="sm" />
+      <b-progress class="col-2" status="circle" :value="range" info="info text" size="sm" />
       <font class="col-1">size(default):</font>
-      <b-progress class="col-2" status="circle" :value="range"/>
+      <b-progress class="col-2" status="circle" :value="range" info="info text" />
       <font class="col-1">size(lg):</font>
-      <b-progress class="col-2" status="circle" :value="range" size="lg" />
+      <b-progress class="col-2" status="circle" :value="range" info="info text" size="lg" />
     </div>
     <br>
     <h4>color</h4>
@@ -119,11 +119,10 @@ export default {
         { color: "danger", value: 0 },
         { color: "info", value: 0, showValue: true },
       ],
-      list: [
-        { value: 5 },
-        { color: "info", value: 10 },
-        { color: "danger", value: 15 },
-        { color: "info", value: 20, showValue: true },
+      colorArr: [
+        {value: 20, color: 'primary'},
+        {value: 20, color: 'danger'},
+        {value: 55, color: 'info'},
       ],
       value: 80,
     };

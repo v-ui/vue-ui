@@ -2,18 +2,20 @@
   <div>
     <b-circle
       v-if="status === 'circle'"
-      width="200"
+      :width="width"
       :value="value"
-      :strong="strong" />
+      :strong="strong"
+      :info="info"
+    />
     <b-bar
       v-else
-      :list="list"
       :color="color"
       :value="value"
       :strong="strong"
       :striped="striped"
-      :animated="animated" />
-    <b-info :info="info" />
+      :animated="animated"
+    />
+    <b-info v-if="status !== 'circle'" :info="info" />
   </div>
 </template>
 
@@ -36,8 +38,7 @@ export default {
         return ["bar", "circle"].includes(value);
       },
     },
-    list: util.props.Array,
-    color: util.props.color,
+    color: [String, Array],
     info: util.props.String,
     striped: util.props.Boolean,
     animated: util.props.Boolean,
@@ -54,6 +55,12 @@ export default {
       if (this.size === "sm") strong = "5";
       else if (this.size === "lg") strong = "15";
       return strong;
+    },
+    width: function() {
+      let width = 200
+      if (this.size === "sm") width = "150";
+      else if (this.size === "lg") width = "250";
+      return width;
     },
   },
 };
