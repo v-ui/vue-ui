@@ -38,6 +38,13 @@
       <b-progress class="col-4" :color="colorArr" :value="range" striped animated />
     </div>
     <div class="row py-1">
+      <font class="col-1">type:</font>
+      <font class="col-1">default(default):</font>
+      <b-progress class="col-4" :color="colorArr" :value="range" type="default" />
+      <font class="col-1">state:</font>
+      <b-progress class="col-4" :color="colorArr" :value="range" type="state" />
+    </div>
+    <div class="row py-1">
       <font class="col-1">info:</font>
       <font class="col-1">one:</font>
       <b-progress class="col-4" :value="range" info="info text" />
@@ -120,9 +127,12 @@ export default {
         { color: "info", value: 0, showValue: true },
       ],
       colorArr: [
-        {value: 20, color: 'primary'},
-        {value: 20, color: 'danger'},
-        {value: 55, color: 'info'},
+        {value: 10, color: 'info'},
+        {value: 30, color: 'danger'},
+        {value: 50, color: 'warning'},
+        {value: 80, color: 'secondary'},
+        {value: 99, color: 'primary'},
+        {value: 100, color: 'success'},
       ],
       value: 80,
     };

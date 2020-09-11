@@ -9,6 +9,7 @@
     />
     <b-bar
       v-else
+      :type="type"
       :color="color"
       :value="value"
       :strong="strong"
@@ -38,6 +39,7 @@ export default {
         return ["bar", "circle"].includes(value);
       },
     },
+    type: String,
     color: [String, Array],
     info: util.props.String,
     striped: util.props.Boolean,

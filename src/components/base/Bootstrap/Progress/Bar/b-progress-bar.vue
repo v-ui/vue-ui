@@ -13,7 +13,7 @@
       </template>
       <b-bar-item
         v-else
-        :color="color"
+        :color="cColor"
         :value="value"
         :striped="striped"
         :animated="animated"
@@ -38,7 +38,7 @@ export default {
       type: String,
       default: 'default',
       validator: function(value) {
-        return ['default', 'state', 'list'].includes(value)
+        return ['default', 'state'].includes(value)
       },
     },
     color: {
@@ -66,18 +66,17 @@ export default {
       enumStatus: {
         default: 'default',
         state: 'state',
-        list: 'list',
       },
     }
   },
   computed: {
     list: function() {
+      if (this.type !== this.enumStatus.default) return null
       let value = 0
       let list = []
       if (tools.obj.type.isArray(this.color)) {
 
         let size = this.color.reduce((acc, cur) => acc.value ? acc.value + cur.value : acc + cur.value)
-        debugger
         if (this.value > size) {
           list = this.color
           list.push({ value: this.value - size, color: 'primary' })
@@ -92,10 +91,16 @@ export default {
             }
           }
         }
-
         return list
       }
       return null
+    },
+    cColor: function() {
+      if (this.type !== this.enumStatus.state) return this.color
+      let c = this.color.find(e => {
+        return this.value <= e.value
+      })
+      return c && c.color || 'primary'
     },
   },
   watch: {
@@ -103,11 +108,8 @@ export default {
       this.targetNumber = value
     },
   },
-  created() {
-    // this.targetNumber =
-    //   this.list && this.list.length > 0
-    //     ? this.list.reduce((acc, cur) => acc.value && cur.value ? acc.value + cur.value : cur.value )
-    //     : this.value;
+  mounted() {
+    this.color.sort((a, b) => a.value - b.value)
   },
 };
 </script>
