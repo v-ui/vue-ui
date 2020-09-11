@@ -17,7 +17,7 @@
     <path
       :d="Pd"
       fill="none"
-      class="stroke-primary"
+      :class="`stroke-${color}`"
       :stroke-width="strong"
       stroke-linecap="round"
     />
@@ -38,6 +38,7 @@ export default {
       ...util.props.UNumber,
       validator: (value) => util.props.UNumber.validator(value) && value <= 100,
     },
+    color: [String, Array,],
     strong: util.props.UNumber,
     info: util.props.String,
   },

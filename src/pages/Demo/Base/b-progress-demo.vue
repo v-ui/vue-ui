@@ -73,13 +73,15 @@
       <b-progress class="col-4" :color="colorArr" :value="range" size="lg" />
     </div>
     <br>
-    <h4>circle</h4>
+    <h4>circle(status="circle")</h4>
     <hr>
     <div class="row py-1">
       <font class="col-1">default:</font>
       <b-progress class="col-2" status="circle" />
       <font class="col-1">value:</font>
       <b-progress class="col-2" status="circle" :value="range"/>
+      <font class="col-1">type="state":</font>
+      <b-progress class="col-2" status="circle" :color="colorArr" type="state" :value="range" />
       <font class="col-1">info:</font>
       <b-progress class="col-2" status="circle" :value="range" info="info text" />
     </div>
