@@ -91,18 +91,22 @@ export default {
     },
     // deg 弧度
     deg: function() {
+      debugger
       return 360 / 100 * Math.PI / 180 * this.tweenNumber || 0
     },
     // A - rx,ry xAxisRotate LargeArcFlag,SweepFlag x,y
     A: function() {
+      debugger
+      let x = Math.sin(this.deg) * this.r
+      let y = -Math.cos(this.deg) * this.r
       return {
         rx: this.r,
         ry: this.r,
         xAxisRotate: 0,
         LargeArcFlag: this.deg > Math.PI ? 1 : 0,
         SweepFlag: 1,
-        x: this.deg === 2 * Math.PI ? -1 : Math.sin(this.deg) * this.r,
-        y: -Math.cos(this.deg) * this.r,
+        x: Math.abs(this.deg - 2 * Math.PI) <= 0.00001 ? -1 : x,
+        y: y,
       }
     },
     // A string

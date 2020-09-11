@@ -15,7 +15,7 @@
         :value="select"
         v-bind="$attrs"
         v-on="inputListeners"
-      />
+      >
       <span
         v-if="prompt || maxValue"
         class="col-auto text-left text-monospace pl-1 pr-0"
@@ -37,29 +37,29 @@ export default {
   inheritAttrs: false,
   model: {
     prop: "value",
-    event: "input"
+    event: "input",
   },
   props: {
     min: util.props.Number,
     max: {
       ...util.props.Number,
-      default: 100
+      default: 100,
     },
     step: {
       ...util.props.Number,
-      default: 1
+      default: 1,
     },
     value: {
       ...util.props.Number,
-      default: function(value) {
-        !isNaN(value) ? Number(value) : this.dataMin
+      default: function (value) {
+        !isNaN(value) ? Number(value) : this.dataMin;
       },
     },
     prompt: util.props.Boolean,
     hideValue: util.props.Boolean,
     info: util.props.String,
     minValue: util.props.String,
-    maxValue: util.props.String
+    maxValue: util.props.String,
   },
   data() {
     return {
@@ -67,16 +67,16 @@ export default {
     };
   },
   computed: {
-    dataValue: function() {
+    dataValue: function () {
       return this.toNumber(this.value);
     },
     dataMin: function () {
-      return this.toNumber(this.min)
+      return this.toNumber(this.min);
     },
     dataMax: function () {
-      return this.toNumber(this.max)
+      return this.toNumber(this.max);
     },
-    inputListeners: function() {
+    inputListeners: function () {
       var vm = this;
       // `Object.assign` 将所有的对象合并为一个新对象
       return Object.assign(
@@ -87,29 +87,32 @@ export default {
         // 或覆写一些监听器的行为
         {
           // 这里确保组件配合 `v-model` 的工作
-          input: function(event) {
+          input: function (event) {
             vm.select = event.target.value;
             vm.$emit("input", vm.select);
-          }
+          },
         }
       );
     },
-    fillMinValue: function() {
+    fillMinValue: function () {
       return this.minValue ? this.minValue : this.dataMin;
     },
-    fillMaxValue: function() {
+    fillMaxValue: function () {
       return this.maxValue ? this.maxValue : this.dataMax;
-    }
+    },
   },
   watch: {
-    value: function(value) {
+    value: function (value) {
       this.select = Number(value);
-    }
+    },
+  },
+  mounted() {
+    this.select = Number(this.value);
   },
   methods: {
-    toNumber: function(str, n = 0) {
+    toNumber: function (str, n = 0) {
       return Number(str) || n;
-    }
-  }
+    },
+  },
 };
 </script>

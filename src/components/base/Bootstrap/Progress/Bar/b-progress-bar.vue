@@ -109,7 +109,7 @@ export default {
     },
   },
   mounted() {
-    this.color.sort((a, b) => a.value - b.value)
+    if (this.type === this.enumStatus.state) this.color.sort((a, b) => a.value - b.value)
   },
 };
 </script>

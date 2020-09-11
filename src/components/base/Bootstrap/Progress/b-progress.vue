@@ -50,6 +50,11 @@ export default {
       validator: (value) => util.props.UNumber.validator(value) && value <= 100,
     },
   },
+  data() {
+    return {
+      show: false
+    }
+  },
   computed: {
     // 粗细
     strong: function () {
