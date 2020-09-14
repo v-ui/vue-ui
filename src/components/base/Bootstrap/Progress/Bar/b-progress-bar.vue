@@ -19,7 +19,7 @@
         :animated="animated"
       />
     </div>
-    <label class="col-1 m-0 p-0 pl-1">{{ parseInt(tweenNumber) || 0 }}%</label>
+    <label v-if="!hideValue" class="col-1 m-0 p-0 pl-1">{{ parseInt(value) || 0 }}%</label>
   </div>
 </template>
 
@@ -31,7 +31,6 @@ import BBarItem from "./b-progress-bar-item.vue";
 export default {
   name: "b-progress-bar",
   components: { BBarItem, },
-  mixins: [ util.mixins.animate.progress, ],
   props: {
     value: {
       ...util.props.UNumber,
@@ -42,16 +41,7 @@ export default {
     list: [Object, Array],
     striped: util.props.Boolean,
     animated: util.props.Boolean,
-  },
-  data() {
-    return {
-      targetNumber: this.value,
-    }
-  },
-  watch: {
-    value: function(value) {
-      this.targetNumber = value
-    },
+    hideValue: util.props.Boolean,
   },
 };
 </script>

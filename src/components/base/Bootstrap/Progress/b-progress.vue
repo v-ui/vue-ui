@@ -1,24 +1,27 @@
 <template>
   <div>
     <b-circle
-      v-if="status === 'circle'"
+      v-if="circle"
+      :src="src"
+      :list="list"
+      :info="info"
       :width="width"
-      :value="value"
       :color="cColor"
       :strong="strong"
-      :info="info"
+      :value="tweenNumber"
+      :hideValue="hideValue"
     />
     <b-bar
       v-else
-      :type="type"
       :list="list"
-      :value="value"
       :color="cColor"
       :strong="strong"
       :striped="striped"
+      :value="tweenNumber"
       :animated="animated"
+      :hideValue="hideValue"
     />
-    <b-info v-if="status !== 'circle'" :info="info" />
+    <b-info v-if="!circle" :info="info" />
   </div>
 </template>
 
@@ -34,20 +37,11 @@ import BInfo from "@/components/Basic/basic-info.vue";
 export default {
   name: "b-progress",
   components: { BBar, BCircle, BInfo },
+  mixins: [ util.mixins.animate.progress, ],
   props: {
-    status: {
-      ...util.props.String,
-      default: "bar",
-      validator: function (value) {
-        return ["bar", "circle"].includes(value);
-      },
-    },
-    type: {
-      type: String,
-      default: 'default',
-      validator: function(value) {
-        return ['default', 'state'].includes(value)
-      },
+    value: {
+      ...util.props.UNumber,
+      validator: (value) => util.props.UNumber.validator(value) && value <= 100,
     },
     color: {
       type: [String, Array],
@@ -60,22 +54,14 @@ export default {
         }
       },
     },
-    info: util.props.String,
+    state: util.props.Boolean,
+    circle: util.props.Boolean,
     striped: util.props.Boolean,
     animated: util.props.Boolean,
+    hideValue: util.props.Boolean,
+    src: util.props.String,
     size: util.props.size,
-    value: {
-      ...util.props.UNumber,
-      validator: (value) => util.props.UNumber.validator(value) && value <= 100,
-    },
-  },
-  data() {
-    return {
-      enumStatus: {
-        default: 'default',
-        state: 'state',
-      },
-    }
+    info: util.props.String,
   },
   computed: {
     // 粗细
@@ -86,28 +72,28 @@ export default {
       return strong;
     },
     width: function() {
-      let width = 200
-      if (this.size === "sm") width = "150";
-      else if (this.size === "lg") width = "250";
+      let width = 150
+      if (this.size === "sm") width = "100";
+      else if (this.size === "lg") width = "200";
       return width;
     },
     list: function() {
-      if (this.type !== this.enumStatus.default) return null
+      if (this.state) return null
       let value = 0
       let list = []
       if (tools.obj.type.isArray(this.color)) {
 
         let size = this.color.reduce((acc, cur) => acc.value ? acc.value + cur.value : acc + cur.value)
-        if (this.value > size) {
+        if (this.tweenNumber > size) {
           list = this.color
-          list.push({ value: this.value - size, color: 'primary' })
+          list.push({ value: this.tweenNumber - size, color: 'primary' })
         } else {
           for (let i = 0; i < this.color.length; i++) {
             value += this.color[i].value
-            if (value <= this.value) {
+            if (value <= this.tweenNumber) {
               list.push(this.color[i])
             } else {
-              list.push({ value: this.value - (value - this.color[i].value), color: this.color[i].color })
+              list.push({ value: this.tweenNumber - (value - this.color[i].value), color: this.color[i].color })
               break
             }
           }
@@ -117,13 +103,13 @@ export default {
       return null
     },
     cColor: function() {
-      if (this.type !== this.enumStatus.state) return 'primary'
+      if (!this.state) return this.color
       let c = this.color.find(e => this.value <= e.value)
       return c && c.color || 'primary'
     },
   },
   mounted() {
-    if (this.type === this.enumStatus.state) this.color.sort((a, b) => a.value - b.value)
+    if (this.state) this.color.sort((a, b) => a.value - b.value)
   },
 };
 </script>

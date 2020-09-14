@@ -3,7 +3,7 @@
     class="progress-bar"
     :class="obbjClass"
     role="progressbar"
-    :style="`width: ${tweenNumber || 0}%`"
+    :style="`width: ${value || 0}%`"
     :aria-valuenow="value"
     :aria-valuemin="min"
     :aria-valuemax="max"
@@ -15,7 +15,6 @@ import util from "@/components/util/index.js";
 
 export default {
   name: "b-progress-bar-item",
-  mixins: [ util.mixins.animate.progress, ],
   props: {
     value: {
       ...util.props.UNumber,
@@ -34,11 +33,6 @@ export default {
     striped: util.props.Boolean,
     animated: util.props.Boolean,
   },
-  data() {
-    return {
-      targetNumber: this.value,
-    }
-  },
   computed: {
     obbjClass: function () {
       let c = `bg-${this.color}`;
@@ -48,11 +42,5 @@ export default {
       return c;
     },
   },
-  watch: {
-    value: function(value) {
-      this.targetNumber = value
-    },
-  },
-
 };
 </script>

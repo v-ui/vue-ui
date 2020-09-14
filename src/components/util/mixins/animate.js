@@ -4,16 +4,20 @@ import TweenLite from "gsap";
 let base = {
   props: {
     target: props.Object,
+    value: props.Number,
     // duration: util.props.Number,
   },
   data() {
     return {
       opt: {delay: 0.5,},
       tweenNumber: 0,
-      targetNumber: 0,
+      targetNumber: this.value || 0,
     };
   },
   watch: {
+    value: function(value) {
+      this.targetNumber = value
+    },
     targetNumber: function (value) {
       this.showAnimate(value);
     },
