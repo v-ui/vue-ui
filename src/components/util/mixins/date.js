@@ -1,6 +1,6 @@
 import tools from "@/tools"
 import config from '@/config'
-import moment from './moment'
+import moment from './plugin/moment'
 import props from '@/components/util/props.js'
 
 let status = {

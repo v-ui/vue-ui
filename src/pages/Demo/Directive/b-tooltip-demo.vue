@@ -77,15 +77,24 @@
         <b-button style="pointer-events: none;" disabled>Disabled button</b-button>
       </span>
     </div>
+    <div class="row py-1">
+      <b-popover top="600" left="300" title="popover title" content="popover content " show />
+    </div>
+    <div class="row py-1">
+      <b-tooltip top="700" left="300" content="tooltip content " show />
+    </div>
   </div>
 </template>
 
 <script>
 import BButton from "@/components/Basic/Button/basic-button.vue";
 
+import BPopover from '@/components/base/Bootstrap/Popover/b-popover.vue'
+import BTooltip from '@/components/base/Bootstrap/Tooltip/b-tooltip.vue'
+
 export default {
   name: "b-tooltip-demo",
-  components: { BButton },
+  components: { BButton, BPopover, BTooltip, },
   data() {
     return {
       text: "disabled value"

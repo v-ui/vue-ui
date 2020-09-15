@@ -10,12 +10,12 @@
   >
     <div class="arrow" :style="arrowStyle" />
     <div ref="header" class="popover-header">
-      <slot v-if="title && $solts.header" name="header">
-        <h6 class="m-0 p-0">{{title}}</h6>
+      <slot v-if="title || $solts.header" name="header">
+        <h6 class="m-0 p-0">{{ title }}</h6>
       </slot>
     </div>
     <div ref="body" class="popover-body">
-      <slot>{{content}}</slot>
+      <slot>{{ content }}</slot>
     </div>
   </div>
 </template>
@@ -53,12 +53,7 @@ export default {
   mounted: function() {
     let setX = !["top", "bottom"].includes(this.set);
     this.arrowStyle = setX
-      ? {
-          top: `${(this.$refs.header.offsetHeight +
-            this.$refs.body.offsetHeight) /
-            2 -
-            13}px`
-        }
+      ? { top: `${(this.$refs.header.offsetHeight + this.$refs.body.offsetHeight) / 2 - 13}px` }
       : { left: `${this.$refs.body.offsetWidth / 2 - 13}px` };
   }
 };
