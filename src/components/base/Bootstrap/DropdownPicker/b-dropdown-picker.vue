@@ -99,6 +99,7 @@ export default {
   methods: {
     init: function() {
       this.initMenuWidth()
+      // 初始化 popper
       this.popperOpts = { placement: 'bottom-start', strategy: 'fixed', }
       this.refElement = this.$refs.dropdownPicker
       this.popperElement = this.$refs.dropdownMenu
