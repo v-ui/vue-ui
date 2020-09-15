@@ -31,7 +31,7 @@
       :strong="strong"
       :value="value"
     />
-    <image v-if="src" :xlink:href='src' x="-25%" y="-25%" height="50%" width="50%"/>
+    <image v-if="src" :xlink:href='src' x="-20%" y="-20%" height="40%" width="40%"/>
     <text v-if="!hideValue" x="0%" :y="info ? '-4%' : '0%'" text-anchor="middle" dominant-baseline="central">{{ parseInt(value) || 0 }}%</text>
     <text x="0%" y="4%" text-anchor="middle" dominant-baseline="central">{{ info }}</text>
   </svg>

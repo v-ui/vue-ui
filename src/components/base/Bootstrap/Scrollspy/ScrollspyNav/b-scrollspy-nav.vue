@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-light overflow-auto rounded p-0">
+  <div class="overflow-auto rounded p-0">
     <b-navbar
       v-if="set == 'top'"
-      class="navbar-expand-lg navbar-light"
+      class="navbar-expand-lg"
       :brand="brand"
       :list="list"
     />
-    <b-navbar v-else class="navbar-light bg-light" :brand="brand" hideToggler>
+    <b-navbar v-else :brand="brand" hideToggler>
       <b-scrollspy-nav-item :list="list" column />
     </b-navbar>
   </div>

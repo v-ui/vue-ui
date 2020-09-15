@@ -1,6 +1,6 @@
 <template>
   <article>
-    <header class="mx-2">
+    <header class=" shadow-sm mx-2">
       <slot v-if="$slots.header" name="header" />
       <div v-else>
         <h1 class="pb-1">{{ title || 'Title' }}</h1>
@@ -14,7 +14,7 @@
         </div>
       </div>
     </header>
-    <article class="border rounded m-1" :class="{row: set != 'top'}" style="max-height: 800px;">
+    <article class="rounded m-1" :class="{row: set != 'top'}" style="max-height: 1080px;">
       <b-scrollspy-nav
         v-if="showContents && set == 'top'"
         :id="scrollspyId"
@@ -22,7 +22,7 @@
         :list="contents"
       />
       <b-scrollspy-nav
-        v-if="showContents &&  set == 'left'"
+        v-if="showContents && set == 'left'"
         :id="scrollspyId"
         :set="set"
         :class="{'col-2': column}"
@@ -32,9 +32,9 @@
       <div
         v-show="$slots.default"
         :id="articleBoxId"
-        class="overflow-auto p-1"
+        class="border overflow-auto p-3"
         :class="{'col-10': column}"
-        style="max-height: 730px;"
+        style="max-height: 1000px;"
         data-offset="20"
         :data-target="'#' + scrollspyId"
         data-spy="scroll"
@@ -86,7 +86,7 @@ export default {
   },
    data() {
     return {
-      showContents: false,
+      showContents: true,
       contents: [],
       map: { h1: 1, h2: 2, h3: 3, h4: 4, h5: 5, h6: 6 }
     };
@@ -102,14 +102,13 @@ export default {
       return "Article-Box-" + this.id;
     }
   },
-  mounted() {
-    const node = this.getArticleNode();
-    const arrs = this.getHTarget(node);
-    this.contents = this.getContents(arrs);
+  async mounted() {
+    const node = await this.getArticleNode();
+    const arrs = await this.getHTarget(node);
+    this.contents = await this.getContents(arrs);
     // 目录计算完成后显示文章，否则无法完成目录与文章的联动
-    this.$nextTick(function() {
-      this.showContents = true;
-    });
+    await this.$nextTick();
+    this.showContents = true;
   },
   methods: {
     getArticleNode: function() {
@@ -127,9 +126,7 @@ export default {
       let arrs = [];
       for (let i = 0; i < node.childNodes.length; i++) {
         let e = node.childNodes[i];
-        if (
-          ["h1", "h2", "h3", "h4", "h5", "h6"].includes(e.tagName.toLowerCase())
-        ) {
+        if ( ["h1", "h2", "h3", "h4", "h5", "h6"].includes(e.tagName.toLowerCase()) ) {
           e.id = this.addId2HTarget(e);
           arrs.push({
             id: e.id,
