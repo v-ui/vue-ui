@@ -1,6 +1,6 @@
 <template>
   <div :id="id" class="align-items-center h-auto px-0" :class="{'bg-light': disabled}" style="min-width: 320px" :disabled="disabled" :aria-disabled="disabled">
-    <div ref="dropdownPicker" class="h-100" @click="clickTrigger">
+    <div ref="dropdownPicker" class="h-100" aria-describedby="tooltip" @click="clickTrigger">
       <div ref="dropdownTrigger" class="d-flex justify-content-between align-items-center h-100 px-1">
         <slot name="trigger">
           <font v-if="!multiple" :class="fontClass">{{ label || placeholder }}</font>
@@ -21,10 +21,11 @@
       <!-- TODO: edit max-height -->
       <div
         v-show="isShow"
+        role="tooltip"
         ref="dropdownMenu"
-        class="card position-absolute overflow-auto rounded shadow-sm my-1"
+        class="card overflow-auto rounded shadow-sm"
         :style="[menuStyle, {'max-height': '50em'}]"
-        style=" z-index: 1000;"
+        style="z-index: 1090"
       >
         <div class="m-0 y-0">
           <slot />
@@ -45,6 +46,7 @@ import tranDrop from "@/components/transition/tran-drop.vue"
 export default {
   name: "b-dropdown-picker",
   components: { BBadge, tranDrop, },
+  mixins: [ util.mixins.popper.base ],
   props: {
     id: {
       type: String,
@@ -66,8 +68,8 @@ export default {
   },
   data() {
     return {
+      menuStyle: "",
       isShow: this.show,
-      menuStyle: ""
     };
   },
   computed: {
@@ -97,6 +99,9 @@ export default {
   methods: {
     init: function() {
       this.initMenuWidth()
+      this.popperOpts = { placement: 'bottom-start', strategy: 'fixed', }
+      this.refElement = this.$refs.dropdownPicker
+      this.popperElement = this.$refs.dropdownMenu
     },
     initMenuWidth: function() {
        this.menuStyle = this.menuWidth && {
