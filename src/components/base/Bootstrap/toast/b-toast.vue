@@ -19,7 +19,7 @@
           <font v-if="!href">{{ fillTitle }}</font>
           <a v-else class="text-body" :href="href">{{ fillTitle }}</a>
         </strong>
-        <small class="text-muted">{{ fillTime }}</small>
+        <b-info :info="info" />
       </slot>
       <button
         type="button"
@@ -39,13 +39,15 @@
 </template>
 
 <script>
-import moment from "moment";
-
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
+import BInfo from "@/components/Basic/basic-info.vue";
+
 export default {
   name: "b-toast",
+  components: { BInfo, },
+  mixins: [ util.mixins.moment.base, ],
   props: {
     title: util.props.String,
     href: util.props.String,
@@ -95,8 +97,8 @@ export default {
     fillTitle: function() {
       return this.title || (this.o && this.o.value && this.o.value.title);
     },
-    fillTime: function() {
-      return moment(this.time || moment()).from();
+    info: function() {
+      return this.moment(this.time || this.moment()).from();
     }
   },
   mounted() {
@@ -108,9 +110,7 @@ export default {
     },
     delayOut: function() {
       if (this.autohide) return;
-      setTimeout(() => {
-        this.hide();
-      }, Number(this.delay));
+      setTimeout(() => this.hide(), this.delay);
     }
   }
 };
