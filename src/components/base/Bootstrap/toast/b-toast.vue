@@ -17,7 +17,7 @@
         </slot>
         <strong class="mr-auto">
           <font v-if="!href">{{ fillTitle }}</font>
-          <a v-else class="text-body" :href="href">{{ fillTitle }}</a>
+          <a v-else :href="href">{{ fillTitle }}</a>
         </strong>
         <b-info :info="info" />
       </slot>

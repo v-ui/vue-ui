@@ -4,7 +4,7 @@ import router from '@/router'
 import store from '@/store'
 
 // vue directives
-import '@/components/util/directives.js'
+import '@/components/util/directives'
 // 第三方库
 import i18n from '@/lang/index.js'
 /********************/

@@ -17,13 +17,12 @@ export default {
         { path: 'b-list', name: 'b-list', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-list-demo.vue'), },
         { path: 'b-loading', name: 'b-loading', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-loading-demo.vue'), },
         { path: 'b-media', name: 'b-media', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-media-demo.vue'), },
-        { path: 'b-modal', name: 'b-modal', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-modal-demo.vue'), },
         { path: 'b-nav', name: 'b-nav', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-nav-demo.vue'), },
         { path: 'b-pagination', name: 'b-pagination', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-pagination-demo.vue'), },
         { path: 'b-progress', name: 'b-progress', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-progress-demo.vue'), },
         { path: 'b-swiper', name: 'b-swiper', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-swiper-demo.vue'), },
-        { path: 'b-toast', name: 'b-toast', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-toast-demo.vue'), },
         { path: 'b-scrollspy', name: 'b-scrollspy', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-scrollspy-demo.vue'), },
+        { path: 'b-toast', name: 'b-toast', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-toast-demo.vue'), },
       ]
     },
     {
@@ -66,6 +65,7 @@ export default {
     {
       SubsystemName: 'Directive',
       Modules: [
+        { path: 'v-modal', name: 'v-modal', component: async () => await import(/* webpackChunkName: "Directive" */'@/pages/Demo/Directive/b-modal-demo.vue'), },
         { path: 'v-tip', name: 'v-tip', component: async () => await import(/* webpackChunkName: "directive" */'@/pages/Demo/Directive/b-tooltip-demo.vue'), },
       ]
     },
