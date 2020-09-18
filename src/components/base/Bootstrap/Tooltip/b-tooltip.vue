@@ -1,54 +1,154 @@
 <template>
-  <div
-    v-if="show"
-    class="tooltip fade"
-    :class="objClass"
-    role="tooltip"
-    :x-placement="set"
-    style="position: absolute; top: 0px; left: 0px; will-change: transform;"
-    :style="{transform: `translate3d(${left}px, ${top}px, 0px)`}"
-  >
-    <div class="arrow" :style="arrowStyle" />
-    <div ref="body" class="tooltip-inner">
-      <slot>{{ content }}</slot>
+  <div>
+    <div ref="popRef" class="d-inline-block" @mouseenter="show = true" @mouseout="show = false">
+      <slot aria-describedby="tooltip" name="popRef" />
     </div>
+    <tran-drop>
+      <div
+        ref="tooltip"
+        class="tooltip fade"
+        :class="objClass"
+        role="tooltip"
+        style="position: absolute; will-change: transform;"
+      >
+        <div ref="arrow" class="tooltip-arrow" data-popper-arrow />
+        <div ref="body" class="tooltip-inner">
+          <slot>{{ content }}</slot>
+        </div>
+      </div>
+    </tran-drop>
   </div>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
 
+import tranDrop from "@/components/transition/tran-drop.vue"
+
 export default {
   name: "b-tooltip",
+  components: { tranDrop, },
+  mixins: [ util.mixins.popper.base, ],
   props: {
-    show: util.props.Boolean,
     set: {
       type: String,
       default: "right",
-      validator: value => ["top", "bottom", "left", "right"].includes(value),
+      validator: value => [
+        'top', 'top-start', 'top-end',
+        'bottom', 'bottom-start', 'bottom-end',
+        'right', 'right-start', 'right-end',
+        'left', 'left-start', 'left-end',
+      ].includes(value),
     },
-    top: util.props.Int,
-    left: util.props.Int,
     content: util.props.String
   },
   data() {
     return {
-      arrowStyle: []
-    };
+      show: false
+    }
   },
   computed: {
     objClass: function() {
       let c = "";
       if (this.show) c += " show ";
-      if (this.set) c += ` bs-tooltip-${this.set} `;
       return c;
     }
   },
-  mounted: function() {
-    let setX = !["top", "bottom"].includes(this.set);
-    this.arrowStyle = setX
-      ? { top: `${(this.$refs.body.offsetHeight) / 2 - 13}px` }
-      : { left: `${this.$refs.body.offsetWidth / 2 - 13}px` };
-  }
+
+  mounted() {
+    this.init()
+  },
+  methods: {
+    init: function() {
+      this.popOpts = {
+        placement: this.set,
+        strategy: 'fixed',
+        modifiers: [
+          { name: 'arrow', options: { element: this.$refs.arrow, padding: 6, }, },
+          { name: 'offset', options: { offset: [5, 5], }, },
+        ],
+      }
+      this.popRef = this.$refs.popRef
+      this.popEle = this.$refs.tooltip
+    },
+  },
 };
 </script>
+
+<style scoped>
+.tooltip .tooltip-arrow {
+  position: absolute;
+  display: block;
+  width: 0.8rem;
+  height: 0.4rem;
+}
+
+.tooltip .tooltip-arrow::before {
+  position: absolute;
+  content: "";
+  border-color: transparent;
+  border-style: solid;
+}
+
+.tooltip[data-popper-placement^="top"] {
+  padding: 0.4rem 0;
+}
+
+.tooltip[data-popper-placement^="top"] .tooltip-arrow,
+.tooltip[data-popper-placement^="top"] .tooltip-arrow {
+  bottom: 0;
+}
+
+.tooltip[data-popper-placement^="top"] .tooltip-arrow::before,
+.tooltip[data-popper-placement^="top"] .tooltip-arrow::before {
+  top: 0;
+  border-width: 0.4rem 0.4rem 0;
+  border-top-color: #000;
+}
+
+.tooltip[data-popper-placement^="right"] {
+  padding: 0 0.4rem;
+}
+
+.tooltip[data-popper-placement^="right"] .tooltip-arrow {
+  left: 0;
+  width: 0.4rem;
+  height: 0.8rem;
+}
+
+.tooltip[data-popper-placement^="right"] .tooltip-arrow::before {
+  right: 0;
+  border-width: 0.4rem 0.4rem 0.4rem 0;
+  border-right-color: #000;
+}
+
+.tooltip[data-popper-placement^="bottom"] {
+  padding: 0.4rem 0;
+}
+
+.tooltip[data-popper-placement^="bottom"] .tooltip-arrow {
+  top: 0;
+}
+
+.tooltip[data-popper-placement^="bottom"] .tooltip-arrow::before {
+  bottom: 0;
+  border-width: 0 0.4rem 0.4rem;
+  border-bottom-color: #000;
+}
+
+.tooltip[data-popper-placement^="left"] {
+  padding: 0 0.4rem;
+}
+
+.tooltip[data-popper-placement^="left"] .tooltip-arrow {
+  right: 0;
+  width: 0.4rem;
+  height: 0.8rem;
+}
+
+.tooltip[data-popper-placement^="left"] .tooltip-arrow::before {
+  left: 0;
+  border-width: 0.4rem 0 0.4rem 0.4rem;
+  border-left-color: #000;
+}
+</style>

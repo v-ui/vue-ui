@@ -5,9 +5,9 @@ export default {
     data () {
       return {
         popper: null,
-        refElement: null,
-        popperElement: null,
-        popperOpts: { placement: 'bottom-start', },
+        popRef: null,
+        popEle: null,
+        popOpts: { placement: 'bottom-start', },
       }
     },
 
@@ -17,18 +17,18 @@ export default {
       this.popper = null
     },
     watch: {
-      refElement() {
-        this.initPopper()
+      popRef: function() {
+        this._initPopper()
       },
-      popperElement: function() {
-        this.initPopper()
+      popEle: function() {
+        this._initPopper()
       }
     },
     methods: {
-      initPopper: async function() {
-        if (this.refElement && this.popperElement) {
+      _initPopper: async function() {
+        if (this.popRef && this.popEle) {
           await this.$nextTick()
-          this.popper = await createPopper(this.refElement, this.popperElement, this.popperOpts)
+          this.popper = await createPopper(this.popRef, this.popEle, this.popOpts)
         }
       },
     },

@@ -27,7 +27,7 @@
         :style="[menuStyle, {'max-height': '50em'}]"
         style="z-index: 1090"
       >
-        <div class="m-0 y-0">
+        <div v-if="isShow" class="m-0 y-0">
           <slot />
         </div>
       </div>
@@ -100,9 +100,9 @@ export default {
     init: function() {
       this.initMenuWidth()
       // 初始化 popper
-      this.popperOpts = { placement: 'bottom-start', strategy: 'fixed', }
-      this.refElement = this.$refs.dropdownPicker
-      this.popperElement = this.$refs.dropdownMenu
+      this.popOpts = { placement: 'bottom-start', strategy: 'fixed', }
+      this.popRef = this.$refs.dropdownPicker
+      this.popEle = this.$refs.dropdownMenu
     },
     initMenuWidth: function() {
        this.menuStyle = this.menuWidth && {

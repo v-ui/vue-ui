@@ -1,13 +1,13 @@
 <template>
   <div>
     <h2>v-tip('tooltip', 'popover')</h2>
+    <hr>
     <br>
     <div class="row py-1">
       <font class="col-1">default:</font>
       <b-button class="col-auto" v-tip>nothing</b-button>
       <font class="col-1">tooltip:</font>
-      <b-button class="col-auto" v-tip:tooltip="text">hover to show tooltip</b-button>
-      <input v-model="text" >
+      <b-button class="col-auto" v-tip:tooltip="'tooltip text'">hover to show tooltip</b-button>
       {{ text }}
       <font class="col-1">popover:</font>
       <b-button class="col-auto" v-tip:popover="'this is popover'"> click to show popover </b-button>
@@ -77,11 +77,225 @@
         <b-button style="pointer-events: none;" disabled>Disabled button</b-button>
       </span>
     </div>
-    <div class="row py-1">
-      <b-popover top="600" left="300" title="popover title" content="popover content " show />
+    <br>
+    <h2>b-popover</h2>
+    <hr>
+    <br>
+    <div class="container">
+      <!-- 'auto' 'auto-start' 'auto-end'
+      'top' 'top-start' 'top-end'
+      'bottom' 'bottom-start' 'bottom-end'
+      'right' 'right-start' 'right-end' '
+      left' 'left-start' 'left-end'; -->
+      <div class="row align-items-start  mb-3">
+        <div class="col-4">
+          <b-popover set='top-start' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">top---------start</b-button>
+            </template>
+            top-start
+          </b-popover>
+        </div>
+        <div class="col-4">
+          <b-popover set='top' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">top---------top</b-button>
+            </template>
+            top
+          </b-popover>
+        </div>
+        <div class="col-4">
+          <b-popover set='top-end' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">top---------end</b-button>
+            </template>
+            top-end
+          </b-popover>
+        </div>
+      </div>
+      <div class="row align-items-center mb-3">
+        <div class="col-4">
+          <b-popover set='left-start' title="header">
+            <template #popRef>
+              <b-button class="col-auto">left<br> <br><br> <br>start</b-button>
+            </template>
+            left-start
+          </b-popover>
+          <br>
+          <b-popover set='left' title="header">
+            <template #popRef>
+              <b-button class="col-auto">left</b-button>
+            </template>
+            left
+          </b-popover>
+          <br>
+          <b-popover set='left-end' title="header">
+            <template #popRef>
+              <b-button class="col-auto">left<br> <br><br> <br>end</b-button>
+            </template>
+            left-end
+          </b-popover>
+        </div>
+        <div class="col-4" />
+        <div class="col-4">
+          <b-popover set='right-start' title="header">
+            <template #popRef>
+              <b-button class="col-auto">right<br> <br><br> <br>start</b-button>
+            </template>
+            right-start
+          </b-popover>
+          <br>
+          <b-popover set='right' title="header">
+            <template #popRef>
+              <b-button class="col-auto">right</b-button>
+            </template>
+            right
+          </b-popover>
+          <br>
+          <b-popover set='right-end' title="header">
+            <template #popRef>
+              <b-button class="col-auto">right<br> <br><br> <br>end</b-button>
+            </template>
+            right-end
+          </b-popover>
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-4">
+          <b-popover set='bottom-start' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">bottom---------start</b-button>
+            </template>
+            bottom-start
+          </b-popover>
+        </div>
+        <div class="col-4">
+          <b-popover set='bottom' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">bottom---------bottom</b-button>
+            </template>
+            bottom
+          </b-popover>
+        </div>
+        <div class="col-4">
+          <b-popover set='bottom-end' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">bottom---------end</b-button>
+            </template>
+            bottom-end
+          </b-popover>
+        </div>
+      </div>
     </div>
-    <div class="row py-1">
-      <b-tooltip top="700" left="300" content="tooltip content " show />
+    <br>
+    <h2>b-tooltip</h2>
+    <hr>
+    <br>
+    <div class="container">
+      <!-- 'auto' 'auto-start' 'auto-end'
+      'top' 'top-start' 'top-end'
+      'bottom' 'bottom-start' 'bottom-end'
+      'right' 'right-start' 'right-end' '
+      left' 'left-start' 'left-end'; -->
+      <div class="row align-items-start  mb-3">
+        <div class="col-4">
+          <b-tooltip set='top-start' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">top---------start</b-button>
+            </template>
+            top-start
+          </b-tooltip>
+        </div>
+        <div class="col-4">
+          <b-tooltip set='top' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">top---------top</b-button>
+            </template>
+            top
+          </b-tooltip>
+        </div>
+        <div class="col-4">
+          <b-tooltip set='top-end' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">top---------end</b-button>
+            </template>
+            top-end
+          </b-tooltip>
+        </div>
+      </div>
+      <div class="row align-items-center mb-3">
+        <div class="col-4">
+          <b-tooltip set='left-start' title="header">
+            <template #popRef>
+              <b-button class="col-auto">left<br> <br><br> <br>start</b-button>
+            </template>
+            left-start
+          </b-tooltip>
+          <br>
+          <b-tooltip set='left' title="header">
+            <template #popRef>
+              <b-button class="col-auto">left</b-button>
+            </template>
+            left
+          </b-tooltip>
+          <br>
+          <b-tooltip set='left-end' title="header">
+            <template #popRef>
+              <b-button class="col-auto">left<br> <br><br> <br>end</b-button>
+            </template>
+            left-end
+          </b-tooltip>
+        </div>
+        <div class="col-4" />
+        <div class="col-4">
+          <b-tooltip set='right-start' title="header">
+            <template #popRef>
+              <b-button class="col-auto">right<br> <br><br> <br>start</b-button>
+            </template>
+            right-start
+          </b-tooltip>
+          <br>
+          <b-tooltip set='right' title="header">
+            <template #popRef>
+              <b-button class="col-auto">right</b-button>
+            </template>
+            right
+          </b-tooltip>
+          <br>
+          <b-tooltip set='right-end' title="header">
+            <template #popRef>
+              <b-button class="col-auto">right<br> <br><br> <br>end</b-button>
+            </template>
+            right-end
+          </b-tooltip>
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-4">
+          <b-tooltip set='bottom-start' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">bottom---------start</b-button>
+            </template>
+            bottom-start
+          </b-tooltip>
+        </div>
+        <div class="col-4">
+          <b-tooltip set='bottom' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">bottom---------bottom</b-button>
+            </template>
+            bottom
+          </b-tooltip>
+        </div>
+        <div class="col-4">
+          <b-tooltip set='bottom-end' title="header">
+            <template #popRef>
+              <b-button class="col-auto align-middle">bottom---------end</b-button>
+            </template>
+            bottom-end
+          </b-tooltip>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -99,6 +313,6 @@ export default {
     return {
       text: "disabled value"
     };
-  }
+  },
 };
 </script>
