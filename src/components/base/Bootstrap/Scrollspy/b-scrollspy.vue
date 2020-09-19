@@ -1,16 +1,12 @@
 <template>
-  <article>
-    <header class=" shadow-sm mx-2">
+  <section class="container w-100 mx-auto my-2" style="max-width: 1500px" role="main">
+    <header class="shadow-sm mx-2">
       <slot v-if="$slots.header" name="header" />
       <div v-else>
-        <h1 class="pb-1">{{ title || 'Title' }}</h1>
-        <div>
-          <span>Author: {{ author || 'Author' }}</span>
-          <br>
-          <span>
-            Time:
-            <time>{{ time || 'Time' }}</time>
-          </span>
+        <h1 class="text-center" v-if="title">{{ title }}</h1>
+        <div class=" mr-3 text-right text-muted">
+          <span v-if="author">{{ author }}</span><br>
+          <span v-if="time"><time>{{ time }}</time></span>
         </div>
       </div>
     </header>
@@ -57,7 +53,7 @@
         </div>
       </slot>
     </footer>
-  </article>
+  </section>
 </template>
 
 <script>

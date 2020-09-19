@@ -65,7 +65,7 @@ export default {
         strategy: 'fixed',
         modifiers: [
           { name: 'arrow', options: { element: this.$refs.arrow, padding: 6, }, },
-          { name: 'offset', options: { offset: [5, 5], }, },
+          //{ name: 'offset', options: { offset: [3, 3], }, },
         ],
       }
       this.popRef = this.$refs.popRef
