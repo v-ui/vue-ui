@@ -1,6 +1,6 @@
 <template>
   <div class="w-100">
-    <b-nav pills :column="column" v-for="(item, index) in list" :key="index">
+    <b-nav :column="column" v-for="(item, index) in list" :key="index" v-bind="$attrs">
       <b-nav-item class="w-100" :href="item.href" :label="item.label" />
       <li
         v-if="item.children && item.children.length && item.children.length > 0"
@@ -28,6 +28,14 @@ export default {
   props: {
     column: util.props.Boolean,
     list: util.props.Array
-  }
+  },
 };
 </script>
+
+<style>
+.active {
+  font-weight: bold;
+  border-right: black;
+  text-decoration: underline;
+}
+</style>

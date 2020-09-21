@@ -1,58 +1,67 @@
 <template>
-  <section class="container w-100 mx-auto my-2" style="max-width: 1500px" role="main">
-    <header class="shadow-sm mx-2">
-      <slot v-if="$slots.header" name="header" />
-      <div v-else>
-        <h1 class="text-center" v-if="title">{{ title }}</h1>
-        <div class=" mr-3 text-right text-muted">
-          <span v-if="author">{{ author }}</span><br>
-          <span v-if="time"><time>{{ time }}</time></span>
-        </div>
-      </div>
-    </header>
-    <article class="rounded m-1" :class="{row: set != 'top'}" style="max-height: 1080px;">
+  <section class="row no-gutters h-100 mx-auto" :class="{row: set != 'top',}"  role="main">
+    <!-- Contents on top -->
+    <!-- <b-scrollspy-nav
+      v-if="showContents && set == 'top'"
+      :id="scrollspyId"
+      class="w-100 bg-light"
+      :brand="title || 'Contents'"
+      :list="contents"
+      :set="set"
+    /> -->
+    <!-- Contents on left -->
+    <div class="col-3 row no-gutters bg-light">
+      <div class="col" />
       <b-scrollspy-nav
-        v-if="showContents && set == 'top'"
         :id="scrollspyId"
-        :set="set"
+        class="col-6 overflow-auto w-50 h-100"
+        :brand="title || 'Contents'"
         :list="contents"
-      />
-      <b-scrollspy-nav
-        v-if="showContents && set == 'left'"
-        :id="scrollspyId"
         :set="set"
-        :class="{'col-2': column}"
         column
-        :list="contents"
       />
-      <div
-        v-show="$slots.default"
-        :id="articleBoxId"
-        class="border overflow-auto p-3"
-        :class="{'col-10': column}"
-        style="max-height: 1000px;"
-        data-offset="20"
-        :data-target="'#' + scrollspyId"
-        data-spy="scroll"
-      >
-        <slot />
-      </div>
-      <b-scrollspy-nav
-        v-if="showContents && set == 'right'"
-        :id="scrollspyId"
-        :set="set"
-        :class="{'col-2': column}"
-        column
-        :list="contents"
-      />
-    </article>
-    <footer v-if="info || $slots.footer">
-      <slot name="footer">
-        <div class="p-2">
-          <font>{{ info }}</font>
+    </div>
+    <!-- main -->
+    <div
+      v-show="$slots.default"
+      :id="articleBoxId"
+      class="col-6 border-left border-right overflow-auto h-100 p-3"
+      :data-target="'#' + scrollspyId"
+      data-spy="scroll"
+      data-offset="20"
+    >
+      <header class="mx-2">
+        <slot v-if="$slots.header" name="header" />
+        <div v-else>
+          <h1 class="text-center" v-if="title">{{ title }}</h1>
+          <div class=" mr-3 text-right text-muted">
+            <span v-if="author">{{ author }}</span><br>
+            <span v-if="time"><time>{{ time }}</time></span>
+          </div>
         </div>
-      </slot>
-    </footer>
+        <hr>
+      </header>
+      <div ref="artical">
+        <slot class="mx-2" />
+      </div>
+      <footer v-if="info || $slots.footer" class="ixed-bottom">
+        <hr>
+        <slot name="footer">
+          <div class="p-2">
+            <font>{{ info }}</font>
+          </div>
+        </slot>
+      </footer>
+    </div>
+    <!-- Contents on right -->
+    <b-scrollspy-nav
+      :id="scrollspyId"
+      class="col overflow-auto h-100"
+      :brand="title || 'Contents'"
+      :list="contents"
+      :set="set"
+      column
+    />
   </section>
 </template>
 
@@ -108,14 +117,7 @@ export default {
   },
   methods: {
     getArticleNode: function() {
-      if (!this.$el.childNodes || !this.$el.childNodes[1]) return;
-      let childrenNodes = this.$el.childNodes[1].childNodes;
-      for (let i = 0; i < childrenNodes.length; i++) {
-        if (childrenNodes[i].id && childrenNodes[i].id == this.articleBoxId) {
-          return childrenNodes[i];
-        }
-      }
-      return;
+      return this.$refs.artical
     },
     getHTarget: function(node) {
       if (!node) return;
@@ -123,7 +125,7 @@ export default {
       for (let i = 0; i < node.childNodes.length; i++) {
         let e = node.childNodes[i];
         if ( ["h1", "h2", "h3", "h4", "h5", "h6"].includes(e.tagName.toLowerCase()) ) {
-          e.id = this.addId2HTarget(e);
+          e.id = e.id || this.addId2HTarget(e);
           arrs.push({
             id: e.id,
             target: this.map[e.tagName.toLowerCase()],

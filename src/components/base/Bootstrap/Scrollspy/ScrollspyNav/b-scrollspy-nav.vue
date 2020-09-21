@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-auto rounded p-0">
+  <div class="rounded p-0">
     <b-navbar
       v-if="set == 'top'"
       class="navbar-expand-lg"
