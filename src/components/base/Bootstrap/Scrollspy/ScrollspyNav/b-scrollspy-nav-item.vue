@@ -35,7 +35,6 @@ export default {
 <style>
 .active {
   font-weight: bold;
-  border-right: black;
   text-decoration: underline;
 }
 </style>

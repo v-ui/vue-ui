@@ -9,17 +9,19 @@
       :list="contents"
       :set="set"
     /> -->
-    <!-- Contents on left -->
-    <div class="col-3 row no-gutters bg-light">
-      <div class="col" />
-      <b-scrollspy-nav
-        :id="scrollspyId"
-        class="col-6 overflow-auto w-50 h-100"
-        :brand="title || 'Contents'"
-        :list="contents"
-        :set="set"
-        column
-      />
+    <!-- list of artices -->
+    <div class="col-3 bg-light h-100">
+      <div v-if="artices && artices.length && artices.length > 0" class="row no-gutters h-100">
+        <div class="col" />
+        <b-scrollspy-nav
+          :id="scrollspyId"
+          class="col-6 overflow-auto w-50 h-100"
+          :brand="title || 'Contents'"
+          :list="contents"
+          :set="set"
+          column
+        />
+      </div>
     </div>
     <!-- main -->
     <div
@@ -55,6 +57,7 @@
     </div>
     <!-- Contents on right -->
     <b-scrollspy-nav
+      v-if="!hideContents"
       :id="scrollspyId"
       class="col overflow-auto h-100"
       :brand="title || 'Contents'"
@@ -81,13 +84,15 @@ export default {
     },
     set: {
       type: String,
-      default: "top",
+      default: "left",
       validator: value => ["top", "left", "right"].includes(value),
     },
+    artices: Array,
     title: util.props.String,
     author: util.props.String,
     time: [Date, String],
     info: util.props.String,
+    hideContents: util.props.Boolean,
   },
    data() {
     return {
