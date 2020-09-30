@@ -21,7 +21,6 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 // 字体图标
 import '@fortawesome/fontawesome-free/css/all.min.css'
-
 import layout from "@/components/layout/layout.vue"
 
 export default {

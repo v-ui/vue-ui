@@ -2,8 +2,6 @@
   <vue-giant-tree
     :setting="setting"
     :nodes="nodes"
-    @onClick="onClick"
-    @onCheck="onCheck"
     @onCreated="handleCreated"
     @onCollapse="onCollapse"
     @onExpand="onExpand"
@@ -28,7 +26,6 @@ export default {
   },
   data() {
     return {
-      showIndex: 0,
       ztreeObj: null,
     }
   },
@@ -58,70 +55,25 @@ export default {
         tools.dom.addClasses(es[i], className)
       }
     },
-    // addHoverDom(treeid, treeNode) {
-    //   const item = document.getElementById(`${treeNode.tId}_a`);
-    //   if(item && !item.querySelector('.tree_extra_btn')){
-    //     const btn = document.createElement('sapn');
-    //     btn.id = `${treeid}_${treeNode.id}_btn`;
-    //     btn.classList.add('tree_extra_btn');
-    //     btn.innerText = '删除';
-    //     btn.addEventListener('click', (e) => {
-    //       e.stopPropagation()
-    //       this.clickRemove(treeNode)
-    //     })
-    //     item.appendChild(btn);
-    //   }
-
-    // },
-    // removeHoverDom(treeid, treeNode) {
-    //   const item = document.getElementById(`${treeNode.tId}_a`);
-    //   if(item){
-    //     const btn = item.querySelector('.tree_extra_btn');
-    //     if(btn){
-    //       item.removeChild(btn)
-    //     }
-    //   }
-    // },
-    clickRemove(treeNode) {
-      console.log('remove', treeNode)
-      this.ztreeObj && this.ztreeObj.removeNode(treeNode)
-    },
     // 节点被展开
-    onExpand: async function(evt, treeId, treeNode) {
-      // if (this.setting && this.setting.view && this.setting.view.showIcon)
-      //   await tools.dom.addClasses(document.getElementById(treeNode.tId +'_ico'), this.icon.folderOpen)
+    onExpand: async function(evt) {
       this.initIcon(
         evt.target.getElementsByClassName('ico_open'),
         evt.target.getElementsByClassName('ico_close'),
         evt.target.getElementsByClassName('ico_docu'),
       )
-      await this.$nextTick()
-      console.log(evt.type, treeNode);
     },
     // 节点被折叠
     onCollapse: async function(evt, treeId, treeNode) {
       if (this.setting && this.setting.view && this.setting.view.showIcon)
         await tools.dom.addClasses(document.getElementById(treeNode.tId +'_ico'), this.icon.folder)
       await this.$nextTick()
-      console.log(evt.type, treeNode);
-    },
-    onClick: function(evt, treeId, treeNode) {
-      // 点击事件
-      console.log(evt.type, treeNode);
-    },
-    onCheck: function(evt, treeId, treeNode) {
-      // 选中事件
-      console.log(evt.type, treeNode);
     },
     handleCreated: function(ztreeObj) {
       this.ztreeObj = ztreeObj;
       // onCreated 中操作ztreeObj对象展开第一个节点
       ztreeObj.expandNode(ztreeObj.getNodes()[0], true);
     },
-    update: function() {
-      // 更新示例数据
-      this.showIndex = this.showIndex === 0 ? 1 : 0;
-    }
   },
 }
 </script>
