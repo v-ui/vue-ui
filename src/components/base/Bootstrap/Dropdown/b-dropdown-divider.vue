@@ -3,6 +3,6 @@
 </template>
 <script>
 export default {
-  name: "b-dropdown-divider"
+  name: "BDropdownDivider"
 };
 </script>

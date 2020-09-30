@@ -16,7 +16,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "basic-textarea",
+  name: "BasicTextarea",
   mixins: [
     util.mixins.form.base,
     util.mixins.form.readonly,

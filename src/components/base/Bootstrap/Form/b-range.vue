@@ -20,7 +20,10 @@
         v-if="prompt || maxValue"
         class="col-auto text-left text-monospace pl-1 pr-0"
       >{{ fillMaxValue }}</span>
-      <span class="col-auto text-left text-monospace px-1" v-if="!hideValue">{{ select }}</span>
+      <span
+        v-if="!hideValue"
+        class="col-auto text-left text-monospace px-1"
+      >{{ select }}</span>
     </div>
     <b-info :info="info" />
   </div>
@@ -32,7 +35,7 @@ import util from "@/components/util/index.js";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-range",
+  name: "BRange",
   components: { BInfo },
   inheritAttrs: false,
   model: {

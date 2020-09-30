@@ -13,55 +13,113 @@
         </pre>
     <br>
     <div class="row py-1">
-      <font class="col-1">default</font>
-      <base-a href="#">text</base-a>
+      <font class="col-1">
+        default
+      </font>
+      <base-a href="#">
+        text
+      </base-a>
     </div>
     <div class="row py-1">
-      <font class="col-1">disabled</font>
-      <base-a href="#" disabled>text</base-a>
+      <font class="col-1">
+        disabled
+      </font>
+      <base-a
+        href="#"
+        disabled
+      >
+        text
+      </base-a>
     </div>
     <div class="row py-1">
-      <font class="col-1">href</font>
+      <font class="col-1">
+        href
+      </font>
       <div class="col-11">
         <div class="row">
-          <font class="col-2">tel:</font>
+          <font class="col-2">
+            tel:
+          </font>
           <base-a href="tel:电话号码" />
         </div>
         <div class="row">
-          <font class="col-2">sms:</font>
+          <font class="col-2">
+            sms:
+          </font>
           <base-a href="sms:电话号码" />
         </div>
         <div class="row">
-          <font class="col-2">mailto:</font>
+          <font class="col-2">
+            mailto:
+          </font>
           <base-a href="mailto:邮件地址" />（详情：
           <base-a
             href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Email_links"
-          >Email links | MDN</base-a>）
+          >
+            Email links | MDN
+          </base-a>）
         </div>
         <div class="row">
-          <font class="col-2">link:</font>
-          <base-a class="px-1" href="http://www.bing.com" text="Bing" />
-          <base-a class="px-1" href="b-About" />
+          <font class="col-2">
+            link:
+          </font>
+          <base-a
+            class="px-1"
+            href="http://www.bing.com"
+            text="Bing"
+          />
+          <base-a
+            class="px-1"
+            href="b-About"
+          />
         </div>
         <div class="row">
-          <font class="col-2">Anchor point:</font>
-          <base-a class="px-1" href="#" />
-          <base-a class="px-1" href="#top" />
-          <base-a class="px-1" href="#1-1" />
+          <font class="col-2">
+            Anchor point:
+          </font>
+          <base-a
+            class="px-1"
+            href="#"
+          />
+          <base-a
+            class="px-1"
+            href="#top"
+          />
+          <base-a
+            class="px-1"
+            href="#1-1"
+          />
         </div>
       </div>
     </div>
     <div class="row py-1">
-      <font class="col-1">download</font>
-      <base-a href="b-About" download="b-About.vue" />
+      <font class="col-1">
+        download
+      </font>
+      <base-a
+        href="b-About"
+        download="b-About.vue"
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">hideIcon</font>
-      <base-a href="http://www.bing.com" text="Bing" hideIcon />
+      <font class="col-1">
+        hideIcon
+      </font>
+      <base-a
+        href="http://www.bing.com"
+        text="Bing"
+        hide-icon
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">icon</font>
-      <base-a href="#" text="text" icon="fas fa-info" />
+      <font class="col-1">
+        icon
+      </font>
+      <base-a
+        href="#"
+        text="text"
+        icon="fas fa-info"
+      />
     </div>
   </div>
 </template>
@@ -70,7 +128,7 @@
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
 export default {
-  name: "base-a-demo",
+  name: "BaseADemo",
   components: { BaseA }
 };
 </script>

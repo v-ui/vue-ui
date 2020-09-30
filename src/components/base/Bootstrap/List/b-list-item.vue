@@ -10,7 +10,12 @@
     <slot>{{ label }}</slot>
     <sr-msg>{{ srMsg || color }}</sr-msg>
   </base-a>
-  <li v-else class="list-group-item text-truncate" :class="objClass" :aria-disabled="disabled">
+  <li
+    v-else
+    class="list-group-item text-truncate"
+    :class="objClass"
+    :aria-disabled="disabled"
+  >
     <slot>{{ label }}</slot>
     <sr-msg>{{ srMsg }}</sr-msg>
   </li>
@@ -23,7 +28,7 @@ import BaseA from "@/components/base/Content/A/c-a.vue";
 import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 export default {
-  name: "b-list-item",
+  name: "BListItem",
   components: { BaseA, srMsg },
   props: {
     href: util.props.href,

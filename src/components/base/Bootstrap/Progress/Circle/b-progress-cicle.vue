@@ -31,9 +31,27 @@
       :strong="strong"
       :value="value"
     />
-    <image v-if="src" :xlink:href='src' x="-20%" y="-20%" height="40%" width="40%"/>
-    <text v-if="!hideValue" x="0%" :y="info ? '-4%' : '0%'" text-anchor="middle" dominant-baseline="central">{{ parseInt(value) || 0 }}%</text>
-    <text x="0%" y="4%" text-anchor="middle" dominant-baseline="central">{{ info }}</text>
+    <image
+      v-if="src"
+      :xlink:href="src"
+      x="-20%"
+      y="-20%"
+      height="40%"
+      width="40%"
+    />
+    <text
+      v-if="!hideValue"
+      x="0%"
+      :y="info ? '-4%' : '0%'"
+      text-anchor="middle"
+      dominant-baseline="central"
+    >{{ parseInt(value) || 0 }}%</text>
+    <text
+      x="0%"
+      y="4%"
+      text-anchor="middle"
+      dominant-baseline="central"
+    >{{ info }}</text>
   </svg>
 </template>
 
@@ -42,7 +60,7 @@ import util from "@/components/util/index.js";
 import BCircleItem from './b-progress-circle-item'
 
 export default {
-  name: 'b-progress-circle',
+  name: 'BProgressCircle',
   components: { BCircleItem, },
   props: {
     width: util.props.UInt,

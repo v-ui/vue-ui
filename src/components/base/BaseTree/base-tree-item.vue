@@ -1,20 +1,36 @@
 <template>
   <!-- item template -->
   <li>
-    <div @click="toggle" @dblclick="changeType">
+    <div
+      @click="toggle"
+      @dblclick="changeType"
+    >
       {{ model.name }}
       <span v-if="isFolder">[{{ open ? '-' : '+' }}]</span>
     </div>
-    <ul v-show="open" v-if="isFolder">
-      <item v-for="(item, index) in model.children" :key="index" :model="item" class="item" />
-      <li class="add" @click="addChild">+</li>
+    <ul
+      v-show="open"
+      v-if="isFolder"
+    >
+      <item
+        v-for="(item, index) in model.children"
+        :key="index"
+        :model="item"
+        class="item"
+      />
+      <li
+        class="add"
+        @click="addChild"
+      >
+        +
+      </li>
     </ul>
   </li>
 </template>
 
 <script>
 export default {
-  name: "base-tree-item",
+  name: "BaseTreeItem",
   components: {
     item: () => import("./base-tree-item.vue")
   },

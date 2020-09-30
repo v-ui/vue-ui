@@ -1,12 +1,17 @@
 <template>
-  <dropdown-list v-model="selectValue" :list="list" @change="change" hide-null />
+  <dropdown-list
+    v-model="selectValue"
+    :list="list"
+    hide-null
+    @change="change"
+  />
 </template>
 
 <script>
 import dropdownList from "@/components/base/Bootstrap/DropdownList/b-dropdown-list.vue";
 
 export default {
-  name: "b-quarter-list",
+  name: "BQuarterList",
   components: { dropdownList },
   model: {
     prop: "value",

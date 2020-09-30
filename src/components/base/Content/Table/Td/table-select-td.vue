@@ -1,6 +1,13 @@
 <template>
-  <th v-if="!hideSelect" class="d-print-none align-middle" data-type="select">
-    <b-checkbox class="text-center" v-model="isSelected" />
+  <th
+    v-if="!hideSelect"
+    class="d-print-none align-middle"
+    data-type="select"
+  >
+    <b-checkbox
+      v-model="isSelected"
+      class="text-center"
+    />
   </th>
 </template>
 
@@ -10,7 +17,7 @@ import util from "@/components/util/index.js";
 import BCheckbox from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox.vue";
 
 export default {
-  name: "table-select-td",
+  name: "TableSelectTd",
   components: { BCheckbox },
   model: {
     prop: "selected",

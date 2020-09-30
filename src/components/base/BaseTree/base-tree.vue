@@ -4,14 +4,17 @@
 
     <!-- the demo root element -->
     <ul id="demo">
-      <item class="item" :model="treeData"></item>
+      <item
+        class="item"
+        :model="treeData"
+      />
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: "base-tree",
+  name: "BaseTree",
   components: {
     item: () => import("./base-tree-item.vue")
   },

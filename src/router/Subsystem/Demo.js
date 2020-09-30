@@ -33,6 +33,7 @@ export default {
         { path: 'c-table', name: 'c-table', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/c-table-demo.vue'), },
         { path: 'c-video', name: 'c-video', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/c-video-demo.vue'), },
         { path: 'tree-view', name: 'tree-view', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/tree-view-demo.vue'), },
+        { path: 'tree-z-tree', name: 'tree-z-tree', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/tree-zTree-demo.vue'), },
         { path: 'video-player', name: 'video-player', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/c-video-player-demo.vue'), },
         { path: 'file-browser', name: 'file-browser', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-file-browser-demo.vue'), },
       ],
@@ -52,7 +53,7 @@ export default {
         { path: 'b-range', name: 'b-range', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-range-demo.vue'), },
         { path: 'b-file', name: 'b-file', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-file-demo.vue'), },
         // { path: 'b-hidden', name: 'b-hidden', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-hidden-demo.vue'), },
-        { path: 'b-input-group', name: 'b-unput-group', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-input-group-demo.vue'), },
+        { path: 'b-input-group', name: 'b-input-group', component: async () => await import(/* webpackChunkName: "form" */'@/pages/Demo/Form/b-input-group-demo.vue'), },
 
       ]
     },

@@ -8,8 +8,8 @@
       :max="range ? rangeStartMax : max"
       :disabled="disabled"
       :range="range"
-      :selectedStart="selectedValueStart"
-      :selectedEnd="selectedValueEnd"
+      :selected-start="selectedValueStart"
+      :selected-end="selectedValueEnd"
       :hide-header="false"
     />
     <date-panel-select
@@ -21,8 +21,8 @@
       :max="max"
       :disabled="disabled"
       :range="range"
-      :selectedStart="selectedValueStart"
-      :selectedEnd="selectedValueEnd"
+      :selected-start="selectedValueStart"
+      :selected-end="selectedValueEnd"
       :hide-header="false"
     />
   </div>
@@ -33,7 +33,7 @@ import util from "@/components/util/index.js";
 import datePanelSelect from './Basic/date-panel-select'
 
 export default {
-  name: 'b-date-panel',
+  name: 'BDatePanel',
   components: { datePanelSelect, },
   mixins: [
     util.mixins.moment.base,

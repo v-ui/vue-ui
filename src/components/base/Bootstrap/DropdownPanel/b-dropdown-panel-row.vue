@@ -21,7 +21,7 @@ import util from "@/components/util/index.js";
 import item from "./b-dropdown-panel-item";
 
 export default {
-  name: "b-dropdown-panel-row",
+  name: "BDropdownPanelRow",
   components: { item },
   mixins: [ util.mixins.select.select, ],
   props: {

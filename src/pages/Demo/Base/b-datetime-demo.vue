@@ -1,151 +1,326 @@
 <template>
   <div>
     <h2>b-date-picker</h2>
-    <hr />
+    <hr>
     <div class="row mx-0">
-      <font class="col-1">default:</font>
+      <font class="col-1">
+        default:
+      </font>
       <b-date-picker class="col-11" />
     </div>
     <div class="row mx-0">
-      <font class="col-1">disabled:</font>
-      <b-date-picker class="col-11" disabled />
+      <font class="col-1">
+        disabled:
+      </font>
+      <b-date-picker
+        class="col-11"
+        disabled
+      />
     </div>
     <div class="row mx-0">
-      <font class="col-1">info:</font>
-      <b-date-picker class="col-11" info="info text" />
+      <font class="col-1">
+        info:
+      </font>
+      <b-date-picker
+        class="col-11"
+        info="info text"
+      />
     </div>
     <div class="row mx-0">
-      <font class="col-1">placeholder:</font>
-      <b-date-picker class="col-11" placeholder="Place Check the Date" />
+      <font class="col-1">
+        placeholder:
+      </font>
+      <b-date-picker
+        class="col-11"
+        placeholder="Place Check the Date"
+      />
     </div>
     <div class="row mx-0">
-      <font class="col-1">type:</font>
-      <font class="col-1">year:</font>
-      <b-date-picker class="col-2" type="year" />
-      <font class="col-1">month:</font>
-      <b-date-picker class="col-2" type="month" />
-      <font class="col-1">date:</font>
-      <b-date-picker class="col-2" type="date" />
+      <font class="col-1">
+        type:
+      </font>
+      <font class="col-1">
+        year:
+      </font>
+      <b-date-picker
+        class="col-2"
+        type="year"
+      />
+      <font class="col-1">
+        month:
+      </font>
+      <b-date-picker
+        class="col-2"
+        type="month"
+      />
+      <font class="col-1">
+        date:
+      </font>
+      <b-date-picker
+        class="col-2"
+        type="date"
+      />
     </div>
     <div class="row mx-0">
-      <font class="col-1">value:</font>
-      <font class="col-1">year:</font>
-      <b-date-picker class="col-2" type="year" value="2018" />
-      <font class="col-1">month:</font>
-      <b-date-picker class="col-2" type="month" value="2018" />
-      <font class="col-1">date:</font>
-      <b-date-picker class="col-2" type="date" value="2018" />
+      <font class="col-1">
+        value:
+      </font>
+      <font class="col-1">
+        year:
+      </font>
+      <b-date-picker
+        class="col-2"
+        type="year"
+        value="2018"
+      />
+      <font class="col-1">
+        month:
+      </font>
+      <b-date-picker
+        class="col-2"
+        type="month"
+        value="2018"
+      />
+      <font class="col-1">
+        date:
+      </font>
+      <b-date-picker
+        class="col-2"
+        type="date"
+        value="2018"
+      />
     </div>
     <div class="row mx-0">
       <font class="col-1">
         min
-        <br />max:
+        <br>max:
       </font>
-      <font class="col-1">year:</font>
-      <b-date-picker class="col-2" type="year" min="2018" max="2019" />
-      <font class="col-1">month:</font>
-      <b-date-picker class="col-2" type="month" min="2018" max="2019-09" />
-      <font class="col-1">date:</font>
-      <b-date-picker class="col-2" type="date" min="2018" max="2019-09-30" info="info text" />
+      <font class="col-1">
+        year:
+      </font>
+      <b-date-picker
+        class="col-2"
+        type="year"
+        min="2018"
+        max="2019"
+      />
+      <font class="col-1">
+        month:
+      </font>
+      <b-date-picker
+        class="col-2"
+        type="month"
+        min="2018"
+        max="2019-09"
+      />
+      <font class="col-1">
+        date:
+      </font>
+      <b-date-picker
+        class="col-2"
+        type="date"
+        min="2018"
+        max="2019-09-30"
+        info="info text"
+      />
     </div>
     <div class="row mx-0">
-      <font class="col-1">v-model:</font>
+      <font class="col-1">
+        v-model:
+      </font>
       <font class="col-1">
         year
-        <br />
+        <br>
         {{ year }}:
       </font>
-      <b-date-picker class="col-2" type="year" v-model="year" />
+      <b-date-picker
+        v-model="year"
+        class="col-2"
+        type="year"
+      />
       <font class="col-1">
         month
-        <br />
+        <br>
         {{ month }}:
       </font>
-      <b-date-picker class="col-2" type="month" v-model="month" />
+      <b-date-picker
+        v-model="month"
+        class="col-2"
+        type="month"
+      />
       <font class="col-1">
         date
-        <br />
+        <br>
         {{ date }}:
       </font>
-      <b-date-picker class="col-2" type="date" v-model="date" />
+      <b-date-picker
+        v-model="date"
+        class="col-2"
+        type="date"
+      />
     </div>
     <div class="row mx-0">
-      <font class="col-1">v-model(range):</font>
+      <font class="col-1">
+        v-model(range):
+      </font>
       <font class="col-1">
         year
-        <br />
+        <br>
         {{ yearR }}:
       </font>
-      <b-date-picker class="col-2" type="year" range v-model="yearR" />
+      <b-date-picker
+        v-model="yearR"
+        class="col-2"
+        type="year"
+        range
+      />
       <font class="col-1">
         month
-        <br />
+        <br>
         {{ monthR }}:
       </font>
-      <b-date-picker class="col-2" type="month" range v-model="monthR" />
+      <b-date-picker
+        v-model="monthR"
+        class="col-2"
+        type="month"
+        range
+      />
       <font class="col-1">
         date
-        <br />
+        <br>
         {{ dateR }}:
       </font>
-      <b-date-picker class="col-2" type="date" range v-model="dateR" />
+      <b-date-picker
+        v-model="dateR"
+        class="col-2"
+        type="date"
+        range
+      />
     </div>
     <h2>b-datetime</h2>
-    <hr />
+    <hr>
     <div class="row mx-0">
-      <font class="col-1">default:</font>
+      <font class="col-1">
+        default:
+      </font>
       <b-time class="col-11" />
     </div>
     <div class="row mx-0">
-      <font class="col-1">disabled:</font>
-      <b-time class="col-11" disabled />
+      <font class="col-1">
+        disabled:
+      </font>
+      <b-time
+        class="col-11"
+        disabled
+      />
     </div>
     <div class="row mx-0">
-      <font class="col-1">readonly:</font>
-      <b-time class="col-11" readonly />
+      <font class="col-1">
+        readonly:
+      </font>
+      <b-time
+        class="col-11"
+        readonly
+      />
     </div>
     <div class="row mx-0">
-      <font class="col-1">info:</font>
-      <b-time class="col-11" info="info text" />
+      <font class="col-1">
+        info:
+      </font>
+      <b-time
+        class="col-11"
+        info="info text"
+      />
     </div>
     <div class="row mx-0">
-      <font class="col-1">type:</font>
-      <font class="col-1">hh:mm:</font>
-      <b-time class="col-4" type="hh:mm" />
-      <font class="col-1">hh:mm:ss:</font>
-      <b-time class="col-4" type="hh:mm:ss" />
+      <font class="col-1">
+        type:
+      </font>
+      <font class="col-1">
+        hh:mm:
+      </font>
+      <b-time
+        class="col-4"
+        type="hh:mm"
+      />
+      <font class="col-1">
+        hh:mm:ss:
+      </font>
+      <b-time
+        class="col-4"
+        type="hh:mm:ss"
+      />
     </div>
     <div class="row mx-0">
-      <font class="col-1">value:</font>
-      <font class="col-1">hh:mm:</font>
-      <b-time class="col-4" type="hh:mm" value="05:32" />
-      <font class="col-1">hh:mm:ss:</font>
-      <b-time class="col-4" type="hh:mm:ss" value="05:32:13" />
+      <font class="col-1">
+        value:
+      </font>
+      <font class="col-1">
+        hh:mm:
+      </font>
+      <b-time
+        class="col-4"
+        type="hh:mm"
+        value="05:32"
+      />
+      <font class="col-1">
+        hh:mm:ss:
+      </font>
+      <b-time
+        class="col-4"
+        type="hh:mm:ss"
+        value="05:32:13"
+      />
     </div>
     <div class="row mx-0">
       <font class="col-1">
         min
-        <br />max:
+        <br>max:
       </font>
-      <font class="col-1">hh:mm:</font>
-      <b-time class="col-4" type="hh:mm" min="09:00" max="15:59" />
-      <font class="col-1">hh:mm:ss:</font>
-      <b-time class="col-4" type="hh:mm:ss" min="09:00" max="15:59:59" info="info text" />
+      <font class="col-1">
+        hh:mm:
+      </font>
+      <b-time
+        class="col-4"
+        type="hh:mm"
+        min="09:00"
+        max="15:59"
+      />
+      <font class="col-1">
+        hh:mm:ss:
+      </font>
+      <b-time
+        class="col-4"
+        type="hh:mm:ss"
+        min="09:00"
+        max="15:59:59"
+        info="info text"
+      />
     </div>
     <div class="row mx-0">
-      <font class="col-1">v-model:</font>
+      <font class="col-1">
+        v-model:
+      </font>
       <font class="col-1">
         hh:mm
-        <br />
+        <br>
         {{ hhmm }}:
       </font>
-      <b-time class="col-4" type="hh:mm" v-model="hhmm" />
+      <b-time
+        v-model="hhmm"
+        class="col-4"
+        type="hh:mm"
+      />
       <font class="col-1">
         hh:mm:ss
-        <br />
+        <br>
         {{ hhmmss }}:
       </font>
-      <b-time class="col-4" type="hh:mm:ss" v-model="hhmmss" />
+      <b-time
+        v-model="hhmmss"
+        class="col-4"
+        type="hh:mm:ss"
+      />
     </div>
     <!-- <h2>b-year-picker</h2>
     <hr />
@@ -205,7 +380,7 @@ import BTime from "@/components/base/Bootstrap/DateTime/Time/b-time.vue";
 // import BMonthPicker from "@/components/base/Bootstrap/DateTime/Date/DateList/b-month-picker.vue";
 
 export default {
-  name: "b-datetime-demo",
+  name: "BDatetimeDemo",
   components: { BDatePicker, BTime,  },
   data() {
     return {

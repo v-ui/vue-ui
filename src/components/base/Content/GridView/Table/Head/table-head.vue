@@ -34,7 +34,7 @@ import util from "@/components/util/index.js";
 import TableHeadTr from "./../Tr/table-head-tr";
 
 export default {
-  name: "table-head",
+  name: "TableHead",
   components: { TableHeadTr },
   model: {
     prop: "checked",
@@ -59,6 +59,11 @@ export default {
     };
   },
   computed: {},
+  watch: {
+    checked: function(value) {
+      this.$emit("change", value);
+    }
+  },
   mounted() {
     this.init();
   },
@@ -133,11 +138,6 @@ export default {
               .filter(e => e.children)
               .reduce((acc, cur) => acc + this.getCellColCount(cur), 0)
         : count;
-    }
-  },
-  watch: {
-    checked: function(value) {
-      this.$emit("change", value);
     }
   }
 };

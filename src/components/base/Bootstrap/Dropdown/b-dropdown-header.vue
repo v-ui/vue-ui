@@ -10,7 +10,7 @@ import util from "@/components/util/index.js";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-dropdown-header",
+  name: "BDropdownHeader",
   components: { BInfo },
   props: {
     label: util.props.String,

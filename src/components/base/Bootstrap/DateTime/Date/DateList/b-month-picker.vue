@@ -16,7 +16,7 @@ import util from "@/components/util/index.js"
 import BDatePicker from "@/components/base/Bootstrap/DateTime/Date/DatePicker/b-date-picker.vue"
 
 export default {
-  name: "b-year-picker",
+  name: "BYearPicker",
   components: { BDatePicker },
   model: {
     prop: "value",

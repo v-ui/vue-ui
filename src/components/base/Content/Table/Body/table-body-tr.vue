@@ -4,8 +4,14 @@
     :style="[row.$style, rowStyle.style && rowStyle.style(row)]"
     :aria-selected="isSelected"
   >
-    <table-serial-td :hideSerial="hideSerial" :number="index" />
-    <table-select-td :hideSelect="hideSelect || selectStatus != 2" v-model="isSelected" />
+    <table-serial-td
+      :hide-serial="hideSerial"
+      :number="index"
+    />
+    <table-select-td
+      v-model="isSelected"
+      :hide-select="hideSelect || selectStatus != 2"
+    />
     <template v-for="(col, colIndex) in columns">
       <table-operate-td
         v-if="col.$operate >= 0"
@@ -13,7 +19,12 @@
         :operate="operate"
         @tr:oper="type => $emit('tr:oper', {type: type, data: row})"
       />
-      <table-body-td v-else :key="colIndex" :cell="row[col.field] || '-'" :col="col" />
+      <table-body-td
+        v-else
+        :key="colIndex"
+        :cell="row[col.field] || '-'"
+        :col="col"
+      />
     </template>
   </tr>
 </template>
@@ -27,7 +38,7 @@ import tableSelectTd from "./../Td/table-select-td";
 import tableOperateTd from "./../Td/table-operate-td";
 
 export default {
-  name: "table--body-tr",
+  name: "TableBodyTr",
   components: { tableBodyTd, tableSerialTd, tableSelectTd, tableOperateTd },
   props: {
     primaryKey: util.props.String,

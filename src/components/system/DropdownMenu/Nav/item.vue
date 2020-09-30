@@ -9,7 +9,9 @@
         class="list-group-item bg-light border-top-0 text-dark text-decoration-none"
         style="cursor: default;"
       >
-        <font class="text-truncate w-100 d-inline-block">{{ model.name }}</font>
+        <font class="text-truncate w-100 d-inline-block">
+          {{ model.name }}
+        </font>
       </router-link>
       <router-link
         v-else
@@ -17,38 +19,47 @@
         class="list-group-item bg-light border-top-0 text-dark text-decoration-none d-flex justify-content-between"
         style="cursor: default;"
       >
-        <font class="text-truncate">{{ model.SubsystemName }}</font>
-        <i class="fas fa-chevron-down" v-if="!open" />
-        <i class="fas fa-chevron-up" v-else />
+        <font class="text-truncate">
+          {{ model.SubsystemName }}
+        </font>
+        <i
+          v-if="!open"
+          class="fas fa-chevron-down"
+        />
+        <i
+          v-else
+          class="fas fa-chevron-up"
+        />
       </router-link>
     </div>
-    <ul class="list-group bg-light p-0 pl-3 border-0 w-100" v-show="open" v-if="model.Modules">
-      <item class="NavItem" v-for="(Module, key) in model.Modules" :key="key" :model="Module" />
+    <ul
+      v-show="open"
+      v-if="model.Modules"
+      class="list-group bg-light p-0 pl-3 border-0 w-100"
+    >
+      <item
+        v-for="(Module, key) in model.Modules"
+        :key="key"
+        class="NavItem"
+        :model="Module"
+      />
     </ul>
   </li>
 </template>
 
 <script>
 export default {
-  name: "dropdown-menu-nav-item",
+  name: "DropdownMenuNavItem",
   components: {
     item: () => import("./item.vue")
+  },
+  props: {
+    model: Object
   },
   data() {
     return {
       open: false
     };
-  },
-  props: {
-    model: Object
-  },
-  created() {
-    this.open = false;
-  },
-  methods: {
-    toggle: function() {
-      this.open = !this.open;
-    }
   },
   watch: {
     model: function(newValue, oldValue) {
@@ -56,6 +67,14 @@ export default {
         this.model = newValue;
         this.open = false;
       }
+    }
+  },
+  created() {
+    this.open = false;
+  },
+  methods: {
+    toggle: function() {
+      this.open = !this.open;
     }
   }
 };

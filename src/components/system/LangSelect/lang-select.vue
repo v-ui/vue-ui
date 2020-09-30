@@ -1,5 +1,11 @@
 <template>
-  <b-dropdown v-if="langs.length > 0" trigger="language" :list="langs" :select="select" @menuClick="lamgChange" />
+  <b-dropdown
+    v-if="langs.length > 0"
+    trigger="language"
+    :list="langs"
+    :select="select"
+    @menuClick="lamgChange"
+  />
 </template>
 
 <script>
@@ -8,7 +14,7 @@ import { loadLanguageAsync } from "@/lang/index";
 import BDropdown from '@/components/base/Bootstrap/Dropdown/b-dropdown.vue'
 
 export default {
-  name: "lang-select",
+  name: "LangSelect",
   components: { BDropdown },
   data() {
     // return { langs: ["zh", "en"] }

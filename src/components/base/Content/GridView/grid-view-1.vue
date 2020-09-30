@@ -1,7 +1,10 @@
 <template>
   <div class="border border-dark rounded p-1">
     <template v-if="!hideData">
-      <div ref="toolbar" class="d-flex d-print-none align-items-center justify-content-between">
+      <div
+        ref="toolbar"
+        class="d-flex d-print-none align-items-center justify-content-between"
+      >
         <div class="m-1 row">
           <slot name="toolbar" />
         </div>
@@ -9,10 +12,18 @@
         <div class="m-1 row">
           <b-button-toolbar>
             <b-button-group>
-              <b-button color="secondary" size="sm" v-tip="'Search'">
+              <b-button
+                v-tip="'Search'"
+                color="secondary"
+                size="sm"
+              >
                 <i :class="icon.search" />
               </b-button>
-              <b-button color="secondary" size="sm" v-tip="'Search Plus'">
+              <b-button
+                v-tip="'Search Plus'"
+                color="secondary"
+                size="sm"
+              >
                 <i :class="icon.searchPlus" />
               </b-button>
               <b-button
@@ -24,18 +35,40 @@
               >
                 <i :class="icon.sort" />
               </b-button>
-              <b-button color="secondary" size="sm" @click="reset" v-tip="'Reset'">
+              <b-button
+                v-tip="'Reset'"
+                color="secondary"
+                size="sm"
+                @click="reset"
+              >
                 <i :class="icon.sync" />
               </b-button>
-              <b-button color="secondary" size="sm" @click="print" v-tip="'Print'">
+              <b-button
+                v-tip="'Print'"
+                color="secondary"
+                size="sm"
+                @click="print"
+              >
                 <i :class="icon.print" />
               </b-button>
             </b-button-group>
-            <b-dropdown :list="downloadList" menuAlign="right" @menuClick="dataExport" hideToggle>
+            <b-dropdown
+              :list="downloadList"
+              menu-align="right"
+              hide-toggle
+              @menuClick="dataExport"
+            >
               <template #trigger>
-                <b-button color="secondary" size="sm" v-tip="'Export'">
+                <b-button
+                  v-tip="'Export'"
+                  color="secondary"
+                  size="sm"
+                >
                   <i :class="icon.fileExport" />
-                  <i :class="icon.caretDown" class="pl-1" />
+                  <i
+                    :class="icon.caretDown"
+                    class="pl-1"
+                  />
                 </b-button>
               </template>
             </b-dropdown>
@@ -45,7 +78,10 @@
         <!-- tiilbar right -->
       </div>
       <!-- toolbar -->
-      <div class="border row m-0" id="printWrap">
+      <div
+        id="printWrap"
+        class="border row m-0"
+      >
         <c-table
           ref="fixedTable"
           v-model="selectedOptions"
@@ -92,20 +128,27 @@
         class="d-flex d-print-none align-items-end justify-content-between py-1"
       >
         <!-- <font>共 {{ count }} 条数据，本页 {{ num }} 条，共 {{ pageCount }} 页，第 {{ pageNumber }} 页，每页 {{ pageSize }} 条，跳转至第 {{ pageNumber }} 页</font> -->
-        <font class="d-flex align-items-center" style="min-width: 550px">
+        <font
+          class="d-flex align-items-center"
+          style="min-width: 550px"
+        >
           {{ dataSize }} /
           {{ dataCount }} 条&nbsp;&nbsp;
           {{ pageNumber }} /
           {{ pageCount }} 页&nbsp;&nbsp;
           每页
           <b-select
+            v-model="pageSize"
             class="d-inline-block mx-1"
             :list="pageSizeList"
-            v-model="pageSize"
             size="sm"
-            hideNull
+            hide-null
           />条&nbsp;&nbsp;
-          <b-pagination start="1" :end="pageCount" v-model.number="pageNumber">
+          <b-pagination
+            v-model.number="pageNumber"
+            start="1"
+            :end="pageCount"
+          >
             <b-number />
             <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
           </b-pagination>
@@ -118,20 +161,37 @@
       class="d-block d-print-none text-center h-100 align-items-center justify-content-center"
     >
       <template v-if="hideData">
-        <p class="display-4">No Related Data</p>
+        <p class="display-4">
+          No Related Data
+        </p>
         <small class="text-secondary">
-          <i class="text-primary px-1" :class="icon.info" />No related data found or Data format error
+          <i
+            class="text-primary px-1"
+            :class="icon.info"
+          />No related data found or Data format error
         </small>
       </template>
       <template v-else-if="loading">
         <b-loading color="primary" />
-        <p class="display-4">Loading...</p>
+        <p class="display-4">
+          Loading...
+        </p>
       </template>
     </div>
-    <b-modal id="sortmodal" title="Sort Plus" :icon="icon.sort">
+    <b-modal
+      id="sortmodal"
+      title="Sort Plus"
+      :icon="icon.sort"
+    >
       <template>
-        <div class="row my-1" v-for="item in sort" :key="item">
-          <font class="col-3">{{ lastcolumns.filter(e => e.field == item)[0].title || item }}:</font>
+        <div
+          v-for="item in sort"
+          :key="item"
+          class="row my-1"
+        >
+          <font class="col-3">
+            {{ lastcolumns.filter(e => e.field == item)[0].title || item }}:
+          </font>
           <div class="col-9">
             <b-select
               size="sm"
@@ -143,9 +203,26 @@
         </div>
       </template>
       <template #footer>
-        <b-button color="secondary" data-dismiss="modal">Close</b-button>
-        <b-button color="primary" data-dismiss="modal" @click="clearSort">Clear Sort</b-button>
-        <b-button color="primary" data-dismiss="modal" @click="sortPlus">Sort</b-button>
+        <b-button
+          color="secondary"
+          data-dismiss="modal"
+        >
+          Close
+        </b-button>
+        <b-button
+          color="primary"
+          data-dismiss="modal"
+          @click="clearSort"
+        >
+          Clear Sort
+        </b-button>
+        <b-button
+          color="primary"
+          data-dismiss="modal"
+          @click="sortPlus"
+        >
+          Sort
+        </b-button>
       </template>
     </b-modal>
   </div>
@@ -175,7 +252,7 @@ import BModal from "@/components/base/Bootstrap/Modal/b-modal.vue";
 import BLoading from "@/components/base/Bootstrap/Loading/b-loading.vue";
 
 export default {
-  name: "grid-view",
+  name: "GridView",
   components: {
     CTable,
     BButton,

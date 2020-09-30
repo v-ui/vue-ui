@@ -1,13 +1,22 @@
 <template>
   <nav class="navbar">
-    <b-nav-brand v-if="$slots.brand || brand" :brand="brand">
+    <b-nav-brand
+      v-if="$slots.brand || brand"
+      :brand="brand"
+    >
       <slot name="brand" />
     </b-nav-brand>
-    <b-nav-toggler v-if="$slots.toggler || !hideToggler" :target="id">
+    <b-nav-toggler
+      v-if="$slots.toggler || !hideToggler"
+      :target="id"
+    >
       <slot name="toggler" />
     </b-nav-toggler>
     <slot>
-      <b-navbar-items :id="id" :list="list" />
+      <b-navbar-items
+        :id="id"
+        :list="list"
+      />
     </slot>
   </nav>
 </template>
@@ -21,7 +30,7 @@ import BNavToggler from "./b-navbar-toggler";
 import BNavbarItems from "./b-navbar-items";
 
 export default {
-  name: "b-navbar",
+  name: "BNavbar",
   components: { BNavBrand, BNavToggler, BNavbarItems },
   props: {
     list: util.props.Array,

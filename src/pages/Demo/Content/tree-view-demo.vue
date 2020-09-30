@@ -1,12 +1,16 @@
 <template>
-  <tree-view :list="list" status="1" v-model="selected" />
+  <tree-view
+    v-model="selected"
+    :list="list"
+    status="1"
+  />
 </template>
 
 <script>
 import TreeView from "@/components/base/Content/TreeView/tree-view.vue";
 
 export default {
-  name: "tree-view-demo",
+  name: "TreeViewDemo",
   components: { TreeView },
   data() {
     return {

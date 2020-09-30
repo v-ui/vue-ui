@@ -7,7 +7,9 @@
     :disabled="disabled"
     :aria-selected="isSelected || (item.status && item.status.selected)"
     @click.stop="$emit('click', item)"
-  >{{ value }}</b-button>
+  >
+    {{ value }}
+  </b-button>
 </template>
 
 <script>
@@ -16,7 +18,7 @@ import util from "@/components/util/index.js";
 import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
-  name: "b-dropdown-panel-item",
+  name: "BDropdownPanelItem",
   components: { BButton },
   mixins: [ util.mixins.select.selectItem, ],
   props: {

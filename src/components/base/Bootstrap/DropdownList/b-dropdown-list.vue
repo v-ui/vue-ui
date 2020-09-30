@@ -11,11 +11,23 @@
       :multiple="isMultiple"
       @deleteItem="deleteItem"
     >
-      <template #trigger><slot name="trigger" /></template>
-      <template #icon><slot name="icon" /></template>
+      <template #trigger>
+        <slot name="trigger" />
+      </template>
+      <template #icon>
+        <slot name="icon" />
+      </template>
       <slot>
-        <b-dropdown-header v-if="search" @click.native="headerClick">
-          <b-text v-model="searchText" hide-icon type="search" size="sm" />
+        <b-dropdown-header
+          v-if="search"
+          @click.native="headerClick"
+        >
+          <b-text
+            v-model="searchText"
+            hide-icon
+            type="search"
+            size="sm"
+          />
         </b-dropdown-header>
         <b-dropdown-divider v-if="search" />
         <b-dropdown-item
@@ -35,11 +47,21 @@
         />
       </slot>
     </b-dropdown-picker>
-    <b-valid v-if="validInfo || $slots.valid" state="valid">
-      <slot name="valid">{{ validInfo }}</slot>
+    <b-valid
+      v-if="validInfo || $slots.valid"
+      state="valid"
+    >
+      <slot name="valid">
+        {{ validInfo }}
+      </slot>
     </b-valid>
-    <b-valid v-if="invalidInfo || $slots.invalid" state="invalid">
-      <slot name="invalid">{{ invalidInfo }}</slot>
+    <b-valid
+      v-if="invalidInfo || $slots.invalid"
+      state="invalid"
+    >
+      <slot name="invalid">
+        {{ invalidInfo }}
+      </slot>
     </b-valid>
     <b-info :info="info" />
   </div>
@@ -59,7 +81,7 @@ import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-dropdown-list",
+  name: "BDropdownList",
   components: {
     BDropdownPicker,
     BDropdownHeader,

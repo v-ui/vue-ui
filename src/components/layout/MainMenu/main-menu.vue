@@ -2,13 +2,23 @@
   <nav class="container h-100 m-0 p-0">
     <ul class="list-group d-inline-block overflow-auto bg-primary h-100 w-100 p-0">
       <!-- 建议不多于七个汉子，超出部分会被隐藏 -->
-      <NavItem v-for="(item, key) in Routers" :key="key" class="NavItem" :model="item">
+      <NavItem
+        v-for="(item, key) in Routers"
+        :key="key"
+        class="NavItem"
+        :model="item"
+      >
         <router-link
           class="list-group-item bg-primary text-white text-decoration-none d-flex justify-content-start"
           to
         >
-          <i class="mr-2" :class="item.icon || 'fas fa-dot-circle'" />
-          <font class="text-truncate">{{ item.SubsystemName | worldUpperCase | firstUpperCase }}</font>
+          <i
+            class="mr-2"
+            :class="item.icon || 'fas fa-dot-circle'"
+          />
+          <font class="text-truncate">
+            {{ item.SubsystemName | worldUpperCase | firstUpperCase }}
+          </font>
         </router-link>
       </NavItem>
     </ul>
@@ -19,7 +29,7 @@
 import util from '@/components/util/index.js'
 
 export default {
-  name: "main-menu",
+  name: "MainMenu",
   components: {
     NavItem: () => import("./main-menu-item.vue")
   },

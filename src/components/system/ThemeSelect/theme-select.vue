@@ -12,13 +12,18 @@
 import BDropdown from "@/components/base/Bootstrap/Dropdown/b-dropdown.vue";
 
 export default {
-  name: "theme-select",
+  name: "ThemeSelect",
   components: { BDropdown },
   data() {
     return {
       list: [],
       theme: localStorage.theme
     };
+  },
+  watch: {
+    theme: function(value) {
+      this.$theme.setTheme(value);
+    }
   },
   async created() {
     let themeList = await JSON.parse(await this.$theme.getThemesList());
@@ -28,11 +33,6 @@ export default {
   methods: {
     menuClick: function(item) {
       this.theme = item.value;
-    }
-  },
-  watch: {
-    theme: function(value) {
-      this.$theme.setTheme(value);
     }
   }
 };

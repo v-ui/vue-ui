@@ -1,7 +1,15 @@
 <template>
-  <div aria-live="polite" aria-atomic="true" class="position-fixed" style="max-height: 500px;">
+  <div
+    aria-live="polite"
+    aria-atomic="true"
+    class="position-fixed"
+    style="max-height: 500px;"
+  >
     <!-- Position it -->
-    <div class="position-absolute overflow-auto pr-2" style="max-height: 480px; top: 0; right: 0;">
+    <div
+      class="position-absolute overflow-auto pr-2"
+      style="max-height: 480px; top: 0; right: 0;"
+    >
       <b-toast
         v-for="(item, index) in list"
         :key="index"
@@ -24,7 +32,7 @@ import util from "@/components/util/index.js";
 import BToast from "./b-toast";
 
 export default {
-  name: "b-toasts",
+  name: "BToasts",
   components: { BToast },
   props: {
     list: util.props.Array,

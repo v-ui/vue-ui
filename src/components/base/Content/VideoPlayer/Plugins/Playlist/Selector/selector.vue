@@ -1,7 +1,15 @@
 <template>
   <div>
-    <div v-if="!disabledList" class="w-100">
-      <b-list class="flex-wrap mb-1" inline :list="list" v-model="selected" />
+    <div
+      v-if="!disabledList"
+      class="w-100"
+    >
+      <b-list
+        v-model="selected"
+        class="flex-wrap mb-1"
+        inline
+        :list="list"
+      />
       <hr class="my-1">
     </div>
     <div class="row no-gutters">
@@ -24,7 +32,7 @@ import BList from "@/components/base/Bootstrap/List/b-list.vue";
 import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
-  name: "c-video-selector",
+  name: "CVideoSelector",
   components: { BList, BButton },
   props: {
     total: util.props.UInt,

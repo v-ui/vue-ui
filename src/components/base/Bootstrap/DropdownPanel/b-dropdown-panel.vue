@@ -6,14 +6,18 @@
       menu-width
       :menuWidth="false"
       :label="fillLabel"
-      :canHide="canHide"
+      :can-hide="canHide"
       :placeholder="fillPlaceholder"
       :disabled="disabled"
       :multiple="isMultiple"
       @deleteItem="deleteItem"
     >
-      <template #trigger><slot name="trigger" /></template>
-      <template #icon><slot name="icon" /></template>
+      <template #trigger>
+        <slot name="trigger" />
+      </template>
+      <template #icon>
+        <slot name="icon" />
+      </template>
       <slot>
         <b-dropdown-panel-row
           v-model="selectedValues"
@@ -24,11 +28,21 @@
         />
       </slot>
     </b-dropdown-picker>
-    <b-valid v-if="validInfo || $slots.valid" state="valid">
-      <slot name="valid">{{ validInfo }}</slot>
+    <b-valid
+      v-if="validInfo || $slots.valid"
+      state="valid"
+    >
+      <slot name="valid">
+        {{ validInfo }}
+      </slot>
     </b-valid>
-    <b-valid v-if="invalidInfo || $slots.invalid" state="invalid">
-      <slot name="invalid">{{ invalidInfo }}</slot>
+    <b-valid
+      v-if="invalidInfo || $slots.invalid"
+      state="invalid"
+    >
+      <slot name="invalid">
+        {{ invalidInfo }}
+      </slot>
     </b-valid>
     <b-info :info="info" />
   </div>
@@ -44,7 +58,7 @@ import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/Basic/basic-info.vue"
 
 export default {
-  name: 'b-dropdown-panel',
+  name: 'BDropdownPanel',
   components: {
     BDropdownPicker,
     BDropdownPanelRow,

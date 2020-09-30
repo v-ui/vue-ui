@@ -8,7 +8,11 @@
       :class="{'overflow-auto': isActive}"
       @scroll="isActive && $emit('table:scroll', $event, 'activeTableHeader')"
     >
-      <table class="table table-sm m-0" :class="tableClass" style="table-layout: fixed">
+      <table
+        class="table table-sm m-0"
+        :class="tableClass"
+        style="table-layout: fixed"
+      >
         <table-colgroup :colgroup="colgroup" />
         <table-head
           v-model="theadCheckboxChecked"
@@ -25,13 +29,17 @@
     </div>
     <!-- body -->
     <div
+      ref="TBody"
       class="p-0 overflow-auto"
       style="min-height: 98px"
-      ref="TBody"
       @scroll="$emit('table:scroll', $event, isActive ? 'activeTableBody' : 'fixedTableBody' )"
     >
       <template v-if="!hideData">
-        <table class="table m-0" :class="tableClass" style="table-layout: fixed">
+        <table
+          class="table m-0"
+          :class="tableClass"
+          style="table-layout: fixed"
+        >
           <table-colgroup :colgroup="colgroup" />
           <table-body
             v-model="selectedOptions"
@@ -58,7 +66,11 @@
       :class="{'overflow-auto': isActive}"
       @scroll="isActive && $emit('table:scroll', $event, 'activeTableFooter')"
     >
-      <table class="table m-0" :class="tableClass" style="table-layout: fixed">
+      <table
+        class="table m-0"
+        :class="tableClass"
+        style="table-layout: fixed"
+      >
         <table-colgroup :colgroup="colgroup" />
         <table-foot :foot="foot" />
       </table>
@@ -76,7 +88,7 @@ import TableBody from "./Body/table-body";
 import TableFoot from "./Foot/table-foot";
 
 export default {
-  name: "c-table",
+  name: "CTable",
   components: { TableColgroup, TableHead, TableBody, TableFoot },
   model: {
     prop: "selected",
@@ -171,6 +183,14 @@ export default {
       return (this.list && this.list.rowStyle) || {};
     }
   },
+  watch: {
+    selected: function(value) {
+      this.selectedOptions = value;
+    },
+    selectedOptions: function(value) {
+      this.$emit("table:selected", value);
+    }
+  },
   mounted() {
     this.init();
   },
@@ -217,14 +237,6 @@ export default {
         e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e);
       });
       return arr;
-    }
-  },
-  watch: {
-    selected: function(value) {
-      this.selectedOptions = value;
-    },
-    selectedOptions: function(value) {
-      this.$emit("table:selected", value);
     }
   }
 };

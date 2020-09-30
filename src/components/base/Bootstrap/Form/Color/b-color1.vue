@@ -1,5 +1,10 @@
 <template>
-  <b-drop-picker :style="style" placeholder="请选择" :value="showValue" :text-color="textColor">
+  <b-drop-picker
+    :style="style"
+    placeholder="请选择"
+    :value="showValue"
+    :text-color="textColor"
+  >
     <div class="row text-center px-1 mx-1 my-2">
       <b-number
         ref="r"
@@ -43,9 +48,24 @@
         :readonly="disabled"
       />
     </div>
-    <b-range :min="rgbmin" :max="rgbmax" v-model="color.r" :disabled="disabled" />
-    <b-range :min="rgbmin" :max="rgbmax" v-model="color.g" :disabled="disabled" />
-    <b-range :min="rgbmin" :max="rgbmax" v-model="color.b" :disabled="disabled" />
+    <b-range
+      v-model="color.r"
+      :min="rgbmin"
+      :max="rgbmax"
+      :disabled="disabled"
+    />
+    <b-range
+      v-model="color.g"
+      :min="rgbmin"
+      :max="rgbmax"
+      :disabled="disabled"
+    />
+    <b-range
+      v-model="color.b"
+      :min="rgbmin"
+      :max="rgbmax"
+      :disabled="disabled"
+    />
     <b-range
       v-model="color.a"
       :min="amin"
@@ -65,7 +85,7 @@ import BRange from "@/components/base/Bootstrap/FormConter/b-range.vue";
 import BDropPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdown-picker.vue";
 
 export default {
-  name: "b-color",
+  name: "BColor",
   components: { BNumber, BRange, BDropPicker },
   model: {
     prop: "value",
@@ -105,12 +125,6 @@ export default {
       return `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.color.a})`;
     }
   },
-  mounted() {
-    this.color.r = Number(this.value.r) || 0;
-    this.color.g = Number(this.value.g) || 0;
-    this.color.b = Number(this.value.b) || 0;
-    this.color.a = Number(this.value.a) || 1;
-  },
   watch: {
     color: {
       handler: function(value) {
@@ -118,6 +132,12 @@ export default {
       },
       deep: true
     }
+  },
+  mounted() {
+    this.color.r = Number(this.value.r) || 0;
+    this.color.g = Number(this.value.g) || 0;
+    this.color.b = Number(this.value.b) || 0;
+    this.color.a = Number(this.value.a) || 1;
   }
 };
 </script>

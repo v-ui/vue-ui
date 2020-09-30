@@ -2,7 +2,10 @@
   <div class="d-flex align-items-start flex-column vw-100 vh-100">
     <main-header class="min-vw-100 mt-0" />
     <div class="d-flex vw-100 vh-100">
-      <aside class="d-flex align-items-start flex-column bg-primary text-light" style="max-width: 300px">
+      <aside
+        class="d-flex align-items-start flex-column bg-primary text-light"
+        style="max-width: 300px"
+      >
         <main-menu class="overflow-auto" />
         <main-section class="border-top border-light" />
       </aside>
@@ -23,7 +26,7 @@ import MainMenu from '@/components/layout/MainMenu/main-menu.vue'
 import MainSection from '@/components/layout/main-section.vue'
 
 export default {
-  name: "layout",
+  name: "Layout",
   components: {
     MainHeader,
     MainContent,

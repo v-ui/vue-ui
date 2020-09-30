@@ -7,9 +7,15 @@
     v-bind="data.attrs"
     v-on="listeners"
   >
-    <span class="page-link text-center px-1" :disabled="props.disabled">
+    <span
+      class="page-link text-center px-1"
+      :disabled="props.disabled"
+    >
       <slot>{{ props.value }}</slot>
-      <span v-if="props.active" class="sr-only">(current)</span>
+      <span
+        v-if="props.active"
+        class="sr-only"
+      >(current)</span>
     </span>
   </li>
 </template>
@@ -18,7 +24,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "b-pag-item",
+  name: "BPagItem",
   props: {
     value: util.props.String,
     disabled: util.props.Boolean,

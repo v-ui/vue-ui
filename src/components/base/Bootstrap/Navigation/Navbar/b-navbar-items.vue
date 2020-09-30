@@ -1,6 +1,9 @@
 <template>
   <div class="collapse navbar-collapse">
-    <b-nav class="navbar-nav" :list="list" />
+    <b-nav
+      class="navbar-nav"
+      :list="list"
+    />
   </div>
 </template>
 
@@ -9,7 +12,7 @@ import util from "@/components/util/index.js";
 
 import BNav from "@/components/base/Bootstrap/Navigation/Nav/b-nav.vue";
 export default {
-  name: "b-navbar-items",
+  name: "BNavbarItems",
   components: { BNav },
   props: {
     list: util.props.Array,

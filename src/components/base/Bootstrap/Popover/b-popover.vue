@@ -1,7 +1,14 @@
 <template>
   <div>
-    <div ref="popRef" class="d-inline-block" @click="show = !show">
-      <slot aria-describedby="tooltip" name="popRef" />
+    <div
+      ref="popRef"
+      class="d-inline-block"
+      @click="show = !show"
+    >
+      <slot
+        aria-describedby="tooltip"
+        name="popRef"
+      />
     </div>
     <tran-drop>
       <div
@@ -11,13 +18,28 @@
         role="tooltip"
         style="position: absolute; will-change: transform;"
       >
-        <div ref="arrow" class="popover-arrow" data-popper-arrow />
-        <div ref="header" class="popover-header">
-          <slot v-if="title || $slots.header" name="header">
-            <h6 class="m-0 p-0">{{ title }}</h6>
+        <div
+          ref="arrow"
+          class="popover-arrow"
+          data-popper-arrow
+        />
+        <div
+          ref="header"
+          class="popover-header"
+        >
+          <slot
+            v-if="title || $slots.header"
+            name="header"
+          >
+            <h6 class="m-0 p-0">
+              {{ title }}
+            </h6>
           </slot>
         </div>
-        <div ref="body" class="popover-body">
+        <div
+          ref="body"
+          class="popover-body"
+        >
           <slot>{{ content }}</slot>
         </div>
       </div>
@@ -31,7 +53,7 @@ import util from "@/components/util/index.js";
 import tranDrop from "@/components/transition/tran-drop.vue"
 
 export default {
-  name: "b-popover",
+  name: "BPopover",
   components: { tranDrop, },
   mixins: [ util.mixins.popper.base, ],
   props: {

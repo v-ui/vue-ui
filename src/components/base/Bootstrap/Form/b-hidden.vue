@@ -3,6 +3,6 @@
 </template>
 <script>
 export default {
-  name: "b-hidden"
+  name: "BHidden"
 };
 </script>

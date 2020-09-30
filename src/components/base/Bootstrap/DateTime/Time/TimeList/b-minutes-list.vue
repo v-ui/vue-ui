@@ -1,5 +1,10 @@
 <template>
-  <dropdown-list v-model="selectValue" :list="list" @change="change" hide-null />
+  <dropdown-list
+    v-model="selectValue"
+    :list="list"
+    hide-null
+    @change="change"
+  />
 </template>
 
 <script>
@@ -8,7 +13,7 @@ import util from "@/components/util/index.js"
 import dropdownList from "@/components/base/Bootstrap/DropdownList/b-dropdown-list.vue";
 
 export default {
-  name: "b-minutes-list",
+  name: "BMinutesList",
   components: { dropdownList },
   model: {
     prop: "value",

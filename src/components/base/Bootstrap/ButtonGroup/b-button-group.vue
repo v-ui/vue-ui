@@ -1,5 +1,10 @@
 <template>
-  <div v-if="$slots.default" class="btn-group" :class="objClass" role="group">
+  <div
+    v-if="$slots.default"
+    class="btn-group"
+    :class="objClass"
+    role="group"
+  >
     <slot />
   </div>
 </template>
@@ -7,7 +12,7 @@
 import util from "@/components/util/index.js"
 
 export default {
-  name: "b-button-group",
+  name: "BButtonGroup",
   props: {
     size: util.props.size,
     vertical: util.props.Boolean

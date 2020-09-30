@@ -7,13 +7,19 @@
     <div class="row overflow-auto border rounded-lg rounded-left h-100 p-1">
       <ul class="list-group col-4 d-inline-block overflow-auto bg-primary rounded-left h-100 p-0">
         <!-- 建议不多于七个汉子，超出部分会被隐藏 -->
-        <div v-for="(item, index) in Subsystem" :key="index" @click="InitModules(item)">
+        <div
+          v-for="(item, index) in Subsystem"
+          :key="index"
+          @click="InitModules(item)"
+        >
           <router-link
             class="list-group-item bg-primary text-white text-decoration-none d-flex justify-content-between"
             style="cursor: default;"
             to
           >
-            <font class="text-truncate">{{ item }}</font>
+            <font class="text-truncate">
+              {{ item }}
+            </font>
             <i class="fas fa-caret-right" />
           </router-link>
         </div>
@@ -21,7 +27,12 @@
       <ul
         class="list-group col-8 d-inline-block overflow-auto bg-light border border-primary rounded-right h-100 p-0"
       >
-        <NavItem v-for="(item, key) in Modules" :key="key" class="NavItem" :model="item" />˝
+        <NavItem
+          v-for="(item, key) in Modules"
+          :key="key"
+          class="NavItem"
+          :model="item"
+        />˝
       </ul>
     </div>
   </nav>
@@ -29,7 +40,10 @@
 
 <script>
 export default {
-  name: "dropdown-menu-nav",
+  name: "DropdownMenuNav",
+  components: {
+    NavItem: () => import("./item")
+  },
   data() {
     return {
       Routers: [],
@@ -37,9 +51,6 @@ export default {
       Modules: [],
       SubsystemName: ""
     };
-  },
-  components: {
-    NavItem: () => import("./item")
   },
   mounted() {
     this.init();

@@ -28,7 +28,7 @@ import util from "@/components/util/index.js";
   https://unsplash.it/1600/900?random
 */
 export default {
-  name: "c-image",
+  name: "CImage",
   props: {
     src: util.props.src,
     alt: util.props.String,

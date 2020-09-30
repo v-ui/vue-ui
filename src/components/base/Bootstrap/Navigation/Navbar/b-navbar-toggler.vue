@@ -18,7 +18,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "b-navbar-toggler",
+  name: "BNavbarToggler",
   props: {
     target: {
       ...util.props.String,

@@ -34,7 +34,7 @@ import util from "@/components/util/index.js";
 import BasicSelectOption from "./basic-select-option.vue";
 
 export default {
-  name: "basic-select",
+  name: "BasicSelect",
   components: { BasicSelectOption },
   mixins: [util.mixins.form.base, util.mixins.select.select],
   props: {

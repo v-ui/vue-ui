@@ -5,56 +5,153 @@
     <h4>基础属性</h4>
     <hr>
     <div class="row">
-      <font class="col-1">default:</font>
-      <b-select class="col-5" :list="list" />
-      <b-select class="col-5" :list="list" multiple />
+      <font class="col-1">
+        default:
+      </font>
+      <b-select
+        class="col-5"
+        :list="list"
+      />
+      <b-select
+        class="col-5"
+        :list="list"
+        multiple
+      />
     </div>
     <div class="row">
-      <font class="col-1">option group:</font>
-      <b-select class="col-5" :list="list3" />
-      <b-select class="col-5" :list="list3" multiple />
+      <font class="col-1">
+        option group:
+      </font>
+      <b-select
+        class="col-5"
+        :list="list3"
+      />
+      <b-select
+        class="col-5"
+        :list="list3"
+        multiple
+      />
     </div>
     <div class="row">
-      <font class="col-1">value:</font>
-      <b-select class="col-5" :list="list" :value="value" />
-      <b-select class="col-5" :list="list" :value="value1" multiple />
+      <font class="col-1">
+        value:
+      </font>
+      <b-select
+        class="col-5"
+        :list="list"
+        :value="value"
+      />
+      <b-select
+        class="col-5"
+        :list="list"
+        :value="value1"
+        multiple
+      />
     </div>
     <div class="row">
-      <font class="col-1">disabled:</font>
-      <b-select class="col-5" disabled />
-      <b-select class="col-5" :list="list" disabled multiple />
+      <font class="col-1">
+        disabled:
+      </font>
+      <b-select
+        class="col-5"
+        disabled
+      />
+      <b-select
+        class="col-5"
+        :list="list"
+        disabled
+        multiple
+      />
     </div>
     <div class="row">
-      <font class="col-1">hideNull:</font>
-      <b-select class="col-5" :list="list" hideNull />
-      <b-select class="col-5" :list="list" hideNull multiple />
+      <font class="col-1">
+        hideNull:
+      </font>
+      <b-select
+        class="col-5"
+        :list="list"
+        hide-null
+      />
+      <b-select
+        class="col-5"
+        :list="list"
+        hide-null
+        multiple
+      />
     </div>
     <div class="row">
-      <font class="col-1">info:</font>
-      <b-select class="col-5" :list="list" info="info label" />
-      <b-select class="col-5" :list="list" info="info label" multiple />
+      <font class="col-1">
+        info:
+      </font>
+      <b-select
+        class="col-5"
+        :list="list"
+        info="info label"
+      />
+      <b-select
+        class="col-5"
+        :list="list"
+        info="info label"
+        multiple
+      />
     </div>
     <div class="row">
-      <font class="col-1">row:</font>
-      <b-select class="col-10" :list="list2" row="5" multiple />
+      <font class="col-1">
+        row:
+      </font>
+      <b-select
+        class="col-10"
+        :list="list2"
+        row="5"
+        multiple
+      />
     </div>
     <div class="row">
-      <font class="col-1">size(lg):</font>
-      <b-select class="col-5" :list="list" size="lg" />
-      <b-select class="col-5" :list="list" size="lg" multiple />
+      <font class="col-1">
+        size(lg):
+      </font>
+      <b-select
+        class="col-5"
+        :list="list"
+        size="lg"
+      />
+      <b-select
+        class="col-5"
+        :list="list"
+        size="lg"
+        multiple
+      />
     </div>
     <div class="row">
-      <font class="col-1">size(sm):</font>
-      <b-select class="col-5" :list="list" size="sm" />
-      <b-select class="col-5" :list="list" size="sm" multiple />
+      <font class="col-1">
+        size(sm):
+      </font>
+      <b-select
+        class="col-5"
+        :list="list"
+        size="sm"
+      />
+      <b-select
+        class="col-5"
+        :list="list"
+        size="sm"
+        multiple
+      />
     </div>
     <br>
     <h4>v-model</h4>
     <hr>
     <div class="row">
-      <font class="col-1">default: 接收/返回字符串</font>
+      <font class="col-1">
+        default: 接收/返回字符串
+      </font>
       <div class="col-10 row">
-        <b-select class="col-3" :list="list" v-model="value" :info="'selected: ' + value" />
+        <b-select
+          v-model="value"
+          class="col-3"
+          :list="list"
+          :info="'selected: ' + value"
+        />
         <b-select
           v-model="value1"
           class="col-3"
@@ -62,7 +159,12 @@
           :info="'selected: ' + value1"
           multiple
         />
-        <b-select class="col-3" :list="list3" v-model="value2" :info="'selected: ' + value2" />
+        <b-select
+          v-model="value2"
+          class="col-3"
+          :list="list3"
+          :info="'selected: ' + value2"
+        />
         <b-select
           v-model="value3"
           class="col-3"
@@ -73,9 +175,17 @@
       </div>
     </div>
     <div class="row">
-      <font class="col-1">接收/返回对象</font>
+      <font class="col-1">
+        接收/返回对象
+      </font>
       <div class="col-10 row">
-        <b-select class="col-3" :list="list" v-model="value4" :info="'selected: ' + value4" primary-key />
+        <b-select
+          v-model="value4"
+          class="col-3"
+          :list="list"
+          :info="'selected: ' + value4"
+          primary-key
+        />
         <b-select
           v-model="value5"
           class="col-3"
@@ -84,7 +194,13 @@
           primary-key
           multiple
         />
-        <b-select class="col-3" :list="list3" v-model="value6" :info="'selected: ' + value6" primary-key />
+        <b-select
+          v-model="value6"
+          class="col-3"
+          :list="list3"
+          :info="'selected: ' + value6"
+          primary-key
+        />
         <b-select
           v-model="value7"
           class="col-3"
@@ -98,21 +214,38 @@
     <h4>校验</h4>
     <hr>
     <div class="row">
-      <font class="col-1">required:</font>
-      <b-select class="col-5" :list="list" required />
-      <b-select class="col-5" :list="list" required multiple />
+      <font class="col-1">
+        required:
+      </font>
+      <b-select
+        class="col-5"
+        :list="list"
+        required
+      />
+      <b-select
+        class="col-5"
+        :list="list"
+        required
+        multiple
+      />
     </div>
     <div class="row">
       <font class="col-1">
         success
         <br>error:
       </font>
-      <b-select class="col-5" :list="list" invalidInfo="error" validInfo="success" required />
       <b-select
         class="col-5"
         :list="list"
-        invalidInfo="error"
-        validInfo="success"
+        invalid-info="error"
+        valid-info="success"
+        required
+      />
+      <b-select
+        class="col-5"
+        :list="list"
+        invalid-info="error"
+        valid-info="success"
         required
         multiple
       />
@@ -122,13 +255,30 @@
         success
         <br>error(2):
       </font>
-      <b-select class="col-5" :list="list" required>
-        <template #invalid>you can add anlything invalidInfo or DOM</template>
-        <template #valid>you can add anlything validInfo or DOM</template>
+      <b-select
+        class="col-5"
+        :list="list"
+        required
+      >
+        <template #invalid>
+          you can add anlything invalidInfo or DOM
+        </template>
+        <template #valid>
+          you can add anlything validInfo or DOM
+        </template>
       </b-select>
-      <b-select class="col-5" :list="list" required multiple>
-        <template #invalid>you can add anlything invalidInfo or DOM</template>
-        <template #valid>you can add anlything validInfo or DOM</template>
+      <b-select
+        class="col-5"
+        :list="list"
+        required
+        multiple
+      >
+        <template #invalid>
+          you can add anlything invalidInfo or DOM
+        </template>
+        <template #valid>
+          you can add anlything validInfo or DOM
+        </template>
       </b-select>
     </div>
   </div>
@@ -138,7 +288,7 @@
 import BSelect from "@/components/base/Bootstrap/Form/b-select.vue";
 
 export default {
-  name: "b-select-demo",
+  name: "BSelectDemo",
   components: { BSelect },
   data() {
     return {

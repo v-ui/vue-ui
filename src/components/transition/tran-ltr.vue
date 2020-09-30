@@ -1,12 +1,15 @@
 <template functional>
-  <transition name="out-in-fade" mode="out-in">
+  <transition
+    name="out-in-fade"
+    mode="out-in"
+  >
     <slot />
   </transition>
 </template>
 
 <script>
 export default {
-  name: "tran-ltr"
+  name: "TranLtr"
 };
 </script>
 <style>

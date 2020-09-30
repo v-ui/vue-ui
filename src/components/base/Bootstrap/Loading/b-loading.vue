@@ -1,5 +1,8 @@
 <template>
-  <div :class="objClass" role="status">
+  <div
+    :class="objClass"
+    role="status"
+  >
     <span class="sr-only">Loading...</span>
   </div>
 </template>
@@ -8,7 +11,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "b-loading",
+  name: "BLoading",
   props: {
     color: {
       ...util.props.textColor,

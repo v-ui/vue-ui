@@ -19,7 +19,7 @@ import util from "@/components/util/index.js";
 import BDropdownMenu from "@/components/base/Bootstrap/Dropdown/b-dropdown-menu.vue";
 
 export default {
-  name: "b-nav-item-dropdown",
+  name: "BNavItemDropdown",
   components: { BDropdownMenu },
   props: {
     list: util.props.Array,

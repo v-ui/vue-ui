@@ -3,7 +3,7 @@
     :placeholder="fillPlaceholder"
     :label="showValue"
     :info="message"
-    :canHide="canHide"
+    :can-hide="canHide"
     :disabled="disabled"
   >
     <template #icon>
@@ -29,7 +29,7 @@ import BDatePanel from '@/components/base/Bootstrap/DateTime/Date/DatePicker/b-d
 import dropdownPanel from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel.vue";
 
 export default {
-  name: "b-date-picker",
+  name: "BDatePicker",
   components: { BDatePanel, dropdownPanel, },
   mixins: [
     util.mixins.form.base,

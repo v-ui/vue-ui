@@ -2,36 +2,81 @@
   <div>
     <h2>b-collapse</h2>
     <hr>
-    <a class="btn btn-primary" role="button" v-coll:control="`#${id}`">Toggle first element</a>
-    <button class="btn btn-primary" type="button" v-coll:control="`#${id}`">Toggle second element</button>
-    <b-collapse :id="id">content</b-collapse>
-    <hr />
+    <a
+      v-coll:control="`#${id}`"
+      class="btn btn-primary"
+      role="button"
+    >Toggle first element</a>
+    <button
+      v-coll:control="`#${id}`"
+      class="btn btn-primary"
+      type="button"
+    >
+      Toggle second element
+    </button>
+    <b-collapse :id="id">
+      content
+    </b-collapse>
+    <hr>
     <h2>box-accordion</h2>
-    <hr />
+    <hr>
     <div class="row pt-1">
-      <font class="col-1">default</font>
+      <font class="col-1">
+        default
+      </font>
       <div class="col-11 accordion">
-        <box-accordion title="title">content</box-accordion>
-        <box-accordion title="title">content</box-accordion>
+        <box-accordion title="title">
+          content
+        </box-accordion>
+        <box-accordion title="title">
+          content
+        </box-accordion>
       </div>
     </div>
     <div class="row pt-1">
-      <font class="col-1">parent</font>
-      <div class="col-11 accordion" id="accordion">
-        <box-accordion title="title" parent="#accordion">content</box-accordion>
-        <box-accordion title="title" parent="#accordion">content</box-accordion>
+      <font class="col-1">
+        parent
+      </font>
+      <div
+        id="accordion"
+        class="col-11 accordion"
+      >
+        <box-accordion
+          title="title"
+          parent="#accordion"
+        >
+          content
+        </box-accordion>
+        <box-accordion
+          title="title"
+          parent="#accordion"
+        >
+          content
+        </box-accordion>
       </div>
     </div>
-    <hr />
+    <hr>
     <h2>box-accordion-list</h2>
-    <hr />
+    <hr>
     <div class="row pt-1">
-      <font class="col-1">default</font>
-      <box-accordion-list class="col-11" :list="list" />
+      <font class="col-1">
+        default
+      </font>
+      <box-accordion-list
+        class="col-11"
+        :list="list"
+      />
     </div>
     <div class="row pt-1">
-      <font class="col-1">parent</font>
-      <box-accordion-list class="col-11" id="accordionList" :list="list" parent="#accordionList" />
+      <font class="col-1">
+        parent
+      </font>
+      <box-accordion-list
+        id="accordionList"
+        class="col-11"
+        :list="list"
+        parent="#accordionList"
+      />
     </div>
   </div>
 </template>
@@ -44,7 +89,7 @@ import BoxAccordion from "@/components/box/Accordion/box-accordion.vue";
 import BoxAccordionList from "@/components/box/Accordion/box-accordion-list.vue";
 
 export default {
-  name: "b-collapse-demo",
+  name: "BCollapseDemo",
   components: { BCollapse, BoxAccordion, BoxAccordionList },
   props: {
     id: {

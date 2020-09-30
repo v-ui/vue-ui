@@ -1,5 +1,8 @@
 <template>
-  <div class="btn-group-toggle" data-toggle="buttons">
+  <div
+    class="btn-group-toggle"
+    data-toggle="buttons"
+  >
     <label
       class="btn"
       :class="[objClass, {'disabled' : disabled}]"
@@ -27,7 +30,7 @@ import util from "@/components/util/index.js";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-checkbox-button-group",
+  name: "BCheckboxButtonGroup",
   components: { BInfo },
   mixins: [util.mixins.form.btn],
   model: {

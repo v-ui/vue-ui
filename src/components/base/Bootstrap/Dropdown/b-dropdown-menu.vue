@@ -1,12 +1,21 @@
 <template>
   <div>
     <!-- TODO: debug with item.label and item.value -->
-    <div v-for="(item, index) in list" :key="index">
-      <h6 v-if="item.header" class="dropdown-header mb-0">
+    <div
+      v-for="(item, index) in list"
+      :key="index"
+    >
+      <h6
+        v-if="item.header"
+        class="dropdown-header mb-0"
+      >
         <slot>{{ item.header }}</slot>
         <b-info :info="item.info" />
       </h6>
-      <div v-else-if="item.divider" class="dropdown-divider" />
+      <div
+        v-else-if="item.divider"
+        class="dropdown-divider"
+      />
       <b-dropdown-item
         v-else-if="item.value"
         :label="item.label || item.value"
@@ -16,7 +25,11 @@
         :disabled="disabled || item.disabled"
         @click.native="$emit('click', item)"
       />
-      <b-dropdown-item-text v-else-if="item.text" :text="item.text" :info="item.info" />
+      <b-dropdown-item-text
+        v-else-if="item.text"
+        :text="item.text"
+        :info="item.info"
+      />
     </div>
   </div>
 </template>
@@ -30,7 +43,7 @@ import BDropdownItemText from "./b-dropdown-item-text.vue";
 import BInfo from "@/components/Basic/basic-info.vue"
 
 export default {
-  name: "b-dropdown-menu",
+  name: "BDropdownMenu",
   components: {
     BDropdownItem,
     BDropdownItemText,

@@ -1,5 +1,8 @@
 <template>
-  <video ref="videoPlayer" class="video-js vjs-default-skin">
+  <video
+    ref="videoPlayer"
+    class="video-js vjs-default-skin"
+  >
     <p class="vjs-no-js">
       To view this video please enable JavaScript, and consider upgrading to a
       web browser that
@@ -41,7 +44,7 @@ import videojs from "video.js";
 import plugins from "./plugins";
 
 export default {
-  name: "c-video",
+  name: "CVideo",
   props: {
     options: util.props.Object,
   },

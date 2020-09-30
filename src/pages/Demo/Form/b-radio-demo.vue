@@ -5,42 +5,106 @@
     <h4>基础属性</h4>
     <hr>
     <div class="row">
-      <font class="col-1">default:</font>
+      <font class="col-1">
+        default:
+      </font>
       <b-radio class="col-11" />
     </div>
     <div class="row">
-      <font class="col-1">checked:</font>
-      <b-radio class="col-11" :checked="Boolean(true)" />
+      <font class="col-1">
+        checked:
+      </font>
+      <b-radio
+        class="col-11"
+        :checked="Boolean(true)"
+      />
     </div>
     <div class="row">
-      <font class="col-1">disabled:</font>
-      <b-radio class="col-11" disabled />
+      <font class="col-1">
+        disabled:
+      </font>
+      <b-radio
+        class="col-11"
+        disabled
+      />
     </div>
     <div class="row">
-      <font class="col-1">value:</font>
-      <b-radio class="col-11" value="value" />
+      <font class="col-1">
+        value:
+      </font>
+      <b-radio
+        class="col-11"
+        value="value"
+      />
     </div>
     <div class="row">
-      <font class="col-1">label:</font>
-      <b-radio class="col-11" label="label text" />
+      <font class="col-1">
+        label:
+      </font>
+      <b-radio
+        class="col-11"
+        label="label text"
+      />
     </div>
     <div class="row">
-      <font class="col-1">inline:</font>
-      <b-radio class="col-auto" label="radio1" inline />
-      <b-radio class="col-auto" label="radio2" inline />
-      <b-radio class="col-auto" label="radio3" inline />
-      <b-radio class="col-auto" label="radio4" inline />
+      <font class="col-1">
+        inline:
+      </font>
+      <b-radio
+        class="col-auto"
+        label="radio1"
+        inline
+      />
+      <b-radio
+        class="col-auto"
+        label="radio2"
+        inline
+      />
+      <b-radio
+        class="col-auto"
+        label="radio3"
+        inline
+      />
+      <b-radio
+        class="col-auto"
+        label="radio4"
+        inline
+      />
     </div>
     <div class="row">
-      <font class="col-1">name:</font>
-      <b-radio class="col-auto" label="radio1" name="inline-radio" />
-      <b-radio class="col-auto" label="radio2" name="inline-radio" />
-      <b-radio class="col-auto" label="radio3" name="inline-radio" />
-      <b-radio class="col-auto" label="radio4" name="inline-radio" />
+      <font class="col-1">
+        name:
+      </font>
+      <b-radio
+        class="col-auto"
+        label="radio1"
+        name="inline-radio"
+      />
+      <b-radio
+        class="col-auto"
+        label="radio2"
+        name="inline-radio"
+      />
+      <b-radio
+        class="col-auto"
+        label="radio3"
+        name="inline-radio"
+      />
+      <b-radio
+        class="col-auto"
+        label="radio4"
+        name="inline-radio"
+      />
     </div>
     <div class="row">
-      <font class="col-1">info:</font>
-      <b-radio class="col-11" label="label text" info="a radio help info" />
+      <font class="col-1">
+        info:
+      </font>
+      <b-radio
+        class="col-11"
+        label="label text"
+        info="a radio help info"
+      />
     </div>
     <br>
     <h4>v-model</h4>
@@ -51,8 +115,20 @@
         <br>
         ({{ checked }})
       </font>
-      <b-radio class="col-auto" v-model="checked" value="one" label="one" name="v-model-radio" />
-      <b-radio class="col-auto" v-model="checked" value="two" label="two" name="v-model-radio" />
+      <b-radio
+        v-model="checked"
+        class="col-auto"
+        value="one"
+        label="one"
+        name="v-model-radio"
+      />
+      <b-radio
+        v-model="checked"
+        class="col-auto"
+        value="two"
+        label="two"
+        name="v-model-radio"
+      />
     </div>
     <hr>
     <h2>b-radio-group</h2>
@@ -61,20 +137,49 @@
     <hr>
     <hr>
     <div class="row">
-      <font class="col-1">default:</font>
-      <b-radio-group class="col-11" :list="list" name="group-default" />
+      <font class="col-1">
+        default:
+      </font>
+      <b-radio-group
+        class="col-11"
+        :list="list"
+        name="group-default"
+      />
     </div>
     <div class="row">
-      <font class="col-1">disabled:</font>
-      <b-radio-group class="col-11" :list="list" name="group-disabled" disabled inline />
+      <font class="col-1">
+        disabled:
+      </font>
+      <b-radio-group
+        class="col-11"
+        :list="list"
+        name="group-disabled"
+        disabled
+        inline
+      />
     </div>
     <div class="row">
-      <font class="col-1">inline:</font>
-      <b-radio-group class="col-11" :list="list" name="group-inline" inline />
+      <font class="col-1">
+        inline:
+      </font>
+      <b-radio-group
+        class="col-11"
+        :list="list"
+        name="group-inline"
+        inline
+      />
     </div>
     <div class="row">
-      <font class="col-1">info:</font>
-      <b-radio-group class="col-11" :list="list" name="group-info" info="info message" inline />
+      <font class="col-1">
+        info:
+      </font>
+      <b-radio-group
+        class="col-11"
+        :list="list"
+        name="group-info"
+        info="info message"
+        inline
+      />
     </div>
     <br>
     <h4>v-model</h4>
@@ -85,7 +190,13 @@
         <br>
         ({{ value1 }})
       </font>
-      <b-radio-group class="col-11" :list="list" name="group-v-model" v-model="value1" inline />
+      <b-radio-group
+        v-model="value1"
+        class="col-11"
+        :list="list"
+        name="group-v-model"
+        inline
+      />
     </div>
     <div class="row">
       <font class="col-1">
@@ -93,14 +204,28 @@
         <br>
         ({{ value2 }})
       </font>
-      <b-radio-group class="col-11" :list="list" name="group-v-model" v-model="value2" primary-key="value" inline />
+      <b-radio-group
+        v-model="value2"
+        class="col-11"
+        :list="list"
+        name="group-v-model"
+        primary-key="value"
+        inline
+      />
     </div>
     <br>
     <h4>校验</h4>
     <hr>
     <div class="row">
-      <font class="col-1">required:</font>
-      <b-radio-group class="col-11" :list="list" name="group-required" required />
+      <font class="col-1">
+        required:
+      </font>
+      <b-radio-group
+        class="col-11"
+        :list="list"
+        name="group-required"
+        required
+      />
     </div>
     <div class="row">
       <font class="col-1">
@@ -112,8 +237,8 @@
         :list="list"
         name="group-valide-one"
         required
-        invalidInfo="error"
-        validInfo="success"
+        invalid-info="error"
+        valid-info="success"
       />
     </div>
     <div class="row">
@@ -121,28 +246,56 @@
         success
         <br>error(2):
       </font>
-      <b-radio-group class="col-11" :list="list" name="group-valide-two" required>
-        <template #invalid>you can add anlything invalidInfo or DOM</template>
-        <template #valid>you can add anlything validInfo or DOM</template>
+      <b-radio-group
+        class="col-11"
+        :list="list"
+        name="group-valide-two"
+        required
+      >
+        <template #invalid>
+          you can add anlything invalidInfo or DOM
+        </template>
+        <template #valid>
+          you can add anlything validInfo or DOM
+        </template>
       </b-radio-group>
     </div>
     <hr>
     <h2>b-radio-button-group</h2>
     <hr>
     <div class="row">
-      <font class="col-1">default:</font>
-      <b-radio-button-group name="default-button-group" :list="buttongrouplist" />
+      <font class="col-1">
+        default:
+      </font>
+      <b-radio-button-group
+        name="default-button-group"
+        :list="buttongrouplist"
+      />
     </div>
     <div class="row">
-      <font class="col-1">disabled:</font>
-      <b-radio-button-group name="disabled-button-group" :list="buttongrouplist" disabled />
+      <font class="col-1">
+        disabled:
+      </font>
+      <b-radio-button-group
+        name="disabled-button-group"
+        :list="buttongrouplist"
+        disabled
+      />
     </div>
     <div class="row">
-      <font class="col-1">value:</font>
-      <b-radio-button-group name="value-button-group" :list="buttongrouplist" value="value1" />
+      <font class="col-1">
+        value:
+      </font>
+      <b-radio-button-group
+        name="value-button-group"
+        :list="buttongrouplist"
+        value="value1"
+      />
     </div>
     <div class="row">
-      <font class="col-1">info:</font>
+      <font class="col-1">
+        info:
+      </font>
       <b-radio-button-group
         name="info-button-group"
         :list="buttongrouplist"
@@ -153,7 +306,7 @@
       <font class="col-1">
         v-model:
         <br>
-        ({{buttongroupvalue}})
+        ({{ buttongroupvalue }})
       </font>
       <b-radio-button-group
         v-model="buttongroupvalue"
@@ -170,7 +323,7 @@ import BRadioGroup from "@/components/base/Bootstrap/Form/Radio/b-radio-group.vu
 import BRadioButtonGroup from "@/components/base/Bootstrap/Form/Radio/b-radio-button-group.vue";
 
 export default {
-  name: "b-radio-demo",
+  name: "BRadioDemo",
   components: { BRadio, BRadioGroup, BRadioButtonGroup, },
   data() {
     return {

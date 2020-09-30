@@ -1,11 +1,14 @@
 <template>
-  <div class="custom-control custom-radio" :class="{ 'custom-control-inline': inline}">
+  <div
+    class="custom-control custom-radio"
+    :class="{ 'custom-control-inline': inline}"
+  >
     <input
+      :id="id"
       type="radio"
       class="custom-control-input"
       :class="mixClass"
       :style="mixStyle"
-      :id="id"
       :value="value"
       :checked="isChecked"
       :aria-checked="isChecked"
@@ -14,16 +17,32 @@
       v-bind="$attrs"
       v-on="inputListeners"
     >
-    <label class="custom-control-label" :for="id">
+    <label
+      class="custom-control-label"
+      :for="id"
+    >
       <slot>{{ label || value }}</slot>
     </label>
-    <b-valid v-if="validInfo || $slots.valid" state="valid">
-      <slot name="valid">{{ validInfo }}</slot>
+    <b-valid
+      v-if="validInfo || $slots.valid"
+      state="valid"
+    >
+      <slot name="valid">
+        {{ validInfo }}
+      </slot>
     </b-valid>
-    <b-valid v-if="invalidInfo || $slots.invalid" state="invalid">
-      <slot name="invalid">{{ invalidInfo }}</slot>
+    <b-valid
+      v-if="invalidInfo || $slots.invalid"
+      state="invalid"
+    >
+      <slot name="invalid">
+        {{ invalidInfo }}
+      </slot>
     </b-valid>
-    <b-info :class="{ 'pl-1': inline }" :info="info" />
+    <b-info
+      :class="{ 'pl-1': inline }"
+      :info="info"
+    />
   </div>
 </template>
 
@@ -35,7 +54,7 @@ import BInfo from "@/components/Basic/basic-info.vue";
 import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 
 export default {
-  name: "b-radio",
+  name: "BRadio",
   components: { BInfo, BValid },
   mixins: [ util.mixins.base.style, util.mixins.form.base, util.mixins.form.validator],
   inheritAttrs: false,

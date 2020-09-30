@@ -6,7 +6,11 @@
     :rel="`noopener norefferrer ${rel}`"
     :aria-disabled="disabled"
   >
-    <i v-if="!hideIcon && iconClass" class="pr-1 align-self-baseline" :class="iconClass" />
+    <i
+      v-if="!hideIcon && iconClass"
+      class="pr-1 align-self-baseline"
+      :class="iconClass"
+    />
     <slot>{{ fillText }}</slot>
   </a>
 </template>
@@ -17,7 +21,7 @@ import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 export default {
-  name: "c-a",
+  name: "CA",
   props: {
     href: {
       ...util.props.href,
@@ -75,16 +79,16 @@ export default {
       return ["url", "download"].includes(this.kind) ? "_blank" : this.target;
     }
   },
-  mounted() {
-    if (this.disabled) tools.dom.addAttr(this.$el, "index", "-1");
-    if (this.download) tools.dom.addAttr(this.$el, "download", this.download);
-  },
   watch: {
     disabled: function(val) {
       val
         ? tools.dom.addAttr(this.$el, "index", "-1")
         : tools.dom.removeAttr(this.$el, "index");
     }
+  },
+  mounted() {
+    if (this.disabled) tools.dom.addAttr(this.$el, "index", "-1");
+    if (this.download) tools.dom.addAttr(this.$el, "download", this.download);
   }
 };
 </script>

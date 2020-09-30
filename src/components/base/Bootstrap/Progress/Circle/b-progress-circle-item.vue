@@ -12,7 +12,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: 'b-progress-circle-item',
+  name: 'BProgressCircleItem',
   props: {
     r: util.props.UNumber,
     value: util.props.UNumber,

@@ -1,6 +1,12 @@
 <template>
   <tr>
-    <table-serial-td :hideSerial="hideSerial" :rowspan="rowCount" :aria-rowspan="rowCount">No.</table-serial-td>
+    <table-serial-td
+      :hide-serial="hideSerial"
+      :rowspan="rowCount"
+      :aria-rowspan="rowCount"
+    >
+      No.
+    </table-serial-td>
     <table-select-td
       v-model="isChecked"
       :hide-select="hideSelect || selectStatus != 2"
@@ -14,7 +20,9 @@
         :operate="cell.$operate"
         :rowspan="rowCount"
         :aria-rowspan="rowCount"
-      >Operate</table-operate-td>
+      >
+        Operate
+      </table-operate-td>
       <table-head-th
         v-else
         :key="cellIndex"
@@ -36,7 +44,7 @@ import tableSelectTd from "./../Td/table-select-td";
 import tableOperateTd from "./../Td/table-operate-td";
 
 export default {
-  name: "table-head-tr",
+  name: "TableHeadTr",
   components: { tableHeadTh, tableSerialTd, tableSelectTd, tableOperateTd },
   model: {
     prop: "checked",

@@ -1,13 +1,32 @@
 <template>
   <div class="card">
-    <div class="card-header d-flex justify-content-between" v-coll:[id]="'#' + id"  @click="isShow = !isShow">
+    <div
+      v-coll:[id]="'#' + id"
+      class="card-header d-flex justify-content-between"
+      @click="isShow = !isShow"
+    >
       <slot name="header">
-        <h4 class="mb-0">{{ title }}</h4>
+        <h4 class="mb-0">
+          {{ title }}
+        </h4>
       </slot>
-      <i v-if="isShow"  role="button" class="fas fa-chevron-up mb-0" />
-      <i v-else  class="fas fa-chevron-down collapsed mb-0" role="button" />
+      <i
+        v-if="isShow"
+        role="button"
+        class="fas fa-chevron-up mb-0"
+      />
+      <i
+        v-else
+        class="fas fa-chevron-down collapsed mb-0"
+        role="button"
+      />
     </div>
-    <div :id="id" class="collapse" :class="{ show: show }" :data-parent="parent">
+    <div
+      :id="id"
+      class="collapse"
+      :class="{ show: show }"
+      :data-parent="parent"
+    >
       <div class="card-body">
         <slot>{{ content }}</slot>
       </div>
@@ -22,7 +41,7 @@ import util from "@/components/util/index.js";
 import "@/components/base/Bootstrap/Collapse/v-collapse.js";
 
 export default {
-  name: "box-accordion",
+  name: "BoxAccordion",
   props: {
     title: util.props.String,
     content: util.props.String,

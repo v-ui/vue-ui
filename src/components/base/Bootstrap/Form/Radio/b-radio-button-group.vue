@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <div
+      class="btn-group btn-group-toggle"
+      data-toggle="buttons"
+    >
       <label
         v-for="(item, index) in list"
         :key="index"
@@ -9,9 +12,9 @@
         @click="selected = item.value"
       >
         <input
+          :id="item.id"
           type="radio"
           :name="name"
-          :id="item.id"
           autocomplete="off"
           :value="item.value"
           :checked="item.value == value"
@@ -32,7 +35,7 @@ import util from "@/components/util/index.js";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-radio-button-group",
+  name: "BRadioButtonGroup",
   components: { BInfo },
   model: {
     prop: "value",

@@ -10,10 +10,16 @@
       @mouseenter="clearTimer"
       @mouseleave="countDown"
     >
-      <h4 v-if="$slots.header" class="alert-heading">
+      <h4
+        v-if="$slots.header"
+        class="alert-heading"
+      >
         <slot name="header" />
       </h4>
-      <div class="overflow-auto" style="max-height: 200px;">
+      <div
+        class="overflow-auto"
+        style="max-height: 200px;"
+      >
         <slot />
         <sr-msg>{{ fillsrMsg }}</sr-msg>
       </div>
@@ -42,7 +48,7 @@ import srMsg from "@/components/Basic/basic-sr-msg.vue";
 import TranOutIn from "@/components/transition/tran-out-in.vue";
 
 export default {
-  name: "b-alert",
+  name: "BAlert",
   components: {
     srMsg,
     TranOutIn

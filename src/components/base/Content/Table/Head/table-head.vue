@@ -34,7 +34,7 @@ import util from "@/components/util/index.js";
 import TableHeadTr from "./table-head-tr";
 
 export default {
-  name: "table-head",
+  name: "TableHead",
   components: { TableHeadTr },
   model: {
     prop: "selected",

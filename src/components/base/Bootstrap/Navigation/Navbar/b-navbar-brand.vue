@@ -1,5 +1,8 @@
 <template functional>
-  <a class="navbar-brand" :href="props.href">
+  <a
+    class="navbar-brand"
+    :href="props.href"
+  >
     <slot>{{ props.brand }}</slot>
   </a>
 </template>
@@ -8,7 +11,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "b-navbar-brand",
+  name: "BNavbarBrand",
   props: {
     href: {
       ...util.props.href,

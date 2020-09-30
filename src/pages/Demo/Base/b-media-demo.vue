@@ -1,17 +1,16 @@
 <template>
-    <div>
-        <h2>b-media-list</h2>
-        <br>
-        <b-media :list="list"></b-media>
-    </div>
-
+  <div>
+    <h2>b-media-list</h2>
+    <br>
+    <b-media :list="list" />
+  </div>
 </template>
 
 <script>
 import BMedia from '@/components/base/Bootstrap/Media/b-media.vue'
 
 export default {
-    name: 'b-media-demo',
+    name: 'BMediaDemo',
     components: { BMedia, },
     data () {
         return {

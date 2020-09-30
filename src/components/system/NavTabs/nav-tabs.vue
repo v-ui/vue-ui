@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div v-for="(item, index) in Paths" :key="index" class="container overflow-auto px-0">
+    <div
+      v-for="(item, index) in Paths"
+      :key="index"
+      class="container overflow-auto px-0"
+    >
       <div
         v-if="item.pathInfo.name && item.pathInfo.path"
         class="btn btn-primary text-truncate d-flex justify-content-between align-items-center px-1"
@@ -14,7 +18,9 @@
           style="min-width: 3rem;"
           :to="item.pathInfo.path"
         >
-          <font class="px-1 px-1">{{ item.pathInfo.name }}</font>
+          <font class="px-1 px-1">
+            {{ item.pathInfo.name }}
+          </font>
         </router-link>
         <i
           class="fas fa-times-circle px-1"
@@ -35,7 +41,9 @@
         role="button"
         @mousedown="closeTab(RightClickItem, 'rigthClick')"
       >
-        <font class="text-truncate text-decoration-none text-center text-muted d-inline-block">Close</font>
+        <font class="text-truncate text-decoration-none text-center text-muted d-inline-block">
+          Close
+        </font>
       </li>
       <li
         class="list-group-item list-group-item-action btn p-1"
@@ -44,7 +52,9 @@
       >
         <font
           class="text-truncate text-decoration-none text-center text-muted d-inline-block"
-        >Close Others</font>
+        >
+          Close Others
+        </font>
       </li>
       <li
         class="list-group-item list-group-item-action btn p-1"
@@ -53,7 +63,9 @@
       >
         <font
           class="text-truncate text-decoration-none text-center text-muted d-inline-block"
-        >Closs All</font>
+        >
+          Closs All
+        </font>
       </li>
     </ul>
   </div>
@@ -63,7 +75,7 @@
 import router from "@/router/index";
 
 export default {
-  name: "nav-tabs",
+  name: "NavTabs",
   data() {
     return {
       pathList: [],
@@ -74,6 +86,14 @@ export default {
       left: "0px",
       isShow: false
     };
+  },
+  watch: {
+    isShow: function(newValue) {
+      newValue ? this.bindHideEvents() : this.unbindHideEvents();
+    },
+    "pathList.length": function() {
+      sessionStorage.System_NavTabs_PathList = JSON.stringify(this.pathList, null, ['pathInfo', 'index']);
+    }
   },
   created() {
     router.afterEach((to, from) => {
@@ -182,14 +202,6 @@ export default {
       this.RightClickItem = null;
       // 启用右键菜单
       document.oncontextmenu = new Function("return true;");
-    }
-  },
-  watch: {
-    isShow: function(newValue) {
-      newValue ? this.bindHideEvents() : this.unbindHideEvents();
-    },
-    "pathList.length": function() {
-      sessionStorage.System_NavTabs_PathList = JSON.stringify(this.pathList, null, ['pathInfo', 'index']);
     }
   }
 };

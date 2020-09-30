@@ -1,40 +1,70 @@
 <template>
   <div>
     <h2>b-loading</h2>
-    <hr />
+    <hr>
     <div class="row py-1">
-      <font class="col-1">default:</font>
+      <font class="col-1">
+        default:
+      </font>
       <b-loading />
     </div>
     <div class="row py-1">
-      <font class="col-1">status:</font>
+      <font class="col-1">
+        status:
+      </font>
       <font class="col-1">
         border
-        <br />(default):
+        <br>(default):
       </font>
       <b-loading status="border" />
-      <font class="col-1">grow:</font>
+      <font class="col-1">
+        grow:
+      </font>
       <b-loading status="grow" />
     </div>
     <div class="row py-1">
-      <font class="col-1">size:</font>
-      <font class="col-1">(default):</font>
+      <font class="col-1">
+        size:
+      </font>
+      <font class="col-1">
+        (default):
+      </font>
       <b-loading />
-      <font class="col-1">sm:</font>
+      <font class="col-1">
+        sm:
+      </font>
       <b-loading size="sm" />
-      <b-loading size="sm" status="grow"/>
+      <b-loading
+        size="sm"
+        status="grow"
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">color:</font>
+      <font class="col-1">
+        color:
+      </font>
       <div class="col-11">
         <div class="row">
-          <div class="col-1" v-for="item in colors" :key="item">
+          <div
+            v-for="item in colors"
+            :key="item"
+            class="col-1"
+          >
             <b-loading :color="item" />
-            <b-loading :color="item" status="grow" />
+            <b-loading
+              :color="item"
+              status="grow"
+            />
           </div>
         </div>
         <div class="row">
-          <font v-for="item in colors" :key="item" class="col-1 text-wrap">{{ item }}</font>
+          <font
+            v-for="item in colors"
+            :key="item"
+            class="col-1 text-wrap"
+          >
+            {{ item }}
+          </font>
         </div>
       </div>
     </div>
@@ -47,7 +77,7 @@ import variables from "@/components/util/variables.js";
 import BLoading from "@/components/base/Bootstrap/Loading/b-loading.vue";
 
 export default {
-  name: "b-loading-demo",
+  name: "BLoadingDemo",
   components: { BLoading },
   data() {
     return {

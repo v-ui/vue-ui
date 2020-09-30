@@ -1,12 +1,18 @@
 <template>
   <nav aria-label="Page navigation">
     <ul class="pagination m-0">
-      <item :disabled="startDisabled" @click="startClick">
+      <item
+        :disabled="startDisabled"
+        @click="startClick"
+      >
         <slot name="start">
           <i :class="icon.stepBackward" />
         </slot>
       </item>
-      <item :disabled="previousDisabled" @click="previousClick">
+      <item
+        :disabled="previousDisabled"
+        @click="previousClick"
+      >
         <slot name="previous">
           <i :class="icon.caretLeft" />
         </slot>
@@ -21,12 +27,18 @@
           @click="itemClick(value)"
         />
       </slot>
-      <item :disabled="nextDisabled" @click="nextClick">
+      <item
+        :disabled="nextDisabled"
+        @click="nextClick"
+      >
         <slot name="next">
           <i :class="icon.caretRight" />
         </slot>
       </item>
-      <item :disabled="endDisabled" @click="endClick">
+      <item
+        :disabled="endDisabled"
+        @click="endClick"
+      >
         <slot name="end">
           <i :class="icon.stepForward" />
         </slot>
@@ -42,7 +54,7 @@ import util from "@/components/util/index.js";
 import item from "./b-pag-item";
 
 export default {
-  name: "b-pag",
+  name: "BPag",
   components: { item },
   model: {
     prop: "active",
@@ -140,6 +152,14 @@ export default {
       return this.endDisabled;
     }
   },
+  watch: {
+    active: function(value) {
+      this.select = value;
+    },
+    select: function(value) {
+      this.$emit("change", value);
+    }
+  },
   methods: {
     startClick: function() {
       if (this.startDisabled) return;
@@ -160,14 +180,6 @@ export default {
     itemClick: function(value) {
       if (this.separator == value) return;
       this.select = value;
-    }
-  },
-  watch: {
-    active: function(value) {
-      this.select = value;
-    },
-    select: function(value) {
-      this.$emit("change", value);
     }
   }
 };

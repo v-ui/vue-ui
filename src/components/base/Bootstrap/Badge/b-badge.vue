@@ -1,11 +1,24 @@
 <template>
-  <span v-if="!href" class="badge" :class="objClass" :style="objStyle">
+  <span
+    v-if="!href"
+    class="badge"
+    :class="objClass"
+    :style="objStyle"
+  >
     <slot />
     <sr-msg v-if="!this.$slots.default">{{ fillsrMsg }}</sr-msg>
   </span>
-  <base-a v-else class="badge" :class="objClass" :href="href" :style="objStyle">
+  <base-a
+    v-else
+    class="badge"
+    :class="objClass"
+    :href="href"
+    :style="objStyle"
+  >
     <slot />
-    <sr-msg v-if="!this.$slots.default">{{ fillsrMsg }}</sr-msg>
+    <sr-msg v-if="!this.$slots.default">
+      {{ fillsrMsg }}
+    </sr-msg>
   </base-a>
 </template>
 
@@ -17,7 +30,7 @@ import BaseA from "@/components/base/Content/A/c-a.vue";
 import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 export default {
-  name: "b-badge",
+  name: "BBadge",
   components: { BaseA, srMsg },
   props: {
     color: {

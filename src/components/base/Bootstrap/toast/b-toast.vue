@@ -10,14 +10,23 @@
     data-animation="true"
   >
     <!-- header -->
-    <div class="toast-header" style="font-size: 1.2em">
+    <div
+      class="toast-header"
+      style="font-size: 1.2em"
+    >
       <slot name="header">
         <slot name="icon">
-          <i class="mr-2" :class="iconClass" />
+          <i
+            class="mr-2"
+            :class="iconClass"
+          />
         </slot>
         <strong class="mr-auto">
           <font v-if="!href">{{ fillTitle }}</font>
-          <a v-else :href="href">{{ fillTitle }}</a>
+          <a
+            v-else
+            :href="href"
+          >{{ fillTitle }}</a>
         </strong>
         <b-info :info="info" />
       </slot>
@@ -45,7 +54,7 @@ import util from "@/components/util/index.js";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-toast",
+  name: "BToast",
   components: { BInfo, },
   mixins: [ util.mixins.moment.base, ],
   props: {

@@ -10,8 +10,8 @@
       :disabled="disabled"
       :hide-header="false"
       :range="type === enumTypeStatus.year && range"
-      :selectedStart="selectedStart"
-      :selectedEnd="selectedEnd"
+      :selected-start="selectedStart"
+      :selected-end="selectedEnd"
       @year:checked="yearChecked"
     />
     <month-panel
@@ -24,8 +24,8 @@
       :disabled="disabled"
       :hide-header="false"
       :range="type === enumTypeStatus.month && range"
-      :selectedStart="selectedStart"
-      :selectedEnd="selectedEnd"
+      :selected-start="selectedStart"
+      :selected-end="selectedEnd"
       @month2Year="month2Year"
       @month:checked="monthChecked"
     />
@@ -39,8 +39,8 @@
       :disabled="disabled"
       :hide-header="false"
       :range="type === enumTypeStatus.date && range"
-      :selectedStart="selectedStart"
-      :selectedEnd="selectedEnd"
+      :selected-start="selectedStart"
+      :selected-end="selectedEnd"
       @date2Month="date2Month"
       @date:checked="dateChecked"
     />
@@ -55,7 +55,7 @@ import monthPanel from "../Panel/date-month-panel";
 import datePanel from "../Panel/date-date-panel";
 
 export default {
-  name: "date-panel-select",
+  name: "DatePanelSelect",
   components: { yearPanel, monthPanel, datePanel },
   mixins: [
     util.mixins.moment.base,

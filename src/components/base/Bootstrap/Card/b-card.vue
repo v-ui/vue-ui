@@ -1,7 +1,16 @@
 <template functional>
-  <basic-slot class="card" :class="[ data.class, data.staticClass ]" :style="data.style" v-bind="data.attrs" v-on="listeners">
+  <basic-slot
+    class="card"
+    :class="[ data.class, data.staticClass ]"
+    :style="data.style"
+    v-bind="data.attrs"
+    v-on="listeners"
+  >
     <slot name="card">
-      <basic-slot v-if="!slots().image" class="card-header">
+      <basic-slot
+        v-if="!slots().image"
+        class="card-header"
+      >
         <slot name="header" />
       </basic-slot>
       <slot name="image" />
@@ -22,6 +31,6 @@
 import '@/components/Basic/basic-slot.js'
 
 export default {
-  name: "b-card",
+  name: "BCard",
 };
 </script>

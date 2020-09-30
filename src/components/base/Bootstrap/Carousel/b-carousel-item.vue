@@ -1,7 +1,14 @@
 <template>
   <div class="carousel-item">
-    <img :src="imgSrc" class="d-block w-100" :alt="item.alt">
-    <div v-if="item.title || item.context" class="carousel-caption d-none d-md-block">
+    <img
+      :src="imgSrc"
+      class="d-block w-100"
+      :alt="item.alt"
+    >
+    <div
+      v-if="item.title || item.context"
+      class="carousel-caption d-none d-md-block"
+    >
       <h5>{{ item.title }}</h5>
       <p>{{ item.context }}</p>
     </div>
@@ -11,7 +18,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "b-carousel-item",
+  name: "BCarouselItem",
   props: {
     item: util.props.Object,
   },

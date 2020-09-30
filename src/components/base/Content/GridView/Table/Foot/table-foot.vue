@@ -1,6 +1,9 @@
 <template>
   <tfoot>
-    <tr v-for="(row, rowIndex) in foot" :key="rowIndex">
+    <tr
+      v-for="(row, rowIndex) in foot"
+      :key="rowIndex"
+    >
       <th
         v-for="(col, colIndex) in row.cols"
         :key="colIndex"
@@ -8,7 +11,9 @@
         :rowspan="col.rowspan || 1"
         :colspan="col.colspan || 1"
         :scope="(col.rowspan > 1 || col.colspan > 1) ? 'colgroup' : 'col'"
-      >{{ col.title }}</th>
+      >
+        {{ col.title }}
+      </th>
     </tr>
   </tfoot>
 </template>
@@ -17,7 +22,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "table-foot",
+  name: "TableFoot",
   props: {
     foot: util.props.Array,
   }

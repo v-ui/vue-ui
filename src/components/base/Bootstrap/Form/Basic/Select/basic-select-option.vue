@@ -6,8 +6,15 @@
     :aria-selected="isSelected"
     :disabled="item.disabled"
     :aria-disabled="item.disabled"
-  >{{ item.label || item.value || item }}</option>
-  <optgroup v-else :label="item.label" :disabled="item.disabled" :aria-disabled="item.disabled">
+  >
+    {{ item.label || item.value || item }}
+  </option>
+  <optgroup
+    v-else
+    :label="item.label"
+    :disabled="item.disabled"
+    :aria-disabled="item.disabled"
+  >
     <basic-select-option
       v-for="(child, index) in item.children"
       :key="index"
@@ -23,7 +30,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "basic-select-option",
+  name: "BasicSelectOption",
   components: { BasicSelectOption: () => import("./basic-select-option.vue") },
   mixins: [util.mixins.select.selectItem],
 };

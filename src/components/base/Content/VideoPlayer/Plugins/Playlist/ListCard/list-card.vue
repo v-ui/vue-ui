@@ -59,7 +59,7 @@ import util from "@/components/util/index.js";
 import CImage from "@/components/base/Content/Image/c-image.vue";
 
 export default {
-  name: "v-video-list-card",
+  name: "VVideoListCard",
   components: { CImage },
   props: {
     list: util.props.Array,

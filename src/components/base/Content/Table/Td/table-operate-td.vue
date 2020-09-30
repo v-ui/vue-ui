@@ -1,12 +1,15 @@
 <template>
-  <th class="d-print-none align-middle text-center mx-1" data-type="operate">
+  <th
+    class="d-print-none align-middle text-center mx-1"
+    data-type="operate"
+  >
     <slot>
       <span
         v-for="(item, index) in oper"
         :key="index"
+        v-tip:tooltip="item.value.tip"
         class="border-0 bg-transparent text-primary text-center p-0 mx-1"
         style="cursor: pointer; font-size: 1em"
-        v-tip:tooltip="item.value.tip"
         @click="$emit('tr:oper', item.type)"
       >
         <i :class="item.value.icon" />
@@ -19,7 +22,7 @@
 import config from "@/config/index.js";
 
 export default {
-  name: "table-operate-td",
+  name: "TableOperateTd",
   props: {
     operate: {
       type: Array,

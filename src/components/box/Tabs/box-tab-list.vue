@@ -31,7 +31,7 @@ import BNav from "@/components/base/Bootstrap/Navigation/Nav/b-nav.vue";
 import BNavItem from "@/components/base/Bootstrap/Navigation/Nav/b-nav-item.vue";
 
 export default {
-  name: "box-tab-list",
+  name: "BoxTabList",
   components: { BNav, BNavItem },
   props: {
     list: util.props.Array,

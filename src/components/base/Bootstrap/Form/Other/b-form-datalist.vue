@@ -1,7 +1,14 @@
 <template functional>
-  <datalist :id="props.id" v-bind="data.attrs" v-on="listeners">
+  <datalist
+    :id="props.id"
+    v-bind="data.attrs"
+    v-on="listeners"
+  >
     <template v-for="(value, index) in props.datalist">
-      <option :value="value" :key="index" />
+      <option
+        :key="index"
+        :value="value"
+      />
     </template>
   </datalist>
 </template>
@@ -9,7 +16,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "b-form-datalist",
+  name: "BFormDatalist",
   props: {
     id: {
       type: String,

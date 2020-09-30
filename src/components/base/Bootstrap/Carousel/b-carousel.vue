@@ -1,6 +1,14 @@
 <template v-if="content && content.length > 0">
-  <div :id="guid" class="carousel slide" :class="{'carousel-fade': fade}" data-ride="carousel">
-    <ol v-if="indicators" class="carousel-indicators">
+  <div
+    :id="guid"
+    class="carousel slide"
+    :class="{'carousel-fade': fade}"
+    data-ride="carousel"
+  >
+    <ol
+      v-if="indicators"
+      class="carousel-indicators"
+    >
       <li
         v-for="(item, index) in content"
         :key="index"
@@ -27,7 +35,10 @@
         data-slide="prev"
         @click="activeIndex < content.length - 1 ? activeIndex++ : 0"
       >
-        <span class="carousel-control-prev-icon" aria-hidden="true" />
+        <span
+          class="carousel-control-prev-icon"
+          aria-hidden="true"
+        />
         <sr-msg>Previous</sr-msg>
       </base-a>
       <base-a
@@ -37,7 +48,10 @@
         data-slide="next"
         @click="activeIndex > 0 ? activeIndex-- : content.length - 1"
       >
-        <span class="carousel-control-next-icon" aria-hidden="true" />
+        <span
+          class="carousel-control-next-icon"
+          aria-hidden="true"
+        />
         <sr-msg>Next</sr-msg>
       </base-a>
     </template>
@@ -53,7 +67,7 @@ import srMsg from "@/components/Basic/basic-sr-msg.vue";
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
 export default {
-  name: "b-carousel",
+  name: "BCarousel",
   components: { BCarouselItem, BaseA, srMsg },
   props: {
     content: util.props.String,

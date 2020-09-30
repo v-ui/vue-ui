@@ -10,7 +10,10 @@
       @checknow="checknow"
       @backward="backward"
     />
-    <hr v-show="!$slots.week" class="my-1">
+    <hr
+      v-show="!$slots.week"
+      class="my-1"
+    >
     <div class="text-center">
       <slot name="week" />
       <panel-row
@@ -30,7 +33,7 @@ import panelHeader from "./date-panel-header";
 import panelRow from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel-row.vue"
 
 export default {
-  name: 'date-panel-temp',
+  name: 'DatePanelTemp',
   components: { panelHeader, panelRow, },
   props: {
     list: util.props.Array,

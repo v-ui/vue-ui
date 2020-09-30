@@ -1,5 +1,9 @@
 <template>
-  <section class="row no-gutters h-100 mx-auto" :class="{row: set != 'top',}"  role="main">
+  <section
+    class="row no-gutters h-100 mx-auto"
+    :class="{row: set != 'top',}"
+    role="main"
+  >
     <!-- Contents on top -->
     <!-- <b-scrollspy-nav
       v-if="showContents && set == 'top'"
@@ -11,7 +15,10 @@
     /> -->
     <!-- list of artices -->
     <div class="col-3 bg-light h-100">
-      <div v-if="artices && artices.length && artices.length > 0" class="row no-gutters h-100">
+      <div
+        v-if="artices && artices.length && artices.length > 0"
+        class="row no-gutters h-100"
+      >
         <div class="col" />
         <b-scrollspy-nav
           :id="scrollspyId"
@@ -33,9 +40,17 @@
       data-offset="20"
     >
       <header class="mx-2">
-        <slot v-if="$slots.header" name="header" />
+        <slot
+          v-if="$slots.header"
+          name="header"
+        />
         <div v-else>
-          <h1 class="text-center" v-if="title">{{ title }}</h1>
+          <h1
+            v-if="title"
+            class="text-center"
+          >
+            {{ title }}
+          </h1>
           <div class=" mr-3 text-right text-muted">
             <span v-if="author">{{ author }}</span><br>
             <span v-if="time"><time>{{ time }}</time></span>
@@ -46,7 +61,10 @@
       <div ref="artical">
         <slot class="mx-2" />
       </div>
-      <footer v-if="info || $slots.footer" class="ixed-bottom">
+      <footer
+        v-if="info || $slots.footer"
+        class="ixed-bottom"
+      >
         <hr>
         <slot name="footer">
           <div class="p-2">
@@ -75,7 +93,7 @@ import util from "@/components/util/index.js";
 import BScrollspyNav from "./ScrollspyNav/b-scrollspy-nav";
 
 export default {
-  name: "b-scrollspy",
+  name: "BScrollspy",
   components: { BScrollspyNav },
   props: {
     id: {

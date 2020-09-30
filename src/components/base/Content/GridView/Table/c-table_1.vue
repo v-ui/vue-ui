@@ -1,9 +1,21 @@
 <template>
-  <div class="row m-0" data-name="tableContainer">
-    <div class="col-4 p-0" data-name="fixedTableContainer">
+  <div
+    class="row m-0"
+    data-name="tableContainer"
+  >
+    <div
+      class="col-4 p-0"
+      data-name="fixedTableContainer"
+    >
       <!-- headr -->
-      <div class="p-0" data-name="fixedTableHeadr">
-        <table class="table m-0" style="table-layout: fixed">
+      <div
+        class="p-0"
+        data-name="fixedTableHeadr"
+      >
+        <table
+          class="table m-0"
+          style="table-layout: fixed"
+        >
           <colgroup>
             <col width="58px;">
             <col width="15%">
@@ -14,27 +26,50 @@
           </colgroup>
           <thead class="thead-dark">
             <tr>
-              <th rowspan="2" scope="col">#</th>
-              <th colspan="5" scope="col">First</th>
+              <th
+                rowspan="2"
+                scope="col"
+              >
+                #
+              </th>
+              <th
+                colspan="5"
+                scope="col"
+              >
+                First
+              </th>
             </tr>
             <tr>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
             </tr>
           </thead>
         </table>
       </div>
       <!-- body -->
       <div
+        ref="fixedTableBody"
         class="p-0 overflow-auto"
         style="height:300px; "
-        ref="fixedTableBody"
         @scroll="scroll($event, 'fixedTableBody')"
       >
-        <table class="table table-striped table-hover m-0" style="table-layout: fixed">
+        <table
+          class="table table-striped table-hover m-0"
+          style="table-layout: fixed"
+        >
           <colgroup>
             <col width="58px;">
             <col width="15%">
@@ -45,7 +80,9 @@
           </colgroup>
           <tbody>
             <tr>
-              <td scope="row">1</td>
+              <td scope="row">
+                1
+              </td>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -53,7 +90,9 @@
               <td>ThorntonThorntonThorntonThorntonThornton</td>
             </tr>
             <tr>
-              <td scope="row">2</td>
+              <td scope="row">
+                2
+              </td>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -61,7 +100,9 @@
               <td>ThorntonThorntonThorntonThorntonThornton</td>
             </tr>
             <tr>
-              <td scope="row">3</td>
+              <td scope="row">
+                3
+              </td>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -69,7 +110,9 @@
               <td>ThorntonThorntonThorntonThorntonThornton</td>
             </tr>
             <tr>
-              <td scope="row">4</td>
+              <td scope="row">
+                4
+              </td>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -77,7 +120,9 @@
               <td>ThorntonThorntonThorntonThorntonThornton</td>
             </tr>
             <tr>
-              <td scope="row">5</td>
+              <td scope="row">
+                5
+              </td>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -85,7 +130,9 @@
               <td>ThorntonThorntonThorntonThorntonThornton</td>
             </tr>
             <tr>
-              <td scope="row">6</td>
+              <td scope="row">
+                6
+              </td>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -93,7 +140,9 @@
               <td>ThorntonThorntonThorntonThorntonThornton</td>
             </tr>
             <tr>
-              <td scope="row">7</td>
+              <td scope="row">
+                7
+              </td>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -101,7 +150,9 @@
               <td>ThorntonThorntonThorntonThorntonThornton</td>
             </tr>
             <tr>
-              <td scope="row">8</td>
+              <td scope="row">
+                8
+              </td>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -109,7 +160,9 @@
               <td>ThorntonThorntonThorntonThorntonThornton</td>
             </tr>
             <tr>
-              <td scope="row">9</td>
+              <td scope="row">
+                9
+              </td>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -117,7 +170,9 @@
               <td>ThorntonThorntonThorntonThorntonThornton</td>
             </tr>
             <tr>
-              <td scope="row">10</td>
+              <td scope="row">
+                10
+              </td>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -128,8 +183,14 @@
         </table>
       </div>
       <!-- footer -->
-      <div class="p-0" data-name="fixedTableFooter">
-        <table class="table m-0" style="table-layout: fixed">
+      <div
+        class="p-0"
+        data-name="fixedTableFooter"
+      >
+        <table
+          class="table m-0"
+          style="table-layout: fixed"
+        >
           <colgroup>
             <col width="58px">
             <col width="15%">
@@ -140,25 +201,43 @@
           </colgroup>
           <tfoot>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
+              <th scope="col">
+                #
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
             </tr>
           </tfoot>
         </table>
       </div>
     </div>
-    <div class="col-8 p-0" data-name="activeTableContainer">
+    <div
+      class="col-8 p-0"
+      data-name="activeTableContainer"
+    >
       <!-- headr -->
       <div
-        class="p-0 overflow-auto"
         ref="activeTableHeader"
+        class="p-0 overflow-auto"
         @scroll="scroll($event, 'activeTableHeader')"
       >
-        <table class="table m-0" style="table-layout: fixed">
+        <table
+          class="table m-0"
+          style="table-layout: fixed"
+        >
           <colgroup>
             <col style="width: 58px">
             <col style="width: 100px">
@@ -200,55 +279,132 @@
           </colgroup>
           <thead class="thead-dark">
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">
+                #
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
             </tr>
           </thead>
         </table>
       </div>
       <!-- body -->
       <div
+        ref="activeTableBody"
         class="p-0 overflow-auto"
         style="height:300px; "
-        ref="activeTableBody"
         @scroll="scroll($event, 'activeTableBody')"
       >
-        <table class="table table-striped table-hover m-0" style="table-layout: fixed">
+        <table
+          class="table table-striped table-hover m-0"
+          style="table-layout: fixed"
+        >
           <colgroup>
             <col width="58px">
             <col width="100px">
@@ -290,7 +446,9 @@
           </colgroup>
           <tbody>
             <tr>
-              <th scope="row">1</th>
+              <th scope="row">
+                1
+              </th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -329,7 +487,9 @@
               <td>@fat</td>
             </tr>
             <tr>
-              <th scope="row">2</th>
+              <th scope="row">
+                2
+              </th>
               <td>Jacob</td>
               <td>Thornton</td>
               <td>@fat</td>
@@ -368,7 +528,9 @@
               <td>@fat</td>
             </tr>
             <tr>
-              <th scope="row">3</th>
+              <th scope="row">
+                3
+              </th>
               <td>Larry</td>
               <td>the Bird</td>
               <td>@twitter</td>
@@ -407,7 +569,9 @@
               <td>@fat</td>
             </tr>
             <tr>
-              <th scope="row">4</th>
+              <th scope="row">
+                4
+              </th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -446,7 +610,9 @@
               <td>@fat</td>
             </tr>
             <tr>
-              <th scope="row">5</th>
+              <th scope="row">
+                5
+              </th>
               <td>Jacob</td>
               <td>Thornton</td>
               <td>@fat</td>
@@ -485,7 +651,9 @@
               <td>@fat</td>
             </tr>
             <tr>
-              <th scope="row">6</th>
+              <th scope="row">
+                6
+              </th>
               <td>Larry</td>
               <td>the Bird</td>
               <td>@twitter</td>
@@ -524,7 +692,9 @@
               <td>@fat</td>
             </tr>
             <tr>
-              <th scope="row">7</th>
+              <th scope="row">
+                7
+              </th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -563,7 +733,9 @@
               <td>@fat</td>
             </tr>
             <tr>
-              <th scope="row">8</th>
+              <th scope="row">
+                8
+              </th>
               <td>Jacob</td>
               <td>Thornton</td>
               <td>@fat</td>
@@ -602,7 +774,9 @@
               <td>@fat</td>
             </tr>
             <tr>
-              <th scope="row">9</th>
+              <th scope="row">
+                9
+              </th>
               <td>Larry</td>
               <td>the Bird</td>
               <td>@twitter</td>
@@ -641,7 +815,9 @@
               <td>@fat</td>
             </tr>
             <tr>
-              <th scope="row">10</th>
+              <th scope="row">
+                10
+              </th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
@@ -684,11 +860,14 @@
       </div>
       <!-- footer -->
       <div
-        class="p-0 overflow-auto"
         ref="activeTableFooter"
+        class="p-0 overflow-auto"
         @scroll="scroll($event, 'activeTableFooter')"
       >
-        <table class="table m-0" style="table-layout: fixed">
+        <table
+          class="table m-0"
+          style="table-layout: fixed"
+        >
           <colgroup>
             <col width="58px">
             <col width="100px">
@@ -730,43 +909,120 @@
           </colgroup>
           <tfoot>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col" style="width: 20px">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">
+                #
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th
+                scope="col"
+                style="width: 20px"
+              >
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
+              <th scope="col">
+                First
+              </th>
+              <th scope="col">
+                Last
+              </th>
+              <th scope="col">
+                Handle
+              </th>
             </tr>
           </tfoot>
         </table>
@@ -779,7 +1035,7 @@
 import tools from "@/tools/index.js";
 
 export default {
-  name: "c-table",
+  name: "CTable",
   data() {
     return {
       xCoord: 0,

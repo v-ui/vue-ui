@@ -8,7 +8,7 @@
 import CVideoPlayer from '@/components/base/Content/VideoPlayer/c-video-player.vue'
 
 export default {
-  name: 'c-video-player-demo',
+  name: 'CVideoPlayerDemo',
   components: { CVideoPlayer, },
 }
 </script>

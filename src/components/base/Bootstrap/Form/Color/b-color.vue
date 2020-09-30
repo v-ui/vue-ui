@@ -1,6 +1,9 @@
 <template>
   <b-drop-picker placeholder="请选择">
-    <div style="width:100%; height:300px;" :style="color" />
+    <div
+      style="width:100%; height:300px;"
+      :style="color"
+    />
   </b-drop-picker>
 </template>
 
@@ -8,7 +11,7 @@
 import BDropPicker from "@/components/base/Bootstrap/DropdownPicker/b-dropdown-picker.vue";
 
 export default {
-  name: "b-color",
+  name: "BColor",
   components: { BDropPicker },
   data() {
     return {

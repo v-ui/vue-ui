@@ -1,78 +1,219 @@
 <template>
   <div>
     <h2>b-progress</h2>
-    <hr />
+    <hr>
     <br>
     <div class="row py-1">
-      <font class="col-1">range:</font>
-      <b-range class="col-11" v-model.number="range" />
+      <font class="col-1">
+        range:
+      </font>
+      <b-range
+        v-model.number="range"
+        class="col-11"
+      />
     </div>
     <h4>bar(default)</h4>
     <hr>
     <div class="row py-1">
-      <font class="col-1">default:</font>
+      <font class="col-1">
+        default:
+      </font>
       <b-progress class="col-2" />
-      <font class="col-1">value:</font>
-      <b-progress class="col-2" :value="range" />
-      <font class="col-1">hideValue:</font>
-      <b-progress class="col-2" :value="range" hideValue />
+      <font class="col-1">
+        value:
+      </font>
+      <b-progress
+        class="col-2"
+        :value="range"
+      />
+      <font class="col-1">
+        hideValue:
+      </font>
+      <b-progress
+        class="col-2"
+        :value="range"
+        hide-value
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">striped:</font>
-      <b-progress class="col-2" :value="range" striped />
-      <font class="col-1">animated:</font>
-      <b-progress class="col-2" :value="range" striped animated />
-      <font class="col-1">info:</font>
-      <b-progress class="col-2" :value="range" info="info text" />
+      <font class="col-1">
+        striped:
+      </font>
+      <b-progress
+        class="col-2"
+        :value="range"
+        striped
+      />
+      <font class="col-1">
+        animated:
+      </font>
+      <b-progress
+        class="col-2"
+        :value="range"
+        striped
+        animated
+      />
+      <font class="col-1">
+        info:
+      </font>
+      <b-progress
+        class="col-2"
+        :value="range"
+        info="info text"
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">size(sm):</font>
-      <b-progress class="col-2" :value="range" size="sm" />
-      <font class="col-1">size(default):</font>
-      <b-progress class="col-2" :value="range" />
-      <font class="col-1">size(lg):</font>
-      <b-progress class="col-2" :value="range" size="lg" />
+      <font class="col-1">
+        size(sm):
+      </font>
+      <b-progress
+        class="col-2"
+        :value="range"
+        size="sm"
+      />
+      <font class="col-1">
+        size(default):
+      </font>
+      <b-progress
+        class="col-2"
+        :value="range"
+      />
+      <font class="col-1">
+        size(lg):
+      </font>
+      <b-progress
+        class="col-2"
+        :value="range"
+        size="lg"
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">state:</font>
-      <font class="col-1">false(default):</font>
-      <b-progress class="col-4" :color="colorArr1" :value="range" />
-      <font class="col-1">true:</font>
-      <b-progress class="col-4" :color="colorArr2" :value="range" state />
+      <font class="col-1">
+        state:
+      </font>
+      <font class="col-1">
+        false(default):
+      </font>
+      <b-progress
+        class="col-4"
+        :color="colorArr1"
+        :value="range"
+      />
+      <font class="col-1">
+        true:
+      </font>
+      <b-progress
+        class="col-4"
+        :color="colorArr2"
+        :value="range"
+        state
+      />
     </div>
     <br>
     <h4>circle</h4>
     <hr>
     <div class="row py-1">
-      <font class="col-1">default:</font>
-      <b-progress class="col-2" circle />
-      <font class="col-1">value:</font>
-      <b-progress class="col-2" circle :value="range"/>
-      <font class="col-1">hideValue:</font>
-      <b-progress class="col-2" circle :value="range" hideValue />
-
+      <font class="col-1">
+        default:
+      </font>
+      <b-progress
+        class="col-2"
+        circle
+      />
+      <font class="col-1">
+        value:
+      </font>
+      <b-progress
+        class="col-2"
+        circle
+        :value="range"
+      />
+      <font class="col-1">
+        hideValue:
+      </font>
+      <b-progress
+        class="col-2"
+        circle
+        :value="range"
+        hide-value
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">info:</font>
-      <b-progress class="col-2" circle :value="range" info="info text" />
-      <font class="col-1">src:</font>
-      <b-progress class="col-2" circle :value="range" hideValue :src="src" />
+      <font class="col-1">
+        info:
+      </font>
+      <b-progress
+        class="col-2"
+        circle
+        :value="range"
+        info="info text"
+      />
+      <font class="col-1">
+        src:
+      </font>
+      <b-progress
+        class="col-2"
+        circle
+        :value="range"
+        hide-value
+        :src="src"
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">size(sm):</font>
-      <b-progress class="col-2" circle :value="range" info="info text" size="sm" />
-      <font class="col-1">size(default):</font>
-      <b-progress class="col-2" circle :value="range" info="info text" />
-      <font class="col-1">size(lg):</font>
-      <b-progress class="col-2" circle :value="range" info="info text" size="lg" />
+      <font class="col-1">
+        size(sm):
+      </font>
+      <b-progress
+        class="col-2"
+        circle
+        :value="range"
+        info="info text"
+        size="sm"
+      />
+      <font class="col-1">
+        size(default):
+      </font>
+      <b-progress
+        class="col-2"
+        circle
+        :value="range"
+        info="info text"
+      />
+      <font class="col-1">
+        size(lg):
+      </font>
+      <b-progress
+        class="col-2"
+        circle
+        :value="range"
+        info="info text"
+        size="lg"
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">state:</font>
-      <font class="col-2"></font>
-      <font class="col-1">false(default):</font>
-      <b-progress class="col-2" circle :color="colorArr1" :value="range" />
-      <font class="col-1">true:</font>
-      <b-progress class="col-2" circle :color="colorArr2" state :value="range" />
+      <font class="col-1">
+        state:
+      </font>
+      <font class="col-2" />
+      <font class="col-1">
+        false(default):
+      </font>
+      <b-progress
+        class="col-2"
+        circle
+        :color="colorArr1"
+        :value="range"
+      />
+      <font class="col-1">
+        true:
+      </font>
+      <b-progress
+        class="col-2"
+        circle
+        :color="colorArr2"
+        state
+        :value="range"
+      />
     </div>
     <br>
     <br>
@@ -111,11 +252,19 @@
     <h4>color</h4>
     <hr>
     <div class="row py-1">
-      <font class="col-1">color:</font>
+      <font class="col-1">
+        color:
+      </font>
       <div class="col-11">
         <template v-for="item in colors">
           {{ item || '(default)' }}:
-          <b-progress :key="item" class="py-1" :color="item" value="100" showValue />
+          <b-progress
+            :key="item"
+            class="py-1"
+            :color="item"
+            value="100"
+            show-value
+          />
         </template>
       </div>
     </div>
@@ -130,7 +279,7 @@ import BProgress from "@/components/base/Bootstrap/Progress/b-progress.vue";
 import BRange from '@/components/base/Bootstrap/Form/b-range.vue'
 
 export default {
-  name: "b-progress-demo",
+  name: "BProgressDemo",
   components: { BProgress, BRange },
   data() {
     return {

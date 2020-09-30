@@ -52,7 +52,10 @@
           :icon="mute ? icon.volumeMute : icon.volumeUp"
           @click="audioMuteClick"
         />
-        <vue-page-transition name="fade-in-right" class="d-none d-lg-inline">
+        <vue-page-transition
+          name="fade-in-right"
+          class="d-none d-lg-inline"
+        >
           <b-range
             v-show="audioMuteRangeShow"
             v-model.number="volumeRange"
@@ -68,7 +71,9 @@
         <font
           v-if="isError"
           class="text-danger"
-        > Play Error: File not found or In an unsupported format </font>
+        >
+          Play Error: File not found or In an unsupported format
+        </font>
         <b-range
           v-else
           hide-value
@@ -111,7 +116,7 @@ import BRange from "@/components/base/Bootstrap/Form/b-range.vue";
 import BLoading from "@/components/base/Bootstrap/Loading/b-loading.vue";
 
 export default {
-  name: "c-auido",
+  name: "CAuido",
   components: { CControllerButton, BRange, BLoading },
   props: {
     playList: util.props.Array, // 播放列表
@@ -213,6 +218,22 @@ export default {
       return (
         this.showStepForward && this.index < this.checkedPlayList.length - 1
       );
+    }
+  },
+  watch: {
+    volumeRange: function(value) {
+      if (!this.mute || value != 0) this.volume = value;
+    },
+    volume: function(value) {
+      if (value == 0) {
+        this.mute = true;
+      } else {
+        this.sound.volume(value, this.soundId);
+        if (this.mute) this.mute = false;
+      }
+    },
+    mute: function(value) {
+      this.sound.mute(value, this.soundId);
     }
   },
   mounted() {
@@ -363,22 +384,6 @@ export default {
         window.URL.revokeObjectURL(this.boblSrc);
         this.boblSrc = null;
       }
-    }
-  },
-  watch: {
-    volumeRange: function(value) {
-      if (!this.mute || value != 0) this.volume = value;
-    },
-    volume: function(value) {
-      if (value == 0) {
-        this.mute = true;
-      } else {
-        this.sound.volume(value, this.soundId);
-        if (this.mute) this.mute = false;
-      }
-    },
-    mute: function(value) {
-      this.sound.mute(value, this.soundId);
     }
   }
 };

@@ -104,9 +104,9 @@
         default
       </font>
       <button
+        v-modal="'#exampleModal'"
         type="button"
         class="btn btn-primary"
-        v-modal="'#exampleModal'"
         @click="show=true"
       >
         default Modal
@@ -117,9 +117,9 @@
         icon
       </font>
       <button
+        v-modal="'#iconModal'"
         type="button"
         class="btn btn-primary"
-        v-modal="'#iconModal'"
         @click="show=true; icon='fas fa-envelope'"
       >
         Modal`s icon
@@ -130,9 +130,9 @@
         slot
       </font>
       <button
+        v-modal="'#slotModal'"
         type="button"
         class="btn btn-primary"
-        v-modal="'#slotModal'"
         @click="show=true;"
       >
         Modal`s slot
@@ -152,9 +152,9 @@
         <label for="center">center</label>
       </div>
       <button
+        v-modal="'#exampleModal'"
         type="button"
         class="col-auto btn btn-primary"
-        v-modal="'#exampleModal'"
         @click="show=true"
       >
         center Modal
@@ -174,9 +174,9 @@
         <label for="scrol">scrol</label>
       </div>
       <button
+        v-modal="'#scrolModal'"
         type="button"
         class="col-auto btn btn-primary"
-        v-modal="'#scrolModal'"
         @click="show=true"
       >
         scrol Modal
@@ -234,9 +234,9 @@
         >sm</label>
       </div>
       <button
+        v-modal="'#exampleModal'"
         type="button"
         class="col-auto btn btn-primary"
-        v-modal="'#exampleModal'"
         @click="show=true"
       >
         size: {{ size }}
@@ -247,57 +247,57 @@
         status
       </font>
       <button
+        v-modal="'#exampleModal'"
         type="button"
         class="btn btn-primary"
-        v-modal="'#exampleModal'"
         @click="status='info'; show=true"
       >
         status: info
       </button>
       <button
+        v-modal="'#exampleModal'"
         type="button"
         class="btn btn-primary"
-        v-modal="'#exampleModal'"
         @click="status='system'; show=true"
       >
         status: system
       </button>
       <button
+        v-modal="'#exampleModal'"
         type="button"
         class="btn btn-primary"
-        v-modal="'#exampleModal'"
         @click="status='issue'; show=true"
       >
         status: issue
       </button>
       <button
+        v-modal="'#exampleModal'"
         type="button"
         class="btn btn-primary"
-        v-modal="'#exampleModal'"
         @click="status='warning'; show=true"
       >
         status: warning
       </button>
       <button
+        v-modal="'#exampleModal'"
         type="button"
         class="btn btn-primary"
-        v-modal="'#exampleModal'"
         @click="status='error'; show=true"
       >
         status: error
       </button>
       <button
+        v-modal="'#exampleModal'"
         type="button"
         class="btn btn-primary"
-        v-modal="'#exampleModal'"
         @click="status='success'; show='true'"
       >
         status: success
       </button>
       <button
+        v-modal="'#exampleModal'"
         type="button"
         class="btn btn-primary"
-        v-modal="'#exampleModal'"
         @click="status='danger'; show='true'"
       >
         status: danger

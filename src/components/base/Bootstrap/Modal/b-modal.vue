@@ -8,27 +8,53 @@
     :aria-modal="show"
     aria-hidden="false"
   >
-    <div class="modal-dialog" :class="documentClass" role="document">
+    <div
+      class="modal-dialog"
+      :class="documentClass"
+      role="document"
+    >
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
             <slot name="icon">
-              <i class="mr-2" :class="iconClass" />
+              <i
+                class="mr-2"
+                :class="iconClass"
+              />
             </slot>
             {{ fillTitle }}
           </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <slot>{{ content }}</slot>
         </div>
-        <div v-if="!hideFooter" class="modal-footer">
+        <div
+          v-if="!hideFooter"
+          class="modal-footer"
+        >
           <slot name="footer">
             <!-- TODO: 关闭方式存在问题 -->
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+            >
+              Save changes
+            </button>
           </slot>
         </div>
       </div>
@@ -42,7 +68,7 @@ import util from "@/components/util/index.js";
 import config from "@/config/index.js";
 
 export default {
-  name: "b-modal",
+  name: "BModal",
   props: {
     title: util.props.String,
     icon: util.props.String,

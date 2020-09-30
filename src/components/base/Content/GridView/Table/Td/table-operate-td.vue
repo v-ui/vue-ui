@@ -1,5 +1,8 @@
 <template>
-  <th class="d-print-none align-middle text-center mx-1" data-type="operate">
+  <th
+    class="d-print-none align-middle text-center mx-1"
+    data-type="operate"
+  >
     <slot>
       <span
         v-for="(item, index) in oper"
@@ -19,7 +22,7 @@
 import config from "@/config/index.js";
 
 export default {
-  name: "table-operate-td",
+  name: "TableOperateTd",
   props: {
     operate: {
       type: Array,

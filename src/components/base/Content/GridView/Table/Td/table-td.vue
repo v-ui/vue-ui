@@ -8,14 +8,16 @@
     :aria-colspan="cell.colspan"
     :rowspan="cell.rowspan"
     :aria-rowspan="cell.rowspan"
-  >{{ col.format ? col.format(value) : value || '-' }}</td>
+  >
+    {{ col.format ? col.format(value) : value || '-' }}
+  </td>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
 
 export default {
-  name: "table-td",
+  name: "TableTd",
   props: {
     cell: [Object, String, Number, Boolean],
     col: util.props.Object

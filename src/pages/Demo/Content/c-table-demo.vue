@@ -1,13 +1,13 @@
 <template>
   <c-table
-    tableStriped
-    tableHover
-    theadSticky
-    tableBordered
-    fixed="4"
-    theadTheme="dark"
-    selectStatus="0"
     v-model="selectedOptions"
+    table-striped
+    table-hover
+    thead-sticky
+    table-bordered
+    fixed="4"
+    thead-theme="dark"
+    select-status="0"
     :list="list"
   />
 </template>
@@ -16,7 +16,7 @@
 import CTable from "@/components/base/Content/GridView/grid-view.vue";
 
 export default {
-  name: "c-table-demo",
+  name: "CTableDemo",
   components: { CTable },
   data() {
     return {

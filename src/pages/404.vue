@@ -2,16 +2,24 @@
   <div class="404">
     <h1>404 not find</h1>
     <strong>Sorry, something went wrong.</strong>
-    <pre></pre>
+    <pre />
     <p>
-      <button type="button" class="btn btn-link" @click="goBack">
-         <i class="fas fa-long-arrow-alt-left"></i>
+      <button
+        type="button"
+        class="btn btn-link"
+        @click="goBack"
+      >
+        <i class="fas fa-long-arrow-alt-left" />
         <font> 返回上一页 </font>
       </button>
     </p>
     <p>
-      <router-link to="/" class="btn btn-link" role="button">
-        <i class="fas fa-home"></i>
+      <router-link
+        to="/"
+        class="btn btn-link"
+        role="button"
+      >
+        <i class="fas fa-home" />
         <font> 返回主页 </font>
       </router-link>
     </p>

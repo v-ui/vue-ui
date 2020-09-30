@@ -2,7 +2,13 @@
   <div>
     <h2>b-scrollspy</h2>
     <hr>
-    <b-scrollspy title="Artical Title" author="Aritical Author" time="2020-09-19" info='info text' set="right">
+    <b-scrollspy
+      title="Artical Title"
+      author="Aritical Author"
+      time="2020-09-19"
+      info="info text"
+      set="right"
+    >
       <h1>right1</h1>
       <p>...</p>
       <p>...</p>
@@ -14,7 +20,7 @@
       <p>...</p>
       <p>...</p>
       <p>...</p>
-      <h2 >right1-1</h2>
+      <h2>right1-1</h2>
       <p>...</p>
       <p>...</p>
       <p>...</p>
@@ -25,7 +31,7 @@
       <p>...</p>
       <p>...</p>
       <p>...</p>
-      <h2 >right1-2</h2>
+      <h2>right1-2</h2>
       <p>...</p>
       <p>...</p>
       <p>...</p>
@@ -36,7 +42,7 @@
       <p>...</p>
       <p>...</p>
       <p>...</p>
-      <h2 >right1-3</h2>
+      <h2>right1-3</h2>
       <p>...</p>
       <p>...</p>
       <p>...</p>
@@ -47,7 +53,7 @@
       <p>...</p>
       <p>...</p>
       <p>...</p>
-      <h2 >right1-4</h2>
+      <h2>right1-4</h2>
       <p>...</p>
       <p>...</p>
       <p>...</p>
@@ -58,7 +64,7 @@
       <p>...</p>
       <p>...</p>
       <p>...</p>
-      <h2 >right1-5</h2>
+      <h2>right1-5</h2>
       <p>...</p>
       <p>...</p>
       <p>...</p>
@@ -176,7 +182,7 @@
 import BScrollspy from "@/components/base/Bootstrap/Scrollspy/b-scrollspy.vue";
 
 export default {
-  name: "b-scrollspy-demo",
+  name: "BScrollspyDemo",
   components: { BScrollspy },
 };
 </script>

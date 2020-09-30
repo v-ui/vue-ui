@@ -1,5 +1,9 @@
 <template functional>
-  <div class="list-group" v-bind="data.attrs" v-on="listeners">
+  <div
+    class="list-group"
+    v-bind="data.attrs"
+    v-on="listeners"
+  >
     <a
       v-for="(item, index) in props.list"
       :key="index"
@@ -22,7 +26,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "v-video-list",
+  name: "VVideoList",
   props: {
     list: util.props.Array
   }

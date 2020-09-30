@@ -2,7 +2,10 @@
   <main class=" border border-primary rounded-lg p-3">
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
-    <transition name="component-fade" mode="out-in">
+    <transition
+      name="component-fade"
+      mode="out-in"
+    >
       <router-view class="h-100" />
     </transition>
   </main>
@@ -10,7 +13,7 @@
 
 <script>
 export default {
-  name:'main-content',
+  name:'MainContent',
 }
 </script>
 

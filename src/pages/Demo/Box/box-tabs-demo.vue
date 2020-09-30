@@ -10,17 +10,41 @@
     <hr>
     <box-tab-list :list="list" />
     <box-tab-content>
-      <box-tab-pane id="one" active>one</box-tab-pane>
-      <box-tab-pane id="two">two</box-tab-pane>
-      <box-tab-pane id="three">three</box-tab-pane>
+      <box-tab-pane
+        id="one"
+        active
+      >
+        one
+      </box-tab-pane>
+      <box-tab-pane id="two">
+        two
+      </box-tab-pane>
+      <box-tab-pane id="three">
+        three
+      </box-tab-pane>
     </box-tab-content>
     <hr>
     <div class="row mx-1">
-      <box-tab-list class="col-2" column pills justified :list="list2" />
+      <box-tab-list
+        class="col-2"
+        column
+        pills
+        justified
+        :list="list2"
+      />
       <box-tab-content class="col-10">
-        <box-tab-pane id="one2" active>one</box-tab-pane>
-        <box-tab-pane id="two2">two</box-tab-pane>
-        <box-tab-pane id="three2">three</box-tab-pane>
+        <box-tab-pane
+          id="one2"
+          active
+        >
+          one
+        </box-tab-pane>
+        <box-tab-pane id="two2">
+          two
+        </box-tab-pane>
+        <box-tab-pane id="three2">
+          three
+        </box-tab-pane>
       </box-tab-content>
     </div>
   </div>
@@ -32,7 +56,7 @@ import BoxTabContent from "@/components/box/Tabs/box-tab-content.vue";
 import BoxTabPane from "@/components/box/Tabs/box-tab-pane.vue";
 
 export default {
-  name: "box-tabs-demo",
+  name: "BoxTabsDemo",
   components: { BoxTabList, BoxTabContent, BoxTabPane },
   data() {
     return {

@@ -9,7 +9,9 @@
         :aria-current="obj.isActive ? 'page' : ''"
       >
         <slot>
-          <base-a :href="obj.path">{{ obj.label }}</base-a>
+          <base-a :href="obj.path">
+            {{ obj.label }}
+          </base-a>
         </slot>
       </li>
     </ol>
@@ -20,7 +22,7 @@ import util from "@/components/util/index.js"
 
 import BaseA from "@/components/base/Content/A/c-a.vue"
 export default {
-  name: "b-breadcrumb",
+  name: "BBreadcrumb",
   components: { BaseA },
   props: {
     content: util.props.String,

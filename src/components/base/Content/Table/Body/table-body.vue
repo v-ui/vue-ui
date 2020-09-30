@@ -27,7 +27,7 @@ import util from "@/components/util/index.js";
 import tableBodyTr from "./table-body-tr";
 
 export default {
-  name: "table-body",
+  name: "TableBody",
   components: { tableBodyTr },
   model: {
     prop: "selected",
@@ -49,6 +49,17 @@ export default {
     return {
       selectedOptions: this.selected
     };
+  },
+  watch: {
+    theadSelected: function(value) {
+      this.data.forEach(e => this.trSelected(value, e));
+    },
+    selected: function(value) {
+      this.selectedOptions = value;
+    },
+    selectedOptions: function(value) {
+      this.$emit("tr:selected", value);
+    }
   },
   methods: {
     trOper: function(data) {
@@ -110,17 +121,6 @@ export default {
     },
     trSelected: function(checked, row) {
       checked ? this.select(row) : this.unSelect(row);
-    }
-  },
-  watch: {
-    theadSelected: function(value) {
-      this.data.forEach(e => this.trSelected(value, e));
-    },
-    selected: function(value) {
-      this.selectedOptions = value;
-    },
-    selectedOptions: function(value) {
-      this.$emit("tr:selected", value);
     }
   }
 };

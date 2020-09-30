@@ -9,7 +9,10 @@
     hide-icon
   >
     <slot>{{ label }}</slot>
-    <b-info :info="info" :textColor="active ? 'light' : 'muted'" />
+    <b-info
+      :info="info"
+      :text-color="active ? 'light' : 'muted'"
+    />
   </base-a>
   <button
     v-else
@@ -21,7 +24,10 @@
     type="button"
   >
     <slot>{{ label }}</slot>
-    <b-info :info="info" :textColor="active ? 'light' : 'muted'" />
+    <b-info
+      :info="info"
+      :text-color="active ? 'light' : 'muted'"
+    />
   </button>
 </template>
 
@@ -32,7 +38,7 @@ import BaseA from "@/components/base/Content/A/c-a.vue";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-dropdown-item",
+  name: "BDropdownItem",
   components: { BaseA, BInfo },
   props: {
     href: util.props.href,

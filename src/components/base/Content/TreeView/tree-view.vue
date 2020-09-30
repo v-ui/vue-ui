@@ -2,20 +2,37 @@
   <div class="border rounded p-1">
     <div v-if="canEdit">
       <b-button-group>
-        <b-button size="sm" outline v-tip="'Add Item'">
+        <b-button
+          v-tip="'Add Item'"
+          size="sm"
+          outline
+        >
           <i :class="icon.add" />
         </b-button>
-        <b-button size="sm" outline v-tip="'Add Folder'">
+        <b-button
+          v-tip="'Add Folder'"
+          size="sm"
+          outline
+        >
           <i :class="icon.folderPlus" />
         </b-button>
-        <b-button v-if="hideClearCheck" v-tip="'Clear Check'" @click="clickClearCheck" outline>
+        <b-button
+          v-if="hideClearCheck"
+          v-tip="'Clear Check'"
+          outline
+          @click="clickClearCheck"
+        >
           <i :class="icon.unCheck" />
         </b-button>
-        <b-button v-if="hideDelete" v-tip="'Delete'" outline>
+        <b-button
+          v-if="hideDelete"
+          v-tip="'Delete'"
+          outline
+        >
           <i :class="icon.delete" />
         </b-button>
       </b-button-group>
-      <hr class="my-2" />
+      <hr class="my-2">
     </div>
     <c-tree
       v-model="selectedOption"
@@ -36,7 +53,7 @@ import BButtonGroup from "@/components/base/Bootstrap/ButtonGroup/b-button-group
 import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
-  name: "tree-view",
+  name: "TreeView",
   components: { CTree, BButtonGroup, BButton },
   model: {
     prop: "selected",
@@ -86,17 +103,17 @@ export default {
       return !this.isSelected;
     }
   },
-  methods: {
-    clickClearCheck: function() {
-      this.selectedOption = {};
-    }
-  },
   watch: {
     selected: function(value) {
       this.selectedOption = value;
     },
     selectedOption: function(value) {
       this.$emit("tree:selected", value);
+    }
+  },
+  methods: {
+    clickClearCheck: function() {
+      this.selectedOption = {};
     }
   }
 };

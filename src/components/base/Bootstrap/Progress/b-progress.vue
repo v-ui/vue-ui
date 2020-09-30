@@ -9,7 +9,7 @@
       :color="cColor"
       :strong="strong"
       :value="tweenNumber"
-      :hideValue="hideValue"
+      :hide-value="hideValue"
     />
     <b-bar
       v-else
@@ -19,9 +19,12 @@
       :striped="striped"
       :value="tweenNumber"
       :animated="animated"
-      :hideValue="hideValue"
+      :hide-value="hideValue"
     />
-    <b-info v-if="!circle" :info="info" />
+    <b-info
+      v-if="!circle"
+      :info="info"
+    />
   </div>
 </template>
 
@@ -35,7 +38,7 @@ import BCircle from "./Circle/b-progress-cicle.vue";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-progress",
+  name: "BProgress",
   components: { BBar, BCircle, BInfo },
   mixins: [ util.mixins.animate.progress, ],
   props: {

@@ -1,6 +1,9 @@
 <template>
   <div class="row mx-0 align-items-center">
-    <div class="progress col px-0" :style="{ height: `${strong}px` }">
+    <div
+      class="progress col px-0"
+      :style="{ height: `${strong}px` }"
+    >
       <template v-if="list && list.length > 0">
         <b-bar-item
           v-for="(obj, index) in list"
@@ -19,7 +22,10 @@
         :animated="animated"
       />
     </div>
-    <label v-if="!hideValue" class="col-1 m-0 p-0 pl-1">{{ parseInt(value) || 0 }}%</label>
+    <label
+      v-if="!hideValue"
+      class="col-1 m-0 p-0 pl-1"
+    >{{ parseInt(value) || 0 }}%</label>
   </div>
 </template>
 
@@ -29,7 +35,7 @@ import util from "@/components/util/index.js";
 import BBarItem from "./b-progress-bar-item.vue";
 
 export default {
-  name: "b-progress-bar",
+  name: "BProgressBar",
   components: { BBarItem, },
   props: {
     value: {

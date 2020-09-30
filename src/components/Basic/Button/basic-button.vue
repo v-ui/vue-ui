@@ -8,7 +8,13 @@
     :aria-pressed="active"
     v-on="$listeners"
   >
-    <slot name="loading"><b-loading v-show="loading" size='sm' class="mr-1" /></slot>
+    <slot name="loading">
+      <b-loading
+        v-show="loading"
+        size="sm"
+        class="mr-1"
+      />
+    </slot>
     <slot>{{ value | worldUpperCase | firstUpperCase }}</slot>
     <sr-msg>{{ fillsrMsg }}</sr-msg>
   </button>
@@ -25,7 +31,13 @@
     role="button"
     v-on="$listeners"
   >
-    <slot name="loading"><b-loading v-show="loading" size='sm' class="mr-1" /></slot>
+    <slot name="loading">
+      <b-loading
+        v-show="loading"
+        size="sm"
+        class="mr-1"
+      />
+    </slot>
     <slot>{{ value | worldUpperCase | firstUpperCase }}</slot>
     <sr-msg>{{ fillsrMsg }}</sr-msg>
   </base-a>
@@ -39,7 +51,7 @@ import BLoading from '@/components/base/Bootstrap/Loading/b-loading.vue'
 import srMsg from "@/components/Basic/basic-sr-msg.vue";
 
 export default {
-  name: "basic-button",
+  name: "BasicButton",
   components: { BaseA, BLoading, srMsg },
   mixins: [util.mixins.form.btn]
 };

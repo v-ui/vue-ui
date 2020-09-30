@@ -6,7 +6,7 @@
 import { fs, path } from "filer";
 
 export default {
-  name: "b-file-browser",
+  name: "BFileBrowser",
   created() {
     this.init();
   },

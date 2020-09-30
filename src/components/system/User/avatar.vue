@@ -11,7 +11,7 @@
 import config from "@/config/index.js";
 
 export default {
-  name: "avatar",
+  name: "Avatar",
   computed: {
     icon: function() {
       return config.ui.icon;

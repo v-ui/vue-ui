@@ -15,7 +15,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "box-tab-pane",
+  name: "BoxTabPane",
   props: {
     active: util.props.Boolean,
   }

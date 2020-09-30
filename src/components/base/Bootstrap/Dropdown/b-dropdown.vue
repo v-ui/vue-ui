@@ -1,5 +1,9 @@
 <template>
-  <div class="py-0" :class="dropClass" ref="divDropdown">
+  <div
+    ref="divDropdown"
+    class="py-0"
+    :class="dropClass"
+  >
     <div
       :id="guid"
       class="d-flex justify-content-between align-items-center px-1"
@@ -9,10 +13,18 @@
       @click="click"
     >
       <slot name="trigger">
-        <font style="cursor: default;">{{ trigger }}</font>
+        <font style="cursor: default;">
+          {{ trigger }}
+        </font>
       </slot>
-      <slot name="icon" v-if="!hideToggle">
-        <i :class="icon.caretDown" class="px-1" />
+      <slot
+        v-if="!hideToggle"
+        name="icon"
+      >
+        <i
+          :class="icon.caretDown"
+          class="px-1"
+        />
       </slot>
     </div>
     <div
@@ -41,7 +53,7 @@ import util from "@/components/util/index.js";
 import DropMenu from "./b-dropdown-menu";
 
 export default {
-  name: "b-dropdown",
+  name: "BDropdown",
   components: { DropMenu },
   props: {
     list: util.props.Array,

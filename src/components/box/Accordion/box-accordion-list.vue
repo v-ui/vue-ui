@@ -18,7 +18,7 @@ import util from "@/components/util/index.js";
 import BoxAccordion from "./box-accordion";
 
 export default {
-  name: "box-accordion-list",
+  name: "BoxAccordionList",
   components: { BoxAccordion },
   props: {
     list: util.props.Array,

@@ -1,8 +1,16 @@
 <template>
   <header class="d-print-none shadow-sm">
     <div class="shadow-sm navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand d-inline-block text-truncate" href="#">
-        <img src="@/assets/logo.png" width="30" height="30" alt="logo" />
+      <a
+        class="navbar-brand d-inline-block text-truncate"
+        href="#"
+      >
+        <img
+          src="@/assets/logo.png"
+          width="30"
+          height="30"
+          alt="logo"
+        >
         {{ $t('systemName') }}
         <small class="navbar-text">(bate 0.1)</small>
       </a>
@@ -17,7 +25,10 @@
       >
         <span class="navbar-toggler-icon" />
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div
+        id="navbarSupportedContent"
+        class="collapse navbar-collapse"
+      >
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item navbar-text dropdown" />
         </ul>
@@ -39,9 +50,15 @@
     </div>
     <div class="bg-primary border-bottom border-light shadow-sm d-flex w-100">
       <!-- <dropdown-menu /> -->
-      <router-link class="btn btn-primary d-inline-flex" to="/" role="button">
+      <router-link
+        class="btn btn-primary d-inline-flex"
+        to="/"
+        role="button"
+      >
         <i class="fas fa-home align-self-center px-1" />
-        <font class="align-self-center px-1">Home</font>
+        <font class="align-self-center px-1">
+          Home
+        </font>
       </router-link>
       <nav-tabs class="d-inline-flex overflow-auto" />
     </div>
@@ -57,7 +74,7 @@ import UserCard from "@/components/system/User/user-card.vue";
 import NavTabs from "@/components/system/NavTabs/nav-tabs.vue";
 
 export default {
-  name: 'main-header',
+  name: 'MainHeader',
   components: {
     LangSelect,
     ThemeSelect,

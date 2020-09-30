@@ -16,7 +16,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "c-tree",
+  name: "CTree",
   components: { TreeItem: () => import("./c-tree-item") },
   model: {
     prop: "selected",
@@ -47,17 +47,17 @@ export default {
       return Number(this.status) || 0;
     }
   },
-  methods: {
-    itemSelected: function(item) {
-      this.selectedOption = item;
-    }
-  },
   watch: {
     selected: function(value) {
       this.selectedOption = value;
     },
     selectedOption: function(value) {
       this.$emit("tree:selected", value);
+    }
+  },
+  methods: {
+    itemSelected: function(item) {
+      this.selectedOption = item;
     }
   }
 };

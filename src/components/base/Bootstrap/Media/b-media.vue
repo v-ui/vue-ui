@@ -1,7 +1,11 @@
 <template>
   <ul class="list-unstyled">
     <template v-for="(item, index) in list">
-      <b-media-item :key="index" class="mb-2" :item="item" />
+      <b-media-item
+        :key="index"
+        class="mb-2"
+        :item="item"
+      />
     </template>
   </ul>
 </template>
@@ -12,7 +16,7 @@ import util from "@/components/util/index.js";
 import BMediaItem from "./b-media-item";
 
 export default {
-  name: "b-media",
+  name: "BMedia",
   components: { BMediaItem },
   props: {
     list: util.props.Array,

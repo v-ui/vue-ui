@@ -1,8 +1,8 @@
 <template>
   <div>
     <basic-text
-      v-model="dataValue"
       ref="text"
+      v-model="dataValue"
       :type="cImputType"
       :style="cStyle"
       :length="Number(length)"
@@ -13,11 +13,21 @@
       v-on="$listeners"
       @blur.native="validator($event)"
     />
-    <b-valid v-if="$slots.valid || validInfo" state="valid">
-      <slot name="valid">{{ validInfo }}</slot>
+    <b-valid
+      v-if="$slots.valid || validInfo"
+      state="valid"
+    >
+      <slot name="valid">
+        {{ validInfo }}
+      </slot>
     </b-valid>
-    <b-valid v-if="$slots.invalid || invalidInfo" state="invalid">
-      <slot name="invalid">{{ invalidInfo }}</slot>
+    <b-valid
+      v-if="$slots.invalid || invalidInfo"
+      state="invalid"
+    >
+      <slot name="invalid">
+        {{ invalidInfo }}
+      </slot>
     </b-valid>
     <b-info :info="info" />
     <i
@@ -39,7 +49,7 @@ import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-text",
+  name: "BText",
   components: { BasicText, BValid, BInfo },
   mixins: [
     util.mixins.form.readonly,

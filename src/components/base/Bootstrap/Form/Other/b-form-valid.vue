@@ -1,5 +1,8 @@
 <template functional>
-  <div v-show="slots().default && props.state" :class="`${props.state}-${props.type}`">
+  <div
+    v-show="slots().default && props.state"
+    :class="`${props.state}-${props.type}`"
+  >
     <slot />
   </div>
 </template>
@@ -7,7 +10,7 @@
 import config from "@/config/index";
 
 export default {
-  name: "b-form-valid",
+  name: "BFormValid",
   props: {
     state: {
       type: String,

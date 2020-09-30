@@ -1,5 +1,8 @@
 <template>
-  <div id="app" class="m-0 p-0 min-vw-100 min-vh-100">
+  <div
+    id="app"
+    class="m-0 p-0 min-vw-100 min-vh-100"
+  >
     <template v-if="show">
       <!-- Load Plugin Page -->
       <router-view />

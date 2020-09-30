@@ -19,7 +19,7 @@ import util from "@/components/util/index.js";
 import BaseA from "@/components/base/Content/A/c-a.vue";
 
 export default {
-  name: "b-nav-item",
+  name: "BNavItem",
   components: { BaseA },
   inheritAttrs: false,
   props: {

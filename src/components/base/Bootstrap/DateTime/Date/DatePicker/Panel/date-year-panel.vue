@@ -21,7 +21,7 @@ import util from "@/components/util/index.js";
 import DatePanelTemp from "../Basic/date-panel-temp.vue";
 
 export default {
-  name: "date-year-panel",
+  name: "DateYearPanel",
   components: { DatePanelTemp },
   mixins: [util.mixins.date.year],
 };

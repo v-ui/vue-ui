@@ -1,5 +1,8 @@
 <template>
-  <ul class="list-group" :class="{'list-group-flush': flush, 'list-group-horizontal': inline, }">
+  <ul
+    class="list-group"
+    :class="{'list-group-flush': flush, 'list-group-horizontal': inline, }"
+  >
     <slot v-if="$slots.default" />
     <list-items
       v-for="(item, index) in list"
@@ -23,7 +26,7 @@ import util from "@/components/util/index.js";
 import listItems from "./b-list-item";
 
 export default {
-  name: "b-list",
+  name: "BList",
   components: { listItems },
   model: {
     prop: "select",

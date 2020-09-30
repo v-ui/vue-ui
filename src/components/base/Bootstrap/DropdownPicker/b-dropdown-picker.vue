@@ -1,18 +1,57 @@
 <template>
-  <div :id="id" class="align-items-center h-auto px-0" :class="{'bg-light': disabled}" style="min-width: 320px" :disabled="disabled" :aria-disabled="disabled">
-    <div ref="dropdownPicker" class="h-100" aria-describedby="tooltip" @click="clickTrigger">
-      <div ref="dropdownTrigger" class="d-flex justify-content-between align-items-center h-100 px-1">
+  <div
+    :id="id"
+    class="align-items-center h-auto px-0"
+    :class="{'bg-light': disabled}"
+    style="min-width: 320px"
+    :disabled="disabled"
+    :aria-disabled="disabled"
+  >
+    <div
+      ref="dropdownPicker"
+      class="h-100"
+      aria-describedby="tooltip"
+      @click="clickTrigger"
+    >
+      <div
+        ref="dropdownTrigger"
+        class="d-flex justify-content-between align-items-center h-100 px-1"
+      >
         <slot name="trigger">
-          <font v-if="!multiple" :class="fontClass">{{ label || placeholder }}</font>
-          <div v-else class="d-flex align-content-between flex-wrap">
-            <b-badge v-for="(item, key) in label" :key="key" class="m-1" color="primary">
+          <font
+            v-if="!multiple"
+            :class="fontClass"
+          >
+            {{ label || placeholder }}
+          </font>
+          <div
+            v-else
+            class="d-flex align-content-between flex-wrap"
+          >
+            <b-badge
+              v-for="(item, key) in label"
+              :key="key"
+              class="m-1"
+              color="primary"
+            >
               {{ item }}
-              <i v-if="!disabled" class="fas fa-times-circle text-muted pl-1" style="cursor: pointer" @click.stop="$emit('deleteItem', key)"/>
+              <i
+                v-if="!disabled"
+                class="fas fa-times-circle text-muted pl-1"
+                style="cursor: pointer"
+                @click.stop="$emit('deleteItem', key)"
+              />
             </b-badge>
-            <label v-show="!label || label.length === 0" class="m-0">{{ placeholder }}</label>
+            <label
+              v-show="!label || label.length === 0"
+              class="m-0"
+            >{{ placeholder }}</label>
           </div>
         </slot>
-        <slot name="icon" v-if="!hideToggle">
+        <slot
+          v-if="!hideToggle"
+          name="icon"
+        >
           <i :class="icon.caretDown" />
         </slot>
       </div>
@@ -21,13 +60,16 @@
       <!-- TODO: edit max-height -->
       <div
         v-show="isShow"
-        role="tooltip"
         ref="dropdownMenu"
+        role="tooltip"
         class="card overflow-auto rounded shadow-sm"
         :style="[menuStyle, {'max-height': '50em'}]"
         style="z-index: 1090"
       >
-        <div v-if="isShow" class="m-0 y-0">
+        <div
+          v-if="isShow"
+          class="m-0 y-0"
+        >
           <slot />
         </div>
       </div>
@@ -44,7 +86,7 @@ import BBadge from '@/components/base/Bootstrap/Badge/b-badge.vue'
 import tranDrop from "@/components/transition/tran-drop.vue"
 
 export default {
-  name: "b-dropdown-picker",
+  name: "BDropdownPicker",
   components: { BBadge, tranDrop, },
   mixins: [ util.mixins.popper.base ],
   props: {

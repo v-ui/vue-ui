@@ -32,7 +32,7 @@ import DatePanelTemp from "../Basic/date-panel-temp";
 import panelRow from "@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel-row.vue";
 
 export default {
-  name: "date-date-panel",
+  name: "DateDatePanel",
   components: { DatePanelTemp, panelRow },
   mixins: [util.mixins.date.date],
 };

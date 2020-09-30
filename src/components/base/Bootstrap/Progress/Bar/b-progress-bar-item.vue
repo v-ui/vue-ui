@@ -14,7 +14,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "b-progress-bar-item",
+  name: "BProgressBarItem",
   props: {
     value: {
       ...util.props.UNumber,

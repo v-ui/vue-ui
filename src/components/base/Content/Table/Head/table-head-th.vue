@@ -8,7 +8,9 @@
     :data-field="cell.field"
   >
     <div class="d-flex justify-content-center align-items-center">
-      <font class="px-1">{{ cell.title }}</font>
+      <font class="px-1">
+        {{ cell.title }}
+      </font>
       <i
         v-if="cell.field && !cell.children && sort.includes(cell.field)"
         :class="iconClass"
@@ -24,7 +26,7 @@ import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 export default {
-  name: "table-head-th",
+  name: "TableHeadTh",
   props: {
     cell: util.props.Object,
     sortObj: util.props.Object,

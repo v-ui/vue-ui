@@ -14,11 +14,21 @@
         v-on="$listeners"
         @input="input($event, item)"
       >
-        <template v-if="list.length - 1 == index" #valid>
-          <slot name="valid">{{ validInfo }}</slot>
+        <template
+          v-if="list.length - 1 == index"
+          #valid
+        >
+          <slot name="valid">
+            {{ validInfo }}
+          </slot>
         </template>
-        <template v-if="list.length - 1 == index" #invalid>
-          <slot name="invalid">{{ invalidInfo }}</slot>
+        <template
+          v-if="list.length - 1 == index"
+          #invalid
+        >
+          <slot name="invalid">
+            {{ invalidInfo }}
+          </slot>
         </template>
       </b-redio>
     </template>
@@ -33,7 +43,7 @@ import BRedio from "./b-radio";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-radio-group",
+  name: "BRadioGroup",
   components: { BRedio, BInfo },
   mixins: [util.mixins.select.check, util.mixins.form.validator],
   inheritAttrs: false,

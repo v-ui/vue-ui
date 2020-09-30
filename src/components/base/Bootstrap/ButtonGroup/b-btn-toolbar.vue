@@ -11,6 +11,6 @@
 </template>
 <script>
 export default {
-  name: "b-btn-toolbar"
+  name: "BBtnToolbar"
 };
 </script>

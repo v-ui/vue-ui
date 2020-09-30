@@ -1,8 +1,19 @@
 <template>
-  <ul class="nav" :class="objClass">
+  <ul
+    class="nav"
+    :class="objClass"
+  >
     <slot v-if="$slots.default" />
-    <template v-else v-for="(item, index) in list">
-      <nav-item-dropdown v-if="item.dropdown" :key="index" :list="item.list" :label="item.label" />
+    <template
+      v-for="(item, index) in list"
+      v-else
+    >
+      <nav-item-dropdown
+        v-if="item.dropdown"
+        :key="index"
+        :list="item.list"
+        :label="item.label"
+      />
       <nav-item
         v-else
         :key="index"
@@ -23,7 +34,7 @@ import NavItem from "./b-nav-item";
 import NavItemDropdown from "./b-nav-item-dropdown";
 
 export default {
-  name: "b-nav",
+  name: "BNav",
   components: { NavItem, NavItemDropdown },
   model: {
     prop: "select",

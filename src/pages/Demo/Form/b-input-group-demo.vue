@@ -1,11 +1,13 @@
 <template>
   <div>
     <h2>b-input-group</h2>
-    <hr />
+    <hr>
     <h3>基础</h3>
-    <br />
+    <br>
     <div class="row py-1">
-      <font class="col-1">default:</font>
+      <font class="col-1">
+        default:
+      </font>
       <div class="col-11">
         <b-input-group>
           <b-input-group-prepend>
@@ -13,14 +15,14 @@
           </b-input-group-prepend>
           <basic-text />
         </b-input-group>
-        <br />
+        <br>
         <b-input-group>
           <b-input-group-prepend>
             <b-input-group-text>Textarea</b-input-group-text>
           </b-input-group-prepend>
           <b-textarea />
         </b-input-group>
-        <br />
+        <br>
         <b-input-group>
           <b-input-group-prepend>
             <b-input-group-text>
@@ -29,7 +31,7 @@
           </b-input-group-prepend>
           <basic-text />
         </b-input-group>
-        <br />
+        <br>
         <b-input-group>
           <b-input-group-prepend>
             <b-input-group-text>
@@ -38,14 +40,14 @@
           </b-input-group-prepend>
           <basic-text />
         </b-input-group>
-        <br />
+        <br>
         <b-input-group>
           <b-input-group-prepend>
             <b-input-group-text>Select</b-input-group-text>
           </b-input-group-prepend>
           <basic-select />
         </b-input-group>
-        <br />
+        <br>
         <b-input-group>
           <b-input-group-prepend>
             <b-input-group-text>Select and Button</b-input-group-text>
@@ -55,7 +57,7 @@
             <basic-button />
           </b-input-group-prepend>
         </b-input-group>
-        <br />
+        <br>
         <b-input-group>
           <b-input-group-prepend>
             <b-input-group-text>one text</b-input-group-text>
@@ -64,7 +66,7 @@
           </b-input-group-prepend>
           <basic-select />
         </b-input-group>
-        <br />
+        <br>
         <b-input-group>
           <b-input-group-prepend>
             <b-input-group-text>More Controls</b-input-group-text>
@@ -72,7 +74,7 @@
           <basic-text />
           <basic-text />
         </b-input-group>
-        <br />
+        <br>
         <b-input-group>
           <b-input-group-prepend>
             <b-input-group-text>More Controls</b-input-group-text>
@@ -83,7 +85,9 @@
       </div>
     </div>
     <div class="row py-1">
-      <font class="col-1">info:</font>
+      <font class="col-1">
+        info:
+      </font>
       <b-input-group info="info text">
         <b-input-group-prepend>
           <b-input-group-text>More Controls</b-input-group-text>
@@ -93,10 +97,14 @@
       </b-input-group>
     </div>
     <div class="row py-1">
-      <font class="col-1">size:</font>
+      <font class="col-1">
+        size:
+      </font>
       <div class="col-11">
         <div class="row">
-          <div class="col-1">sm</div>
+          <div class="col-1">
+            sm
+          </div>
           <div class="col-5">
             <b-input-group size="sm">
               <b-input-group-prepend>
@@ -118,7 +126,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-1">default</div>
+          <div class="col-1">
+            default
+          </div>
           <div class="col-5">
             <b-input-group>
               <b-input-group-prepend>
@@ -140,7 +150,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-1">lg</div>
+          <div class="col-1">
+            lg
+          </div>
           <div class="col-5">
             <b-input-group size="lg">
               <b-input-group-prepend>
@@ -180,7 +192,7 @@ import BasicSelect from "@/components/base/Bootstrap/Form/Basic/Select/basic-sel
 import BasicButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
-  name: "b-unput-group-demo",
+  name: "BUnputGroupDemo",
   components: {
     BInputGroup,
     BInputGroupPrepend,

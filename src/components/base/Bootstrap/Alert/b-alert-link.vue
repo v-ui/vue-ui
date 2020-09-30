@@ -1,5 +1,8 @@
 <template>
-  <base-a :href="href" class="alert-link">
+  <base-a
+    :href="href"
+    class="alert-link"
+  >
     <slot />
   </base-a>
 </template>
@@ -8,7 +11,7 @@ import util from "@/components/util/index.js";
 
 import BaseA from "@/components/base/Content/A/c-a.vue";
 export default {
-  name: "b-alert-link",
+  name: "BAlertLink",
   components: { BaseA },
   props: {
     href: {

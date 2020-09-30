@@ -6,7 +6,7 @@
 import BFileBrowser from '@/components/base/Content/FileBrowser/v-file-browser.vue'
 
 export default {
-  name: 'b-file-browser-demo',
+  name: 'BFileBrowserDemo',
   components: { BFileBrowser, },
 }
 </script>

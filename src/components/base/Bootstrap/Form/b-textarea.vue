@@ -12,11 +12,21 @@
       @input.native.stop="change"
       @blur.native="validator"
     />
-    <b-valid v-if="validInfo || $slots.valid" state="valid">
-      <slot name="valid">{{ validInfo }}</slot>
+    <b-valid
+      v-if="validInfo || $slots.valid"
+      state="valid"
+    >
+      <slot name="valid">
+        {{ validInfo }}
+      </slot>
     </b-valid>
-    <b-valid v-if="invalidInfo || $slots.invalid" state="invalid">
-      <slot name="invalid">{{ invalidInfo }}</slot>
+    <b-valid
+      v-if="invalidInfo || $slots.invalid"
+      state="invalid"
+    >
+      <slot name="invalid">
+        {{ invalidInfo }}
+      </slot>
     </b-valid>
     <b-info :info="message" />
   </div>
@@ -31,7 +41,7 @@ import BValid from "@/components/base/Bootstrap/Form/Other/b-form-valid.vue";
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-textarea",
+  name: "BTextarea",
   components: { BasicTextarea, BValid, BInfo },
   mixins: [
     util.mixins.form.readonly,

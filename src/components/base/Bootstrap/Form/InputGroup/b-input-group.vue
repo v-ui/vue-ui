@@ -1,5 +1,11 @@
 <template functional>
-  <div v-if="slots().default" class="input-group" :class="[ data.staticClass, {[`input-group-${props.size}`]: props.size}]" v-bind="data.attrs" v-on="listeners" >
+  <div
+    v-if="slots().default"
+    class="input-group"
+    :class="[ data.staticClass, {[`input-group-${props.size}`]: props.size}]"
+    v-bind="data.attrs"
+    v-on="listeners"
+  >
     <slot />
   </div>
 </template>
@@ -8,7 +14,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: 'b-input-group',
+  name: 'BInputGroup',
   props: {
     size: util.props.size,
   },

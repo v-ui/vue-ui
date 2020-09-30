@@ -15,7 +15,7 @@
 import Velocity from "velocity-animate";
 
 export default {
-  name: "tran-list",
+  name: "TranList",
   methods: {
     beforeEnter: function(el) {
       el.style.opacity = 0;

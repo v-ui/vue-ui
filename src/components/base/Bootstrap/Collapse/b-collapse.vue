@@ -2,7 +2,8 @@
   <div
     class="collapse"
     v-bind="data.attrs"
-    v-on="listeners">
+    v-on="listeners"
+  >
     <div class="card card-body">
       <slot />
     </div>
@@ -11,6 +12,6 @@
 
 <script>
 export default {
-  name: "b-collapse-item"
+  name: "BCollapseItem"
 };
 </script>

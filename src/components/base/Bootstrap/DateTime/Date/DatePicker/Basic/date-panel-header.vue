@@ -43,7 +43,7 @@ import util from "@/components/util/index.js";
 import BButton from "@/components/Basic/Button/basic-button.vue";
 
 export default {
-  name: "date-panel-header",
+  name: "DatePanelHeader",
   components: { BButton },
   props: {
     headerText: util.props.String,

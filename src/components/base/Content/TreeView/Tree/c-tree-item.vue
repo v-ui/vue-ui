@@ -16,7 +16,11 @@
       @dragexit="dragexit"
       @drop.stop.prevent="drop"
     >
-      <div class="d-table-cell pl-1" :class="itemClass" @click.stop="open = !open">
+      <div
+        class="d-table-cell pl-1"
+        :class="itemClass"
+        @click.stop="open = !open"
+      >
         <div v-if="isFolder">
           <i
             class="mr-2"
@@ -24,14 +28,30 @@
             style="width: 10px"
             @dblclick.stop
           />
-          <i class="mr-2" :class="open ? icon.folderOpen : icon.folder" @click.stop />
+          <i
+            class="mr-2"
+            :class="open ? icon.folderOpen : icon.folder"
+            @click.stop
+          />
         </div>
-        <i v-else class="mx-2" :class="icon.fileAlt" />
+        <i
+          v-else
+          class="mx-2"
+          :class="icon.fileAlt"
+        />
       </div>
       <!-- icon -->
       <div class="d-table-cell pr-1">
-        <font v-if="!editItem">{{ item.value }}</font>
-        <b-text v-else ref="edior" :value="item.value" size="sm" @blur="editorBlur" />
+        <font v-if="!editItem">
+          {{ item.value }}
+        </font>
+        <b-text
+          v-else
+          ref="edior"
+          :value="item.value"
+          size="sm"
+          @blur="editorBlur"
+        />
       </div>
       <!-- label or edit -->
     </div>
@@ -60,7 +80,7 @@ import BText from "@/components/base/Bootstrap/Form/b-text.vue";
 // https://developer.mozilla.org/zh-CN/docs/Web/API/Document/drop_event
 
 export default {
-  name: "c-tree-item",
+  name: "CTreeItem",
   components: { CTree: () => import("./c-tree"), BText },
   props: {
     item: util.props.Object,
@@ -110,6 +130,14 @@ export default {
         this.item[this.primaryKey] &&
         this.selectedOption[this.primaryKey] &&
         this.selectedOption[this.primaryKey] === this.item[this.primaryKey]
+    }
+  },
+  watch: {
+    selected: function(value) {
+      this.selectedOption = value;
+    },
+    selectedOption: function(value) {
+      this.$emit("item:selected", value);
     }
   },
   methods: {
@@ -198,14 +226,6 @@ export default {
       if (this.isFolder && this.$store.state.timer)
         this.$store.commit("stopTimer");
       this.$emit("item:drop", event, this.isFolder, this.dropStatus);
-    }
-  },
-  watch: {
-    selected: function(value) {
-      this.selectedOption = value;
-    },
-    selectedOption: function(value) {
-      this.$emit("item:selected", value);
     }
   }
 };

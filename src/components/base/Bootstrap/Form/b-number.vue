@@ -2,8 +2,14 @@
   <div>
     <b-input-group :size="size">
       <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
-        <basic-button outline :disabled="subButtomDisabled" @click="subn">
-          <slot name="sub">{{ subValue }}</slot>
+        <basic-button
+          outline
+          :disabled="subButtomDisabled"
+          @click="subn"
+        >
+          <slot name="sub">
+            {{ subValue }}
+          </slot>
         </basic-button>
       </b-input-group-prepend>
       <basic-text
@@ -24,8 +30,14 @@
         @keyup.native.shift.exact.down="superSubn"
       />
       <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
-        <basic-button outline :disabled="addButtonDisabled" @click="add">
-          <slot name="add">{{ subValue }}</slot>
+        <basic-button
+          outline
+          :disabled="addButtonDisabled"
+          @click="add"
+        >
+          <slot name="add">
+            {{ subValue }}
+          </slot>
         </basic-button>
       </b-input-group-prepend>
     </b-input-group>
@@ -46,7 +58,7 @@ import BInputGroupPrepend from "@/components/base/Bootstrap/Form/InputGroup/b-in
 import BInfo from "@/components/Basic/basic-info.vue";
 
 export default {
-  name: "b-number",
+  name: "BNumber",
   components: {
     BasicText,
     BasicButton,

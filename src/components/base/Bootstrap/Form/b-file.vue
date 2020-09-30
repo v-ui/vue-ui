@@ -41,7 +41,7 @@ const FilePond = vueFilePond(
 );
 
 export default {
-  name: "b-file",
+  name: "BFile",
   inheritAttrs: false,
   props: {
     info: util.props.String,

@@ -13,7 +13,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "c-controller-button",
+  name: "CControllerButton",
   props: {
     icon: util.props.String,
   }

@@ -23,7 +23,7 @@ import util from "@/components/util/index.js";
 import DatePanelTemp from "../Basic/date-panel-temp.vue";
 
 export default {
-  name: "date-month-panel",
+  name: "DateMonthPanel",
   components: { DatePanelTemp },
   mixins: [util.mixins.date.month],
   // model: {

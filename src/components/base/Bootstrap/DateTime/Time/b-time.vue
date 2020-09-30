@@ -19,7 +19,7 @@ import util from "@/components/util/index.js";
 import BText from "@/components/base/Bootstrap/Form/b-text.vue";
 
 export default {
-  name: "b-time",
+  name: "BTime",
   components: { BText },
   mixins: [util.mixins.form.readonly],
   model: {

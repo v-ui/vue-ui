@@ -15,7 +15,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: "basic-text",
+  name: "BasicText",
   mixins: [util.mixins.form.base, util.mixins.form.readonly],
   props: {
     type: {

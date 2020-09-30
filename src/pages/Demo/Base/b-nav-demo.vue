@@ -1,68 +1,150 @@
 <template>
   <div>
     <h2>b-nav</h2>
-    <hr />
+    <hr>
     <div class="row py-1">
-      <font class="col-1">default:</font>
-      <b-nav class="col-11" :list="list" />
+      <font class="col-1">
+        default:
+      </font>
+      <b-nav
+        class="col-11"
+        :list="list"
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">nav width dropdown:</font>
-      <b-nav class="col-11" :list="listd" />
+      <font class="col-1">
+        nav width dropdown:
+      </font>
+      <b-nav
+        class="col-11"
+        :list="listd"
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">set:</font>
+      <font class="col-1">
+        set:
+      </font>
       <div class="col-11">
         <div class="row py-1">
-          <font class="col-1">set:start</font>
-          <b-nav class="col-11" :list="list" set="start" />
+          <font class="col-1">
+            set:start
+          </font>
+          <b-nav
+            class="col-11"
+            :list="list"
+            set="start"
+          />
         </div>
         <div class="row py-1">
-          <font class="col-1">set:center</font>
-          <b-nav class="col-11" :list="list" set="center" />
+          <font class="col-1">
+            set:center
+          </font>
+          <b-nav
+            class="col-11"
+            :list="list"
+            set="center"
+          />
         </div>
         <div class="row py-1">
-          <font class="col-1">set:end</font>
-          <b-nav class="col-11" :list="list" set="end" />
+          <font class="col-1">
+            set:end
+          </font>
+          <b-nav
+            class="col-11"
+            :list="list"
+            set="end"
+          />
         </div>
       </div>
     </div>
     <div class="row py-1">
-      <font class="col-1">column:</font>
-      <b-nav class="col-11" :list="list" column />
+      <font class="col-1">
+        column:
+      </font>
+      <b-nav
+        class="col-11"
+        :list="list"
+        column
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">column width dropdown:</font>
-      <b-nav class="col-11" :list="listd" column />
+      <font class="col-1">
+        column width dropdown:
+      </font>
+      <b-nav
+        class="col-11"
+        :list="listd"
+        column
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">tabs:</font>
-      <b-nav class="col-11" :list="list" tabs />
+      <font class="col-1">
+        tabs:
+      </font>
+      <b-nav
+        class="col-11"
+        :list="list"
+        tabs
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">pills:</font>
-      <b-nav class="col-11" :list="list" pills />
+      <font class="col-1">
+        pills:
+      </font>
+      <b-nav
+        class="col-11"
+        :list="list"
+        pills
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">select(label1):</font>
-      <b-nav class="col-11" :list="list" select="label1" pills />
+      <font class="col-1">
+        select(label1):
+      </font>
+      <b-nav
+        class="col-11"
+        :list="list"
+        select="label1"
+        pills
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">fill:</font>
-      <b-nav class="col-11" :list="list2" tabs fill />
+      <font class="col-1">
+        fill:
+      </font>
+      <b-nav
+        class="col-11"
+        :list="list2"
+        tabs
+        fill
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">justified:</font>
-      <b-nav class="col-11" :list="list2" tabs justified />
+      <font class="col-1">
+        justified:
+      </font>
+      <b-nav
+        class="col-11"
+        :list="list2"
+        tabs
+        justified
+      />
     </div>
     <h2>b-navbar</h2>
-    <hr />
+    <hr>
     <div class="row py-1">
-      <font class="col-1">default:</font>
-      <b-navbar class="col-11 navbar-expand-lg navbar-light bg-light" :list="list" />
+      <font class="col-1">
+        default:
+      </font>
+      <b-navbar
+        class="col-11 navbar-expand-lg navbar-light bg-light"
+        :list="list"
+      />
     </div>
     <div class="row py-1">
-      <font class="col-1">brand:</font>
+      <font class="col-1">
+        brand:
+      </font>
       <b-navbar
         class="col-11 navbar-expand-lg navbar-light bg-light"
         brand="Brand Text"
@@ -77,7 +159,7 @@ import BNav from "@/components/base/Bootstrap/Navigation/Nav/b-nav.vue";
 import BNavbar from "@/components/base/Bootstrap/Navigation/Navbar/b-navbar.vue";
 
 export default {
-  name: "b-nav-demo",
+  name: "BNavDemo",
   components: { BNav, BNavbar },
   data() {
     return {
