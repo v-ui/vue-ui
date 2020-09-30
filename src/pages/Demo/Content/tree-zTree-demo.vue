@@ -19,8 +19,8 @@
 
 <script>
 import data from './data.json'
-import CA from '@/components/base/Content/A/c-a.vue'
-import tree from "@/components/base/Content/TreeView/zTree/c-zTree.vue"
+import CA from '@/components/basic/A/c-a.vue'
+import tree from "@/components/content//TreeView/zTree/c-zTree.vue"
 
 export default {
   name: 'TreeZTreeDemo',

@@ -139,10 +139,10 @@
 </template>
 
 <script>
-import BAlert from "@/components/base/Bootstrap/Alert/b-alert.vue";
-import BAlertLink from "@/components/base/Bootstrap/Alert/b-alert-link.vue";
+import BAlert from "@/components/base/Alert/b-alert.vue";
+import BAlertLink from "@/components/base/Alert/b-alert-link.vue";
 
-import BRadioGroup from "@/components/base/Bootstrap/Form/Radio/b-radio-group.vue";
+import BRadioGroup from "@/components/form/Radio/b-radio-group.vue";
 
 import variables from "@/components/util/variables.js";
 export default {

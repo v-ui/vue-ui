@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import BSwitch from "@/components/base/Bootstrap/Form/b-switch.vue";
+import BSwitch from "@/components/form/b-switch.vue";
 
 export default {
   name: "BSwitchDemo",

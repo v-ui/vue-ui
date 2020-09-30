@@ -275,8 +275,8 @@
 import variables from "@/components/util/variables.js";
 
 import img from '@/assets/logo.png'
-import BProgress from "@/components/base/Bootstrap/Progress/b-progress.vue";
-import BRange from '@/components/base/Bootstrap/Form/b-range.vue'
+import BProgress from "@/components/base/Progress/b-progress.vue";
+import BRange from '@/components/form/b-range.vue'
 
 export default {
   name: "BProgressDemo",

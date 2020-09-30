@@ -2,6 +2,7 @@
 
 export default {
     SubsystemName: 'c',
+    // icon: '', // 子系统的图标，不添加有默认图标
     // hide: true,
     // 此处添加 则 ‘c’ 子系统均不会在主菜单中显示
     Modules: [

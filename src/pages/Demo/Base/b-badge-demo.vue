@@ -78,7 +78,7 @@
 <script>
 import variables from "@/components/util/variables.js";
 
-import BBadge from "@/components/base/Bootstrap/Badge/b-badge.vue";
+import BBadge from "@/components/base/Badge/b-badge.vue";
 
 export default {
   name: "BBadgeDemo",

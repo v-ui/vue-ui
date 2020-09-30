@@ -307,7 +307,7 @@
 </template>
 
 <script>
-import BModal from '@/components/base/Bootstrap/Modal/b-modal.vue'
+import BModal from '@/components/base/Modal/b-modal.vue'
 
 export default {
     name: 'BModalDemo',

@@ -309,8 +309,8 @@
 </template>
 
 <script>
-import BText from "@/components/base/Bootstrap/Form/b-text.vue";
-import BFormLabel from '@/components/base/Bootstrap/Form/Other/b-form-lanel.vue'
+import BText from "@/components/form/b-text.vue";
+import BFormLabel from '@/components/form/Other/b-form-lanel.vue'
 
 export default {
   name: "BTextDemo",

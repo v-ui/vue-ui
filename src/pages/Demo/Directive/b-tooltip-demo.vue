@@ -534,10 +534,10 @@
 </template>
 
 <script>
-import BButton from "@/components/Basic/Button/basic-button.vue";
+import BButton from "@/components/basic/Button/basic-button.vue";
 
-import BPopover from '@/components/base/Bootstrap/Popover/b-popover.vue'
-import BTooltip from '@/components/base/Bootstrap/Tooltip/b-tooltip.vue'
+import BPopover from '@/components/base/Popover/b-popover.vue'
+import BTooltip from '@/components/base/Tooltip/b-tooltip.vue'
 
 export default {
   name: "BTooltipDemo",

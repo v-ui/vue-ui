@@ -27,8 +27,8 @@
 <script>
 import util from "@/components/util/index.js";
 
-import BNav from "@/components/base/Bootstrap/Navigation/Nav/b-nav.vue";
-import BNavItem from "@/components/base/Bootstrap/Navigation/Nav/b-nav-item.vue";
+import BNav from "@/components/base/Navigation/Nav/b-nav.vue";
+import BNavItem from "@/components/base/Navigation/Nav/b-nav-item.vue";
 
 export default {
   name: "BoxTabList",

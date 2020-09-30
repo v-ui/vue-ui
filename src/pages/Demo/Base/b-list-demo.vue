@@ -109,8 +109,8 @@
 <script>
 import variables from '@/components/util/variables.js'
 
-import BList from '@/components/base/Bootstrap/List/b-list.vue'
-import BListItem from '@/components/base/Bootstrap/List/b-list-item.vue'
+import BList from '@/components/base/List/b-list.vue'
+import BListItem from '@/components/base/List/b-list-item.vue'
 
 export default {
     name: 'BListDemo',

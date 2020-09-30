@@ -373,11 +373,11 @@
 </template>
 
 <script>
-import BDatePicker from "@/components/base/Bootstrap/DateTime/Date/DatePicker/b-date-picker.vue";
-import BTime from "@/components/base/Bootstrap/DateTime/Time/b-time.vue";
+import BDatePicker from "@/components/base/DateTime/Date/DatePicker/b-date-picker.vue";
+import BTime from "@/components/base/DateTime/Time/b-time.vue";
 
-// import BYearPicker from "@/components/base/Bootstrap/DateTime/Date/DateList/b-year-picker.vue";
-// import BMonthPicker from "@/components/base/Bootstrap/DateTime/Date/DateList/b-month-picker.vue";
+// import BYearPicker from "@/components/base/DateTime/Date/DateList/b-year-picker.vue";
+// import BMonthPicker from "@/components/base/DateTime/Date/DateList/b-month-picker.vue";
 
 export default {
   name: "BDatetimeDemo",

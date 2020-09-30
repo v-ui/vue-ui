@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import BaseA from '@/components/base/Content/A/c-a.vue'
+import BaseA from '@/components/basic/A/c-a.vue'
 
 export default {
     name: 'CADemo',

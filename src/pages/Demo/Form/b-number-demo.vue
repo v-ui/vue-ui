@@ -197,7 +197,7 @@
 </template>
 
 <script>
-import BNumber from "@/components/base/Bootstrap/Form/b-number.vue";
+import BNumber from "@/components/form/b-number.vue";
 
 export default {
   name: "BNumberDemo",

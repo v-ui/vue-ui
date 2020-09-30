@@ -285,7 +285,7 @@
 </template>
 
 <script>
-import BSelect from "@/components/base/Bootstrap/Form/b-select.vue";
+import BSelect from "@/components/form/b-select.vue";
 
 export default {
   name: "BSelectDemo",

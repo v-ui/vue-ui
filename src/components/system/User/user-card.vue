@@ -31,7 +31,7 @@
 
 <script>
 import Avatar from "./avatar.vue";
-import BDropdown from "@/components/base/Bootstrap/Dropdown/b-dropdown.vue";
+import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
 
 export default {
   name: "UserCard",

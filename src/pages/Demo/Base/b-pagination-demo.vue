@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import BPag from '@/components/base/Bootstrap/Navigation/Pagination/b-pag.vue'
+import BPag from '@/components/base/Pagination/b-pag.vue'
 
 export default {
     name: 'BPaginationDemo',

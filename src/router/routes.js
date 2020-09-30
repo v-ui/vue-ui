@@ -1,25 +1,30 @@
 import util from './util'
 
 // System
-import demoRouters from './Subsystem/Demo'
-import bRouters from './Subsystem/b'
-import cRouters from './Subsystem/c'
+import BaseRouters from './Subsystem/Base'
+import FormRouters from './Subsystem/Form'
+import ContentRouters from './Subsystem/Content'
+import BoxRouters from './Subsystem/Box'
+import DirectiveRouters from './Subsystem/Directive'
 import SystemRouters from './Subsystem/system'
 
 const Modules = [
-    util.GetModels(demoRouters),
-    util.GetModels(bRouters),
-    util.GetModels(cRouters),
-    util.GetModels(SystemRouters),
-    // util.GetModels(Plugin),
+  util.GetModels(BaseRouters),
+  util.GetModels(FormRouters),
+  util.GetModels(ContentRouters),
+  util.GetModels(BoxRouters),
+  util.GetModels(DirectiveRouters),
+  util.GetModels(SystemRouters),
 ]
 
 const Routers = [
-    ...util.GetRouters(demoRouters),               // a
-    ...util.GetRouters(bRouters),               // b
-    ...util.GetRouters(cRouters),               // c
-    ...util.GetRouters(SystemRouters),          // System
-    // ...util.GetRouters(Plugin),
+  ...util.GetRouters(BaseRouters),              // Base
+  ...util.GetRouters(FormRouters),              // Form
+  ...util.GetRouters(ContentRouters),           // Content
+  ...util.GetRouters(BoxRouters),               // Box
+  ...util.GetRouters(DirectiveRouters),         // Directive
+  ...util.GetRouters(SystemRouters),            // System
+  // ...util.GetRouters(Plugin),
 ]
 
 export default Routers

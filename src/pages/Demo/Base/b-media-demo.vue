@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BMedia from '@/components/base/Bootstrap/Media/b-media.vue'
+import BMedia from '@/components/base/Media/b-media.vue'
 
 export default {
     name: 'BMediaDemo',

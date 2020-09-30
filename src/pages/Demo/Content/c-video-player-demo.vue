@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CVideoPlayer from '@/components/base/Content/VideoPlayer/c-video-player.vue'
+import CVideoPlayer from '@/components/content//VideoPlayer/c-video-player.vue'
 
 export default {
   name: 'CVideoPlayerDemo',

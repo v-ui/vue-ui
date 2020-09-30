@@ -247,14 +247,14 @@
 </template>
 
 <script>
-import BCard from "@/components/base/Bootstrap/Card/b-card.vue";
-import BCardLink from "@/components/base/Bootstrap/Card/b-card-link.vue";
-import BCardImage from "@/components/base/Bootstrap/Card/b-card-image.vue";
-import "@/components/base/Bootstrap/Card/b-card-sub-components.js";
+import BCard from "@/components/base/Card/b-card.vue";
+import BCardLink from "@/components/base/Card/b-card-link.vue";
+import BCardImage from "@/components/base/Card/b-card-image.vue";
+import "@/components/base/Card/b-card-sub-components.js";
 
-import BNav from "@/components/base/Bootstrap/Navigation/Nav/b-nav.vue";
-import BaseA from "@/components/base/Content/A/c-a.vue";
-import BList from "@/components/base/Bootstrap/List/b-list.vue";
+import BNav from "@/components/base/Navigation/Nav/b-nav.vue";
+import BaseA from "@/components/basic/A/c-a.vue";
+import BList from "@/components/base/List/b-list.vue";
 
 export default {
   name: "BCardDemo",

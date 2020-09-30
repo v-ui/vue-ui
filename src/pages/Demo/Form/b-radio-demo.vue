@@ -318,9 +318,9 @@
 </template>
 
 <script>
-import BRadio from "@/components/base/Bootstrap/Form/Radio/b-radio.vue";
-import BRadioGroup from "@/components/base/Bootstrap/Form/Radio/b-radio-group.vue";
-import BRadioButtonGroup from "@/components/base/Bootstrap/Form/Radio/b-radio-button-group.vue";
+import BRadio from "@/components/form/Radio/b-radio.vue";
+import BRadioGroup from "@/components/form/Radio/b-radio-group.vue";
+import BRadioButtonGroup from "@/components/form/Radio/b-radio-button-group.vue";
 
 export default {
   name: "BRadioDemo",

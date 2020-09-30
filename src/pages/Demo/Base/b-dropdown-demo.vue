@@ -484,14 +484,14 @@
 </template>
 
 <script>
-import BDropdown from "@/components/base/Bootstrap/Dropdown/b-dropdown.vue";
-import BDropdownHeader from "@/components/base/Bootstrap/Dropdown/b-dropdown-header.vue";
-import BDropdownItem from "@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue";
-import BDropdownItemText from "@/components/base/Bootstrap/Dropdown/b-dropdown-item-text.vue";
-import BDropdownDivider from "@/components/base/Bootstrap/Dropdown/b-dropdown-divider.vue";
+import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
+import BDropdownHeader from "@/components/base/Dropdown/b-dropdown-header.vue";
+import BDropdownItem from "@/components/base/Dropdown/b-dropdown-item.vue";
+import BDropdownItemText from "@/components/base/Dropdown/b-dropdown-item-text.vue";
+import BDropdownDivider from "@/components/base/Dropdown/b-dropdown-divider.vue";
 
-import BDropdownList from "@/components/base/Bootstrap/DropdownList/b-dropdown-list.vue";
-import BDropdownPanel from '@/components/base/Bootstrap/DropdownPanel/b-dropdown-panel.vue'
+import BDropdownList from "@/components/base/DropdownList/b-dropdown-list.vue";
+import BDropdownPanel from '@/components/base/DropdownPanel/b-dropdown-panel.vue'
 
 export default {
   name: "BDropdownDemo",

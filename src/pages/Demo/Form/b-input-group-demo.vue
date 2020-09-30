@@ -180,16 +180,16 @@
 
 <script>
 
-import BInputGroup from "@/components/base/Bootstrap/Form/InputGroup/b-input-group.vue";
-import BInputGroupPrepend from "@/components/base/Bootstrap/Form/InputGroup/b-input-group-prepend.vue";
-import BInputGroupText from "@/components/base/Bootstrap/Form/InputGroup/b-input-group-text.vue";
+import BInputGroup from "@/components/form/InputGroup/b-input-group.vue";
+import BInputGroupPrepend from "@/components/form/InputGroup/b-input-group-prepend.vue";
+import BInputGroupText from "@/components/form/InputGroup/b-input-group-text.vue";
 
-import BasicText from "@/components/base/Bootstrap/Form/Basic/basic-text.vue";
-import BTextarea from "@/components/base/Bootstrap/Form/b-textarea.vue";
-import BCheckbox from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox.vue";
-import BRadio from "@/components/base/Bootstrap/Form/Radio/b-radio.vue";
-import BasicSelect from "@/components/base/Bootstrap/Form/Basic/Select/basic-select.vue";
-import BasicButton from "@/components/Basic/Button/basic-button.vue";
+import BasicText from "@/components/form/Basic/basic-text.vue";
+import BTextarea from "@/components/form/b-textarea.vue";
+import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
+import BRadio from "@/components/form/Radio/b-radio.vue";
+import BasicSelect from "@/components/form/Basic/Select/basic-select.vue";
+import BasicButton from "@/components/basic/Button/basic-button.vue";
 
 export default {
   name: "BUnputGroupDemo",

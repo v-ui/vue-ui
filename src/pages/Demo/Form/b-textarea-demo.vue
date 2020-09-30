@@ -199,7 +199,7 @@
 </template>
 
 <script>
-import BTextarea from "@/components/base/Bootstrap/Form/b-textarea.vue";
+import BTextarea from "@/components/form/b-textarea.vue";
 
 export default {
   name: "BTeatareaDemo",

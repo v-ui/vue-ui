@@ -186,9 +186,9 @@
 </template>
 
 <script>
-import BToast from "@/components/base/Bootstrap/toast/b-toast.vue";
-import BToasts from "@/components/base/Bootstrap/toast/b-toasts.vue";
-import BaseA from "@/components/base/Content/A/c-a.vue";
+import BToast from "@/components/base/toast/b-toast.vue";
+import BToasts from "@/components/base/toast/b-toasts.vue";
+import BaseA from "@/components/basic/A/c-a.vue";
 
 export default {
   name: "BToastDemo",

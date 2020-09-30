@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import BFileBrowser from '@/components/base/Content/FileBrowser/v-file-browser.vue'
+import BFileBrowser from '@/components/content//FileBrowser/v-file-browser.vue'
 
 export default {
   name: 'BFileBrowserDemo',

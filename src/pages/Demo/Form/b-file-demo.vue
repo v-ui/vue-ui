@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import BFile from '@/components/base/Bootstrap/Form/b-file.vue'
-import BaseA from '@/components/base/Content/A/c-a.vue'
+import BFile from '@/components/form/b-file.vue'
+import BaseA from '@/components/basic/A/c-a.vue'
 
 export default {
   name: 'BFileDemo',

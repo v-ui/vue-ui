@@ -74,7 +74,7 @@
 <script>
 import variables from "@/components/util/variables.js";
 
-import BLoading from "@/components/base/Bootstrap/Loading/b-loading.vue";
+import BLoading from "@/components/base/Loading/b-loading.vue";
 
 export default {
   name: "BLoadingDemo",

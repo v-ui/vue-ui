@@ -232,12 +232,12 @@
 <script>
 import variables from "@/components/util/variables.js";
 
-import BasicButton from "@/components/Basic/Button/basic-button.vue";
-import BasicReset from "@/components/Basic/Button/basic-reset.vue";
-import BasicSubmit from "@/components/Basic/Button/basic-submit.vue";
+import BasicButton from "@/components/basic/Button/basic-button.vue";
+import BasicReset from "@/components/basic/Button/basic-reset.vue";
+import BasicSubmit from "@/components/basic/Button/basic-submit.vue";
 
-import BButtonGroup from "@/components/base/Bootstrap/ButtonGroup/b-button-group.vue";
-import BButtonToolbar from "@/components/base/Bootstrap/ButtonGroup/b-btn-toolbar.vue";
+import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
+import BButtonToolbar from "@/components/base/ButtonGroup/b-btn-toolbar.vue";
 
 export default {
   name: "BButtonDemo",

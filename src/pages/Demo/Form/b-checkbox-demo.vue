@@ -386,9 +386,9 @@
 </template>
 
 <script>
-import BCheckbox from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox.vue";
-import BCheckboxGroup from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox-group.vue";
-import BCheckboxButtonGroup from "@/components/base/Bootstrap/Form/CheckBox/b-checkbox-button-group.vue";
+import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
+import BCheckboxGroup from "@/components/form/CheckBox/b-checkbox-group.vue";
+import BCheckboxButtonGroup from "@/components/form/CheckBox/b-checkbox-button-group.vue";
 
 export default {
   name: "BCheckboxDemo",

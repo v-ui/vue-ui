@@ -38,7 +38,7 @@
 import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import "@/components/base/Bootstrap/Collapse/v-collapse.js";
+import "@/components/base/Collapse/v-collapse.js";
 
 export default {
   name: "BoxAccordion",

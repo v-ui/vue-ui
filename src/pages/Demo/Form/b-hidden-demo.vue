@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import BHidden from '@/components/base/Bootstrap/Form/b-hidden.vue'
+import BHidden from '@/components/form/b-hidden.vue'
 
 export default {
     name: 'BHiddenDemo',

@@ -155,8 +155,8 @@
 </template>
 
 <script>
-import BNav from "@/components/base/Bootstrap/Navigation/Nav/b-nav.vue";
-import BNavbar from "@/components/base/Bootstrap/Navigation/Navbar/b-navbar.vue";
+import BNav from "@/components/base/Navigation/Nav/b-nav.vue";
+import BNavbar from "@/components/base/Navigation/Navbar/b-navbar.vue";
 
 export default {
   name: "BNavDemo",

@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import BRange from '@/components/base/Bootstrap/Form/b-range.vue'
+import BRange from '@/components/form/b-range.vue'
 
 export default {
     name: 'BRangeDemo',

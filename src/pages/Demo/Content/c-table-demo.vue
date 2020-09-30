@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import CTable from "@/components/base/Content/GridView/grid-view.vue";
+import CTable from "@/components/content//GridView/grid-view.vue";
 
 export default {
   name: "CTableDemo",
