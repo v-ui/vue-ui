@@ -23,7 +23,7 @@ import CA from '@/components/basic/A/c-a.vue'
 import tree from "@/components/content//TreeView/zTree/c-zTree.vue"
 
 export default {
-  name: 'TreeZTreeDemo',
+  name: 'CZTreeDemo',
   components: { CA, tree },
 	data() {
     return {
@@ -48,7 +48,7 @@ export default {
       // nodes: this.dataMaker(500),
       setting: {
         check: {
-          enable: true
+          enable: false
         },
         data: {
           simpleData: {
