@@ -32,9 +32,9 @@
 import util from "@/components/util/index.js";
 
 import CVideo from "@/components/content//Video/c-video.vue";
-// import CVideoList from '@/components/content//VideoPlayer/Plugins/Playlist/list/list.vue'
-// import CVideoListCard from '@/components/content//VideoPlayer/Plugins/Playlist/ListCard/list-card.vue'
-import CVideoSelector from "@/components/content//VideoPlayer/Plugins/Playlist/Selector/selector.vue";
+// import CVideoList from './Plugins/Playlist/list/list.vue'
+import CVideoSelector from "./Plugins/Playlist/Selector/selector.vue";
+// import CVideoListCard from './Plugins/Playlist/ListCard/list-card.vue'
 
 export default {
   name: "CVideoPlayer",

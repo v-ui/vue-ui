@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import CVideoPlayer from '@/components/content//VideoPlayer/c-video-player.vue'
+import CVideoPlayer from '@/components/box/VideoPlayer/c-video-player.vue'
 
 export default {
-  name: 'CVideoPlayerDemo',
+  name: 'BVideoPlayerDemo',
   components: { CVideoPlayer, },
 }
 </script>

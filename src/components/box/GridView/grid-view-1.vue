@@ -54,9 +54,9 @@
             </b-button-group>
             <b-dropdown
               :list="downloadList"
-              hide-toggle
               menu-align="right"
-              @menu-click="item => dataExport(item)"
+              hide-toggle
+              @menuClick="dataExport"
             >
               <template #trigger>
                 <b-button
@@ -88,19 +88,14 @@
           :class="fixedNum > 0 ? `col-${fixedSizeNum}` : ''"
           :list="fixedList"
           :sort-obj="sortObj"
-          :table-theme="tableTheme"
-          :table-sm="tableSm"
-          :table-hover="tableHover"
-          :table-striped="tableStriped"
-          :table-bordered="tableBordered"
-          :table-borderless="tableBorderless"
-          :thead-theme="theadTheme"
+          :table-class="tableClass"
+          :thead-class="theadClass"
           :hide-head="hideHead"
           :hide-data="hideData"
           :hide-foot="hideFoot"
           :hide-serial="hideSerial"
-          :select-status="selectStatus"
           :primary-key="primaryKey"
+          :select-status="selectStatus"
           @table:sort="cell => tableSort(cell)"
           @table:scroll="(event, type) => scroll(event, type)"
         />
@@ -109,24 +104,19 @@
           v-if="fixedNum > 0"
           ref="activeTable"
           :list="activeList"
+          :class="`col-${12 - fixedSizeNum}`"
           is-active
           hide-serial
           hide-select
-          :class="`col-${12 - fixedSizeNum}`"
           :sort-obj="sortObj"
-          :table-theme="tableTheme"
-          :table-sm="tableSm"
-          :table-hover="tableHover"
-          :table-striped="tableStriped"
-          :table-bordered="tableBordered"
-          :table-borderless="tableBorderless"
-          :thead-theme="theadTheme"
+          :table-class="tableClass"
+          :thead-class="theadClass"
           :hide-head="hideHead"
           :hide-data="hideData"
           :hide-foot="hideFoot"
+          :primary-key="primaryKey"
           :selected="selectedOptions"
           :select-status="selectStatus"
-          :primary-key="primaryKey"
           @table:sort="cell => tableSort(cell)"
           @table:scroll="(event, type) => scroll(event, type)"
         />
@@ -159,7 +149,7 @@
             start="1"
             :end="pageCount"
           >
-            <b-number v-model.number="pageNumber" />
+            <b-number />
             <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
           </b-pagination>
         </font>
@@ -204,8 +194,8 @@
           </font>
           <div class="col-9">
             <b-select
-              :list="['asc', 'desc']"
               size="sm"
+              :list="['asc', 'desc']"
               :value="sortPlusObj[item]"
               @change="sortPlusChanged($event, item)"
             />
@@ -240,14 +230,13 @@
 </template>
 
 <script>
-// 参考： https://printjs.crabbly.com/
-import printJS from "print-js";
-
 import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
+// 参考： https://printjs.crabbly.com/
+import printJS from "print-js";
 
-import CTable from "@/components/content//Table/c-table.vue";
+import CTable from "@/components/content/Table/c-table.vue";
 
 import BButton from "@/components/basic/Button/basic-button.vue";
 import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
@@ -298,20 +287,19 @@ export default {
       validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value))
     },// 0: 默认, 1: 单选, 2: 多选
     selected: [Array, Object],
-    printTitle: util.props.String
+    printTitle: String
   },
   data() {
     return {
       loading: false, // 未使用
       selectedOptions: this.selected,
       downloadList: [
+        { value: "JSON", type: "json" },
         { value: "XML", type: "xml" },
         { value: "CSV", type: "csv" },
         { value: "TXT", type: "txt" },
-        // { value: 'SQL', type: 'sql', },
-        // { value: 'PDF', type: 'pdf', },
-        { value: "JSON", type: "json" }
-        // { value: 'MS-EXCEL', type: 'ms-excel', },
+        { value: "SQL", type: "sql" },
+        { value: "MS-EXCEL", type: "ms-excel" }
       ],
       sortObj: {},
       sortPlusObj: {},
@@ -401,6 +389,18 @@ export default {
     },
     hideFoot: function() {
       return !this.foot || this.foot.length == 0;
+    },
+    tableClass: function() {
+      let theme = this.tableTheme ? `table-${this.tableTheme}` : "";
+      let sm = this.tableSm ? "table-sm" : "";
+      let hover = this.tableHover ? "table-hover" : "";
+      let striped = this.tableStriped ? "table-striped" : "";
+      let bordered = this.tableBordered ? "table-bordered" : "";
+      let borderless = this.tableBorderless ? "table-borderless" : "";
+      return `${theme} ${hover} ${striped} ${bordered} ${borderless} ${sm} `;
+    },
+    theadClass: function() {
+      return this.theadTheme ? `thead-${this.theadTheme}` : "";
     },
     fixedTable: function() {
       return this.$refs && this.$refs.fixedTable;
@@ -599,32 +599,6 @@ export default {
     },
     dataExport: function(item) {
       if (!item || !item.type) return;
-      switch (item.type) {
-        case "xml":
-          tools.file.xml.writer(this.data);
-          break;
-        case "csv":
-          tools.file.csv.writer(this.data);
-          break;
-        case "txt":
-          tools.file.txt.writer(this.data);
-          break;
-        // case 'sql':
-
-        //     break;
-        // case 'pdf':
-
-        //     break;
-        case "json":
-          tools.file.json.writer(this.data);
-          break;
-        case "ms-excel":
-          tools.file.excel.writer(this.data);
-          break;
-        default:
-          break;
-      }
-      return false;
     },
     tableSort: function(cell) {
       this.$set(

@@ -20,7 +20,7 @@
 <script>
 import data from './data.json'
 import CA from '@/components/basic/A/c-a.vue'
-import tree from "@/components/content//TreeView/zTree/c-zTree.vue"
+import tree from "@/components/content/Tree/zTree/c-zTree.vue"
 
 export default {
   name: 'CZTreeDemo',
