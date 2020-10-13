@@ -21,7 +21,7 @@ import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 export default {
-  name: "CA",
+  name: "BasicA",
   props: {
     href: {
       ...util.props.href,

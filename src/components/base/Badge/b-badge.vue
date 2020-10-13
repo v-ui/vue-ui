@@ -25,7 +25,7 @@
 <script>
 import util from "@/components/util/index.js";
 
-import BaseA from "@/components/basic/A/c-a.vue";
+import BaseA from "@/components/basic/A/basic-a.vue";
 
 import srMsg from "@/components/basic/basic-sr-msg.vue";
 
