@@ -48,12 +48,12 @@ export default {
     },
     color: {
       type: [String, Array],
-      default:  util.props.color.default,
+      default: util.props.color.default,
       validator: function(value) {
         if (tools.obj.type.isString(value)) {
           return util.props.color.validator(value)
         } else if (tools.obj.type.isArray(value)) {
-          return value.every(e => util.props.UInt.validator(e.value) && e.value <= 100 && util.props.color.validator(e.color))
+          return value.every(e => util.props.UNumber.validator(e.value) && e.value <= 100 && util.props.color.validator(e.color))
         }
       },
     },
@@ -110,6 +110,17 @@ export default {
       let c = this.color.find(e => this.value <= e.value)
       return c && c.color || 'primary'
     },
+  },
+  data() {
+    let vm = this
+    return {
+      opt: {
+        delay: 0.25,
+        onUpdate: function() {
+          vm.$emit('animate:updating', vm.tweenNumber)
+        },
+      },
+    }
   },
   mounted() {
     if (this.state) this.color.sort((a, b) => a.value - b.value)

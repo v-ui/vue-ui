@@ -310,7 +310,7 @@
 
 <script>
 import BText from "@/components/form/b-text.vue";
-import BFormLabel from '@/components/form/Other/b-form-lanel.vue'
+import BFormLabel from '@/components/form/Other/b-form-label.vue'
 
 export default {
   name: "BTextDemo",

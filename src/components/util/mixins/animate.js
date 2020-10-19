@@ -1,5 +1,5 @@
 import props from "../props.js";
-import TweenLite from "gsap";
+import gsap from "gsap";
 
 let base = {
   props: {
@@ -9,7 +9,7 @@ let base = {
   },
   data() {
     return {
-      opt: {delay: 0.5,},
+      opt: {delay: 0.25,},
       tweenNumber: 0,
       targetNumber: this.value || 0,
     };
@@ -27,7 +27,7 @@ let base = {
   },
   methods: {
     showAnimate: function (number) {
-      TweenLite.to(this.target && this.target.keys && this.target.keys().length > 0 ? this.target : this.$data, { tweenNumber: number, ...this.opt });
+      gsap.to(this.target && this.target.keys && this.target.keys().length > 0 ? this.target : this.$data, { tweenNumber: number, ...this.opt }, );
     },
   },
 }

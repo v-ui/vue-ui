@@ -18,14 +18,14 @@ export default {
     },
     watch: {
       popRef: function() {
-        this._initPopper()
+        this.plugin_initPopper()
       },
       popEle: function() {
-        this._initPopper()
+        this.plugin_initPopper()
       }
     },
     methods: {
-      _initPopper: async function() {
+      plugin_initPopper: async function() {
         if (this.popRef && this.popEle) {
           await this.$nextTick()
           this.popper = await createPopper(this.popRef, this.popEle, this.popOpts)

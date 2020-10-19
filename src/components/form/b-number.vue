@@ -27,7 +27,7 @@
         @keyup.native.exact.up="add"
         @keyup.native.exact.down="subn"
         @keyup.native.shift.exact.up="superAdd"
-        @keyup.native.shift.exact.down="superSubn"
+        @keyup.native.shift.exact.down="superSub"
       />
       <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
         <basic-button
@@ -208,7 +208,7 @@ export default {
       this.number += this.dataStep;
       this.change();
     },
-    superSubn: function() {
+    superSub: function() {
       if (this.disabled || this.readonly) return
       this.number = Number(this.number)
       this.number -= this.dataStep * 10
