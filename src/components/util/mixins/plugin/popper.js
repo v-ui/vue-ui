@@ -28,7 +28,7 @@ export default {
       plugin_initPopper: async function() {
         if (this.popRef && this.popEle) {
           await this.$nextTick()
-          this.popper = await createPopper(this.popRef, this.popEle, this.popOpts)
+          this.popper = await createPopper(this.popRef.$el || this.popRef, this.popEle.$el || this.popEle, this.popOpts)
         }
       },
     },

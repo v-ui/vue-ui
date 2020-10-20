@@ -12,14 +12,14 @@
           class="position-absolute"
           :class="objClass"
           :style="[controllerStyle, startControllerPossition]"
-          @mousedown.native.left.exact.stop.prevent="startMouseDown"
+          @mousedown.native.left.exact.stop.prevent="$event => mouseDown($event, 'start')"
         />
         <b-slide-coltroller
           v-tip="dataEnd"
           class="position-absolute"
           :class="objClass"
           :style="[controllerStyle, endControllerPossition]"
-          @mousedown.native.left.exact.stop.prevent="endMouseDown"
+          @mousedown.native.left.exact.stop.prevent="$event => mouseDown($event, 'end')"
         />
       </div>
       <label class=" m-0 p-0 pl-1">{{ dataMax }}</label>
@@ -128,26 +128,25 @@ export default {
       this.startControllerPossition.top = top + 'px'
       this.endControllerPossition.top = top + 'px'
     },
-    startMouseDown: function(event) {
+    mouseDown: function(event, type) {
       this.mouseMoveClientX = event.clientX
-      document.addEventListener('mousemove', this.startMousemove)
-      document.addEventListener('mouseup', () => document.removeEventListener('mousemove', this.startMousemove))
+      document.addEventListener('mousemove', type === 'start' ? this.startMousemove : this.endMousemove)
+      document.addEventListener('mouseup',
+        () => document.removeEventListener('mousemove', type === 'start' ? this.startMousemove : this.endMousemove)
+      )
     },
     startMousemove: function(event) {
       let diff = event.clientX - this.mouseMoveClientX
       this.mouseMoveClientX = event.clientX
       this.dataStart += this.computeNumber(diff)
+      if (this.dataStart >= this.dataEnd) this.dataStart = this.dataEnd - 1
       this.initControllerLeft()
-    },
-    endMouseDown: function(event) {
-      this.mouseMoveClientX = event.clientX
-      document.addEventListener('mousemove', this.endMousemove)
-      document.addEventListener('mouseup', () => document.removeEventListener('mousemove', this.endMousemove))
     },
     endMousemove: function(event) {
       let diff = event.clientX - this.mouseMoveClientX
       this.mouseMoveClientX = event.clientX
       this.dataEnd += this.computeNumber(diff)
+      if (this.dataEnd <= this.dataStart) this.dataEnd = this.dataStart + 1
       this.initControllerLeft()
     },
     computeNumber: function(diff) {
