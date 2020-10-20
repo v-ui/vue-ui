@@ -8,14 +8,12 @@
           <b-slide-bar :class="objClass" :value="pEnd" />
         </div>
         <b-slide-coltroller
-          v-tip="dataStart"
           class="position-absolute"
           :class="objClass"
           :style="[controllerStyle, startControllerPossition]"
           @mousedown.native.left.exact.stop.prevent="$event => mouseDown($event, 'start')"
         />
         <b-slide-coltroller
-          v-tip="dataEnd"
           class="position-absolute"
           :class="objClass"
           :style="[controllerStyle, endControllerPossition]"
@@ -58,6 +56,7 @@ export default {
   },
   data() {
     return {
+      instance: null,
       dataStart: isNaN(this.start) ? 0 : Number(this.start),
       dataEnd: isNaN(this.end) ? 0 : Number(this.end),
       mouseMoveClientX: 0,

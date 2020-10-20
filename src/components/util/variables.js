@@ -12,6 +12,12 @@ const size = ['', 'lg', 'sm']
 const setX = ['left', 'right', 'center']
 const setY = ['up', 'down']
 const set = [...setX, ...setY]
+const popperSet = [
+  'top', 'top-start', 'top-end',
+  'bottom', 'bottom-start', 'bottom-end',
+  'right', 'right-start', 'right-end',
+  'left', 'left-start', 'left-end',
+]
 // position
 const positionST = ['top-left', 'top-right']
 const positionSB = ['bottom-left', 'bottom-right']
@@ -44,6 +50,7 @@ export default {
       default: set,
       x: setX,
       y: setY,
+      popperSet: popperSet,
     },
     position: {
       default: position,

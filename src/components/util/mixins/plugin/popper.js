@@ -10,7 +10,6 @@ export default {
         popOpts: { placement: 'bottom-start', },
       }
     },
-
     beforeDestroy() {
       if (!this.popper) return
       this.popper.destroy()

@@ -76,6 +76,14 @@ export default {
       return v.base.set.x.includes(value)
     },
   },
+  popperSet: {
+    type: String,
+    default: "top",
+    validator: (value) => {
+      // 这个值必须匹配下列字符串中的一个
+      return v.base.set.popperSet.includes(value)
+    },
+  },
   position: {
     type: String,
     default: 'top-center',

@@ -1,53 +1,42 @@
 <template>
-  <div>
+  <tran-drop>
     <div
-      ref="popRef"
-      class="d-inline-block"
-      @click="show = !show"
+      ref="popover"
+      class="popover fade"
+      :class="objClass"
+      role="tooltip"
+      style="position: absolute; will-change: transform;"
     >
-      <slot
-        aria-describedby="tooltip"
-        name="popRef"
-      />
-    </div>
-    <tran-drop>
       <div
-        ref="popover"
-        class="popover fade"
-        :class="objClass"
-        role="tooltip"
-        style="position: absolute; will-change: transform;"
+        ref="arrow"
+        class="popover-arrow"
+        data-popper-arrow
+      />
+      <div
+        ref="header"
+        class="popover-header"
       >
-        <div
-          ref="arrow"
-          class="popover-arrow"
-          data-popper-arrow
-        />
-        <div
-          ref="header"
-          class="popover-header"
+        <slot
+          v-if="title || $slots.header"
+          name="header"
         >
-          <slot
-            v-if="title || $slots.header"
-            name="header"
-          >
-            <h6 class="m-0 p-0">
-              {{ title }}
-            </h6>
-          </slot>
-        </div>
-        <div
-          ref="body"
-          class="popover-body"
-        >
-          <slot>{{ content }}</slot>
-        </div>
+          <h6 class="m-0 p-0">
+            {{ title }}
+          </h6>
+        </slot>
       </div>
-    </tran-drop>
-  </div>
+      <div
+        ref="body"
+        class="popover-body"
+      >
+        <slot>{{ content }}</slot>
+      </div>
+    </div>
+  </tran-drop>
 </template>
 
 <script>
+import tools from '@/tools'
 import util from "@/components/util/index.js";
 
 import tranDrop from "@/components/transition/tran-drop.vue"
@@ -57,18 +46,13 @@ export default {
   components: { tranDrop, },
   mixins: [ util.mixins.popper.base, ],
   props: {
+    for: {
+      ...util.props.String,
+      require: true,
+    },
     title: util.props.String,
     content: util.props.String,
-    set: {
-      type: String,
-      default: "right",
-      validator: value => [
-        'top', 'top-start', 'top-end',
-        'bottom', 'bottom-start', 'bottom-end',
-        'right', 'right-start', 'right-end',
-        'left', 'left-start', 'left-end',
-      ].includes(value),
-    },
+    set: util.props.popperSet,
   },
   data() {
     return {
@@ -93,10 +77,12 @@ export default {
         strategy: 'fixed',
         modifiers: [
           { name: 'arrow', options: { element: this.$refs.arrow, padding: 6, }, },
-          { name: 'offset', options: { offset: [0, 8], }, },
+          { name: 'offset', options: { offset: [10, 10], }, },
         ],
       }
-      this.popRef = this.$refs.popRef
+      this.popRef = document.getElementById(this.for)
+      tools.dom.addAttr(this.popRef, 'aria-describedby', 'tooltip')
+      this.popRef.onclick = () => this.show = !this.show
       this.popEle = this.$refs.popover
     },
   },
