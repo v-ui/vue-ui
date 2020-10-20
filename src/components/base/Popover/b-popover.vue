@@ -66,7 +66,11 @@ export default {
       return c;
     }
   },
-
+  watch: {
+    for: function() {
+      this.init()
+    },
+  },
   mounted() {
     this.init()
   },
@@ -81,8 +85,10 @@ export default {
         ],
       }
       this.popRef = document.getElementById(this.for)
-      tools.dom.addAttr(this.popRef, 'aria-describedby', 'tooltip')
-      this.popRef.onclick = () => this.show = !this.show
+      if (this.for && this.popRef) {
+        tools.dom.addAttr(this.popRef, 'aria-describedby', 'tooltip')
+        this.popRef.onclick = () => this.show = !this.show
+      }
       this.popEle = this.$refs.popover
     },
   },

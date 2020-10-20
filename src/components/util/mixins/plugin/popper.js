@@ -10,6 +10,9 @@ export default {
         popOpts: { placement: 'bottom-start', },
       }
     },
+    mounted() {
+      this.plugin_initPopper()
+    },
     beforeDestroy() {
       if (!this.popper) return
       this.popper.destroy()

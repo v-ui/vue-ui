@@ -8,17 +8,22 @@
           <b-slide-bar :class="objClass" :value="pEnd" />
         </div>
         <b-slide-coltroller
+          :id="`start-controller-${id}`"
           class="position-absolute"
           :class="objClass"
           :style="[controllerStyle, startControllerPossition]"
+          @mouseenter.native="initPopper('start')"
           @mousedown.native.left.exact.stop.prevent="$event => mouseDown($event, 'start')"
         />
         <b-slide-coltroller
+          :id="`end-controller-${id}`"
           class="position-absolute"
           :class="objClass"
           :style="[controllerStyle, endControllerPossition]"
+          @mouseenter.native="initPopper('end')"
           @mousedown.native.left.exact.stop.prevent="$event => mouseDown($event, 'end')"
         />
+        <b-tootip :for="refId" :content="refTip" />
       </div>
       <label class=" m-0 p-0 pl-1">{{ dataMax }}</label>
     </div>
@@ -27,16 +32,18 @@
 </template>
 
 <script>
-import util from "@/components/util/index.js";
+import tools from "@/tools";
+import util from "@/components/util";
 
 import BSlideBar from './Basic/b-slide-bar'
 import BSlideColtroller from './Basic/b-slide-coltroller'
 
+import BTootip from '@/components/base/Tooltip/b-tooltip.vue'
 import BInfo from "@/components/basic/basic-info.vue";
 
 export default {
   name: 'BSlide',
-  components: { BSlideBar, BSlideColtroller, BInfo, },
+  components: { BSlideBar, BSlideColtroller, BTootip, BInfo, },
   props: {
     color: util.props.color,
     start: util.props.Number,
@@ -56,7 +63,9 @@ export default {
   },
   data() {
     return {
-      instance: null,
+      id: tools.random.getRandomString(),
+      refId: null,
+      refTip: null,
       dataStart: isNaN(this.start) ? 0 : Number(this.start),
       dataEnd: isNaN(this.end) ? 0 : Number(this.end),
       mouseMoveClientX: 0,
@@ -68,14 +77,6 @@ export default {
         left: '0px',
         top: '-3px',
       }
-    }
-  },
-  watch: {
-    start: function(value) {
-      this.dataStart = isNaN(this.start) ? 0 : Number(value)
-    },
-    end: function(value) {
-      this.dataEnd = isNaN(this.start) ? 0 : Number(value)
     }
   },
   computed: {
@@ -111,11 +112,26 @@ export default {
       return `bg-${this.color}`
     },
   },
+  watch: {
+    start: function(value) {
+      this.dataStart = isNaN(this.start) ? 0 : Number(value)
+    },
+    end: function(value) {
+      this.dataEnd = isNaN(this.start) ? 0 : Number(value)
+    }
+  },
   mounted() {
     this.initControllerLeft()
     this.initControllerTop()
   },
   methods: {
+    initPopper: async function(type) {
+      if (!['start', 'end'].includes(type)) return
+      this.refId = null
+      await this.$nextTick()
+      this.refId = `${type}-controller-${this.id}`
+      this.refTip = this.dataStart
+    },
     initControllerLeft: function() {
       let start = (this.$refs.bar.clientWidth * this.pStart / 100 + 10)
       let end = (this.$refs.bar.clientWidth * this.pEnd / 100 + start)
@@ -134,18 +150,20 @@ export default {
         () => document.removeEventListener('mousemove', type === 'start' ? this.startMousemove : this.endMousemove)
       )
     },
-    startMousemove: function(event) {
+    startMousemove: async function(event) {
       let diff = event.clientX - this.mouseMoveClientX
       this.mouseMoveClientX = event.clientX
       this.dataStart += this.computeNumber(diff)
       if (this.dataStart >= this.dataEnd) this.dataStart = this.dataEnd - 1
+      this.initPopper('start')
       this.initControllerLeft()
     },
-    endMousemove: function(event) {
+    endMousemove: async function(event) {
       let diff = event.clientX - this.mouseMoveClientX
       this.mouseMoveClientX = event.clientX
       this.dataEnd += this.computeNumber(diff)
       if (this.dataEnd <= this.dataStart) this.dataEnd = this.dataStart + 1
+      this.initPopper('end')
       this.initControllerLeft()
     },
     computeNumber: function(diff) {

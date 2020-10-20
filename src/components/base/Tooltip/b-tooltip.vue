@@ -52,7 +52,11 @@ export default {
       return c;
     }
   },
-
+  watch: {
+    for: function() {
+      this.init()
+    },
+  },
   mounted() {
     this.init()
   },
@@ -67,9 +71,11 @@ export default {
         ],
       }
       this.popRef = document.getElementById(this.for)
-      tools.dom.addAttr(this.popRef, 'aria-describedby', 'tooltip')
-      this.popRef.onmouseover = () => this.show = true
-      this.popRef.onmouseleave = () => this.show = false
+      if (this.for && this.popRef) {
+        tools.dom.addAttr(this.popRef, 'aria-describedby', 'tooltip')
+        this.popRef.onmouseover = () => this.show = true
+        this.popRef.onmouseleave = () => this.show = false
+      }
       this.popEle = this.$refs.tooltip
     },
   },
