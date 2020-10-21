@@ -6,15 +6,9 @@
     <hr>
     <div class="row">
       <font class="col-1">
-        int:
+        default:
       </font>
       <b-number />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        float:
-      </font>
-      <b-number value="0.5" />
     </div>
     <div class="row">
       <font class="col-1">
@@ -57,7 +51,6 @@
       <b-number
         min="5"
         max="10"
-        placeholder="只能输入 5-10 之间的数"
       />
     </div>
     <div class="row">
@@ -65,7 +58,6 @@
         hideButton:
       </font>
       <b-number
-        placeholder="hidebutton text"
         hide-button
       />
     </div>
@@ -86,23 +78,6 @@
         info:
       </font>
       <b-number info="info text" />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        prompt:
-      </font>
-      <b-number prompt />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        info
-        <br>prompt:
-      </font>
-      <b-number
-        info="info text"
-        step="0.1"
-        prompt
-      />
     </div>
     <div class="row">
       <font class="col-1">
@@ -152,17 +127,13 @@
     <hr>
     <div>
       default(accuracy 小于 0, value = 1，step = 1（默认）, 无小数位)
-      <b-number
-        value="1"
-        prompt
-      />
+      <b-number value="1" />
     </div>
     <div>
       default(accuracy 小于 0, value = 1， step = 0.1, 1 位小数)
       <b-number
         value="1"
         step="0.1"
-        prompt
       />
     </div>
     <div>
@@ -170,7 +141,6 @@
       <b-number
         value="0.1"
         step="0.002"
-        prompt
       />
     </div>
     <div>
@@ -179,7 +149,6 @@
         value="0.1"
         step="0.02"
         accuracy="3"
-        prompt
       />
     </div>
     <br>

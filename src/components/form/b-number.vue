@@ -3,7 +3,8 @@
     <b-input-group :size="size">
       <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
         <basic-button
-          outline
+          class="border-0"
+          color="light"
           :disabled="subButtomDisabled"
           @click="subn"
         >
@@ -13,6 +14,7 @@
         </basic-button>
       </b-input-group-prepend>
       <basic-text
+        ref="input"
         v-model.number="number"
         :text-align="textAlign"
         :min="dataMin"
@@ -24,7 +26,7 @@
         v-on="$listeners"
         @blur.native="blur"
         @click.native="click"
-        @change.native="change"
+        @input.native="input"
         @keyup.native.exact.up="add"
         @keyup.native.exact.down="subn"
         @keyup.native.shift.exact.up="superAdd"
@@ -32,7 +34,8 @@
       />
       <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
         <basic-button
-          outline
+          class="border-0"
+          color="light"
           :disabled="addButtonDisabled"
           @click="add"
         >
@@ -42,7 +45,7 @@
         </basic-button>
       </b-input-group-prepend>
     </b-input-group>
-    <b-info :info="msg" />
+    <b-info :info="info" />
   </div>
 </template>
 
@@ -71,7 +74,7 @@ export default {
   inheritAttrs: false,
   model: {
     prop: "value",
-    event: "number:changed"
+    event: "number:input"
   },
   props: {
     min: util.props.Number,
@@ -109,14 +112,12 @@ export default {
     textReadonly: util.props.Boolean,
     size: util.props.size,
     hideButton: util.props.Boolean,
-    prompt: util.props.Boolean,
     info: util.props.String
   },
   data() {
     return {
       number: 0,
       setPrecision: 0,
-      msg: ""
     };
   },
   computed: {
@@ -150,20 +151,10 @@ export default {
   mounted() {
     this.getPrecision();
     this.innitNumber();
-    this.initInfo();
   },
   methods: {
     innitNumber: function() {
       this.number = this.formatNumber(this.toNmuber(this.value, this.dataMin));
-    },
-    initInfo: function() {
-      this.msg = this.info || "";
-      if (this.prompt) {
-        let str = `${this.formatNumber(this.min)}-${this.formatNumber(
-          this.max
-        )},精度: ${this.formatNumber(this.step)}`;
-        this.msg += this.info ? `(${str})` : str;
-      }
     },
     toNmuber: function(str, n = 0) {
       return Number(str) || n;
@@ -186,27 +177,27 @@ export default {
     formatNumber: function(value) {
       return Number(value).toFixed(this.setPrecision);
     },
-    click: function(event) {
+    click: function() {
       if (this.textReadonly) return
       if (this.readonly || this.disabled) return;
-      if (this.dataNumber == 0) event.target.value = "";
+      if (this.dataNumber == 0) this.$refs.input.$el.value = ""
     },
-    change: function(event) {
+    input: function() {
       if (this.dataNumber < this.dataMin) this.number = this.dataMin;
       if (this.dataNumber > this.dataMax) this.number = this.dataMax;
       this.number = this.formatNumber(this.number);
-      if (event && event.target) event.target.value = this.number;
+      this.$refs.input.$el.value = this.number;
       // 配合 v-model
-      this.$emit("number:changed", this.number);
+      this.$emit("number:input", this.number);
     },
-    blur: function(event) {
-      if (isNaN(event.target.value)) return
-      event.target.value = this.number
+    blur: function() {
+      if (isNaN(this.$refs.input.$el.value)) return
+      this.$refs.input.$el.value = this.number
     },
     calculator: function(callback) {
       if (this.disabled || this.readonly) return;
       callback && callback()
-      this.change();
+      this.input();
     },
     subn: function() {
       this.calculator(() => this.number = this.dataNumber - this.dataStep)
