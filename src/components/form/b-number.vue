@@ -22,7 +22,8 @@
         :readonly="readonly || textReadonly"
         v-bind="$attrs"
         v-on="$listeners"
-        @click.native="click($event)"
+        @blur.native="blur"
+        @click.native="click"
         @change.native="change"
         @keyup.native.exact.up="add"
         @keyup.native.exact.down="subn"
@@ -36,7 +37,7 @@
           @click="add"
         >
           <slot name="add">
-            {{ subValue }}
+            {{ addValue }}
           </slot>
         </basic-button>
       </b-input-group-prepend>
@@ -128,14 +129,17 @@ export default {
     dataMax: function() {
       return this.toNmuber(this.max, 100);
     },
+    dataNumber: function() {
+      return Number(this.number)
+    },
     dataAccuracy: function() {
       return this.toNmuber(this.accuracy);
     },
     subButtomDisabled: function() {
-      return this.number <= this.dataMin || this.disabled;
+      return this.dataNumber <= this.dataMin || this.disabled;
     },
     addButtonDisabled: function() {
-      return this.number >= this.dataMax || this.disabled;
+      return this.dataNumber >= this.dataMax || this.disabled;
     }
   },
   watch: {
@@ -180,45 +184,41 @@ export default {
       );
     },
     formatNumber: function(value) {
-      return Number.parseFloat(value).toFixed(this.setPrecision);
+      return Number(value).toFixed(this.setPrecision);
     },
     click: function(event) {
       if (this.textReadonly) return
       if (this.readonly || this.disabled) return;
-      if (this.number == 0) event.target.value = "";
+      if (this.dataNumber == 0) event.target.value = "";
     },
-    change: async function() {
-      if (this.number === "") return;
-      if (this.number < this.dataMin) this.number = this.dataMin;
-      if (this.number > this.dataMax) this.number = this.dataMax;
+    change: function(event) {
+      if (this.dataNumber < this.dataMin) this.number = this.dataMin;
+      if (this.dataNumber > this.dataMax) this.number = this.dataMax;
       this.number = this.formatNumber(this.number);
-      event.target.value = this.number;
+      if (event && event.target) event.target.value = this.number;
       // 配合 v-model
       this.$emit("number:changed", this.number);
     },
-    subn: function() {
+    blur: function(event) {
+      if (isNaN(event.target.value)) return
+      event.target.value = this.number
+    },
+    calculator: function(callback) {
       if (this.disabled || this.readonly) return;
-      this.number = Number(this.number);
-      this.number -= this.dataStep;
+      callback && callback()
       this.change();
+    },
+    subn: function() {
+      this.calculator(() => this.number = this.dataNumber - this.dataStep)
     },
     add: function() {
-      if (this.disabled || this.readonly) return;
-      this.number = Number(this.number);
-      this.number += this.dataStep;
-      this.change();
+      this.calculator(() => this.number = this.dataNumber + this.dataStep)
     },
     superSub: function() {
-      if (this.disabled || this.readonly) return
-      this.number = Number(this.number)
-      this.number -= this.dataStep * 10
-      this.change()
+      this.calculator(() => this.number = this.dataNumber - this.dataStep * 10)
     },
     superAdd: function() {
-      if (this.disabled || this.readonly) return
-      this.number = Number(this.number)
-      this.number += this.dataStep * 10
-      this.change()
+      this.calculator(() => this.number = this.dataNumber + this.dataStep * 10)
     },
   }
 };
