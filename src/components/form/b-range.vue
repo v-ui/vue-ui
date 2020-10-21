@@ -105,8 +105,8 @@ export default {
     this.select =  this.toNumber(this.value, this.dataMin)
   },
   methods: {
-    toNumber: function (str, n = 0) {
-      return Number(str) || n;
+    toNumber: function (value, n = 0) {
+      return !isNaN(value) ? Number(value) : n
     },
   },
 };

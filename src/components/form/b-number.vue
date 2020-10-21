@@ -156,8 +156,8 @@ export default {
     innitNumber: function() {
       this.number = this.formatNumber(this.toNmuber(this.value, this.dataMin));
     },
-    toNmuber: function(str, n = 0) {
-      return Number(str) || n;
+    toNmuber: function(value, n = 0) {
+      return !isNaN(value) ? Number(value) : n
     },
     getNumberPrecision: function(number) {
       let str = number.toString().split(".");

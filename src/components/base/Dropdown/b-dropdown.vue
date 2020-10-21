@@ -99,6 +99,7 @@ export default {
     if (!el) return;
     let node = el;
     if (!node) return;
+    debugger
     tools.dom.addAttrs(node, {
       id: this.guid,
       "data-toggle": "dropdown",

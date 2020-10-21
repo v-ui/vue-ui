@@ -22,6 +22,12 @@
     </div>
     <div class="row py-1">
       <font class="col-1">
+        step:
+      </font>
+      <b-slide class="col-10" start="20" end="50" step="2" />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
         info:
       </font>
       <b-slide
@@ -29,6 +35,38 @@
         start="20"
         end="50"
         info="info text"
+      />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
+        disabled:
+      </font>
+      <b-slide
+        class="col-2"
+        start="20"
+        end="50"
+        size="sm"
+        disabled
+      />
+      <font class="col-1">
+        startDisabled:
+      </font>
+      <b-slide
+        class="col-2"
+        start="20"
+        end="50"
+        size="sm"
+        startDisabled
+      />
+      <font class="col-1">
+        endDisabled:
+      </font>
+      <b-slide
+        class="col-2"
+        start="20"
+        end="50"
+        size="sm"
+        endDiabled
       />
     </div>
     <div class="row py-1">
