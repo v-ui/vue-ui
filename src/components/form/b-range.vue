@@ -52,12 +52,7 @@ export default {
       ...util.props.Number,
       default: 1,
     },
-    value: {
-      ...util.props.Number,
-      default: function (value) {
-        !isNaN(value) ? Number(value) : this.dataMin;
-      },
-    },
+    value: util.props.Number,
     prompt: util.props.Boolean,
     hideValue: util.props.Boolean,
     info: util.props.String,
@@ -66,13 +61,10 @@ export default {
   },
   data() {
     return {
-      select: this.dataValue,
+      select: 0,
     };
   },
   computed: {
-    dataValue: function () {
-      return this.toNumber(this.value);
-    },
     dataMin: function () {
       return this.toNumber(this.min);
     },
@@ -110,7 +102,7 @@ export default {
     },
   },
   mounted() {
-    this.select = Number(this.value);
+    this.select =  this.toNumber(this.value, this.dataMin)
   },
   methods: {
     toNumber: function (str, n = 0) {
