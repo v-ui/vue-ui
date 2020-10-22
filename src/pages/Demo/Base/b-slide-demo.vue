@@ -12,7 +12,7 @@
       <font class="col-1">
         start/end:
       </font>
-      <b-slide class="col-10" start="20" end="50" />
+      <b-slide class="col-10" :value="value" />
     </div>
     <div class="row py-1">
       <font class="col-1">
@@ -24,7 +24,7 @@
       <font class="col-1">
         step:
       </font>
-      <b-slide class="col-10" start="20" end="50" step="2" />
+      <b-slide class="col-10" :value="value" step="2" />
     </div>
     <div class="row py-1">
       <font class="col-1">
@@ -32,20 +32,40 @@
       </font>
       <b-slide
         class="col-10"
-        start="20"
-        end="50"
+        :value="value"
         info="info text"
+      />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
+        v-model:
+      </font>
+      <b-slide
+        class="col-10"
+        v-model="value2"
+        :info="`{start: ${value2.start}, end: ${value2.end} }`"
+      />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
+        readonly:
+      </font>
+      <b-slide
+        class="col-10"
+        :value="value"
+        readonly
       />
     </div>
     <div class="row py-1">
       <font class="col-1">
         disabled:
       </font>
+      <font class="col-1">
+        disabled:
+      </font>
       <b-slide
         class="col-2"
-        start="20"
-        end="50"
-        size="sm"
+        :value="value"
         disabled
       />
       <font class="col-1">
@@ -53,9 +73,7 @@
       </font>
       <b-slide
         class="col-2"
-        start="20"
-        end="50"
-        size="sm"
+        :value="value"
         startDisabled
       />
       <font class="col-1">
@@ -63,37 +81,35 @@
       </font>
       <b-slide
         class="col-2"
-        start="20"
-        end="50"
-        size="sm"
+        :value="value"
         endDiabled
       />
     </div>
     <div class="row py-1">
       <font class="col-1">
-        size(sm):
+        size:
+      </font>
+      <font class="col-1">
+        sm:
       </font>
       <b-slide
         class="col-2"
-        start="20"
-        end="50"
+        :value="value"
         size="sm"
       />
       <font class="col-1">
-        size(default):
+        (default):
       </font>
       <b-slide
         class="col-2"
-        start="20"
-        end="50"
+        :value="value"
       />
       <font class="col-1">
-        size(lg):
+        lg:
       </font>
       <b-slide
         class="col-2"
-        start="20"
-        end="50"
+        :value="value"
         size="lg"
       />
     </div>
@@ -110,8 +126,7 @@
             :key="color"
             class="py-1"
             :color="color"
-            start="20"
-            end="50"
+            :value="value"
           />
         </template>
       </div>
@@ -130,6 +145,8 @@ export default {
   data() {
     return {
       colors: variables.base.color.bg,
+      value: {start: 30, end: 50},
+      value2: {start: 30, end: 50},
     }
   },
 }

@@ -8,6 +8,7 @@
           <b-slide-bar :class="barClass" :value="pEnd" />
         </div>
         <b-slide-coltroller
+          v-if="!readonly"
           :id="`start-controller-${id}`"
           class="position-absolute"
           :class="startControllerClass"
@@ -17,6 +18,7 @@
           @mousedown.native.left.exact.stop.prevent="$event => mouseDown($event, 'start')"
         />
         <b-slide-coltroller
+          v-if="!readonly"
           :id="`end-controller-${id}`"
           class="position-absolute"
           :class="endControllerClass"
@@ -46,14 +48,19 @@ import BInfo from "@/components/basic/basic-info.vue";
 export default {
   name: 'BSlide',
   components: { BSlideBar, BSlideColtroller, BTootip, BInfo, },
+  model: {
+    prop: 'value',
+    event: 'slide:input'
+  },
   props: {
     color: util.props.color,
-    start: util.props.Number,
-    end: {
-      ...util.props.Number,
-      default: 0,
-      validator: (value) => util.props.Number.validator(value),
-    },
+    value: util.props.Object,
+    // start: util.props.Number,
+    // end: {
+    //   ...util.props.Number,
+    //   default: 0,
+    //   validator: (value) => util.props.Number.validator(value),
+    // },
     min: util.props.Number,
     max: {
       ...util.props.Number,
@@ -69,6 +76,7 @@ export default {
     disabled: util.props.Boolean,
     startDisabled: util.props.Boolean,
     endDiabled: util.props.Boolean,
+    readonly: util.props.Boolean,
   },
   data() {
     return {
@@ -77,8 +85,8 @@ export default {
       refId: null,
       refTip: null,
 
-      dataStart: this.toNumber(this.start),
-      dataEnd: this.toNumber(this.end),
+      dataStart: this.toNumber(this.value.start),
+      dataEnd: this.toNumber(this.value.end),
 
       // 控制点的位置相关
       delt: 0, // 移动量数值的累加值
@@ -111,10 +119,12 @@ export default {
       return this.dataMin >= this.dataMax ? 0 : 100 / (this.dataMax - this.dataMin)
     },
     pStart: function() {
-      return this.dataStart >= this.dataEnd ? 0 : (this.dataStart - this.dataMin) * this.p
+      let data = this.dataStart >= this.dataEnd ? 0 : (this.dataStart - this.dataMin) * this.p
+      return this.formatData(data, 0, 100)
     },
     pEnd: function() {
-      return this.dataStart >= this.dataEnd ? 0 : (this.dataEnd - this.dataMin) * this.p - this.pStart
+      let data = this.dataStart >= this.dataEnd ? 0 : (this.dataEnd - this.dataMin) * this.p - this.pStart
+      return this.formatData(data, 0, 100)
     },
 
     // 禁用
@@ -127,9 +137,9 @@ export default {
 
     // 样式
     barStrong: function() {
-      let strong = "8";
-      if (this.size === "sm") strong = "6";
-      else if (this.size === "lg") strong = "10";
+      let strong = 8;
+      if (this.size === "sm") strong = 6;
+      else if (this.size === "lg") strong = 10;
       return strong
     },
     barStyle: function () {
@@ -156,10 +166,10 @@ export default {
     },
   },
   watch: {
-    start: function(value) {
+    'value.start': function(value) {
       this.dataStart = this.toNumber(value)
     },
-    end: function(value) {
+    'value.end': function(value) {
       this.dataEnd = this.toNumber(value)
     }
   },
@@ -182,8 +192,15 @@ export default {
       this.refTip = type === 'start' ?  this.dataStart : this.dataEnd
     },
     initControllerLeft: function() {
-      let start = (this.$refs.bar.clientWidth * this.pStart / 100 + 10)
-      let end = (this.$refs.bar.clientWidth * this.pEnd / 100 + start)
+      let barWidth = this.$refs.bar.clientWidth
+      let start = (barWidth * this.pStart / 100 + this.barStrong)
+      let end = (barWidth * (this.pEnd + this.pStart) / 100 + this.barStrong)
+
+      start = this.formatData(start, 0, barWidth, this.barStrong, barWidth)
+      end = this.formatData(end, 0, barWidth + this.barStrong, this.barStrong)
+      if (end < this.barStrong * 2) end = this.barStrong * 2
+      if (start > end - this.barStrong * 2) start = end - this.barStrong * 2
+
       this.startControllerPossition.left = start + 'px'
       this.endControllerPossition.left = end + 'px'
     },
@@ -195,17 +212,22 @@ export default {
     toNumber: function(value, n = 0) {
       return !isNaN(value) ? Number(value) : n
     },
+    formatData: function(value, min = 0, max = 100, minValue = min, maxValue = max) {
+      if (value < min) value = minValue
+      if (value > max) value = maxValue
+      return value
+    },
     // 将移动的量转换为数值
-    formatNumber: function(diff) {
+    getNumber: function(diff) {
       let p = 100 / this.$refs.bar.clientWidth
       return diff * p
     },
     // 计算移动的累加值，当累加值大于或等于 dataStep 时一次性放回，并将累加值置 0
-    formatDelt: function(x) {
+    getDelt: function(x) {
       let delt = 0
       let diff = x - this.mouseMoveClientX
       this.mouseMoveClientX = x
-      this.delt += this.formatNumber(diff)
+      this.delt += this.getNumber(diff)
       if (Math.abs(this.delt) >= Math.abs(this.dataStep)) {
         delt = parseInt(this.delt / this.dataStep) * this.dataStep
         this.delt = 0
@@ -222,16 +244,24 @@ export default {
     },
     startMousemove: async function(event) {
       if (!this.disabledStart) {
-        this.dataStart += this.formatDelt(event.clientX)
+        let delt = this.getDelt(event.clientX)
+        if (this.dataStart + delt < this.dataMin || this.dataStart + delt > this.dataMax) return
+        this.dataStart += delt
         if (this.dataStart >= this.dataEnd) this.dataStart = this.dataEnd - this.dataStep
         this.initControllerLeft()
+        // 配合 v-model
+        this.$emit('slide:input', {start: this.dataStart, end: this.dataEnd})
       }
       this.initPopper('start')
     },
     endMousemove: async function(event) {
       if (!this.disabledEnd) {
-        this.dataEnd += this.formatDelt(event.clientX)
+        let delt = this.getDelt(event.clientX)
+        if (this.dataEnd + delt < this.dataMin || this.dataEnd + delt > this.dataMax) return
+        this.dataEnd += delt
         if (this.dataEnd <= this.dataStart) this.dataEnd = this.dataStart + this.dataStep
+        // 配合 v-model
+        this.$emit('slide:input', {start: this.dataStart, end: this.dataEnd})
         this.initControllerLeft()
       }
       this.initPopper('end')
