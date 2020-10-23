@@ -1,7 +1,7 @@
 import config from "@/config/index.js";
 import props from '@/components/util/props.js'
 
-const baseStatus = {
+const base = {
   props: {
     title: props.String,
     icon: props.String,
@@ -21,7 +21,7 @@ const baseStatus = {
 }
 
 const message = {
-  mixins: [ baseStatus, ],
+  mixins: [ base, ],
   props: {
     status: props.messageStatus,
   },
@@ -48,7 +48,7 @@ const message = {
 }
 
 const method = {
-  mixins: [ baseStatus, ],
+  mixins: [ base, ],
 }
 
 export default {

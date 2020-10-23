@@ -5,40 +5,10 @@
 </template>
 
 <script>
-import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 export default {
   name: 'b-step-circle',
-  props: {
-    icon: util.props.String,
-    status: {
-      type: String,
-      validator: val =>
-        [
-          "",
-          "info",
-          "system",
-          "issue",
-          "warning",
-          "error",
-          "success",
-          "danger"
-        ].includes(val)
-    }
-  },
-  computed: {
-    o: function() {
-      return Object.getOwnPropertyDescriptor(config.ui.status, this.status);
-    },
-    iconClass: function() {
-      let icon = this.icon,
-        color = "";
-      if (this.o && this.o.value) {
-        (icon = this.o.value.icon), (color = this.o.value.color);
-      }
-      return `${icon} text-${color}`;
-    },
-  },
+  mixins: [ util.mixins.status.method, ],
 }
 </script>

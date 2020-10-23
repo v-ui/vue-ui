@@ -40,7 +40,7 @@ import BInfo from "@/components/basic/basic-info.vue";
 export default {
   name: "BProgress",
   components: { BBar, BCircle, BInfo },
-  mixins: [ util.mixins.animate.progress, ],
+  mixins: [ util.mixins.animate.progress, util.mixins.size.strong, ],
   props: {
     value: {
       ...util.props.UNumber,
@@ -63,22 +63,11 @@ export default {
     animated: util.props.Boolean,
     hideValue: util.props.Boolean,
     src: util.props.String,
-    size: util.props.size,
     info: util.props.String,
   },
   computed: {
-    // 粗细
-    strong: function () {
-      let strong = "10";
-      if (this.size === "sm") strong = "5";
-      else if (this.size === "lg") strong = "15";
-      return strong;
-    },
     width: function() {
-      let width = 150
-      if (this.size === "sm") width = "100";
-      else if (this.size === "lg") width = "200";
-      return width;
+      return this.strong * 14;
     },
     list: function() {
       if (this.state) return null

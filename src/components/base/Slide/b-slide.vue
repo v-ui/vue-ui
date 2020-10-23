@@ -48,6 +48,7 @@ import BInfo from "@/components/basic/basic-info.vue";
 export default {
   name: 'BSlide',
   components: { BSlideBar, BSlideColtroller, BTootip, BInfo, },
+  mixins: [ util.mixins.size.strong, ],
   model: {
     prop: 'value',
     event: 'slide:input'
@@ -71,7 +72,6 @@ export default {
       ...util.props.UNumber,
       default: 1
     },
-    size: util.props.size,
     info: util.props.String,
     disabled: util.props.Boolean,
     startDisabled: util.props.Boolean,
@@ -136,20 +136,14 @@ export default {
     },
 
     // 样式
-    barStrong: function() {
-      let strong = 8;
-      if (this.size === "sm") strong = 6;
-      else if (this.size === "lg") strong = 10;
-      return strong
-    },
     barStyle: function () {
-      return { height: `${this.barStrong}px`, opacity: this.disabled ? 0.8 : 1 }
+      return { height: `${this.strong}px`, opacity: this.disabled ? 0.8 : 1 }
     },
     barClass: function() {
       return this.changeClass(false)
     },
     controllerStyle: function () {
-      let strong = this.barStrong * 2
+      let strong = this.strong * 2
       return { width: `${strong}px`, height: `${strong}px` }
     },
     startControllerStyle: function() {
@@ -193,19 +187,19 @@ export default {
     },
     initControllerLeft: function() {
       let barWidth = this.$refs.bar.clientWidth
-      let start = (barWidth * this.pStart / 100 + this.barStrong)
-      let end = (barWidth * (this.pEnd + this.pStart) / 100 + this.barStrong)
+      let start = (barWidth * this.pStart / 100 + this.strong)
+      let end = (barWidth * (this.pEnd + this.pStart) / 100 + this.strong)
 
-      start = this.formatData(start, 0, barWidth, this.barStrong, barWidth)
-      end = this.formatData(end, 0, barWidth + this.barStrong, this.barStrong)
-      if (end < this.barStrong * 2) end = this.barStrong * 2
-      if (start > end - this.barStrong * 2) start = end - this.barStrong * 2
+      start = this.formatData(start, 0, barWidth, this.strong, barWidth)
+      end = this.formatData(end, 0, barWidth + this.strong, this.strong)
+      if (end < this.strong * 2) end = this.strong * 2
+      if (start > end - this.strong * 2) start = end - this.strong * 2
 
       this.startControllerPossition.left = start + 'px'
       this.endControllerPossition.left = end + 'px'
     },
     initControllerTop: function() {
-      let top = -this.barStrong / 2
+      let top = -this.strong / 2
       this.startControllerPossition.top = top + 'px'
       this.endControllerPossition.top = top + 'px'
     },

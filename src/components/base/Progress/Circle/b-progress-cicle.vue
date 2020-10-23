@@ -42,13 +42,13 @@
     <text
       v-if="!hideValue"
       x="0%"
-      :y="info ? '-4%' : '0%'"
+      :y="info ? '-7%' : '0%'"
       text-anchor="middle"
       dominant-baseline="central"
     >{{ parseInt(value) || 0 }}%</text>
     <text
       x="0%"
-      y="4%"
+      y="7%"
       text-anchor="middle"
       dominant-baseline="central"
     >{{ info }}</text>
