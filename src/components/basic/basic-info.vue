@@ -1,12 +1,10 @@
-<template functional>
+<template>
   <small
-    v-if="props.info"
+    v-if="info"
     class="form-text"
-    :class="['text-' + props.textColor, data.staticClass]"
-    v-bind="data.attrs"
-    v-on="listeners"
+    :class="['text-' + textColor,]"
   >
-    {{ props.info }}
+    {{ info }}
   </small>
 </template>
 <script>

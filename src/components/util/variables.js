@@ -37,7 +37,7 @@ const borderRadiusSize = size.map(e => `rounded-${e}`)
 // justify
 const justify = ['', 'start', 'center', 'end', 'between', 'around']
 // status
-const baseStatus = ['', "success", "warning", "error", "danger"]
+const baseStatus = ['', 'default', "success", "warning", "error", "danger"]
 const messageStatus = [ "system", "info", "issue", ...baseStatus ]
 const methodStatus = [ ...baseStatus ]
 

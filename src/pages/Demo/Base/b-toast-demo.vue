@@ -92,6 +92,9 @@
       <div class="col-11">
         <div class="row">
           <font class="col-4">
+            default
+          </font>
+          <font class="col-4">
             system
           </font>
           <font class="col-4">
@@ -102,6 +105,12 @@
           </font>
         </div>
         <div class="row">
+          <b-toast
+            class="col-4"
+            autohide
+            status="default"
+            content="content text"
+          />
           <b-toast
             class="col-4"
             autohide

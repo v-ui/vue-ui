@@ -22,7 +22,7 @@
           />
         </slot>
         <strong class="mr-auto">
-          <font v-if="!href">{{ dataTitle }}</font>
+          <font>{{ dataTitle }}</font>
         </strong>
         <b-info :info="info" />
       </slot>

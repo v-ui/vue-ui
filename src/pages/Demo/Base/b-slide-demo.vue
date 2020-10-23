@@ -18,7 +18,7 @@
       <font class="col-1">
         min/max:
       </font>
-      <b-slide class="col-10" min="-100" max="0" start="-80" end="-50" />
+      <b-slide class="col-10" min="-100" max="0" :value="{start: -80, end: -50}" />
     </div>
     <div class="row py-1">
       <font class="col-1">
@@ -39,11 +39,11 @@
     <div class="row py-1">
       <font class="col-1">
         v-model:
+        {{ `{start: ${value2.start}, end: ${value2.end} }` }}
       </font>
       <b-slide
         class="col-10"
         v-model="value2"
-        :info="`{start: ${value2.start}, end: ${value2.end} }`"
       />
     </div>
     <div class="row py-1">
@@ -145,8 +145,8 @@ export default {
   data() {
     return {
       colors: variables.base.color.bg,
-      value: {start: 30, end: 50},
-      value2: {start: 30, end: 50},
+      value: {start: 20, end: 50},
+      value2: {start: 20, end: 50},
     }
   },
 }
