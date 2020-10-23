@@ -100,6 +100,30 @@ export default {
       return v.base.justify.includes(value)
     },
   },
+  baseStatus: {
+    type: String,
+    default: '',
+    validator: (value) => {
+      // 这个值必须匹配下列字符串中的一个
+      return v.base.status.base.includes(value)
+    },
+  },
+  messageStatus: {
+    type: String,
+    default: '',
+    validator: (value) => {
+      // 这个值必须匹配下列字符串中的一个
+      return v.base.status.message.includes(value)
+    },
+  },
+  methodStatus: {
+    type: String,
+    default: '',
+    validator: (value) => {
+      // 这个值必须匹配下列字符串中的一个
+      return v.base.status.method.includes(value)
+    },
+  },
   width: {
     type: Number,
     default: 50,

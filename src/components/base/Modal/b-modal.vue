@@ -16,13 +16,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
-            <slot name="icon">
+            <slot v-if="$slots.icon || showIcon" name="icon">
               <i
                 class="mr-2"
                 :class="iconClass"
               />
             </slot>
-            {{ fillTitle }}
+            {{ dataTitle }}
           </h5>
           <button
             type="button"
@@ -65,13 +65,10 @@
 <script>
 import util from "@/components/util/index.js";
 
-import config from "@/config/index.js";
-
 export default {
   name: "BModal",
+  mixins: [ util.mixins.status.message, ],
   props: {
-    title: util.props.String,
-    icon: util.props.String,
     content: util.props.String,
     scrol: util.props.Boolean, //modal-dialog-scrollable
     center: util.props.Boolean, // modal-dialog-centered
@@ -87,21 +84,6 @@ export default {
       ...util.props.String,
       default: "Modal Dialog"
     },
-    status: {
-      type: String,
-      validator: function(val) {
-        return [
-          "",
-          "info",
-          "system",
-          "issue",
-          "warning",
-          "error",
-          "success",
-          "danger"
-        ].includes(val);
-      }
-    }
   },
   data() {
     return {
@@ -118,21 +100,6 @@ export default {
       let size = this.size ? `modal-${this.size}` : "";
       return `${scrol} ${center} ${size}`;
     },
-    o: function() {
-      return Object.getOwnPropertyDescriptor(config.ui.status, this.status);
-    },
-    iconClass: function() {
-      let icon = "",
-        color = "";
-      if (this.o && this.o.value) {
-        icon = this.o.value.icon;
-        color = this.o.value.color;
-      }
-      return `${this.icon || icon} text-${color}`;
-    },
-    fillTitle: function() {
-      return this.title || (this.o && this.o.value && this.o.value.title);
-    }
   },
   methods: {
     hideModel: function() {

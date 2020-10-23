@@ -1,4 +1,4 @@
-import props from "../props.js";
+import props from "../../props.js";
 import gsap from "gsap";
 
 let base = {

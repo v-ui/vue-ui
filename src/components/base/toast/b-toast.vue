@@ -15,18 +15,14 @@
       style="font-size: 1.2em"
     >
       <slot name="header">
-        <slot name="icon">
+        <slot v-if="$slots.icon || showIcon" name="icon">
           <i
             class="mr-2"
             :class="iconClass"
           />
         </slot>
         <strong class="mr-auto">
-          <font v-if="!href">{{ fillTitle }}</font>
-          <a
-            v-else
-            :href="href"
-          >{{ fillTitle }}</a>
+          <font v-if="!href">{{ dataTitle }}</font>
         </strong>
         <b-info :info="info" />
       </slot>
@@ -48,7 +44,6 @@
 </template>
 
 <script>
-import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 import BInfo from "@/components/basic/basic-info.vue";
@@ -56,32 +51,15 @@ import BInfo from "@/components/basic/basic-info.vue";
 export default {
   name: "BToast",
   components: { BInfo, },
-  mixins: [ util.mixins.moment.base, ],
+  mixins: [ util.mixins.moment.base, util.mixins.status.message, ],
   props: {
-    title: util.props.String,
-    href: util.props.String,
     autohide: util.props.Boolean,
     time: [String, Number, Array],
-    icon: util.props.String,
     content: util.props.String,
     delay: {
       ...util.props.UInt,
       default: 10000,
     },
-    status: {
-      type: String,
-      validator: val =>
-        [
-          "",
-          "info",
-          "system",
-          "issue",
-          "warning",
-          "error",
-          "success",
-          "danger"
-        ].includes(val)
-    }
   },
   data() {
     return {
@@ -91,20 +69,6 @@ export default {
   computed: {
     showToast: function() {
       return (this.content || this.$slots.default) && this.show;
-    },
-    o: function() {
-      return Object.getOwnPropertyDescriptor(config.ui.status, this.status);
-    },
-    iconClass: function() {
-      let icon = this.icon,
-        color = "";
-      if (this.o && this.o.value) {
-        (icon = this.o.value.icon), (color = this.o.value.color);
-      }
-      return `${icon} text-${color}`;
-    },
-    fillTitle: function() {
-      return this.title || (this.o && this.o.value && this.o.value.title);
     },
     info: function() {
       return this.moment(this.time || this.moment()).from();

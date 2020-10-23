@@ -36,6 +36,10 @@ const borderRadius = ['rounded', 'rounded-circle', 'rounded-pill', 'rounded-0', 
 const borderRadiusSize = size.map(e => `rounded-${e}`)
 // justify
 const justify = ['', 'start', 'center', 'end', 'between', 'around']
+// status
+const baseStatus = ['', "success", "warning", "error", "danger"]
+const messageStatus = [ "system", "info", "issue", ...baseStatus ]
+const methodStatus = [ ...baseStatus ]
 
 export default {
   base: {
@@ -71,5 +75,10 @@ export default {
       rediussize: borderRadiusSize,
     },
     justify: justify,
+    status: {
+      base: baseStatus,
+      message: messageStatus,
+      method: methodStatus,
+    },
   },
 }

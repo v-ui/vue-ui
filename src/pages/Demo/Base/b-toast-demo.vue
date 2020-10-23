@@ -63,18 +63,6 @@
     </div>
     <div class="row py-1">
       <font class="col-1">
-        href
-      </font>
-      <b-toast
-        class="col-11"
-        autohide
-        content="content text"
-        title="title text"
-        href="/b-About"
-      />
-    </div>
-    <div class="row py-1">
-      <font class="col-1">
         time
       </font>
       <b-toast
