@@ -8,7 +8,7 @@
         :title="item.title"
         :info="item.info"
         :status="item.status"
-        :isDong="value && item.id && value === item.id"
+        :active="item.active"
       />
       <div v-if="list.length -1 != key" :key="key" class="align-self-center w-100 round rounded-pill" :class="lineClass" style="height: 1px" />
     </template>
@@ -25,7 +25,6 @@ export default {
   components: { BStepItem, },
   props: {
     list: util.props.array,
-    value: util.props.string,
     size: util.props.size,
     set: {
       ...util.props.set,

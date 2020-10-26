@@ -10,12 +10,6 @@
     </div>
     <div class="row py-1">
       <font class="col-1">
-        value:
-      </font>
-      <b-step class="col-10" :list="list" value="002" />
-    </div>
-    <div class="row py-1">
-      <font class="col-1">
         column:
       </font>
       <b-step class="col-10" column :list="list" />
@@ -80,11 +74,11 @@ export default {
   data() {
     return {
       list: [
-        { id: "001", status: 'default', title: 'default', info: "info text is tooo ooooooo ooooooo oooooo long",},
-        { id: "002", status: 'success', title: "success", info: "info text",},
-        { id: "003", status: 'warning', title: "warning", info: "info text",},
-        { id: "004", status: 'error', title: "error", info: "info text",},
-        { id: "005", status: 'danger', title: "danger", info: "info text",},
+        { status: 'default', title: 'default', active: true, info: "info text is tooo ooooooo ooooooo oooooo long",},
+        { status: 'success', title: "success", info: "info text",},
+        { status: 'warning', title: "warning", info: "info text",},
+        { status: 'error', title: "error", info: "info text",},
+        { status: 'danger', title: "danger", info: "info text",},
       ],
     }
   },

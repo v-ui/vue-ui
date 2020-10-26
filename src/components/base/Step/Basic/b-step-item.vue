@@ -2,7 +2,8 @@
   <div class="d-inline-flex m-2" :class="ObjClass" style="width: 15em;">
     <i :class="iconClass" class="align-self-center m-2" :style="`font-size: ${iconSize}px;`" />
     <div class="align-self-center">
-      <font class="d-block text-wrap w-100 text-truncate" :class="titleClass" style="max-height: 3em">{{ dataTitle }}</font>
+      <b-badge v-if="active" :color="dataColor">{{ dataTitle }}</b-badge>
+      <font v-else class="d-block text-wrap w-100 text-truncate" :class="fontClass" style="max-height: 3em">{{ dataTitle }}</font>
       <b-info class="d-block text-wrap w-100 text-truncate" style="max-height: 3em" :info="info" />
     </div>
   </div>
@@ -11,14 +12,15 @@
 <script>
 import util from "@/components/util/index.js";
 
+import BBadge from '@/components/base/Badge/b-badge.vue'
 import BInfo from "@/components/basic/basic-info.vue";
 
 export default {
   name: 'b-step-item',
-  components: { BInfo, },
+  components: { BBadge, BInfo, },
   mixins: [ util.mixins.status.method, util.mixins.size.strong, ],
   props: {
-    isDong: util.props.boolean,
+    active: util.props.boolean,
     info: util.props.string,
     set: {
       ...util.props.set,
@@ -31,13 +33,6 @@ export default {
     },
     fontClass: function() {
       return `text-${this.dataColor}`
-    },
-    titleClass: function() {
-      let color = ''
-      if (this.isDong) {
-        color = `text-${this.dataColor}`
-      }
-      return color
     },
     ObjClass: function() {
       let set = ''
