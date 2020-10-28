@@ -10,7 +10,7 @@ const message = {
   ...base,
   system: { title: 'System Info', color: 'info', icon: 'far fa-cog' },
   info: { title: 'Info', color: 'info', icon: 'far fa-info-circle' },
-  issue: { title: 'Issue', color: 'warning', icon: 'far fa-question-circle' },
+  issue: { title: 'Issue', color: 'secondary', icon: 'far fa-question-circle' },
 }
 
 const method = {

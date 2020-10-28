@@ -147,6 +147,14 @@
         v-modal="'#exampleModal'"
         type="button"
         class="btn btn-primary"
+        @click="status='default'; show=true"
+      >
+        status: default
+      </button>
+      <button
+        v-modal="'#exampleModal'"
+        type="button"
+        class="btn btn-primary"
         @click="status='info'; show=true"
       >
         status: info
