@@ -5,7 +5,6 @@
       id="exampleModal"
       title="title text"
       content="content text"
-      :center="center"
       :size="size"
       :status="status"
     />
@@ -13,6 +12,10 @@
       v-if="show"
       id="slotModal"
       title="slot Modal"
+      :set="set"
+      :size="size"
+      :drawer="drawer"
+      :scrol="scrol"
     >
       you can add any string and DOM
     </b-modal>
@@ -28,8 +31,6 @@
       id="scrolModal"
       title="scrol Modal"
       content="content text"
-      :scrol="scrol"
-      :center="center"
       :status="status"
     >
       there is too long<br>
@@ -138,110 +139,6 @@
         Modal`s slot
       </button>
     </div>
-    <div class="row align-items-center py-1">
-      <font class="col-1">
-        center
-      </font>
-      <div class="col-1">
-        <input
-          id="center"
-          class="mr-1"
-          type="checkbox"
-          @change="center=!center"
-        >
-        <label for="center">center</label>
-      </div>
-      <button
-        v-modal="'#exampleModal'"
-        type="button"
-        class="col-auto btn btn-primary"
-        @click="show=true"
-      >
-        center Modal
-      </button>
-    </div>
-    <div class="row align-items-center py-1">
-      <font class="col-1">
-        scrol
-      </font>
-      <div class="col-1">
-        <input
-          id="scrol"
-          class="mr-1"
-          type="checkbox"
-          @change="scrol=!scrol"
-        >
-        <label for="scrol">scrol</label>
-      </div>
-      <button
-        v-modal="'#scrolModal'"
-        type="button"
-        class="col-auto btn btn-primary"
-        @click="show=true"
-      >
-        scrol Modal
-      </button>
-    </div>
-    <div class="row align-items-center py-1">
-      <font class="col-1">
-        size
-      </font>
-      <div class="col-3">
-        <input
-          id="null"
-          class="mr-1"
-          type="radio"
-          name="size"
-          checked
-          @change="size=''"
-        >
-        <label
-          class="mr-2"
-          for="null"
-        >default</label>
-        <input
-          id="xl"
-          class="mr-1"
-          type="radio"
-          name="size"
-          @change="size='xl'"
-        >
-        <label
-          class="mr-2"
-          for="xl"
-        >xl</label>
-        <input
-          id="lg"
-          class="mr-1"
-          type="radio"
-          name="size"
-          @change="size='lg'"
-        >
-        <label
-          class="mr-2"
-          for="lg"
-        >lg</label>
-        <input
-          id="sm"
-          class="mr-1"
-          type="radio"
-          name="size"
-          @change="size='sm'"
-        >
-        <label
-          class="mr-2"
-          for="sm"
-        >sm</label>
-      </div>
-      <button
-        v-modal="'#exampleModal'"
-        type="button"
-        class="col-auto btn btn-primary"
-        @click="show=true"
-      >
-        size: {{ size }}
-      </button>
-    </div>
     <div class="row py-1">
       <font class="col-1">
         status
@@ -303,6 +200,144 @@
         status: danger
       </button>
     </div>
+    <div class="row align-items-center py-1">
+      <font class="col-1">
+        drawer
+      </font>
+      <div class="col-1">
+        <input
+          id="drawer"
+          class="mr-1"
+          type="checkbox"
+          @change="drawer=!drawer"
+        >
+        <label for="drawer">drawer</label>
+      </div>
+    </div>
+    <div class="row align-items-center py-1">
+      <font class="col-1">
+        scrol
+      </font>
+      <div class="col-1">
+        <input
+          id="scrol"
+          class="mr-1"
+          type="checkbox"
+          @change="scrol=!scrol"
+        >
+        <label for="scrol">scrol</label>
+      </div>
+    </div>
+    <div class="row align-items-center py-1">
+      <font class="col-1">
+        size
+      </font>
+      <div class="col-3">
+        <input
+          id="null"
+          class="mr-1"
+          type="radio"
+          name="size"
+          checked
+          @change="size=''"
+        >
+        <label
+          class="mr-2"
+          for="null"
+        >default</label>
+        <input
+          id="xl"
+          class="mr-1"
+          type="radio"
+          name="size"
+          @change="size='xl'"
+        >
+        <label
+          class="mr-2"
+          for="xl"
+        >xl</label>
+        <input
+          id="lg"
+          class="mr-1"
+          type="radio"
+          name="size"
+          @change="size='lg'"
+        >
+        <label
+          class="mr-2"
+          for="lg"
+        >lg</label>
+        <input
+          id="sm"
+          class="mr-1"
+          type="radio"
+          name="size"
+          @change="size='sm'"
+        >
+        <label
+          class="mr-2"
+          for="sm"
+        >sm</label>
+      </div>
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
+        show model
+      </font>
+      <button
+        v-modal="'#slotModal'"
+        type="button"
+        class="col-auto btn btn-primary"
+        @click="show=true"
+      >
+        Modal
+      </button>
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
+        position
+      </font>
+      <button
+        v-modal="'#slotModal'"
+        type="button"
+        class="btn btn-primary"
+        @click="set='top'; show=true"
+      >
+        position: top(default)
+      </button>
+      <button
+        v-modal="'#slotModal'"
+        type="button"
+        class="btn btn-primary"
+        @click="set='center'; show=true"
+      >
+        position: center
+      </button>
+      <button
+        v-modal="'#slotModal'"
+        type="button"
+        class="btn btn-primary"
+        @click="set='down'; show=true"
+      >
+        position: down
+      </button>
+      <button
+        v-modal="'#slotModal'"
+        type="button"
+        class="btn btn-primary"
+        @click="set='left'; show=true"
+      >
+        position: left
+      </button>
+      <button
+        v-modal="'#slotModal'"
+        type="button"
+        class="btn btn-primary"
+        @click="set='right'; show=true"
+      >
+        position: right
+      </button>
+    </div>
   </div>
 </template>
 
@@ -316,8 +351,9 @@ export default {
       return {
         status: '',
         show: false,
-        center: false,
         scrol: false,
+        drawer: false,
+        set: '',
         size: '',
         icon: '',
       }

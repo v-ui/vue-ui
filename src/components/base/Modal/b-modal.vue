@@ -9,8 +9,9 @@
     aria-hidden="false"
   >
     <div
-      class="modal-dialog"
+      class="modal-dialog my-0"
       :class="documentClass"
+      :style="documentStyle"
       role="document"
     >
       <div class="modal-content">
@@ -71,8 +72,8 @@ export default {
   props: {
     content: util.props.String,
     scrol: util.props.Boolean, //modal-dialog-scrollable
-    center: util.props.Boolean, // modal-dialog-centered
     hideFooter: util.props.Boolean,
+    drawer: util.props.Boolean,
     size: {
       type: String,
       default: "",
@@ -80,6 +81,10 @@ export default {
         return ["", "xl", "lg", "sm"].includes(val);
       }
     }, // modal-xl modal-lg modal-sm
+    set: {
+      ...util.props.set,
+      default: 'top',
+    },
     labelledby: {
       ...util.props.String,
       default: "Modal Dialog"
@@ -96,9 +101,45 @@ export default {
     },
     documentClass: function() {
       let scrol = this.scrol ? "modal-dialog-scrollable" : "";
-      let center = this.center ? "modal-dialog-centered" : "";
       let size = this.size ? `modal-${this.size}` : "";
-      return `${scrol} ${center} ${size}`;
+      let set = ''
+      switch (this.set) {
+        case 'left':
+          set = 'w-25 ml-0 d-flex align-items-right'
+          break;
+        case 'right':
+          set = 'w-25 mr-0 d-flex align-items-right'
+          break;
+        case 'center':
+          set = 'd-flex align-items-center'
+          break;
+        case 'down':
+          set = 'd-flex align-items-end'
+          break;
+        default:
+          set = ''
+      }
+      return `${scrol} ${set} ${size}`;
+    },
+    documentStyle: function() {
+      let set = ''
+      switch (this.set) {
+        case 'left':
+          set = this.drawer ? 'min-height: 100%' : ''
+          break;
+        case 'right':
+          set = this.drawer ? 'min-height: 100%' : ''
+          break;
+        case 'center':
+          set = this.drawer ? 'min-height: 100%; min-width: 100%' : 'min-height: 100%;'
+          break;
+        case 'down':
+          set = this.drawer ? 'min-height: 100%; min-width: 100%' : 'min-height: 100%'
+          break;
+        default:
+          set = this.drawer ? 'min-width: 100%' : ''
+      }
+      return set
     },
   },
   methods: {

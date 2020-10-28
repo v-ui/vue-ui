@@ -11,7 +11,7 @@ const size = ['', 'lg', 'sm']
 // set
 const setX = ['left', 'right', 'center']
 const setY = ['up', 'down']
-const set = [...setX, ...setY]
+const set = ['', ...setX, ...setY]
 const popperSet = [
   'top', 'top-start', 'top-end',
   'bottom', 'bottom-start', 'bottom-end',
