@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-between" :class="objClass">
     <template v-for="(item, key) in list">
       <b-step-item
-        :key="key"
+        :key="'item' + key"
         :set="set"
         :size="size"
         :title="item.title"
@@ -10,7 +10,7 @@
         :status="item.status"
         :active="item.active"
       />
-      <div v-if="list.length -1 != key" :key="key" class="align-self-center w-100 round rounded-pill" :class="lineClass" style="height: 1px" />
+      <div v-if="list.length -1 != key" :key="'line' + key" class="align-self-center w-100 round rounded-pill" :class="lineClass" style="height: 1px" />
     </template>
   </div>
 </template>
