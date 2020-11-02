@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class=" position-relative p-0">
     <basic-text
       ref="text"
       v-model="dataValue"
@@ -34,7 +34,7 @@
       v-if="!hideIcon && cIcon"
       class="text-muted text-center position-absolute"
       :class="cIcon"
-      style="top: 0.7em; left:1.5em; width: 1em;"
+      style="top: 0.7em; left:0.6em; width: 1em;"
     />
   </div>
 </template>
