@@ -1,6 +1,7 @@
 <template>
   <div class="d-inline-flex m-2" :class="ObjClass" style="width: 15em;">
-    <i :class="iconClass" class="align-self-center m-2" :style="`font-size: ${iconSize}px;`" />
+    <i v-if="size !== 'sm'" :class="iconClass" class="align-self-center m-2" :style="`font-size: ${iconSize}px;`" />
+    <b-badge v-else :color="dataColor" class="align-self-center m-2" />
     <div class="align-self-center">
       <b-badge v-if="active" :color="dataColor">{{ dataTitle }}</b-badge>
       <font v-else class="d-block text-wrap w-100 text-truncate" :class="fontClass" style="max-height: 3em">{{ dataTitle }}</font>
