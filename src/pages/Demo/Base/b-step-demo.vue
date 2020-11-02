@@ -6,7 +6,7 @@
       <font class="col-1">
         default:
       </font>
-      <b-step class="col-10" :list="list" />
+      <b-step class="col-10" :list="defaultList" />
     </div>
     <div class="row py-1">
       <font class="col-1">
@@ -79,19 +79,26 @@ export default {
   components: { BStep, },
   data() {
     return {
+      defaultList: [
+        { status: 'default',},
+        { status: 'success',},
+        { status: 'warning',},
+        { status: 'error',},
+        { status: 'danger',},
+      ],
       list: [
-        { status: 'default', title: 'default', info: "info text is tooo ooooooo ooooooo oooooo long",},
-        { status: 'success', title: "success", info: "info text",},
-        { status: 'warning', title: "warning", info: "info text",},
-        { status: 'error', title: "error", info: "info text",},
-        { status: 'danger', title: "danger", info: "info text",},
+        { status: 'default', title: 'title', info: "info text is tooo ooooooo ooooooo oooooo long",},
+        { status: 'success', title: "title", info: "info text",},
+        { status: 'warning', title: "title", info: "info text",},
+        { status: 'error', title: "title ", info: "info text",},
+        { status: 'danger', title: "title", info: "info text",},
       ],
       list2: [
-        { status: 'default', title: 'default', active: true, info: "info text is tooo ooooooo ooooooo oooooo long",},
-        { status: 'success', title: "success", info: "info text",},
-        { status: 'warning', title: "warning", info: "info text",},
-        { status: 'error', title: "error", info: "info text",},
-        { status: 'danger', title: "danger", info: "info text",},
+        { status: 'default', title: 'active item', info: "It is a active item", active: true,},
+        { status: 'success',},
+        { status: 'warning',},
+        { status: 'error',},
+        { status: 'danger',},
       ],
     }
   },
