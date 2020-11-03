@@ -5,6 +5,7 @@
       v-model="dataValue"
       :type="cImputType"
       :style="cStyle"
+      :size="size"
       :length="Number(length)"
       :readonly="readonly"
       :disabled="disabled"
@@ -34,7 +35,7 @@
       v-if="!hideIcon && cIcon"
       class="text-muted text-center position-absolute"
       :class="cIcon"
-      style="top: 0.7em; left:0.6em; width: 1em;"
+      :style="iconStyle"
     />
   </div>
 </template>
@@ -82,6 +83,7 @@ export default {
     value: util.props.String,
     placeholder: util.props.String,
     length: util.props.UInt,
+    size: util.props.size,
     maxlength: {
       ...util.props.UInt,
       default: 64,
@@ -125,7 +127,19 @@ export default {
       return this.pattern
         ? tools.string.toRegExp(this.pattern.toString())
         : (o && o.value) || null;
-    }
+    },
+    iconStyle: function() {
+      let style = `top: 0.7em; left: 0.6em; width: 1em;`
+      switch(this.size) {
+        case 'sm':
+          style = `top: 0.5em; left: 0.5em; width: 1em;`
+          break;
+        case 'lg':
+          style = `top: 1.1em; left: 0.9em; width: 1em;`
+          break;
+      }
+      return style
+    },
   },
   watch: {
     value: function(value) {
