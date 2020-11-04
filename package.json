@@ -15,6 +15,8 @@
     "@videojs/http-streaming": "^1.13.0",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "bootstrap-icons": "^1.1.0",
+    "clipboard": "^2.0.6",
     "core-js": "^3.6.4",
     "excel4node": "^1.7.2",
     "filepond": "^4.13.4",
@@ -52,6 +54,7 @@
     "eslint-plugin-vue": "^6.1.2",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
+    "svg-sprite-loader": "^5.0.0",
     "vue-template-compiler": "^2.6.11"
   }
 }
