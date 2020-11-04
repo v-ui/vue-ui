@@ -48,7 +48,7 @@
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
-import CTree from "./Tree/c-tree";
+import CTree from "@/components/content/Tree/Tree/c-tree.vue";
 import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
 import BButton from "@/components/basic/Button/basic-button.vue";
 

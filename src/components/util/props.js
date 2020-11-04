@@ -76,6 +76,14 @@ export default {
       return v.base.set.x.includes(value)
     },
   },
+  popperSet: {
+    type: String,
+    default: "top",
+    validator: (value) => {
+      // 这个值必须匹配下列字符串中的一个
+      return v.base.set.popperSet.includes(value)
+    },
+  },
   position: {
     type: String,
     default: 'top-center',
@@ -90,6 +98,30 @@ export default {
     validator: (value) => {
       // 这个值必须匹配下列字符串中的一个
       return v.base.justify.includes(value)
+    },
+  },
+  baseStatus: {
+    type: String,
+    default: '',
+    validator: (value) => {
+      // 这个值必须匹配下列字符串中的一个
+      return v.base.status.base.includes(value)
+    },
+  },
+  messageStatus: {
+    type: String,
+    default: '',
+    validator: (value) => {
+      // 这个值必须匹配下列字符串中的一个
+      return v.base.status.message.includes(value)
+    },
+  },
+  methodStatus: {
+    type: String,
+    default: '',
+    validator: (value) => {
+      // 这个值必须匹配下列字符串中的一个
+      return v.base.status.method.includes(value)
     },
   },
   width: {

@@ -4,7 +4,7 @@ export default {
   SubsystemName: 'Base',
   icon: 'fab fa-bootstrap',
   Modules: [
-    { path: 'base-icon', name: 'base-icon', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/base-icon.vue'), },
+    { path: 'basic-icon', name: 'basic-icon', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/basic-icon-demo.vue'), },
     { path: 'b-alert', name: 'b-alert', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-alert-demo.vue'), },
     { path: 'b-badge', name: 'b-badge', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-badge-demo.vue'), },
     { path: 'b-card', name: 'b-card', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-card-demo.vue'), },
@@ -16,6 +16,8 @@ export default {
     { path: 'b-nav', name: 'b-nav', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-nav-demo.vue'), },
     { path: 'b-pagination', name: 'b-pagination', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-pagination-demo.vue'), },
     { path: 'b-progress', name: 'b-progress', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-progress-demo.vue'), },
+    { path: 'b-step', name: 'b-step', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-step-demo.vue'), },
+    { path: 'b-slide', name: 'b-slide', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-slide-demo.vue'), },
     { path: 'b-toast', name: 'b-toast', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-toast-demo.vue'), },
   ],
 }

@@ -85,6 +85,7 @@
         id="sm"
         class="col-10"
         value="sm size"
+        icon="fas fa-user-circle"
         size="sm"
       />
     </div>
@@ -102,6 +103,7 @@
         id="default"
         class="col-10"
         value="default size"
+        icon="fas fa-user-circle"
       />
     </div>
     <div class="row">
@@ -119,6 +121,7 @@
         id="lg"
         class="col-10"
         value="lg size"
+        icon="fas fa-user-circle"
         size="lg"
       />
     </div>
@@ -310,7 +313,7 @@
 
 <script>
 import BText from "@/components/form/b-text.vue";
-import BFormLabel from '@/components/form/Other/b-form-lanel.vue'
+import BFormLabel from '@/components/form/Other/b-form-label.vue'
 
 export default {
   name: "BTextDemo",

@@ -1,41 +1,29 @@
 <template>
-  <div>
+  <tran-drop>
     <div
-      ref="popRef"
-      class="d-inline-block"
-      @mouseenter="show = true"
-      @mouseout="show = false"
+      ref="tooltip"
+      class="tooltip fade"
+      :class="objClass"
+      role="tooltip"
+      style="position: absolute; will-change: transform;"
     >
-      <slot
-        aria-describedby="tooltip"
-        name="popRef"
-      />
-    </div>
-    <tran-drop>
       <div
-        ref="tooltip"
-        class="tooltip fade"
-        :class="objClass"
-        role="tooltip"
-        style="position: absolute; will-change: transform;"
+        ref="arrow"
+        class="tooltip-arrow"
+        data-popper-arrow
+      />
+      <div
+        ref="body"
+        class="tooltip-inner"
       >
-        <div
-          ref="arrow"
-          class="tooltip-arrow"
-          data-popper-arrow
-        />
-        <div
-          ref="body"
-          class="tooltip-inner"
-        >
-          <slot>{{ content }}</slot>
-        </div>
+        <slot>{{ content }}</slot>
       </div>
-    </tran-drop>
-  </div>
+    </div>
+  </tran-drop>
 </template>
 
 <script>
+import tools from '@/tools'
 import util from "@/components/util/index.js";
 
 import tranDrop from "@/components/transition/tran-drop.vue"
@@ -45,17 +33,12 @@ export default {
   components: { tranDrop, },
   mixins: [ util.mixins.popper.base, ],
   props: {
-    set: {
-      type: String,
-      default: "right",
-      validator: value => [
-        'top', 'top-start', 'top-end',
-        'bottom', 'bottom-start', 'bottom-end',
-        'right', 'right-start', 'right-end',
-        'left', 'left-start', 'left-end',
-      ].includes(value),
+    for: {
+      ...util.props.String,
+      require: true,
     },
-    content: util.props.String
+    set: util.props.popperSet,
+    content: util.props.String,
   },
   data() {
     return {
@@ -69,7 +52,11 @@ export default {
       return c;
     }
   },
-
+  watch: {
+    for: function() {
+      this.init()
+    },
+  },
   mounted() {
     this.init()
   },
@@ -83,7 +70,12 @@ export default {
           //{ name: 'offset', options: { offset: [3, 3], }, },
         ],
       }
-      this.popRef = this.$refs.popRef
+      this.popRef = document.getElementById(this.for)
+      if (this.for && this.popRef) {
+        tools.dom.addAttr(this.popRef, 'aria-describedby', 'tooltip')
+        this.popRef.onmouseover = () => this.show = true
+        this.popRef.onmouseleave = () => this.show = false
+      }
       this.popEle = this.$refs.tooltip
     },
   },

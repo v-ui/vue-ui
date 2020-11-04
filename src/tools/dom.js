@@ -3,7 +3,7 @@ function addAttr(e, attr, value) {
   if (hasAttr(e, attr)) removeAttr(e, attr)
   e[attr] = value
   e.attr = value
-  e.attributes[attr] = value
+  // if (e.attributes) e.attributes[attr] = value
   e.setAttribute && e.setAttribute(attr, value)
   e.createAttribute && e.createAttribute(attr, value)
 }

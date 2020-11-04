@@ -253,7 +253,7 @@ import BCardImage from "@/components/base/Card/b-card-image.vue";
 import "@/components/base/Card/b-card-sub-components.js";
 
 import BNav from "@/components/base/Navigation/Nav/b-nav.vue";
-import BaseA from "@/components/basic/A/c-a.vue";
+import BaseA from "@/components/basic/A/basic-a.vue";
 import BList from "@/components/base/List/b-list.vue";
 
 export default {

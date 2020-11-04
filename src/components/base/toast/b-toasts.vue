@@ -13,7 +13,6 @@
       <b-toast
         v-for="(item, index) in list"
         :key="index"
-        :href="item.href"
         :time="item.time"
         :icon="item.icon"
         :delay="item.delay"

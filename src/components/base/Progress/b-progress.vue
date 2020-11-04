@@ -40,7 +40,7 @@ import BInfo from "@/components/basic/basic-info.vue";
 export default {
   name: "BProgress",
   components: { BBar, BCircle, BInfo },
-  mixins: [ util.mixins.animate.progress, ],
+  mixins: [ util.mixins.animate.progress, util.mixins.size.strong, ],
   props: {
     value: {
       ...util.props.UNumber,
@@ -48,12 +48,12 @@ export default {
     },
     color: {
       type: [String, Array],
-      default:  util.props.color.default,
+      default: util.props.color.default,
       validator: function(value) {
         if (tools.obj.type.isString(value)) {
           return util.props.color.validator(value)
         } else if (tools.obj.type.isArray(value)) {
-          return value.every(e => util.props.UInt.validator(e.value) && e.value <= 100 && util.props.color.validator(e.color))
+          return value.every(e => util.props.UNumber.validator(e.value) && e.value <= 100 && util.props.color.validator(e.color))
         }
       },
     },
@@ -63,22 +63,11 @@ export default {
     animated: util.props.Boolean,
     hideValue: util.props.Boolean,
     src: util.props.String,
-    size: util.props.size,
     info: util.props.String,
   },
   computed: {
-    // 粗细
-    strong: function () {
-      let strong = "10";
-      if (this.size === "sm") strong = "5";
-      else if (this.size === "lg") strong = "15";
-      return strong;
-    },
     width: function() {
-      let width = 150
-      if (this.size === "sm") width = "100";
-      else if (this.size === "lg") width = "200";
-      return width;
+      return this.strong * 14;
     },
     list: function() {
       if (this.state) return null
@@ -110,6 +99,17 @@ export default {
       let c = this.color.find(e => this.value <= e.value)
       return c && c.color || 'primary'
     },
+  },
+  data() {
+    let vm = this
+    return {
+      opt: {
+        delay: 0.25,
+        onUpdate: function() {
+          vm.$emit('animate:updating', vm.tweenNumber)
+        },
+      },
+    }
   },
   mounted() {
     if (this.state) this.color.sort((a, b) => a.value - b.value)

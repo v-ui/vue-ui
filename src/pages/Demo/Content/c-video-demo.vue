@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CVideo from '@/components/content//Video/c-video.vue'
+import CVideo from '@/components/content/Video/c-video.vue'
 
 export default {
     name: 'CVideoDemo',

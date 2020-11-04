@@ -11,7 +11,14 @@ const size = ['', 'lg', 'sm']
 // set
 const setX = ['left', 'right', 'center']
 const setY = ['up', 'down']
-const set = [...setX, ...setY]
+const set = ['', ...setX, ...setY]
+const popperSet = [
+  'auto', 'auto-start', 'auto-end',
+  'top', 'top-start', 'top-end',
+  'bottom', 'bottom-start', 'bottom-end',
+  'right', 'right-start', 'right-end',
+  'left', 'left-start', 'left-end',
+]
 // position
 const positionST = ['top-left', 'top-right']
 const positionSB = ['bottom-left', 'bottom-right']
@@ -30,6 +37,10 @@ const borderRadius = ['rounded', 'rounded-circle', 'rounded-pill', 'rounded-0', 
 const borderRadiusSize = size.map(e => `rounded-${e}`)
 // justify
 const justify = ['', 'start', 'center', 'end', 'between', 'around']
+// status
+const baseStatus = ['', 'default', "success", "warning", "error", "danger"]
+const messageStatus = [ "system", "info", "issue", ...baseStatus ]
+const methodStatus = [ ...baseStatus ]
 
 export default {
   base: {
@@ -44,6 +55,7 @@ export default {
       default: set,
       x: setX,
       y: setY,
+      popperSet: popperSet,
     },
     position: {
       default: position,
@@ -64,5 +76,10 @@ export default {
       rediussize: borderRadiusSize,
     },
     justify: justify,
+    status: {
+      base: baseStatus,
+      message: messageStatus,
+      method: methodStatus,
+    },
   },
 }

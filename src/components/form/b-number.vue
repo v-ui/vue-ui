@@ -3,7 +3,8 @@
     <b-input-group :size="size">
       <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
         <basic-button
-          outline
+          class="border-0"
+          color="light"
           :disabled="subButtomDisabled"
           @click="subn"
         >
@@ -13,6 +14,7 @@
         </basic-button>
       </b-input-group-prepend>
       <basic-text
+        ref="input"
         v-model.number="number"
         :text-align="textAlign"
         :min="dataMin"
@@ -22,26 +24,28 @@
         :readonly="readonly || textReadonly"
         v-bind="$attrs"
         v-on="$listeners"
-        @click.native="click($event)"
-        @change.native="change"
+        @blur.native="blur"
+        @click.native="click"
+        @input.native="input"
         @keyup.native.exact.up="add"
         @keyup.native.exact.down="subn"
         @keyup.native.shift.exact.up="superAdd"
-        @keyup.native.shift.exact.down="superSubn"
+        @keyup.native.shift.exact.down="superSub"
       />
       <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
         <basic-button
-          outline
+          class="border-0"
+          color="light"
           :disabled="addButtonDisabled"
           @click="add"
         >
           <slot name="add">
-            {{ subValue }}
+            {{ addValue }}
           </slot>
         </basic-button>
       </b-input-group-prepend>
     </b-input-group>
-    <b-info :info="msg" />
+    <b-info :info="info" />
   </div>
 </template>
 
@@ -70,7 +74,7 @@ export default {
   inheritAttrs: false,
   model: {
     prop: "value",
-    event: "number:changed"
+    event: "number:input"
   },
   props: {
     min: util.props.Number,
@@ -108,14 +112,12 @@ export default {
     textReadonly: util.props.Boolean,
     size: util.props.size,
     hideButton: util.props.Boolean,
-    prompt: util.props.Boolean,
     info: util.props.String
   },
   data() {
     return {
       number: 0,
       setPrecision: 0,
-      msg: ""
     };
   },
   computed: {
@@ -128,14 +130,17 @@ export default {
     dataMax: function() {
       return this.toNmuber(this.max, 100);
     },
+    dataNumber: function() {
+      return Number(this.number)
+    },
     dataAccuracy: function() {
       return this.toNmuber(this.accuracy);
     },
     subButtomDisabled: function() {
-      return this.number <= this.dataMin || this.disabled;
+      return this.dataNumber <= this.dataMin || this.disabled;
     },
     addButtonDisabled: function() {
-      return this.number >= this.dataMax || this.disabled;
+      return this.dataNumber >= this.dataMax || this.disabled;
     }
   },
   watch: {
@@ -146,23 +151,13 @@ export default {
   mounted() {
     this.getPrecision();
     this.innitNumber();
-    this.initInfo();
   },
   methods: {
     innitNumber: function() {
       this.number = this.formatNumber(this.toNmuber(this.value, this.dataMin));
     },
-    initInfo: function() {
-      this.msg = this.info || "";
-      if (this.prompt) {
-        let str = `${this.formatNumber(this.min)}-${this.formatNumber(
-          this.max
-        )},精度: ${this.formatNumber(this.step)}`;
-        this.msg += this.info ? `(${str})` : str;
-      }
-    },
-    toNmuber: function(str, n = 0) {
-      return Number(str) || n;
+    toNmuber: function(value, n = 0) {
+      return !isNaN(value) ? Number(value) : n
     },
     getNumberPrecision: function(number) {
       let str = number.toString().split(".");
@@ -180,45 +175,41 @@ export default {
       );
     },
     formatNumber: function(value) {
-      return Number.parseFloat(value).toFixed(this.setPrecision);
+      return Number(value).toFixed(this.setPrecision);
     },
-    click: function(event) {
+    click: function() {
       if (this.textReadonly) return
       if (this.readonly || this.disabled) return;
-      if (this.number == 0) event.target.value = "";
+      if (this.dataNumber == 0) this.$refs.input.$el.value = ""
     },
-    change: async function() {
-      if (this.number === "") return;
-      if (this.number < this.dataMin) this.number = this.dataMin;
-      if (this.number > this.dataMax) this.number = this.dataMax;
+    input: function() {
+      if (this.dataNumber < this.dataMin) this.number = this.dataMin;
+      if (this.dataNumber > this.dataMax) this.number = this.dataMax;
       this.number = this.formatNumber(this.number);
-      event.target.value = this.number;
+      this.$refs.input.$el.value = this.number;
       // 配合 v-model
-      this.$emit("number:changed", this.number);
+      this.$emit("number:input", this.number);
+    },
+    blur: function() {
+      if (isNaN(this.$refs.input.$el.value)) return
+      this.$refs.input.$el.value = this.number
+    },
+    calculator: function(callback) {
+      if (this.disabled || this.readonly) return;
+      callback && callback()
+      this.input();
     },
     subn: function() {
-      if (this.disabled || this.readonly) return;
-      this.number = Number(this.number);
-      this.number -= this.dataStep;
-      this.change();
+      this.calculator(() => this.number = this.dataNumber - this.dataStep)
     },
     add: function() {
-      if (this.disabled || this.readonly) return;
-      this.number = Number(this.number);
-      this.number += this.dataStep;
-      this.change();
+      this.calculator(() => this.number = this.dataNumber + this.dataStep)
     },
-    superSubn: function() {
-      if (this.disabled || this.readonly) return
-      this.number = Number(this.number)
-      this.number -= this.dataStep * 10
-      this.change()
+    superSub: function() {
+      this.calculator(() => this.number = this.dataNumber - this.dataStep * 10)
     },
     superAdd: function() {
-      if (this.disabled || this.readonly) return
-      this.number = Number(this.number)
-      this.number += this.dataStep * 10
-      this.change()
+      this.calculator(() => this.number = this.dataNumber + this.dataStep * 10)
     },
   }
 };

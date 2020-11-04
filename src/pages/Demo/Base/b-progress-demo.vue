@@ -286,12 +286,6 @@ export default {
       src: img,
       range: 80,
       colors: variables.base.color.bg,
-      list0: [
-        { value: 0 },
-        { color: "info", value: 0 },
-        { color: "danger", value: 0 },
-        { color: "info", value: 0, showValue: true },
-      ],
       colorArr1: [
         {value: 10, color: 'info'},
         {value: 20, color: 'danger'},

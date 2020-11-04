@@ -105,3 +105,6 @@ dist
 
 # mac os file
 .DS_Store
+
+# inspect file
+output.js

@@ -2,7 +2,7 @@
   <div>
     <h2>box-tabs</h2>
     <div>
-      box-tab-list 的使用请参考
+      b-tab-list 的使用请参考
       <a href="Demo-Base-b-nav">b-nav</a>
       <br>
       请勿加入 dropdown，这会对辅助技术用户不友好
@@ -56,7 +56,7 @@ import BoxTabContent from "@/components/box/Tabs/box-tab-content.vue";
 import BoxTabPane from "@/components/box/Tabs/box-tab-pane.vue";
 
 export default {
-  name: "BoxTabsDemo",
+  name: "BTabsDemo",
   components: { BoxTabList, BoxTabContent, BoxTabPane },
   data() {
     return {

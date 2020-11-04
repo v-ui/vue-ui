@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import CAudio from '@/components/content//Audio/c-audio.vue'
+import CAudio from '@/components/content/Audio/c-audio.vue'
 
 export default {
     name: 'CAudioDemo',

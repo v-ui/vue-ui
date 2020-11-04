@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import TreeView from "@/components/content//TreeView/tree-view.vue";
+import TreeView from "@/components/box/TreeView/tree-view.vue";
 
 export default {
-  name: "TreeViewDemo",
+  name: "BTreeViewDemo",
   components: { TreeView },
   data() {
     return {

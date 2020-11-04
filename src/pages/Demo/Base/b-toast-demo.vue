@@ -63,18 +63,6 @@
     </div>
     <div class="row py-1">
       <font class="col-1">
-        href
-      </font>
-      <b-toast
-        class="col-11"
-        autohide
-        content="content text"
-        title="title text"
-        href="/b-About"
-      />
-    </div>
-    <div class="row py-1">
-      <font class="col-1">
         time
       </font>
       <b-toast
@@ -104,6 +92,9 @@
       <div class="col-11">
         <div class="row">
           <font class="col-4">
+            default
+          </font>
+          <font class="col-4">
             system
           </font>
           <font class="col-4">
@@ -114,6 +105,12 @@
           </font>
         </div>
         <div class="row">
+          <b-toast
+            class="col-4"
+            autohide
+            status="default"
+            content="content text"
+          />
           <b-toast
             class="col-4"
             autohide
@@ -188,7 +185,7 @@
 <script>
 import BToast from "@/components/base/toast/b-toast.vue";
 import BToasts from "@/components/base/toast/b-toasts.vue";
-import BaseA from "@/components/basic/A/c-a.vue";
+import BaseA from "@/components/basic/A/basic-a.vue";
 
 export default {
   name: "BToastDemo",

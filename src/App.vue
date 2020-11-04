@@ -19,7 +19,11 @@
 import 'jquery'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-// 字体图标
+// 图标
+const requireAll = requireContext => requireContext.keys().map(requireContext)
+const req = require.context('bootstrap-icons/icons', false, /\.svg$/)
+requireAll(req)
+
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import layout from "@/components/layout/layout.vue"
 

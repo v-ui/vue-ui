@@ -1,7 +1,8 @@
 
 
 const getTypeString = function (o) {
-  let s = Object.prototype.toString.call(o);
+  // https://juejin.im/post/6888702006962814990
+  let s = Object.prototype.toString.call(o); // Function.prototype.call.bind(o)
   return s.match(/\[object (.*?)\]/)[1].toLowerCase();
 }
 

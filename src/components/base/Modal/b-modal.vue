@@ -9,20 +9,21 @@
     aria-hidden="false"
   >
     <div
-      class="modal-dialog"
+      class="modal-dialog my-0"
       :class="documentClass"
+      :style="documentStyle"
       role="document"
     >
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
-            <slot name="icon">
+            <slot v-if="$slots.icon || showIcon" name="icon">
               <i
                 class="mr-2"
                 :class="iconClass"
               />
             </slot>
-            {{ fillTitle }}
+            {{ dataTitle }}
           </h5>
           <button
             type="button"
@@ -65,17 +66,14 @@
 <script>
 import util from "@/components/util/index.js";
 
-import config from "@/config/index.js";
-
 export default {
   name: "BModal",
+  mixins: [ util.mixins.status.message, ],
   props: {
-    title: util.props.String,
-    icon: util.props.String,
     content: util.props.String,
     scrol: util.props.Boolean, //modal-dialog-scrollable
-    center: util.props.Boolean, // modal-dialog-centered
     hideFooter: util.props.Boolean,
+    drawer: util.props.Boolean,
     size: {
       type: String,
       default: "",
@@ -83,25 +81,14 @@ export default {
         return ["", "xl", "lg", "sm"].includes(val);
       }
     }, // modal-xl modal-lg modal-sm
+    set: {
+      ...util.props.set,
+      default: 'top',
+    },
     labelledby: {
       ...util.props.String,
       default: "Modal Dialog"
     },
-    status: {
-      type: String,
-      validator: function(val) {
-        return [
-          "",
-          "info",
-          "system",
-          "issue",
-          "warning",
-          "error",
-          "success",
-          "danger"
-        ].includes(val);
-      }
-    }
   },
   data() {
     return {
@@ -114,25 +101,46 @@ export default {
     },
     documentClass: function() {
       let scrol = this.scrol ? "modal-dialog-scrollable" : "";
-      let center = this.center ? "modal-dialog-centered" : "";
       let size = this.size ? `modal-${this.size}` : "";
-      return `${scrol} ${center} ${size}`;
-    },
-    o: function() {
-      return Object.getOwnPropertyDescriptor(config.ui.status, this.status);
-    },
-    iconClass: function() {
-      let icon = "",
-        color = "";
-      if (this.o && this.o.value) {
-        icon = this.o.value.icon;
-        color = this.o.value.color;
+      let set = ''
+      switch (this.set) {
+        case 'left':
+          set = 'w-25 ml-0 d-flex align-items-right'
+          break;
+        case 'right':
+          set = 'w-25 mr-0 d-flex align-items-right'
+          break;
+        case 'center':
+          set = 'd-flex align-items-center'
+          break;
+        case 'down':
+          set = 'd-flex align-items-end'
+          break;
+        default:
+          set = ''
       }
-      return `${this.icon || icon} text-${color}`;
+      return `${scrol} ${set} ${size}`;
     },
-    fillTitle: function() {
-      return this.title || (this.o && this.o.value && this.o.value.title);
-    }
+    documentStyle: function() {
+      let set = ''
+      switch (this.set) {
+        case 'left':
+          set = this.drawer ? 'min-height: 100%' : ''
+          break;
+        case 'right':
+          set = this.drawer ? 'min-height: 100%' : ''
+          break;
+        case 'center':
+          set = this.drawer ? 'min-height: 100%; min-width: 100%' : 'min-height: 100%;'
+          break;
+        case 'down':
+          set = this.drawer ? 'min-height: 100%; min-width: 100%' : 'min-height: 100%'
+          break;
+        default:
+          set = this.drawer ? 'min-width: 100%' : ''
+      }
+      return set
+    },
   },
   methods: {
     hideModel: function() {

@@ -14,7 +14,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: 'BFormLanel',
+  name: 'BFormLabel',
   props: {
     label: util.props.String,
     size: util.props.size,
