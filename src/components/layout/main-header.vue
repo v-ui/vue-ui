@@ -12,7 +12,7 @@
           alt="logo"
         >
         {{ $t('systemName') }}
-        <small class="navbar-text">(bate 0.1)</small>
+        <small class="navbar-text">(bate 1.0)</small>
       </a>
       <button
         class="navbar-toggler"
