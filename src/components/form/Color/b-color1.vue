@@ -80,8 +80,8 @@
 <script>
 import util from "@/components/util/index.js";
 
-import BNumber from "@/components/formConter/b-number.vue";
-import BRange from "@/components/formConter/b-range.vue";
+import BNumber from "@/components/form/b-number.vue";
+import BRange from "@/components/form/b-range.vue";
 import BDropPicker from "@/components/base/DropdownPicker/b-dropdown-picker.vue";
 
 export default {

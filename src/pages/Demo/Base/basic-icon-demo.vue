@@ -60,7 +60,7 @@
       <ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8  list-unstyled list">
         <li v-for="(item, key) in searchIcons" :key="key" class="col mb-4">
           <a class="d-block text-decoration-none text-center">
-            <div class="p-3 py-4 mb-2 bg-light text-primary text-center rounded" style="font-size: 2em">
+            <div class="p-4 bg-light text-primary text-center rounded" style="font-size: 2em">
               <basic-icon :icon="item" />
             </div>
             <font class="clip btn btn-link pt-1" v-tip.bottom="'Click to copy'" :data-clipboard-text="item">
