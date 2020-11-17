@@ -1,5 +1,16 @@
 <template>
-  <div :style="bgImage" style="cursor: pointer;" />
+  <div
+    :style="barStyle"
+    style="width: 10px; height: 200px; background-position: initial initial; background-repeat: initial initial; cursor: pointer;"
+    class="position-relative"
+    @mousedown="barDown"
+  >
+    <span
+      class="color-thumb"
+      :style="`top: ${top}px`"
+      @mousedown.left.exact.stop.prevent="thumbDown"
+    />
+  </div>
 </template>
 <script>
 // linear-gradient - MDN
@@ -11,6 +22,11 @@ import util from '@/components/util'
 export default {
   name: 'b-color-bar',
   mixins: [ util.mixins.color.base, ],
+  data() {
+    return {
+      top: 0
+    }
+  },
   computed: {
     scaleArray: function() {
       let arr = []
@@ -22,13 +38,48 @@ export default {
     scale: function() {
       return this.color.scale(this.scaleArray).domain([0, 100])
     },
-    bgImage: function() {
+    barStyle: function() {
       let rgb = ''
       for(let i = 0; i < 100; i++) {
         rgb += `${this.scale(i).css()} ${i}% ${i < 99 ? ', ' : ''}`
       }
-      return `width: 10px; height: 200px; background-position: initial initial; background-repeat: initial initial; background-image: linear-gradient(to bottom, ${rgb});`
+      return `background-image: linear-gradient(to bottom, ${rgb});`
+    },
+  },
+  methods: {
+    barDown: function(event) {
+      let { offsetY } = event
+      this.top = offsetY
+    },
+    thumbDown: function(event) {
+      let t = event.pageY - this.top
+      document.onmousemove = mouseEvent => {
+        let { clientHeight } = this.$el
+        this.top = mouseEvent.pageY - t
+        if (this.top < 0) this.top = 0
+        if (this.top > clientHeight) this.top = clientHeight
+      }
+      document.onmouseup = () => {
+        document.onmousemove = null
+        document.onmouseup = null
+      }
     },
   },
 }
 </script>
+
+<style scoped>
+.color-thumb {
+  position: absolute;
+  left: -1px;
+  width: 12px;
+  height: 4px;
+  border-radius: 1px;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  box-sizing: border-box;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .6);
+  cursor: pointer;
+  z-index: 10;
+}
+</style>
