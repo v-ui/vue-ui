@@ -1,13 +1,15 @@
 <template>
   <div
     :style="barStyle"
-    style="width: 10px; height: 200px; background-position: initial initial; background-repeat: initial initial; cursor: pointer;"
+    style="width: 10px; height: 200px; background-position: initial initial; background-repeat: initial initial;"
     class="position-relative"
+    :aria-disabled="disabled"
     @mousedown="barDown"
   >
     <span
       class="color-thumb"
       :style="`top: ${top}px`"
+      :aria-disabled="disabled"
       @mousedown.left.exact.stop.prevent="thumbDown"
     />
   </div>
@@ -22,9 +24,23 @@ import util from '@/components/util'
 export default {
   name: 'b-color-bar',
   mixins: [ util.mixins.color.base, ],
+  model: {
+    props: 'value',
+    event: 'bar:changed'
+  },
+  props: {
+    value: {
+      ...util.props.UNumber,
+      validator: function(value) {
+        return util.props.UNumber.validator(value) && value <= 360
+      },
+    },
+    disabled: util.props.Boolean,
+  },
   data() {
     return {
-      top: 0
+      top: 0,
+      h: this.value,
     }
   },
   computed: {
@@ -46,18 +62,47 @@ export default {
       return `background-image: linear-gradient(to bottom, ${rgb});`
     },
   },
+  watch: {
+    value: function(value) {
+      this.h = value
+      this.valueChange(this.h)
+    },
+    top: function(value) {
+      this.topChange(value)
+    },
+    h: function(value) {
+      // v-model
+      this.$emit('bar:changed', value)
+    },
+  },
+  mounted() {
+    this.valueChange(this.h)
+  },
   methods: {
+    valueChange: function(value) {
+      if (value >= 0 && value <= 360) {
+        this.top = this.$el.clientHeight / 360 * value
+      }
+    },
+    topChange: function(top) {
+      if (this.h >= 0 && this.h <= 360) {
+        this.h = top / this.$el.clientHeight * 360
+      }
+    },
     barDown: function(event) {
+      if (this.disabled) return
       let { offsetY } = event
       this.top = offsetY
     },
     thumbDown: function(event) {
+      if (this.disabled) return
       let t = event.pageY - this.top
       document.onmousemove = mouseEvent => {
         let { clientHeight } = this.$el
-        this.top = mouseEvent.pageY - t
-        if (this.top < 0) this.top = 0
-        if (this.top > clientHeight) this.top = clientHeight
+        let top = mouseEvent.pageY - t
+        if (top < 0) top = 0
+        if (top > clientHeight) top = clientHeight
+        this.top = top
       }
       document.onmouseup = () => {
         document.onmousemove = null

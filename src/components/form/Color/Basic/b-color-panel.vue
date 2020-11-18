@@ -1,15 +1,15 @@
 <template>
   <div
     class="color-panel-main"
-    style="cursor: pointer"
-    :style="{ background: color(90, 1, 0.5, 'hsl') }"
+    :aria-disabled="disabled"
     @mousedown="panelDown"
   >
     <div class="color-white-panel" />
     <div class="color-block-panel" />
     <span
       class="color-cursor"
-      :style="`top: ${top}px; left: ${left}px`"
+      :aria-disabled="disabled"
+      :style="`top: ${offset.top}px; left: ${offset.left}px`"
       @mousedown.left.exact.stop.prevent="cursorDown"
     />
   </div>
@@ -21,26 +21,74 @@ import util from "@/components/util";
 export default {
   name: "b-color-panel",
   mixins: [util.mixins.color.base],
+  model: {
+    prop: 'value',
+    event: 'panel:changed',
+  },
+  props: {
+    value: [Object,],
+    disabled: util.props.Boolean,
+  },
   data() {
     return {
-      top: 0,
-      left: 0,
+      offset: {
+        top: 0,
+        left: 0,
+      },
+      sl: this.value,
     };
   },
-  computed: {},
+  watch: {
+    value: {
+      handler: function(value) {
+        this.sl = value
+      },
+      deep: true,
+    },
+    offset: {
+      handler: function(value) {
+        this.offsetChange(value)
+      },
+      deep: true,
+    },
+    sl: {
+      handler: function(value) {
+        // v-model
+        this.$emit('panel:changed', value)
+      },
+      deep: true,
+    },
+  },
+  mounted() {
+    this.valueChange(this.sl)
+  },
   methods: {
+    valueChange: function(value) {
+      if (value && value.s >= 0 && value.s <= 1 && value.l >= 0 && value.l <= 1) {
+        this.offset.left = this.$el.clientWidth * value.s
+        this.offset.top = this.$el.clientHeight * value.l
+      }
+    },
+    offsetChange: function(value) {
+      if (this.sl && this.sl.s >= 0 && this.sl.s <= 1 && this.sl.l >= 0 && this.sl.l <= 1) {
+        this.sl.s = value.left / this.$el.clientWidth
+        this.sl.l = value.top / this.$el.clientHeight
+      }
+    },
     panelDown: function (event) {
+      if (this.disabled) return
       let { offsetX, offsetY } = event;
       this.top = offsetY;
       this.left = offsetX;
     },
     cursorDown: function(event) {
-      let l = event.pageX - this.left
-      let t = event.pageY - this.top
+      if (this.disabled) return
+      let t = event.pageY - this.offset.top
+      let l = event.pageX - this.offset.left
       document.onmousemove = mouseEvent => {
         let { clientWidth, clientHeight } = this.$el;
-        this.left = this.getDailt(mouseEvent.pageX, l, clientWidth)
-        this.top = this.getDailt(mouseEvent.pageY, t, clientHeight)
+        this.offset.top = this.getDailt(mouseEvent.pageY, t, clientHeight)
+        this.offset.left = this.getDailt(mouseEvent.pageX, l, clientWidth)
       }
       document.onmouseup = () => {
         document.onmousemove = null;
