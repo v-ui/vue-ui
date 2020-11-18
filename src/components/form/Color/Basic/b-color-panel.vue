@@ -72,14 +72,14 @@ export default {
     offsetChange: function(value) {
       if (this.sl && this.sl.s >= 0 && this.sl.s <= 1 && this.sl.l >= 0 && this.sl.l <= 1) {
         this.sl.s = value.left / this.$el.clientWidth
-        this.sl.l = value.top / this.$el.clientHeight
+        this.sl.l = 1 - value.top / this.$el.clientHeight
       }
     },
     panelDown: function (event) {
       if (this.disabled) return
       let { offsetX, offsetY } = event;
-      this.top = offsetY;
-      this.left = offsetX;
+      this.offset.top = offsetY;
+      this.offset.left = offsetX;
     },
     cursorDown: function(event) {
       if (this.disabled) return

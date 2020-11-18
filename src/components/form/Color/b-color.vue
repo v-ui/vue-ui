@@ -2,7 +2,7 @@
   <b-drop-panel placeholder="请选择" :canHide="false">
     <div style="width: 240px">
       <div class="d-flex px-2 py-1">
-        <strong class="w-100 text-center">Header</strong>
+        <strong class="w-100 text-center" :style="`color: ${cssColor}`">{{ cssColor }}</strong>
         cotroller
       </div>
       <hr class="my-1">
@@ -43,6 +43,11 @@ export default {
       selected2: { h: 100, s: 1, l: .5 },
       sl: null,
     };
+  },
+  computed: {
+    cssColor: function() {
+      return this.color(this.selected2).css()
+    },
   },
   watch: {
     selected2: {
