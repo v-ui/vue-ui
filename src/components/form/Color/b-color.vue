@@ -1,14 +1,17 @@
 <template>
   <b-drop-panel placeholder="请选择" :canHide="false">
     <div style="width: 240px">
-      <div class="d-flex px-2 py-1">
-        <strong class="w-100 text-center" :style="`color: ${cssColor}`">{{ cssColor }}</strong>
+      <div class="d-flex align-items-center px-2 py-1">
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <span class="d-inline-block border border-primary m-1" style="width: 20px; height: 20px;" :style="`background: ${cssColor}`"  />
+          <strong class="text-center">{{ cssColor }}</strong>
+        </div>
         cotroller
       </div>
       <hr class="my-1">
       <div class="d-flex p-1">
         <b-color-panel class="m-1" :style="{ background: color(selected2.h, 1, 0.5, 'hsl') }" v-model="sl"/>
-        <b-color-bar class="m-1" v-model.number="selected2.h" />
+        <b-color-bar class="m-1" v-model="selected2.h" />
       </div>
       <hr class="my-1">
       <b-color-list :list="list" v-model="selected" />
@@ -46,7 +49,7 @@ export default {
   },
   computed: {
     cssColor: function() {
-      return this.color(this.selected2).css()
+      return this.color(this.selected2).css('hsl')
     },
   },
   watch: {

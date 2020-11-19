@@ -100,7 +100,7 @@ export default {
       document.onmousemove = mouseEvent => {
         let { clientHeight } = this.$el
         let top = mouseEvent.pageY - t
-        if (top < 0) top = 0
+        if (top < -5) top = -5
         if (top > clientHeight) top = clientHeight
         this.top = top
       }

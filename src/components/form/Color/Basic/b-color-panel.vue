@@ -1,6 +1,6 @@
 <template>
   <div
-    class="color-panel-main"
+    class="color-panel-main border border-light"
     :aria-disabled="disabled"
     @mousedown="panelDown"
   >
@@ -128,7 +128,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient(0deg, #000, transparent);
+  background: linear-gradient(0deg, #000, hsla(0, 100%, 0%, 0));
 }
 
 .color-cursor {
