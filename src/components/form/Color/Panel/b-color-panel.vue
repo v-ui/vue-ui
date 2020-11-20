@@ -4,8 +4,9 @@
     :aria-disabled="disabled"
     @mousedown="panelDown"
   >
-    <div class="color-white-panel" />
-    <div class="color-block-panel" />
+    <!-- <div class="color-white-panel" />
+    <div class="color-block-panel" /> -->
+    <div class="color-hsl-panel" />
     <span
       class="color-cursor"
       :aria-disabled="disabled"
@@ -129,6 +130,16 @@ export default {
   bottom: 0;
   left: 0;
   background: linear-gradient(0deg, #000, hsla(0, 100%, 0%, 0));
+}
+
+.color-hsl-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(top, hsl(0, 0%, 100%) 0%, hsla(0, 0%, 100%, 0) 50%, hsla(0, 0%, 0%, 0) 50%, hsl(0, 0%, 0%) 100%),
+              linear-gradient(left, hsl(0, 0%, 50%) 0%, hsla(0, 0%, 50%, 0) 100%);
 }
 
 .color-cursor {
