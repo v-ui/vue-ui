@@ -3,8 +3,8 @@
     <div style="width: 240px">
       <div class="d-flex align-items-center px-2 py-1">
         <div class="d-flex align-items-center justify-content-center w-100">
-          <span class="d-inline-block border border-primary m-1" style="width: 20px; height: 20px;" :style="`background: ${rgb}`"  />
-          <strong class="text-center">{{ rgb }}</strong>
+          <span class="d-inline-block border border-primary m-1" style="width: 20px; height: 20px;" :style="`background: ${rgba}`"  />
+          <strong class="text-center">{{ rgba }}</strong>
         </div>
         cotroller
       </div>
@@ -14,7 +14,7 @@
         <b-color-hue-bar class="m-1" status="column" v-model="selected.h" />
       </div>
       <div class="p-1">
-        <b-color-alpha-bar class="m-1" :style="{ background: rgb }" v-model="selected.a" />
+        <b-color-alpha-bar class="m-1" :style="{ background: rgbCss }" v-model="alpha" />
       </div>
     </div>
   </b-drop-panel>
@@ -37,13 +37,20 @@ export default {
   mixins: [ util.mixins.color.base ],
   data() {
     return {
-      selected: { h: 100, s: 1, l: .5, a: 1 },
+      selected: { h: 100, s: 1, l: .5, },
+      alpha: 1,
       sl: null,
     };
   },
   computed: {
     rgb: function() {
+      return this.color(this.selected).rgb()
+    },
+    rgbCss: function() {
       return this.color(this.selected).css()
+    },
+    rgba: function() {
+      return this.color(this.rgb).alpha(this.alpha)
     },
   },
   watch: {
