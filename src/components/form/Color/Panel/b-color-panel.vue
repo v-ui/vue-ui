@@ -2,7 +2,7 @@
   <div
     class="color-panel-main border border-light"
     :aria-disabled="disabled"
-    @mousedown="panelDown"
+    @mousedown.left.exact="panelDown"
   >
     <!-- <div class="color-white-panel" />
     <div class="color-block-panel" /> -->
@@ -43,12 +43,7 @@ export default {
     value: {
       handler: function(value) {
         this.sl = value
-      },
-      deep: true,
-    },
-    offset: {
-      handler: function(value) {
-        this.offsetChange(value)
+        this.valueChange(value)
       },
       deep: true,
     },
@@ -60,14 +55,11 @@ export default {
       deep: true,
     },
   },
-  mounted() {
-    this.valueChange(this.sl)
-  },
   methods: {
     valueChange: function(value) {
       if (value && value.s >= 0 && value.s <= 1 && value.l >= 0 && value.l <= 1) {
         this.offset.left = this.$el.clientWidth * value.s
-        this.offset.top = this.$el.clientHeight * value.l
+        this.offset.top = this.$el.clientHeight * (1 - value.l)
       }
     },
     offsetChange: function(value) {
@@ -81,6 +73,7 @@ export default {
       let { offsetX, offsetY } = event;
       this.offset.top = offsetY;
       this.offset.left = offsetX;
+      this.offsetChange(this.offset)
     },
     cursorDown: function(event) {
       if (this.disabled) return
@@ -90,6 +83,7 @@ export default {
         let { clientWidth, clientHeight } = this.$el;
         this.offset.top = this.getDailt(mouseEvent.pageY, t, clientHeight)
         this.offset.left = this.getDailt(mouseEvent.pageX, l, clientWidth)
+        this.offsetChange(this.offset)
       }
       document.onmouseup = () => {
         document.onmousemove = null;
@@ -138,8 +132,8 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient(top, hsl(0, 0%, 100%) 0%, hsla(0, 0%, 100%, 0) 50%, hsla(0, 0%, 0%, 0) 50%, hsl(0, 0%, 0%) 100%),
-              linear-gradient(left, hsl(0, 0%, 50%) 0%, hsla(0, 0%, 50%, 0) 100%);
+  background: linear-gradient(to bottom, hsl(0, 0%, 100%) 0%, hsla(0, 0%, 100%, 0) 50%, hsla(0, 0%, 0%, 0) 50%, hsl(0, 0%, 0%) 100%),
+              linear-gradient(to right, hsl(0, 0%, 50%) 0%, hsla(0, 0%, 50%, 0) 100%);
 }
 
 .color-cursor {
