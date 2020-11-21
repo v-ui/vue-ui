@@ -3,7 +3,7 @@
     :style="barStyle"
     class="position-relative"
     :aria-disabled="disabled"
-    @mousedown="barDown"
+    @mousedown.left.exact="barDown"
   >
     <div v-if="filter" :style="filter" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;" />
     <span
@@ -71,18 +71,12 @@ export default {
   watch: {
     value: function(value) {
       this.selectedValue = value
-      this.valueChange(this.h)
-    },
-    disp: function(value) {
-      this.dispChange(value)
+      this.valueChange(value)
     },
     selectedValue: function(value) {
       // v-model
       this.$emit('bar:changed', value)
     },
-  },
-  mounted() {
-    this.valueChange(this.selectedValue)
   },
   methods: {
     validatorSelectedValue: function(value) {
@@ -91,6 +85,7 @@ export default {
     valueChange: function(value) {
       if (this.validatorSelectedValue(value)) {
         this.disp = this.ruler / this.max * value
+        this.dispChange(this.disp)
       }
     },
     dispChange: function(disp) {
@@ -101,6 +96,7 @@ export default {
     barDown: function(event) {
       if (this.disabled) return
       this.disp = this.status === this.enumStatus.column ? event.offsetY : event.offsetX
+      this.dispChange(this.disp)
     },
     thumbDown: function(event) {
       if (this.disabled) return
@@ -110,6 +106,7 @@ export default {
         if (disp < 0) disp = 0
         if (disp > this.ruler) disp = this.ruler
         this.disp = disp
+        this.dispChange(this.disp)
       }
       document.onmouseup = () => {
         document.onmousemove = null
