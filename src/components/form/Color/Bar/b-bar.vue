@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       disp: 0, // 位移
-      selectedValue: this.value,
+      selectedValue: 0,
       enumStatus: {
         row: 'row',
         column: 'column',
@@ -78,6 +78,10 @@ export default {
       this.$emit('bar:changed', value)
     },
   },
+  mounted() {
+    this.selectedValue = this.value
+    this.valueChange(this.selectedValue)
+  },
   methods: {
     validatorSelectedValue: function(value) {
       return value >= this.min && value <= this.max
@@ -85,7 +89,6 @@ export default {
     valueChange: function(value) {
       if (this.validatorSelectedValue(value)) {
         this.disp = this.ruler / this.max * value
-        this.dispChange(this.disp)
       }
     },
     dispChange: function(disp) {
