@@ -58,9 +58,11 @@ export default {
         : 'width: 200px; height: 10px;'
     },
     thumbStyle: function() {
-      return this.status === this.enumStatus.column
-        ? `left: -1px; width: 12px; height: 4px; top: ${this.disp}px`
-        : `top: -1px; width: 4px; height: 12px; left: ${this.disp}px`
+      let s = this.status === this.enumStatus.column
+        ? `left: -1px; width: 12px; height: 4px; top: ${this.disp}px;`
+        : `top: -1px; width: 4px; height: 12px; left: ${this.disp}px;`
+      let d = `cursor: ${this.disabled ? 'default': 'pointer'};`
+      return `${s} ${d}`
     },
     ruler: function() {
       return this.status === this.enumStatus.column
@@ -128,7 +130,6 @@ export default {
   border: 1px solid #f0f0f0;
   box-sizing: border-box;
   box-shadow: 0 0 2px rgba(0, 0, 0, .6);
-  cursor: pointer;
   z-index: 10;
 }
 </style>

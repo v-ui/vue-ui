@@ -66,9 +66,9 @@ export default {
   },
   watch: {
     value: function(value) {
-      this.a = value
+      this.h = value
     },
-    a: function(value) {
+    h: function(value) {
       // v-model
       this.$emit('bar:changed', value)
     },

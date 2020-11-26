@@ -1,5 +1,15 @@
 <template>
-  <b-drop-panel placeholder="请选择" :canHide="false">
+  <b-drop-panel
+    placeholder="请选择"
+    :can-hide="false"
+    :disabled="disabled"
+  >
+    <template #trigger>
+      <div class="d-flex align-items-center w-100">
+        <span class="d-inline-block border border-primary m-1" style="width: 20px; height: 20px;" :style="`background: ${rgba}`"  />
+        <strong class="text-center">{{ rgba }}</strong>
+      </div>
+    </template>
     <div style="width: 240px">
       <div class="d-flex align-items-center px-2 py-1">
         <div class="d-flex align-items-center justify-content-center w-100">
@@ -34,7 +44,10 @@ import BColorPanel from './Panel/b-color-panel'
 export default {
   name: "BColor",
   components: { BDropPanel, BColorHueBar, BColorAlphaBar, BColorPanel },
-  mixins: [ util.mixins.color.base ],
+  mixins: [
+    util.mixins.color.base,
+    util.mixins.form.readonly,
+  ],
   data() {
     return {
       selected: { h: 100, s: 1, l: .5, },

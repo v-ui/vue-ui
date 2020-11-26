@@ -1,14 +1,20 @@
 <template>
   <div>
-    <h2>b-color-picker</h2>
+    <h2>b-color</h2>
     <br>
-    <h4>基础属性</h4>
+    <h4>b-color-panel</h4>
     <hr>
     <div class="row">
       <font class="col-1">
         default:
       </font>
       <b-color-picker />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        disabled:
+      </font>
+      <b-color-picker disabled />
     </div>
     <h2>b-color</h2>
     <br>
@@ -19,6 +25,12 @@
         default:
       </font>
       <b-color />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        disabled:
+      </font>
+      <b-color disabled />
     </div>
   </div>
 </template>

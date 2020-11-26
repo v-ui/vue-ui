@@ -10,7 +10,7 @@
     <span
       class="color-cursor"
       :aria-disabled="disabled"
-      :style="`top: ${offset.top}px; left: ${offset.left}px`"
+      :style="`top: ${offset.top}px; left: ${offset.left}px; cursor: ${disabled ? 'default': 'pointer'};`"
       @mousedown.left.exact.stop.prevent="cursorDown"
     />
   </div>
@@ -36,7 +36,7 @@ export default {
         top: 0,
         left: 0,
       },
-      sl: this.value,
+      sl: {s: 0, l: 0},
     };
   },
   watch: {
@@ -54,6 +54,10 @@ export default {
       },
       deep: true,
     },
+  },
+  mounted() {
+    this.sl = this.value
+    this.valueChange(this.sl)
   },
   methods: {
     valueChange: function(value) {
@@ -144,7 +148,6 @@ export default {
     0 0 1px 2px rgba(0, 0, 0, 0.4);
   border-radius: 50%;
   transform: translate(-2px, -2px);
-  cursor: pointer;
   z-index: 10;
 }
 </style>
