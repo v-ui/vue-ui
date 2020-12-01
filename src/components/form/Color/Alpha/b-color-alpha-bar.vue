@@ -11,7 +11,7 @@
 <script>
 import util from '@/components/util'
 
-import BBar from './b-bar'
+import BBar from '../Basic/b-bar'
 
 export default {
   name: 'b-color-alpha-bar',

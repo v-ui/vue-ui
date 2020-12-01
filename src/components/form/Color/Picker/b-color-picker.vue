@@ -10,7 +10,7 @@
     <template v-if="!disabled">
       <hr class="my-1">
       <div class="d-flex p-1">
-        <b-color-panel class="m-1" :disabled="disabled" :style="{ background: color(hsl.h, 1, .5, 'hsl') }" v-model="sl"/>
+        <b-color-sl-panel class="m-1" :disabled="disabled" :style="{ background: color(hsl.h, 1, .5, 'hsl') }" v-model="lt"/>
         <b-color-hue-bar class="m-1" :disabled="disabled" status="column" v-model="hsl.h" />
       </div>
       <div class="p-1">
@@ -23,15 +23,15 @@
 <script>
 import util from "@/components/util";
 
-import BColorHueBar from '../Bar/b-color-hue-bar'
-import BColorAlphaBar from '../Bar/b-color-alpha-bar'
-import BColorPanel from '../Panel/b-color-panel'
+import BColorHueBar from '../hsl/b-color-hue-bar'
+import BColorAlphaBar from '../Alpha/b-color-alpha-bar'
+import BColorSlPanel from '../hsl/b-color-sl-panel'
 
 import BasicIcon from '@/components/basic/basic-icon.vue'
 
 export default {
   name: 'b-color-picker',
-  components: { BColorHueBar, BColorAlphaBar, BColorPanel, BasicIcon },
+  components: { BColorHueBar, BColorAlphaBar, BColorSlPanel, BasicIcon },
   mixins: [ util.mixins.color.base, ],
   model: {
     prop: 'value',
@@ -45,14 +45,14 @@ export default {
     return {
       hsl: { h: 0, s: 1, l: .5, },
       alpha: 1,
-      sl: null,
+      lt: null,
     };
   },
   computed: {
     dataValue: function() {
       return this.color.valid(this.value)
         ? this.color(this.value)
-        : this.color(100, 1, .5, 'hsl')
+        : this.color(0, 1, .5, 'hsl')
     },
     dataHsl: function() {
       return {
@@ -78,14 +78,14 @@ export default {
     dataHsl: {
       handler: function(value) {
         this.hsl.h = value.h
-        this.sl = { s: value.s, l: value.l }
+        this.lt = { l: value.s, t: value.l }
       },
       deep: true,
     },
-    sl: {
+    lt: {
       handler: function() {
-        this.hsl.s = this.sl.s
-        this.hsl.l = this.sl.l
+        this.hsl.s = this.lt.l
+        this.hsl.l = this.lt.t
       },
       deep: true,
     },
@@ -99,7 +99,7 @@ export default {
   mounted() {
     this.hsl = this.dataHsl
     this.alpha = this.dataAlpha
-    this.sl = { s: this.dataHsl.s, l: this.dataHsl.l }
+    this.lt = { l: this.dataHsl.s, t: this.dataHsl.l }
   },
 }
 </script>

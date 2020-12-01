@@ -6,27 +6,11 @@
   >
     <template #trigger>
       <div class="d-flex align-items-center w-100">
-        <span class="d-inline-block border border-primary m-1" style="width: 20px; height: 20px;" :style="`background: ${rgba}`"  />
-        <strong class="text-center">{{ rgba }}</strong>
+        <span class="d-inline-block border border-primary m-1" style="width: 20px; height: 20px;" :style="`background: ${color}`"  />
+        <strong class="text-center">{{ color }}</strong>
       </div>
     </template>
-    <div style="width: 240px">
-      <div class="d-flex align-items-center px-2 py-1">
-        <div class="d-flex align-items-center justify-content-center w-100">
-          <span class="d-inline-block border border-primary m-1" style="width: 20px; height: 20px;" :style="`background: ${rgba}`"  />
-          <strong class="text-center">{{ rgba }}</strong>
-        </div>
-        cotroller
-      </div>
-      <hr class="my-1">
-      <div class="d-flex p-1">
-        <b-color-panel class="m-1" :style="{ background: color(selected.h, 1, 0.5, 'hsl') }" v-model="sl"/>
-        <b-color-hue-bar class="m-1" status="column" v-model="selected.h" />
-      </div>
-      <div class="p-1">
-        <b-color-alpha-bar class="m-1" :style="{ background: rgbCss }" v-model="alpha" />
-      </div>
-    </div>
+    <b-color-picker style="width: 240px" v-model="color" />
   </b-drop-panel>
 </template>
 
@@ -37,52 +21,37 @@ import util from "@/components/util";
 
 import BDropPanel from "@/components/base/DropdownPanel/b-dropdown-panel.vue";
 
-import BColorHueBar from './Bar/b-color-hue-bar'
-import BColorAlphaBar from './Bar/b-color-alpha-bar'
-import BColorPanel from './Panel/b-color-panel'
+import BColorPicker from './Picker/b-color-picker'
 
 export default {
   name: "BColor",
-  components: { BDropPanel, BColorHueBar, BColorAlphaBar, BColorPanel },
+  components: {  BDropPanel, BColorPicker, },
   mixins: [
     util.mixins.color.base,
     util.mixins.form.readonly,
   ],
+  model: {
+    prop: 'value',
+    event: 'drop:changed',
+  },
+  props: {
+    value: {
+      type: [ String, Number, Object ],
+      default: 'rgb(0, 0, 0)',
+    },
+  },
   data() {
     return {
-      selected: { h: 100, s: 1, l: .5, },
-      alpha: 1,
-      sl: null,
+      color: this.value
     };
   },
-  computed: {
-    rgb: function() {
-      return this.color(this.selected).rgb()
-    },
-    rgbCss: function() {
-      return this.color(this.selected).css()
-    },
-    rgba: function() {
-      return this.color(this.rgb).alpha(this.alpha)
-    },
-  },
   watch: {
-    selected: {
-      handler: function() {
-        this.sl = { s: this.selected.s, l: this.selected.l }
-      },
-      deep: true,
+    value: function(value) {
+      this.color = value
     },
-    sl: {
-      handler: function() {
-        this.selected.s = this.sl.s
-        this.selected.l = this.sl.l
-      },
-      deep: true,
+    color: function(value) {
+      this.$emit('drop:changed', value)
     },
-  },
-  mounted() {
-    this.sl = { s: this.selected.s, l: this.selected.l }
   },
 };
 </script>

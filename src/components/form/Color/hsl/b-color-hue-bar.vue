@@ -14,7 +14,7 @@
 
 import util from '@/components/util'
 
-import BBar from './b-bar.vue'
+import BBar from '../Basic/b-bar'
 
 export default {
   name: 'b-color-hue-bar',
@@ -28,7 +28,7 @@ export default {
     value: {
       ...util.props.UNumber,
       validator: function(value) {
-        return util.props.UNumber.validator(value) && value <= 360
+        return util.props.UNumber.validator(value) && value <= 360 || isNaN(value)
       },
     },
     disabled: util.props.Boolean,

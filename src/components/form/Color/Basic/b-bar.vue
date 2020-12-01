@@ -5,9 +5,9 @@
     :aria-disabled="disabled"
     @mousedown.left.exact="barDown"
   >
-    <div v-if="filter" :style="filter" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;" />
+    <div v-if="filter" class="filter" :style="filter" />
     <span
-      class="color-thumb"
+      class="thumb"
       :style="thumbStyle"
       :aria-disabled="disabled"
       @mousedown.left.exact.stop.prevent="thumbDown"
@@ -34,7 +34,6 @@ export default {
       },
     },
     filter: util.props.String,
-    min: util.props.UNumber,
     max: {
       ...util.props.UNumber,
       default: 100,
@@ -86,7 +85,7 @@ export default {
   },
   methods: {
     validatorSelectedValue: function(value) {
-      return value >= this.min && value <= this.max
+      return value >= 0 && value <= this.max
     },
     valueChange: function(value) {
       if (this.validatorSelectedValue(value)) {
@@ -123,7 +122,7 @@ export default {
 </script>
 
 <style scoped>
-.color-thumb {
+.thumb {
   position: absolute;
   border-radius: 1px;
   background: #fff;
@@ -131,5 +130,13 @@ export default {
   box-sizing: border-box;
   box-shadow: 0 0 2px rgba(0, 0, 0, .6);
   z-index: 10;
+}
+
+.filter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 </style>
