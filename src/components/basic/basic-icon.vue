@@ -1,7 +1,9 @@
 <template>
-  <svg class="svg-icon" focusable="false" role="img" aria-hidden="true">
-    <use :xlink:href="iconName"></use>
-  </svg>
+  <i>
+    <svg class="svg-icon" focusable="false" role="img" aria-hidden="true">
+      <use :xlink:href="iconName"></use>
+    </svg>
+  </i>
 </template>
 
 <script>

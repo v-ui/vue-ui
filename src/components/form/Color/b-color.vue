@@ -34,7 +34,7 @@ export default {
   props: {
     value: {
       type: [ String, Number, Object ],
-      default: 'rgb( x, 0, 0)',
+      default: 'rgb(255, 0, 0)',
     },
   },
   data() {

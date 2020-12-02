@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import util from "@/components/util";
+import util from "@/components/util"
 
-import BColorHueBar from '../hsl/b-color-hue-bar'
+import BColorHueBar from './b-color-hue-bar'
 import BColorAlphaBar from '../Alpha/b-color-alpha-bar'
-import BColorSlPanel from '../hsl/b-color-sl-panel'
+import BColorSlPanel from './b-color-sl-panel'
 
 export default {
   name: 'b-color-hsl-panel',

@@ -1,8 +1,8 @@
 <template>
   <b-color-bar
-    v-model="a"
-    :max="1"
-    :filter="filterStyle"
+    v-model="g"
+    :max="255"
+    :style="barStyle"
     :status="status"
     :disabled="disabled"
   />
@@ -11,10 +11,10 @@
 <script>
 import util from '@/components/util'
 
-import BColorBar from '../Basic/b-color-bar'
+import BColorBar from '../../Basic/b-color-bar'
 
 export default {
-  name: 'b-color-alpha-bar',
+  name: 'b-color-green-bar',
   components: { BColorBar, },
   model: {
     prop: 'value',
@@ -24,7 +24,7 @@ export default {
     value: {
       ...util.props.UNumber,
       validator: function(value) {
-        return util.props.UNumber.validator(value) && value <= 1
+        return util.props.UNumber.validator(value) && value <= 255
       },
     },
     disabled: util.props.Boolean,
@@ -38,19 +38,19 @@ export default {
   },
   data() {
     return {
-      a: this.value,
+      g: this.value,
     }
   },
   computed: {
-    filterStyle: function() {
-      return `background-image: linear-gradient(to ${this.status === 'row' ? 'left': 'top'}, hsla(0, 0%, 100%, 0), #fff);`
+    barStyle: function() {
+      return `background-image: linear-gradient(to ${this.status === 'row' ? 'right': 'bottom'}, rgb(0, 0, 0), rgb(0, 255, 0));`
     },
   },
   watch: {
     value: function(value) {
-      this.a = value
+      this.g = value
     },
-    a: function(value) {
+    g: function(value) {
       // v-model
       this.$emit('bar:changed', value)
     },

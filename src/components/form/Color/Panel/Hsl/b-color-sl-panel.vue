@@ -10,7 +10,7 @@
 <script>
 import util from "@/components/util";
 
-import BColorPanel from '../Basic/b-color-panel'
+import BColorPanel from '../../Basic/b-color-panel'
 
 export default {
   name: "b-color-sl-panel",

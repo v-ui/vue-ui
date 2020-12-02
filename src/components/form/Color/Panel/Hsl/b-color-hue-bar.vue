@@ -14,7 +14,7 @@
 
 import util from '@/components/util'
 
-import BColorBar from '../Basic/b-color-bar'
+import BColorBar from '../../Basic/b-color-bar'
 
 export default {
   name: 'b-color-hue-bar',

@@ -1,12 +1,19 @@
 <template>
   <div style="width: 240px">
     <div class="d-flex align-items-center px-2 py-1">
-      <b-color-label class="w-100" :color="rgba" />
-      <basic-icon v-if="!disabled" icon="gear" style="cursor:pointer" />
+      <strong class="text-center w-100" v-if="setting">Set color model</strong>
+      <b-color-label v-else class="w-100" :color="rgba" />
+      <basic-icon v-if="!disabled" :icon="setting ? 'x' : 'gear'" style="cursor:pointer" @click.native="setting = !setting" />
     </div>
     <template v-if="!disabled">
       <hr class="my-1">
-      <b-color-hsl-panel v-model="selectValue" />
+      <!-- set-panel -->
+      <b-color-set v-if="setting" :list="modes" v-model="selectedMode" />
+      <!-- color-panel -->
+      <template v-else>
+        <b-color-hsl-panel v-if="selectedMode === 'hsl'" v-model="selectValue" />
+        <b-color-rgb-panel v-if="selectedMode === 'rgb'" v-model="selectValue" />
+      </template>
     </template>
   </div>
 </template>
@@ -14,15 +21,19 @@
 <script>
 import util from "@/components/util";
 
+import BColorSet from './b-color-set'
 import BColorLabel from '../Basic/b-color-label'
-// import BColorSet from './b-color-set'
-import BColorHslPanel from '../hsl/b-color-hsl-panel'
+
+import BColorHslPanel from '../Panel/Hsl/b-color-hsl-panel'
+import BColorRgbPanel from '../Panel/Rgb/b-color-rgb-panel'
 
 import BasicIcon from '@/components/basic/basic-icon.vue'
 
+const modes = [ 'hsl', 'rgb', 'hex', 'cmyk' ]
+
 export default {
   name: 'b-color-picker',
-  components: { BColorLabel, BColorHslPanel, BasicIcon, },
+  components: { BColorSet, BColorLabel, BColorHslPanel, BColorRgbPanel, BasicIcon, },
   mixins: [ util.mixins.color.base, ],
   model: {
     prop: 'value',
@@ -30,11 +41,21 @@ export default {
   },
   props: {
     value: [ Object, Number, String, Array, ],
+    mode: {
+      type: String,
+      default: 'hsl',
+      validator: function(value) {
+        return modes.includes(value)
+      },
+    },
     disabled: util.props.Boolean,
   },
   data() {
     return {
       selectValue: null,
+      setting: false,
+      modes: modes,
+      selectedMode: 'rgb',
     }
   },
   computed: {
@@ -54,6 +75,9 @@ export default {
     },
   },
   watch: {
+    selectedMode: function() {
+      this.setting = false
+    },
     value: function(value) {
       this.selectValue = value
     },
