@@ -1,5 +1,5 @@
 <template>
-  <b-bar
+  <b-color-bar
     v-model="a"
     :max="1"
     :filter="filterStyle"
@@ -11,11 +11,11 @@
 <script>
 import util from '@/components/util'
 
-import BBar from '../Basic/b-bar'
+import BColorBar from '../Basic/b-color-bar'
 
 export default {
   name: 'b-color-alpha-bar',
-  components: { BBar, },
+  components: { BColorBar, },
   model: {
     prop: 'value',
     event: 'bar:changed',

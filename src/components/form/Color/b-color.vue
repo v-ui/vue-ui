@@ -5,10 +5,7 @@
     :disabled="disabled"
   >
     <template #trigger>
-      <div class="d-flex align-items-center w-100">
-        <span class="d-inline-block border border-primary m-1" style="width: 20px; height: 20px;" :style="`background: ${color}`"  />
-        <strong class="text-center">{{ color }}</strong>
-      </div>
+      <b-color-label class="w-100" :color="color" />
     </template>
     <b-color-picker style="width: 240px" v-model="color" />
   </b-drop-panel>
@@ -20,12 +17,12 @@
 import util from "@/components/util";
 
 import BDropPanel from "@/components/base/DropdownPanel/b-dropdown-panel.vue";
-
+import BColorLabel from './Basic/b-color-label'
 import BColorPicker from './Picker/b-color-picker'
 
 export default {
-  name: "BColor",
-  components: {  BDropPanel, BColorPicker, },
+  name: "b-color",
+  components: {  BDropPanel, BColorLabel, BColorPicker, },
   mixins: [
     util.mixins.color.base,
     util.mixins.form.readonly,
@@ -37,7 +34,7 @@ export default {
   props: {
     value: {
       type: [ String, Number, Object ],
-      default: 'rgb(0, 0, 0)',
+      default: 'rgb( x, 0, 0)',
     },
   },
   data() {

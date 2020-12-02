@@ -85,16 +85,16 @@ export default {
   },
   methods: {
     validatorSelectedValue: function(value) {
-      return value >= 0 && value <= this.max
+      return value >= 0 && value <= this.max || isNaN(value)
     },
     valueChange: function(value) {
       if (this.validatorSelectedValue(value)) {
-        this.disp = this.ruler / this.max * value
+        this.disp = this.ruler / this.max * (value || 0)
       }
     },
     dispChange: function(disp) {
       if (this.validatorSelectedValue(this.selectedValue)) {
-        this.selectedValue = disp / this.ruler * this.max
+        this.selectedValue = (disp || 0) / this.ruler * this.max
       }
     },
     barDown: function(event) {

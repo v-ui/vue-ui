@@ -18,7 +18,7 @@
 import util from '@/components/util'
 
 export default {
-  name: 'b-panel',
+  name: 'b-color-panel',
   model: {
     prop: 'value',
     event: 'panel:changed',

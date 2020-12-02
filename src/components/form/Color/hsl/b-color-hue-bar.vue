@@ -1,5 +1,5 @@
 <template>
-  <b-bar
+  <b-color-bar
     v-model="h"
     :max="360"
     :style="barStyle"
@@ -14,11 +14,11 @@
 
 import util from '@/components/util'
 
-import BBar from '../Basic/b-bar'
+import BColorBar from '../Basic/b-color-bar'
 
 export default {
   name: 'b-color-hue-bar',
-  components: { BBar, },
+  components: { BColorBar, },
   mixins: [ util.mixins.color.base, ],
   model: {
     prop: 'value',
