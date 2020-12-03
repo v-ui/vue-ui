@@ -4,10 +4,12 @@ import form from './form'
 import grid from './grid'
 import date from './date'
 import clip from './clip'
+import color from './color'
 import select from './select'
 import status from './status'
 
 // plugin 第三方库
+import chroma from './plugin/chroma'
 import popper from './plugin/popper'
 import moment from './plugin/moment'
 import animate from './plugin/animate'
@@ -20,8 +22,10 @@ export default {
   grid,
   date,
   clip,
+  color,
   select,
   status,
+  chroma,
   popper,
   moment,
   animate,

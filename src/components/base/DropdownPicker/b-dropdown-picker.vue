@@ -61,9 +61,8 @@
       <div
         v-show="isShow"
         ref="dropdownMenu"
-        role="tooltip"
         class="card overflow-auto rounded shadow-sm"
-        :style="[menuStyle, {'max-height': '50em'}]"
+        :style="[menuStyle, { 'min-width': '15em', 'max-height': '50em'}]"
         style="z-index: 1090"
       >
         <div
