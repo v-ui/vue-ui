@@ -26,7 +26,7 @@
         v-on="$listeners"
         @blur.native="blur"
         @click.native="click"
-        @input.native="input"
+        @change.native="change"
         @keyup.native.exact.up="add"
         @keyup.native.exact.down="subn"
         @keyup.native.shift.exact.up="superAdd"
@@ -74,7 +74,7 @@ export default {
   inheritAttrs: false,
   model: {
     prop: "value",
-    event: "number:input"
+    event: "number:change"
   },
   props: {
     min: util.props.Number,
@@ -131,7 +131,7 @@ export default {
       return this.toNmuber(this.max, 100);
     },
     dataNumber: function() {
-      return Number(this.number)
+      return this.toNmuber(this.number)
     },
     dataAccuracy: function() {
       return this.toNmuber(this.accuracy);
@@ -145,8 +145,11 @@ export default {
   },
   watch: {
     value: function(value) {
-      this.number = this.toNmuber(value);
-    }
+      this.number = this.formatNumber(this.toNmuber(value))
+    },
+    number: function() {
+      this.blur()
+    },
   },
   mounted() {
     this.getPrecision();
@@ -182,13 +185,13 @@ export default {
       if (this.readonly || this.disabled) return;
       if (this.dataNumber == 0) this.$refs.input.$el.value = ""
     },
-    input: function() {
+    change: function() {
       if (this.dataNumber < this.dataMin) this.number = this.dataMin;
       if (this.dataNumber > this.dataMax) this.number = this.dataMax;
       this.number = this.formatNumber(this.number);
       this.$refs.input.$el.value = this.number;
       // 配合 v-model
-      this.$emit("number:input", this.number);
+      this.$emit("number:change", this.toNmuber(this.number));
     },
     blur: function() {
       if (isNaN(this.$refs.input.$el.value)) return
@@ -197,7 +200,7 @@ export default {
     calculator: function(callback) {
       if (this.disabled || this.readonly) return;
       callback && callback()
-      this.input();
+      this.change();
     },
     subn: function() {
       this.calculator(() => this.number = this.dataNumber - this.dataStep)

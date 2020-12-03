@@ -53,8 +53,8 @@ export default {
   computed: {
     barStyle: function() {
       return this.status === this.enumStatus.column
-        ? 'width: 10px; height: 200px;'
-        : 'width: 200px; height: 10px;'
+        ? 'width: 10px; height: 260px;'
+        : 'width: 260px; height: 10px;'
     },
     thumbStyle: function() {
       let s = this.status === this.enumStatus.column

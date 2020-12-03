@@ -7,7 +7,7 @@
     <template #trigger>
       <b-color-label class="w-100" :color="color" />
     </template>
-    <b-color-picker style="width: 240px" :mode="mode" v-model="color" />
+    <b-color-picker :mode="mode" :hideInput="hideInput" v-model="color" />
   </b-drop-panel>
 </template>
 
@@ -40,6 +40,7 @@ export default {
       type: String,
       default: 'hsl',
     },
+    hideInput: util.props.Boolean,
   },
   data() {
     return {

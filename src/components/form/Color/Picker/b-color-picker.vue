@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 240px">
+  <div style="width: 300px">
     <div class="d-flex align-items-center px-2 py-1">
       <strong class="text-center w-100" v-if="setting">Set color model</strong>
       <b-color-label v-else class="w-100" :color="rgba" />
@@ -11,9 +11,9 @@
       <b-color-set v-if="setting" :list="modes" v-model="selectedMode" />
       <!-- color-panel -->
       <template v-else>
-        <b-color-hsl v-if="selectedMode === 'hsl'" v-model="selectValue" />
-        <b-color-rgb v-if="selectedMode === 'rgb'" v-model="selectValue" />
-        <b-color-cmyk v-if="selectedMode === 'cmyk'" v-model="selectValue" />
+        <b-color-hsl v-if="selectedMode === 'hsl'" :hideInput="hideInput" v-model="selectValue" />
+        <b-color-rgb v-if="selectedMode === 'rgb'" :hideInput="hideInput" v-model="selectValue" />
+        <b-color-cmyk v-if="selectedMode === 'cmyk'" :hideInput="hideInput" v-model="selectValue" />
       </template>
     </template>
   </div>
@@ -50,6 +50,7 @@ export default {
         return modes.includes(value)
       },
     },
+    hideInput: util.props.Boolean,
     disabled: util.props.Boolean,
   },
   data() {
