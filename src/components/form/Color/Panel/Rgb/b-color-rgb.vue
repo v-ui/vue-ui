@@ -1,5 +1,11 @@
 <template>
   <div class="d-flex flex-column align-items-center p-1">
+    <div v-if="!hideInput" class="d-flex align-items-center justify-content-around">
+      R: <b-number v-model="rgb.r" class="mx-1" max="255" size="sm" length="3" hideButton />
+      G: <b-number v-model="rgb.g" class="mx-1" max="255" size="sm" length="3" hideButton />
+      B: <b-number v-model="rgb.b" class="mx-1" max="255" size="sm" length="3" hideButton />
+      A: <b-number v-model="alpha" class="mx-1" max="1" step="0.01" size="sm" length="4" hideButton />
+    </div>
     <b-color-red-bar class="my-1" v-model="rgb.r" />
     <b-color-green-bar class="my-1" v-model="rgb.g" />
     <b-color-blue-bar class="my-1" v-model="rgb.b" />
@@ -10,6 +16,8 @@
 <script>
 import util from "@/components/util";
 
+import BNumber from '@/components/form/b-number.vue'
+
 import BColorRedBar from './b-color-red-bar'
 import BColorGreenBar from './b-color-green-bar'
 import BColorBlueBar from './b-color-blue-bar'
@@ -17,7 +25,7 @@ import BColorAlphaBar from '../Alpha/b-color-alpha-bar'
 
 export default {
   name: 'b-color-rgb',
-  components: { BColorRedBar, BColorGreenBar, BColorBlueBar, BColorAlphaBar  },
+  components: { BNumber, BColorRedBar, BColorGreenBar, BColorBlueBar, BColorAlphaBar  },
   mixins: [ util.mixins.color.base, ],
   model: {
     prop: 'value',
@@ -25,6 +33,7 @@ export default {
   },
   props: {
     value: [ Object, Number, String, Array, ],
+    hideInput: util.props.Boolean,
     disabled: util.props.Boolean,
   },
   data() {

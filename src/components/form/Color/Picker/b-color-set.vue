@@ -1,16 +1,14 @@
 <template>
-  <div style="width: 240px">
-    <div class="container py-1">
-      <div class="row">
-        <basic-button
-          v-for="(item, index) in list"
-          :key="index"
-          class="col m-1"
-          color="light"
-          :value="item"
-          :active="isChecked(item)"
-          @click="checkedValues = item" />
-      </div>
+  <div class="container py-1">
+    <div class="row">
+      <basic-button
+        v-for="(item, index) in list"
+        :key="index"
+        class="col m-1"
+        color="light"
+        :value="item"
+        :active="isChecked(item)"
+        @click="checkedValues = item" />
     </div>
   </div>
 </template>

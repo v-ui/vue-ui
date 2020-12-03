@@ -114,8 +114,8 @@ export default {
 
 <style scoped>
 .panel-main {
-  width: 200px;
-  height: 200px;
+  width: 260px;
+  height: 260px;
   position: relative;
   background-position: initial initial;
 }
