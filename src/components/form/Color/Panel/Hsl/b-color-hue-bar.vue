@@ -1,6 +1,6 @@
 <template>
-  <b-bar
-    v-model="h"
+  <b-color-bar
+    v-model="selectedValue"
     :max="360"
     :style="barStyle"
     :status="status"
@@ -14,37 +14,12 @@
 
 import util from '@/components/util'
 
-import BBar from './b-bar.vue'
+import BColorBar from '../../Basic/b-color-bar'
 
 export default {
   name: 'b-color-hue-bar',
-  components: { BBar, },
-  mixins: [ util.mixins.color.base, ],
-  model: {
-    prop: 'value',
-    event: 'bar:changed',
-  },
-  props: {
-    value: {
-      ...util.props.UNumber,
-      validator: function(value) {
-        return util.props.UNumber.validator(value) && value <= 360
-      },
-    },
-    disabled: util.props.Boolean,
-    status: {
-      type: String,
-      default: 'row',
-      validator: function(value) {
-        return [ 'row', 'column' ].includes(value)
-      },
-    },
-  },
-  data() {
-    return {
-      h: this.value,
-    }
-  },
+  components: { BColorBar, },
+  mixins: [ util.mixins.color.base, util.mixins.color.colorBar, ],
   computed: {
     scaleArray: function() {
       let arr = []
@@ -62,15 +37,6 @@ export default {
         rgb += `${this.scale(i).css()} ${i}% ${i < 99 ? ', ' : ''}`
       }
       return `background-image: linear-gradient(to ${this.status === 'row' ? 'right': 'bottom'}, ${rgb});`
-    },
-  },
-  watch: {
-    value: function(value) {
-      this.h = value
-    },
-    h: function(value) {
-      // v-model
-      this.$emit('bar:changed', value)
     },
   },
 }

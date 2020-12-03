@@ -5,9 +5,9 @@
     :aria-disabled="disabled"
     @mousedown.left.exact="barDown"
   >
-    <div v-if="filter" :style="filter" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;" />
+    <div v-if="filter" class="filter" :style="filter" />
     <span
-      class="color-thumb"
+      class="thumb"
       :style="thumbStyle"
       :aria-disabled="disabled"
       @mousedown.left.exact.stop.prevent="thumbDown"
@@ -34,7 +34,6 @@ export default {
       },
     },
     filter: util.props.String,
-    min: util.props.UNumber,
     max: {
       ...util.props.UNumber,
       default: 100,
@@ -44,7 +43,7 @@ export default {
   data() {
     return {
       disp: 0, // 位移
-      selectedValue: this.value,
+      selectedValue: 0,
       enumStatus: {
         row: 'row',
         column: 'column',
@@ -58,9 +57,11 @@ export default {
         : 'width: 200px; height: 10px;'
     },
     thumbStyle: function() {
-      return this.status === this.enumStatus.column
-        ? `left: -1px; width: 12px; height: 4px; top: ${this.disp}px`
-        : `top: -1px; width: 4px; height: 12px; left: ${this.disp}px`
+      let s = this.status === this.enumStatus.column
+        ? `left: -1px; width: 12px; height: 4px; top: ${this.disp}px;`
+        : `top: -1px; width: 4px; height: 12px; left: ${this.disp}px;`
+      let d = `cursor: ${this.disabled ? 'default': 'pointer'};`
+      return `${s} ${d}`
     },
     ruler: function() {
       return this.status === this.enumStatus.column
@@ -78,19 +79,22 @@ export default {
       this.$emit('bar:changed', value)
     },
   },
+  mounted() {
+    this.selectedValue = this.value
+    this.valueChange(this.selectedValue)
+  },
   methods: {
     validatorSelectedValue: function(value) {
-      return value >= this.min && value <= this.max
+      return value >= 0 && value <= this.max || isNaN(value)
     },
     valueChange: function(value) {
       if (this.validatorSelectedValue(value)) {
-        this.disp = this.ruler / this.max * value
-        this.dispChange(this.disp)
+        this.disp = this.ruler / this.max * (value || 0)
       }
     },
     dispChange: function(disp) {
       if (this.validatorSelectedValue(this.selectedValue)) {
-        this.selectedValue = disp / this.ruler * this.max
+        this.selectedValue = (disp || 0) / this.ruler * this.max
       }
     },
     barDown: function(event) {
@@ -118,14 +122,21 @@ export default {
 </script>
 
 <style scoped>
-.color-thumb {
+.thumb {
   position: absolute;
   border-radius: 1px;
   background: #fff;
   border: 1px solid #f0f0f0;
   box-sizing: border-box;
   box-shadow: 0 0 2px rgba(0, 0, 0, .6);
-  cursor: pointer;
   z-index: 10;
+}
+
+.filter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 </style>
