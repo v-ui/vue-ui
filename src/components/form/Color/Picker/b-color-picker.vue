@@ -5,14 +5,15 @@
       <b-color-label v-else class="w-100" :color="rgba" />
       <basic-icon v-if="!disabled" :icon="setting ? 'x' : 'gear'" style="cursor:pointer" @click.native="setting = !setting" />
     </div>
-    <template v-if="!disabled">
+    <template v-if="!disabled && selectValue">
       <hr class="my-1">
       <!-- set-panel -->
       <b-color-set v-if="setting" :list="modes" v-model="selectedMode" />
       <!-- color-panel -->
       <template v-else>
-        <b-color-hsl-panel v-if="selectedMode === 'hsl'" v-model="selectValue" />
-        <b-color-rgb-panel v-if="selectedMode === 'rgb'" v-model="selectValue" />
+        <b-color-hsl v-if="selectedMode === 'hsl'" v-model="selectValue" />
+        <b-color-rgb v-if="selectedMode === 'rgb'" v-model="selectValue" />
+        <b-color-cmyk v-if="selectedMode === 'cmyk'" v-model="selectValue" />
       </template>
     </template>
   </div>
@@ -24,16 +25,17 @@ import util from "@/components/util";
 import BColorSet from './b-color-set'
 import BColorLabel from '../Basic/b-color-label'
 
-import BColorHslPanel from '../Panel/Hsl/b-color-hsl-panel'
-import BColorRgbPanel from '../Panel/Rgb/b-color-rgb-panel'
+import BColorHsl from '../Panel/Hsl/b-color-hsl'
+import BColorRgb from '../Panel/Rgb/b-color-rgb'
+import BColorCmyk from '../Panel/Cmyk/b-color-cmyk'
 
 import BasicIcon from '@/components/basic/basic-icon.vue'
 
-const modes = [ 'hsl', 'rgb', 'hex', 'cmyk' ]
+const modes = [ 'hsl', 'rgb', 'cmyk', ]
 
 export default {
   name: 'b-color-picker',
-  components: { BColorSet, BColorLabel, BColorHslPanel, BColorRgbPanel, BasicIcon, },
+  components: { BColorSet, BColorLabel, BColorHsl, BColorRgb, BColorCmyk, BasicIcon, },
   mixins: [ util.mixins.color.base, ],
   model: {
     prop: 'value',
@@ -55,7 +57,7 @@ export default {
       selectValue: null,
       setting: false,
       modes: modes,
-      selectedMode: 'rgb',
+      selectedMode: this.mode,
     }
   },
   computed: {
@@ -75,6 +77,9 @@ export default {
     },
   },
   watch: {
+    mode: function(value) {
+      this.selectedMode = value
+    },
     selectedMode: function() {
       this.setting = false
     },

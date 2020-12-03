@@ -18,7 +18,7 @@ import BColorAlphaBar from '../Alpha/b-color-alpha-bar'
 import BColorSlPanel from './b-color-sl-panel'
 
 export default {
-  name: 'b-color-hsl-panel',
+  name: 'b-color-hsl',
   components: { BColorHueBar, BColorAlphaBar, BColorSlPanel },
   mixins: [ util.mixins.color.base, ],
   model: {
@@ -65,17 +65,17 @@ export default {
         this.lt = { l: 1, t: .5 }
       }
     },
-    dataHsl: {
-      handler: function(value) {
-        this.hsl.h = value.h
-        this.lt = this.lt = { l: value.s, t: value.l }
-      },
-      deep: true,
-    },
     lt: {
       handler: function() {
         this.hsl.s = this.lt.l
         this.hsl.l = this.lt.t
+      },
+      deep: true,
+    },
+    dataHsl: {
+      handler: function(value) {
+        this.hsl.h = value.h
+        this.lt = this.lt = { l: value.s, t: value.l }
       },
       deep: true,
     },

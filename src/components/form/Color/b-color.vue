@@ -7,7 +7,7 @@
     <template #trigger>
       <b-color-label class="w-100" :color="color" />
     </template>
-    <b-color-picker style="width: 240px" v-model="color" />
+    <b-color-picker style="width: 240px" :mode="mode" v-model="color" />
   </b-drop-panel>
 </template>
 
@@ -34,7 +34,11 @@ export default {
   props: {
     value: {
       type: [ String, Number, Object ],
-      default: 'rgb(255, 0, 0)',
+      default: '#ff0000',
+    },
+    mode: {
+      type: String,
+      default: 'hsl',
     },
   },
   data() {

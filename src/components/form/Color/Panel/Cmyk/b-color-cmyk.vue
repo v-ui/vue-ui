@@ -1,8 +1,9 @@
 <template>
   <div class="d-flex flex-column align-items-center p-1">
-    <b-color-red-bar class="my-1" v-model="rgb.r" />
-    <b-color-green-bar class="my-1" v-model="rgb.g" />
-    <b-color-blue-bar class="my-1" v-model="rgb.b" />
+    <b-color-cyan-bar class="my-1" v-model="cmyk.c" />
+    <b-color-magenta-bar class="my-1" v-model="cmyk.m" />
+    <b-color-yellow-bar class="my-1" v-model="cmyk.y" />
+    <b-color-key-bar class="my-1" v-model="cmyk.k" />
     <b-color-alpha-bar class="my-1" :style="{ background: rgbCss }" v-model="alpha" />
   </div>
 </template>
@@ -10,14 +11,15 @@
 <script>
 import util from "@/components/util";
 
-import BColorRedBar from './b-color-red-bar'
-import BColorGreenBar from './b-color-green-bar'
-import BColorBlueBar from './b-color-blue-bar'
+import BColorCyanBar from './b-color-cyan-bar'
+import BColorMagentaBar from './b-color-magenta-bar'
+import BColorYellowBar from './b-color-yellow-bar'
+import BColorKeyBar from './b-color-key-bar'
 import BColorAlphaBar from '../Alpha/b-color-alpha-bar'
 
 export default {
-  name: 'b-color-rgb-panel',
-  components: { BColorRedBar, BColorGreenBar, BColorBlueBar, BColorAlphaBar  },
+  name: 'b-color-cmyk',
+  components: { BColorCyanBar, BColorMagentaBar, BColorYellowBar, BColorAlphaBar, BColorKeyBar },
   mixins: [ util.mixins.color.base, ],
   model: {
     prop: 'value',
@@ -29,7 +31,7 @@ export default {
   },
   data() {
     return {
-      rgb: { r: 255, g: 0, b: 0, },
+      cmyk: { c: 0, m: 1, y: 1, k: 0, },
       alpha: 1,
     };
   },
@@ -37,35 +39,36 @@ export default {
     dataValue: function() {
       return this.color.valid(this.value)
         ? this.color(this.value)
-        : this.color(255, 0, 0, 'rgb')
+        : this.color(0, 1, 1, 0, 'cmyk')
     },
-    dataRgb: function() {
+    dataCmyk: function() {
       return {
-        r: this.dataValue.get('rgb.r'),
-        g: this.dataValue.get('rgb.g'),
-        b: this.dataValue.get('rgb.b'),
+        c: this.dataValue.get('cmyk.c'),
+        m: this.dataValue.get('cmyk.m'),
+        y: this.dataValue.get('cmyk.y'),
+        k: this.dataValue.get('cmyk.k'),
       }
     },
     dataAlpha: function() {
       return this.dataValue.alpha() || 1
     },
     rgbCss: function() {
-      return this.color(this.rgb).css()
+      return this.color(this.cmyk).css()
     },
-    rgba: function() {
-      return this.color(this.rgb).alpha(this.alpha)
+    rgb: function() {
+      return this.color(this.cmyk)
     },
   },
   watch: {
     dataAlpha: function(value) {
       this.alpha = value
     },
-    rgba: function(value) {
+    rgb: function(value) {
       this.$emit('picker:change', value)
     },
   },
   mounted() {
-    this.rgb = this.dataRgb
+    this.cmyk = this.dataCmyk
     this.alpha = this.dataAlpha
   },
 }

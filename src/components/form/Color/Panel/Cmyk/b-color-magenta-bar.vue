@@ -2,6 +2,7 @@
   <b-color-bar
     v-model="selectedValue"
     :max="1"
+    :style="barStyle"
     :filter="filterStyle"
     :status="status"
     :disabled="disabled"
@@ -14,10 +15,13 @@ import util from '@/components/util'
 import BColorBar from '../../Basic/b-color-bar'
 
 export default {
-  name: 'b-color-alpha-bar',
+  name: 'b-color-magenta-bar',
   components: { BColorBar, },
-  mixins: [ util.mixins.color.colorBar, ],
+  mixins: [ util.mixins.color.base, util.mixins.color.colorBar, ],
   computed: {
+    barStyle: function() {
+      return `background: ${this.color(0, 1, 0, 0, 'cmyk').css()}`
+    },
     filterStyle: function() {
       return `background-image: linear-gradient(to ${this.status === 'row' ? 'left': 'top'}, hsla(0, 0%, 100%, 0), #fff);`
     },

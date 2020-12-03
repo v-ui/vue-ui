@@ -32,29 +32,60 @@
         <b-color-picker v-model="value" />
       </div>
     </div>
+    <div class="row">
+      <div class="col-3 row">
+        <font class="col-1">
+          mode:
+        </font>
+        <font class="col-2">
+          default(hsl):
+        </font>
+        <b-color-picker />
+      </div>
+      <div class="col-3 row">
+        <font class="col-3">
+          rgb:
+        </font>
+        <b-color-picker mode="rgb" />
+      </div>
+      <div class="col-3 row">
+        <font class="col-3">
+          cmyk:
+        </font>
+        <b-color-picker mode="cmyk" />
+      </div>
+    </div>
     <h2>b-color</h2>
     <br>
     <h4>基础属性</h4>
     <hr>
     <div class="row">
-      <font class="col-1">
-        default:
-      </font>
-      <b-color />
+      <div class="col-4 row">
+        <font class="col-3">
+          default:
+        </font>
+        <b-color />
+      </div>
+      <div class="col-4 row">
+        <font class="col-3">
+          disabled:
+        </font>
+        <b-color disabled />
+      </div>
+      <div class="col-4 row">
+        <font class="col-3">
+          v-model:
+          <br>
+          ({{ value2 }})
+        </font>
+        <b-color v-model="value2" />
+      </div>
     </div>
     <div class="row">
       <font class="col-1">
-        disabled:
+        mode:
       </font>
-      <b-color disabled />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        v-model:
-        <br>
-        ({{ value2 }})
-      </font>
-      <b-color v-model="value2" />
+      与 b-color-panel 的 mode 相同
     </div>
   </div>
 </template>
