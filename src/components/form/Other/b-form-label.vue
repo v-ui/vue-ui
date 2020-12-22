@@ -1,12 +1,10 @@
-<template functional>
+<template>
   <label
-    v-if="slots().default"
+    v-if="$slots.default"
     class="col-form-label"
-    :class="[ data.staticClass, {[`col-form-label-${props.size}`]: props.size}]"
-    v-bind="data.attrs"
-    v-on="listeners"
+    :class="{[`col-form-label-${size}`]: size}"
   >
-    <slot>{{ props.label }}</slot>
+    <slot>{{ label }}</slot>
   </label>
 </template>
 

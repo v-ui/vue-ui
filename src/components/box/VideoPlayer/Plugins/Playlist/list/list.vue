@@ -1,11 +1,7 @@
-<template functional>
-  <div
-    class="list-group"
-    v-bind="data.attrs"
-    v-on="listeners"
-  >
+<template>
+  <div class="list-group">
     <a
-      v-for="(item, index) in props.list"
+      v-for="(item, index) in list"
       :key="index"
       class="list-group-item list-group-item-action p-2 my-1"
     >

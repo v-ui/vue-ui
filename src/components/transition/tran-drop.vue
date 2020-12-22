@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <transition name="fade">
     <slot />
   </transition>

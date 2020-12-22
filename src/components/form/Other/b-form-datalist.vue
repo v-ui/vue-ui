@@ -1,10 +1,6 @@
-<template functional>
-  <datalist
-    :id="props.id"
-    v-bind="data.attrs"
-    v-on="listeners"
-  >
-    <template v-for="(value, index) in props.datalist">
+<template>
+  <datalist :id="id" >
+    <template v-for="(value, index) in datalist">
       <option
         :key="index"
         :value="value"

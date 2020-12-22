@@ -1,11 +1,9 @@
-<template functional>
+<template>
   <div
-    v-if="slots().default"
+    v-if="$slots.default"
     class="tab-pane fade overflow-auto"
-    :class="{'show active': props.active}"
+    :class="{'show active': active}"
     role="tabpanel"
-    v-bind="data.attrs"
-    v-on="listeners"
   >
     <slot />
   </div>

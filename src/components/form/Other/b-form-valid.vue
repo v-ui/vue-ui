@@ -1,7 +1,7 @@
-<template functional>
+<template>
   <div
-    v-show="slots().default && props.state"
-    :class="`${props.state}-${props.type}`"
+    v-show="$slots.default && state"
+    :class="`${state}-${type}`"
   >
     <slot />
   </div>

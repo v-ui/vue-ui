@@ -1,19 +1,17 @@
-<template functional>
+<template>
   <li
     class="page-item text-center"
-    :class="{disabled: props.disabled, active: props.active}"
+    :class="{disabled: disabled, active: active}"
     style="width: 2.5em"
-    :aria-current="props.active ? 'page' : ''"
-    v-bind="data.attrs"
-    v-on="listeners"
+    :aria-current="active ? 'page' : ''"
   >
     <span
       class="page-link text-center px-1"
-      :disabled="props.disabled"
+      :disabled="disabled"
     >
-      <slot>{{ props.value }}</slot>
+      <slot>{{ value }}</slot>
       <span
-        v-if="props.active"
+        v-if="active"
         class="sr-only"
       >(current)</span>
     </span>

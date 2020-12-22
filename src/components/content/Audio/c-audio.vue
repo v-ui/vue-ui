@@ -21,19 +21,19 @@
         <c-controller-button
           v-if="status == EStatus.loading"
           :icon="icon.stop"
-          @click="stopload"
+          @click.native="stopload"
         />
         <c-controller-button
           v-if="showPlay"
           :icon="icon.play"
           :disabled="disabledPlay"
-          @click="play"
+          @click.native="play"
         />
         <c-controller-button
           v-if="showPause"
           :icon="icon.pause"
           :disabled="disabledPause"
-          @click="pause"
+          @click.native="pause"
         />
         <c-controller-button
           v-if="showStepForward"
@@ -50,7 +50,7 @@
         <c-controller-button
           class="mr-1"
           :icon="mute ? icon.volumeMute : icon.volumeUp"
-          @click="audioMuteClick"
+          @click.native="audioMuteClick"
         />
         <vue-page-transition
           name="fade-in-right"

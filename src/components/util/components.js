@@ -2,13 +2,12 @@ import Vue from 'vue'
 
 const initFuncSlotContainer = function (components) {
   for (let [key, value] of Object.entries(components)) {
-    newFuncSlotCompoment(key, value)
+    newFuncSlotComponent(key, value)
   }
 }
 
-const newFuncSlotCompoment = function (name, value) {
+const newFuncSlotComponent = function (name, value) {
   Vue.component(name, {
-    functional: true,
     render: function (createElement, context) {
       if (!context.slots().default) return
       return createElement(
@@ -24,7 +23,7 @@ const newFuncSlotCompoment = function (name, value) {
 }
 
 export default {
-  newFuncSlotCompoment,
+  newFuncSlotComponent,
   initFuncSlotContainer,
  }
 

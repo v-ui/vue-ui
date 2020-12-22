@@ -1,11 +1,9 @@
-<template functional>
+<template>
   <button
-    v-show="props.icon && props.icon.length > 0"
+    v-show="icon && icon.length > 0"
     class="btn btn-outline-primary rounded-circle text-center ml-1"
-    v-bind="data.attrs"
-    v-on="listeners"
   >
-    <i :class="props.icon" />
+    <i :class="icon" />
   </button>
 </template>
 

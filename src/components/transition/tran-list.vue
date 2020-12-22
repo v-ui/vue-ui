@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <transition-group
     name="staggered-fade"
     tag="div"
