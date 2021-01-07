@@ -44,8 +44,8 @@
           info="info text"
         />
         <b-dropdown-divider />
-        <b-dropdown-item-text text="text" />
-        <b-dropdown-item-text
+        <b-dropdown-text text="text" />
+        <b-dropdown-text
           text="text"
           info="info text"
         />
@@ -487,7 +487,7 @@
 import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
 import BDropdownHeader from "@/components/base/Dropdown/b-dropdown-header.vue";
 import BDropdownItem from "@/components/base/Dropdown/b-dropdown-item.vue";
-import BDropdownItemText from "@/components/base/Dropdown/b-dropdown-item-text.vue";
+import BDropdownText from "@/components/base/Dropdown/b-dropdown-text.vue";
 import BDropdownDivider from "@/components/base/Dropdown/b-dropdown-divider.vue";
 
 import BDropdownList from "@/components/base/DropdownList/b-dropdown-list.vue";
@@ -499,7 +499,7 @@ export default {
     BDropdown,
     BDropdownHeader,
     BDropdownItem,
-    BDropdownItemText,
+    BDropdownText,
     BDropdownDivider,
     BDropdownList,
     BDropdownPanel,
@@ -525,7 +525,7 @@ export default {
         { value: "a active", href: "#", active: true },
         { value: "a disabled", href: "#", disabled: true }
       ],
-      value1: "value1",
+      value1: { value: "value1", label: "label1" },
       value2: [
         { value: "value1", label: "label1" },
         { value: "value2", label: "label2" },

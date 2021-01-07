@@ -39,7 +39,7 @@
                 v-if="!disabled"
                 class="fas fa-times-circle text-muted pl-1"
                 style="cursor: pointer"
-                @click.stop="$emit('deleteItem', key)"
+                @click.stop="$emit('delete:item', key)"
               />
             </b-badge>
             <label
@@ -157,18 +157,22 @@ export default {
     hindeMenu: async function(event) {
       // 判断鼠标点击的位置是否在含有 control class 的元素内，是则返回
       let i = 0
-      let doms = document.getElementsByClassName('date-panel-cannt-hide')
+      let doms = document.getElementsByClassName('cannt-hide')
       while (doms[i]) {
         if (tools.dom.isElementIm(doms[i], event.target)) return
         i++
       }
       // 判断鼠标点击位置是否在菜单内，如果是则返回
       if (tools.dom.isElementIm(this.$refs.dropdownTrigger, event.target)) return
-      if (this.canHide) {
-        this.isShow = !this.isShow
-        return
-      }
-      this.isShow = tools.dom.isElementIm(this.$refs.dropdownMenu, event.target)
+      // 临时解决方法，如不采用延时会影响 menu 中的事件
+      setTimeout(() => {
+        if (this.canHide) {
+          this.isShow = !this.isShow
+          return
+        }
+        this.isShow = tools.dom.isElementIm(this.$refs.dropdownMenu, event.target)
+      }, 200)
+
     },
   },
 };

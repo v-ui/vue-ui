@@ -10,7 +10,7 @@
       :placeholder="fillPlaceholder"
       :disabled="disabled"
       :multiple="isMultiple"
-      @deleteItem="deleteItem"
+      @delete:item="deleteItem"
     >
       <template #trigger>
         <slot name="trigger" />
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+// TODO: 向 BDropdown 一样修改
 import util from "@/components/util/index.js";
 
 import BDropdownPicker from '@/components/base/DropdownPicker/b-dropdown-picker.vue'

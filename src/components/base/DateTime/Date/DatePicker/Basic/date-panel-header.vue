@@ -2,14 +2,14 @@
   <header>
     <font class="row text-center mx-1">
       <b-button
-        class="date-panel-cannt-hide col font-weight-bold border-0 bg-transparent text-body h5"
+        class="cannt-hide col font-weight-bold border-0 bg-transparent text-body h5"
         style="height: 2.5em"
         :value="headerText"
         :disabled="diesableHeaderClick"
         @click.stop="$emit('clickHeader')"
       />
       <b-button
-        class="date-panel-cannt-hide border-0 bg-transparent text-body"
+        class="cannt-hide border-0 bg-transparent text-body"
         style="height: 2.5em"
         :disabled="disabled"
         @click.stop="$emit('forward')"
@@ -18,7 +18,7 @@
       </b-button>
       <b-button
         class="border-0 bg-transparent text-body"
-        :class="{ 'date-panel-cannt-hide': disabled || disabledNow }"
+        :class="{ 'cannt-hide': disabled || disabledNow }"
         style="height: 2.5em"
         :disabled="disabled || disabledNow"
         @click.stop="$emit('checknow')"
@@ -26,7 +26,7 @@
         <i class="fas fa-circle" />
       </b-button>
       <b-button
-        class="date-panel-cannt-hide border-0 bg-transparent text-body"
+        class="cannt-hide border-0 bg-transparent text-body"
         style="height: 2.5em"
         :disabled="disabled"
         @click.stop="$emit('backward')"

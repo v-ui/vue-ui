@@ -1,35 +1,39 @@
 <template>
   <div>
     <!-- TODO: debug with item.label and item.value -->
+    <b-dropdown-header v-if="header || $slots.header">
+      <slot name="header">
+        {{ header && header.text || header }}
+        <b-info v-if="header && header.info" :info="header.info" />
+      </slot>
+    </b-dropdown-header>
+    <b-dropdown-item
+      v-if="showNull"
+      :label="nullValue"
+      :disabled="disabled"
+      @click.native="itemClick(null)"
+    />
     <div
       v-for="(item, index) in list"
       :key="index"
     >
-      <h6
-        v-if="item.header"
-        class="dropdown-header mb-0"
-      >
-        <slot>{{ item.header }}</slot>
-        <b-info :info="item.info" />
-      </h6>
-      <div
-        v-else-if="item.divider"
-        class="dropdown-divider"
+      <b-dropdown-divider v-if="item.divider" />
+      <b-dropdown-text
+        v-else-if="item.text"
+        :text="item.text"
+        :info="item.info"
       />
       <b-dropdown-item
         v-else-if="item.value"
         :label="item.label || item.value"
         :href="item.href"
         :info="item.info"
-        :active="select ? select == item.value : item.active"
+        :active="isChecked(item)"
         :disabled="disabled || item.disabled"
-        @click.native="$emit('click', item)"
-      />
-      <b-dropdown-item-text
-        v-else-if="item.text"
-        :text="item.text"
-        :info="item.info"
-      />
+        @click.native="itemClick(item)"
+      >
+        <slot :item="item" />
+      </b-dropdown-item>
     </div>
   </div>
 </template>
@@ -37,22 +41,46 @@
 <script>
 import util from "@/components/util/index.js";
 
+import BDropdownHeader from './b-dropdown-header'
+import BDropdownDivider from './b-dropdown-divider'
 import BDropdownItem from "./b-dropdown-item.vue";
-import BDropdownItemText from "./b-dropdown-item-text.vue";
+import BDropdownText from "./b-dropdown-text.vue";
 
 import BInfo from "@/components/basic/basic-info.vue"
 
 export default {
   name: "BDropdownMenu",
   components: {
+    BDropdownHeader,
+    BDropdownDivider,
     BDropdownItem,
-    BDropdownItemText,
+    BDropdownText,
     BInfo,
   },
+  mixins: [ util.mixins.select.check, ],
   props: {
-    list: util.props.Array,
-    select: util.props.String,
+    nullValue: util.props.String,
+    showNull: util.props.Boolean,
+    multiple: util.props.Boolean,
+    header: [ String, Number, Object ],
     disabled: util.props.Boolean,
-  }
+  },
+  data() {
+    return {
+      isMultiple: this.multiple,
+    }
+  },
+  methods: {
+    itemClick: function(item) {
+      if (this.isMultiple) {
+        let index = this.checkedMap.indexOf(item)
+        if (index >= 0) this.checkedValues.splice(index, 1)
+        else this.checkedValues.push(item)
+      } else {
+        this.checkedValues = item
+      }
+      this.$emit('item:click', item)
+    },
+  },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-1">
+  <div class="container cannt-hide py-1">
     <div class="row">
       <basic-button
         v-for="(item, index) in list"

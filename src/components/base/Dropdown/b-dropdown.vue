@@ -35,11 +35,12 @@
       :aria-labelledby="guid"
     >
       <slot>
-        <drop-menu
+        <b-dropdown-menu
+          v-model="selectedValues"
           :list="list"
-          :select="select"
           :disabled="disabled"
-          @click="item => $emit('menuClick', item)"
+          :primary-key="primaryKey"
+          @item:click="item => $emit('item:click', item)"
         />
       </slot>
     </div>
@@ -50,14 +51,13 @@ import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
-import DropMenu from "./b-dropdown-menu";
+import BDropdownMenu from "./b-dropdown-menu";
 
 export default {
   name: "BDropdown",
-  components: { DropMenu },
+  components: { BDropdownMenu },
+  mixins: [ util.mixins.select.select, ],
   props: {
-    list: util.props.Array,
-    select: util.props.String,
     disabled: util.props.Boolean,
     set: util.props.set,
     trigger: {

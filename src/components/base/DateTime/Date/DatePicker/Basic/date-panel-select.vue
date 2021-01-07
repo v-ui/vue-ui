@@ -1,9 +1,9 @@
 <template>
-  <div :class="{ 'date-panel-cannt-hide': range }">
+  <div :class="{ 'cannt-hide': range }">
     <year-panel
       v-if="pickertType === enumTypeStatus.year"
       :value="selectedValues"
-      :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.year }"
+      :class="{ 'cannt-hide': type !== enumTypeStatus.year }"
       style="min-width: 18em"
       :min="min"
       :max="max"
@@ -17,7 +17,7 @@
     <month-panel
       v-if="pickertType === enumTypeStatus.month"
       :value="selectedValues"
-      :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.month }"
+      :class="{ 'cannt-hide': type !== enumTypeStatus.month }"
       style="min-width: 15em"
       :min="min"
       :max="max"
@@ -32,7 +32,7 @@
     <date-panel
       v-if="pickertType === enumTypeStatus.date"
       :value="selectedValues"
-      :class="{ 'date-panel-cannt-hide': type !== enumTypeStatus.date }"
+      :class="{ 'cannt-hide': type !== enumTypeStatus.date }"
       style="min-width: 22em"
       :min="min"
       :max="max"

@@ -10,7 +10,7 @@ import util from "@/components/util/index.js";
 import BInfo from "@/components/basic/basic-info.vue";
 
 export default {
-  name: "BDropdownItemText",
+  name: "BDropdownText",
   components: { BInfo },
   props: {
     text: util.props.String,

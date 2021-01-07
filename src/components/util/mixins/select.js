@@ -44,12 +44,12 @@ export default {
         const self = this
         return this.isMultiple
           ? this.checkedValues && this.checkedValues.map && this.checkedValues.map(e => (e && e[self.primaryKey || 'value'] || e))
-          : this.checkedValues && this.checkedValues[this.primaryKey] || this.checkedValues
+          : this.checkedValues && this.checkedValues[this.primaryKey || 'value'] || this.checkedValues
       },
     },
     methods: {
       isChecked: function(item) {
-        if (!this.checkedMap || this.checkedMap && this.checkedMap.length === 0) return false
+        if (!this.checkedMap) return false
         return this.isMultiple
           ? this.checkedMap.includes && this.checkedMap.includes(item[this.primaryKey || 'value'] || item)
           : (item && item[this.primaryKey || 'value'] || item) === this.checkedMap
@@ -104,10 +104,10 @@ export default {
         const self = this
         return this.isMultiple
           ? this.selected && this.selected.map && this.selected.map(e => e && e[self.primaryKey || 'value'] || e)
-          : this.selected && this.selected[this.primaryKey] || this.selected
+          : this.selected && this.selected[this.primaryKey || 'value'] || this.selected
       },
       isSelected: function () {
-        if (!this.selectedMap || this.selectedMap && this.selectedMap.length === 0) return false
+        if (!this.selectedMap) return false
         return this.isMultiple
           ? this.selectedMap.includes && this.selectedMap.includes(this.item[this.primaryKey || 'value'] || this.item)
           : (this.item && this.item[this.primaryKey || 'value'] || this.item) === this.selectedMap
