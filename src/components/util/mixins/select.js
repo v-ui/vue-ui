@@ -96,17 +96,17 @@ export default {
         validator: value => !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value),
       },
       selected: [String, Number, Array, Object],
-      isMultiple: props.Boolean,
+      multiple: props.Boolean,
     },
     computed: {
       selectedMap: function () {
-        return this.isMultiple
+        return this.multiple
           ? this.selected && this.selected.map && this.selected.map(e => e && e[this.primaryKey || 'value'] || e)
           : this.selected && this.selected[this.primaryKey || 'value'] || this.selected
       },
       isSelected: function () {
         if (!this.selectedMap) return false
-        return this.isMultiple
+        return this.multiple
           ? this.selectedMap.includes && this.selectedMap.includes(this.item[this.primaryKey || 'value'] || this.item)
           : (this.item && this.item[this.primaryKey || 'value'] || this.item) === this.selectedMap
       },

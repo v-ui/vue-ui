@@ -81,7 +81,7 @@ export default {
       } else {
         this.checkedValues = item
       }
-      this.$emit('item:click', item)
+      this.$emit('item:click', this.checkedValues)
     },
   },
 };

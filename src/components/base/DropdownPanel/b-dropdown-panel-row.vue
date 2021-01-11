@@ -5,7 +5,7 @@
       :key="index"
       class="text-center"
       :item="item"
-      :is-multiple="isMultiple"
+      :multiple="isMultiple"
       :primary-key="primaryKey"
       :selected="selectedValues"
       :col-count="colCount"

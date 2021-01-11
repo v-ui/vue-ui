@@ -3,7 +3,7 @@
     class="custom-select"
     :class="[cClass, sizeClass]"
     :size="row"
-    :multiple="isMultiple"
+    :multiple="multiple"
     :disabled="disabled"
     :aria-disabled="disabled"
     v-on="inputListeners"
@@ -20,7 +20,7 @@
         v-for="(item, index) in list"
         :key="index"
         :item="item"
-        :is-multiple="isMultiple"
+        :multiple="multiple"
         :primary-key="primaryKey"
         :selected="selectedValues"
       />
@@ -43,7 +43,7 @@ export default {
     row: {
       type: [Number, String],
       default: function() {
-        return this.isMultiple ? this.list.length + 1 : null;
+        return this.multiple ? this.list.length + 1 : null;
       }
     }
   },
@@ -60,7 +60,7 @@ export default {
       let list = this.list
         .map(e => (e.children ? [...e.children] : e))
         .reduce((acc, val) => acc.concat(val), []);
-      if (this.isMultiple) {
+      if (this.multiple) {
         this.selectedValues = Array.prototype.filter
             .call(event.target.options, o => o.selected && o.value)
             .map(o => o.value === this.nullValue ? null : list.find(e => (e.value || e) === o.value)
