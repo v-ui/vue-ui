@@ -86,7 +86,6 @@ export default {
     util.mixins.select.select,
   ],
   props: {
-    multiple: util.props.Boolean,
     info: util.props.String,
     search: util.props.Boolean,
     hideNull: {
@@ -100,7 +99,6 @@ export default {
     return {
       searchText: null,
       menuHeight: "0px",
-      isMultiple: this.multiple,
       placeholder: '<Pleace select...>',
     };
   },

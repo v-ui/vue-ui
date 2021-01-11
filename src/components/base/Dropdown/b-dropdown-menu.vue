@@ -59,16 +59,9 @@ export default {
   },
   mixins: [ util.mixins.select.check, ],
   props: {
-    nullValue: util.props.String,
     showNull: util.props.Boolean,
-    multiple: util.props.Boolean,
     header: [ String, Number, Object ],
     disabled: util.props.Boolean,
-  },
-  data() {
-    return {
-      isMultiple: this.multiple,
-    }
   },
   methods: {
     itemClick: function(item) {

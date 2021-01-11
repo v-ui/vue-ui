@@ -12,24 +12,24 @@ export default {
         ...props.Array,
         validator: value => !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value),
       },
-      checked: {
-        type: [String, Number, Array, Object, Date, ],
-      },
       primaryKey: {
         ...props.String,
         default: null,
       },
+      checked: [String, Number, Array, Object, Date, ],
+      multiple: props.Boolean,
     },
     data() {
       return {
-        isMultiple: false,
+        isMultiple: this.multiple,
+        nullValue: '<Place select...>',
         checkedValues: null,
       }
     },
     mounted() {
       this.checkedValues = this.isMultiple
         ? this.checked && tools.obj.type.isArray(this.checked) ? this.checked : []
-        : this.checked && (tools.obj.type.isObject(this.checked) || tools.obj.type.isString(this.checked)) ? this.checked : null
+        : this.checked && (tools.obj.type.isObject(this.checked) || tools.obj.type.isString(this.checked)) ? this.checked : ''
     },
     watch: {
       checked: function (value) {
@@ -61,11 +61,11 @@ export default {
       event: 'select:selected',
     },
     props: {
+      list: props.Array,
       primaryKey: {
         ...props.String,
         default: null,
       },
-      list: props.Array,
       selected: [String, Number, Array, Object],
       multiple: props.Boolean,
     },
@@ -73,8 +73,13 @@ export default {
       return {
         isMultiple: this.multiple,
         nullValue: '<Place select...>',
-        selectedValues: this.selected || (this.multiple ? [] : ''),
+        selectedValues: null,
       }
+    },
+    mounted() {
+      this.selectedValues = this.isMultiple
+        ? this.selected && tools.obj.type.isArray(this.selected) ? this.selected : []
+        : this.selected && (tools.obj.type.isObject(this.selected) || tools.obj.type.isString(this.selected)) ? this.selected : ''
     },
     watch: {
       selected: function (value) {
@@ -87,13 +92,13 @@ export default {
   },
   selectItem: {
     props: {
-      primaryKey: {
-        ...props.String,
-        default: null,
-      },
       item: {
         type: [String, Number, Array, Object],
         validator: value => !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value),
+      },
+      primaryKey: {
+        ...props.String,
+        default: null,
       },
       selected: [String, Number, Array, Object],
       multiple: props.Boolean,
