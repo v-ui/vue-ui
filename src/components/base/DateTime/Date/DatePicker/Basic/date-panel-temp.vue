@@ -20,7 +20,7 @@
         :list="list"
         :col-count="colCount"
         :disabled="disabled"
-        @click="click"
+        @item:click="click"
       />
     </div>
   </div>
@@ -63,7 +63,7 @@ export default {
       this.$emit('panel:backward')
     },
     click: function(value) {
-      this.$emit('panel:checked', value)
+      this.$emit('panel:checked', value && value.value)
     },
   },
 }

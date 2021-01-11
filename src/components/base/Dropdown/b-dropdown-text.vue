@@ -1,7 +1,9 @@
 <template>
   <span class="dropdown-item-text">
-    <slot>{{ text }}</slot>
-    <b-info :info="info" />
+    <slot>
+      {{ text }}
+      <b-info :info="info" />
+    </slot>
   </span>
 </template>
 <script>

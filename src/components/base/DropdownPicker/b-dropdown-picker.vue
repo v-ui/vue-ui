@@ -18,10 +18,7 @@
         class="d-flex justify-content-between align-items-center h-100 px-1"
       >
         <slot name="trigger">
-          <font
-            v-if="!multiple"
-            :class="fontClass"
-          >
+          <font v-if="!multiple" :class="fontClass">
             {{ label || placeholder }}
           </font>
           <div
@@ -42,16 +39,9 @@
                 @click.stop="$emit('delete:item', key)"
               />
             </b-badge>
-            <label
-              v-show="!label || label.length === 0"
-              class="m-0"
-            >{{ placeholder }}</label>
           </div>
         </slot>
-        <slot
-          v-if="!hideToggle"
-          name="icon"
-        >
+        <slot v-if="!hideToggle" name="icon">
           <i :class="icon.caretDown" />
         </slot>
       </div>
@@ -65,10 +55,7 @@
         :style="[menuStyle, { 'min-width': '15em', 'max-height': '50em'}]"
         style="z-index: 1090"
       >
-        <div
-          v-if="isShow"
-          class="m-0 y-0"
-        >
+        <div v-if="isShow" class="m-0 y-0">
           <slot />
         </div>
       </div>

@@ -1,7 +1,9 @@
 <template>
   <h6 class="dropdown-header mb-0">
-    <slot>{{ label }}</slot>
-    <b-info :info="info" />
+    <slot>
+      {{ label }}
+      <b-info :info="info" />
+    </slot>
   </h6>
 </template>
 <script>

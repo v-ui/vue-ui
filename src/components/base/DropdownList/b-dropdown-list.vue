@@ -34,6 +34,9 @@
               size="sm"
             />
           </template>
+          <template #item="{ item }">
+            <slot name="item" :item="item" />
+          </template>
         </b-dropdown-menu>
       </slot>
     </b-dropdown-picker>

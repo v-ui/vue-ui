@@ -32,7 +32,7 @@
         :disabled="disabled || item.disabled"
         @click.native="itemClick(item)"
       >
-        <slot :item="item" />
+        <slot name="item" :item="item" />
       </b-dropdown-item>
     </div>
   </div>
@@ -73,9 +73,11 @@ export default {
   methods: {
     itemClick: function(item) {
       if (this.isMultiple) {
-        let index = this.checkedMap.indexOf(item)
-        if (index >= 0) this.checkedValues.splice(index, 1)
-        else this.checkedValues.push(item)
+        const value = item && item[this.primaryKey || 'value'] || item
+        let index = this.checkedMap.indexOf(value)
+        index >= 0
+          ? this.checkedValues.splice(index, 1)
+          : this.checkedValues.push(item)
       } else {
         this.checkedValues = item
       }

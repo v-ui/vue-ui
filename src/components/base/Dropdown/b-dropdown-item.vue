@@ -23,11 +23,13 @@
     :aria-disabled="disabled"
     type="button"
   >
-    <slot>{{ label }}</slot>
-    <b-info
-      :info="info"
-      :text-color="active ? 'light' : 'muted'"
-    />
+    <slot>
+      {{ label }}
+      <b-info
+        :info="info"
+        :text-color="active ? 'light' : 'muted'"
+      />
+    </slot>
   </button>
 </template>
 

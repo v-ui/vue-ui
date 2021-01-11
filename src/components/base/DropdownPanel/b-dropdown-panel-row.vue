@@ -10,7 +10,7 @@
       :selected="selectedValues"
       :col-count="colCount"
       :disabled="item.disabled || disabled"
-      @click="click"
+      @item:click="itemClick"
     />
   </span>
 </template>
@@ -29,17 +29,16 @@ export default {
     colCount: util.props.UInt,
   },
   methods: {
-    click: function(item) {
-      let value = this.primaryKey ? item : item && item.value || item
+    itemClick: function(item) {
       if (this.isMultiple) {
-        let index = this.selectedValues.indexOf(value)
+        let index = this.selectedValues.findIndex(e => (e && e[this.primaryKey || 'value'] || e) === (item && item[this.primaryKey || 'value'] || item))
         index >= 0
           ? this.selectedValues.splice(index, 1)
-          : this.selectedValues.push(value)
+          : this.selectedValues.push(item)
       } else {
-        this.selectedValues = value
+        this.selectedValues = item
       }
-      this.$emit('click', this.selectedValues)
+      this.$emit('item:click', this.selectedValues)
     },
   },
 };

@@ -6,7 +6,7 @@
     :style="objStyle"
     :disabled="disabled"
     :aria-selected="isSelected || (item.status && item.status.selected)"
-    @click.stop="$emit('click', item)"
+    @click.native="$emit('item:click', item)"
   >
     {{ value }}
   </b-button>

@@ -337,6 +337,25 @@
         </template>
       </b-dropdown-list>
     </div>
+    <br>
+    <h4>slot</h4>
+    <hr>
+    <div class="row">
+      <b-dropdown-list
+        class="col-12"
+        :list="list"
+      >
+        <template #trigger>
+          trigger slot -> you can add anlything validInfo or DOM
+        </template>
+        <template #icon>
+          <i>icon slot -> icon</i>
+        </template>
+        <template #item="{ item }">
+          item slot -> {{ item }}
+        </template>
+      </b-dropdown-list>
+    </div>
     <h2>b-dropdown-panel</h2>
     <hr>
     <h4>基础属性</h4>
