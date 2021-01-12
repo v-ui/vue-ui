@@ -4,8 +4,8 @@
       ref="dropdownpanel"
       :class="[readonlyClass]"
       menu-width
+      :label="showLabel"
       :menuWidth="false"
-      :label="fillLabel"
       :can-hide="canHide"
       :placeholder="fillPlaceholder"
       :disabled="disabled"
@@ -49,7 +49,6 @@
 </template>
 
 <script>
-// TODO: 向 BDropdown 一样修改
 import util from "@/components/util/index.js";
 
 import BDropdownPicker from '@/components/base/DropdownPicker/b-dropdown-picker.vue'
@@ -73,7 +72,6 @@ export default {
     util.mixins.select.select,
   ],
   props: {
-    label: util.props.String,
     info: util.props.String,
     canHide: {
       ...util.props.Boolean,
@@ -83,13 +81,8 @@ export default {
     placeholder: util.props.String,
   },
   computed: {
-    fillLabel: function() {
-      return this.label || (this.isMultiple
-        ? this.selectedValues && this.selectedValues.map && this.selectedValues.map(e => e[this.primaryKey] || e.label || e.value || e ) || null
-        : this.selectedValues && (this.selectedValues[this.primaryKey] || this.selectedValues.label || this.selectedValues.value || this.selectedValues) || null)
-    },
     fillPlaceholder: function() {
-      return this.placeholder || '<Place select...>'
+      return this.placeholder || this.nullValue
     },
   },
   watch: {

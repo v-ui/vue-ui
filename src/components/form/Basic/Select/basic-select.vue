@@ -12,8 +12,8 @@
     <slot>
       <option
         v-if="!hideNull"
-        :selected="selected.length == 0"
-        :aria-selected="selected.length == 0"
+        :selected="selected && selected.length == 0"
+        :aria-selected="selected && selected.length == 0"
         v-text="nullValue"
       />
       <basic-select-option
@@ -63,11 +63,11 @@ export default {
       if (this.multiple) {
         this.selectedValues = Array.prototype.filter
             .call(event.target.options, o => o.selected && o.value)
-            .map(o => o.value === this.nullValue ? null : list.find(e => (e.value || e) === o.value)
-            ).filter(e => e).map(e => this.primaryKey ? e : e && e.value || e)
+            .map(o => o.value === this.nullValue ? null : list.find(e => (e.value || e) === o.value))
+            .filter(e => e).map(e => this.primaryKey ? e : e && e.value || e)
       } else {
         let result = list.find(e => (e.value || e) === event.target.value)
-        this.selectedValues = this.primaryKey ? result : result && result.value || result
+        this.selectedValues = this.primaryKey ? result : result && result.value || result || ''
       }
     }
   }

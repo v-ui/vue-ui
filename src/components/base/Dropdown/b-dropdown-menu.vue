@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- TODO: debug with item.label and item.value -->
     <b-dropdown-header v-if="header || $slots.header">
       <slot name="header">
         {{ header && header.text || header }}

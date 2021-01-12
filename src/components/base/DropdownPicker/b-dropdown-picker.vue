@@ -18,11 +18,8 @@
         class="d-flex justify-content-between align-items-center h-100 px-1"
       >
         <slot name="trigger">
-          <font v-if="!multiple" :class="fontClass">
-            {{ label || placeholder }}
-          </font>
           <div
-            v-else
+            v-if="multiple && label.length > 0"
             class="d-flex align-content-between flex-wrap"
           >
             <b-badge
@@ -40,6 +37,9 @@
               />
             </b-badge>
           </div>
+          <font v-else :class="fontClass">
+            {{ label && label.length === 0 && multiple ? placeholder : (label || placeholder) }}
+          </font>
         </slot>
         <slot v-if="!hideToggle" name="icon">
           <i :class="icon.caretDown" />
@@ -82,7 +82,10 @@ export default {
         return "drop-picker-" + tools.random.getRandomString();
       }
     },
-    placeholder: util.props.String,
+    placeholder: {
+      ...util.props.String,
+      default: '<Place select...>',
+    },
     show: util.props.Boolean,
     canHide: {
       ...util.props.Boolean,

@@ -4,7 +4,7 @@
       ref="dropdownlist"
       :class="[readonlyClass]"
       menu-width
-      :label="label"
+      :label="showLabel"
       :placeholder="placeholder"
       :disabled="disabled"
       :multiple="isMultiple"
@@ -99,7 +99,7 @@ export default {
     return {
       searchText: null,
       menuHeight: "0px",
-      placeholder: '<Pleace select...>',
+      placeholder: this.nullValue,
     };
   },
   computed: {
@@ -107,11 +107,6 @@ export default {
       return this.searchText
         ? this.list.filter(e => e.value && (e.value.includes(this.searchText) || e.label.includes(this.searchText)))
         : this.list
-    },
-    label: function() {
-      return this.isMultiple
-        ? this.selectedValues && this.selectedValues.map && this.selectedValues.map(e => e[this.primaryKey] || e.label || e.value || e ) || null
-        : this.selectedValues && (this.selectedValues[this.primaryKey] || this.selectedValues.label || this.selectedValues.value || this.selectedValues) || null
     },
   },
   watch: {

@@ -133,7 +133,6 @@ export default {
   methods: {
     formatDate: function (value) {
       if (!value || !value.isValid || !value.isValid()) return;
-
       switch (this.type) {
         case this.enumTypeStatus.year:
           return value.format(config.ui.date.year)

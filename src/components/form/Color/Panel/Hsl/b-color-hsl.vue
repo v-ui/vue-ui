@@ -76,7 +76,6 @@ export default {
     },
     lt: {
       handler: function() {
-        debugger
         this.hsl.s = this.lt.l
         this.hsl.l = this.lt.t
       },

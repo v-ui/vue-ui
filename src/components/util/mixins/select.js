@@ -1,6 +1,31 @@
 import tools from '@/tools/index.js'
 import props from '@/components/util/props.js'
 
+const install = function(selected, multiple) {
+  return multiple
+    ? selected && tools.obj.type.isArray(selected) ? selected : []
+    : selected && (tools.obj.type.isObject(selected) || tools.obj.type.isString(selected)) ? selected : ''
+}
+
+const label = function(selected, multiple, primaryKey) {
+  return multiple
+    ? selected && selected.map && selected.map(e => e && (e.label || e[primaryKey] || e.value) || e) || null
+    : selected && (selected && (selected.label || selected[primaryKey] || selected.value) || selected) || null
+}
+
+const map = function(selected, multiple, primaryKey) {
+  return multiple
+    ? selected && selected.map && selected.map(e => e && e[primaryKey || 'value'] || e)
+    : selected && selected[primaryKey || 'value'] || selected
+}
+
+const isSelected = function(map, item, multiple, primaryKey) {
+  if (!map) return false
+  return multiple
+    ? map.includes && map.includes(item[primaryKey || 'value'] || item)
+    : (item && item[primaryKey || 'value'] || item) === map
+}
+
 export default {
   check: {
     model: {
@@ -17,6 +42,7 @@ export default {
         default: null,
       },
       checked: [String, Number, Array, Object, Date, ],
+      label: [ Array, String, Number, Object, Date, ],
       multiple: props.Boolean,
     },
     data() {
@@ -26,10 +52,8 @@ export default {
         checkedValues: null,
       }
     },
-    mounted() {
-      this.checkedValues = this.isMultiple
-        ? this.checked && tools.obj.type.isArray(this.checked) ? this.checked : []
-        : this.checked && (tools.obj.type.isObject(this.checked) || tools.obj.type.isString(this.checked)) ? this.checked : ''
+    created() {
+      this.checkedValues = install(this.checked, this.isMultiple)
     },
     watch: {
       checked: function (value) {
@@ -40,18 +64,16 @@ export default {
       },
     },
     computed: {
+      showLabel: function() {
+        return this.label || label(this.checkedValues, this.isMultiple, this.primaryKey)
+      },
       checkedMap: function () {
-        return this.isMultiple
-          ? this.checkedValues && this.checkedValues.map && this.checkedValues.map(e => (e && e[this.primaryKey || 'value'] || e))
-          : this.checkedValues && this.checkedValues[this.primaryKey || 'value'] || this.checkedValues
+        return map(this.checkedValues, this.isMultiple, this.primaryKey)
       },
     },
     methods: {
       isChecked: function(item) {
-        if (!this.checkedMap) return false
-        return this.isMultiple
-          ? this.checkedMap.includes && this.checkedMap.includes(item[this.primaryKey || 'value'] || item)
-          : (item && item[this.primaryKey || 'value'] || item) === this.checkedMap
+        return isSelected(this.checkedMap, item, this.isMultiple, this.primaryKey)
       },
     },
   },
@@ -67,6 +89,7 @@ export default {
         default: null,
       },
       selected: [String, Number, Array, Object],
+      label: [ Array, String, Number, Object, Date, ],
       multiple: props.Boolean,
     },
     data() {
@@ -76,10 +99,8 @@ export default {
         selectedValues: null,
       }
     },
-    mounted() {
-      this.selectedValues = this.isMultiple
-        ? this.selected && tools.obj.type.isArray(this.selected) ? this.selected : []
-        : this.selected && (tools.obj.type.isObject(this.selected) || tools.obj.type.isString(this.selected)) ? this.selected : ''
+    created() {
+      this.selectedValues = install(this.selected, this.isMultiple)
     },
     watch: {
       selected: function (value) {
@@ -87,6 +108,11 @@ export default {
       },
       selectedValues: function (value) {
         this.$emit('select:selected', value)
+      },
+    },
+    computed: {
+      showLabel: function() {
+        return this.label || label(this.selectedValues, this.isMultiple, this.primaryKey)
       },
     },
   },
@@ -105,15 +131,10 @@ export default {
     },
     computed: {
       selectedMap: function () {
-        return this.multiple
-          ? this.selected && this.selected.map && this.selected.map(e => e && e[this.primaryKey || 'value'] || e)
-          : this.selected && this.selected[this.primaryKey || 'value'] || this.selected
+        return map(this.selected, this.multiple, this.primaryKey)
       },
       isSelected: function () {
-        if (!this.selectedMap) return false
-        return this.multiple
-          ? this.selectedMap.includes && this.selectedMap.includes(this.item[this.primaryKey || 'value'] || this.item)
-          : (this.item && this.item[this.primaryKey || 'value'] || this.item) === this.selectedMap
+        return isSelected(this.selectedMap, this.item, this.multiple, this.primaryKey)
       },
     },
   },
