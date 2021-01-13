@@ -12,7 +12,7 @@
     <b-info
       :info="item.info"
       class="m-0"
-      :textColor="isSelected || (item.status && item.status.selected) ? 'white' : 'muted'"
+      :info-color="isSelected || (item.status && item.status.selected) ? 'white' : 'muted'"
       style="font-size: 0.5em"
     />
   </b-button>

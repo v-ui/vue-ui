@@ -9,11 +9,11 @@
     hide-icon
   >
     <slot>
-      <b-icon :icon="icon" />
-      <span class="d-inline-block pl-1 text-truncate">{{ label }}</span>
-      <b-info
+      <b-label
+        :icon="icon"
         :info="info"
-        :text-color="active ? 'light' : 'muted'"
+        :label="label"
+        :info-color="active ? 'light' : 'muted'"
       />
     </slot>
   </base-a>
@@ -27,11 +27,11 @@
     type="button"
   >
     <slot>
-      <b-icon :icon="icon" />
-      <span class="d-inline-block pl-1 text-truncate">{{ label }}</span>
-      <b-info
+      <b-label
+        :icon="icon"
         :info="info"
-        :text-color="active ? 'light' : 'muted'"
+        :label="label"
+        :info-color="active ? 'light' : 'muted'"
       />
     </slot>
   </button>
@@ -41,12 +41,11 @@
 import util from "@/components/util/index.js";
 
 import BaseA from "@/components/basic/A/basic-a.vue";
-import BIcon from '@/components/basic/basic-icon.vue'
-import BInfo from "@/components/basic/basic-info.vue";
+import BLabel from '@/components/basic/basic-label.vue'
 
 export default {
   name: "BDropdownItem",
-  components: { BaseA, BIcon, BInfo },
+  components: { BaseA, BLabel },
   props: {
     href: util.props.href,
     label: util.props.String,
