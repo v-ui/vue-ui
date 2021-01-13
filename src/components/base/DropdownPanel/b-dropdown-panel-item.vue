@@ -1,14 +1,20 @@
 <template>
   <b-button
-    class="rounded-pill my-1"
+    class="rounded-pill my-1 p-1"
+    style="min-width: 2.2em"
     :class="objClass"
-    style="min-width: 3em"
     :style="objStyle"
     :disabled="disabled"
     :aria-selected="isSelected || (item.status && item.status.selected)"
     @click.native="$emit('item:click', item)"
   >
     {{ value }}
+    <b-info
+      :info="item.info"
+      class="m-0"
+      :textColor="isSelected || (item.status && item.status.selected) ? 'white' : 'muted'"
+      style="font-size: 0.5em"
+    />
   </b-button>
 </template>
 
@@ -16,10 +22,11 @@
 import util from "@/components/util/index.js";
 
 import BButton from "@/components/basic/Button/basic-button.vue";
+import BInfo from "@/components/basic/basic-info.vue";
 
 export default {
   name: "BDropdownPanelItem",
-  components: { BButton },
+  components: { BButton, BInfo },
   mixins: [ util.mixins.select.selectItem, ],
   props: {
     disabled: util.props.Boolean,
@@ -35,11 +42,11 @@ export default {
       if (this.item.status) {
         if (this.item.status.now) status = 'border-0 bg-transparent text-danger '
         if (this.item.status.start || this.item.status.end || this.item.status.between) status = 'rounded-0 bg-primary'
-        if (this.item.status.selected) status = "bg-transparent text-primary "
+        if (this.item.status.selected) status = this.item.status.now ? "border-0 bg-danger text-white" : "text-white"
         if (status.length === 0) status = 'border-0 bg-transparent text-body'
       } else {
         select = this.isSelected
-          ? "border bg-transparent border-primary text-primary"
+          ? ""
           : "border-0 bg-transparent text-body";
       }
       const col = 12 % this.colCount == 0 ? `col-${12 / this.colCount}` : "col-auto";

@@ -2,8 +2,11 @@
   <div>
     <b-dropdown-header v-if="header || $slots.header">
       <slot name="header">
-        {{ header && header.text || header }}
-        <b-info v-if="header && header.info" :info="header.info" />
+        <b-label
+          :label="header && header.text || header"
+          :info="header.info"
+          :icon="header.icon"
+        />
       </slot>
     </b-dropdown-header>
     <b-dropdown-item
@@ -21,12 +24,14 @@
         v-else-if="item.text"
         :text="item.text"
         :info="item.info"
+        :icon="item.icon"
       />
       <b-dropdown-item
         v-else-if="item.value"
         :label="item.label || item.value"
         :href="item.href"
         :info="item.info"
+        :icon="item.icon"
         :active="isChecked(item)"
         :disabled="disabled || item.disabled"
         @click.native="itemClick(item)"
@@ -45,7 +50,7 @@ import BDropdownDivider from './b-dropdown-divider'
 import BDropdownItem from "./b-dropdown-item.vue";
 import BDropdownText from "./b-dropdown-text.vue";
 
-import BInfo from "@/components/basic/basic-info.vue"
+import BLabel from '@/components/basic/basic-label.vue'
 
 export default {
   name: "BDropdownMenu",
@@ -54,7 +59,7 @@ export default {
     BDropdownDivider,
     BDropdownItem,
     BDropdownText,
-    BInfo,
+    BLabel,
   },
   mixins: [ util.mixins.select.check, ],
   props: {

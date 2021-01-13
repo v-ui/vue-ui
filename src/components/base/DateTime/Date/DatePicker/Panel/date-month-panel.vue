@@ -1,7 +1,7 @@
 <template>
   <date-panel-temp
     v-model="month"
-    style="max-width: 20em"
+    style="max-width: 16em"
     :list="list"
     :col-count="colCount"
     :disabled="disabled"

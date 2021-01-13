@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex">
+  <div class="d-flex justify-content-center">
     <date-panel-select
       v-model="selectedValueStart"
       class="flex-fill"

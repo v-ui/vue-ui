@@ -1,21 +1,25 @@
 <template>
   <span class="dropdown-item-text">
     <slot>
-      {{ text }}
-      <b-info :info="info" />
+      <b-label
+        :label="text"
+        :info="info"
+        :icon="icon"
+      />
     </slot>
   </span>
 </template>
 <script>
 import util from "@/components/util/index.js";
 
-import BInfo from "@/components/basic/basic-info.vue";
+import BLabel from '@/components/basic/basic-label.vue'
 
 export default {
   name: "BDropdownText",
-  components: { BInfo },
+  components: { BLabel },
   props: {
     text: util.props.String,
+    icon: util.props.String,
     info: util.props.String
   }
 };

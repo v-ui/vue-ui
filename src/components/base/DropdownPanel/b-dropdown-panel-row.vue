@@ -5,10 +5,10 @@
       :key="index"
       class="text-center"
       :item="item"
+      :col-count="colCount"
       :multiple="isMultiple"
       :primary-key="primaryKey"
       :selected="selectedValues"
-      :col-count="colCount"
       :disabled="item.disabled || disabled"
       @item:click="itemClick"
     />

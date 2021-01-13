@@ -1,5 +1,97 @@
 <template>
   <div>
+    <h2>b-dropdown-menu</h2>
+    <hr>
+    <div class="row">
+      <font class="col-2 text-center">list</font>
+      <font class="col-2 text-center">disabled</font>
+      <font class="col-2 text-center">slot:header</font>
+      <font class="col-2 text-center">
+        v-model multiple='false'(default)<br>
+        {{ value1 }}
+      </font>
+      <font class="col-2 text-center">
+        v-model multiple='true'(default)<br>
+        {{ value2 }}
+      </font>
+    </div>
+    <div class="row">
+      <b-dropdown-menu
+        class="col-2"
+        :header="{ text: 'header label', info: 'info text', icon: 'circle-fill' }"
+        :list="list2"
+      />
+      <b-dropdown-menu
+        class="col-2"
+        :header="{ text: 'header label', info: 'info text', icon: 'circle-fill' }"
+        :list="list2"
+        disabled
+      />
+      <b-dropdown-menu
+        class="col-2"
+        :header="{ text: 'header label', info: 'info text', icon: 'circle-fill' }"
+        :list="list2"
+      >
+        <template #header>
+          you can add anlything text or DOM
+        </template>
+      </b-dropdown-menu>
+      <b-dropdown-menu
+        class="col-2"
+        :list="list"
+        v-model="value1"
+      />
+      <b-dropdown-menu
+        class="col-2"
+        :list="list"
+        multiple
+        v-model="value2"
+      />
+    </div>
+    <h2>b-dropdown-row</h2>
+    <hr>
+    <div class="row">
+      <font class="col-2 text-center">list</font>
+      <font class="col-2 text-center">colCount</font>
+      <font class="col-2 text-center">disabled</font>
+      <font class="col-2 text-center">
+        v-model multiple='false'(default)<br>
+        {{ value1 }}
+      </font>
+      <font class="col-2 text-center">
+        v-model multiple='true'(default)<br>
+        {{ value2 }}
+      </font>
+    </div>
+    <div class="row">
+      <b-dropdown-row
+        class="col-2"
+        :list="list"
+      />
+      <div class="col-2">
+        <b-range min="1" max="12" v-model="col" />
+        <b-dropdown-row
+          :list="list"
+          :colCount="col"
+        />
+      </div>
+      <b-dropdown-row
+        class="col-2"
+        :list="list"
+        disabled
+      />
+      <b-dropdown-row
+        class="col-2"
+        :list="list"
+        v-model="value1"
+      />
+      <b-dropdown-row
+        class="col-2"
+        :list="list"
+        multiple
+        v-model="value2"
+      />
+    </div>
     <h2>b-dropdown</h2>
     <hr>
     <h4>基础属性</h4>
@@ -503,6 +595,9 @@
 </template>
 
 <script>
+import BDropdownMenu from '@/components/base/Dropdown/b-dropdown-menu.vue'
+import BDropdownRow from '@/components/base/DropdownPanel/b-dropdown-panel-row.vue'
+
 import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
 import BDropdownHeader from "@/components/base/Dropdown/b-dropdown-header.vue";
 import BDropdownItem from "@/components/base/Dropdown/b-dropdown-item.vue";
@@ -512,9 +607,13 @@ import BDropdownDivider from "@/components/base/Dropdown/b-dropdown-divider.vue"
 import BDropdownList from "@/components/base/DropdownList/b-dropdown-list.vue";
 import BDropdownPanel from '@/components/base/DropdownPanel/b-dropdown-panel.vue'
 
+import BRange from '@/components/form/b-range.vue'
+
 export default {
   name: "BDropdownDemo",
   components: {
+    BDropdownMenu,
+    BDropdownRow,
     BDropdown,
     BDropdownHeader,
     BDropdownItem,
@@ -522,6 +621,7 @@ export default {
     BDropdownDivider,
     BDropdownList,
     BDropdownPanel,
+    BRange,
   },
   data() {
     return {
@@ -531,25 +631,27 @@ export default {
         { value: "value3", label: "label3" },
         { value: "value4", label: "label4" },
         { value: "value5", label: "label5" },
-        { value: "value6", label: "disabled", disabled: true }
+        { value: "value6", label: "disabled", disabled: true },
       ],
       list2: [
-        { header: "header label", divider: true, text: "text", item: "item" },
-        { divider: true, text: "text", item: "item" },
-        { text: "text", item: "item" },
-        { value: "value" },
-        { value: "a item", href: "#" },
-        { value: "btuuon active item", active: true },
-        { value: "btuuon disabled item", disabled: true },
-        { value: "a active", href: "#", active: true },
-        { value: "a disabled", href: "#", disabled: true }
+        { divider: true, },
+        { text: "text", info: "info text", icon: "circle-fill" },
+        { divider: true, },
+        { value: "value", info: "info text", icon: "circle-fill" },
+        { value: "btuuon active item", info: "info text", icon: "circle-fill", active: true },
+        { value: "btuuon disabled item", info: "info text", icon: "circle-fill", disabled: true },
+        { divider: true, },
+        { value: "a item", href: "#", info: "info text", icon: "circle-fill" },
+        { value: "a active", href: "#", info: "info text", icon: "circle-fill", active: true },
+        { value: "a disabled", href: "#", info: "info text", icon: "circle-fill", disabled: true }
       ],
       value1: { value: "value1", label: "label1" },
       value2: [
         { value: "value1", label: "label1" },
         { value: "value2", label: "label2" },
         { value: "value3", label: "label3" }
-      ]
+      ],
+      col: 6,
     };
   }
 };

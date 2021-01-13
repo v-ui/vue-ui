@@ -14,7 +14,7 @@
       v-show="!$slots.week"
       class="my-1"
     >
-    <div class="text-center">
+    <div>
       <slot name="week" />
       <panel-row
         :list="list"
