@@ -1,4 +1,4 @@
-import tools from "@/tools"
+// import tools from "@/tools"
 import config from '@/config'
 import moment from './plugin/moment'
 import props from '@/components/util/props.js'
@@ -70,14 +70,14 @@ let status = {
 
 let base = {
   mixins: [ moment.base, status.select, ],
-  // model: {
-  //   prop: "value",
-  //   event: "selected:changed"
-  // },
+  model: {
+    prop: "value",
+    event: "selected:changed"
+  },
   props: {
     value: [String, Number, Date, Object],
-    min: Object,
-    max: Object,
+    min: [String, Number, Date, Object],
+    max: [String, Number, Date, Object],
     range: props.Boolean,
     selectedStart: [String, Number, Date, Object],
     selectedEnd: [String, Number, Date, Object],
@@ -90,6 +90,7 @@ let base = {
       month: 0,
       date: 1,
       now: null,
+      colCount: 0,
       disabledNow: false,
       selectedValues: null,
     }
@@ -101,6 +102,18 @@ let base = {
     headerText: function() {
       return null
     },
+    dateMin: function() {
+      return this.moment(new Date(this.min))
+    },
+    dateMax: function() {
+      return this.moment(new Date(this.max))
+    },
+    arrayMin: function() {
+      return [this.dateMin.year(), this.dateMin.month(), this.dateMin.date()]
+    },
+    arrayMax: function() {
+      return [this.dateMin.year(), this.dateMin.month(), this.dateMin.date()]
+    },
     list: function() {
       return []
     },
@@ -109,10 +122,10 @@ let base = {
     value: function(value) {
       this.initValue && this.initValue(value)
     },
-    // selectedValues: function(value) {
-    //   // 配合 v-model 工作
-    //   this.$emit("selected:changed", value);
-    // }
+    selectedValues: function(value) {
+      // 配合 v-model 工作
+      this.$emit("selected:changed", value);
+    }
   },
   methods: {
     format(year = this.year, month = this.month, date = this.date) {
@@ -122,11 +135,7 @@ let base = {
       return (start.isValid() && (value.isBefore(start))) ||
             (end.isValid() && (value.isAfter(end)))
     },
-    disabledItem: function(
-      value,
-      min = this.dateMin || [this.min.year(), this.min.month(), this.min.date()],
-      max = this.dateMax || [this.max.year(), this.max.month(), this.max.date()]
-    ) {
+    disabledItem: function(value, min = this.dateMin, max = this.dateMax) {
       return this.isBetween(value, this.moment(min), this.moment(max))
     },
   },
@@ -136,8 +145,8 @@ let year = {
   mixins: [ base, ],
   data() {
     return {
-      total: 15,
-      colCount: 3,
+      total: 20,
+      colCount: 4,
       start: 0,
     }
   },
@@ -145,30 +154,26 @@ let year = {
     headerText: function() {
       return `${this.start} - ${this.start + this.total - 1}`
     },
-    dateMin: function() {
-      return [this.min.year()]
-    },
-    dateMax: function() {
-      return [this.max.year()]
-    },
     list: function() {
       if (!this.start || isNaN(this.start)) return
       let arr = [];
       for (let i = 0; i < this.total; i++) {
         let value = this.start + i
+        let date = this.format(value)
+
         arr.push({
           value: value,
-          label: value,
-          status: this.validator(this.moment([value]), this.now, this.selectedValues, this.selectedStart, this.selectedEnd),
-          disabled: this.disabledItem(this.moment([value])),
+          label: date.format("YYYY"), //`${value} `,
+          status: this.validator(date, this.now, this.selectedValues, this.selectedStart, this.selectedEnd),
+          disabled: this.disabledItem(date),
         });
       }
       return arr
     },
   },
   watch: {
-    year: function(value) {
-      this.start = this.formatStart(value)
+    selectedValues: function() {
+      this.start = this.formatStart(this.year)
     }
   },
   mounted() {
@@ -180,7 +185,7 @@ let year = {
   },
   methods: {
     initValue: function(value) {
-      let date = value && value.isValid && value.isValid() ? value : (this.disabledNow ? this.min : this.moment())
+      let date = value && value.isValid && value.isValid() ? value : (this.disabledNow ? this.dateMin : this.moment())
       this.year = date.year()
     },
     formatStart: function(val) {
@@ -192,15 +197,17 @@ let year = {
       this.start -= this.total;
     },
     checknow: function() {
-      this.year = this.moment().year()
-      this.selectedValues = this.format();
+      this.year = this.moment().year();
+      this.selectedValues = this.format()
       this.$emit('year:checked', this.selectedValues)
     },
     backward: function() {
       this.start += this.total;
     },
     checked: function(value) {
-      this.year = value
+      // TODO: 解决 mixins-select 中遇到 0 的问题，
+      // 待解决后改回： this.month = value
+      this.year = value && value.value === 0 ? value.value : value
       this.selectedValues = this.format()
       this.$emit('year:checked', this.selectedValues)
     },
@@ -219,12 +226,6 @@ let month = {
     headerText: function() {
       return this.year;
     },
-    dateMin: function() {
-      return [this.min.year(), this.min.month()]
-    },
-    dateMax: function() {
-      return [this.max.year(), this.max.month()]
-    },
     list: function() {
       if (!this.year || isNaN(this.year)) return;
       let arr = [];
@@ -232,7 +233,7 @@ let month = {
           let date = this.format(this.year, i)
           arr.push({
             value: i,
-            label: tools.string.padStart(i + 1, 2),
+            label: date.format("MMM"), // tools.string.padStart(i + 1, 2),
             status: this.validator(date, this.now , this.selectedValues, this.selectedStart, this.selectedEnd),
             disabled: this.disabledItem(date),
           });
@@ -248,7 +249,7 @@ let month = {
   },
   methods: {
     initValue: function(value) {
-      let date = value && value.isValid && value.isValid() ? value : (this.disabledNow ? this.min : this.moment())
+      let date = value && value.isValid && value.isValid() ? value : (this.disabledNow ? this.dateMin : this.moment())
       this.year = date.year()
       this.month = date.month()
     },
@@ -281,7 +282,7 @@ let date = {
   mixins: [ base, ],
   data() {
     return {
-      colCount: 7,
+      // colCount: 7,
     }
   },
   computed: {
@@ -293,12 +294,6 @@ let date = {
     },
     weekList: function() {
       return this.moment.localeData().weekdaysMin()
-    },
-    dateMin: function() {
-      return [this.min.year(), this.min.month(), this.min.date()]
-    },
-    dateMax: function() {
-      return [this.max.year(), this.max.month(), this.max.date()]
     },
     list: function() {
 
@@ -319,7 +314,7 @@ let date = {
           let date = this.format(this.year, this.month, value)
           arr.push({
             value: value,
-            label: tools.string.padStart(value, 2),
+            label: date.format("DD"), // tools.string.padStart(value, 2),
             status: this.validator(date, this.now , this.selectedValues, this.selectedStart, this.selectedEnd),
             disabled: this.disabledItem(date),
           });
@@ -338,7 +333,7 @@ let date = {
   },
   methods: {
     initValue: function(value) {
-      let date = value && value.isValid && value.isValid() ? value : (this.disabledNow ? this.min : this.moment())
+      let date = value && value.isValid && value.isValid() ? value : (this.disabledNow ? this.dateMin : this.moment())
       this.year = date.year()
       this.month = date.month()
       this.date = date.date()

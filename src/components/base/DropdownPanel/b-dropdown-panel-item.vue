@@ -41,7 +41,7 @@ export default {
       let status = ''
       if (this.item.status) {
         if (this.item.status.now) status = 'border-0 bg-transparent text-danger '
-        if (this.item.status.start || this.item.status.end || this.item.status.between) status = 'rounded-0 bg-primary'
+        if (this.item.status.start || this.item.status.end || this.item.status.between) status = this.item.status.now ? 'border-0 rounded-0 bg-danger' : 'border-0 rounded-0 bg-primary'
         if (this.item.status.selected) status = this.item.status.now ? "border-0 bg-danger text-white" : "text-white"
         if (status.length === 0) status = 'border-0 bg-transparent text-body'
       } else {

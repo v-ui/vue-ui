@@ -51,8 +51,8 @@ export default {
       validator: (value) => ["year", "month", "date"].includes(value),
     },
     value: [String, Number, Date, Object],
-    min: [Date, Object],
-    max: [Date, Object],
+    min: [String, Number, Date, Object],
+    max: [String, Number, Date, Object],
     range: util.props.Boolean,
   },
   data() {
