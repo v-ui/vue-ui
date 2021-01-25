@@ -45,6 +45,19 @@ let status = {
       validBetween: function(value, start, end) {
         return value.isBetween(start, end)
       },
+      objClass: function(status) {
+        let style = ''
+        if (status) {
+          if (status.now) style = 'border-0 bg-transparent text-danger '
+          if (status.start || status.end || status.between) style = status.now ? 'border-0 rounded-0 bg-danger' : 'border-0 rounded-0 bg-primary'
+          if (status.selected) style = status.now ? "border-danger bg-transparent text-danger" : "bg-transparent text-primary"
+          if (style.length === 0) style = 'border-0 bg-transparent text-body'
+        }
+        return style
+      },
+      objStyle: function (status) {
+        return status && status.between ? 'opacity: .3' : ''
+      }
     },
   },
   type: {
@@ -161,10 +174,12 @@ let year = {
         let value = this.start + i
         let date = this.format(value)
 
+        let status = this.validator(date, this.now, this.selectedValues, this.selectedStart, this.selectedEnd)
         arr.push({
           value: value,
           label: date.format("YYYY"), //`${value} `,
-          status: this.validator(date, this.now, this.selectedValues, this.selectedStart, this.selectedEnd),
+          objClass: this.objClass(status),
+          objStyle: this.objStyle(status),
           disabled: this.disabledItem(date),
         });
       }
@@ -232,11 +247,14 @@ let quarter = {
        for (let i = 0; i < this.total; i++) {
           let value = i + 1
           let date = this.format(this.year).quarter(value)
+
+          let status = this.validator(date, this.now , this.selectedValues, null, null)
           arr.push({
             value: value,
             label: date.format("Qo"),
             info: `${date.startOf('quarter').format("ll")}-${date.endOf('quarter').format("ll")}`,
-            status: this.validator(date, this.now , this.selectedValues, null, null),
+            objClass: this.objClass(status),
+            objStyle: this.objStyle(status),
             disabled: this.disabledItem(date),
           });
        }
@@ -295,10 +313,13 @@ let month = {
       let arr = [];
        for (let i = 0; i < this.total; i++) {
           let date = this.format(this.year, i)
+
+          let status = this.validator(date, this.now, this.selectedValues, this.selectedStart, this.selectedEnd)
           arr.push({
             value: i,
             label: date.format("MMM"), // tools.string.padStart(i + 1, 2),
-            status: this.validator(date, this.now , this.selectedValues, this.selectedStart, this.selectedEnd),
+            objClass: this.objClass(status),
+            objStyle: this.objStyle(status),
             disabled: this.disabledItem(date),
           });
        }
@@ -365,11 +386,13 @@ let week = {
       let date = start
 
       while(!date.isAfter(end)) {
+        let status = this.validator(date, this.now, this.selectedValues, null, null)
         arr.push({
           value: date.week(),
           label: date.format("Wo"),
           info: `${date.startOf('week').format("ll")}-${date.endOf('week').format("ll")}`,
-          status: this.validator(date, this.now , this.selectedValues, null, null),
+          objClass: this.objClass(status),
+          objStyle: this.objStyle(status),
           disabled: this.disabledItem(date),
         });
         date.add(1, 'week')
@@ -452,10 +475,14 @@ let date = {
       for (let i = 0; i < this.total; i++) {
         let value = i + 1
         let date = this.format(this.year, this.month, value)
+
+        let status = this.validator(date, this.now, this.selectedValues, this.selectedStart, this.selectedEnd)
         arr.push({
           value: value,
+          // info: '十二月',
           label: date.format("DD"), // tools.string.padStart(value, 2),
-          status: this.validator(date, this.now , this.selectedValues, this.selectedStart, this.selectedEnd),
+          objClass: this.objClass(status),
+          objStyle: this.objStyle(status),
           disabled: this.disabledItem(date),
         });
       }

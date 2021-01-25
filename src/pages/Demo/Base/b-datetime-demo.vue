@@ -108,7 +108,7 @@
       <font class="col-1">
         v-model(range):
       </font>
-      <font class="col">
+      <font class="col-1">
         yearR
         <br>
         {{ year }}
@@ -118,7 +118,7 @@
         type="year"
         range
       />
-      <font class="col">
+      <font class="col-1">
         monthR
         <br>
         {{ month }}
@@ -128,7 +128,10 @@
         type="month"
         range
       />
-      <font class="col">
+    </div>
+    <div class="row">
+      <font class="col-1" />
+      <font class="col-1">
         date
         <br>
         {{ date }}

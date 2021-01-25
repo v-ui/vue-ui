@@ -1,9 +1,9 @@
 <template>
   <b-button
     class="rounded-pill my-1 p-1"
-    style="min-width: 2.2em"
-    :class="objClass"
-    :style="objStyle"
+    style="min-width: 3em"
+    :class="[item.objClass, objClass]"
+    :style="item.objStyle"
     :disabled="disabled"
     :aria-selected="isSelected || (item.status && item.status.selected)"
     @click.native="$emit('item:click', item)"
@@ -12,7 +12,7 @@
     <b-info
       :info="item.info"
       class="m-0"
-      :info-color="isSelected || (item.status && item.status.selected) ? 'white' : 'muted'"
+      :info-color="item.infoColor || 'muted'"
       style="font-size: 0.5em"
     />
   </b-button>
@@ -38,23 +38,14 @@ export default {
     },
     objClass: function() {
       let select = ''
-      let status = ''
-      if (this.item.status) {
-        if (this.item.status.now) status = 'border-0 bg-transparent text-danger '
-        if (this.item.status.start || this.item.status.end || this.item.status.between) status = this.item.status.now ? 'border-0 rounded-0 bg-danger' : 'border-0 rounded-0 bg-primary'
-        if (this.item.status.selected) status = this.item.status.now ? "border-0 bg-danger text-white" : "text-white"
-        if (status.length === 0) status = 'border-0 bg-transparent text-body'
-      } else {
+      if (!this.item.objClass) {
         select = this.isSelected
-          ? ""
+          ? "bg-transparent text-body"
           : "border-0 bg-transparent text-body";
       }
       const col = 12 % this.colCount == 0 ? `col-${12 / this.colCount}` : "col-auto";
-      return `${select} ${col} ${status}`
+      return `${select} ${col}`
     },
-    objStyle: function () {
-      return this.item && this.item.status && this.item.status.between ? 'opacity: .3' : ''
-    }
   }
 };
 </script>

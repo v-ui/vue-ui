@@ -1,7 +1,7 @@
 <template>
   <date-panel-temp
     :list="list"
-    style="width: 16em;"
+    style="width: 22em;"
     :col-count="colCount"
     :disabled="disabled"
     :disabled-now="disabledNow"

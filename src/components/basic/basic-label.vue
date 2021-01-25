@@ -1,7 +1,7 @@
 <template>
   <span>
     <b-icon :icon="icon" :icon-color="iconColor" />
-    <span class="d-inline-block pl-1 text-truncate" :class="textColor ? 'text-' + textColor : ''">{{ label }}</span>
+    <span class="d-inline-block pl-1 text-truncate" :class="labelColor ? 'text-' + labelColor : ''">{{ label }}</span>
     <b-info :info="info" :info-color="infoColor" />
   </span>
 </template>
@@ -19,7 +19,7 @@ export default {
     label: util.props.String,
     icon: util.props.String,
     info: util.props.String,
-    textColor: util.props.textColor,
+    labelColor: util.props.textColor,
     infoColor: util.props.textColor,
     iconColor: util.props.textColor,
   },
