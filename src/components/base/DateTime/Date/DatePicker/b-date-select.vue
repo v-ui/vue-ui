@@ -1,8 +1,9 @@
+
 <template>
   <div :class="{ 'cannt-hide': range }">
     <year-panel
       v-if="pickertType === enumTypeStatus.year"
-      v-model="selectedValues"
+      :value="selectedValues"
       :class="{ 'cannt-hide': type !== enumTypeStatus.year }"
       :min="min"
       :max="max"
@@ -13,9 +14,23 @@
       :selected-end="selectedEnd"
       @year:checked="yearChecked"
     />
+    <quarter-panel
+      v-if="pickertType === enumTypeStatus.quarter"
+      v-model="selectedValues"
+      :class="{ 'cannt-hide': type !== enumTypeStatus.quarter }"
+      :min="min"
+      :max="max"
+      :disabled="disabled"
+      :hide-header="false"
+      :range="type === enumTypeStatus.quarter && range"
+      :selected-start="selectedStart"
+      :selected-end="selectedEnd"
+      @quarter2Year="quarter2Year"
+      @quarter:checked="quarterChecked"
+    />
     <month-panel
       v-if="pickertType === enumTypeStatus.month"
-      v-model="selectedValues"
+      :value="selectedValues"
       :class="{ 'cannt-hide': type !== enumTypeStatus.month }"
       :min="min"
       :max="max"
@@ -27,9 +42,23 @@
       @month2Year="month2Year"
       @month:checked="monthChecked"
     />
+    <week-panel
+      v-if="pickertType === enumTypeStatus.week"
+      v-model="selectedValues"
+      :class="{ 'cannt-hide': type !== enumTypeStatus.week }"
+      :min="min"
+      :max="max"
+      :disabled="disabled"
+      :hide-header="false"
+      :range="type === enumTypeStatus.week && range"
+      :selected-start="selectedStart"
+      :selected-end="selectedEnd"
+      @week2Month="week2Month"
+      @week:checked="weekChecked"
+    />
     <date-panel
       v-if="pickertType === enumTypeStatus.date"
-      v-model="selectedValues"
+      :value="selectedValues"
       :class="{ 'cannt-hide': type !== enumTypeStatus.date }"
       :min="min"
       :max="max"
@@ -51,9 +80,12 @@ import yearPanel from "./Panel/date-year-panel";
 import monthPanel from "./Panel/date-month-panel";
 import datePanel from "./Panel/date-date-panel";
 
+import quarterPanel from './Panel/date-quarter-panel'
+import weekPanel from './Panel/date-week-panel'
+
 export default {
   name: "DatePanelSelect",
-  components: { yearPanel, monthPanel, datePanel },
+  components: { yearPanel, monthPanel, datePanel, quarterPanel, weekPanel },
   mixins: [
     util.mixins.moment.base,
     util.mixins.form.readonly,
@@ -67,19 +99,19 @@ export default {
     type: {
       type: String,
       default: "date",
-      validator: (value) => ["year", "month", "date"].includes(value),
+      validator: (value) => ["year", "quarter", "month", "week", "date"].includes(value),
     },
     value: [String, Number, Date, Object],
-    min: [String, Date, Number, Object],
-    max: [String, Date, Number, Object],
+    min: [String, Date, Object],
+    max: [String, Date, Object],
     range: util.props.Boolean,
     selectedStart: [String, Number, Date, Object],
     selectedEnd: [String, Number, Date, Object],
   },
   data() {
     return {
-      pickertType: this.type,
-      selectedValues: this.value,
+      pickertType: "",
+      selectedValues: null,
     };
   },
   computed: {
@@ -99,6 +131,10 @@ export default {
       this.$emit("change", value);
     },
   },
+  mounted() {
+    this.pickertType = this.type;
+    this.selectedValues = this.value
+  },
   methods: {
     formatDate: function(
       year = this.selectedValuesIsValid ? this.selectedValues.year() : 0,
@@ -107,24 +143,47 @@ export default {
     ) {
       return this.moment([year, month, date])
     },
+    // year
     month2Year: function (value) {
-      if (value) this.selectedValues = this.formatDate(value.year(), value.month())
+      this.selectedValues = this.formatDate(value.year(), value.month())
       this.pickertType = this.enumTypeStatus.year;
     },
-    yearChecked: function(value) {
+    yearChecked: function (value) {
       this.selectedValues = this.formatDate(value.year())
       if (this.canHide) return;
-      this.pickertType = this.enumTypeStatus.month;
+      this.pickertType = this.type === this.enumTypeStatus.quarter ? this.enumTypeStatus.quarter : this.enumTypeStatus.month;
     },
+    // quarter
+    quarter2Year: function(value) {
+      if (value) this.selectedValues = this.formatDate(value.year(), value.month(), 1)
+      this.pickertType = this.enumTypeStatus.year;
+    },
+    quarterChecked: function(value) {
+      this.selectedValues = this.formatDate(value.year(), value.month(), 1)
+      if (this.canHide) return
+      this.pickertType = this.enumTypeStatus.quarter
+    },
+    // month
     date2Month: function (value) {
-      if (value) this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
+      this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
       this.pickertType = this.enumTypeStatus.month;
     },
     monthChecked: function (value) {
       this.selectedValues = this.formatDate(value.year(), value.month())
       if (this.canHide) return;
-      this.pickertType = this.enumTypeStatus.date;
+      this.pickertType = this.type === this.enumTypeStatus.week ? this.enumTypeStatus.week : this.enumTypeStatus.date;
     },
+    // week
+    week2Month: function(value) {
+      if (value) this.selectedValues = this.formatDate(value.year(), value.month(), 1)
+      this.pickertType = this.enumTypeStatus.month;
+    },
+    weekChecked: function(value) {
+      this.selectedValues = this.formatDate(value.year(), value.month(), 1)
+      if (this.canHide) return
+      this.pickertType = this.enumTypeStatus.week
+    },
+    // date
     dateChecked: function (value) {
       this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
     },

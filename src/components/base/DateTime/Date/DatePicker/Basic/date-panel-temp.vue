@@ -14,15 +14,16 @@
       v-show="!$slots.week"
       class="my-1"
     >
-    <div>
-      <slot name="week" />
+
+    <slot name="week" />
+    <slot>
       <panel-row
         :list="list"
         :col-count="colCount"
         :disabled="disabled"
         @item:click="click"
       />
-    </div>
+    </slot>
   </div>
 </template>
 

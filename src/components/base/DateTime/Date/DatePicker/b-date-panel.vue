@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-content-center">
-    <date-panel-select
+    <b-date-select
       v-model="selectedValueStart"
       class="flex-fill"
       :type="type"
@@ -12,7 +12,7 @@
       :selected-end="selectedValueEnd"
       :hide-header="false"
     />
-    <date-panel-select
+    <b-date-select
       v-if="range"
       v-model="selectedValueEnd"
       class="flex-fill"
@@ -30,11 +30,11 @@
 
 <script>
 import util from "@/components/util/index.js";
-import datePanelSelect from './Basic/date-panel-select'
+import BDateSelect from './b-date-select'
 
 export default {
   name: 'BDatePanel',
-  components: { datePanelSelect, },
+  components: { BDateSelect, },
   mixins: [
     util.mixins.moment.base,
     util.mixins.form.readonly,
@@ -48,7 +48,7 @@ export default {
     type: {
       type: String,
       default: "date",
-      validator: (value) => ["year", "month", "date"].includes(value),
+      validator: (value) => ["year", "quarter", "month", "week", "date"].includes(value),
     },
     value: [String, Number, Date, Object],
     min: [String, Number, Date, Object],

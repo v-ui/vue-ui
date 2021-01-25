@@ -45,7 +45,7 @@ export default {
     type: {
       type: String,
       default: "date",
-      validator: (value) => ["year", "month", "date"].includes(value),
+      validator: (value) => ["year", "quarter", "month", "week", "date"].includes(value),
     },
     value: [String, Number, Date, Object],
     min: [String, Date],

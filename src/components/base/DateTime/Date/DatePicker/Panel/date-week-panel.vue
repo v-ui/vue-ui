@@ -2,27 +2,31 @@
   <date-panel-temp
     :list="list"
     style="width: 16em"
-    :col-count="colCount"
     :disabled="disabled"
     :disabled-now="disabledNow"
     :hide-header="hideHeader"
     :header-text="headerText"
-    :diesable-header-click="true"
+    @panel:clickHeader="clickHeader"
     @panel:forward="forward"
     @panel:checknow="checknow"
     @panel:backward="backward"
-    @panel:checked="checked"
-  />
+  >
+    <b-dropdown-menu
+      :list="list"
+      @item:click="checked"
+    />
+  </date-panel-temp>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
 
-import DatePanelTemp from "../Basic/date-panel-temp.vue";
+import DatePanelTemp from '../Basic/date-panel-temp.vue'
+import BDropdownMenu from '@/components/base/Dropdown/b-dropdown-menu.vue'
 
 export default {
-  name: "DateYearPanel",
-  components: { DatePanelTemp },
-  mixins: [util.mixins.date.year],
-};
+  name: 'DateWeekPanel',
+  components: { DatePanelTemp, BDropdownMenu },
+  mixins: [util.mixins.date.week],
+}
 </script>

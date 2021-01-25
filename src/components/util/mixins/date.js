@@ -206,10 +206,74 @@ let year = {
     },
     checked: function(value) {
       // TODO: 解决 mixins-select 中遇到 0 的问题，
-      // 待解决后改回： this.month = value
+      // 待解决后改回： this.year = value
       this.year = value && value.value === 0 ? value.value : value
       this.selectedValues = this.format()
       this.$emit('year:checked', this.selectedValues)
+    },
+  },
+}
+
+let quarter = {
+  mixins: [ base, ],
+  data() {
+    return {
+      total: 4,
+      quarter: 1,
+    }
+  },
+  computed: {
+    headerText: function() {
+      return this.year;
+    },
+    list: function() {
+      if (!this.year || isNaN(this.year)) return;
+      let arr = [];
+       for (let i = 0; i < this.total; i++) {
+          let value = i + 1
+          let date = this.format(this.year).quarter(value)
+          arr.push({
+            value: value,
+            label: date.format("Qo"),
+            info: `${date.startOf('quarter').format("ll")}-${date.endOf('quarter').format("ll")}`,
+            status: this.validator(date, this.now , this.selectedValues, null, null),
+            disabled: this.disabledItem(date),
+          });
+       }
+      return arr;
+    }
+  },
+  mounted() {
+    this.now = this.moment([this.moment().year(), this.moment().month(), 1])
+    this.disabledNow = this.disabledItem(this.now)
+    this.initValue && this.initValue(this.value)
+    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format().quarter(this.quarter) : null
+  },
+  methods: {
+    initValue: function(value) {
+      let date = value && value.isValid && value.isValid() ? value : (this.disabledNow ? this.dateMin : this.moment())
+      this.year = date.year()
+      this.quarter = date.quarter()
+    },
+    clickHeader: function() {
+      this.$emit("quarter2Year", this.selectedValues);
+    },
+    forward: function() {
+      this.year -= 1;
+    },
+    checknow: function() {
+      this.year = this.moment().year();
+      this.quarter = this.moment().quarter();
+      this.selectedValues = this.format().quarter(this.quarter)
+      this.$emit('quarter:checked', this.selectedValues)
+    },
+    backward: function() {
+      this.year += 1;
+    },
+    checked: function(value) {
+      this.quarter = value.value
+      this.selectedValues = this.format().quarter(this.quarter)
+      this.$emit('quarter:checked', this.selectedValues)
     },
   },
 }
@@ -278,6 +342,88 @@ let month = {
   },
 }
 
+let week = {
+  mixins: [ base, ],
+  data() {
+    return {
+      week: 1,
+    }
+  },
+  computed: {
+    // total: function() {
+    //   return this.moment([this.year]).weeksInYear()
+    // },
+    headerText: function() {
+      return this.moment([this.year, this.month]).format(config.ui.date.month)
+    },
+    list: function() {
+      if (!this.year || isNaN(this.year)) return;
+      if (isNaN(this.month) || this.month < 0 ) return
+      let arr = [];
+      let start = this.format(this.year, this.month)
+      let end = this.format(this.year, this.month).endOf("month")
+      let date = start
+
+      while(!date.isAfter(end)) {
+        arr.push({
+          value: date.week(),
+          label: date.format("Wo"),
+          info: `${date.startOf('week').format("ll")}-${date.endOf('week').format("ll")}`,
+          status: this.validator(date, this.now , this.selectedValues, null, null),
+          disabled: this.disabledItem(date),
+        });
+        date.add(1, 'week')
+      }
+      return arr;
+    }
+  },
+  mounted() {
+    this.now = this.moment([this.moment().year(), this.moment().month(), this.moment().date()])
+    this.disabledNow = this.disabledItem(this.now)
+    this.initValue && this.initValue(this.value)
+    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format().endOf('week') : null
+  },
+  methods: {
+    initValue: function(value) {
+      let date = value && value.isValid && value.isValid() ? value : (this.disabledNow ? this.dateMin : this.moment())
+      this.year = date.year()
+      this.month = date.month()
+      this.week = date.week()
+    },
+    clickHeader: function() {
+      this.$emit("week2Month", this.selectedValues);
+    },
+    forward: function() {
+      if (this.month === 0) {
+        this.year -= 1
+        this.month = 11
+      } else {
+        this.month -= 1
+      }
+    },
+    checknow: function() {
+      this.year = this.moment().year();
+      this.month = this.moment().month();
+      this.week = this.moment().week();
+      this.selectedValues = this.format().week(this.week).startOf('week')
+      this.$emit('week:checked', this.selectedValues)
+    },
+    backward: function() {
+      if (this.month === 11) {
+        this.year += 1
+        this.month = 0
+      } else {
+        this.month += 1
+      }
+    },
+    checked: function(value) {
+      this.week = value.value
+      this.selectedValues = this.format().week(this.week).startOf('week')
+      this.$emit('week:checked', this.selectedValues)
+    },
+  },
+}
+
 let date = {
   mixins: [ base, ],
   data() {
@@ -300,27 +446,18 @@ let date = {
       if (!this.year || isNaN(this.year)) return
       if (isNaN(this.month) || this.month < 0 ) return
 
-      let arr = []
-      let i = 0
-      let value = 1
-      let flag = false
       let day = this.moment([this.year, this.month, 1]).day()
+      let arr = Array(day).fill({ label: "  " });
 
-      while (value <= this.total) {
-        flag = i >= day
-        if (!flag) {
-          arr.push({ label: "  " });
-        } else {
-          let date = this.format(this.year, this.month, value)
-          arr.push({
-            value: value,
-            label: date.format("DD"), // tools.string.padStart(value, 2),
-            status: this.validator(date, this.now , this.selectedValues, this.selectedStart, this.selectedEnd),
-            disabled: this.disabledItem(date),
-          });
-          value++
-        }
-        i++
+      for (let i = 0; i < this.total; i++) {
+        let value = i + 1
+        let date = this.format(this.year, this.month, value)
+        arr.push({
+          value: value,
+          label: date.format("DD"), // tools.string.padStart(value, 2),
+          status: this.validator(date, this.now , this.selectedValues, this.selectedStart, this.selectedEnd),
+          disabled: this.disabledItem(date),
+        });
       }
       return arr
     },
@@ -376,6 +513,8 @@ export default {
   status,
   base,
   year,
+  quarter,
   month,
+  week,
   date,
 }
