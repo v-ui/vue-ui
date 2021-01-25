@@ -28,7 +28,8 @@ let status = {
         } else {
           isSelected = (selected && this.validSelect(value, selected)) || false
         }
-        return { now: isNow, selected: isSelected, start: isStart, end: isEnd, between: isBetween, }
+        let isWeekend = this.validWeekend(value)
+        return { now: isNow, selected: isSelected, start: isStart, end: isEnd, between: isBetween, isWeekend: isWeekend }
       },
       validNow: function(value, now) {
         return value.isSame(now)
@@ -45,6 +46,9 @@ let status = {
       validBetween: function(value, start, end) {
         return value.isBetween(start, end)
       },
+      validWeekend: function() {
+        return false
+      },
       objClass: function(status) {
         let style = ''
         if (status) {
@@ -52,6 +56,7 @@ let status = {
           if (status.start || status.end || status.between) style = status.now ? 'border-0 rounded-0 bg-danger' : 'border-0 rounded-0 bg-primary'
           if (status.selected) style = status.now ? "border-danger bg-transparent text-danger" : "bg-transparent text-primary"
           if (style.length === 0) style = 'border-0 bg-transparent text-body'
+          style += status.isWeekend ? ' font-weight-light' : ' font-weight-bolder'
         }
         return style
       },
@@ -532,6 +537,9 @@ let date = {
       this.date = value
       this.selectedValues = this.format()
       this.$emit('date:checked', this.selectedValues)
+    },
+    validWeekend: function(value) {
+      return [7, 6].includes(value.isoWeekday())
     },
   },
 }
