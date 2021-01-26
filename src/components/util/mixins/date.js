@@ -322,7 +322,7 @@ let month = {
           let status = this.validator(date, this.now, this.selectedValues, this.selectedStart, this.selectedEnd)
           arr.push({
             value: i,
-            label: date.format("MMM"), // tools.string.padStart(i + 1, 2),
+            label: date.format("MMMM"), // tools.string.padStart(i + 1, 2),
             objClass: this.objClass(status),
             objStyle: this.objStyle(status),
             disabled: this.disabledItem(date),
@@ -372,7 +372,7 @@ let week = {
   mixins: [ base, ],
   data() {
     return {
-      week: 1,
+      week: 0,
     }
   },
   computed: {
@@ -386,15 +386,16 @@ let week = {
       if (!this.year || isNaN(this.year)) return;
       if (isNaN(this.month) || this.month < 0 ) return
       let arr = [];
-      let start = this.format(this.year, this.month)
-      let end = this.format(this.year, this.month).endOf("month")
-      let date = start
+      let date = this.format().startOf('week').isBefore(this.format())
+                  ? this.format().endOf('week').add(1, 'day')
+                  : this.format()
+      let end = this.format().endOf("month").endOf('week')
 
-      while(!date.isAfter(end)) {
-        let status = this.validator(date, this.now, this.selectedValues, null, null)
+      while(date.isSameOrBefore(end)) {
+        let status = this.validator(date, this.now, this.selectedValues)
         arr.push({
           value: date.week(),
-          label: date.format("Wo"),
+          label: date.format("wo"),
           info: `${date.startOf('week').format("ll")}-${date.endOf('week').format("ll")}`,
           objClass: this.objClass(status),
           objStyle: this.objStyle(status),
@@ -433,7 +434,8 @@ let week = {
       this.year = this.moment().year();
       this.month = this.moment().month();
       this.week = this.moment().week();
-      this.selectedValues = this.format().week(this.week).startOf('week')
+      debugger
+      this.selectedValues = this.format().week(this.week)
       this.$emit('week:checked', this.selectedValues)
     },
     backward: function() {
@@ -444,10 +446,16 @@ let week = {
         this.month += 1
       }
     },
-    checked: function(value) {
-      this.week = value.value
-      this.selectedValues = this.format().week(this.week).startOf('week')
+    checked: function() {
+      this.week = this.moment().week();
+      this.selectedValues = this.format().week(this.week)
       this.$emit('week:checked', this.selectedValues)
+    },
+    validNow: function(value, now) {
+      return value.isSame(now.startOf('week'))
+    },
+    validSelect: function(value, selected) {
+      return value.isSame(selected.startOf('week'))
     },
   },
 }
@@ -467,7 +475,7 @@ let date = {
       return this.moment([this.year, this.month]).format(config.ui.date.month)
     },
     weekList: function() {
-      return this.moment.localeData().weekdaysMin()
+      return this.moment.weekdaysShort()
     },
     list: function() {
 

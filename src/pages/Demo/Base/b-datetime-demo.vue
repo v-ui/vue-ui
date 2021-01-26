@@ -21,6 +21,13 @@
         type="month"
       />
       <font class="col-1">
+        weeek
+      </font>
+      <b-date-panel
+        class="col-2"
+        type="week"
+      />
+      <font class="col-1">
         date
       </font>
       <b-date-panel

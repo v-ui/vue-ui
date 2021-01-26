@@ -7,7 +7,7 @@ export default {
         moment,
       }
     },
-    created () {
+    async created () {
       this.moment.locale(this.$i18n.locale || 'en-US')
     },
     watch: {
