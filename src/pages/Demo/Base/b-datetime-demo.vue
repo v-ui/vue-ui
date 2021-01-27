@@ -21,13 +21,6 @@
         type="month"
       />
       <font class="col-1">
-        weeek
-      </font>
-      <b-date-panel
-        class="col-2"
-        type="week"
-      />
-      <font class="col-1">
         date
       </font>
       <b-date-panel
@@ -118,7 +111,7 @@
       <font class="col-1">
         yearR
         <br>
-        {{ year }}
+        {{ yearR }}
       </font>
       <b-date-panel
         v-model="yearR"
@@ -128,7 +121,7 @@
       <font class="col-1">
         monthR
         <br>
-        {{ month }}
+        {{ monthR }}
       </font>
       <b-date-panel
         v-model="monthR"
@@ -141,7 +134,7 @@
       <font class="col-1">
         date
         <br>
-        {{ date }}
+        {{ dateR }}
       </font>
       <b-date-panel
         v-model="dateR"

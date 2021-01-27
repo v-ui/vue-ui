@@ -145,7 +145,7 @@ export default {
     },
     // year
     month2Year: function (value) {
-      this.selectedValues = this.formatDate(value.year(), value.month())
+      if (value) this.selectedValues = this.formatDate(value && value.year())
       this.pickertType = this.enumTypeStatus.year;
     },
     yearChecked: function (value) {
@@ -165,7 +165,7 @@ export default {
     },
     // month
     date2Month: function (value) {
-      this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
+      if (value) this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
       this.pickertType = this.enumTypeStatus.month;
     },
     monthChecked: function (value) {
@@ -185,7 +185,7 @@ export default {
     },
     // date
     dateChecked: function (value) {
-      this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
+      if (value) this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
     },
   },
 };

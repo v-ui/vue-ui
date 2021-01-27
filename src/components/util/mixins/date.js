@@ -149,12 +149,12 @@ let base = {
     format(year = this.year, month = this.month, date = this.date) {
       return this.moment([year, month, date])
     },
-    isBetween: function(value, start, end) {
-      return (start.isValid() && (value.isBefore(start))) ||
-            (end.isValid() && (value.isAfter(end)))
-    },
+    // isBetween: function(value, start, end) {
+    //   return (start.isValid() && (value.isSameOrBefore(start))) ||
+    //         (end.isValid() && (value.isAfter(end)))
+    // },
     disabledItem: function(value, min = this.dateMin, max = this.dateMax) {
-      return this.isBetween(value, this.moment(min), this.moment(max))
+      return !value.isBetween(this.moment(min), this.moment(max), null, '[]')
     },
   },
 }
@@ -475,7 +475,7 @@ let date = {
       return this.moment([this.year, this.month]).format(config.ui.date.month)
     },
     weekList: function() {
-      return this.moment.weekdaysShort()
+      return this.moment.weekdaysMin()
     },
     list: function() {
 
