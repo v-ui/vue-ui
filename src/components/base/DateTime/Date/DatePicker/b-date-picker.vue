@@ -12,7 +12,7 @@
     <template>
       <b-date-panel
         v-model="selectedValues"
-        :type="pickertType"
+        :type="pickerType"
         :min="dateMin"
         :max="dateMax"
         :range="range"
@@ -33,30 +33,21 @@ export default {
   components: { BDatePanel, dropdownPanel, },
   mixins: [
     util.mixins.form.base,
-    util.mixins.moment.base,
+    util.mixins.date.base,
+    util.mixins.date.type,
+    util.mixins.date.select,
     util.mixins.form.readonly,
-    util.mixins.date.status.type,
   ],
   model: {
     prop: "value",
     event: "change",
   },
   props: {
-    type: {
-      type: String,
-      default: "date",
-      validator: (value) => ["year", "quarter", "month", "week", "date"].includes(value),
-    },
-    value: [String, Number, Date, Object],
-    min: [String, Date],
-    max: [String, Date],
     info: util.props.String,
-    range: util.props.Boolean,
     placeholder: util.props.String,
   },
   data() {
     return {
-      pickertType: this.type,
       selectedValues: this.value,
     };
   },
@@ -87,7 +78,7 @@ export default {
         : this.formatDate(this.selectedValues)
     },
     canHide: function () {
-      return this.type === this.pickertType;
+      return this.type === this.pickerType;
     },
     dateMin: function () {
       return this.moment(new Date(this.min));

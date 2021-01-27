@@ -27,6 +27,11 @@ import BDropdownMenu from '@/components/base/Dropdown/b-dropdown-menu.vue'
 export default {
   name: 'DateQuarterPanel',
   components: { DatePanelTemp, BDropdownMenu },
-  mixins: [util.mixins.date.quarter],
+  mixins: [
+    util.mixins.date.select,
+    util.mixins.date.ui,
+    util.mixins.date.validator,
+    util.mixins.date.quarter,
+  ],
 }
 </script>

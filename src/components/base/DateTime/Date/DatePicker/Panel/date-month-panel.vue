@@ -23,6 +23,11 @@ import DatePanelTemp from "../Basic/date-panel-temp.vue";
 export default {
   name: "DateMonthPanel",
   components: { DatePanelTemp },
-  mixins: [util.mixins.date.month],
+  mixins: [
+    util.mixins.date.select,
+    util.mixins.date.ui,
+    util.mixins.date.validator,
+    util.mixins.date.month,
+  ],
 };
 </script>

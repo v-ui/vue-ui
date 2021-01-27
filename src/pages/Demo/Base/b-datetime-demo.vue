@@ -242,7 +242,7 @@
       </font>
       <b-date-picker
         class="col-2"
-        type="month"
+        type="year"
         min="2018"
         max="2020"
       />

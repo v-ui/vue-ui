@@ -33,6 +33,11 @@ import panelRow from "@/components/base/DropdownPanel/b-dropdown-panel-row.vue";
 export default {
   name: "DateDatePanel",
   components: { DatePanelTemp, panelRow },
-  mixins: [util.mixins.date.date],
+  mixins: [
+    util.mixins.date.select,
+    util.mixins.date.ui,
+    util.mixins.date.validator,
+    util.mixins.date.date,
+  ],
 };
 </script>

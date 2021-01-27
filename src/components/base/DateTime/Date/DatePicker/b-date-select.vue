@@ -2,7 +2,7 @@
 <template>
   <div :class="{ 'cannt-hide': range }">
     <year-panel
-      v-if="pickertType === enumTypeStatus.year"
+      v-if="pickerType === enumTypeStatus.year"
       :value="selectedValues"
       :class="{ 'cannt-hide': type !== enumTypeStatus.year }"
       :min="min"
@@ -15,7 +15,7 @@
       @year:checked="yearChecked"
     />
     <quarter-panel
-      v-if="pickertType === enumTypeStatus.quarter"
+      v-if="pickerType === enumTypeStatus.quarter"
       v-model="selectedValues"
       :class="{ 'cannt-hide': type !== enumTypeStatus.quarter }"
       :min="min"
@@ -29,7 +29,7 @@
       @quarter:checked="quarterChecked"
     />
     <month-panel
-      v-if="pickertType === enumTypeStatus.month"
+      v-if="pickerType === enumTypeStatus.month"
       :value="selectedValues"
       :class="{ 'cannt-hide': type !== enumTypeStatus.month }"
       :min="min"
@@ -43,7 +43,7 @@
       @month:checked="monthChecked"
     />
     <week-panel
-      v-if="pickertType === enumTypeStatus.week"
+      v-if="pickerType === enumTypeStatus.week"
       v-model="selectedValues"
       :class="{ 'cannt-hide': type !== enumTypeStatus.week }"
       :min="min"
@@ -57,7 +57,7 @@
       @week:checked="weekChecked"
     />
     <date-panel
-      v-if="pickertType === enumTypeStatus.date"
+      v-if="pickerType === enumTypeStatus.date"
       :value="selectedValues"
       :class="{ 'cannt-hide': type !== enumTypeStatus.date }"
       :min="min"
@@ -87,52 +87,20 @@ export default {
   name: "DatePanelSelect",
   components: { yearPanel, monthPanel, datePanel, quarterPanel, weekPanel },
   mixins: [
-    util.mixins.moment.base,
+    util.mixins.date.type,
+    util.mixins.date.base,
+    util.mixins.date.select,
     util.mixins.form.readonly,
-    util.mixins.date.status.type,
   ],
-  model: {
-    prop: "value",
-    event: "change",
-  },
-  props: {
-    type: {
-      type: String,
-      default: "date",
-      validator: (value) => ["year", "quarter", "month", "week", "date"].includes(value),
-    },
-    value: [String, Number, Date, Object],
-    min: [String, Date, Object],
-    max: [String, Date, Object],
-    range: util.props.Boolean,
-    selectedStart: [String, Number, Date, Object],
-    selectedEnd: [String, Number, Date, Object],
-  },
-  data() {
-    return {
-      pickertType: "",
-      selectedValues: null,
-    };
-  },
   computed: {
     canHide: function () {
-      return this.type === this.pickertType;
+      return this.type === this.pickerType;
     },
     selectedValuesIsValid: function () {
       return this.selectedValues && this.selectedValues.isValid && this.selectedValues.isValid()
     },
   },
-  watch: {
-    value: function (value) {
-      this.selectedValues = value
-    },
-    selectedValues: function (value) {
-      // 配合 v-model 工作
-      this.$emit("change", value);
-    },
-  },
   mounted() {
-    this.pickertType = this.type;
     this.selectedValues = this.value
   },
   methods: {
@@ -146,42 +114,42 @@ export default {
     // year
     month2Year: function (value) {
       if (value) this.selectedValues = this.formatDate(value && value.year())
-      this.pickertType = this.enumTypeStatus.year;
+      this.pickerType = this.enumTypeStatus.year;
     },
     yearChecked: function (value) {
       this.selectedValues = this.formatDate(value.year())
       if (this.canHide) return;
-      this.pickertType = this.type === this.enumTypeStatus.quarter ? this.enumTypeStatus.quarter : this.enumTypeStatus.month;
+      this.pickerType = this.type === this.enumTypeStatus.quarter ? this.enumTypeStatus.quarter : this.enumTypeStatus.month;
     },
     // quarter
     quarter2Year: function(value) {
       if (value) this.selectedValues = this.formatDate(value.year(), value.month(), 1)
-      this.pickertType = this.enumTypeStatus.year;
+      this.pickerType = this.enumTypeStatus.year;
     },
     quarterChecked: function(value) {
       this.selectedValues = this.formatDate(value.year(), value.month(), 1)
       if (this.canHide) return
-      this.pickertType = this.enumTypeStatus.quarter
+      this.pickerType = this.enumTypeStatus.quarter
     },
     // month
     date2Month: function (value) {
       if (value) this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
-      this.pickertType = this.enumTypeStatus.month;
+      this.pickerType = this.enumTypeStatus.month;
     },
     monthChecked: function (value) {
       this.selectedValues = this.formatDate(value.year(), value.month())
       if (this.canHide) return;
-      this.pickertType = this.type === this.enumTypeStatus.week ? this.enumTypeStatus.week : this.enumTypeStatus.date;
+      this.pickerType = this.type === this.enumTypeStatus.week ? this.enumTypeStatus.week : this.enumTypeStatus.date;
     },
     // week
     week2Month: function(value) {
       if (value) this.selectedValues = this.formatDate(value.year(), value.month(), 1)
-      this.pickertType = this.enumTypeStatus.month;
+      this.pickerType = this.enumTypeStatus.month;
     },
     weekChecked: function(value) {
       this.selectedValues = this.formatDate(value.year(), value.month(), 1)
       if (this.canHide) return
-      this.pickertType = this.enumTypeStatus.week
+      this.pickerType = this.enumTypeStatus.week
     },
     // date
     dateChecked: function (value) {

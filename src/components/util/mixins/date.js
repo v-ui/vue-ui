@@ -3,102 +3,118 @@ import config from '@/config'
 import moment from './plugin/moment'
 import props from '@/components/util/props.js'
 
-let status = {
-  select: {
-    data() {
-      return {
-        enumSelectStatus: {
-          now: 'now',
-          selected: 'selected',
-          start: 'start',
-          between: 'between',
-          end: 'end',
-        },
-      }
-    },
-    methods: {
-      validator: function(value, now = null, selected = null, start = null, end = null) {
-        let isSelected = false, isStart = false, isEnd = false, isBetween = false
-
-        let isNow = (now && this.validNow(value, now)) || false
-        if (this.range) {
-          isStart = (start && this.validStart(value, start)) || false
-          isEnd = (end && this.validEnd(value, end)) || false
-          isBetween = (start && end && this.validBetween(value, start, end)) || false
-        } else {
-          isSelected = (selected && this.validSelect(value, selected)) || false
-        }
-        let isWeekend = this.validWeekend(value)
-        return { now: isNow, selected: isSelected, start: isStart, end: isEnd, between: isBetween, isWeekend: isWeekend }
-      },
-      validNow: function(value, now) {
-        return value.isSame(now)
-      },
-      validSelect: function(value, selected) {
-        return value.isSame(selected)
-      },
-      validStart: function(value, start) {
-        return value.isSame(start)
-      },
-      validEnd: function(value, end) {
-        return value.isSame(end)
-      },
-      validBetween: function(value, start, end) {
-        return value.isBetween(start, end)
-      },
-      validWeekend: function() {
-        return false
-      },
-      objClass: function(status) {
-        let style = ''
-        if (status) {
-          if (status.now) style = 'border-0 bg-transparent text-danger '
-          if (status.start || status.end || status.between) style = status.now ? 'border-0 rounded-0 bg-danger' : 'border-0 rounded-0 bg-primary'
-          if (status.selected) style = status.now ? "border-danger bg-transparent text-danger" : "bg-transparent text-primary"
-          if (style.length === 0) style = 'border-0 bg-transparent text-body'
-          style += status.isWeekend ? ' font-weight-light' : ' font-weight-bolder'
-        }
-        return style
-      },
-      objStyle: function (status) {
-        return status && status.between ? 'opacity: .3' : ''
-      }
+let type = {
+  props: {
+    type: {
+      type: String,
+      default: "date",
+      validator: (value) => ["year", "quarter", "month", "week", "date"].includes(value),
     },
   },
-  type: {
-    data() {
-      return {
-        enumTypeStatus: {
-          millisecond: 'millisecond',// 毫秒
-          second: 'second',// 秒
-          minute: 'minute',// 分钟
-          hour: 'hour',// 小时
-          date: 'date',// 日期
-          day: 'day',// 星期
-          weekday: 'weekday',// 根据语言环境的星期
-          week: 'week',// 周
-          month: 'month', // 月
-          quarter: 'quarter',// 季度
-          year: 'year',// 年
-        },
+  data() {
+    return {
+      pickerType: this.type,
+      enumTypeStatus: {
+        millisecond: 'millisecond',// 毫秒
+        second: 'second',// 秒
+        minute: 'minute',// 分钟
+        hour: 'hour',// 小时
+        date: 'date',// 日期
+        day: 'day',// 星期
+        weekday: 'weekday',// 根据语言环境的星期
+        week: 'week',// 周
+        month: 'month', // 月
+        quarter: 'quarter',// 季度
+        year: 'year',// 年
+      },
+    }
+  },
+  mounted() {
+    this.pickerType = this.type;
+  },
+}
+
+let validator = {
+  data() {
+    return {
+      enumSelectStatus: {
+        now: 'now',
+        selected: 'selected',
+        start: 'start',
+        between: 'between',
+        end: 'end',
+      },
+    }
+  },
+  methods: {
+    validator: function(
+      value,
+      now = this.now || null,
+      selected = this.selectedValues || null,
+      start = this.selectedStart || null,
+      end = this.selectedEnd || null
+    ) {
+      let isSelected = false, isStart = false, isEnd = false, isBetween = false
+
+      let isNow = (now && this.validNow(value, now)) || false
+      if (this.range) {
+        isStart = (start && this.validStart(value, start)) || false
+        isEnd = (end && this.validEnd(value, end)) || false
+        isBetween = (start && end && this.validBetween(value, start, end)) || false
+      } else {
+        isSelected = (selected && this.validSelect(value, selected)) || false
       }
+      let isWeekend = this.validWeekend(value)
+      return { now: isNow, selected: isSelected, start: isStart, end: isEnd, between: isBetween, isWeekend: isWeekend }
+    },
+    validNow: function(value, now) {
+      return value.isSame(now)
+    },
+    validSelect: function(value, selected) {
+      return value.isSame(selected)
+    },
+    validStart: function(value, start) {
+      return value.isSame(start)
+    },
+    validEnd: function(value, end) {
+      return value.isSame(end)
+    },
+    validBetween: function(value, start, end) {
+      return value.isBetween(start, end)
+    },
+    validWeekend: function() {
+      return false
     },
   },
 }
 
+let ui = {
+  methods: {
+    objClass: function(status) {
+      let style = ''
+      if (status) {
+        if (status.now) style = 'border-0 bg-transparent text-danger '
+        if (status.start || status.end || status.between) style = status.now ? 'border-0 rounded-0 bg-danger' : 'border-0 rounded-0 bg-primary'
+        if (status.selected) style = status.now ? "border-danger bg-transparent text-danger" : "bg-transparent text-primary"
+        if (style.length === 0) style = 'border-0 bg-transparent text-body'
+        style += status.isWeekend ? ' font-weight-light' : ' font-weight-bolder'
+      }
+      return style
+    },
+    objStyle: function (status) {
+      return status && status.between ? 'opacity: .3' : ''
+    }
+  },
+}
+
 let base = {
-  mixins: [ moment.base, status.select, ],
+  mixins: [ moment.base, ],
   model: {
     prop: "value",
     event: "selected:changed"
   },
   props: {
     value: [String, Number, Date, Object],
-    min: [String, Number, Date, Object],
-    max: [String, Number, Date, Object],
-    range: props.Boolean,
-    selectedStart: [String, Number, Date, Object],
-    selectedEnd: [String, Number, Date, Object],
     hideHeader: props.Boolean,
     disabled: props.Boolean,
   },
@@ -120,24 +136,13 @@ let base = {
     headerText: function() {
       return null
     },
-    dateMin: function() {
-      return this.moment(new Date(this.min))
-    },
-    dateMax: function() {
-      return this.moment(new Date(this.max))
-    },
-    arrayMin: function() {
-      return [this.dateMin.year(), this.dateMin.month(), this.dateMin.date()]
-    },
-    arrayMax: function() {
-      return [this.dateMin.year(), this.dateMin.month(), this.dateMin.date()]
-    },
     list: function() {
       return []
     },
   },
   watch: {
     value: function(value) {
+      this.selectedValues = value
       this.initValue && this.initValue(value)
     },
     selectedValues: function(value) {
@@ -155,6 +160,24 @@ let base = {
     // },
     disabledItem: function(value, min = this.dateMin, max = this.dateMax) {
       return !value.isBetween(this.moment(min), this.moment(max), null, '[]')
+    },
+  },
+}
+
+let select = {
+  props: {
+    min: [String, Number, Date, Object],
+    max: [String, Number, Date, Object],
+    range: props.Boolean,
+    selectedStart: [String, Number, Date, Object],
+    selectedEnd: [String, Number, Date, Object],
+  },
+  computed: {
+    dateMin: function() {
+      return this.moment(new Date(this.min))
+    },
+    dateMax: function() {
+      return this.moment(new Date(this.max))
     },
   },
 }
@@ -179,7 +202,7 @@ let year = {
         let value = this.start + i
         let date = this.format(value)
 
-        let status = this.validator(date, this.now, this.selectedValues, this.selectedStart, this.selectedEnd)
+        let status = this.validator && this.validator(date)
         arr.push({
           value: value,
           label: date.format("YYYY"), //`${value} `,
@@ -253,7 +276,7 @@ let quarter = {
           let value = i + 1
           let date = this.format(this.year).quarter(value)
 
-          let status = this.validator(date, this.now , this.selectedValues, null, null)
+          let status = this.validator && this.validator(date)
           arr.push({
             value: value,
             label: date.format("Qo"),
@@ -319,7 +342,7 @@ let month = {
        for (let i = 0; i < this.total; i++) {
           let date = this.format(this.year, i)
 
-          let status = this.validator(date, this.now, this.selectedValues, this.selectedStart, this.selectedEnd)
+          let status = this.validator && this.validator(date)
           arr.push({
             value: i,
             label: date.format("MMMM"), // tools.string.padStart(i + 1, 2),
@@ -392,7 +415,7 @@ let week = {
       let end = this.format().endOf("month").endOf('week')
 
       while(date.isSameOrBefore(end)) {
-        let status = this.validator(date, this.now, this.selectedValues)
+        let status = this.validator && this.validator(date)
         arr.push({
           value: date.week(),
           label: date.format("wo"),
@@ -489,7 +512,7 @@ let date = {
         let value = i + 1
         let date = this.format(this.year, this.month, value)
 
-        let status = this.validator(date, this.now, this.selectedValues, this.selectedStart, this.selectedEnd)
+        let status = this.validator && this.validator(date)
         arr.push({
           value: value,
           // info: '十二月',
@@ -553,8 +576,11 @@ let date = {
 }
 
 export default {
-  status,
+  type,
+  validator,
   base,
+  select,
+  ui,
   year,
   quarter,
   month,

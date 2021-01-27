@@ -36,28 +36,17 @@ export default {
   name: 'BDatePanel',
   components: { BDateSelect, },
   mixins: [
-    util.mixins.moment.base,
+    util.mixins.date.type,
+    util.mixins.date.base,
+    util.mixins.date.select,
     util.mixins.form.readonly,
-    util.mixins.date.status.type,
   ],
   model: {
     prop: "value",
     event: "change",
   },
-  props: {
-    type: {
-      type: String,
-      default: "date",
-      validator: (value) => ["year", "quarter", "month", "week", "date"].includes(value),
-    },
-    value: [String, Number, Date, Object],
-    min: [String, Number, Date, Object],
-    max: [String, Number, Date, Object],
-    range: util.props.Boolean,
-  },
   data() {
     return {
-      pickertType: "",
       // 默认使用 selectedValueStart，
       // 当 range 为 True 时才使用 selectedValueEnd，
       // 此时 selectedValueStart 相当于 start，selectedValueEnd 相当于 end
@@ -120,7 +109,6 @@ export default {
     },
   },
   mounted() {
-    this.pickertType = this.type;
     if (this.range) {
       if (this.value.start) this.selectedValueStart = this.moment(this.value.start)
       if (this.value.end) this.selectedValueEnd = this.moment(this.value.end)
