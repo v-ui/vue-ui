@@ -125,6 +125,7 @@ let base = {
       date: 1,
       now: null,
       colCount: 0,
+      disabledNow: false,
       selectedValues: null,
     }
   },
@@ -153,6 +154,13 @@ let base = {
     format(year = this.year, month = this.month, date = this.date) {
       return this.moment([year, month, date])
     },
+    isBetween: function(value, start, end) {
+      return (start.isValid() && (value.isBefore(start))) ||
+            (end.isValid() && (value.isAfter(end)))
+    },
+    disabledItem: function(value, min = this.dateMin, max = this.dateMax) {
+      return this.isBetween(value, this.moment(min), this.moment(max))
+    },
   },
 }
 
@@ -164,26 +172,12 @@ let select = {
     selectedStart: [String, Number, Date, Object],
     selectedEnd: [String, Number, Date, Object],
   },
-  data() {
-    return {
-      disabledNow: false,
-    }
-  },
   computed: {
     dateMin: function() {
       return this.moment(new Date(this.min))
     },
     dateMax: function() {
       return this.moment(new Date(this.max))
-    },
-  },
-  methods: {
-    isBetween: function(value, start, end) {
-      return (start.isValid() && (value.isBefore(start))) ||
-            (end.isValid() && (value.isAfter(end)))
-    },
-    disabledItem: function(value, min = this.dateMin, max = this.dateMax) {
-      return this.isBetween(value, this.moment(min), this.moment(max))
     },
   },
 }
@@ -226,14 +220,15 @@ let year = {
     }
   },
   mounted() {
-    this.now = this.moment([this.moment().year(), this.moment().month(), 1])
+    this.now = this.moment([this.moment().year()])
     this.disabledNow = this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
-    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format().quarter(this.quarter) : null
+    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format() : null
     this.start = this.formatStart(this.year)
   },
   methods: {
     initValue: function(value) {
+      debugger
       let date = value && value.isValid && value.isValid() ? value : (this.disabledNow ? this.dateMin : this.moment())
       this.year = date.year()
     },

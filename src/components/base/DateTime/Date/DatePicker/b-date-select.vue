@@ -3,7 +3,7 @@
   <div :class="{ 'cannt-hide': range }">
     <year-panel
       v-if="pickerType === enumTypeStatus.year"
-      :value="selectedValues"
+      v-model="selectedValues"
       :class="{ 'cannt-hide': type !== enumTypeStatus.year }"
       :min="min"
       :max="max"
@@ -30,7 +30,7 @@
     />
     <month-panel
       v-if="pickerType === enumTypeStatus.month"
-      :value="selectedValues"
+      v-model="selectedValues"
       :class="{ 'cannt-hide': type !== enumTypeStatus.month }"
       :min="min"
       :max="max"
@@ -58,7 +58,7 @@
     />
     <date-panel
       v-if="pickerType === enumTypeStatus.date"
-      :value="selectedValues"
+      v-model="selectedValues"
       :class="{ 'cannt-hide': type !== enumTypeStatus.date }"
       :min="min"
       :max="max"
@@ -113,7 +113,7 @@ export default {
     },
     // year
     month2Year: function (value) {
-      if (value) this.selectedValues = this.formatDate(value && value.year())
+      if (value) this.selectedValues = this.formatDate(value.year())
       this.pickerType = this.enumTypeStatus.year;
     },
     yearChecked: function (value) {

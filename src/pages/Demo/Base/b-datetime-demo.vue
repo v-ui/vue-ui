@@ -47,26 +47,26 @@
       <font class="col-1">
         month
         <br>
-        min="2021-01"
-        max="2021-10"
+        min="2020-01"
+        max="2020-10"
       </font>
       <b-date-panel
         class="col-2"
         type="month"
-        min="2021-01"
-        max="2021-10"
+        min="2020-01"
+        max="2020-10"
       />
       <font class="col-1">
         date
         <br>
-        min="2021-01-10"
-        max="2021-01-20"
+        min="2020-01-10"
+        max="2020-01-20"
       </font>
       <b-date-panel
         class="col-2"
         type="date"
-        min="2021-01-10"
-        max="2021-01-20"
+        min="2020-01-10"
+        max="2020-01-20"
       />
     </div>
     <div class="row mx-0">
