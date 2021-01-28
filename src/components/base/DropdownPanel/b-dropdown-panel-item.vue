@@ -1,7 +1,7 @@
 <template>
   <b-button
     class="rounded-pill my-1 p-1"
-    style="min-width: 3em"
+    style="min-width: 2.2em"
     :class="[item.objClass, objClass]"
     :style="item.objStyle"
     :disabled="disabled"
@@ -12,7 +12,6 @@
     <b-info
       :info="item.info"
       class="m-0"
-      :info-color="item.infoColor || 'muted'"
       style="font-size: 0.5em"
     />
   </b-button>

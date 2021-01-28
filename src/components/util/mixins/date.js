@@ -154,12 +154,12 @@ let base = {
     format(year = this.year, month = this.month, date = this.date) {
       return this.moment([year, month, date])
     },
-    // isBetween: function(value, start, end) {
-    //   return (start.isValid() && (value.isSameOrBefore(start))) ||
-    //         (end.isValid() && (value.isAfter(end)))
-    // },
+    isBetween: function(value, start, end) {
+      return (start.isValid() && (value.isSameOrBefore(start))) ||
+            (end.isValid() && (value.isAfter(end)))
+    },
     disabledItem: function(value, min = this.dateMin, max = this.dateMax) {
-      return !value.isBetween(this.moment(min), this.moment(max), null, '[]')
+      return this.isBetween(value, this.moment(min), this.moment(max))
     },
   },
 }
@@ -220,10 +220,7 @@ let year = {
     }
   },
   mounted() {
-    this.now = this.moment([this.moment().year()])
-    this.disabledNow = this.disabledItem(this.now)
-    this.initValue && this.initValue(this.value)
-    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format() : null
+
     this.start = this.formatStart(this.year)
   },
   methods: {
@@ -457,7 +454,6 @@ let week = {
       this.year = this.moment().year();
       this.month = this.moment().month();
       this.week = this.moment().week();
-      debugger
       this.selectedValues = this.format().week(this.week)
       this.$emit('week:checked', this.selectedValues)
     },
