@@ -35,7 +35,6 @@ export default {
   components: { DatePanelTemp, panelRow },
   mixins: [
     util.mixins.date.select,
-    util.mixins.date.ui,
     util.mixins.date.validator,
     util.mixins.date.date,
   ],

@@ -1,17 +1,20 @@
 <template>
   <span class="row mx-1">
-    <item
-      v-for="(item, index) in list"
-      :key="index"
-      class="text-center"
-      :item="item"
-      :col-count="colCount"
-      :multiple="isMultiple"
-      :primary-key="primaryKey"
-      :selected="selectedValues"
-      :disabled="item.disabled || disabled"
-      @item:click="itemClick"
-    />
+    <template v-for="(item, index) in list">
+      <slot name="item" :item="item" :itemClass="itemClass" :disabled="disabled">
+        <item
+          :key="index"
+          :item="item"
+          class="text-center"
+          :class="itemClass"
+          :multiple="isMultiple"
+          :primary-key="primaryKey"
+          :selected="selectedValues"
+          :disabled="item.disabled || disabled"
+          @item:click="itemClick"
+        />
+      </slot>
+    </template>
   </span>
 </template>
 
@@ -27,6 +30,11 @@ export default {
   props: {
     disabled: util.props.Boolean,
     colCount: util.props.UInt,
+  },
+  computed: {
+    itemClass: function() {
+      return 12 % this.colCount == 0 ? `col-${12 / this.colCount}` : "col-auto";
+    },
   },
   methods: {
     itemClick: function(item) {

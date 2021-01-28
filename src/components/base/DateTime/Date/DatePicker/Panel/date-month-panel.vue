@@ -25,7 +25,6 @@ export default {
   components: { DatePanelTemp },
   mixins: [
     util.mixins.date.select,
-    util.mixins.date.ui,
     util.mixins.date.validator,
     util.mixins.date.month,
   ],

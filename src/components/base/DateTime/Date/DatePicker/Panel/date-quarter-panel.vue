@@ -29,7 +29,6 @@ export default {
   components: { DatePanelTemp, BDropdownMenu },
   mixins: [
     util.mixins.date.select,
-    util.mixins.date.ui,
     util.mixins.date.validator,
     util.mixins.date.quarter,
   ],

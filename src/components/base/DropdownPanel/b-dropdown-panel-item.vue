@@ -2,10 +2,9 @@
   <b-button
     class="rounded-pill my-1 p-1"
     style="min-width: 2.2em"
-    :class="[item.objClass, objClass]"
-    :style="item.objStyle"
+    :class="objClass"
     :disabled="disabled"
-    :aria-selected="isSelected || (item.status && item.status.selected)"
+    :aria-selected="isSelected"
     @click.native="$emit('item:click', item)"
   >
     {{ value }}
@@ -29,21 +28,15 @@ export default {
   mixins: [ util.mixins.select.selectItem, ],
   props: {
     disabled: util.props.Boolean,
-    colCount: util.props.UInt,
   },
   computed: {
     value: function() {
       return this.item.label || this.item[this.primaryKey] || this.item.value || this.item
     },
     objClass: function() {
-      let select = ''
-      if (!this.item.objClass) {
-        select = this.isSelected
-          ? "bg-transparent text-body"
-          : "border-0 bg-transparent text-body";
-      }
-      const col = 12 % this.colCount == 0 ? `col-${12 / this.colCount}` : "col-auto";
-      return `${select} ${col}`
+      return this.isSelected
+        ? "bg-transparent text-body"
+        : "border-0 bg-transparent text-body";
     },
   }
 };

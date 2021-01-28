@@ -10,11 +10,7 @@
       @checknow="checknow"
       @backward="backward"
     />
-    <hr
-      v-show="!$slots.week"
-      class="my-1"
-    >
-
+    <hr v-show="!$slots.week" class="my-1">
     <slot name="week" />
     <slot>
       <panel-row
@@ -22,7 +18,16 @@
         :col-count="colCount"
         :disabled="disabled"
         @item:click="click"
-      />
+      >
+        <template #item="{ item, itemClass, disabled }">
+          <panel-item
+            :item="item"
+            :class="itemClass"
+            :disabled="disabled || item.disabled"
+            @item:click="click"
+          />
+        </template>
+      </panel-row>
     </slot>
   </div>
 </template>
@@ -31,11 +36,12 @@
 import util from "@/components/util/index.js";
 
 import panelHeader from "./date-panel-header";
+import panelItem from './date-panel-item'
 import panelRow from "@/components/base/DropdownPanel/b-dropdown-panel-row.vue"
 
 export default {
   name: 'DatePanelTemp',
-  components: { panelHeader, panelRow, },
+  components: { panelHeader, panelItem, panelRow, },
   props: {
     list: util.props.Array,
     colCount: util.props.UInt,
