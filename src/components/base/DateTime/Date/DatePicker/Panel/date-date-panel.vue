@@ -1,7 +1,7 @@
 <template>
   <date-panel-temp
     :list="list"
-    style="width: 16em;"
+    style="width: 18em;"
     :col-count="colCount"
     :disabled="disabled"
     :disabled-now="disabledNow"
@@ -14,7 +14,7 @@
     @panel:checked="checked"
   >
     <template #week>
-      <panel-row
+      <panel-tabel
         class="border-bottom border-primary mb-1"
         :list="weekList"
         :col-count="colCount"
@@ -28,11 +28,11 @@
 import util from "@/components/util/index.js";
 
 import DatePanelTemp from "../Basic/date-panel-temp";
-import panelRow from "@/components/base/DropdownPanel/b-dropdown-panel-row.vue";
+import panelTabel from "@/components/base/DateTime/Date/DatePicker/Basic/date-panel-tabel.vue";
 
 export default {
   name: "DateDatePanel",
-  components: { DatePanelTemp, panelRow },
+  components: { DatePanelTemp, panelTabel },
   mixins: [
     util.mixins.date.select,
     util.mixins.date.validator,

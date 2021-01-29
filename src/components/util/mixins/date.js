@@ -465,7 +465,7 @@ let date = {
   mixins: [ base, ],
   data() {
     return {
-      // colCount: 7,
+      colCount: 7,
     }
   },
   computed: {

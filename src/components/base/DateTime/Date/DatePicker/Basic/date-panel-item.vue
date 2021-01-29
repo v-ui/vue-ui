@@ -20,7 +20,7 @@ export default {
   name: 'date-panel-item',
   components: { BButton },
   props: {
-    item: util.props.Object,
+    item: [ Object, String, Number, ],
     disabled: util.props.Boolean,
   },
   computed: {

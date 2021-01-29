@@ -1,5 +1,5 @@
 <template>
-  <span class="row mx-1">
+  <span class="row m-1">
     <template v-for="(item, index) in list">
       <slot name="item" :item="item" :itemClass="itemClass" :disabled="disabled">
         <item
