@@ -10,8 +10,9 @@
       <i class="far fa-calendar-alt" />
     </template>
     <template>
-      <b-date-panel
+      <b-date-select
         v-model="selectedValues"
+        :hide-header="hideHeader"
         :type="pickerType"
         :min="dateMin"
         :max="dateMax"
@@ -25,12 +26,12 @@
 import config from '@/config/index.js'
 import util from "@/components/util/index.js";
 
-import BDatePanel from '@/components/base/DateTime/Date/DatePicker/b-date-panel.vue'
+import BDateSelect from '@/components/base/DateTime/Date/DatePicker/b-date-select.vue'
 import dropdownPanel from "@/components/base/DropdownPanel/b-dropdown-panel.vue";
 
 export default {
   name: "BDatePicker",
-  components: { BDatePanel, dropdownPanel, },
+  components: { BDateSelect, dropdownPanel, },
   mixins: [
     util.mixins.form.base,
     util.mixins.date.base,

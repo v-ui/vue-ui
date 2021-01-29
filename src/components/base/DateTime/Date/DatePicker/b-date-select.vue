@@ -1,160 +1,120 @@
-
 <template>
-  <div :class="{ 'cannt-hide': range }">
-    <year-panel
-      v-if="pickerType === enumTypeStatus.year"
-      v-model="selectedValues"
-      :class="{ 'cannt-hide': type !== enumTypeStatus.year }"
+  <div class="d-flex justify-content-center">
+    <b-date-panel
+      v-model="selectedValueStart"
+      class="flex-fill"
+      :type="type"
       :min="min"
-      :max="max"
+      :max="range ? rangeStartMax : max"
       :disabled="disabled"
-      :hide-header="false"
-      :range="type === enumTypeStatus.year && range"
-      :selected-start="selectedStart"
-      :selected-end="selectedEnd"
-      @year:checked="yearChecked"
+      :range="range"
+      :selected-start="selectedValueStart"
+      :selected-end="selectedValueEnd"
+      :hide-header="hideHeader"
     />
-    <quarter-panel
-      v-if="pickerType === enumTypeStatus.quarter"
-      v-model="selectedValues"
-      :class="{ 'cannt-hide': type !== enumTypeStatus.quarter }"
-      :min="min"
+    <b-date-panel
+      v-if="range"
+      v-model="selectedValueEnd"
+      class="flex-fill"
+      :type="type"
+      :min="range ? rangeEndMin : min"
       :max="max"
       :disabled="disabled"
-      :hide-header="false"
-      :range="type === enumTypeStatus.quarter && range"
-      :selected-start="selectedStart"
-      :selected-end="selectedEnd"
-      @quarter2Year="quarter2Year"
-      @quarter:checked="quarterChecked"
-    />
-    <month-panel
-      v-if="pickerType === enumTypeStatus.month"
-      v-model="selectedValues"
-      :class="{ 'cannt-hide': type !== enumTypeStatus.month }"
-      :min="min"
-      :max="max"
-      :disabled="disabled"
-      :hide-header="false"
-      :range="type === enumTypeStatus.month && range"
-      :selected-start="selectedStart"
-      :selected-end="selectedEnd"
-      @month2Year="month2Year"
-      @month:checked="monthChecked"
-    />
-    <week-panel
-      v-if="pickerType === enumTypeStatus.week"
-      v-model="selectedValues"
-      :class="{ 'cannt-hide': type !== enumTypeStatus.week }"
-      :min="min"
-      :max="max"
-      :disabled="disabled"
-      :hide-header="false"
-      :range="type === enumTypeStatus.week && range"
-      :selected-start="selectedStart"
-      :selected-end="selectedEnd"
-      @week2Month="week2Month"
-      @week:checked="weekChecked"
-    />
-    <date-panel
-      v-if="pickerType === enumTypeStatus.date"
-      v-model="selectedValues"
-      :class="{ 'cannt-hide': type !== enumTypeStatus.date }"
-      :min="min"
-      :max="max"
-      :disabled="disabled"
-      :hide-header="false"
-      :range="type === enumTypeStatus.date && range"
-      :selected-start="selectedStart"
-      :selected-end="selectedEnd"
-      @date2Month="date2Month"
-      @date:checked="dateChecked"
+      :range="range"
+      :selected-start="selectedValueStart"
+      :selected-end="selectedValueEnd"
+      :hide-header="hideHeader"
     />
   </div>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
-
-import yearPanel from "./Panel/date-year-panel";
-import monthPanel from "./Panel/date-month-panel";
-import datePanel from "./Panel/date-date-panel";
-
-import quarterPanel from './Panel/date-quarter-panel'
-import weekPanel from './Panel/date-week-panel'
+import BDatePanel from './b-date-panel'
 
 export default {
-  name: "DatePanelSelect",
-  components: { yearPanel, monthPanel, datePanel, quarterPanel, weekPanel },
+  name: 'BDateSelet',
+  components: { BDatePanel, },
   mixins: [
     util.mixins.date.type,
     util.mixins.date.base,
     util.mixins.date.select,
     util.mixins.form.readonly,
   ],
+  model: {
+    prop: "value",
+    event: "change",
+  },
+  data() {
+    return {
+      // 默认使用 selectedValueStart，
+      // 当 range 为 True 时才使用 selectedValueEnd，
+      // 此时 selectedValueStart 相当于 start，selectedValueEnd 相当于 end
+      selectedValueStart: null,
+      selectedValueEnd: null,
+      selectedValues: this.range ? {start: null, end: null} : null,
+    };
+  },
   computed: {
-    canHide: function () {
-      return this.type === this.pickerType;
+    rangeStartMax: function() {
+      if (this.selectedValueEnd && this.selectedValueEnd.isValid && this.selectedValueEnd.isValid()) {
+        let end = this.selectedValueEnd.clone()
+        switch (this.type) {
+          case this.enumTypeStatus.year:
+          return end.subtract(1, 'years')
+        case this.enumTypeStatus.month:
+          return end.subtract(1, 'months')
+        case this.enumTypeStatus.date:
+          return end.subtract(1, 'days')
+        default:
+          return end
+        }
+      } else {
+        return this.max
+      }
     },
-    selectedValuesIsValid: function () {
-      return this.selectedValues && this.selectedValues.isValid && this.selectedValues.isValid()
+    rangeEndMin: function() {
+      if (this.selectedValueStart && this.selectedValueStart.isValid && this.selectedValueStart.isValid()) {
+        let start = this.selectedValueStart.clone()
+        switch (this.type) {
+          case this.enumTypeStatus.year:
+          return start.add(1, 'years')
+        case this.enumTypeStatus.month:
+          return start.add(1, 'months')
+        case this.enumTypeStatus.date:
+          return start.add(1, 'days')
+        default:
+          return start
+        }
+      } else {
+        return this.min
+      }
+    },
+  },
+  watch: {
+    selectedValueStart: function (value) {
+      this.range
+        ? this.selectedValues.start = value
+        : this.selectedValues = value
+    },
+    selectedValueEnd: function (value) {
+      this.selectedValues.end = value
+    },
+    selectedValues: {
+      handler: function (value) {
+        // 配合 v-model 工作
+        this.$emit("change", value);
+      },
+      deep: true,
     },
   },
   mounted() {
-    this.selectedValues = this.value
+    if (this.range) {
+      if (this.value.start) this.selectedValueStart = this.moment(this.value.start)
+      if (this.value.end) this.selectedValueEnd = this.moment(this.value.end)
+    } else {
+      if (this.value) this.selectedValueStart = this.moment(this.value)
+    }
   },
-  methods: {
-    formatDate: function(
-      year = this.selectedValuesIsValid ? this.selectedValues.year() : 0,
-      month = this.selectedValuesIsValid ? this.selectedValues.month() : 0,
-      date = this.selectedValuesIsValid ? this.selectedValues.date() : 1
-    ) {
-      return this.moment([year, month, date])
-    },
-    // year
-    month2Year: function (value) {
-      if (value) this.selectedValues = this.formatDate(value.year())
-      this.pickerType = this.enumTypeStatus.year;
-    },
-    yearChecked: function (value) {
-      this.selectedValues = this.formatDate(value.year())
-      if (this.canHide) return;
-      this.pickerType = this.type === this.enumTypeStatus.quarter ? this.enumTypeStatus.quarter : this.enumTypeStatus.month;
-    },
-    // quarter
-    quarter2Year: function(value) {
-      if (value) this.selectedValues = this.formatDate(value.year(), value.month(), 1)
-      this.pickerType = this.enumTypeStatus.year;
-    },
-    quarterChecked: function(value) {
-      this.selectedValues = this.formatDate(value.year(), value.month(), 1)
-      if (this.canHide) return
-      this.pickerType = this.enumTypeStatus.quarter
-    },
-    // month
-    date2Month: function (value) {
-      if (value) this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
-      this.pickerType = this.enumTypeStatus.month;
-    },
-    monthChecked: function (value) {
-      this.selectedValues = this.formatDate(value.year(), value.month())
-      if (this.canHide) return;
-      this.pickerType = this.type === this.enumTypeStatus.week ? this.enumTypeStatus.week : this.enumTypeStatus.date;
-    },
-    // week
-    week2Month: function(value) {
-      if (value) this.selectedValues = this.formatDate(value.year(), value.month(), 1)
-      this.pickerType = this.enumTypeStatus.month;
-    },
-    weekChecked: function(value) {
-      this.selectedValues = this.formatDate(value.year(), value.month(), 1)
-      if (this.canHide) return
-      this.pickerType = this.enumTypeStatus.week
-    },
-    // date
-    dateChecked: function (value) {
-      if (value) this.selectedValues = this.formatDate(value.year(), value.month(), value.date())
-    },
-  },
-};
+}
 </script>

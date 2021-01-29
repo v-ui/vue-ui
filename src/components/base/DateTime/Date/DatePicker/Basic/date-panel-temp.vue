@@ -1,6 +1,7 @@
 <template>
   <div>
     <panel-header
+      v-if="!hideHeader"
       :disabled="disabled"
       :disabled-now="disabledNow"
       :diesable-header-click="diesableHeaderClick"
@@ -10,7 +11,7 @@
       @checknow="checknow"
       @backward="backward"
     />
-    <hr v-show="!$slots.week" class="my-1">
+    <hr v-show="!$slots.week && !hideHeader" class="my-1">
     <slot name="week" />
     <slot>
       <panel-row

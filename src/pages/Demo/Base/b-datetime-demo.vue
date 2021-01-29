@@ -30,6 +30,35 @@
     </div>
     <div class="row mx-0">
       <font class="col-1">
+        hideHeader:
+      </font>
+      <font class="col-1">
+        year
+      </font>
+      <b-date-panel
+        class="col-2"
+        type="year"
+        hide-header
+      />
+      <font class="col-1">
+        month
+      </font>
+      <b-date-panel
+        class="col-2"
+        type="month"
+        hide-header
+      />
+      <font class="col-1">
+        date
+      </font>
+      <b-date-panel
+        class="col-2"
+        type="date"
+        hide-header
+      />
+    </div>
+    <div class="row mx-0">
+      <font class="col-1">
         min/max:
       </font>
       <font class="col-1">
@@ -104,6 +133,9 @@
         type="date"
       />
     </div>
+    <h2>b-date-select</h2>
+    b-date-select 拥有 b-date-panel 的所有功能，b-date-panel 更简洁，在单独选择日期时推荐使用 b-date-panel，仅当需要选择时间范围时才使用 b-date-select
+    <hr>
     <div class="row mx-0">
       <font class="col-1">
         v-model(range):
@@ -113,7 +145,7 @@
         <br>
         {{ yearR }}
       </font>
-      <b-date-panel
+      <b-date-select
         v-model="yearR"
         type="year"
         range
@@ -123,7 +155,7 @@
         <br>
         {{ monthR }}
       </font>
-      <b-date-panel
+      <b-date-select
         v-model="monthR"
         type="month"
         range
@@ -136,7 +168,7 @@
         <br>
         {{ dateR }}
       </font>
-      <b-date-panel
+      <b-date-select
         v-model="dateR"
         type="date"
         range
@@ -468,13 +500,14 @@
 </template>
 
 <script>
-import BDatePanel from '@/components/base/DateTime/Date/DatePicker/b-date-panel.vue'
+import BDatePanel from '@/components/base/DateTime/Date/DatePicker/b-date-panel.vue';
+import BDateSelect from '@/components/base/DateTime/Date/DatePicker/b-date-select.vue'
 import BDatePicker from "@/components/base/DateTime/Date/DatePicker/b-date-picker.vue";
 import BTime from "@/components/base/DateTime/Time/b-time.vue";
 
 export default {
   name: "BDatetimeDemo",
-  components: { BDatePanel, BDatePicker, BTime,  },
+  components: { BDatePanel, BDateSelect, BDatePicker, BTime,  },
   data() {
     return {
       year: "2018",

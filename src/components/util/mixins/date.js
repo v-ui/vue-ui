@@ -208,7 +208,7 @@ let year = {
     this.now = this.moment([this.moment().year(), this.moment().month(), 1])
     this.disabledNow = this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
-    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format().quarter(this.quarter) : null
+    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format() : null
     this.start = this.formatStart(this.year)
   },
   methods: {

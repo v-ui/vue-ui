@@ -1,6 +1,6 @@
 <template>
   <b-button
-    class="rounded-pill my-1 p-1"
+    class="rounded-pill p-1"
     style="min-width: 2.2em"
     :class="objClass"
     :style="objStyle"
