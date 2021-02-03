@@ -1,18 +1,23 @@
 <template>
   <date-panel-temp
     :list="list"
-    style="width: 16em"
+    style="min-width: 16em;"
     :col-count="colCount"
     :disabled="disabled"
     :disabled-now="disabledNow"
     :hide-header="hideHeader"
     :header-text="headerText"
+    :hide-controller="calendar"
     @panel:clickHeader="clickHeader"
     @panel:forward="forward"
     @panel:checknow="checknow"
     @panel:backward="backward"
     @panel:checked="checked"
-  />
+  >
+    <template #header>
+      <slot name="header" />
+    </template>
+  </date-panel-temp>
 </template>
 
 <script>

@@ -228,7 +228,6 @@ let year = {
   },
   methods: {
     initValue: function(value) {
-      debugger
       let date = value && value.isValid && value.isValid() ? value : (this.disabledNow ? this.dateMin : this.moment())
       this.year = date.year()
     },

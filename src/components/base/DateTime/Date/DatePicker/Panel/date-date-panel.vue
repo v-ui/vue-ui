@@ -1,21 +1,25 @@
 <template>
   <date-panel-temp
     :list="list"
-    style="width: 18em;"
+    style="min-width: 16em;"
     :col-count="colCount"
     :disabled="disabled"
     :disabled-now="disabledNow"
     :hide-header="hideHeader"
     :header-text="headerText"
+    :hide-controller="calendar"
     @panel:clickHeader="clickHeader"
     @panel:forward="forward"
     @panel:checknow="checknow"
     @panel:backward="backward"
     @panel:checked="checked"
   >
+    <template #header>
+      <slot name="header" />
+    </template>
     <template #week>
-      <panel-tabel
-        class="border-bottom border-primary mb-1"
+      <panel-table
+        class="border-bottom border-primary font-weight-bolder mb-1"
         :list="weekList"
         :col-count="colCount"
         disabled
@@ -28,15 +32,16 @@
 import util from "@/components/util/index.js";
 
 import DatePanelTemp from "../Basic/date-panel-temp";
-import panelTabel from "@/components/base/DateTime/Date/DatePicker/Basic/date-panel-tabel.vue";
+import panelTable from "@/components/base/DateTime/Date/DatePicker/Basic/date-panel-table.vue";
 
 export default {
   name: "DateDatePanel",
-  components: { DatePanelTemp, panelTabel },
+  components: { DatePanelTemp, panelTable },
   mixins: [
     util.mixins.date.select,
     util.mixins.date.validator,
     util.mixins.date.date,
+    util.mixins.date.weekList,
   ],
 };
 </script>

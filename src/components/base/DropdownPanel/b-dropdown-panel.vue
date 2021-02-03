@@ -52,7 +52,7 @@
 import util from "@/components/util/index.js";
 
 import BDropdownPicker from '@/components/base/DropdownPicker/b-dropdown-picker.vue'
-import BDropdownPanelRow from './b-dropdown-panel-row'
+import BDropdownPanelRow from './Row/b-dropdown-panel-row'
 
 import BValid from "@/components/form/Other/b-form-valid.vue";
 import BInfo from "@/components/basic/basic-info.vue"

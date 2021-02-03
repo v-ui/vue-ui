@@ -8,6 +8,7 @@ export default {
     { path: 'b-alert', name: 'b-alert', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-alert-demo.vue'), },
     { path: 'b-badge', name: 'b-badge', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-badge-demo.vue'), },
     { path: 'b-card', name: 'b-card', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-card-demo.vue'), },
+    { path: 'b-calendar', name: 'b-calendar', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-calendar-demo.vue'), },
     { path: 'b-datetime', name: 'b-datetime', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-datetime-demo.vue'), },
     { path: 'b-dropdown', name: 'b-dropdown', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-dropdown-demo.vue'), },
     { path: 'b-list', name: 'b-list', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-list-demo.vue'), },

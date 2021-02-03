@@ -596,7 +596,7 @@
 
 <script>
 import BDropdownMenu from '@/components/base/Dropdown/b-dropdown-menu.vue'
-import BDropdownRow from '@/components/base/DropdownPanel/b-dropdown-panel-row.vue'
+import BDropdownRow from '@/components/base/DropdownPanel/Row/b-dropdown-panel-row.vue'
 
 import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
 import BDropdownHeader from "@/components/base/Dropdown/b-dropdown-header.vue";

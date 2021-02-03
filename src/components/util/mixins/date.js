@@ -98,6 +98,7 @@ let base = {
     value: [String, Number, Date, Object],
     hideHeader: props.Boolean,
     disabled: props.Boolean,
+    calendar: props.Boolean,
   },
   data() {
     return {
@@ -122,7 +123,7 @@ let base = {
   },
   watch: {
     value: function(value) {
-      this.selectedValues = value
+      if (!this.calendar) this.selectedValues = value
       this.initValue && this.initValue(value)
     },
     selectedValues: function(value) {
@@ -193,7 +194,7 @@ let year = {
           value: value,
           label: date.format("YYYY"), //`${value} `,
           status: this.validator && this.validator(date),
-          disabled: this.disabledItem(date),
+          disabled: this.disabledItem && this.disabledItem(date),
         });
       }
       return arr
@@ -205,8 +206,8 @@ let year = {
     }
   },
   mounted() {
-    this.now = this.moment([this.moment().year(), this.moment().month(), 1])
-    this.disabledNow = this.disabledItem(this.now)
+    this.now = this.moment([this.moment().year()])
+    this.disabledNow = this.disabledItem && this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
     this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format() : null
     this.start = this.formatStart(this.year)
@@ -266,7 +267,7 @@ let quarter = {
             label: date.format("Qo"),
             info: `${date.startOf('quarter').format("ll")}-${date.endOf('quarter').format("ll")}`,
             status: this.validator && this.validator(date),
-            disabled: this.disabledItem(date),
+            disabled: this.disabledItem && this.disabledItem(date),
           });
        }
       return arr;
@@ -274,7 +275,7 @@ let quarter = {
   },
   mounted() {
     this.now = this.moment([this.moment().year(), this.moment().month(), 1])
-    this.disabledNow = this.disabledItem(this.now)
+    this.disabledNow = this.disabledItem && this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
     this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format().quarter(this.quarter) : null
   },
@@ -329,7 +330,7 @@ let month = {
             value: i,
             label: date.format("MMMM"), // tools.string.padStart(i + 1, 2),
             status: this.validator && this.validator(date),
-            disabled: this.disabledItem(date),
+            disabled: this.disabledItem && this.disabledItem(date),
           });
        }
       return arr;
@@ -337,7 +338,7 @@ let month = {
   },
   mounted() {
     this.now = this.moment([this.moment().year(), this.moment().month()])
-    this.disabledNow = this.disabledItem(this.now)
+    this.disabledNow = this.disabledItem && this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
     this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format() : null
   },
@@ -401,7 +402,7 @@ let week = {
           label: date.format("wo"),
           info: `${date.startOf('week').format("ll")}-${date.endOf('week').format("ll")}`,
           status: this.validator && this.validator(date),
-          disabled: this.disabledItem(date),
+          disabled: this.disabledItem && this.disabledItem(date),
         });
         date.add(1, 'week')
       }
@@ -410,7 +411,7 @@ let week = {
   },
   mounted() {
     this.now = this.moment([this.moment().year(), this.moment().month(), this.moment().date()])
-    this.disabledNow = this.disabledItem(this.now)
+    this.disabledNow = this.disabledItem && this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
     this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format().endOf('week') : null
   },
@@ -466,6 +467,7 @@ let date = {
   data() {
     return {
       colCount: 7,
+      start: 1,
     }
   },
   computed: {
@@ -474,9 +476,6 @@ let date = {
     },
     headerText: function() {
       return this.moment([this.year, this.month]).format(config.ui.date.month)
-    },
-    weekList: function() {
-      return this.moment.weekdaysMin()
     },
     list: function() {
 
@@ -487,14 +486,14 @@ let date = {
       let arr = Array(day).fill({ label: "  " });
 
       for (let i = 0; i < this.total; i++) {
-        let value = i + 1
+        let value = i + this.start
         let date = this.format(this.year, this.month, value)
 
         arr.push({
           value: value,
           label: date.format("DD"), // tools.string.padStart(value, 2),
           status: this.validator && this.validator(date),
-          disabled: this.disabledItem(date),
+          disabled: this.disabledItem && this.disabledItem(date),
         });
       }
       return arr
@@ -502,9 +501,11 @@ let date = {
   },
   mounted() {
     this.now = this.moment([this.moment().year(), this.moment().month(), this.moment().date()])
-    this.disabledNow = this.disabledItem(this.now)
+    this.disabledNow = this.disabledItem && this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
-    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format() : null
+    this.selectedValues = this.calendar
+      ? this.now
+      : this.value && this.value.isValid && this.value.isValid() ? this.format() : null
   },
   methods: {
     initValue: function(value) {
@@ -540,12 +541,21 @@ let date = {
       }
     },
     checked: function(value) {
+      if (this.calendar) return
       this.date = value
       this.selectedValues = this.format()
       this.$emit('date:checked', this.selectedValues)
     },
     validWeekend: function(value) {
       return [7, 6].includes(value.isoWeekday())
+    },
+  },
+}
+
+let weekList = {
+  computed: {
+    weekList: function() {
+      return this.moment.weekdaysMin()
     },
   },
 }
@@ -560,4 +570,5 @@ export default {
   month,
   week,
   date,
+  weekList,
 }
