@@ -1,6 +1,8 @@
 <template>
   <div
     class="btn-group-toggle"
+    :class="groupClass"
+    style="min-width: 25%"
     data-toggle="buttons"
   >
     <label
@@ -41,6 +43,7 @@ export default {
     value: util.props.String,
     label: util.props.String,
     info: util.props.String,
+    size: util.props.size,
     checked: util.props.Boolean,
     disabled: util.props.Boolean
   },
@@ -48,6 +51,12 @@ export default {
     return {
       selected: this.checked,
     }
+  },
+  computed: {
+    groupClass: function() {
+      let size = this.size ? `btn-group-${this.size}` : ''
+      return `${size}`
+    },
   },
   watch: {
     checked: function(value) {

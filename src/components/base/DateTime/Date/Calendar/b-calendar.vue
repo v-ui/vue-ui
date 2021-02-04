@@ -1,5 +1,14 @@
 <template>
   <div class="m-1 h-100">
+    <div>
+      <b-radio-button-group
+        v-model="pickerType"
+        class="d-flex justify-content-center"
+        name="picker-type"
+        :list="typeList"
+        size="sm"
+      />
+    </div>
     <cal-year-panel
       v-if="pickerType === enumTypeStatus.year"
       calendar
@@ -37,16 +46,33 @@ import CalYearPanel from './Cal/cal-year-panel'
 import CalMonthPanel from './Cal/cal-month-panel'
 import CalWeekPanel from './Cal/cal-week-panel'
 import CalDatePanel from './Cal/cal-date-panel'
+import BRadioButtonGroup from "@/components/form/Radio/b-radio-button-group.vue";
 export default {
   name: 'b-calendar',
-  components: { CalYearPanel, CalMonthPanel, CalWeekPanel, CalDatePanel },
+  components: { CalYearPanel, CalMonthPanel, CalWeekPanel, CalDatePanel, BRadioButtonGroup },
   mixins: [
     util.mixins.date.type,
     util.mixins.date.base,
     util.mixins.form.readonly,
   ],
+  data() {
+    return {
+      typeList: [],
+    }
+  },
   mounted() {
+    this.typeList = [
+      { value: this.enumTypeStatus.year, label: '年', },
+      { value: this.enumTypeStatus.month, label: '月', },
+      { value: this.enumTypeStatus.week, label: '周', },
+      { value: this.enumTypeStatus.date, label: '日', },
+    ],
     this.selectedValues = this.moment(this.value)
+  },
+  watch: {
+    pickerType: function() {
+
+    },
   },
   methods: {
     // year
