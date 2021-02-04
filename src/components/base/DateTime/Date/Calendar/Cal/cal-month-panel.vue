@@ -2,11 +2,12 @@
   <date-panel-temp
     :list="list"
     border
-    style="min-width: 65em;"
+    class="h-100"
+    style="min-width: 66em;"
     :col-count="colCount"
     :hide-header="hideHeader"
     :header-text="headerText"
-    :diesable-header-click="true"
+    @panel:clickHeader="clickHeader"
     @panel:forward="forward"
     @panel:checknow="checknow"
     @panel:backward="backward"
@@ -25,7 +26,7 @@
         :item="item"
         :year="year"
         :month="month"
-        @click.native="click"
+        @click.native="monthChecked(year, month, item.value)"
       />
     </template>
   </date-panel-temp>
@@ -46,12 +47,12 @@ export default {
     util.mixins.date.date,
     util.mixins.date.weekList,
   ],
-  mounted() {
-    this.selectedValues = this.format()
-  },
   methods: {
-    click(value) {
-      this.$emit('month2Week', value)
+    clickHeader: function() {
+      this.$emit("month2Year", this.format(this.year, this.month, this.date))
+    },
+    monthChecked(year, month, date) {
+      this.$emit('month:checked', this.format(year, month, date))
     },
   },
 }

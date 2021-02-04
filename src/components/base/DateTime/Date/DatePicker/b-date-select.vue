@@ -30,8 +30,8 @@
 
 <script>
 import util from "@/components/util/index.js";
-import BDatePanel from './b-date-panel'
 
+import BDatePanel from './b-date-panel'
 export default {
   name: 'BDateSelet',
   components: { BDatePanel, },

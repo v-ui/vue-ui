@@ -1,11 +1,88 @@
 <template>
-  <cal-year-panel />
+  <div class="m-1 h-100">
+    <cal-year-panel
+      v-if="pickerType === enumTypeStatus.year"
+      calendar
+      :value="selectedValues"
+      @year:checked="yearChecked"
+    />
+    <cal-month-panel
+      v-if="pickerType === enumTypeStatus.month"
+      calendar
+      :value="selectedValues"
+      @month2Year="month2Year"
+      @month:checked="monthChecked"
+    />
+    <cal-week-panel
+      v-if="pickerType === enumTypeStatus.week"
+      calendar
+      :value="selectedValues"
+      @week2Month="week2Month"
+      @week:checked="weekChecked"
+    />
+    <cal-date-panel
+      v-if="pickerType === enumTypeStatus.date"
+      calendar
+      :value="selectedValues"
+      @date2Week="date2Week"
+      @date:checked="dateChecked"
+    />
+  </div>
 </template>
 
 <script>
-import CalYearPanel from './Cal/cal-date-panel'
+import util from "@/components/util/index.js";
+
+import CalYearPanel from './Cal/cal-year-panel'
+import CalMonthPanel from './Cal/cal-month-panel'
+import CalWeekPanel from './Cal/cal-week-panel'
+import CalDatePanel from './Cal/cal-date-panel'
 export default {
   name: 'b-calendar',
-  components: { CalYearPanel, },
+  components: { CalYearPanel, CalMonthPanel, CalWeekPanel, CalDatePanel },
+  mixins: [
+    util.mixins.date.type,
+    util.mixins.date.base,
+    util.mixins.form.readonly,
+  ],
+  mounted() {
+    this.selectedValues = this.moment(this.value)
+  },
+  methods: {
+    // year
+    yearChecked: function (value) {
+      this.selectedValues = value
+      if (this.canHide) return;
+      this.pickerType = this.enumTypeStatus.month;
+    },
+    // month
+    month2Year: function (value) {
+      if (value) this.selectedValues = value
+      this.pickerType = this.enumTypeStatus.year;
+    },
+    monthChecked: function (value) {
+      this.selectedValues = value
+      if (this.canHide) return;
+      this.pickerType = this.enumTypeStatus.week;
+    },
+    // week
+    week2Month: function (value) {
+      if (value) this.selectedValues = value
+      this.pickerType = this.enumTypeStatus.month;
+    },
+    weekChecked: function(value) {
+      this.selectedValues = value
+      if (this.canHide) return
+      this.pickerType = this.enumTypeStatus.date
+    },
+    // date
+    date2Week: function(value) {
+      if (value) this.selectedValues = value
+      this.pickerType = this.enumTypeStatus.week;
+    },
+    dateChecked: function (value) {
+      if (value) this.selectedValues = value
+    },
+  },
 }
 </script>

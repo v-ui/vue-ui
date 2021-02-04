@@ -1,7 +1,8 @@
 <template>
   <date-panel-temp
     :list="list"
-    style="width: 66em"
+    class="h-100"
+    style="min-width: 66em"
     :col-count="colCount"
     :hide-header="hideHeader"
     :header-text="headerText"
@@ -14,9 +15,9 @@
     <template #item="{ item }">
       <date-date-panel
         calendar
-        class="m-1"
+        class="h-100 p-3 m-1"
         :value="format(year, item.value)"
-        @click.native="click(item.value)"
+        @date:checked="dateChecked"
       >
         <template #header>
           <p class="h6 text-primary">{{ moment([year, item.value, 1]).format("MMMM") }}</p>
@@ -45,8 +46,8 @@ export default {
     }
   },
   methods: {
-    click(value) {
-      this.$emit('year2Month', value)
+    dateChecked(value) {
+      this.$emit('year:checked', value)
     },
   },
 }

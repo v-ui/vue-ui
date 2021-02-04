@@ -2,11 +2,12 @@
   <date-panel-temp
     :list="list"
     border
-    style="min-width: 65em;"
+    class="h-100"
+    style="min-width: 66em;"
     :col-count="colCount"
     :hide-header="hideHeader"
     :header-text="headerText"
-    :diesable-header-click="true"
+    @panel:clickHeader="clickHeader"
     @panel:forward="forward"
     @panel:checknow="checknow"
     @panel:backward="backward"
@@ -25,7 +26,7 @@
         :item="item"
         :year="year"
         :month="month"
-        @click.native="click"
+        @click.native="weekChecked(year, month, item.value)"
       />
     </template>
   </date-panel-temp>
@@ -34,7 +35,7 @@
 <script>
 import util from "@/components/util/index.js";
 
-import CalPanelItem from '../Basic/'
+import CalPanelItem from '../Basic/cal-panel-item'
 import PanelTable from "@/components/base/DateTime/Date/DatePicker/Basic/date-panel-table.vue"
 import DatePanelTemp from "@/components/base/DateTime/Date/DatePicker/Basic/date-panel-temp.vue";
 
@@ -71,12 +72,9 @@ export default {
       return arr
     },
   },
-  mounted() {
-    this.selectedValues = this.format()
-  },
   methods: {
     clickHeader: function() {
-      this.$emit("date2Month", this.selectedValues)
+      this.$emit("week2Month", this.format(this.year, this.month, this.date))
     },
     forward: function() {
       this.initValue(this.format().subtract(1, 'week'))
@@ -84,8 +82,8 @@ export default {
     backward: function() {
       this.initValue(this.format().add(1, 'week'))
     },
-    click(value) {
-      this.$emit('week2Date', value)
+    weekChecked(year, month, date) {
+      this.$emit('week:checked', this.format(year, month, date))
     },
   },
 }

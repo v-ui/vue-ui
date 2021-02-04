@@ -2,11 +2,12 @@
   <date-panel-temp
     :list="list"
     border
-    style="min-width: 65em;"
+    class="h-100"
+    style="min-width: 66em;"
     :col-count="colCount"
     :hide-header="hideHeader"
     :header-text="headerText"
-    :diesable-header-click="true"
+    @panel:clickHeader="clickHeader"
     @panel:forward="forward"
     @panel:checknow="checknow"
     @panel:backward="backward"
@@ -17,6 +18,7 @@
         :item="item"
         :year="year"
         :month="month"
+        @dateChecked="dateChecked(year, month, item.value)"
       />
     </template>
   </date-panel-temp>
@@ -54,18 +56,18 @@ export default {
       return arr
     },
   },
-  mounted() {
-    this.selectedValues = this.format()
-  },
   methods: {
     clickHeader: function() {
-      this.$emit("date2Month", this.selectedValues)
+      this.$emit("date2Week", this.format(this.year, this.month, this.date))
     },
     forward: function() {
       this.initValue(this.format().subtract(1, 'day'))
     },
     backward: function() {
       this.initValue(this.format().add(1, 'day'))
+    },
+    dateChecked: function(year, month, date) {
+      this.$$emit('date:checked', this.format(year, month, date))
     },
   },
 }

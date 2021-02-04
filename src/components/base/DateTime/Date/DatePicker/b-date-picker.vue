@@ -1,5 +1,5 @@
 <template>
-  <dropdown-panel
+  <b-dropdown-panel
     :placeholder="fillPlaceholder"
     :label="showValue"
     :info="message"
@@ -19,7 +19,7 @@
         :range="range"
       />
     </template>
-  </dropdown-panel>
+  </b-dropdown-panel>
 </template>
 
 <script>
@@ -27,11 +27,11 @@ import config from '@/config/index.js'
 import util from "@/components/util/index.js";
 
 import BDateSelect from '@/components/base/DateTime/Date/DatePicker/b-date-select.vue'
-import dropdownPanel from "@/components/base/DropdownPanel/b-dropdown-panel.vue";
+import BDropdownPanel from "@/components/base/DropdownPanel/b-dropdown-panel.vue";
 
 export default {
   name: "BDatePicker",
-  components: { BDateSelect, dropdownPanel, },
+  components: { BDateSelect, BDropdownPanel, },
   mixins: [
     util.mixins.form.base,
     util.mixins.date.base,

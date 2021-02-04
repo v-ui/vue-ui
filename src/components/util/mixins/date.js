@@ -123,8 +123,8 @@ let base = {
   },
   watch: {
     value: function(value) {
-      if (!this.calendar) this.selectedValues = value
       this.initValue && this.initValue(value)
+      if (!this.calendar) this.selectedValues = value
     },
     selectedValues: function(value) {
       // 配合 v-model 工作
@@ -541,7 +541,6 @@ let date = {
       }
     },
     checked: function(value) {
-      if (this.calendar) return
       this.date = value
       this.selectedValues = this.format()
       this.$emit('date:checked', this.selectedValues)

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel-header
+    <date-panel-header
       v-if="!hideHeader"
       :disabled="disabled"
       :header-text="headerText"
@@ -15,7 +15,7 @@
       <template #header>
         <slot name="header" />
       </template>
-    </panel-header>
+    </date-panel-header>
     <hr v-show="!$slots.week && !hideHeader" class="my-1">
     <slot name="week" />
     <slot>
@@ -28,7 +28,7 @@
       >
         <template #item="{ item }">
           <slot name="item" :item="item">
-            <panel-item
+            <date-panel-item
               :item="item"
               class="w-100"
               :disabled="item.disabled"
@@ -44,13 +44,13 @@
 <script>
 import util from "@/components/util/index.js";
 
-import panelHeader from "./date-panel-header";
-import panelItem from './date-panel-item'
+import DatePanelHeader from "./date-panel-header";
+import DatePanelItem from './date-panel-item'
 import DatePanelTable from './date-panel-table.vue';
 
 export default {
   name: 'DatePanelTemp',
-  components: { panelHeader, panelItem, DatePanelTable, },
+  components: { DatePanelHeader, DatePanelItem, DatePanelTable, },
   props: {
     list: util.props.Array,
     colCount: util.props.UInt,
