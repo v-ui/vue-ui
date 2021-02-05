@@ -18,7 +18,7 @@
         :item="item"
         :year="year"
         :month="month"
-        @dateChecked="dateChecked(year, month, item.value)"
+        @dateChecked="dateChecked"
       />
     </template>
   </date-panel-temp>
@@ -66,8 +66,8 @@ export default {
     backward: function() {
       this.initValue(this.format().add(1, 'day'))
     },
-    dateChecked: function(year, month, date) {
-      this.$$emit('date:checked', this.format(year, month, date))
+    dateChecked: function(value) {
+      this.$$emit('date:checked', this.format(this.year, this.month, value))
     },
   },
 }

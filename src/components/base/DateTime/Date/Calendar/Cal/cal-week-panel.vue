@@ -26,7 +26,7 @@
         :item="item"
         :year="year"
         :month="month"
-        @click.native="weekChecked(year, month, item.value)"
+        @item:click="weekChecked"
       />
     </template>
   </date-panel-temp>
@@ -82,8 +82,8 @@ export default {
     backward: function() {
       this.initValue(this.format().add(1, 'week'))
     },
-    weekChecked(year, month, date) {
-      this.$emit('week:checked', this.format(year, month, date))
+    weekChecked(value) {
+      this.$emit('week:checked', this.format(this.year, this.month, value))
     },
   },
 }

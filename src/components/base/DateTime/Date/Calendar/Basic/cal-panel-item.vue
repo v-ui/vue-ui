@@ -5,6 +5,7 @@
       <date-panel-item
         :item="item"
         class="ml-1 mr-auto"
+        @item:click="$emit('item:click', item.value)"
       />
       <div class="my-1" />
     </div>

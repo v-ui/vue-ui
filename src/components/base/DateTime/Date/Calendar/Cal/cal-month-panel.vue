@@ -26,7 +26,7 @@
         :item="item"
         :year="year"
         :month="month"
-        @click.native="monthChecked(year, month, item.value)"
+        @item:click="monthChecked"
       />
     </template>
   </date-panel-temp>
@@ -51,8 +51,8 @@ export default {
     clickHeader: function() {
       this.$emit("month2Year", this.format(this.year, this.month, this.date))
     },
-    monthChecked(year, month, date) {
-      this.$emit('month:checked', this.format(year, month, date))
+    monthChecked(value) {
+      this.$emit('month:checked', this.format(this.year, this.month, value))
     },
   },
 }

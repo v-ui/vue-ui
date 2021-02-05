@@ -1,9 +1,9 @@
 <template>
   <div class="m-1 h-100">
-    <div>
+    <div class="d-flex justify-content-center">
       <b-radio-button-group
         v-model="pickerType"
-        class="d-flex justify-content-center"
+        class="d-flex justify-content-center w-25"
         name="picker-type"
         :list="typeList"
         size="sm"

@@ -1,8 +1,7 @@
 <template>
   <div
-    class="btn-group-toggle"
+    class="btn-group-toggle w-100"
     :class="groupClass"
-    style="min-width: 25%"
     data-toggle="buttons"
   >
     <label
