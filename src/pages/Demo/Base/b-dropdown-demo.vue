@@ -92,6 +92,56 @@
         v-model="value2"
       />
     </div>
+    <h2>b-dropdown-table</h2>
+    <hr>
+    <div class="row">
+      <font class="col-2 text-center">list</font>
+      <font class="col-2 text-center">colCount</font>
+      <font class="col-2 text-center">border</font>
+      <font class="col-2 text-center">disabled</font>
+      <font class="col-2 text-center">
+        v-model multiple='false'(default)<br>
+        {{ value1 }}
+      </font>
+      <font class="col-2 text-center">
+        v-model multiple='true'(default)<br>
+        {{ value2 }}
+      </font>
+    </div>
+    <div class="row">
+      <b-dropdown-table
+        class="col-2"
+        :list="list"
+      />
+      <div class="col-2">
+        <b-range min="1" max="12" v-model="col" />
+        <b-dropdown-table
+          :list="list"
+          :colCount="col"
+        />
+      </div>
+      <b-dropdown-table
+        class="col-2"
+        :list="list"
+        disabled
+      />
+      <b-dropdown-table
+        class="col-2"
+        :list="list"
+        border
+      />
+      <b-dropdown-table
+        class="col-2"
+        :list="list"
+        v-model="value1"
+      />
+      <b-dropdown-table
+        class="col-2"
+        :list="list"
+        multiple
+        v-model="value2"
+      />
+    </div>
     <h2>b-dropdown</h2>
     <hr>
     <h4>基础属性</h4>
@@ -475,6 +525,27 @@
     </div>
     <div class="row">
       <font class="col-1">
+        type:
+      </font>
+      <font class="col-1">
+        row(default)
+      </font>
+      <b-dropdown-panel
+        class="col-auto"
+        type="row"
+        :list="list"
+      />
+      <font class="col-1">
+        table
+      </font>
+      <b-dropdown-panel
+        class="col-auto"
+        type="table"
+        :list="list"
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
         list:
       </font>
       <b-dropdown-panel
@@ -596,7 +667,8 @@
 
 <script>
 import BDropdownMenu from '@/components/base/Dropdown/b-dropdown-menu.vue'
-import BDropdownRow from '@/components/base/DropdownPanel/Row/b-dropdown-panel-row.vue'
+import BDropdownRow from '@/components/base/DropdownPanel/Basic/b-dropdown-panel-row.vue'
+import BDropdownTable from '@/components/base/DropdownPanel/Basic/b-dropdown-panel-table.vue'
 
 import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
 import BDropdownHeader from "@/components/base/Dropdown/b-dropdown-header.vue";
@@ -614,6 +686,7 @@ export default {
   components: {
     BDropdownMenu,
     BDropdownRow,
+    BDropdownTable,
     BDropdown,
     BDropdownHeader,
     BDropdownItem,

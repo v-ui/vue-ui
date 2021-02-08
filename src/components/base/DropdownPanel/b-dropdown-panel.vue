@@ -20,8 +20,20 @@
       </template>
       <slot>
         <b-dropdown-panel-row
+          v-if="type === 'row'"
           v-model="selectedValues"
           :list="list"
+          :primary-key="primaryKey"
+          :multiple="isMultiple"
+          :col-count="colCount"
+        />
+        <b-dropdown-panel-table
+          v-else-if="type === 'table'"
+          v-model="selectedValues"
+          class="h-100"
+          :list="list"
+          :border="border"
+          :disabled="disabled"
           :primary-key="primaryKey"
           :multiple="isMultiple"
           :col-count="colCount"
@@ -52,7 +64,8 @@
 import util from "@/components/util/index.js";
 
 import BDropdownPicker from '@/components/base/DropdownPicker/b-dropdown-picker.vue'
-import BDropdownPanelRow from './Row/b-dropdown-panel-row'
+import BDropdownPanelRow from './Basic/b-dropdown-panel-row'
+import BDropdownPanelTable from './Basic/b-dropdown-panel-table'
 
 import BValid from "@/components/form/Other/b-form-valid.vue";
 import BInfo from "@/components/basic/basic-info.vue"
@@ -62,6 +75,7 @@ export default {
   components: {
     BDropdownPicker,
     BDropdownPanelRow,
+    BDropdownPanelTable,
     BValid,
     BInfo,
   },
@@ -72,12 +86,20 @@ export default {
     util.mixins.select.select,
   ],
   props: {
-    info: util.props.String,
     canHide: {
       ...util.props.Boolean,
       default: true,
     },
+    type: {
+      type: String,
+      default: 'row',
+      validator: function(value) {
+        return [ 'row', 'table' ].includes(value)
+      },
+    },
+    info: util.props.String,
     colCount: util.props.UInt,
+    border: util.props.Boolean,
     placeholder: util.props.String,
   },
   computed: {
