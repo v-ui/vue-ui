@@ -34,7 +34,7 @@ import DatePanelTemp from "@/components/base/DateTime/Date/DatePicker/Basic/date
 import DateDatePanel from '@/components/base/DateTime/Date/DatePicker/Panel/date-date-panel.vue';
 
 export default {
-  name: 'cal-year-panel',
+  name: 'CalYearPanel',
   components: { DatePanelTemp, DateDatePanel, },
   mixins: [
     util.mixins.date.validator,

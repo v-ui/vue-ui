@@ -48,7 +48,7 @@ import CalWeekPanel from './Cal/cal-week-panel'
 import CalDatePanel from './Cal/cal-date-panel'
 import BRadioButtonGroup from "@/components/form/Radio/b-radio-button-group.vue";
 export default {
-  name: 'b-calendar',
+  name: 'BCalendar',
   components: { CalYearPanel, CalMonthPanel, CalWeekPanel, CalDatePanel, BRadioButtonGroup },
   mixins: [
     util.mixins.date.type,

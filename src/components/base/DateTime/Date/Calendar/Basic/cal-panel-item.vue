@@ -20,7 +20,7 @@ import util from "@/components/util/index.js";
 
 import DatePanelItem from "@/components/base/DateTime/Date/DatePicker/Basic/date-panel-item.vue"
 export default {
-  name: 'cal-panel-item',
+  name: 'CalPanelItem',
   components: { DatePanelItem },
   mixins: [ util.mixins.moment.base, ],
   props: {

@@ -40,7 +40,7 @@ import DatePanelTemp from "@/components/base/DateTime/Date/DatePicker/Basic/date
 import BDropdownPanelTable from "@/components/base/DropdownPanel/Basic/b-dropdown-panel-table.vue"
 
 export default {
-  name: 'cal-month-panel',
+  name: 'CalMonthPanel',
   components: { CalPanelItem, BDropdownPanelTable, DatePanelTemp },
   mixins: [
     util.mixins.date.validator,

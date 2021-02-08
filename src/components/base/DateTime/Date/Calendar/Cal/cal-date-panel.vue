@@ -31,7 +31,7 @@ import CalPanelItem from '../Basic/cal-panel-item'
 import DatePanelTemp from "@/components/base/DateTime/Date/DatePicker/Basic/date-panel-temp.vue";
 
 export default {
-  name: 'cal-date-panel',
+  name: 'CalDatePanel',
   components: { CalPanelItem, DatePanelTemp },
   mixins: [
     util.mixins.date.validator,

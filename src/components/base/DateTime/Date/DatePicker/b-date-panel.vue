@@ -84,7 +84,7 @@ import DateQuarterPanel from './Panel/date-quarter-panel'
 import DateWeekPanel from './Panel/date-week-panel'
 
 export default {
-  name: "DatePanelPanel",
+  name: "BDatePanel",
   components: { DateYearPanel, DateMonthPanel, DateDatePanel, DateQuarterPanel, DateWeekPanel },
   mixins: [
     util.mixins.date.type,

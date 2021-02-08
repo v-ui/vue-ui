@@ -17,7 +17,7 @@ import util from "@/components/util/index.js";
 
 import BButton from "@/components/basic/Button/basic-button.vue";
 export default {
-  name: 'date-panel-item',
+  name: 'DatePanelItem',
   components: { BButton },
   props: {
     item: [ Object, String, Number, ],
