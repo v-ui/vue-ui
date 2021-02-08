@@ -19,7 +19,7 @@
     <hr v-show="!$slots.week && !hideHeader" class="my-1">
     <slot name="week" />
     <slot>
-      <date-panel-table
+      <b-dropdown-panel-table
         :list="list"
         class="h-100"
         :border="border"
@@ -36,7 +36,7 @@
             />
           </slot>
         </template>
-      </date-panel-table>
+      </b-dropdown-panel-table>
     </slot>
   </div>
 </template>
@@ -46,11 +46,11 @@ import util from "@/components/util/index.js";
 
 import DatePanelHeader from "./date-panel-header";
 import DatePanelItem from './date-panel-item'
-import DatePanelTable from './date-panel-table.vue';
+import BDropdownPanelTable from '@/components/base/DropdownPanel/Basic/b-dropdown-panel-table.vue';
 
 export default {
   name: 'DatePanelTemp',
-  components: { DatePanelHeader, DatePanelItem, DatePanelTable, },
+  components: { DatePanelHeader, DatePanelItem, BDropdownPanelTable, },
   props: {
     list: util.props.Array,
     colCount: util.props.UInt,

@@ -18,7 +18,7 @@
       <slot name="header" />
     </template>
     <template #week>
-      <date-panel-table
+      <b-dropdown-panel-table
         class="border-bottom border-primary font-weight-bolder mb-1"
         :list="weekList"
         :col-count="colCount"
@@ -32,11 +32,12 @@
 import util from "@/components/util/index.js";
 
 import DatePanelTemp from "../Basic/date-panel-temp";
-import DatePanelTable from "@/components/base/DateTime/Date/DatePicker/Basic/date-panel-table.vue";
+import BDropdownPanelTable from "@/components/base/DropdownPanel/Basic/b-dropdown-panel-table.vue";
+
 
 export default {
   name: "DateDatePanel",
-  components: { DatePanelTemp, DatePanelTable },
+  components: { DatePanelTemp, BDropdownPanelTable },
   mixins: [
     util.mixins.date.select,
     util.mixins.date.validator,
