@@ -4,8 +4,8 @@
       <slot name="header">
         <b-label
           :label="header && header.text || header"
-          :info="header.info"
-          :icon="header.icon"
+          :info="header && header.info"
+          :icon="header && header.icon"
         />
       </slot>
     </b-dropdown-header>
