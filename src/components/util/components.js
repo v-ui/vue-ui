@@ -8,15 +8,15 @@ const initFuncSlotContainer = function (components) {
 
 const newFuncSlotComponent = function (name, value) {
   Vue.component(name, {
-    render: function (createElement, context) {
-      if (!context.slots().default) return
+    render: function (createElement) {
+      if (!this.$slots.default) return
       return createElement(
         value && value.el || 'div',
         {
-          ...context.data,
+          ...this.$data,
           ...value,
         },
-        context.slots().default
+        this.$slots.default
       )
     },
   })
