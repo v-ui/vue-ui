@@ -3,22 +3,22 @@
     class="nav"
     :class="objClass"
   >
-    <slot v-if="$slots.default" />
+    <slot />
     <template v-for="(item, index) in list">
       <nav-item-dropdown
         v-if="item.dropdown"
         :key="index"
         :list="item.list"
-        :label="item.label"
+        :label="item.label || item.value || item"
       />
       <nav-item
         v-else
         :key="index"
-        :label="item.label || item.value"
+        :label="item.label || item.value || item"
         :href="item.href"
         :disabled="item.disabled"
         :active="isChecked(item) || item.active"
-        @click.native="itemClick(item)"
+        @click.native="checkedValues = item"
       />
     </template>
   </ul>
@@ -53,11 +53,6 @@ export default {
       if (this.justified) c += " nav-justified ";
       return c;
     }
-  },
-  methods: {
-    itemClick: function(item) {
-      this.checkedValues = item
-    },
   },
 };
 </script>
