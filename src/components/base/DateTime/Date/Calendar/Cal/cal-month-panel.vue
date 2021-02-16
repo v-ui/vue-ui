@@ -14,7 +14,7 @@
     @panel:checked="checked"
   >
     <template #week>
-      <b-dropdown-panel-table
+      <b-grid-table
         class="border-bottom border-primary font-weight-bolder mb-1"
         :list="weekList"
         :col-count="colCount"
@@ -37,11 +37,11 @@ import util from "@/components/util/index.js";
 
 import CalPanelItem from '../Basic/cal-panel-item'
 import DatePanelTemp from "@/components/base/DateTime/Date/DatePicker/Basic/date-panel-temp.vue";
-import BDropdownPanelTable from "@/components/base/DropdownPanel/Basic/b-dropdown-panel-table.vue"
+import BGridTable from "@/components/base/Grid/b-grid-table.vue"
 
 export default {
   name: 'CalMonthPanel',
-  components: { CalPanelItem, BDropdownPanelTable, DatePanelTemp },
+  components: { CalPanelItem, BGridTable, DatePanelTemp },
   mixins: [
     util.mixins.date.validator,
     util.mixins.date.date,

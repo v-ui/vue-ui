@@ -11,6 +11,7 @@ export default {
     { path: 'b-calendar', name: 'b-calendar', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-calendar-demo.vue'), },
     { path: 'b-datetime', name: 'b-datetime', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-datetime-demo.vue'), },
     { path: 'b-dropdown', name: 'b-dropdown', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-dropdown-demo.vue'), },
+    { path: 'b-grid', name: 'b-grid', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-grid-demo.vue'), },
     { path: 'b-list', name: 'b-list', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-list-demo.vue'), },
     { path: 'b-loading', name: 'b-loading', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-loading-demo.vue'), },
     { path: 'b-media', name: 'b-media', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-media-demo.vue'), },

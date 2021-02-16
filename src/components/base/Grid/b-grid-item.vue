@@ -23,7 +23,7 @@ import BButton from "@/components/basic/Button/basic-button.vue";
 import BInfo from "@/components/basic/basic-info.vue";
 
 export default {
-  name: "BDropdownPanelItem",
+  name: "BGridItem",
   components: { BButton, BInfo },
   mixins: [ util.mixins.select.selectItem, ],
   props: {

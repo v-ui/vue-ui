@@ -2,7 +2,7 @@
   <span class="row m-1">
     <template v-for="(item, index) in list">
       <slot name="item" :item="item" :itemClass="itemClass" :disabled="disabled">
-        <b-dropdown-panel-item
+        <b-grid-item
           :key="index"
           :item="item"
           class="text-center"
@@ -21,11 +21,11 @@
 <script>
 import util from "@/components/util/index.js";
 
-import BDropdownPanelItem from "./b-dropdown-panel-item";
+import BGridItem from "./b-grid-item";
 
 export default {
   name: "BDropdownPanelRow",
-  components: { BDropdownPanelItem },
+  components: { BGridItem },
   mixins: [ util.mixins.select.select, ],
   props: {
     disabled: util.props.Boolean,

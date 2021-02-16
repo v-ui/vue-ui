@@ -3,7 +3,7 @@
     <tr v-for="index in rowCount" :key="'tr-'+index">
       <td v-for="(item, itemIndex) in getList(index)" :key="'td-'+itemIndex" class="p-0">
         <slot name="item" :item="item">
-          <b-dropdown-panel-item
+          <b-grid-item
             :item="item"
             class="text-center"
             :multiple="isMultiple"
@@ -21,11 +21,11 @@
 <script>
 import util from "@/components/util/index.js";
 
-import BDropdownPanelItem from "./b-dropdown-panel-item";
+import BGridItem from "./b-grid-item";
 
 export default {
-  name: 'BDropdownPanelTable',
-  components: { BDropdownPanelItem, },
+  name: 'BGridTable',
+  components: { BGridItem, },
   mixins: [ util.mixins.select.select, ],
   props: {
     colCount: util.props.UInt,

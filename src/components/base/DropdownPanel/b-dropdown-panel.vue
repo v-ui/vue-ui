@@ -19,7 +19,7 @@
         <slot name="icon" />
       </template>
       <slot>
-        <b-dropdown-panel-row
+        <b-grid-row
           v-if="type === 'row'"
           v-model="selectedValues"
           :list="list"
@@ -27,7 +27,7 @@
           :multiple="isMultiple"
           :col-count="colCount"
         />
-        <b-dropdown-panel-table
+        <b-grid-table
           v-else-if="type === 'table'"
           v-model="selectedValues"
           class="h-100"
@@ -64,8 +64,8 @@
 import util from "@/components/util/index.js";
 
 import BDropdownPicker from '@/components/base/DropdownPicker/b-dropdown-picker.vue'
-import BDropdownPanelRow from './Basic/b-dropdown-panel-row'
-import BDropdownPanelTable from './Basic/b-dropdown-panel-table'
+import BGridRow from '@/components/base/Grid/b-grid-row.vue'
+import BGridTable from '@/components/base/Grid/b-grid-table.vue'
 
 import BValid from "@/components/form/Other/b-form-valid.vue";
 import BInfo from "@/components/basic/basic-info.vue"
@@ -74,8 +74,8 @@ export default {
   name: 'BDropdownPanel',
   components: {
     BDropdownPicker,
-    BDropdownPanelRow,
-    BDropdownPanelTable,
+    BGridRow,
+    BGridTable,
     BValid,
     BInfo,
   },

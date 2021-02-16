@@ -19,7 +19,7 @@
     <hr v-show="!$slots.week && !hideHeader" class="my-1">
     <slot name="week" />
     <slot>
-      <b-dropdown-panel-table
+      <b-grid-table
         :list="list"
         class="h-100"
         :border="border"
@@ -36,7 +36,7 @@
             />
           </slot>
         </template>
-      </b-dropdown-panel-table>
+      </b-grid-table>
     </slot>
   </div>
 </template>
@@ -46,11 +46,11 @@ import util from "@/components/util/index.js";
 
 import DatePanelHeader from "./date-panel-header";
 import DatePanelItem from './date-panel-item'
-import BDropdownPanelTable from '@/components/base/DropdownPanel/Basic/b-dropdown-panel-table.vue';
+import BGridTable from '@/components/base/Grid/b-grid-table.vue';
 
 export default {
   name: 'DatePanelTemp',
-  components: { DatePanelHeader, DatePanelItem, BDropdownPanelTable, },
+  components: { DatePanelHeader, DatePanelItem, BGridTable, },
   props: {
     list: util.props.Array,
     colCount: util.props.UInt,
