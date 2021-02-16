@@ -4,7 +4,7 @@
   >
     <slot name="card">
       <div
-        v-if="!$slots.image"
+        v-if="!$slots.image && $slots.header"
         class="card-header"
       >
         <slot name="header" />
