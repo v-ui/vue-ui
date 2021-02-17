@@ -30,6 +30,7 @@
     "moment": "^2.29.1",
     "popper.js": "^1.16.1",
     "print-js": "^1.0.63",
+    "province-city-china": "^7.1.3",
     "register-service-worker": "^1.6.2",
     "screenfull": "^5.0.2",
     "swiper": "^5.4.5",

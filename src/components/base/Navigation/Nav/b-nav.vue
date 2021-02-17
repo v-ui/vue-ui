@@ -18,7 +18,7 @@
         :href="item.href"
         :disabled="item.disabled"
         :active="isChecked(item) || item.active"
-        @click.native="checkedValues = item"
+        @item:click="checkedValues = item"
       />
     </template>
   </ul>

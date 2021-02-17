@@ -24,7 +24,7 @@ import util from "@/components/util/index.js";
 import BGridItem from "./b-grid-item";
 
 export default {
-  name: "BDropdownPanelRow",
+  name: "BGridRow",
   components: { BGridItem },
   mixins: [ util.mixins.select.select, ],
   props: {

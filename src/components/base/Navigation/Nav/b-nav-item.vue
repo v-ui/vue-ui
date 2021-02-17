@@ -1,5 +1,5 @@
 <template>
-  <li class="nav-item">
+  <li class="nav-item" @click="click">
     <base-a
       class="nav-link text-truncate"
       :class="objClass"
@@ -38,6 +38,12 @@ export default {
       c += this.disabled ? " disabled " : " ";
       return c;
     }
-  }
+  },
+  methods: {
+    click: function() {
+      if (this.disabled) return
+      this.$emit('item:click')
+    },
+  },
 };
 </script>

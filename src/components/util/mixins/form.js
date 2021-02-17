@@ -54,7 +54,10 @@ export default {
         ...props.String,
         default: `Button`,
       },
-      color: props.color,
+      color: {
+        ...props.color,
+        validator: value => 'link' === value || props.color.validator(value)
+      },
       textColor: props.textColor,
       size: props.size,
       href: {
