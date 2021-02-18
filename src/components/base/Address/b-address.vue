@@ -10,14 +10,14 @@
     </template>
     <address-country
       v-if="pickerType === enumTypeStatus.country"
-      v-model="selectedValue"
+      v-model="selectedValues"
       :list="list"
       :primary-key="primaryKey"
       @item:click="itemClick"
     />
     <address-temp
       v-else
-      v-model="selectedValue"
+      v-model="selectedValues"
       :list="list"
       :primary-key="primaryKey"
       @item:click="itemClick"
@@ -40,17 +40,20 @@ export default {
     util.mixins.address.type,
     util.mixins.address.country,
     util.mixins.address.data,
-    util.mixins.address.province,
-    util.mixins.address.city,
-    util.mixins.address.area,
     util.mixins.address.town,
   ],
+  model: {
+    prop: 'selected',
+    event: 'select:selected',
+  },
+  props: {
+    selected: util.props.Array,
+  },
   data() {
     return {
       list: [],
       primaryKey: 'code',
-      selectedValue: '',
-      selected: '',
+      selectedValues: this.selected,
     }
   },
   computed: {
@@ -72,13 +75,13 @@ export default {
       return array
     },
     selectedObj: function() {
-      if (!this.selectedValue) return {}
+      if (!this.selectedValues) return {}
       return {
         country: null,
-        province: this.selectedValue.province,
-        city: this.selectedValue.city,
-        area: this.selectedValue.area,
-        town: this.selectedValue.town,
+        province: this.selectedValues.province,
+        city: this.selectedValues.city,
+        area: this.selectedValues.area,
+        town: this.selectedValues.town,
       }
     },
     hideCountry: function() {
@@ -164,6 +167,12 @@ export default {
     },
     pickerType: function(value) {
       this.init(value)
+    },
+    selected: function (value) {
+      this.selectedValues = value
+    },
+    selectedValues: function (value) {
+      this.$emit('select:selected', value)
     },
   },
   mounted() {
