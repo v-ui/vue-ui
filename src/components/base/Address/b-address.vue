@@ -47,14 +47,19 @@ export default {
     navList: function() {
       let country = { value: this.enumTypeStatus.country, label: '国家', }
       let province = { value: this.enumTypeStatus.province, label: '省级', }
-      let city = { value: this.enumTypeStatus.city, label: '地级', disabled: this.noCityHasArea ? true : this.noProvinceChild || !this.selectedObj.province, }
-      let area = { value: this.enumTypeStatus.area, label: '县级', disabled: this.noCityHasArea ? false : this.noCityChild || !this.selectedObj.city, }
-      let town = { value: this.enumTypeStatus.town, label: '乡级', disabled: this.noTown ? true : !this.selectedObj.area, }
-      return [ country, province, city, area, town ]
-      // if (this.noProvinceChild) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.city))
-      // if (this.noCityHasArea) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.city), 1)
-      // if (this.noCityChild) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.area))
-      // if (this.noTown) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.town))
+      let city = { value: this.enumTypeStatus.city, label: '地级', }
+      let area = { value: this.enumTypeStatus.area, label: '县级', }
+      let town = { value: this.enumTypeStatus.town, label: '乡级', }
+
+      let array = [ country, province, city, area, town ]
+
+      if (this.hideCountry) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.country), 1)
+      if (this.hideProvince) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.province), 1)
+      if (this.hideCity) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.city), 1)
+      if (this.hideArea) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.area), 1)
+      if (this.hideTown) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.town), 1)
+
+      return array
     },
     selectedObj: function() {
       if (!this.selectedValue) return {}
@@ -65,6 +70,25 @@ export default {
         area: this.selectedValue.area,
         town: this.selectedValue.town,
       }
+    },
+    hideCountry: function() {
+      return this.type !== this.enumTypeStatus.country
+    },
+    hideProvince: function() {
+      return !this.hideCountry
+    },
+    hideCity: function() {
+      return this.hideProvince || this.type === this.enumTypeStatus.province
+            || this.noProvinceChild || this.noCityHasArea
+    },
+    hideArea: function() {
+      return this.noCityHasArea
+              ? this.hideProvince || this.type === this.enumTypeStatus.city
+              : this.hideCity || this.type === this.enumTypeStatus.city || this.noCityChild
+    },
+    hideTown: function() {
+      return this.hideArea || this.type === this.enumTypeStatus.area
+            || this.noTown
     },
     getCountry: function() {
       return this.country
@@ -121,9 +145,6 @@ export default {
             && e.area === this.selectedObj.area
         )
     },
-    hasNoTown: function() {
-      return this.getTown.length === 0
-    },
   },
    watch: {
     'pickerType.value': function(value) {
@@ -136,10 +157,12 @@ export default {
     },
   },
   mounted() {
-    this.init(this.type)
+    this.pickerType = this.type !== this.enumTypeStatus.country ? this.enumTypeStatus.province : this.enumTypeStatus.country
+    this.init(this.pickerType)
   },
   methods: {
     init: function(value) {
+      debugger
       if (value !== this.enumTypeStatus.country) this.primaryKey = value
 
       switch(value) {
@@ -163,20 +186,23 @@ export default {
     },
     itemClick: async function() {
       await this.$nextTick()
+      debugger
       switch(this.pickerType?.value || this.pickerType) {
         case this.enumTypeStatus.country:
+          if (this.hideProvince) return
           this.pickerType = this.enumTypeStatus.province
           break
         case this.enumTypeStatus.province:
-          if (this.noProvinceChild) return
-          this.pickerType = this.noCityHasArea ? this.enumTypeStatus.area : this.enumTypeStatus.city
+          if (this.noCityHasArea) this.pickerType = this.enumTypeStatus.area
+          if (this.hideCity) return
+          this.pickerType = this.enumTypeStatus.city
           break
         case this.enumTypeStatus.city:
-          if (this.noCityChild) return
+          if (this.hideArea) return
           this.pickerType = this.enumTypeStatus.area
           break
         case this.enumTypeStatus.area:
-          if (this.noTown) return
+          if (this.hideTown) return
           this.pickerType = this.enumTypeStatus.town
           break
       }

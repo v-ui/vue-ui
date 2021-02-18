@@ -10,7 +10,7 @@ import {
   town,
 } from 'province-city-china/data'
 
-import { country } from 'province-city-china/dist/country.json'
+import country from 'province-city-china/dist/country.json'
 
 export {
   data,

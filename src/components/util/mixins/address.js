@@ -68,13 +68,13 @@ const type = {
   props: {
     type: {
       type: String,
-      default: "province",
+      default: "town",
       validator: value => ["country", "province", "city", "area", "town"].includes(value),
     },
   },
   data() {
     return {
-      pickerType: this.type,
+      pickerType: null,
       enumTypeStatus: {
         country: 'country',// 国
         province: 'province',// 省

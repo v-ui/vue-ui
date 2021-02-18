@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     ObjClass: function() {
-      return this.isSelected ? 'border-primary' : ''
+      return this.isSelected ? '' : 'text-body'
     },
   },
 }
