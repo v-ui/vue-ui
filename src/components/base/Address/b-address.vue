@@ -47,7 +47,7 @@ export default {
     event: 'select:selected',
   },
   props: {
-    selected: util.props.Array,
+    selected: util.props.Object,
   },
   data() {
     return {
@@ -58,26 +58,18 @@ export default {
   },
   computed: {
     navList: function() {
-      let country = { value: this.enumTypeStatus.country, label: '国家', }
-      let province = { value: this.enumTypeStatus.province, label: '省级', }
-      let city = { value: this.enumTypeStatus.city, label: '地级', }
-      let area = { value: this.enumTypeStatus.area, label: '县级', }
-      let town = { value: this.enumTypeStatus.town, label: '乡级', }
+      let country = this.hideCountry ? false : { value: this.enumTypeStatus.country, label: this.countryLabel || '国家', }
+      let province = this.hideProvince ? false : { value: this.enumTypeStatus.province, label: this.provinceLabel || '省级', }
+      let city = this.hideCity ? false : { value: this.enumTypeStatus.city, label: this.cityLabel || '地级', }
+      let area = this.hideArea ? false : { value: this.enumTypeStatus.area, label: this.areaLabel || '县级', }
+      let town = this.hideTown ? false : { value: this.enumTypeStatus.town, label: this.townLabel || '乡级', }
 
-      let array = [ country, province, city, area, town ]
-
-      if (this.hideCountry) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.country), 1)
-      if (this.hideProvince) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.province), 1)
-      if (this.hideCity) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.city), 1)
-      if (this.hideArea) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.area), 1)
-      if (this.hideTown) array.splice(array.findIndex(e => e && e.value === this.enumTypeStatus.town), 1)
-
-      return array
+      return [ country, province, city, area, town ].filter(e => e)
     },
     selectedObj: function() {
       if (!this.selectedValues) return {}
       return {
-        country: null,
+        country: this.selectedValues.id,
         province: this.selectedValues.province,
         city: this.selectedValues.city,
         area: this.selectedValues.area,
@@ -158,6 +150,34 @@ export default {
             && e.area === this.selectedObj.area
         )
     },
+    countryLabel: function() {
+      let item = this.getCountry.find(e => e && e.id === this.selectedObj.country)
+      return item && `${item.cnname}(${item.name})`
+    },
+    provinceLabel: function() {
+      let item = this.getProvince.find(e => e && e.province === this.selectedObj.province)
+      return item && item.name
+    },
+    cityLabel: function() {
+      let item = this.getCity.find(e => e && e.city === this.selectedObj.city)
+      return item && item.name
+    },
+    areaLabel: function() {
+      let item = this.getArea.find(e => e && e.area === this.selectedObj.area)
+      return item && item.name
+    },
+    townLabel: function() {
+      let item = this.getTown.find(e => e && e.town === this.selectedObj.town)
+      return item && item.name
+    },
+    label: function() {
+      let country = !this.hideCountry && this.countryLabel || ''
+      let provide = !this.hideProvince && this.provinceLabel || ''
+      let city = !this.hideCity && this.cityLabel || ''
+      let area = !this.hideArea && this.areaLabel || ''
+      let town = !this.hideTown && this.townLabel || ''
+      return `${country} ${provide} ${city} ${area} ${town}`.trim()
+    },
   },
    watch: {
     'pickerType.value': function(value) {
@@ -172,7 +192,7 @@ export default {
       this.selectedValues = value
     },
     selectedValues: function (value) {
-      this.$emit('select:selected', value)
+      this.$emit('select:selected', value, )
     },
   },
   mounted() {
