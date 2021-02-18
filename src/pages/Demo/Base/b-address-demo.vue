@@ -1,6 +1,18 @@
 <template>
   <div>
-    <b-address />
+    <h2>b-address</h2>
+    <hr>
+    type:
+    country
+    <b-address type="country" />
+    province
+    <b-address type="province" />
+    city
+    <b-address type="city" />
+    area
+    <b-address type="area" />
+    town(default)
+    <b-address type="town" />
   </div>
 </template>
 

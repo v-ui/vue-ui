@@ -7,7 +7,9 @@
     :aria-selected="isSelected"
     @click.native="$emit('item:click', item)"
   >
-    {{ item.name }}
+    <slot>
+      {{ item.name }}
+    </slot>
   </b-button>
 </template>
 

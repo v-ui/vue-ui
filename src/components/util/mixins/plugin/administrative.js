@@ -1,7 +1,7 @@
 // province-city-china
 // https://github.com/uiwjs/province-city-china
 
-import {
+export {
   data,
   level,
   province,
@@ -10,14 +10,4 @@ import {
   town,
 } from 'province-city-china/data'
 
-import country from 'province-city-china/dist/country.json'
-
-export {
-  data,
-  level,
-  province,
-  city,
-  area,
-  town,
-  country,
- }
+export * as country from 'province-city-china/dist/country.json'

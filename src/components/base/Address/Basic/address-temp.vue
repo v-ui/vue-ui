@@ -4,13 +4,15 @@
     :primary-key="primaryKey"
   >
     <template #item="{ item }">
-      <address-item
-        :item="item"
-        :primary-key="primaryKey"
-        :selected="selectedValues"
-        :disabled="item.disabled"
-        @item:click="itemClick"
-      />
+      <slot name="item" :item="item">
+        <address-item
+          :item="item"
+          :primary-key="primaryKey"
+          :selected="selectedValues"
+          :disabled="item.disabled"
+          @item:click="itemClick"
+        />
+      </slot>
     </template>
   </b-grid-row>
 </template>

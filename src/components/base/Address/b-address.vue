@@ -8,7 +8,15 @@
         tabs
       />
     </template>
+    <address-country
+      v-if="pickerType === enumTypeStatus.country"
+      v-model="selectedValue"
+      :list="list"
+      :primary-key="primaryKey"
+      @item:click="itemClick"
+    />
     <address-temp
+      v-else
       v-model="selectedValue"
       :list="list"
       :primary-key="primaryKey"
@@ -21,11 +29,13 @@
 import util from "@/components/util/index.js";
 
 import AddressTemp from './Basic/address-temp'
+import AddressCountry from './Basic/address-country'
 import BCard from '@/components/base/Card/b-card.vue'
 import BNav from '@/components/base/Navigation/Nav/b-nav.vue'
+
 export default {
   name: 'b-address',
-  components: { AddressTemp, BCard, BNav, },
+  components: { AddressTemp, AddressCountry, BCard, BNav, },
   mixins: [
     util.mixins.address.type,
     util.mixins.address.country,
@@ -83,7 +93,7 @@ export default {
     },
     hideArea: function() {
       return this.noCityHasArea
-              ? this.hideProvince || this.type === this.enumTypeStatus.city
+              ? this.hideProvince || this.type === this.enumTypeStatus.province || this.type === this.enumTypeStatus.city
               : this.hideCity || this.type === this.enumTypeStatus.city || this.noCityChild
     },
     hideTown: function() {
@@ -162,7 +172,6 @@ export default {
   },
   methods: {
     init: function(value) {
-      debugger
       if (value !== this.enumTypeStatus.country) this.primaryKey = value
 
       switch(value) {
@@ -186,14 +195,14 @@ export default {
     },
     itemClick: async function() {
       await this.$nextTick()
-      debugger
+
       switch(this.pickerType?.value || this.pickerType) {
         case this.enumTypeStatus.country:
           if (this.hideProvince) return
           this.pickerType = this.enumTypeStatus.province
           break
         case this.enumTypeStatus.province:
-          if (this.noCityHasArea) this.pickerType = this.enumTypeStatus.area
+          if (this.noCityHasArea && !this.hideArea) this.pickerType = this.enumTypeStatus.area
           if (this.hideCity) return
           this.pickerType = this.enumTypeStatus.city
           break
