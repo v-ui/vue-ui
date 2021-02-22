@@ -66,7 +66,7 @@ export default {
             .map(o => o.value === this.nullValue ? null : list.find(e => (e.value || e) === o.value))
             .filter(e => e).map(e => this.primaryKey ? e : e && e.value || e)
       } else {
-        let result = list.find(e => (e.value || e) === event.target.value)
+        let result = list.find(e => (e.value || e) == event.target.value)
         this.selectedValues = this.primaryKey ? result : result && result.value || result || ''
       }
     }

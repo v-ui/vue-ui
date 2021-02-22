@@ -309,7 +309,7 @@
         v-modal="'#slotModal'"
         type="button"
         class="btn btn-primary"
-        @click="set='top'; show=true"
+        @click="set='up'; show=true"
       >
         position: top(default)
       </button>

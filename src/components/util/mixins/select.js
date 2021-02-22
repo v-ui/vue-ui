@@ -3,8 +3,8 @@ import props from '@/components/util/props.js'
 
 const install = function(selected, multiple) {
   return multiple
-    ? selected && tools.obj.type.isArray(selected) ? selected : []
-    : selected && (tools.obj.type.isObject(selected) || tools.obj.type.isString(selected)) ? selected : ''
+    ? tools.obj.type.isArray(selected) ? selected : []
+    : selected || ''
 }
 
 const label = function(selected, multiple, primaryKey) {
