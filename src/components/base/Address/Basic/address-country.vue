@@ -3,7 +3,7 @@
     <div v-for="(alpha, index) in alphas" :key="index">
       <h5>{{ alpha.toUpperCase() }}</h5>
       <address-temp
-        v-model="selectedValues"
+        v-model="selectedValue"
         :list="list.filter(e => e.name[0].toUpperCase() === alpha.toUpperCase())"
         :primary-key="primaryKey"
         @item:click="itemClick"
@@ -12,7 +12,7 @@
           <address-item
             :item="item"
             :primary-key="primaryKey"
-            :selected="selectedValues"
+            :selected="selectedValue"
             :disabled="item.disabled"
             @item:click="itemClick"
           >
@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     itemClick: function(item) {
-      this.selectedValues = item
+      this.selectedValue = item
       this.$emit('item:click')
     }
   },

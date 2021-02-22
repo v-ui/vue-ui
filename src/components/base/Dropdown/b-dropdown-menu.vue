@@ -32,7 +32,7 @@
         :href="item.href"
         :info="item.info"
         :icon="item.icon"
-        :active="isChecked(item)"
+        :active="isSelected(item)"
         :disabled="disabled || item.disabled"
         @click.native="itemClick(item)"
       >
@@ -71,14 +71,14 @@ export default {
     itemClick: function(item) {
       if (this.isMultiple) {
         const value = item && item[this.primaryKey || 'value'] || item
-        let index = this.checkedMap.indexOf(value)
+        let index = this.selectedMap.indexOf(value)
         index >= 0
-          ? this.checkedValues.splice(index, 1)
-          : this.checkedValues.push(item)
+          ? this.selectedValue.splice(index, 1)
+          : this.selectedValue.push(item)
       } else {
-        this.checkedValues = item
+        this.selectedValue = item
       }
-      this.$emit('item:click', this.checkedValues)
+      this.$emit('item:click', this.selectedValue)
     },
   },
 };

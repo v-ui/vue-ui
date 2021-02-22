@@ -10,14 +10,14 @@
     </template>
     <address-country
       v-if="pickerType === enumTypeStatus.country"
-      v-model="selectedValues"
+      v-model="selectedValue"
       :list="list"
       :primary-key="primaryKey"
       @item:click="changePickerType"
     />
     <address-temp
       v-else
-      v-model="selectedValues"
+      v-model="selectedValue"
       :list="list"
       :primary-key="primaryKey"
       @item:click="changePickerType"

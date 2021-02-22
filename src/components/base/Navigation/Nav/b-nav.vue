@@ -17,8 +17,8 @@
         :label="item.label || item.value || item"
         :href="item.href"
         :disabled="item.disabled"
-        :active="isChecked(item) || item.active"
-        @item:click="checkedValues = item"
+        :active="isSelected(item) || item.active"
+        @item:click="selectedValue = item"
       />
     </template>
   </ul>

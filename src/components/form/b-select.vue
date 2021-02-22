@@ -1,7 +1,7 @@
 <template>
   <div class="form-group my-0">
     <basic-select
-      v-model="selectedValues"
+      v-model="selectedValue"
       :list="list"
       :size="size"
       :row="row"
@@ -10,7 +10,7 @@
       :primary-key="primaryKey"
       v-bind="$attrs"
       v-on="$listeners"
-      @change.native="validator($event, selectedValues)"
+      @change.native="validator($event, selectedValue)"
     >
       <slot />
     </basic-select>

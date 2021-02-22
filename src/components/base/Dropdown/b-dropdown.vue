@@ -36,7 +36,7 @@
     >
       <slot>
         <b-dropdown-menu
-          v-model="selectedValues"
+          v-model="selectedValue"
           :list="list"
           :disabled="disabled"
           :primary-key="primaryKey"

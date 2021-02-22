@@ -7,8 +7,8 @@
         class="col m-1"
         color="light"
         :value="item"
-        :active="isChecked(item)"
-        @click="checkedValues = item" />
+        :active="isSelected(item)"
+        @click="selectedValue = item" />
     </div>
   </div>
 </template>

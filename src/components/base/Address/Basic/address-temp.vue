@@ -8,7 +8,7 @@
         <address-item
           :item="item"
           :primary-key="primaryKey"
-          :selected="selectedValues"
+          :selected="selectedValue"
           :disabled="item.disabled"
           @item:click="itemClick"
         />
@@ -29,7 +29,7 @@ export default {
   mixins: [ util.mixins.select.select, ],
   methods: {
     itemClick: function(item) {
-      this.selectedValues = item
+      this.selectedValue = item
       this.$emit('item:click')
     }
   },

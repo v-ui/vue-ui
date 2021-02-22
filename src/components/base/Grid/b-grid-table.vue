@@ -8,7 +8,7 @@
             class="text-center"
             :multiple="isMultiple"
             :primary-key="primaryKey"
-            :selected="selectedValues"
+            :selected="selectedValue"
             :disabled="item.disabled || disabled"
             @item:click="itemClick"
           />
@@ -42,14 +42,14 @@ export default {
   methods: {
     itemClick: function(item) {
       if (this.isMultiple) {
-        let index = this.selectedValues.findIndex(e => (e && e[this.primaryKey || 'value'] || e) === (item && item[this.primaryKey || 'value'] || item))
+        let index = this.selectedValue.findIndex(e => (e && e[this.primaryKey || 'value'] || e) === (item && item[this.primaryKey || 'value'] || item))
         index >= 0
-          ? this.selectedValues.splice(index, 1)
-          : this.selectedValues.push(item)
+          ? this.selectedValue.splice(index, 1)
+          : this.selectedValue.push(item)
       } else {
-        this.selectedValues = item
+        this.selectedValue = item
       }
-      this.$emit('item:click', this.selectedValues)
+      this.$emit('item:click', this.selectedValue)
     },
     getList: function(index) {
       let colCount = this.colCount || this.list.length

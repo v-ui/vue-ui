@@ -8,7 +8,7 @@
         :name="name"
         :value="item.value || item"
         :label="item.label"
-        :checked="isChecked(item)"
+        :checked="isSelected(item)"
         :disabled="item.disabled || disabled"
         v-bind="$attrs"
         v-on="$listeners"
@@ -64,10 +64,10 @@ export default {
   methods: {
     input: function(event, item) {
       if (event.target.checked) {
-        this.checkedValues = this.primaryKey ? item : item && item.value || item
+        this.selectedValue = item
         this.validator(
           event,
-          this.checkedValues,
+          this.selectedValue,
           () => { this.validateClass = '' },
           () => { this.validateClass = this.validClass },
           () => { this.validateClass = this.inValidClass },

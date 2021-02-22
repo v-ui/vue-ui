@@ -18,7 +18,7 @@
       </template>
       <slot>
         <b-dropdown-menu
-          v-model="selectedValues"
+          v-model="selectedValue"
           :multiple="isMultiple"
           :primary-key="primaryKey"
           :list="searchList"
@@ -110,14 +110,14 @@ export default {
     },
   },
   watch: {
-    selectedValues: function(value) {
+    selectedValue: function(value) {
       this.searchText = null
       this.validator(this.$refs.dropdownlist.$el, value)
     },
   },
   methods: {
     deleteItem: function(index) {
-      if (index >= 0) this.selectedValues.splice(index, 1)
+      if (index >= 0) this.selectedValue.splice(index, 1)
     },
   }
 };

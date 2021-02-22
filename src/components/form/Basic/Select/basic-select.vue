@@ -22,7 +22,7 @@
         :item="item"
         :multiple="multiple"
         :primary-key="primaryKey"
-        :selected="selectedValues"
+        :selected="selectedValue"
       />
     </slot>
   </select>
@@ -60,14 +60,15 @@ export default {
       let list = this.list
         .map(e => (e.children ? [...e.children] : e))
         .reduce((acc, val) => acc.concat(val), []);
+
       if (this.multiple) {
-        this.selectedValues = Array.prototype.filter
+        this.selectedValue = Array.prototype.filter
             .call(event.target.options, o => o.selected && o.value)
-            .map(o => o.value === this.nullValue ? null : list.find(e => (e.value || e) === o.value))
+            .map(o => o.value === this.nullValue ? null : list.find(e => (e.value || e) == o.value))
             .filter(e => e).map(e => this.primaryKey ? e : e && e.value || e)
       } else {
         let result = list.find(e => (e.value || e) == event.target.value)
-        this.selectedValues = this.primaryKey ? result : result && result.value || result || ''
+        this.selectedValue = this.primaryKey ? result : result && result.value || result || ''
       }
     }
   }

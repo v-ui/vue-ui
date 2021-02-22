@@ -8,7 +8,7 @@
         unvalid
         :label="item.label"
         :value="item.value || item"
-        :checked="isChecked(item)"
+        :checked="isSelected(item)"
         :disabled="item.disabled || disabled"
         v-bind="$attrs"
         v-on="$listeners"
@@ -60,12 +60,12 @@ export default {
   methods: {
     input: function(event, item) {
       if (event.target.checked) {
-        this.checkedValues.push(this.primaryKey ? item : item && item.value || item);
+        this.selectedValue.push(item);
       } else {
-        let index = this.checkedMap.indexOf(event.target.value);
-        if (index >= 0) this.checkedValues.splice(index, 1);
+        let index = this.selectedMap.indexOf(event.target.value);
+        if (index >= 0) this.selectedValue.splice(index, 1);
       }
-      this.validator( event, this.checkedValues,
+      this.validator( event, this.selectedValue,
         () => { this.validateClass = ""; },
         () => { this.validateClass = this.validClass; },
         () => { this.validateClass = this.inValidClass; }

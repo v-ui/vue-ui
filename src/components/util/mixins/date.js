@@ -50,7 +50,7 @@ let validator = {
     validator: function(
       value,
       now = this.now || null,
-      selected = this.selectedValues || null,
+      selected = this.selectedValue || null,
       start = this.selectedStart || null,
       end = this.selectedEnd || null
     ) {
@@ -107,7 +107,7 @@ let base = {
       date: 1,
       now: null,
       colCount: 0,
-      selectedValues: null,
+      selectedValue: null,
     }
   },
   computed: {
@@ -124,9 +124,9 @@ let base = {
   watch: {
     value: function(value) {
       this.initValue && this.initValue(value)
-      if (!this.calendar) this.selectedValues = value
+      if (!this.calendar) this.selectedValue = value
     },
-    selectedValues: function(value) {
+    selectedValue: function(value) {
       // 配合 v-model 工作
       this.$emit("selected:changed", value);
     }
@@ -201,7 +201,7 @@ let year = {
     },
   },
   watch: {
-    selectedValues: function() {
+    selectedValue: function() {
       this.start = this.formatStart(this.year)
     }
   },
@@ -209,7 +209,7 @@ let year = {
     this.now = this.moment([this.moment().year()])
     this.disabledNow = this.disabledItem && this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
-    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format() : null
+    this.selectedValue = this.value && this.value.isValid && this.value.isValid() ? this.format() : null
     this.start = this.formatStart(this.year)
   },
   methods: {
@@ -227,8 +227,8 @@ let year = {
     },
     checknow: function() {
       this.year = this.moment().year();
-      this.selectedValues = this.format()
-      this.$emit('year:checked', this.selectedValues)
+      this.selectedValue = this.format()
+      this.$emit('year:checked', this.selectedValue)
     },
     backward: function() {
       this.start += this.total;
@@ -236,9 +236,9 @@ let year = {
     checked: function(value) {
       // TODO: 解决 mixins-select 中遇到 0 的问题，
       // 待解决后改回： this.year = value
-      this.year = value && value.value === 0 ? value.value : value
-      this.selectedValues = this.format()
-      this.$emit('year:checked', this.selectedValues)
+      this.year = value
+      this.selectedValue = this.format()
+      this.$emit('year:checked', this.selectedValue)
     },
   },
 }
@@ -277,7 +277,7 @@ let quarter = {
     this.now = this.moment([this.moment().year(), this.moment().month(), 1])
     this.disabledNow = this.disabledItem && this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
-    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format().quarter(this.quarter) : null
+    this.selectedValue = this.value && this.value.isValid && this.value.isValid() ? this.format().quarter(this.quarter) : null
   },
   methods: {
     initValue: function(value) {
@@ -286,7 +286,7 @@ let quarter = {
       this.quarter = date.quarter()
     },
     clickHeader: function() {
-      this.$emit("quarter2Year", this.selectedValues);
+      this.$emit("quarter2Year", this.selectedValue);
     },
     forward: function() {
       this.year -= 1;
@@ -294,16 +294,16 @@ let quarter = {
     checknow: function() {
       this.year = this.moment().year();
       this.quarter = this.moment().quarter();
-      this.selectedValues = this.format().quarter(this.quarter)
-      this.$emit('quarter:checked', this.selectedValues)
+      this.selectedValue = this.format().quarter(this.quarter)
+      this.$emit('quarter:checked', this.selectedValue)
     },
     backward: function() {
       this.year += 1;
     },
     checked: function(value) {
       this.quarter = value.value
-      this.selectedValues = this.format().quarter(this.quarter)
-      this.$emit('quarter:checked', this.selectedValues)
+      this.selectedValue = this.format().quarter(this.quarter)
+      this.$emit('quarter:checked', this.selectedValue)
     },
   },
 }
@@ -340,7 +340,7 @@ let month = {
     this.now = this.moment([this.moment().year(), this.moment().month()])
     this.disabledNow = this.disabledItem && this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
-    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format() : null
+    this.selectedValue = this.value && this.value.isValid && this.value.isValid() ? this.format() : null
   },
   methods: {
     initValue: function(value) {
@@ -349,7 +349,7 @@ let month = {
       this.month = date.month()
     },
     clickHeader: function() {
-      this.$emit("month2Year", this.selectedValues);
+      this.$emit("month2Year", this.selectedValue);
     },
     forward: function() {
       this.year -= 1;
@@ -357,8 +357,8 @@ let month = {
     checknow: function() {
       this.year = this.moment().year();
       this.month = this.moment().month();
-      this.selectedValues = this.format()
-      this.$emit('month:checked', this.selectedValues)
+      this.selectedValue = this.format()
+      this.$emit('month:checked', this.selectedValue)
     },
     backward: function() {
       this.year += 1;
@@ -366,9 +366,9 @@ let month = {
     checked: function(value) {
       // TODO: 解决 mixins-select 中遇到 0 的问题，
       // 待解决后改回： this.month = value
-      this.month = value && value.value === 0 ? value.value : value
-      this.selectedValues = this.format()
-      this.$emit('month:checked', this.selectedValues)
+      this.month = value
+      this.selectedValue = this.format()
+      this.$emit('month:checked', this.selectedValue)
     },
   },
 }
@@ -413,7 +413,7 @@ let week = {
     this.now = this.moment([this.moment().year(), this.moment().month(), this.moment().date()])
     this.disabledNow = this.disabledItem && this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
-    this.selectedValues = this.value && this.value.isValid && this.value.isValid() ? this.format().endOf('week') : null
+    this.selectedValue = this.value && this.value.isValid && this.value.isValid() ? this.format().endOf('week') : null
   },
   methods: {
     initValue: function(value) {
@@ -423,7 +423,7 @@ let week = {
       this.week = date.week()
     },
     clickHeader: function() {
-      this.$emit("week2Month", this.selectedValues);
+      this.$emit("week2Month", this.selectedValue);
     },
     forward: function() {
       if (this.month === 0) {
@@ -437,8 +437,8 @@ let week = {
       this.year = this.moment().year();
       this.month = this.moment().month();
       this.week = this.moment().week();
-      this.selectedValues = this.format().week(this.week)
-      this.$emit('week:checked', this.selectedValues)
+      this.selectedValue = this.format().week(this.week)
+      this.$emit('week:checked', this.selectedValue)
     },
     backward: function() {
       if (this.month === 11) {
@@ -450,8 +450,8 @@ let week = {
     },
     checked: function() {
       this.week = this.moment().week();
-      this.selectedValues = this.format().week(this.week)
-      this.$emit('week:checked', this.selectedValues)
+      this.selectedValue = this.format().week(this.week)
+      this.$emit('week:checked', this.selectedValue)
     },
     validNow: function(value, now) {
       return value.isSame(now.startOf('week'))
@@ -503,7 +503,7 @@ let date = {
     this.now = this.moment([this.moment().year(), this.moment().month(), this.moment().date()])
     this.disabledNow = this.disabledItem && this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
-    this.selectedValues = this.calendar
+    this.selectedValue = this.calendar
       ? this.now
       : this.value && this.value.isValid && this.value.isValid() ? this.format() : null
   },
@@ -515,7 +515,7 @@ let date = {
       this.date = date.date()
     },
     clickHeader: function() {
-      this.$emit("date2Month", this.selectedValues)
+      this.$emit("date2Month", this.selectedValue)
     },
     forward: function() {
       if (this.month === 0) {
@@ -529,8 +529,8 @@ let date = {
       this.year = this.moment().year();
       this.month = this.moment().month();
       this.date = this.moment().date()
-      this.selectedValues = this.format()
-      this.$emit('date:checked', this.selectedValues)
+      this.selectedValue = this.format()
+      this.$emit('date:checked', this.selectedValue)
     },
     backward: function() {
       if (this.month === 11) {
@@ -542,8 +542,8 @@ let date = {
     },
     checked: function(value) {
       this.date = value
-      this.selectedValues = this.format()
-      this.$emit('date:checked', this.selectedValues)
+      this.selectedValue = this.format()
+      this.$emit('date:checked', this.selectedValue)
     },
     validWeekend: function(value) {
       return [7, 6].includes(value.isoWeekday())

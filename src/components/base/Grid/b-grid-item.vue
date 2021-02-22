@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     value: function() {
-      return this.item.label || this.item[this.primaryKey] || this.item.value || this.item
+      return this.item && this.item.label || this.item[this.primaryKey || 'value'] || this.item
     },
     objClass: function() {
       return this.isSelected

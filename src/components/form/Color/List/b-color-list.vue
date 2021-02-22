@@ -25,10 +25,15 @@ export default {
   props: {
     disabled: util.props.Boolean,
   },
+  data() {
+    return {
+      isMultiple: false,
+    }
+  },
   methods: {
     click: function(item) {
       if (item.disabled || this.disabled) return
-      this.selected = item.color
+      this.selectedValue = item
     },
   },
 }

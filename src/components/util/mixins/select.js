@@ -4,130 +4,102 @@ import props from '@/components/util/props.js'
 const install = function(selected, multiple) {
   return multiple
     ? tools.obj.type.isArray(selected) ? selected : []
-    : selected || ''
+    : tools.obj.isTrue(selected) ? selected : ''
 }
 
-const label = function(selected, multiple, primaryKey) {
+const label = function(selected, multiple, key) {
   return multiple
-    ? selected && selected.map && selected.map(e => e && (e.label || e[primaryKey] || e.value) || e) || null
-    : selected && (selected && (selected.label || selected[primaryKey] || selected.value) || selected) || null
+    ? selected && selected.map && selected.map(e => e && (e.label || e[key] || e.value) || e) || null
+    : selected && ((selected.label || selected[key] || selected.value) || selected) || null
 }
 
-const map = function(selected, multiple, primaryKey) {
+const map = function(selected, multiple, key) {
   return multiple
-    ? selected && selected.map && selected.map(e => e && e[primaryKey || 'value'] || e)
-    : selected && selected[primaryKey || 'value'] || selected
+    ? selected && selected.map && selected.map(e => e && e[key || 'value'] || e)
+    : selected && selected[key || 'value'] || selected
 }
 
-const isSelected = function(map, item, multiple, primaryKey) {
-  if (!map) return false
+const isSelected = function(map, item, multiple, key) {
+  if (!tools.obj.isTrue(map)) return false
   return multiple
-    ? map.includes && map.includes(item[primaryKey || 'value'] || item)
-    : (item && item[primaryKey || 'value'] || item) === map
+    ? map && map.includes && map.includes(item && item[key || 'value'] || item)
+    : (item && item[key || 'value'] || item) === map
+}
+
+const basic = {
+  props: {
+    primaryKey: {
+      ...props.String,
+      default: null,
+    },
+    selected: [String, Number, Array, Object, Date, ],
+    multiple: props.Boolean,
+  },
+}
+
+const base = {
+  mixins: [ basic ],
+  model: {
+    prop: 'selected',
+    event: 'selected:change',
+  },
+  props: {
+    list: props.Array,
+    label: [ Array, String, Number, Object, Date, ],
+  },
+  data() {
+    return {
+      isMultiple: this.multiple,
+      key: this.primaryKey,
+      selectedValue: null,
+      nullValue: '<Place select...>',
+    }
+  },
+  created() {
+    this.selectedValue = install(this.selected, this.isMultiple)
+  },
+  computed: {
+    showLabel: function() {
+      return this.label || label(this.selectedValue, this.isMultiple, this.key)
+    },
+  },
+  watch: {
+    primaryKey: function(value) {
+      this.key = value
+    },
+    selected: function (value) {
+      this.selectedValue = value
+    },
+    selectedValue: function (value) {
+      this.$emit('selected:change', value)
+    },
+  },
 }
 
 export default {
   check: {
-    model: {
-      prop: 'checked',
-      event: 'check:change',
-    },
-    props: {
-      list: {
-        ...props.Array,
-        validator: value => !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value),
-      },
-      primaryKey: {
-        ...props.String,
-        default: null,
-      },
-      checked: [String, Number, Array, Object, Date, ],
-      label: [ Array, String, Number, Object, Date, ],
-      multiple: props.Boolean,
-    },
-    data() {
-      return {
-        isMultiple: this.multiple,
-        nullValue: '<Place select...>',
-        checkedValues: null,
-      }
-    },
-    created() {
-      this.checkedValues = install(this.checked, this.isMultiple)
-    },
-    watch: {
-      checked: function (value) {
-        this.checkedValues = value
-      },
-      checkedValues: function (value) {
-        this.$emit('check:change', value)
-      },
-    },
+    mixins: [ base, ],
     computed: {
-      showLabel: function() {
-        return this.label || label(this.checkedValues, this.isMultiple, this.primaryKey)
-      },
-      checkedMap: function () {
-        return map(this.checkedValues, this.isMultiple, this.primaryKey)
+      selectedMap: function () {
+        return map(this.selectedValue, this.isMultiple, this.key)
       },
     },
     methods: {
-      isChecked: function(item) {
-        return isSelected(this.checkedMap, item, this.isMultiple, this.primaryKey)
+      isSelected: function(item) {
+        return isSelected(this.selectedMap, item, this.isMultiple, this.key)
       },
     },
   },
   select: {
-    model: {
-      prop: 'selected',
-      event: 'select:selected',
-    },
-    props: {
-      list: props.Array,
-      primaryKey: {
-        ...props.String,
-        default: null,
-      },
-      selected: [String, Number, Array, Object],
-      label: [ Array, String, Number, Object, Date, ],
-      multiple: props.Boolean,
-    },
-    data() {
-      return {
-        isMultiple: this.multiple,
-        nullValue: '<Place select...>',
-        selectedValues: null,
-      }
-    },
-    created() {
-      this.selectedValues = install(this.selected, this.isMultiple)
-    },
-    watch: {
-      selected: function (value) {
-        this.selectedValues = value
-      },
-      selectedValues: function (value) {
-        this.$emit('select:selected', value)
-      },
-    },
-    computed: {
-      showLabel: function() {
-        return this.label || label(this.selectedValues, this.isMultiple, this.primaryKey)
-      },
-    },
+    mixins: [ base, ],
   },
   selectItem: {
+    mixins: [ basic, ],
     props: {
       item: {
-        type: [String, Number, Array, Object],
-        validator: value => !tools.obj.type.isNull(value) && !tools.obj.type.isUndefined(value),
+        type: [String, Number, Array, Object, Date],
+        validator: value => tools.obj.isTrue(value)
       },
-      primaryKey: {
-        ...props.String,
-        default: null,
-      },
-      selected: [String, Number, Array, Object],
-      multiple: props.Boolean,
     },
     computed: {
       selectedMap: function () {

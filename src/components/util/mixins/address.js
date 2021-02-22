@@ -101,18 +101,18 @@ const base = {
     return {
       list: [],
       primaryKey: 'code',
-      selectedValues: []
+      selectedValue: []
     }
   },
   computed: {
     selectedObj: function() {
-      if (!this.selectedValues) return {}
+      if (!this.selectedValue) return {}
       return {
-        country: this.selectedValues.id,
-        province: this.selectedValues.province,
-        city: this.selectedValues.city,
-        area: this.selectedValues.area,
-        town: this.selectedValues.town,
+        country: this.selectedValue.id,
+        province: this.selectedValue.province,
+        city: this.selectedValue.city,
+        area: this.selectedValue.area,
+        town: this.selectedValue.town,
       }
     },
     // show or hide
@@ -231,14 +231,14 @@ const base = {
       this.init(value)
     },
     selected: function (value) {
-      this.selectedValues = value
+      this.selectedValue = value
     },
-    selectedValues: function (value) {
+    selectedValue: function (value) {
       this.$emit('select:selected', value )
     },
   },
   mounted() {
-    this.selectedValues = this.getValue(this.selected)
+    this.selectedValue = this.getValue(this.selected)
     this.pickerType = this.type !== this.enumTypeStatus.country ? this.enumTypeStatus.province : this.enumTypeStatus.country
     this.init(this.pickerType)
   },

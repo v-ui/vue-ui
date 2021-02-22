@@ -21,7 +21,7 @@
       <slot>
         <b-grid-row
           v-if="type === 'row'"
-          v-model="selectedValues"
+          v-model="selectedValue"
           :list="list"
           :primary-key="primaryKey"
           :multiple="isMultiple"
@@ -29,7 +29,7 @@
         />
         <b-grid-table
           v-else-if="type === 'table'"
-          v-model="selectedValues"
+          v-model="selectedValue"
           class="h-100"
           :list="list"
           :border="border"
@@ -108,13 +108,13 @@ export default {
     },
   },
   watch: {
-    selectedValues: function(value) {
+    selectedValue: function(value) {
       this.validator(this.$refs.dropdownpanel.$el, value)
     },
   },
   methods: {
     deleteItem: function(index) {
-      if (index >= 0) this.selectedValues.splice(index, 1)
+      if (index >= 0) this.selectedValue.splice(index, 1)
     },
   },
 }

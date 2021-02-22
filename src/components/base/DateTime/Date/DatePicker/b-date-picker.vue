@@ -11,7 +11,7 @@
     </template>
     <template>
       <b-date-select
-        v-model="selectedValues"
+        v-model="selectedValue"
         :hide-header="hideHeader"
         :type="pickerType"
         :min="dateMin"
@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      selectedValues: this.value,
+      selectedValue: this.value,
     };
   },
   computed: {
@@ -74,9 +74,9 @@ export default {
       }
     },
     showValue: function () {
-      return this.range && this.selectedValues.start && this.selectedValues.end
-        ? this.formatDate(this.selectedValues.start) + ' - ' + this.formatDate(this.selectedValues.end)
-        : this.formatDate(this.selectedValues)
+      return this.range && this.selectedValue.start && this.selectedValue.end
+        ? this.formatDate(this.selectedValue.start) + ' - ' + this.formatDate(this.selectedValue.end)
+        : this.formatDate(this.selectedValue)
     },
     canHide: function () {
       return this.type === this.pickerType;
@@ -110,11 +110,11 @@ export default {
   watch: {
     value: {
       handler: function (value) {
-        this.selectedValues = value
+        this.selectedValue = value
       },
       deep: true,
     },
-    selectedValues: {
+    selectedValue: {
       handler: function (value) {
         // 配合 v-model 工作
         this.$emit("change", value);

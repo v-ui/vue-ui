@@ -52,7 +52,7 @@ export default {
       // 此时 selectedValueStart 相当于 start，selectedValueEnd 相当于 end
       selectedValueStart: null,
       selectedValueEnd: null,
-      selectedValues: this.range ? {start: null, end: null} : null,
+      selectedValue: this.range ? {start: null, end: null} : null,
     };
   },
   computed: {
@@ -94,13 +94,13 @@ export default {
   watch: {
     selectedValueStart: function (value) {
       this.range
-        ? this.selectedValues.start = value
-        : this.selectedValues = value
+        ? this.selectedValue.start = value
+        : this.selectedValue = value
     },
     selectedValueEnd: function (value) {
-      this.selectedValues.end = value
+      this.selectedValue.end = value
     },
-    selectedValues: {
+    selectedValue: {
       handler: function (value) {
         // 配合 v-model 工作
         this.$emit("change", value);

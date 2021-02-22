@@ -99,17 +99,6 @@
     </div>
     <div class="row py-1">
       <font class="col-1">
-        checked(label1):
-      </font>
-      <b-nav
-        class="col-11"
-        :list="list"
-        checked="label1"
-        pills
-      />
-    </div>
-    <div class="row py-1">
-      <font class="col-1">
         v-model({{ value }}):
       </font>
       <b-nav
