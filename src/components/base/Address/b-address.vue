@@ -36,9 +36,7 @@ import BNav from '@/components/base/Navigation/Nav/b-nav.vue'
 export default {
   name: 'b-address',
   components: { AddressTemp, AddressCountry, BCard, BNav, },
-  mixins: [
-    util.mixins.address.base,
-  ],
+  mixins: [ util.mixins.address.base, ],
   computed: {
     navList: function() {
       let country = this.hideCountry ? false : { value: this.enumTypeStatus.country, label: this.countryLabel || '国家', }

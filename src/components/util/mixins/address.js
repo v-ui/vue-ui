@@ -231,7 +231,7 @@ const base = {
       this.init(value)
     },
     selected: function (value) {
-      this.selectedValues = this.getValue(value)
+      this.selectedValues = value
     },
     selectedValues: function (value) {
       this.$emit('select:selected', value )

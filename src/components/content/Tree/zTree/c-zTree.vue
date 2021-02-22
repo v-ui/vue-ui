@@ -57,7 +57,8 @@ export default {
     },
     // 节点被展开
     onExpand: async function(evt) {
-      this.initIcon(
+      await this.$nextTick()
+      await this.initIcon(
         evt.target.getElementsByClassName('ico_open'),
         evt.target.getElementsByClassName('ico_close'),
         evt.target.getElementsByClassName('ico_docu'),
@@ -65,6 +66,7 @@ export default {
     },
     // 节点被折叠
     onCollapse: async function(evt, treeId, treeNode) {
+      await this.$nextTick()
       if (this.setting && this.setting.view && this.setting.view.showIcon)
         await tools.dom.addClasses(document.getElementById(treeNode.tId +'_ico'), this.icon.folder)
       await this.$nextTick()
@@ -72,7 +74,7 @@ export default {
     handleCreated: function(ztreeObj) {
       this.ztreeObj = ztreeObj;
       // onCreated 中操作ztreeObj对象展开第一个节点
-      ztreeObj.expandNode(ztreeObj.getNodes()[0], true);
+      // ztreeObj.expandNode(ztreeObj.getNodes()[0], true);
     },
   },
 }
