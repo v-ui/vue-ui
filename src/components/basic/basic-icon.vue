@@ -10,7 +10,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: 'basic-icon',
+  name: 'BasicIcon',
   props: {
     icon: {
       ...util.props.string,

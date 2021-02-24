@@ -103,7 +103,7 @@ import BGridTable from '@/components/base/Grid/b-grid-table.vue'
 
 import BRange from '@/components/form/b-range.vue'
 export default {
-  name: 'b-grid-demo',
+  name: 'BGridDemo',
   components: {
     BGridRow,
     BGridTable,

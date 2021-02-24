@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: 'b-slide-coltroller',
+  name: 'BSlideColtroller',
 }
 </script>

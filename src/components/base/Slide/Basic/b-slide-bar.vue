@@ -6,7 +6,7 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: 'b-slide-bar',
+  name: 'BSlideBar',
   props: {
     value: {
       ...util.props.UNumber,

@@ -21,7 +21,7 @@ import util from "@/components/util/index.js";
 import BStepItem from './Basic/b-step-item'
 
 export default {
-  name: 'b-step',
+  name: 'BStep',
   components: { BStepItem, },
   props: {
     list: util.props.array,

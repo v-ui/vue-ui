@@ -12,7 +12,7 @@ import BStepIcon from './b-step-icon'
 import BStepContent from './b-step-content';
 
 export default {
-  name: 'b-step-item',
+  name: 'BStepItem',
   components: { BStepIcon, BStepContent, },
   mixins: [ util.mixins.status.message, ],
   props: {

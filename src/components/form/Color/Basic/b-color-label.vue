@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'b-color-label',
+  name: 'BColorLabel',
   props: {
     color: [String, Number],
   },

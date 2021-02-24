@@ -4,7 +4,6 @@ import util from './util'
 import BaseRouters from './Subsystem/Base'
 import FormRouters from './Subsystem/Form'
 import ContentRouters from './Subsystem/Content'
-import BoxRouters from './Subsystem/Box'
 import DirectiveRouters from './Subsystem/Directive'
 import SystemRouters from './Subsystem/system'
 
@@ -12,7 +11,6 @@ const Modules = [
   util.GetModels(BaseRouters),
   util.GetModels(FormRouters),
   util.GetModels(ContentRouters),
-  util.GetModels(BoxRouters),
   util.GetModels(DirectiveRouters),
   util.GetModels(SystemRouters),
 ]
@@ -21,7 +19,6 @@ const Routers = [
   ...util.GetRouters(BaseRouters),              // Base
   ...util.GetRouters(FormRouters),              // Form
   ...util.GetRouters(ContentRouters),           // Content
-  ...util.GetRouters(BoxRouters),               // Box
   ...util.GetRouters(DirectiveRouters),         // Directive
   ...util.GetRouters(SystemRouters),            // System
   // ...util.GetRouters(Plugin),

@@ -26,7 +26,7 @@ import BColorKeyBar from './b-color-key-bar'
 // import BColorAlphaBar from '../Alpha/b-color-alpha-bar'
 
 export default {
-  name: 'b-color-cmyk',
+  name: 'BColorCmyk',
   components: { BNumber, BColorCyanBar, BColorMagentaBar, BColorYellowBar, BColorKeyBar },
   mixins: [ util.mixins.color.base, ],
   model: {

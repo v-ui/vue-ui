@@ -26,7 +26,7 @@ import BColorAlphaBar from '../Alpha/b-color-alpha-bar'
 import BColorSlPanel from './b-color-sl-panel'
 
 export default {
-  name: 'b-color-hsl',
+  name: 'BColorHsl',
   components: { BNumber, BColorHueBar, BColorAlphaBar, BColorSlPanel },
   mixins: [ util.mixins.color.base, ],
   model: {

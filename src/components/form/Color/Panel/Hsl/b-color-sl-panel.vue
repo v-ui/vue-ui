@@ -13,7 +13,7 @@ import util from "@/components/util";
 import BColorPanel from '../../Basic/b-color-panel'
 
 export default {
-  name: "b-color-sl-panel",
+  name: "BColorSlPanel",
   components: { BColorPanel, },
   mixins: [ util.mixins.color.colorPanel, ],
 };

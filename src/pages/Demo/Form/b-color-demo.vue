@@ -158,7 +158,7 @@ import BColorPicker from '@/components/form/Color/Picker/b-color-picker.vue'
 import BColor from '@/components/form/Color/b-color.vue'
 
 export default {
-  name: 'b-color-demo',
+  name: 'BColorDemo',
   components: { BColorPicker, BColor, },
   data() {
     return {

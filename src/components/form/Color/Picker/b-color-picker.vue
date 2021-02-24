@@ -34,7 +34,7 @@ import BasicIcon from '@/components/basic/basic-icon.vue'
 const modes = [ 'hsl', 'rgb', 'cmyk', ]
 
 export default {
-  name: 'b-color-picker',
+  name: 'BColorPicker',
   components: { BColorSet, BColorLabel, BColorHsl, BColorRgb, BColorCmyk, BasicIcon, },
   mixins: [ util.mixins.color.base, ],
   model: {

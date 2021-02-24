@@ -19,7 +19,7 @@ import util from '@/components/util'
 import BColorCheck from './b-color-check'
 
 export default {
-  name: 'b-color-list',
+  name: 'BColorList',
   components: { BColorCheck, },
   mixins: [ util.mixins.select.select ],
   props: {

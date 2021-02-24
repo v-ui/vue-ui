@@ -14,7 +14,7 @@ import util from '@/components/util'
 import BColorBar from '../../Basic/b-color-bar'
 
 export default {
-  name: 'b-color-alpha-bar',
+  name: 'BColorAlphaBar',
   components: { BColorBar, },
   mixins: [ util.mixins.color.colorBar, ],
   computed: {

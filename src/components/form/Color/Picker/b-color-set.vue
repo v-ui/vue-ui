@@ -19,7 +19,7 @@ import util from '@/components/util'
 import BasicButton from '@/components/basic/Button/basic-button.vue'
 
 export default {
-  name: 'b-color-set',
+  name: 'BColorSet',
   components: { BasicButton, },
   mixins: [ util.mixins.select.check ],
 }
