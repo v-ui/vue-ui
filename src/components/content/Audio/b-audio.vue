@@ -14,12 +14,12 @@
           :disabled="disabledStepBackward"
         />
         <b-loading
-          v-if="status == EStatus.loading"
+          v-if="status == enumStatus.loading"
           class="btn btn-outline-primary rounded-circle"
           status="grow"
         />
         <b-controller-button
-          v-if="status == EStatus.loading"
+          v-if="status == enumStatus.loading"
           :icon="icon.stop"
           @click.native="stopload"
         />
@@ -50,6 +50,7 @@
         <b-controller-button
           class="mr-1"
           :icon="mute ? icon.volumeMute : icon.volumeUp"
+          :disabled="disabledMute"
           @click.native="audioMuteClick"
         />
         <vue-page-transition
@@ -59,6 +60,7 @@
           <b-range
             v-show="audioMuteRangeShow"
             v-model.number="volumeRange"
+            :disabled="disabledMute"
             class="p-0"
             hide-value
             max="1"
@@ -132,7 +134,7 @@ export default {
       volume: 0.5, // 音量
       volumeRange: 0.5,
       status: null, // 状态
-      EStatus: {
+      enumStatus: {
         // 状态 枚举
         unloaded: "unloaded", // 未加载
         loading: "loading", // 加载
@@ -180,27 +182,30 @@ export default {
     },
     isError: function() {
       return (
-        this.status == this.EStatus.loaderror ||
-        this.status == this.EStatus.playerror
+        this.status == this.enumStatus.loaderror ||
+        this.status == this.enumStatus.playerror
       );
     },
     // ------ controllers ------
     showPlay: function() {
       return (
-        this.status == this.EStatus.pauseing ||
-        this.status == this.EStatus.finished ||
-        this.status == this.EStatus.loaded ||
-        this.status == this.EStatus.unloaded
+        this.status == this.enumStatus.pauseing ||
+        this.status == this.enumStatus.finished ||
+        this.status == this.enumStatus.loaded ||
+        this.status == this.enumStatus.unloaded
       );
     },
     disabledPlay: function() {
       return this.duration == 0;
     },
     showPause: function() {
-      return this.status == this.EStatus.playing;
+      return this.status == this.enumStatus.playing;
     },
     disabledPause: function() {
       return false;
+    },
+    disabledMute: function() {
+      return this.disabledPlay
     },
     disabledSeekRange: function() {
       return this.disabledPlay;
@@ -237,7 +242,7 @@ export default {
     }
   },
   mounted() {
-    this.status = this.EStatus.unloaded;
+    this.status = this.enumStatus.unloaded;
     this.volumeRange = this.mute ? 0 : this.volume;
   },
   beforeDestroy() {
@@ -261,10 +266,10 @@ export default {
     },
     // ----- sound event ------
     onload: function() {
-      this.status = this.EStatus.loaded;
+      this.status = this.enumStatus.loaded;
     },
     onloaderror: function() {
-      this.status = this.EStatus.loaderror;
+      this.status = this.enumStatus.loaderror;
     },
     stopload: function() {
       this.clear();
@@ -273,12 +278,12 @@ export default {
     play: function() {
       if (this.duration == this.seek) this.seek = 0;
       this.soundId = this.sound.play();
-      this.status = this.EStatus.playing;
+      this.status = this.enumStatus.playing;
     },
     pause: function() {
-      if (this.status != this.EStatus.playing) return;
+      if (this.status != this.enumStatus.playing) return;
       this.sound.pause();
-      this.status = this.EStatus.pauseing;
+      this.status = this.enumStatus.pauseing;
     },
     onplay: function() {
       this.timer = setInterval(() => {
@@ -286,7 +291,7 @@ export default {
       }, 1000);
     },
     onend: function() {
-      this.status = this.EStatus.finished;
+      this.status = this.enumStatus.finished;
       clearInterval(this.timer);
     },
     // ------ 进度调节 ------
@@ -373,7 +378,7 @@ export default {
       window.URL.revokeObjectURL(this.boblSrc);
     },
     clear: function() {
-      this.status = this.EStatus.unloaded;
+      this.status = this.enumStatus.unloaded;
       this.seek = 0;
       if (this.sound) {
         this.sound.unload();
