@@ -159,7 +159,7 @@
             start="1"
             :end="pageCount"
           >
-            <b-number v-model.number="pageNumber" />
+            <b-number length="5" min="1" :max="pageCount" hide-button v-model.number="pageNumber" />
             <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
           </b-pagination>
         </font>
@@ -325,13 +325,13 @@ export default {
       return config.ui.icon;
     },
     head: function() {
-      return (this.list && this.list.head) || [];
+      return this.list && this.list.head || [];
     },
     sort: function() {
-      return (this.list && this.list.sort) || [];
+      return this.list && this.list.sort || [];
     },
     data: function() {
-      return (this.list && this.list.data) || [];
+      return this.list && this.list.data || [];
     },
     fillData: function() {
       return this.data.slice(
@@ -340,7 +340,7 @@ export default {
       );
     },
     foot: function() {
-      return (this.list && this.list.foot) || [];
+      return this.list && this.list.foot || [];
     },
     dataCount: function() {
       // 总条数
@@ -348,17 +348,15 @@ export default {
     },
     pageCount: function() {
       // 总页数
-      return (
-        Number.parseInt(this.dataCount / this.pageSize) +
-        (this.dataCount % this.pageSize == 0 ? 0 : 1)
-      );
+      return Number.parseInt(this.dataCount / this.pageSize) +
+        this.dataCount % this.pageSize == 0 ? 0 : 1
     },
     dataSize: function() {
       // 本页条数
       return this.fillData.length;
     },
     rowStyle: function() {
-      return (this.list && this.list.rowStyle) || {};
+      return this.list && this.list.rowStyle || {};
     },
     lastcolumns: function() {
       return this.getLastColumns();
@@ -403,50 +401,37 @@ export default {
       return !this.foot || this.foot.length == 0;
     },
     fixedTable: function() {
-      return this.$refs && this.$refs.fixedTable;
+      return this.$refs.fixedTable;
     },
     fixedTableTHead: function() {
-      return (
-        this.fixedTable && this.fixedTable.$refs && this.fixedTable.$refs.Thead
-      );
+      return this.fixedTable && this.fixedTable.$refs.Thead
     },
     fixedTableTBody: function() {
-      return (
-        this.fixedTable && this.fixedTable.$refs && this.fixedTable.$refs.TBody
-      );
+      return this.fixedTable && this.fixedTable.$refs.TBody
     },
     fixedTableTFoot: function() {
-      return (
-        this.fixedTable && this.fixedTable.$refs && this.fixedTable.$refs.TFoot
-      );
+      return this.fixedTable && this.fixedTable.$refs.TFoot
     },
     activeTable: function() {
-      return this.$refs && this.$refs.activeTable;
+      return this.$refs.activeTable;
     },
     activeTableTHead: function() {
-      return (
-        this.activeTable &&
-        this.$refs.activeTable.$refs &&
-        this.activeTable.$refs.Thead
-      );
+      return this.activeTable && this.activeTable.$refs.Thead
     },
     activeTableTBody: function() {
-      return (
-        this.activeTable &&
-        this.$refs.activeTable.$refs &&
-        this.activeTable.$refs.TBody
-      );
+      return this.activeTable && this.activeTable.$refs.TBody
     },
     activeTableTFoot: function() {
-      return (
-        this.activeTable &&
-        this.$refs.activeTable.$refs &&
-        this.activeTable.$refs.TFoot
-      );
-    }
+      return this.activeTable && this.activeTable.$refs.TFoot
+    },
   },
   mounted() {
     this.init();
+  },
+  watch: {
+    pageCount: function(value) {
+      if(this.pageNumber > value) this.pageNumber = this.pageCount
+    },
   },
   methods: {
     init: async function() {
@@ -463,53 +448,25 @@ export default {
       await this.$nextTick();
       await this.initHeight();
     },
-    initHeight: function() {
+    initHeight: async function() {
       if (!this.fixedTableTBody && !this.activeTableTBody) return;
       if (this.fixedTableTBody) this.fixedTableTBody.style.height = 0 + "px";
       if (this.activeTableTBody) this.activeTableTBody.style.height = 0 + "px";
       this.$el.style.height = this.$parent.$el.offsetHeight + "px";
 
-      this.$nextTick(function() {
-        if (this.fixedTable && this.activeTable) {
-          this.initTrHeight(
-            this.$refs.fixedTable.$refs.THead,
-            this.$refs.activeTable.$refs.THead
-          );
-          this.initTrHeight(
-            this.$refs.fixedTable.$refs.TBody,
-            this.$refs.activeTable.$refs.TBody
-          );
-          this.initTrHeight(
-            this.$refs.fixedTable.$refs.TFoot,
-            this.$refs.activeTable.$refs.TFoot
-          );
-        }
-        let ToolbarHeight = this.$refs.toolbar
-          ? this.$refs.toolbar.offsetHeight
-          : 0;
-        let THeadHeight = this.$refs.fixedTable.$refs.THead
-          ? this.$refs.fixedTable.$refs.THead.offsetHeight
-          : 0;
-        let TFootHeight = this.$refs.fixedTable.$refs.TFoot
-          ? this.$refs.fixedTable.$refs.TFoot.offsetHeight
-          : 0;
-        let PaginationHeight = this.$refs.pagination
-          ? this.$refs.pagination.offsetHeight
-          : 0;
-        let TBodyHeight =
-          this.$parent.$el.offsetHeight -
-          ToolbarHeight -
-          THeadHeight -
-          TFootHeight -
-          PaginationHeight -
-          10;
-        if (this.fixedTableTBody)
-          this.fixedTableTBody.style.height =
-            TBodyHeight < 0 ? 0 : TBodyHeight + "px";
-        if (this.activeTableTBody)
-          this.activeTableTBody.style.height =
-            TBodyHeight < 0 ? 0 : TBodyHeight + "px";
-      });
+      await this.$nextTick()
+      if (this.fixedTable && this.activeTable) {
+        this.initTrHeight(this.$refs.fixedTable.$refs.THead, this.$refs.activeTable.$refs.THead);
+        this.initTrHeight(this.$refs.fixedTable.$refs.TBody, this.$refs.activeTable.$refs.TBody);
+        this.initTrHeight(this.$refs.fixedTable.$refs.TFoot, this.$refs.activeTable.$refs.TFoot);
+      }
+      let ToolbarHeight = this.$refs.toolbar ? this.$refs.toolbar.offsetHeight : 0;
+      let THeadHeight = this.$refs.fixedTable.$refs.THead ? this.$refs.fixedTable.$refs.THead.offsetHeight : 0;
+      let TFootHeight = this.$refs.fixedTable.$refs.TFoot ? this.$refs.fixedTable.$refs.TFoot.offsetHeight : 0;
+      let PaginationHeight = this.$refs.pagination ? this.$refs.pagination.offsetHeight : 0;
+      let TBodyHeight = this.$parent.$el.offsetHeight - ToolbarHeight - THeadHeight - TFootHeight - PaginationHeight - 10;
+      if (this.fixedTableTBody) this.fixedTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + "px";
+      if (this.activeTableTBody) this.activeTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + "px";
     },
     initTrHeight: function(fixedTableTrList, activeTableTrList) {
       if (!fixedTableTrList && !activeTableTrList) return;
@@ -518,21 +475,20 @@ export default {
       let min = Math.min(fixed.length, active.length);
 
       for (let i = 0; i < min; i++) {
-        if (
-          i == min - 1 &&
+        if (i == min - 1 &&
           fixedTableTrList.children[0].children[1].offsetHeight !=
             activeTableTrList.children[0].children[1].offsetHeight
         ) {
           fixedTableTrList.children[0].children[1].offsetHeight >
           activeTableTrList.children[0].children[1].offsetHeight
-            ? (active[active.length - 1].style.height =
+            ? active[active.length - 1].style.height =
                 Array.from(fixed)
                   .slice(min - 1)
-                  .reduce((acc, cur) => cur.offsetHeight + acc, 0) + "px")
-            : (fixed[fixed.length - 1].style.height =
+                  .reduce((acc, cur) => cur.offsetHeight + acc, 0) + "px"
+            : fixed[fixed.length - 1].style.height =
                 Array.from(active)
                   .slice(min - 1)
-                  .reduce((acc, cur) => cur.offsetHeight + acc, 0) + "px");
+                  .reduce((acc, cur) => cur.offsetHeight + acc, 0) + "px"
           return;
         }
 
@@ -544,16 +500,8 @@ export default {
     },
     injectionHover: function(dom1, dom2) {
       for (let i = 0; i < dom1.children.length; i++) {
-        dom1.childNodes[i].addEventListener(
-          "mouseover",
-          () => tools.dom.addClass(dom2.children[i], "hover"),
-          false
-        );
-        dom1.childNodes[i].addEventListener(
-          "mouseout",
-          () => tools.dom.removeClass(dom2.children[i], "hover"),
-          false
-        );
+        dom1.childNodes[i].addEventListener("mouseover", () => tools.dom.addClass(dom2.children[i], "hover"), false);
+        dom1.childNodes[i].addEventListener("mouseout", () => tools.dom.removeClass(dom2.children[i], "hover"), false);
       }
     },
     scroll: function(elment, type) {
@@ -592,9 +540,7 @@ export default {
     },
     getLastColumns: function(head = this.head) {
       let arr = [];
-      head.forEach(e => {
-        e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e);
-      });
+      head.forEach(e => e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e));
       return arr;
     },
     dataExport: function(item) {

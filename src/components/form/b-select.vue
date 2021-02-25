@@ -7,6 +7,7 @@
       :row="row"
       :multiple="multiple"
       :disabled="disabled"
+      :hide-null="hideNull"
       :primary-key="primaryKey"
       v-bind="$attrs"
       v-on="$listeners"
