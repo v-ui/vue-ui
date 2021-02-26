@@ -455,21 +455,25 @@ export default {
       this.$el.style.height = this.$parent.$el.offsetHeight + "px";
 
       await this.$nextTick()
+
       if (this.fixedTable && this.activeTable) {
         this.initTrHeight(this.$refs.fixedTable.$refs.THead, this.$refs.activeTable.$refs.THead);
         this.initTrHeight(this.$refs.fixedTable.$refs.TBody, this.$refs.activeTable.$refs.TBody);
         this.initTrHeight(this.$refs.fixedTable.$refs.TFoot, this.$refs.activeTable.$refs.TFoot);
       }
+
       let ToolbarHeight = this.$refs.toolbar ? this.$refs.toolbar.offsetHeight : 0;
       let THeadHeight = this.$refs.fixedTable.$refs.THead ? this.$refs.fixedTable.$refs.THead.offsetHeight : 0;
       let TFootHeight = this.$refs.fixedTable.$refs.TFoot ? this.$refs.fixedTable.$refs.TFoot.offsetHeight : 0;
       let PaginationHeight = this.$refs.pagination ? this.$refs.pagination.offsetHeight : 0;
       let TBodyHeight = this.$parent.$el.offsetHeight - ToolbarHeight - THeadHeight - TFootHeight - PaginationHeight - 10;
+
       if (this.fixedTableTBody) this.fixedTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + "px";
       if (this.activeTableTBody) this.activeTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + "px";
     },
     initTrHeight: function(fixedTableTrList, activeTableTrList) {
       if (!fixedTableTrList && !activeTableTrList) return;
+
       let fixed = fixedTableTrList.children[0].children[1].children;
       let active = activeTableTrList.children[0].children[1].children;
       let min = Math.min(fixed.length, active.length);
