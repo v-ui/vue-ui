@@ -144,29 +144,20 @@ export default {
       return isNaN(this.selectStatus) ? 0 : Number(this.selectStatus);
     },
     operate: function() {
-      if (this.isActive || this.status == 2 || !this.list || !this.list.operate)
-        return {};
-      let index =
-        this.list.operate.index >= 0
+      if (this.isActive || this.status == 2 || !this.list || !this.list.operate) return {};
+      let index = this.list.operate.index >= 0
           ? this.list.operate.index
           : this.list.head.length;
-      let value =
-        (this.list.operate.value &&
-          this.list.operate.value.forEach &&
-          this.list.operate.value.filter(e =>
-            config.ui.table.operate[e].permissions(this.status)
-          )) ||
-        [];
-      let n = Math.min(
-        ...this.list.head.map((e, index) => {
-          return e.children ? index : Infinity;
-        })
-      );
+      let value = this.list.operate.value &&
+        this.list.operate.value.forEach &&
+        this.list.operate.value.filter(e => config.ui.table.operate[e].permissions(this.status)) ||
+        []
+      let n = Math.min(...this.list.head.map((e, index) => e.children ? index : Infinity))
       if (index > n) index = n;
       return { index: index, value: value };
     },
     head: function() {
-      let arr = Array.from((this.list && this.list.head) || []);
+      let arr = Array.from(this.list && this.list.head || []);
       if (
         !this.isActive &&
         this.status != 2 &&
@@ -179,13 +170,13 @@ export default {
       return arr;
     },
     data: function() {
-      return (this.list && this.list.data) || [];
+      return this.list && this.list.data || [];
     },
     foot: function() {
-      return (this.list && this.list.foot) || [];
+      return this.list && this.list.foot || [];
     },
     sort: function() {
-      return (this.list && this.list.sort) || [];
+      return this.list && this.list.sort || [];
     },
     hideHead: function() {
       return !this.head || this.head.length == 0;
@@ -197,7 +188,7 @@ export default {
       return !this.foot || this.foot.length == 0;
     },
     rowStyle: function() {
-      return (this.list && this.list.rowStyle) || {};
+      return this.list && this.list.rowStyle || {};
     }
   },
   watch: {

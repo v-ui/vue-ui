@@ -11,21 +11,18 @@ export default {
     },
     methods: {
       // head
-      getLastColumns: function (head = this.head) {
+      getLastColumns: function(head = this.head) {
         let arr = []
-        head.forEach(e => {
-          e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e)
-        })
+        head.forEach(e => e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e))
         return arr
       },
       // head
-      initHead: function () {
-        this.theadRowCount =
-          this.initHeadData(this.head)
+      initHead: function() {
+        this.theadRowCount = this.initHeadData(this.head)
         this.getHeadData(this.head)
       },
       // head
-      getTheadRowCount: function (arr = [], count = 1) {
+      getTheadRowCount: function(arr = [], count = 1) {
         return Math.max(...arr.map(e => e.children ? this.getTheadRowCount(e.children, count + 1) : count))
       },
       // head
