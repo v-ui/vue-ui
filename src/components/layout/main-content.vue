@@ -6,7 +6,7 @@
       name="component-fade"
       mode="out-in"
     >
-      <router-view class="h-100" />
+      <router-view class="flex-grow-1" />
     </transition>
   </main>
 </template>
