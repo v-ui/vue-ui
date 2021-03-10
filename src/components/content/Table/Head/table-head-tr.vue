@@ -54,10 +54,10 @@ export default {
     row: util.props.Array,
     sort: util.props.Array,
     checked: util.props.Boolean,
-    rowCount: Number,
+    rowCount: util.props.UNumber,
     hideSerial: util.props.Boolean,
     hideSelect: util.props.Boolean,
-    selectStatus: Number,
+    selectStatus: util.props.UNumber,
     sortObj: util.props.Object,
   },
   data() {

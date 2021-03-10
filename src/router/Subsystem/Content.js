@@ -14,6 +14,7 @@ export default {
     { path: 'b-video-player', name: 'b-video-player', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-video-player-demo.vue'), },
     { path: 'b-zTree', name: 'b-zTree', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-zTree-demo.vue'), },
     { path: 'b-tree-view', name: 'b-tree-view', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-tree-view-demo.vue'), },
+    { path: 'b-table', name: 'b-table', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-table-demo.vue'), },
     { path: 'b-grid-view', name: 'b-grid-view', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-grid-view-demo.vue'), },
     { path: 'b-file-browser', name: 'b-file-browser', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-file-browser-demo.vue'), },
   ],

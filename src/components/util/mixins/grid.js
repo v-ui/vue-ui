@@ -11,14 +11,8 @@ export default {
     },
     methods: {
       // head
-      getLastColumns: function(head = this.head) {
-        let arr = []
-        head.forEach(e => e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e))
-        return arr
-      },
-      // head
       initHead: function() {
-        this.theadRowCount = this.initHeadData(this.head)
+        this.initHeadData(this.head)
         this.getHeadData(this.head)
       },
       // head
@@ -28,17 +22,16 @@ export default {
       // head
       initHeadData: function (head = [], index = 0) {
         if (!head || head.length == 0) return []
-        let vm = this
         let hasChildren = head.some(e => e.children)
         index += hasChildren ? 1 : 0
         head.forEach(e => {
-          let colspan = vm.getCellColCount(e)
-          let rowspan = vm.getCellRowCount(e, hasChildren ? index - 1 : index)
-          e.colspan = colspan > 1 ? colspan : null
-          e.rowspan = rowspan > 1 ? rowspan : null
+          let colSpan = this.getCellColCount(e)
+          let rowSpan = this.getCellRowCount(e, hasChildren ? index - 1 : index)
+          e.colSpan = colSpan > 1 ? colSpan : null
+          e.rowSpan = rowSpan > 1 ? rowSpan : null
           if (e.children) {
             if (e.sort) e.sort = false
-            vm.initHeadData(e.children, index)
+            this.initHeadData(e.children, index)
           }
         })
       },
@@ -54,7 +47,7 @@ export default {
       },
       // head
       getHeadData: function (head = []) {
-        if (!head || head.length == 0) return []
+        if (!head || head.length === 0) return []
         this.theadData.push([...head])
         // ie 和 edge 不支持 flat
         // this.getHeadData(head.filter(e => e.children).map(e => e.children).flat())

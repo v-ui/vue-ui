@@ -1,10 +1,10 @@
 <template>
   <th
     class="text-center align-middle"
-    :rowspan="cell.rowspan"
-    :aria-rowspan="cell.rowspan"
-    :colspan="cell.colspan"
-    :aria-colspan="cell.colspan"
+    :rowspan="cell.rowSpan"
+    :aria-rowspan="cell.rowSpan"
+    :colspan="cell.colSpan"
+    :aria-colspan="cell.colSpan"
     :data-field="cell.field"
   >
     <div class="d-flex justify-content-center align-items-center">

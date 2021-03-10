@@ -40,7 +40,7 @@ export default {
               {
                 title: "1-1",
                 field: "1-1",
-                hildren: [
+                children: [
                   { title: "1-1-1", field: "1-1-1" },
                   { title: "1-1-2", field: "1-1-2" }
                 ]

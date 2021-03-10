@@ -4,10 +4,10 @@
     :class="[cell.class, ObjStyle && ObjStyle.class]"
     :style="[cell.style, ObjStyle && ObjStyle.style]"
     style="min-width: 30px;"
-    :colspan="cell.colspan"
-    :aria-colspan="cell.colspan"
-    :rowspan="cell.rowspan"
-    :aria-rowspan="cell.rowspan"
+    :colspan="cell.colSpan"
+    :aria-colspan="cell.colSpan"
+    :rowspan="cell.rowSpan"
+    :aria-rowspan="cell.rowSpan"
   >
     {{ col.format ? col.format(value) : value || '-' }}
   </td>

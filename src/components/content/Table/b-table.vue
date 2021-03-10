@@ -9,7 +9,7 @@
       @scroll="isActive && $emit('table:scroll', $event, 'activeTableHeader')"
     >
       <table
-        class="table table-sm m-0"
+        class="table table-sm table-bordered m-0"
         :class="tableClass"
         style="table-layout: fixed"
       >
@@ -20,6 +20,7 @@
           :sort="sort"
           :sort-obj="sortObj"
           :class="theadClass"
+          :row-count="theadRowCount"
           :thead-row-count="theadRowCount"
           :hide-serial="hideSerial"
           :hide-select="hideSelect"
@@ -207,7 +208,7 @@ export default {
     // head and colgroup
     InitColgroupAndcolumns: function() {
       if (this.hideHead) return;
-      (this.colgroup = []), (this.fieldcolumns = []);
+
       if (!this.hideSerial)
         this.colgroup.push({ class: "text-center", style: "width: 58px;" });
       if (this.status == 2 && !this.hideSelect)
@@ -234,7 +235,12 @@ export default {
           });
         }
       });
-    }
+    },
+    getLastColumns: function(head = this.head) {
+      let arr = []
+      head.forEach(e => e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e))
+      return arr
+    },
   }
 };
 </script>
