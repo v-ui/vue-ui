@@ -99,12 +99,12 @@
     </div>
     <div class="row py-1">
       <font class="col-1">
-        select(label1):
+        v-model({{ value }}):
       </font>
       <b-nav
+        v-model="value"
         class="col-11"
         :list="list"
-        select="label1"
         pills
       />
     </div>
@@ -164,27 +164,27 @@ export default {
   data() {
     return {
       list: [
-        { label: "label1" },
-        { label: "label2" },
-        { label: "active href", href: "#", active: true },
-        { label: "disabled label", disabled: true },
+        { value: "label1" },
+        { value: "label2" },
+        { value: "active href", href: "#",  },
+        { value: "disabled label", disabled: true },
       ],
       list2: [
-        { label: "label1" },
-        { label: "label2" },
+        { value: "label1" },
+        { value: "label2" },
         {
-          label: "toooooooooooooooooooooooo loooooooooooooooooooooooog",
+          value: "toooooooooooooooooooooooo loooooooooooooooooooooooog",
           href: "#",
         },
       ],
       listd: [
-        { label: "label1" },
-        { label: "label2" },
-        { label: "active href", href: "#", active: true },
-        { label: "disabled label", disabled: true },
+        { value: "label1" },
+        { value: "label2" },
+        { value: "active href", href: "#", active: true },
+        { value: "disabled label", disabled: true },
         {
           dropdown: true,
-          label: "dropdown label",
+          value: "dropdown label",
           list: [
             {
               header: "header label",
@@ -201,6 +201,7 @@ export default {
           ],
         },
       ],
+      value: 'label1'
     };
   },
 };

@@ -1,9 +1,9 @@
-<template functional>
+<template>
   <a
     class="navbar-brand"
-    :href="props.href"
+    :href="href"
   >
-    <slot>{{ props.brand }}</slot>
+    <slot>{{ brand }}</slot>
   </a>
 </template>
 

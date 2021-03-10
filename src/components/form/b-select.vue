@@ -1,16 +1,17 @@
 <template>
   <div class="form-group my-0">
     <basic-select
-      v-model="selectedValues"
+      v-model="selectedValue"
       :list="list"
       :size="size"
       :row="row"
       :multiple="multiple"
       :disabled="disabled"
-      :primary-key="keyValue"
+      :hide-null="hideNull"
+      :primary-key="primaryKey"
       v-bind="$attrs"
       v-on="$listeners"
-      @change.native="validator($event, selectedValues)"
+      @change.native="validator($event, selectedValue)"
     >
       <slot />
     </basic-select>
@@ -47,7 +48,6 @@ export default {
   mixins: [util.mixins.form.base, util.mixins.select.select, util.mixins.form.validator],
   inheritAttrs: false,
   props: {
-    primaryKey: util.props.Boolean,
     disabled: util.props.Boolean,
     info: util.props.String,
     hideNull: util.props.Boolean,
@@ -57,11 +57,6 @@ export default {
         return this.multiple ? this.list.length + 1 : null;
       },
     },
-  },
-  data() {
-    return {
-      keyValue: this.primaryKey ? 'value' : null
-    }
   },
   methods: {
     // 验证集合 通过返回 true，不通过返回 false

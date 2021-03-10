@@ -17,7 +17,7 @@
 import util from '@/components/util'
 
 export default {
-  name: 'b-color-check',
+  name: 'BColorCheck',
   mixins: [ util.mixins.select.selectItem ],
   props: {
     disabled: util.props.Boolean,

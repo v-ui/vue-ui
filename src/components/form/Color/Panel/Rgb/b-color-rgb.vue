@@ -24,7 +24,7 @@ import BColorBlueBar from './b-color-blue-bar'
 import BColorAlphaBar from '../Alpha/b-color-alpha-bar'
 
 export default {
-  name: 'b-color-rgb',
+  name: 'BColorRgb',
   components: { BNumber, BColorRedBar, BColorGreenBar, BColorBlueBar, BColorAlphaBar  },
   mixins: [ util.mixins.color.base, ],
   model: {

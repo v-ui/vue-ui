@@ -1,10 +1,10 @@
 <template>
   <b-dropdown
     v-if="langs.length > 0"
+    v-model="locale"
+    primary-key="code"
     trigger="language"
     :list="langs"
-    :select="select"
-    @menuClick="lamgChange"
   />
 </template>
 
@@ -19,13 +19,18 @@ export default {
   data() {
     // return { langs: ["zh", "en"] }
     return {
-      locale: this.$i18n.locale,
+      locale: config.lang.defaultLocale, // 加载默认语言
       langs: config.lang.langsList.map(e => ({value: e.name, code: e.code})), // 支持的语言列表
     };
   },
   computed: {
     select: function () {
       return this.langs.find && this.langs.find(e => e.code.toLowerCase() == this.locale.toLowerCase()).value
+    },
+  },
+  watch: {
+    locale: function(value) {
+      loadLanguageAsync(value && value.code || value); // 加载所选择的语言
     },
   },
   mounted() {
@@ -35,11 +40,5 @@ export default {
   created() {
     this.locale = config.lang.defaultLocale // 加载默认语言
   },
-  methods: {
-    lamgChange: function(item) {
-      this.locale = item.code
-      loadLanguageAsync(this.locale); // 加载所选择的语言
-    },
-  }
 }
 </script>

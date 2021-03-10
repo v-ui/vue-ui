@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <div class="dropdown-divider" />
 </template>
 <script>

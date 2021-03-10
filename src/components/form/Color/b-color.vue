@@ -21,7 +21,7 @@ import BColorLabel from './Basic/b-color-label'
 import BColorPicker from './Picker/b-color-picker'
 
 export default {
-  name: "b-color",
+  name: "BColor",
   components: {  BDropPanel, BColorLabel, BColorPicker, },
   mixins: [
     util.mixins.color.base,

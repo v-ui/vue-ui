@@ -13,7 +13,7 @@ import BBadge from '@/components/base/Badge/b-badge.vue'
 import BInfo from "@/components/basic/basic-info.vue";
 
 export default {
-  name: 'b-step-content',
+  name: 'BStepContent',
   components: { BBadge, BInfo, },
   props: {
     color: util.props.color,

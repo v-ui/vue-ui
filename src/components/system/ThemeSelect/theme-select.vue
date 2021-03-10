@@ -1,10 +1,9 @@
 <template>
   <b-dropdown
     v-if="list.length > 0"
+    v-model="theme"
     trigger="Theme"
     :list="list"
-    :select="theme"
-    @menuClick="menuClick"
   />
 </template>
 
@@ -22,7 +21,7 @@ export default {
   },
   watch: {
     theme: function(value) {
-      this.$theme.setTheme(value);
+      this.$theme.setTheme(value && value.value || value);
     }
   },
   async created() {
@@ -30,10 +29,5 @@ export default {
     this.list = themeList.map && themeList.map(e => ({ value: e.name }));
     this.list.unshift({ value: this.$theme.defaultTheme });
   },
-  methods: {
-    menuClick: function(item) {
-      this.theme = item.value;
-    }
-  }
 };
 </script>

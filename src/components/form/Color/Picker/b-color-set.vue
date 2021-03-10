@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-1">
+  <div class="container cannt-hide py-1">
     <div class="row">
       <basic-button
         v-for="(item, index) in list"
@@ -7,8 +7,8 @@
         class="col m-1"
         color="light"
         :value="item"
-        :active="isChecked(item)"
-        @click="checkedValues = item" />
+        :active="isSelected(item)"
+        @click="selectedValue = item" />
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ import util from '@/components/util'
 import BasicButton from '@/components/basic/Button/basic-button.vue'
 
 export default {
-  name: 'b-color-set',
+  name: 'BColorSet',
   components: { BasicButton, },
   mixins: [ util.mixins.select.check ],
 }

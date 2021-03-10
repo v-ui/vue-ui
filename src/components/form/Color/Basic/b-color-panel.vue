@@ -18,7 +18,7 @@
 import util from '@/components/util'
 
 export default {
-  name: 'b-color-panel',
+  name: 'BColorPanel',
   model: {
     prop: 'value',
     event: 'panel:changed',

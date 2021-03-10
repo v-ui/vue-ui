@@ -1,10 +1,8 @@
-<template functional>
+<template>
   <div
-    v-if="slots().default"
+    v-if="$slots.default"
     class="btn-toolbar"
     role="toolbar"
-    v-bind="data.attrs"
-    v-on="listeners"
   >
     <slot />
   </div>

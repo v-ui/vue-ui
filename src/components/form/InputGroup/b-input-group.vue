@@ -1,10 +1,8 @@
-<template functional>
+<template>
   <div
-    v-if="slots().default"
+    v-if="$slots.default"
     class="input-group"
-    :class="[ data.staticClass, {[`input-group-${props.size}`]: props.size}]"
-    v-bind="data.attrs"
-    v-on="listeners"
+    :class="{[`input-group-${size}`]: size}"
   >
     <slot />
   </div>

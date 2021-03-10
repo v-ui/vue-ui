@@ -1,19 +1,18 @@
 <template>
-  <div class="d-flex align-items-start flex-column vw-100 vh-100">
-    <main-header class="min-vw-100 mt-0" />
-    <div class="d-flex vw-100 vh-100">
+  <div class="d-flex flex-column flex-nowrap overflow-hidden vh-100 vw-100">
+    <main-header />
+    <div class="flex-grow-1 d-flex flex-nowrap overflow-hidden">
       <aside
-        class="d-flex align-items-start flex-column bg-primary text-light"
-        style="max-width: 300px"
+        class="flex-grow-1 overflow-auto d-flex align-items-start flex-column bg-primary text-light"
+        style="min-width: 300px; max-width: 300px"
       >
-        <main-menu class="overflow-auto" />
+        <main-menu class="flex-grow-1 overflow-auto" />
         <main-section class="border-top border-light" />
       </aside>
-      <div class="d-flex align-items-start flex-column w-100 h-100">
-        <main-content class="w-100 h-100 overflow-auto m-1" />
-        <main-footer class="w-100 mb-0" />
+      <div class="flex-grow-1 overflow-hidden d-flex flex-nowrap flex-column">
+        <main-content class="flex-grow-1 overflow-auto d-flex flex-nowrap m-1 p-1" />
+        <main-footer />
       </div>
-      <div />
     </div>
   </div>
 </template>
@@ -36,3 +35,14 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.parent{
+	display:flex;
+	flex-flow:column nowrap;
+	overflow:hidden;
+}
+.b{
+flex:1;
+}
+</style>

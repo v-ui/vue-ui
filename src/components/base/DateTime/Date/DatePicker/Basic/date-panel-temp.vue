@@ -1,53 +1,66 @@
 <template>
   <div>
-    <panel-header
+    <date-panel-header
+      v-if="!hideHeader"
       :disabled="disabled"
-      :disabled-now="disabledNow"
-      :diesable-header-click="diesableHeaderClick"
       :header-text="headerText"
+      :disabled-now="disabledNow"
+      :hide-controller="hideController"
+      :diesable-header-click="diesableHeaderClick"
       @clickHeader="clickHeader"
       @forward="forward"
       @checknow="checknow"
       @backward="backward"
-    />
-    <hr
-      v-show="!$slots.week"
-      class="my-1"
     >
-    <div class="text-center">
-      <slot name="week" />
-      <panel-row
+      <template #header>
+        <slot name="header" />
+      </template>
+    </date-panel-header>
+    <hr v-show="!$slots.week && !hideHeader" class="my-1">
+    <slot name="week" />
+    <slot>
+      <b-grid-table
         :list="list"
+        class="h-100"
+        :border="border"
         :col-count="colCount"
         :disabled="disabled"
-        @click="click"
-      />
-    </div>
+      >
+        <template #item="{ item }">
+          <slot name="item" :item="item">
+            <date-panel-item
+              :item="item"
+              class="w-100"
+              :disabled="item.disabled"
+              @item:click="click"
+            />
+          </slot>
+        </template>
+      </b-grid-table>
+    </slot>
   </div>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
 
-import panelHeader from "./date-panel-header";
-import panelRow from "@/components/base/DropdownPanel/b-dropdown-panel-row.vue"
+import DatePanelHeader from "./date-panel-header";
+import DatePanelItem from './date-panel-item'
+import BGridTable from '@/components/base/Grid/b-grid-table.vue';
 
 export default {
   name: 'DatePanelTemp',
-  components: { panelHeader, panelRow, },
+  components: { DatePanelHeader, DatePanelItem, BGridTable, },
   props: {
     list: util.props.Array,
     colCount: util.props.UInt,
+    border: util.props.Boolean,
+    disabled: util.props.Boolean,
     headerText: util.props.String,
     hideHeader: util.props.Boolean,
-    disabled: util.props.Boolean,
-    diesableHeaderClick: util.props.Boolean,
     disabledNow: util.props.Boolean,
-  },
-  computed: {
-    rowCount: function() {
-      return Math.ceil(this.total / this.colCount);
-    },
+    hideController: util.props.Boolean,
+    diesableHeaderClick: util.props.Boolean,
   },
   methods: {
     clickHeader: function() {
@@ -63,7 +76,7 @@ export default {
       this.$emit('panel:backward')
     },
     click: function(value) {
-      this.$emit('panel:checked', value)
+      this.$emit('panel:checked', value && value.value)
     },
   },
 }

@@ -1,35 +1,43 @@
 <template>
   <div>
-    <!-- TODO: debug with item.label and item.value -->
+    <b-dropdown-header v-if="header || $slots.header">
+      <slot name="header">
+        <b-label
+          :label="header && header.text || header"
+          :info="header && header.info"
+          :icon="header && header.icon"
+        />
+      </slot>
+    </b-dropdown-header>
+    <b-dropdown-item
+      v-if="showNull"
+      :label="nullValue"
+      :disabled="disabled"
+      @click.native="itemClick(null)"
+    />
     <div
       v-for="(item, index) in list"
       :key="index"
     >
-      <h6
-        v-if="item.header"
-        class="dropdown-header mb-0"
-      >
-        <slot>{{ item.header }}</slot>
-        <b-info :info="item.info" />
-      </h6>
-      <div
-        v-else-if="item.divider"
-        class="dropdown-divider"
+      <b-dropdown-divider v-if="item.divider" />
+      <b-dropdown-text
+        v-else-if="item.text"
+        :text="item.text"
+        :info="item.info"
+        :icon="item.icon"
       />
       <b-dropdown-item
         v-else-if="item.value"
         :label="item.label || item.value"
         :href="item.href"
         :info="item.info"
-        :active="select ? select == item.value : item.active"
+        :icon="item.icon"
+        :active="isSelected(item)"
         :disabled="disabled || item.disabled"
-        @click.native="$emit('click', item)"
-      />
-      <b-dropdown-item-text
-        v-else-if="item.text"
-        :text="item.text"
-        :info="item.info"
-      />
+        @click.native="itemClick(item)"
+      >
+        <slot name="item" :item="item" />
+      </b-dropdown-item>
     </div>
   </div>
 </template>
@@ -37,22 +45,41 @@
 <script>
 import util from "@/components/util/index.js";
 
+import BDropdownHeader from './b-dropdown-header'
+import BDropdownDivider from './b-dropdown-divider'
 import BDropdownItem from "./b-dropdown-item.vue";
-import BDropdownItemText from "./b-dropdown-item-text.vue";
+import BDropdownText from "./b-dropdown-text.vue";
 
-import BInfo from "@/components/basic/basic-info.vue"
+import BLabel from '@/components/basic/basic-label.vue'
 
 export default {
   name: "BDropdownMenu",
   components: {
+    BDropdownHeader,
+    BDropdownDivider,
     BDropdownItem,
-    BDropdownItemText,
-    BInfo,
+    BDropdownText,
+    BLabel,
   },
+  mixins: [ util.mixins.select.check, ],
   props: {
-    list: util.props.Array,
-    select: util.props.String,
+    showNull: util.props.Boolean,
+    header: [ String, Number, Object ],
     disabled: util.props.Boolean,
-  }
+  },
+  methods: {
+    itemClick: function(item) {
+      if (this.isMultiple) {
+        const value = item && item[this.primaryKey || 'value'] || item
+        let index = this.selectedMap.indexOf(value)
+        index >= 0
+          ? this.selectedValue.splice(index, 1)
+          : this.selectedValue.push(item)
+      } else {
+        this.selectedValue = item
+      }
+      this.$emit('item:click', this.selectedValue)
+    },
+  },
 };
 </script>

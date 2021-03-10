@@ -1,5 +1,5 @@
 <template>
-  <dropdown-panel
+  <b-dropdown-panel
     :placeholder="fillPlaceholder"
     :label="showValue"
     :info="message"
@@ -10,54 +10,46 @@
       <i class="far fa-calendar-alt" />
     </template>
     <template>
-      <b-date-panel
-        v-model="selectedValues"
-        :type="pickertType"
+      <b-date-select
+        v-model="selectedValue"
+        :hide-header="hideHeader"
+        :type="pickerType"
         :min="dateMin"
         :max="dateMax"
         :range="range"
       />
     </template>
-  </dropdown-panel>
+  </b-dropdown-panel>
 </template>
 
 <script>
 import config from '@/config/index.js'
 import util from "@/components/util/index.js";
 
-import BDatePanel from '@/components/base/DateTime/Date/DatePicker/b-date-panel.vue'
-import dropdownPanel from "@/components/base/DropdownPanel/b-dropdown-panel.vue";
+import BDateSelect from '@/components/base/DateTime/Date/DatePicker/b-date-select.vue'
+import BDropdownPanel from "@/components/base/DropdownPanel/b-dropdown-panel.vue";
 
 export default {
   name: "BDatePicker",
-  components: { BDatePanel, dropdownPanel, },
+  components: { BDateSelect, BDropdownPanel, },
   mixins: [
     util.mixins.form.base,
-    util.mixins.moment.base,
+    util.mixins.date.base,
+    util.mixins.date.type,
+    util.mixins.date.select,
     util.mixins.form.readonly,
-    util.mixins.date.status.type,
   ],
   model: {
     prop: "value",
     event: "change",
   },
   props: {
-    type: {
-      type: String,
-      default: "date",
-      validator: (value) => ["year", "month", "date"].includes(value),
-    },
-    value: [String, Number, Date, Object],
-    min: [String, Date],
-    max: [String, Date],
     info: util.props.String,
-    range: util.props.Boolean,
     placeholder: util.props.String,
   },
   data() {
     return {
-      pickertType: this.type,
-      selectedValues: this.value,
+      selectedValue: this.value,
     };
   },
   computed: {
@@ -82,12 +74,12 @@ export default {
       }
     },
     showValue: function () {
-      return this.range && this.selectedValues.start && this.selectedValues.end
-        ? this.formatDate(this.selectedValues.start) + ' - ' + this.formatDate(this.selectedValues.end)
-        : this.formatDate(this.selectedValues)
+      return this.range && this.selectedValue.start && this.selectedValue.end
+        ? this.formatDate(this.selectedValue.start) + ' - ' + this.formatDate(this.selectedValue.end)
+        : this.formatDate(this.selectedValue)
     },
     canHide: function () {
-      return this.type === this.pickertType;
+      return this.type === this.pickerType;
     },
     dateMin: function () {
       return this.moment(new Date(this.min));
@@ -118,11 +110,11 @@ export default {
   watch: {
     value: {
       handler: function (value) {
-        this.selectedValues = value
+        this.selectedValue = value
       },
       deep: true,
     },
-    selectedValues: {
+    selectedValue: {
       handler: function (value) {
         // 配合 v-model 工作
         this.$emit("change", value);
@@ -133,7 +125,6 @@ export default {
   methods: {
     formatDate: function (value) {
       if (!value || !value.isValid || !value.isValid()) return;
-
       switch (this.type) {
         case this.enumTypeStatus.year:
           return value.format(config.ui.date.year)

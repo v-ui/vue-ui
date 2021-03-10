@@ -1,19 +1,25 @@
 <template>
   <h6 class="dropdown-header mb-0">
-    <slot>{{ label }}</slot>
-    <b-info :info="info" />
+    <slot>
+      <b-label
+        :label="label"
+        :info="info"
+        :icon="icon"
+      />
+    </slot>
   </h6>
 </template>
 <script>
 import util from "@/components/util/index.js";
 
-import BInfo from "@/components/basic/basic-info.vue";
+import BLabel from '@/components/basic/basic-label.vue'
 
 export default {
   name: "BDropdownHeader",
-  components: { BInfo },
+  components: { BLabel },
   props: {
     label: util.props.String,
+    icon: util.props.String,
     info: util.props.String,
   }
 };

@@ -83,7 +83,7 @@ export default {
     }, // modal-xl modal-lg modal-sm
     set: {
       ...util.props.set,
-      default: 'top',
+      default: 'up',
     },
     labelledby: {
       ...util.props.String,

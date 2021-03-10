@@ -75,7 +75,7 @@
 import BStep from '@/components/base/Step/b-step.vue'
 
 export default {
-  name: 'b-step-demo',
+  name: 'BStepDemo',
   components: { BStep, },
   data() {
     return {

@@ -21,7 +21,7 @@
       :item="child"
       :selected="selected"
       :primary-key="primaryKey"
-      :is-multiple="isMultiple"
+      :multiple="multiple"
     />
   </optgroup>
 </template>

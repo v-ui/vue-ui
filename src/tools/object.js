@@ -31,9 +31,14 @@ Object.assign(type, {
   isFinite: isFinite,
 })
 
+const isTrue = function(value) {
+  return !type.isNull(value) && !type.isUndefined(value)
+}
+
 export default {
   assign: (objs) => {
     return Object.assign(...objs)
   },
   type,
+  isTrue,
 }

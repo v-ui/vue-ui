@@ -9,7 +9,7 @@ import util from "@/components/util/index.js";
 import BBadge from '@/components/base/Badge/b-badge.vue'
 
 export default {
-  name: 'b-step-icon',
+  name: 'BStepIcon',
   components: { BBadge, },
   mixins: [ util.mixins.size.strong, ],
   props: {

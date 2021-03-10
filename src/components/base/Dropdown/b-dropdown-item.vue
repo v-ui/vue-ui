@@ -8,11 +8,14 @@
     :href="href"
     hide-icon
   >
-    <slot>{{ label }}</slot>
-    <b-info
-      :info="info"
-      :text-color="active ? 'light' : 'muted'"
-    />
+    <slot>
+      <b-label
+        :icon="icon"
+        :info="info"
+        :label="label"
+        :info-color="active ? 'light' : 'muted'"
+      />
+    </slot>
   </base-a>
   <button
     v-else
@@ -23,11 +26,14 @@
     :aria-disabled="disabled"
     type="button"
   >
-    <slot>{{ label }}</slot>
-    <b-info
-      :info="info"
-      :text-color="active ? 'light' : 'muted'"
-    />
+    <slot>
+      <b-label
+        :icon="icon"
+        :info="info"
+        :label="label"
+        :info-color="active ? 'light' : 'muted'"
+      />
+    </slot>
   </button>
 </template>
 
@@ -35,14 +41,15 @@
 import util from "@/components/util/index.js";
 
 import BaseA from "@/components/basic/A/basic-a.vue";
-import BInfo from "@/components/basic/basic-info.vue";
+import BLabel from '@/components/basic/basic-label.vue'
 
 export default {
   name: "BDropdownItem",
-  components: { BaseA, BInfo },
+  components: { BaseA, BLabel },
   props: {
     href: util.props.href,
     label: util.props.String,
+    icon: util.props.String,
     info: util.props.String,
     active: util.props.Boolean,
     disabled: util.props.Boolean,

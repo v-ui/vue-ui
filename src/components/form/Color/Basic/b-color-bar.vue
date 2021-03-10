@@ -19,7 +19,7 @@
 import util from '@/components/util'
 
 export default {
-  name: 'b-color-bar',
+  name: 'BColorBar',
   model: {
     props: 'value',
     event: 'bar:changed'

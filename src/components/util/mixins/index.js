@@ -7,6 +7,7 @@ import clip from './clip'
 import color from './color'
 import select from './select'
 import status from './status'
+import address from './address'
 
 // plugin 第三方库
 import chroma from './plugin/chroma'
@@ -14,6 +15,7 @@ import popper from './plugin/popper'
 import moment from './plugin/moment'
 import animate from './plugin/animate'
 import clipboard from './plugin/clipboard'
+import administrative from './plugin/administrative'
 
 export default {
   base,
@@ -29,5 +31,7 @@ export default {
   popper,
   moment,
   animate,
+  address,
   clipboard,
+  administrative,
 }

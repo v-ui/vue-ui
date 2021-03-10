@@ -1,5 +1,53 @@
 <template>
   <div>
+    <h2>b-dropdown-menu</h2>
+    <hr>
+    <div class="row">
+      <font class="col-2 text-center">list</font>
+      <font class="col-2 text-center">disabled</font>
+      <font class="col-2 text-center">slot:header</font>
+      <font class="col-2 text-center">
+        v-model multiple='false'(default)<br>
+        {{ value1 }}
+      </font>
+      <font class="col-2 text-center">
+        v-model multiple='true'(default)<br>
+        {{ value2 }}
+      </font>
+    </div>
+    <div class="row">
+      <b-dropdown-menu
+        class="col-2"
+        :header="{ text: 'header label', info: 'info text', icon: 'circle-fill' }"
+        :list="list2"
+      />
+      <b-dropdown-menu
+        class="col-2"
+        :header="{ text: 'header label', info: 'info text', icon: 'circle-fill' }"
+        :list="list2"
+        disabled
+      />
+      <b-dropdown-menu
+        class="col-2"
+        :header="{ text: 'header label', info: 'info text', icon: 'circle-fill' }"
+        :list="list2"
+      >
+        <template #header>
+          you can add anlything text or DOM
+        </template>
+      </b-dropdown-menu>
+      <b-dropdown-menu
+        class="col-2"
+        :list="list"
+        v-model="value1"
+      />
+      <b-dropdown-menu
+        class="col-2"
+        :list="list"
+        multiple
+        v-model="value2"
+      />
+    </div>
     <h2>b-dropdown</h2>
     <hr>
     <h4>基础属性</h4>
@@ -44,8 +92,8 @@
           info="info text"
         />
         <b-dropdown-divider />
-        <b-dropdown-item-text text="text" />
-        <b-dropdown-item-text
+        <b-dropdown-text text="text" />
+        <b-dropdown-text
           text="text"
           info="info text"
         />
@@ -337,7 +385,27 @@
         </template>
       </b-dropdown-list>
     </div>
+    <br>
+    <h4>slot</h4>
+    <hr>
+    <div class="row">
+      <b-dropdown-list
+        class="col-12"
+        :list="list"
+      >
+        <template #trigger>
+          trigger slot -> you can add anlything validInfo or DOM
+        </template>
+        <template #icon>
+          <i>icon slot -> icon</i>
+        </template>
+        <template #item="{ item }">
+          item slot -> {{ item }}
+        </template>
+      </b-dropdown-list>
+    </div>
     <h2>b-dropdown-panel</h2>
+    基于 <basic-a href="base-b-grid" text="b-grid" />
     <hr>
     <h4>基础属性</h4>
     <hr>
@@ -360,6 +428,27 @@
         class="col-auto"
         multiple
         disabled
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        type:
+      </font>
+      <font class="col-1">
+        row(default)
+      </font>
+      <b-dropdown-panel
+        class="col-auto"
+        type="row"
+        :list="list"
+      />
+      <font class="col-1">
+        table
+      </font>
+      <b-dropdown-panel
+        class="col-auto"
+        type="table"
+        :list="list"
       />
     </div>
     <div class="row">
@@ -484,25 +573,30 @@
 </template>
 
 <script>
+import BDropdownMenu from '@/components/base/Dropdown/b-dropdown-menu.vue'
+
 import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
 import BDropdownHeader from "@/components/base/Dropdown/b-dropdown-header.vue";
 import BDropdownItem from "@/components/base/Dropdown/b-dropdown-item.vue";
-import BDropdownItemText from "@/components/base/Dropdown/b-dropdown-item-text.vue";
+import BDropdownText from "@/components/base/Dropdown/b-dropdown-text.vue";
 import BDropdownDivider from "@/components/base/Dropdown/b-dropdown-divider.vue";
 
 import BDropdownList from "@/components/base/DropdownList/b-dropdown-list.vue";
 import BDropdownPanel from '@/components/base/DropdownPanel/b-dropdown-panel.vue'
 
+import BasicA from '@/components/basic/A/basic-a.vue'
 export default {
   name: "BDropdownDemo",
   components: {
+    BDropdownMenu,
     BDropdown,
     BDropdownHeader,
     BDropdownItem,
-    BDropdownItemText,
+    BDropdownText,
     BDropdownDivider,
     BDropdownList,
     BDropdownPanel,
+    BasicA,
   },
   data() {
     return {
@@ -512,25 +606,26 @@ export default {
         { value: "value3", label: "label3" },
         { value: "value4", label: "label4" },
         { value: "value5", label: "label5" },
-        { value: "value6", label: "disabled", disabled: true }
+        { value: "value6", label: "disabled", disabled: true },
       ],
       list2: [
-        { header: "header label", divider: true, text: "text", item: "item" },
-        { divider: true, text: "text", item: "item" },
-        { text: "text", item: "item" },
-        { value: "value" },
-        { value: "a item", href: "#" },
-        { value: "btuuon active item", active: true },
-        { value: "btuuon disabled item", disabled: true },
-        { value: "a active", href: "#", active: true },
-        { value: "a disabled", href: "#", disabled: true }
+        { divider: true, },
+        { text: "text", info: "info text", icon: "circle-fill" },
+        { divider: true, },
+        { value: "value", info: "info text", icon: "circle-fill" },
+        { value: "btuuon active item", info: "info text", icon: "circle-fill", active: true },
+        { value: "btuuon disabled item", info: "info text", icon: "circle-fill", disabled: true },
+        { divider: true, },
+        { value: "a item", href: "#", info: "info text", icon: "circle-fill" },
+        { value: "a active", href: "#", info: "info text", icon: "circle-fill", active: true },
+        { value: "a disabled", href: "#", info: "info text", icon: "circle-fill", disabled: true }
       ],
-      value1: "value1",
+      value1: { value: "value1", label: "label1" },
       value2: [
         { value: "value1", label: "label1" },
         { value: "value2", label: "label2" },
         { value: "value3", label: "label3" }
-      ]
+      ],
     };
   }
 };

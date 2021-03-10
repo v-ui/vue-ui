@@ -3,25 +3,22 @@
     class="nav"
     :class="objClass"
   >
-    <slot v-if="$slots.default" />
-    <template
-      v-for="(item, index) in list"
-      v-else
-    >
+    <slot />
+    <template v-for="(item, index) in list">
       <nav-item-dropdown
         v-if="item.dropdown"
         :key="index"
         :list="item.list"
-        :label="item.label"
+        :label="item.label || item.value || item"
       />
       <nav-item
         v-else
         :key="index"
-        :label="item.label"
+        :label="item.label || item.value || item"
         :href="item.href"
         :disabled="item.disabled"
-        :active="select ? select == item.label || select == item.value : item.active"
-        @click.native="$emit('click', item.value || item.label)"
+        :active="isSelected(item) || item.active"
+        @item:click="selectedValue = item"
       />
     </template>
   </ul>
@@ -36,13 +33,8 @@ import NavItemDropdown from "./b-nav-item-dropdown";
 export default {
   name: "BNav",
   components: { NavItem, NavItemDropdown },
-  model: {
-    prop: "select",
-    event: "click"
-  },
+  mixins: [ util.mixins.select.check, ],
   props: {
-    list: util.props.Array,
-    select: util.props.String,
     set: util.props.justify,
     column: util.props.Boolean,
     tabs: util.props.Boolean,
@@ -61,6 +53,6 @@ export default {
       if (this.justified) c += " nav-justified ";
       return c;
     }
-  }
+  },
 };
 </script>

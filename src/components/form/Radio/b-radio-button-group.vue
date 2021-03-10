@@ -1,7 +1,8 @@
 <template>
   <div>
     <div
-      class="btn-group btn-group-toggle"
+      class="btn-group btn-group-toggle w-100"
+      :class="groupClass"
       data-toggle="buttons"
     >
       <label
@@ -45,6 +46,7 @@ export default {
     value: util.props.String,
     list: util.props.Array,
     info: util.props.String,
+    size: util.props.size,
     disabled: util.props.Boolean,
     color: util.props.color,
     name: {
@@ -56,6 +58,12 @@ export default {
     return {
       selected: this.value,
     }
+  },
+  computed: {
+    groupClass: function() {
+      let size = this.size ? `btn-group-${this.size}` : ''
+      return `${size}`
+    },
   },
   watch: {
     value: function(value) {

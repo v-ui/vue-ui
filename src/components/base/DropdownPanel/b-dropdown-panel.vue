@@ -4,13 +4,13 @@
       ref="dropdownpanel"
       :class="[readonlyClass]"
       menu-width
+      :label="showLabel"
       :menuWidth="false"
-      :label="fillLabel"
       :can-hide="canHide"
       :placeholder="fillPlaceholder"
       :disabled="disabled"
       :multiple="isMultiple"
-      @deleteItem="deleteItem"
+      @delete:item="deleteItem"
     >
       <template #trigger>
         <slot name="trigger" />
@@ -19,9 +19,21 @@
         <slot name="icon" />
       </template>
       <slot>
-        <b-dropdown-panel-row
-          v-model="selectedValues"
+        <b-grid-row
+          v-if="type === 'row'"
+          v-model="selectedValue"
           :list="list"
+          :primary-key="primaryKey"
+          :multiple="isMultiple"
+          :col-count="colCount"
+        />
+        <b-grid-table
+          v-else-if="type === 'table'"
+          v-model="selectedValue"
+          class="h-100"
+          :list="list"
+          :border="border"
+          :disabled="disabled"
           :primary-key="primaryKey"
           :multiple="isMultiple"
           :col-count="colCount"
@@ -52,7 +64,8 @@
 import util from "@/components/util/index.js";
 
 import BDropdownPicker from '@/components/base/DropdownPicker/b-dropdown-picker.vue'
-import BDropdownPanelRow from './b-dropdown-panel-row'
+import BGridRow from '@/components/base/Grid/b-grid-row.vue'
+import BGridTable from '@/components/base/Grid/b-grid-table.vue'
 
 import BValid from "@/components/form/Other/b-form-valid.vue";
 import BInfo from "@/components/basic/basic-info.vue"
@@ -61,7 +74,8 @@ export default {
   name: 'BDropdownPanel',
   components: {
     BDropdownPicker,
-    BDropdownPanelRow,
+    BGridRow,
+    BGridTable,
     BValid,
     BInfo,
   },
@@ -72,33 +86,35 @@ export default {
     util.mixins.select.select,
   ],
   props: {
-    label: util.props.String,
-    info: util.props.String,
     canHide: {
       ...util.props.Boolean,
       default: true,
     },
+    type: {
+      type: String,
+      default: 'row',
+      validator: function(value) {
+        return [ 'row', 'table' ].includes(value)
+      },
+    },
+    info: util.props.String,
     colCount: util.props.UInt,
+    border: util.props.Boolean,
     placeholder: util.props.String,
   },
   computed: {
-    fillLabel: function() {
-      return this.label || (this.isMultiple
-        ? this.selectedValues && this.selectedValues.map && this.selectedValues.map(e => e[this.primaryKey] || e.label || e.value || e ) || null
-        : this.selectedValues && (this.selectedValues[this.primaryKey] || this.selectedValues.label || this.selectedValues.value || this.selectedValues) || null)
-    },
     fillPlaceholder: function() {
-      return this.placeholder || '<Place select...>'
+      return this.placeholder || this.nullValue
     },
   },
   watch: {
-    selectedValues: function(value) {
+    selectedValue: function(value) {
       this.validator(this.$refs.dropdownpanel.$el, value)
     },
   },
   methods: {
     deleteItem: function(index) {
-      if (index >= 0) this.selectedValues.splice(index, 1)
+      if (index >= 0) this.selectedValue.splice(index, 1)
     },
   },
 }

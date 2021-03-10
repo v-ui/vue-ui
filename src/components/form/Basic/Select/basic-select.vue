@@ -3,7 +3,7 @@
     class="custom-select"
     :class="[cClass, sizeClass]"
     :size="row"
-    :multiple="isMultiple"
+    :multiple="multiple"
     :disabled="disabled"
     :aria-disabled="disabled"
     v-on="inputListeners"
@@ -12,17 +12,17 @@
     <slot>
       <option
         v-if="!hideNull"
-        :selected="selected.length == 0"
-        :aria-selected="selected.length == 0"
+        :selected="selected && selected.length == 0"
+        :aria-selected="selected && selected.length == 0"
         v-text="nullValue"
       />
       <basic-select-option
         v-for="(item, index) in list"
         :key="index"
         :item="item"
-        :is-multiple="isMultiple"
+        :multiple="multiple"
         :primary-key="primaryKey"
-        :selected="selectedValues"
+        :selected="selectedValue"
       />
     </slot>
   </select>
@@ -43,7 +43,7 @@ export default {
     row: {
       type: [Number, String],
       default: function() {
-        return this.isMultiple ? this.list.length + 1 : null;
+        return this.multiple ? this.list.length + 1 : null;
       }
     }
   },
@@ -60,14 +60,15 @@ export default {
       let list = this.list
         .map(e => (e.children ? [...e.children] : e))
         .reduce((acc, val) => acc.concat(val), []);
-      if (this.isMultiple) {
-        this.selectedValues = Array.prototype.filter
+
+      if (this.multiple) {
+        this.selectedValue = Array.prototype.filter
             .call(event.target.options, o => o.selected && o.value)
-            .map(o => o.value === this.nullValue ? null : list.find(e => (e.value || e) === o.value)
-            ).filter(e => e).map(e => this.primaryKey ? e : e && e.value || e)
+            .map(o => o.value === this.nullValue ? null : list.find(e => (e.value || e) == o.value))
+            .filter(e => e).map(e => this.primaryKey ? e : e && e.value || e)
       } else {
-        let result = list.find(e => (e.value || e) === event.target.value)
-        this.selectedValues = this.primaryKey ? result : result && result.value || result
+        let result = list.find(e => (e.value || e) == event.target.value)
+        this.selectedValue = this.primaryKey ? result : result && result.value || result || ''
       }
     }
   }

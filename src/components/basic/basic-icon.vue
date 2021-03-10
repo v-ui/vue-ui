@@ -1,5 +1,5 @@
 <template>
-  <i>
+  <i v-if="icon" :class="iconColor ? 'text-' + iconColor : ''">
     <svg class="svg-icon" focusable="false" role="img" aria-hidden="true">
       <use :xlink:href="iconName"></use>
     </svg>
@@ -10,12 +10,13 @@
 import util from "@/components/util/index.js";
 
 export default {
-  name: 'basic-icon',
+  name: 'BasicIcon',
   props: {
     icon: {
       ...util.props.string,
       required: true
-    }
+    },
+    iconColor: util.props.textColor,
   },
   computed: {
     iconName() {

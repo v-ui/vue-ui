@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <input type="hidden">
 </template>
 <script>

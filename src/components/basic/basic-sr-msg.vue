@@ -1,6 +1,6 @@
-<template functional>
+<template>
   <span
-    v-if="slots().default"
+    v-if="$slots.default"
     class="sr-only sr-only-focusable"
   >
     <slot />
