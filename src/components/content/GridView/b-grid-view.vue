@@ -133,37 +133,7 @@
         <!-- activeTableContainer -->
       </div>
       <!-- tableContainer -->
-      <div
-        ref="pagination"
-        class="d-flex d-print-none align-items-end justify-content-between py-1"
-      >
-        <!-- <font>共 {{ count }} 条数据，本页 {{ num }} 条，共 {{ pageCount }} 页，第 {{ pageNumber }} 页，每页 {{ pageSize }} 条，跳转至第 {{ pageNumber }} 页</font> -->
-        <font
-          class="d-flex align-items-center"
-          style="min-width: 550px"
-        >
-          {{ dataSize }} /
-          {{ dataCount }} 条&nbsp;&nbsp;
-          {{ pageNumber }} /
-          {{ pageCount }} 页&nbsp;&nbsp;
-          每页
-          <b-select
-            v-model="pageSize"
-            class="d-inline-block mx-1"
-            :list="pageSizeList"
-            size="sm"
-            hide-null
-          />条&nbsp;&nbsp;
-          <b-pagination
-            v-model.number="pageNumber"
-            start="1"
-            :end="pageCount"
-          >
-            <b-number length="5" min="1" :max="pageCount" hide-button v-model.number="pageNumber" />
-            <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
-          </b-pagination>
-        </font>
-      </div>
+      <grid-pagination ref="pagination" :dataCount="data.length" v-model.number="pageNumber" @page:changed="pageChanged" />
       <!-- pagination -->
     </template>
     <div
@@ -253,10 +223,9 @@ import BButton from "@/components/basic/Button/basic-button.vue";
 import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
 import BButtonToolbar from "@/components/base/ButtonGroup/b-btn-toolbar.vue";
 import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
-
-import BNumber from "@/components/form/b-number.vue";
 import BSelect from "@/components/form/b-select.vue";
-import BPagination from "@/components/base/Pagination/b-pag";
+
+import GridPagination from './Basic/grid-pagination'
 
 import BModal from "@/components/base/Modal/b-modal.vue";
 
@@ -267,12 +236,11 @@ export default {
   components: {
     BTable,
     BButton,
+    BSelect,
     BButtonGroup,
     BButtonToolbar,
+    GridPagination,
     BDropdown,
-    BNumber,
-    BSelect,
-    BPagination,
     BLoading,
     BModal
   },
@@ -315,9 +283,8 @@ export default {
       ],
       sortObj: {},
       sortPlusObj: {},
-      pageSizeList: [10, 25, 50, 75, 100],
-      pageNumber: 1, // 页码
-      pageSize: 25 // 每页条数
+      paginate: {},
+      pageNumber: 1,
     };
   },
   computed: {
@@ -334,26 +301,10 @@ export default {
       return this.list && this.list.data || [];
     },
     fillData: function() {
-      return this.data.slice(
-        this.pageSize * (this.pageNumber - 1),
-        this.pageSize * this.pageNumber
-      );
+      return this.data.slice(this.paginate.start, this.paginate.end);
     },
     foot: function() {
       return this.list && this.list.foot || [];
-    },
-    dataCount: function() {
-      // 总条数
-      return this.data.length;
-    },
-    pageCount: function() {
-      // 总页数
-      return Number.parseInt(this.dataCount / this.pageSize) +
-        this.dataCount % this.pageSize == 0 ? 0 : 1
-    },
-    dataSize: function() {
-      // 本页条数
-      return this.fillData.length;
     },
     rowStyle: function() {
       return this.list && this.list.rowStyle || {};
@@ -428,11 +379,6 @@ export default {
   mounted() {
     this.init();
   },
-  watch: {
-    pageCount: function(value) {
-      if(this.pageNumber > value) this.pageNumber = this.pageCount
-    },
-  },
   methods: {
     init: async function() {
       if (this.fixed > 0) {
@@ -465,7 +411,8 @@ export default {
       let ToolbarHeight = this.$refs.toolbar ? this.$refs.toolbar.offsetHeight : 0;
       let THeadHeight = this.$refs.fixedTable.$refs.THead ? this.$refs.fixedTable.$refs.THead.offsetHeight : 0;
       let TFootHeight = this.$refs.fixedTable.$refs.TFoot ? this.$refs.fixedTable.$refs.TFoot.offsetHeight : 0;
-      let PaginationHeight = this.$refs.pagination ? this.$refs.pagination.offsetHeight : 0;
+      let PaginationHeight = this.$refs.pagination ? this.$refs.pagination.$el.offsetHeight : 0;
+      debugger
       let TBodyHeight = this.$parent.$el.offsetHeight - ToolbarHeight - THeadHeight - TFootHeight - PaginationHeight - 10;
 
       if (this.fixedTableTBody) this.fixedTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + "px";
@@ -601,8 +548,7 @@ export default {
     reset: function() {
       this.selectedOptions = this.selected;
       this.sortObj = {};
-      this.pageNumber = 1; // 页码
-      this.pageSize = 25; // 每页条数
+      this.pageNumber = 1
     },
     print: function() {
       printJS({
@@ -618,7 +564,10 @@ export default {
           : null
       });
       this.$emit("table:print");
-    }
+    },
+    pageChanged: function(value) {
+      this.paginate = value
+    },
   }
 };
 </script>
