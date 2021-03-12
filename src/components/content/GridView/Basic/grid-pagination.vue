@@ -41,7 +41,7 @@ export default {
   components: { BNumber, BSelect, BPagination, },
   model: {
     prop: 'page',
-    event: 'pageNumber:changed'
+    event: 'page:changed'
   },
   props: {
     dataCount: util.props.UNumber, // 总条数
@@ -57,7 +57,13 @@ export default {
       pageSize: 25 // 每页条数
     }
   },
+  mounted() {
+    this.$emit('page:changed', { start: this.start, end: this.start + this.pageSize })
+  },
   computed: {
+    start: function() {
+      return this.pageSize * (this.pageNumber - 1)
+    },
     pageCount: function() {
       // 总页数
       return Number.parseInt(this.dataCount / this.pageSize) +
@@ -66,22 +72,16 @@ export default {
     dataSize: function() {
       // 本页条数
       return this.pageSize * this.pageNumber > this.dataCount
-        ? this.dataCount % (this.pageSize * this.pageNumber)
+        ? this.dataCount - this.start
         : this.pageSize
-    },
-    start: function() {
-      return this.pageSize * (this.pageNumber - 1)
     },
   },
   watch: {
-    page: function(value) {
-      this.pageNumber = value
-    },
-    pageNumber: function(value) {
-      this.$emit('pageNumber:changed', value)
-    },
     start: function() {
       this.$emit('page:changed', { start: this.start, end: this.start + this.pageSize })
+    },
+    page: function(value) {
+      if (typeof value === 'number') this.pageNumber = value
     },
     pageCount: function(value) {
       if (this.pageNumber > value) this.pageNumber = value

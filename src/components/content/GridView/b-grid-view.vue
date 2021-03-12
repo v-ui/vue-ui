@@ -1,14 +1,16 @@
 <template>
   <div class="border border-dark rounded p-1">
     <template v-if="!hideData">
+      <!-- toolbar -->
       <div
         ref="toolbar"
         class="d-flex d-print-none align-items-center justify-content-between"
       >
+        <!-- toolbar left -->
         <div class="m-1 row">
           <slot name="toolbar" />
         </div>
-        <!-- tiilbar left -->
+        <!-- tiilbar right -->
         <div class="m-1 row">
           <b-button-toolbar>
             <b-button-group>
@@ -56,7 +58,7 @@
               :list="downloadList"
               hide-toggle
               menu-align="right"
-              @menu-click="item => dataExport(item)"
+              @item:click="dataExport"
             >
               <template #trigger>
                 <b-button
@@ -75,9 +77,8 @@
             <!-- download dropdown -->
           </b-button-toolbar>
         </div>
-        <!-- tiilbar right -->
       </div>
-      <!-- toolbar -->
+      <!-- tableContainer -->
       <div
         id="printWrap"
         class="border row m-0"
@@ -132,32 +133,10 @@
         />
         <!-- activeTableContainer -->
       </div>
-      <!-- tableContainer -->
-      <grid-pagination ref="pagination" :dataCount="data.length" v-model.number="pageNumber" @page:changed="pageChanged" />
-      <!-- pagination -->
+       <!-- pagination -->
+      <grid-pagination ref="pagination" :dataCount="data.length" v-model="paginate" />
     </template>
-    <div
-      v-else
-      class="d-block d-print-none text-center h-100 align-items-center justify-content-center"
-    >
-      <template v-if="hideData">
-        <p class="display-4">
-          No Related Data
-        </p>
-        <small class="text-secondary">
-          <i
-            class="text-primary px-1"
-            :class="icon.info"
-          />No related data found or Data format error
-        </small>
-      </template>
-      <template v-else-if="loading">
-        <b-loading color="primary" />
-        <p class="display-4">
-          Loading...
-        </p>
-      </template>
-    </div>
+    <grid-helper v-else :hide-data="hideData" :loading="loading" />
     <b-modal
       id="sortmodal"
       title="Sort Plus"
@@ -225,11 +204,10 @@ import BButtonToolbar from "@/components/base/ButtonGroup/b-btn-toolbar.vue";
 import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
 import BSelect from "@/components/form/b-select.vue";
 
+import GridHelper from './Basic/grid-helper'
 import GridPagination from './Basic/grid-pagination'
 
 import BModal from "@/components/base/Modal/b-modal.vue";
-
-import BLoading from "@/components/base/Loading/b-loading.vue";
 
 export default {
   name: "BGridView",
@@ -239,9 +217,9 @@ export default {
     BSelect,
     BButtonGroup,
     BButtonToolbar,
+    GridHelper,
     GridPagination,
     BDropdown,
-    BLoading,
     BModal
   },
   props: {
@@ -283,8 +261,8 @@ export default {
       ],
       sortObj: {},
       sortPlusObj: {},
-      paginate: {},
-      pageNumber: 1,
+      // pagination
+      paginate: 1,
     };
   },
   computed: {
@@ -346,7 +324,7 @@ export default {
       return !this.head || this.head.length == 0;
     },
     hideData: function() {
-      return !this.data || this.data.length == 0 || this.hideHead;
+      return this.loading || this.hideHead || !this.data || this.data.length == 0
     },
     hideFoot: function() {
       return !this.foot || this.foot.length == 0;
@@ -548,7 +526,7 @@ export default {
     reset: function() {
       this.selectedOptions = this.selected;
       this.sortObj = {};
-      this.pageNumber = 1
+      this.paginate = 1
     },
     print: function() {
       printJS({
@@ -564,9 +542,6 @@ export default {
           : null
       });
       this.$emit("table:print");
-    },
-    pageChanged: function(value) {
-      this.paginate = value
     },
   }
 };
