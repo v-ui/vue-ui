@@ -5,11 +5,13 @@ import grid from './grid'
 import date from './date'
 import clip from './clip'
 import color from './color'
+import print from './print'
 import select from './select'
 import status from './status'
 import address from './address'
 
 // plugin 第三方库
+import printJS from './plugin/print'
 import chroma from './plugin/chroma'
 import popper from './plugin/popper'
 import moment from './plugin/moment'
@@ -25,13 +27,17 @@ export default {
   date,
   clip,
   color,
+  print,
   select,
   status,
+  address,
+
+  // plugin 第三方库
+  printJS,
   chroma,
   popper,
   moment,
   animate,
-  address,
   clipboard,
   administrative,
 }

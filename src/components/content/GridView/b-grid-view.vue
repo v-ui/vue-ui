@@ -45,36 +45,10 @@
               >
                 <i :class="icon.sync" />
               </b-button>
-              <b-button
-                v-tip="'Print'"
-                color="secondary"
-                size="sm"
-                @click="print"
-              >
-                <i :class="icon.print" />
-              </b-button>
+              <grid-print :data="data" :columns="lastcolumns" :title="'printTitle'" />
             </b-button-group>
-            <b-dropdown
-              :list="downloadList"
-              hide-toggle
-              menu-align="right"
-              @item:click="dataExport"
-            >
-              <template #trigger>
-                <b-button
-                  v-tip="'Export'"
-                  color="secondary"
-                  size="sm"
-                >
-                  <i :class="icon.fileExport" />
-                  <i
-                    :class="icon.caretDown"
-                    class="pl-1"
-                  />
-                </b-button>
-              </template>
-            </b-dropdown>
-            <!-- download dropdown -->
+             <!-- export dropdown -->
+              <grid-export :data="data" />
           </b-button-toolbar>
         </div>
       </div>
@@ -189,8 +163,6 @@
 </template>
 
 <script>
-// 参考： https://printjs.crabbly.com/
-import printJS from "print-js";
 
 import tools from "@/tools/index.js";
 import config from "@/config/index.js";
@@ -198,12 +170,13 @@ import util from "@/components/util/index.js";
 
 import BTable from "@/components/content/Table/b-table.vue";
 
-import BButton from "@/components/basic/Button/basic-button.vue";
 import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
 import BButtonToolbar from "@/components/base/ButtonGroup/b-btn-toolbar.vue";
-import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
 import BSelect from "@/components/form/b-select.vue";
+import BButton from "@/components/basic/Button/basic-button.vue";
 
+import GridPrint from './tools/grid-print'
+import GridExport from './tools/grid-export'
 import GridHelper from './Basic/grid-helper'
 import GridPagination from './Basic/grid-pagination'
 
@@ -217,9 +190,10 @@ export default {
     BSelect,
     BButtonGroup,
     BButtonToolbar,
+    GridPrint,
+    GridExport,
     GridHelper,
     GridPagination,
-    BDropdown,
     BModal
   },
   props: {
@@ -250,15 +224,6 @@ export default {
     return {
       loading: false, // 未使用
       selectedOptions: this.selected,
-      downloadList: [
-        { value: "XML", type: "xml" },
-        { value: "CSV", type: "csv" },
-        { value: "TXT", type: "txt" },
-        // { value: 'SQL', type: 'sql', },
-        // { value: 'PDF', type: 'pdf', },
-        { value: "JSON", type: "json" }
-        // { value: 'MS-EXCEL', type: 'ms-excel', },
-      ],
       sortObj: {},
       sortPlusObj: {},
       // pagination
@@ -472,35 +437,7 @@ export default {
       head.forEach(e => e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e));
       return arr;
     },
-    dataExport: function(item) {
-      if (!item || !item.type) return;
-      switch (item.type) {
-        case "xml":
-          tools.file.xml.writer(this.data);
-          break;
-        case "csv":
-          tools.file.csv.writer(this.data);
-          break;
-        case "txt":
-          tools.file.txt.writer(this.data);
-          break;
-        // case 'sql':
 
-        //     break;
-        // case 'pdf':
-
-        //     break;
-        case "json":
-          tools.file.json.writer(this.data);
-          break;
-        case "ms-excel":
-          tools.file.excel.writer(this.data);
-          break;
-        default:
-          break;
-      }
-      return false;
-    },
     tableSort: function(cell) {
       this.$set(
         this.sortObj,
@@ -527,21 +464,6 @@ export default {
       this.selectedOptions = this.selected;
       this.sortObj = {};
       this.paginate = 1
-    },
-    print: function() {
-      printJS({
-        type: "json",
-        printable: this.data,
-        repeatTableHeader: true,
-        properties: this.lastcolumns.map(e => ({
-          field: e.field,
-          displayName: e.title
-        })),
-        header: this.printTitle
-          ? '<h3 class="text-center">' + this.printTitle + "</h3>"
-          : null
-      });
-      this.$emit("table:print");
     },
   }
 };

@@ -30,8 +30,8 @@ export default {
   name: 'grid-helper',
   components: { BLoading, },
   props: {
-    hideData: util.props.Booleam,
-    loading: util.props.Booleam,
+    hideData: util.props.Boolean,
+    loading: util.props.Boolean,
   },
   computed: {
     icon: function() {

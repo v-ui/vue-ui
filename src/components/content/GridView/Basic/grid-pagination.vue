@@ -46,7 +46,7 @@ export default {
   props: {
     dataCount: util.props.UNumber, // 总条数
     page: {
-      ...util.props.UNumber,
+      type: [Object, Number],
       default: 1,
     }, // 页数
   },
