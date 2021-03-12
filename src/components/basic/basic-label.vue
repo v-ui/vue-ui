@@ -1,7 +1,7 @@
 <template>
   <span>
-    <b-icon :icon="icon" :icon-color="iconColor" />
-    <span class="d-inline-block pl-1 text-truncate" :class="labelColor ? 'text-' + labelColor : ''">{{ label }}</span>
+    <b-icon class="pr-1" :icon="icon" :icon-color="iconColor" />
+    <span class="d-inline-block text-truncate" :class="labelColor ? 'text-' + labelColor : ''">{{ label }}</span>
     <b-info :info="info" :info-color="infoColor" />
   </span>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <base-a
     v-if="href"
-    class="dropdown-item"
+    class="dropdown-item px-2"
     :class="{active: active,}"
     :aria-selected="active"
     :disabled="disabled"
@@ -19,7 +19,7 @@
   </base-a>
   <button
     v-else
-    class="dropdown-item"
+    class="dropdown-item px-2"
     :class="{active: active,}"
     :aria-selected="active"
     :disabled="disabled"

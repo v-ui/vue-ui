@@ -2,6 +2,7 @@ import base from './base'
 import size from './size'
 import form from './form'
 import grid from './grid'
+import data from './data'
 import date from './date'
 import clip from './clip'
 import color from './color'
@@ -24,6 +25,7 @@ export default {
   size,
   form,
   grid,
+  data,
   date,
   clip,
   color,

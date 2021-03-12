@@ -27,8 +27,8 @@
         :icon="item.icon"
       />
       <b-dropdown-item
-        v-else-if="item.value"
-        :label="item.label || item.value"
+        v-else
+        :label="item.label || item.value || item"
         :href="item.href"
         :info="item.info"
         :icon="item.icon"

@@ -16,7 +16,9 @@
       :disabled="disabled || item.disabled"
       :active="select ? select == item.value || select == item.label : item.active"
       @click.native="$emit('click', item.value || item.label)"
-    />
+    >
+      <slot name="item" :item="item" />
+    </list-items>
   </ul>
 </template>
 

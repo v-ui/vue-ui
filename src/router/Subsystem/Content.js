@@ -5,6 +5,7 @@ export default {
   icon: 'fas fa-dice-d6',
   Modules: [
     { path: 'b-a', name: 'b-a', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-a-demo.vue'), },
+    { path: 'b-data', name: 'b-data', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-data-demo.vue'), },
     { path: 'b-tabs', name: 'b-tabs', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-tabs-demo.vue'), },
     { path: 'b-swiper', name: 'b-swiper', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-swiper-demo.vue'), },
     { path: 'b-collapse', name: 'b-collapse', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-collapse-demo.vue'), },
