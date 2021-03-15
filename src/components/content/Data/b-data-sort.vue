@@ -1,12 +1,14 @@
 <template>
   <div class="p-2">
-    <b-label icon="arrow-down-up" label="Sort" info="Data sort panel" />
-    <hr class="my-1" />
-    <div v-if="!fillList || fillList.length === 0">Add a sort rule</div>
+    <header v-if="hideHeader">
+      <b-label icon="arrow-down-up" label="Sort" info="Data sort panel" />
+      <hr class="my-1" />
+    </header>
+    <div v-if="!dataList || dataList.length === 0">Add a sort rule</div>
     <div v-else>
-      <span v-for="(item, index) in fillList" :key="index" class="d-flex justify-content-between align-items-center">
+      <span v-for="(item, index) in dataList" :key="index" class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-          <b-dropdown-list class="m-1" :list="list" hide-null v-model="item.value" />
+          <b-dropdown-list class="m-1" :list="list" hide-null :primary-key="primaryKey" v-model="item.value" />
           <b-dropdown-list class="m-1" :list="sort" hide-null v-model="item.data" />
         </div>
         <b-button class="p-0" color="link" @click="del(index)">
@@ -33,6 +35,9 @@ export default {
   name: 'BDataSort',
   components: { BIcon, BLabel, BButton, BDropdownList, },
   mixins: [ util.mixins.data.base ],
+  props: {
+    primaryKey: props.String,
+  },
   data() {
     return {
       sort: [

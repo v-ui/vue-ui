@@ -3,18 +3,19 @@ import props from '../props'
 const base = {
   props: {
     list: props.Array,
+    hideHeader: props.Boolean,
   },
   data() {
     return {
-      fillList: [],
+      dataList: [],
       defaultData: null,
     }
   },
   destroyed() {
-    this.$emit('async:changed', this.fillList)
+    this.$emit('async:changed', this.dataList)
   },
   watch: {
-    fillList: {
+    dataList: {
       handler: function(value) {
         this.$emit('sync:changed', value)
       },
@@ -24,10 +25,10 @@ const base = {
   methods: {
     add: function() {
       let item = this.list[0]
-      this.fillList.push({ value: item, data: this.defaultData })
+      this.dataList.push({ value: item, data: this.defaultData })
     },
     del: function(index) {
-      this.fillList.splice(index, 1)
+      this.dataList.splice(index, 1)
     },
   },
 }
