@@ -8,7 +8,7 @@
     @click.native="$emit('item:click', item)"
   >
     <slot>
-      {{ item.name }}
+      {{ getDisplay(item) }}
     </slot>
   </b-button>
 </template>

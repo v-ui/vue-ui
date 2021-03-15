@@ -7,7 +7,8 @@
             :item="item"
             class="text-center"
             :multiple="isMultiple"
-            :primary-key="primaryKey"
+            :primary-key="key"
+            :display-name="displayKey"
             :selected="selectedValue"
             :disabled="item.disabled || disabled"
             @item:click="itemClick"
@@ -42,7 +43,8 @@ export default {
   methods: {
     itemClick: function(item) {
       if (this.isMultiple) {
-        let index = this.selectedValue.findIndex(e => (e && e[this.primaryKey || 'value'] || e) === (item && item[this.primaryKey || 'value'] || item))
+        const value = this.getValue(item)
+        let index = this.selectedMap.indexOf(value)
         index >= 0
           ? this.selectedValue.splice(index, 1)
           : this.selectedValue.push(item)

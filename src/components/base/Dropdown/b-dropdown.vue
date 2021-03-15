@@ -39,7 +39,8 @@
           v-model="selectedValue"
           :list="list"
           :disabled="disabled"
-          :primary-key="primaryKey"
+          :primary-key="key"
+          :display-name="displayKey"
           @item:click="item => $emit('item:click', item)"
         />
       </slot>

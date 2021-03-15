@@ -1,5 +1,5 @@
 <template>
-  <h6 class="dropdown-header mb-0">
+  <h6 class="dropdown-header mb-0 px-2">
     <slot>
       <b-label
         :label="label"

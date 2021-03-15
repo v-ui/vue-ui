@@ -28,7 +28,7 @@
       />
       <b-dropdown-item
         v-else
-        :label="item.label || item.value || item"
+        :label="getDisplay(item)"
         :href="item.href"
         :info="item.info"
         :icon="item.icon"
@@ -70,7 +70,7 @@ export default {
   methods: {
     itemClick: function(item) {
       if (this.isMultiple) {
-        const value = item && item[this.primaryKey || 'value'] || item
+        const value = this.getValue(item)
         let index = this.selectedMap.indexOf(value)
         index >= 0
           ? this.selectedValue.splice(index, 1)

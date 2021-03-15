@@ -265,8 +265,8 @@ const base = {
       return select
     },
     init: function(value) {
-      this.primaryKey = value !== this.enumTypeStatus.country ? 'id' : value
-
+      this.primaryKey = value === this.enumTypeStatus.country ? 'id' : value
+      debugger
       // this.list = this[`get${value[0].toUpperCase()}${value.slice(1)}`]
       switch(value) {
         case this.enumTypeStatus.country:
@@ -289,7 +289,8 @@ const base = {
     changePickerType: async function() {
       await this.$nextTick()
 
-      switch(this.pickerType?.value || this.pickerType) {
+      let type = this.pickerType?.value || this.pickerType
+      switch(type) {
         case this.enumTypeStatus.country:
           if (this.hideProvince) return
           this.pickerType = this.enumTypeStatus.province
@@ -308,7 +309,7 @@ const base = {
           this.pickerType = this.enumTypeStatus.town
           break
       }
-      await this.init(this.pickerType)
+      await this.init(type)
     },
   },
 }

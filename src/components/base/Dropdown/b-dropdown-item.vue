@@ -12,7 +12,7 @@
       <b-label
         :icon="icon"
         :info="info"
-        :label="label"
+        :label="label || href"
         :info-color="active ? 'light' : 'muted'"
       />
     </slot>

@@ -1,6 +1,6 @@
 <template>
   <div class="p-2">
-    <header v-if="hideHeader">
+    <header v-if="!hideHeader">
       <b-label icon="arrow-down-up" label="Sort" info="Data sort panel" />
       <hr class="my-1" />
     </header>
@@ -36,7 +36,7 @@ export default {
   components: { BIcon, BLabel, BButton, BDropdownList, },
   mixins: [ util.mixins.data.base ],
   props: {
-    primaryKey: props.String,
+    primaryKey: util.props.String,
   },
   data() {
     return {

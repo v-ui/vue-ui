@@ -7,7 +7,7 @@
     :aria-selected="isSelected"
     @click.native="$emit('item:click', item)"
   >
-    {{ value }}
+    {{ getDisplay(item) }}
     <b-info
       :info="item.info"
       class="m-0"
@@ -30,9 +30,6 @@ export default {
     disabled: util.props.Boolean,
   },
   computed: {
-    value: function() {
-      return this.item && this.item.label || this.item[this.primaryKey || 'value'] || this.item
-    },
     objClass: function() {
       return this.isSelected
         ? "bg-transparent text-body"

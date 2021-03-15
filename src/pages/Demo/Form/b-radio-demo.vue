@@ -113,7 +113,7 @@
       <font class="col-1">
         v-model:
         <br>
-        ({{ checked }})
+        {{ checked }}
       </font>
       <b-radio
         v-model="checked"
@@ -186,30 +186,15 @@
     <hr>
     <div class="row">
       <font class="col-1">
-        default: 接收/返回字符串
+        default:
         <br>
-        ({{ value1 }})
+        {{ value1 }}
       </font>
       <b-radio-group
         v-model="value1"
         class="col-11"
         :list="list"
         name="group-v-model"
-        inline
-      />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        接收/返回对象
-        <br>
-        ({{ value2 }})
-      </font>
-      <b-radio-group
-        v-model="value2"
-        class="col-11"
-        :list="list"
-        name="group-v-model"
-        primary-key="value"
         inline
       />
     </div>
@@ -306,7 +291,7 @@
       <font class="col-1">
         v-model:
         <br>
-        ({{ buttongroupvalue }})
+        {{ buttongroupvalue }}
       </font>
       <b-radio-button-group
         v-model="buttongroupvalue"

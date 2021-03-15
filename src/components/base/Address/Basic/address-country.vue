@@ -5,13 +5,15 @@
       <address-temp
         v-model="selectedValue"
         :list="list.filter(e => e.name[0].toUpperCase() === alpha.toUpperCase())"
-        :primary-key="primaryKey"
+        :primary-key="key"
+        :display-name="displayKey"
         @item:click="itemClick"
       >
         <template #item='{ item }'>
           <address-item
             :item="item"
-            :primary-key="primaryKey"
+            :primary-key="key"
+            :display-name="displayKey"
             :selected="selectedValue"
             :disabled="item.disabled"
             @item:click="itemClick"

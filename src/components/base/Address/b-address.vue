@@ -20,6 +20,7 @@
       v-model="selectedValue"
       :list="list"
       :primary-key="primaryKey"
+      display-name="name"
       @item:click="changePickerType"
     />
   </b-card>

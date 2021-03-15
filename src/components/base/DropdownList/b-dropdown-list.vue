@@ -19,18 +19,19 @@
       <slot>
         <b-dropdown-menu
           v-model="selectedValue"
-          :multiple="isMultiple"
-          :primary-key="primaryKey"
           :list="searchList"
+          :primary-key="key"
+          :display-name="displayKey"
+          :multiple="isMultiple"
           :null-value="placeholder"
           :show-null="!searchText && !hideNull"
         >
           <template #header v-if="search">
             <b-text
               v-model="searchText"
-              hide-icon
               class="cannt-hide"
               type="search"
+              hide-icon
               size="sm"
             />
           </template>
@@ -105,7 +106,11 @@ export default {
   computed: {
     searchList: function() {
       return this.searchText
-        ? this.list.filter(e => e.value && (e.value.includes(this.searchText) || e.label.includes(this.searchText)))
+        ? this.list.filter(e => {
+          let value = this.getValue(e)
+          let label = this.getDisplay(e)
+          return value && label && (value.includes(this.searchText) || label.includes(this.searchText))
+        })
         : this.list
     },
   },

@@ -3,11 +3,11 @@
     <template v-for="(item, index) in list">
       <b-checkbox
         :id="item.id"
-        :key="item.key ? item.key : (item.id ? item.id : index)"
+        :key="item.key || item.id || index"
         :mix-class="validateClass"
         unvalid
-        :label="item.label"
-        :value="item.value || item"
+        :label="getDisplay(item)"
+        :value="getValue(item)"
         :checked="isSelected(item)"
         :disabled="item.disabled || disabled"
         v-bind="$attrs"

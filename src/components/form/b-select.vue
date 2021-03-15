@@ -41,7 +41,7 @@ import util from "@/components/util/index.js";
 import BasicSelect from '@/components/form/Basic/Select/basic-select.vue'
 import BValid from "@/components/form/Other/b-form-valid.vue";
 import BInfo from "@/components/basic/basic-info.vue";
-
+// TODO: util.mixins.select.select 暂缓
 export default {
   name: "BSelect",
   components: { BasicSelect, BValid, BInfo },
