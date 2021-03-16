@@ -11,6 +11,14 @@ const base = {
       defaultData: null,
     }
   },
+  computed: {
+    hideInfo: function() {
+      return this.dataList && this.dataList?.length !== 0
+    },
+    disabledTrash: function() {
+      return !this.hideInfo
+    },
+  },
   destroyed() {
     this.$emit('async:changed', this.dataList)
   },
@@ -29,6 +37,9 @@ const base = {
     },
     del: function(index) {
       this.dataList.splice(index, 1)
+    },
+    clear: function() {
+      this.dataList = []
     },
   },
 }

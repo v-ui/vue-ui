@@ -27,7 +27,7 @@ import BButton from "@/components/basic/Button/basic-button.vue";
 import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
 
 export default {
-  name: 'grid-export',
+  name: 'GridExport',
   components: { BButton, BDropdown, },
   props: {
     data: util.props.Array,

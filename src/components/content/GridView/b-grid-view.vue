@@ -53,6 +53,7 @@
         </div>
       </div>
       <!-- tableContainer -->
+      <grid-sort id="sortmodal" :list="lastcolumns" />
       <div
         id="printWrap"
         class="border row m-0"
@@ -111,53 +112,6 @@
       <grid-pagination ref="pagination" :dataCount="data.length" v-model="paginate" />
     </template>
     <grid-helper v-else :hide-data="hideData" :loading="loading" />
-    <b-modal
-      id="sortmodal"
-      title="Sort Plus"
-      :icon="icon.sort"
-    >
-      <template>
-        <div
-          v-for="item in sort"
-          :key="item"
-          class="row my-1"
-        >
-          <font class="col-3">
-            {{ lastcolumns.filter(e => e.field == item)[0].title || item }}:
-          </font>
-          <div class="col-9">
-            <b-select
-              :list="['asc', 'desc']"
-              size="sm"
-              :value="sortPlusObj[item]"
-              @change="sortPlusChanged($event, item)"
-            />
-          </div>
-        </div>
-      </template>
-      <template #footer>
-        <b-button
-          color="secondary"
-          data-dismiss="modal"
-        >
-          Close
-        </b-button>
-        <b-button
-          color="primary"
-          data-dismiss="modal"
-          @click="clearSort"
-        >
-          Clear Sort
-        </b-button>
-        <b-button
-          color="primary"
-          data-dismiss="modal"
-          @click="sortPlus"
-        >
-          Sort
-        </b-button>
-      </template>
-    </b-modal>
   </div>
   <!-- gridView -->
 </template>
@@ -172,29 +126,26 @@ import BTable from "@/components/content/Table/b-table.vue";
 
 import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
 import BButtonToolbar from "@/components/base/ButtonGroup/b-btn-toolbar.vue";
-import BSelect from "@/components/form/b-select.vue";
 import BButton from "@/components/basic/Button/basic-button.vue";
 
+import GridSort from './tools/grid-sort'
 import GridPrint from './tools/grid-print'
 import GridExport from './tools/grid-export'
 import GridHelper from './Basic/grid-helper'
 import GridPagination from './Basic/grid-pagination'
-
-import BModal from "@/components/base/Modal/b-modal.vue";
 
 export default {
   name: "BGridView",
   components: {
     BTable,
     BButton,
-    BSelect,
     BButtonGroup,
     BButtonToolbar,
+    GridSort,
     GridPrint,
     GridExport,
     GridHelper,
     GridPagination,
-    BModal
   },
   props: {
     list: util.props.Object,

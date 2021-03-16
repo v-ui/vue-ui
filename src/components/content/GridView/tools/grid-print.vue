@@ -15,7 +15,7 @@ import util from "@/components/util/index.js";
 
 import BButton from "@/components/basic/Button/basic-button.vue";
 export default {
-  name: 'grid-print',
+  name: 'GridPrint',
   components: { BButton, },
   mixins: [ util.mixins.print, ],
   props: {

@@ -3,7 +3,7 @@
     :id="id"
     class="align-items-center h-auto px-0"
     :class="{'bg-light': disabled}"
-    style="min-width: 320px"
+    style="min-width: 150px"
     :disabled="disabled"
     :aria-disabled="disabled"
   >
