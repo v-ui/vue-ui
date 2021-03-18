@@ -4,7 +4,8 @@
   <hr>
   <h2>b-panel-list</h2>
   <hr>
-  <b-data-sort class="border " :list="list" />
+  <b-data-sort class="border " :column="column" v-model="sort" />
+  {{ sort }}
   </div>
 </template>
 
@@ -15,7 +16,8 @@ export default {
   components: { BDataSort, },
   data() {
     return {
-      list: [
+      sort: [],
+      column: [
         { value: 'value-1', label: 'label-1' },
         { value: 'value-2', label: 'label-2' },
         { value: 'value-3', label: 'label-3' },

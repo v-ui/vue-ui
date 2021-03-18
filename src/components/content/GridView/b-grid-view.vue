@@ -30,10 +30,10 @@
               </b-button>
               <b-button
                 v-modal="'#sortmodal'"
-                v-tip="'Sort Plus'"
+                v-tip="'Sort'"
                 color="secondary"
                 size="sm"
-                @click="sortPlusObj = Object.create(sortObj)"
+                :active="sortActive"
               >
                 <i :class="icon.sort" />
               </b-button>
@@ -48,12 +48,12 @@
               <grid-print :data="data" :columns="lastcolumns" :title="'printTitle'" />
             </b-button-group>
              <!-- export dropdown -->
-              <grid-export :data="data" />
+            <grid-export :data="data" />
           </b-button-toolbar>
         </div>
       </div>
       <!-- tableContainer -->
-      <grid-sort id="sortmodal" :list="lastcolumns" />
+      <grid-sort id="sortmodal" :column="lastcolumns" v-model="sort" @sort:done="sortDone" />
       <div
         id="printWrap"
         class="border row m-0"
@@ -63,7 +63,6 @@
           v-model="selectedOptions"
           :class="fixedNum > 0 ? `col-${fixedSizeNum}` : ''"
           :list="fixedList"
-          :sort-obj="sortObj"
           :table-theme="tableTheme"
           :table-sm="tableSm"
           :table-hover="tableHover"
@@ -77,7 +76,6 @@
           :hide-serial="hideSerial"
           :select-status="selectStatus"
           :primary-key="primaryKey"
-          @table:sort="cell => tableSort(cell)"
           @table:scroll="(event, type) => scroll(event, type)"
         />
         <!-- fixedTableContainer -->
@@ -89,7 +87,6 @@
           hide-serial
           hide-select
           :class="`col-${12 - fixedSizeNum}`"
-          :sort-obj="sortObj"
           :table-theme="tableTheme"
           :table-sm="tableSm"
           :table-hover="tableHover"
@@ -103,7 +100,6 @@
           :selected="selectedOptions"
           :select-status="selectStatus"
           :primary-key="primaryKey"
-          @table:sort="cell => tableSort(cell)"
           @table:scroll="(event, type) => scroll(event, type)"
         />
         <!-- activeTableContainer -->
@@ -175,8 +171,7 @@ export default {
     return {
       loading: false, // 未使用
       selectedOptions: this.selected,
-      sortObj: {},
-      sortPlusObj: {},
+      sort: [],
       // pagination
       paginate: 1,
     };
@@ -187,9 +182,6 @@ export default {
     },
     head: function() {
       return this.list && this.list.head || [];
-    },
-    sort: function() {
-      return this.list && this.list.sort || [];
     },
     data: function() {
       return this.list && this.list.data || [];
@@ -220,7 +212,6 @@ export default {
       return {
         head: this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head,
         operate: this.list.operate,
-        sort: this.sort,
         data: this.fillData,
         foot: this.foot,
         rowStyle: this.rowStyle
@@ -230,11 +221,13 @@ export default {
       if (this.fixedNum <= 0) return {};
       return {
         head: this.head.slice(this.fixedNum),
-        sort: this.sort,
         data: this.fillData,
         foot: this.foot,
         rowStyle: this.rowStyle
       };
+    },
+    sortActive: function() {
+      return this.sort && this.sort.length
     },
     hideHead: function() {
       return !this.head || this.head.length == 0;
@@ -268,6 +261,14 @@ export default {
     },
     activeTableTFoot: function() {
       return this.activeTable && this.activeTable.$refs.TFoot
+    },
+  },
+  watch: {
+    sort: {
+      handler: function(value) {
+        this.$$emit('table:sort', value)
+      },
+      deep: true,
     },
   },
   mounted() {
@@ -387,32 +388,8 @@ export default {
       head.forEach(e => e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e));
       return arr;
     },
-
-    tableSort: function(cell) {
-      this.$set(
-        this.sortObj,
-        cell.field,
-        this.sortObj && this.sortObj[cell.field] == "asc" ? "desc" : "asc"
-      );
-      this.$emit("table:sort", { sort: this.sortObj, cell: cell });
-    },
-    sortPlusChanged: function(value, field) {
-      value
-        ? this.$set(this.sortPlusObj, field, value)
-        : this.$delete(this.sortPlusObj, field);
-    },
-    sortPlus: function() {
-      this.sortObj = Object.create(this.sortPlusObj);
-      this.$emit("table:sortPlus", this.sortObj);
-    },
-    clearSort: function() {
-      this.sortObj = {};
-      this.sortPlusObj = {};
-      this.$emit("table:sortClear");
-    },
     reset: function() {
       this.selectedOptions = this.selected;
-      this.sortObj = {};
       this.paginate = 1
     },
   }

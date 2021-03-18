@@ -22,7 +22,7 @@
         </b-button>
         <b-button :disabled="disabledTrash" class="ml-auto" color="link" @click="clear">
           <b-icon icon="trash" />
-          Clear Sort
+          Clear sort
         </b-button>
       </template>
   </b-data-temp>
@@ -54,10 +54,7 @@ export default {
   },
   data() {
     return {
-      sort: [
-        { value: 'Ascending', icon: 'arrow-up-circle', },
-        { value: 'Descending', icon: 'arrow-down-circle', },
-      ],
+      sort: [ 'Ascending', 'Descending',],
       defaultData: 'Ascending',
     }
   },

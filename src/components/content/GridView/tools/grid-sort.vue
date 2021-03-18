@@ -3,9 +3,14 @@
     title="Sort Plus"
     :icon="icon.sort"
   >
-    <template>
-      <b-data-sort hide-header primary-key="field" display-name="title" :list="list" />
-    </template>
+    <b-data-sort
+      v-model="dataSort"
+      :column="column"
+      hide-header
+      primary-key="field"
+      display-name="title"
+
+    />
     <template #footer>
       <b-button
         color="secondary"
@@ -16,8 +21,9 @@
       <b-button
         color="primary"
         data-dismiss="modal"
+        @click.native="done"
       >
-        Sort
+        Done
       </b-button>
     </template>
   </b-modal>
@@ -35,12 +41,39 @@ import BDataSort from '@/components/content/Data/b-data-sort.vue'
 export default {
   name: 'GridSort',
   components: { BModal, BButton, BDataSort, },
+  model: {
+    prop: 'sort',
+    event: 'sort:changed'
+  },
   props: {
-    list: util.props.Array,
+    sort: util.props.Array,
+    column: util.props.Array,
+  },
+  data() {
+    return {
+      dataSort: this.sort,
+    }
   },
   computed: {
     icon: function() {
       return config.ui.icon;
+    },
+  },
+  watch: {
+    sort: {
+      handler: function(value) {
+        this.dataSort = value
+      },
+      deep: true,
+    },
+    dataSort: function(value) {
+      // v-model
+      this.$emit('sort:changed', value)
+    },
+  },
+  methods: {
+    done: function() {
+      this.$$emit('sort:done', this.dataSort)
     },
   },
 }
