@@ -1,10 +1,10 @@
 <template>
   <tbody>
     <table-body-tr
-      v-for="(row, rowIndex) in data"
-      :key="rowIndex"
+      v-for="(row, index) in data"
+      :key="index"
       :row="row"
-      :index="rowIndex + 1"
+      :index="index + 1"
       :row-style="rowStyle"
       :operate="operate"
       :columns="columns"

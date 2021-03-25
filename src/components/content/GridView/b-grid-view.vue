@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-dark rounded p-1">
+  <div class="p-1">
     <template v-if="!hideData">
       <!-- toolbar -->
       <div
@@ -76,6 +76,7 @@
           :hide-serial="hideSerial"
           :select-status="selectStatus"
           :primary-key="primaryKey"
+          @table:sort="cell => tableSort(cell)"
           @table:scroll="(event, type) => scroll(event, type)"
         />
         <!-- fixedTableContainer -->
@@ -100,6 +101,7 @@
           :selected="selectedOptions"
           :select-status="selectStatus"
           :primary-key="primaryKey"
+          @table:sort="cell => tableSort(cell)"
           @table:scroll="(event, type) => scroll(event, type)"
         />
         <!-- activeTableContainer -->
@@ -212,6 +214,7 @@ export default {
       return {
         head: this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head,
         operate: this.list.operate,
+        sort: this.sort,
         data: this.fillData,
         foot: this.foot,
         rowStyle: this.rowStyle
@@ -221,13 +224,14 @@ export default {
       if (this.fixedNum <= 0) return {};
       return {
         head: this.head.slice(this.fixedNum),
+        sort: this.sort,
         data: this.fillData,
         foot: this.foot,
         rowStyle: this.rowStyle
       };
     },
     sortActive: function() {
-      return this.sort && this.sort.length
+      return this.sort && this.sort.length !== 0
     },
     hideHead: function() {
       return !this.head || this.head.length == 0;

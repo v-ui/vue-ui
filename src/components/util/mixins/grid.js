@@ -7,13 +7,13 @@ export default {
       }
     },
     mounted() {
-      this.theadRowCount = this.getTheadRowCount(this.head)
+      this.theadRowCount = this.getTheadRowCount(this.dataHead)
     },
     methods: {
       // head
       initHead: function() {
-        this.initHeadData(this.head)
-        this.getHeadData(this.head)
+        this.initHeadData(this.dataHead)
+        this.getHeadData(this.dataHead)
       },
       // head
       getTheadRowCount: function(arr = [], count = 1) {

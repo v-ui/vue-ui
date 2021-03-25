@@ -43,13 +43,13 @@ export default {
   props: {
     primaryKey: util.props.String,
     row: util.props.Object,
-    index: Number,
+    index: util.props.UNumber,
     columns: util.props.Array,
     rowStyle: util.props.Object,
     operate: util.props.Array,
     hideSerial: util.props.Boolean,
     hideSelect: util.props.Boolean,
-    selectStatus: Number,
+    selectStatus: util.props.UNumber,
     selectedOptions: [Array, Object]
   },
   data() {

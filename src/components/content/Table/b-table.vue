@@ -17,11 +17,9 @@
         <table-head
           v-model="theadSelected"
           :head="theadData"
-          :sort="sort"
-          :sort-obj="sortObj"
+          :sort="dataSort"
           :class="theadClass"
           :row-count="theadRowCount"
-          :thead-row-count="theadRowCount"
           :hide-serial="hideSerial"
           :hide-select="hideSelect"
           :select-status="status"
@@ -45,11 +43,11 @@
           <table-colgroup :colgroup="colgroup" />
           <table-body
             v-model="selectedOptions"
-            :data="data"
+            :data="list"
             :row-style="rowStyle"
             :columns="fieldcolumns"
+            :operate="dataOperate.value"
             :primary-key="primaryKey"
-            :operate="operate.value"
             :hide-serial="hideSerial"
             :hide-select="hideSelect"
             :select-status="status"
@@ -96,8 +94,16 @@ export default {
     event: "table:selected"
   },
   props: {
-    list: util.props.Object,
-    primaryKey: util.props.String,
+    head: util.props.Array,
+    list: util.props.Array,
+    foot: util.props.Array,
+    operate: util.props.Object,
+    sort: util.props.Array,
+    rowStyle: util.props.Object,
+    primaryKey: {
+      ...util.props.String,
+      default: 'id',
+    },
     isActive: util.props.Boolean,
     hideSerial: util.props.Boolean,
     hideSelect: util.props.Boolean,
@@ -116,7 +122,6 @@ export default {
       validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value))
     },
     selected: [Array, Object],
-    sortObj: util.props.Object
   },
   data() {
     return {
@@ -144,53 +149,47 @@ export default {
     status: function() {
       return isNaN(this.selectStatus) ? 0 : Number(this.selectStatus);
     },
-    operate: function() {
-      if (this.isActive || this.status == 2 || !this.list || !this.list.operate) return {};
-      let index = this.list.operate.index >= 0
-          ? this.list.operate.index
-          : this.list.head.length;
-      let value = this.list.operate.value &&
-        this.list.operate.value.forEach &&
-        this.list.operate.value.filter(e => config.ui.table.operate[e].permissions(this.status)) ||
+    dataOperate: function() {
+      if (this.isActive || this.status == 2 || !this.operate) return {};
+      let index = this.operate.index >= 0
+          ? this.operate.index
+          : this.head.length;
+      let value = this.operate.value &&
+        this.operate.value.forEach &&
+        this.operate.value.filter(e => config.ui.table.operate[e].permissions(this.status)) ||
         []
-      let n = Math.min(...this.list.head.map((e, index) => e.children ? index : Infinity))
+      let n = Math.min(...this.head.map((e, index) => e.children ? index : Infinity))
       if (index > n) index = n;
       return { index: index, value: value };
     },
-    head: function() {
-      let arr = Array.from(this.list && this.list.head || []);
+    dataHead: function() {
+      let arr = Array.from(this.head || []);
       if (
         !this.isActive &&
         this.status != 2 &&
-        this.operate &&
-        this.operate.index >= 0 &&
-        this.operate.value
+        this.dataOperate &&
+        this.dataOperate.index >= 0 &&
+        this.dataOperate.value
       ) {
-        arr.splice(this.operate.index, 0, { $operate: this.operate.value });
+        arr.splice(this.dataOperate.index, 0, { $operate: this.dataOperate.value });
       }
       return arr;
     },
-    data: function() {
-      return this.list && this.list.data || [];
+    dataFoot: function() {
+      return this.foot || [];
     },
-    foot: function() {
-      return this.list && this.list.foot || [];
-    },
-    sort: function() {
-      return this.list && this.list.sort || [];
+    dataSort: function() {
+      return this.sort || [];
     },
     hideHead: function() {
-      return !this.head || this.head.length == 0;
+      return !this.dataHead || this.dataHead.length == 0;
     },
     hideData: function() {
-      return !this.data || this.data.length == 0 || this.hideHead;
+      return !this.list || this.list.length == 0 || this.hideHead;
     },
     hideFoot: function() {
-      return !this.foot || this.foot.length == 0;
+      return !this.dataFoot || this.dataFoot.length == 0;
     },
-    rowStyle: function() {
-      return this.list && this.list.rowStyle || {};
-    }
   },
   watch: {
     selected: function(value) {
@@ -220,12 +219,12 @@ export default {
           this.colgroup.push({
             class: "text-center",
             style: `width: ${
-              2 * this.operate.value.length < 5
+              2 * this.dataOperate.value.length < 5
                 ? 5
-                : 1.8 * this.operate.value.length + 1
+                : 1.8 * this.dataOperate.value.length + 1
             }em;`
           });
-          this.fieldcolumns.push({ $operate: this.operate.index });
+          this.fieldcolumns.push({ $operate: this.dataOperate.index });
         } else {
           this.colgroup.push({ class: e.colClass, style: e.colStyle });
           this.fieldcolumns.push({
@@ -236,7 +235,7 @@ export default {
         }
       });
     },
-    getLastColumns: function(head = this.head) {
+    getLastColumns: function(head = this.dataHead) {
       let arr = []
       head.forEach(e => e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e))
       return arr

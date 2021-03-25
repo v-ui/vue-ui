@@ -28,8 +28,7 @@
         :key="cellIndex"
         :cell="cell"
         :sort="sort"
-        :sort-obj="sortObj"
-        @table:sort="cell => $emit('table:sort', cell)"
+        @table:sort="thSort"
       />
     </template>
   </tr>
@@ -58,7 +57,6 @@ export default {
     hideSerial: util.props.Boolean,
     hideSelect: util.props.Boolean,
     selectStatus: util.props.UNumber,
-    sortObj: util.props.Object,
   },
   data() {
     return {
@@ -72,6 +70,13 @@ export default {
     isChecked: function(value) {
       this.$emit("change", value);
     }
-  }
+  },
+  methods: {
+    thSort: function(cell) {
+      // 只允许最后一层的 th 返回 sort 事件
+      if (cell.colSpan) return
+      this.$emit('table:sort', cell)
+    },
+  },
 };
 </script>
