@@ -1,13 +1,13 @@
 <template>
   <th
     class="text-center align-middle"
-    style="cursor: pointer"
+    :style="style"
     :rowspan="cell.rowSpan"
     :aria-rowspan="cell.rowSpan"
     :colspan="cell.colSpan"
     :aria-colspan="cell.colSpan"
     :data-field="cell.field"
-    @click="$emit('table:sort', cell)"
+    @click="cellSort"
   >
     <div class="d-flex justify-content-center align-items-center h-100">
       <font class="px-1">
@@ -40,7 +40,21 @@ export default {
       if (this.sort[index].value === "asc") return this.icon.sortUp;
       if (this.sort[index].value === "desc") return this.icon.sortDown;
       else return "";
-    }
-  }
+    },
+    lastColumnCell: function() {
+      debugger
+      return !this.cell.colSpan
+    },
+    style: function() {
+      return this.lastColumnCell ? 'cursor: pointer' : ''
+    },
+  },
+  methods: {
+    cellSort: function(cell) {
+      // 只允许最后一层的 cell 返回 sort 事件
+      if (!this.lastColumnCell) return
+      this.$emit('cell:sort', cell)
+    },
+  },
 };
 </script>

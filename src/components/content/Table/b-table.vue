@@ -23,7 +23,7 @@
           :hide-serial="hideSerial"
           :hide-select="hideSelect"
           :select-status="status"
-          @table:sort="tableSort"
+          @th:sort="thSort"
         />
       </table>
     </div>
@@ -43,7 +43,7 @@
           <table-colgroup :colgroup="colgroup" />
           <table-body
             v-model="selectedOptions"
-            :data="list"
+            :data="data"
             :row-style="rowStyle"
             :columns="fieldcolumns"
             :operate="dataOperate.value"
@@ -150,6 +150,9 @@ export default {
     status: function() {
       return isNaN(this.selectStatus) ? 0 : Number(this.selectStatus);
     },
+    data: function() {
+      return this.list
+    },
     dataOperate: function() {
       if (this.isActive || this.status == 2 || !this.operate) return {};
       let index = this.operate.index >= 0
@@ -195,7 +198,13 @@ export default {
     },
     selectedOptions: function(value) {
       this.$emit("table:selected", value);
-    }
+    },
+    sort: {
+      handler: function(value) {
+        this.dataSort = value
+      },
+      deep: true,
+    },
   },
   async mounted() {
     await this.InitColgroupAndcolumns();
@@ -238,15 +247,29 @@ export default {
       head.forEach(e => e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e))
       return arr
     },
-    tableSort: function(cell) {
+    thSort: function(cell) {
       let field = cell.field
       let index = this.dataSort.findIndex && this.dataSort.findIndex(e => e && e.field === field)
-
+      let sort = 'asc'
       if (index >= 0) {
-        this.dataSort[index].value = this.dataSort[index].value === 'asc' ? 'desc' : 'asc'
+        sort = this.dataSort[index].value === 'asc' ? 'desc' : 'asc'
+        this.dataSort[index].value = sort
       } else {
-        this.dataSort.push({field: field, value: 'asc'})
+        this.dataSort.push({field: field, value: sort})
       }
+      this.data.sort((a, b) => {
+        let sa = a && a[field]
+        let sb = b && b[field]
+        if (sort === 'asc') {
+          return sa && sa.localeCompare && sb && sb.localeCompare
+            ? sa.localeCompare(sb)
+            : sa - sb
+        } else {
+          return sa && sa.localeCompare && sb && sb.localeCompare
+            ? sb.localeCompare(sa)
+            : sb - sa
+        }
+      })
       this.$emit('table:sort', cell)
     },
   }

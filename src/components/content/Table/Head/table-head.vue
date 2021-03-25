@@ -11,7 +11,7 @@
         :hide-serial="hideSerial"
         :hide-select="hideSelect"
         :select-status="selectStatus"
-        @table:sort="cell => $emit('table:sort', cell)"
+        @tr:sort="cell => $emit('th:sort', cell)"
       />
       <table-head-tr
         v-else
@@ -20,7 +20,7 @@
         hide-serial
         hide-select
         :sort="sort"
-        @table:sort="cell => $emit('table:sort', cell)"
+        @tr:sort="cell => $emit('th:sort', cell)"
       />
     </template>
   </thead>

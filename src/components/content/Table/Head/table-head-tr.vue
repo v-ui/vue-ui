@@ -28,7 +28,7 @@
         :key="cellIndex"
         :cell="cell"
         :sort="sort"
-        @table:sort="thSort"
+        @cell:sort="$emit('tr:sort', cell)"
       />
     </template>
   </tr>
@@ -70,13 +70,6 @@ export default {
     isChecked: function(value) {
       this.$emit("change", value);
     }
-  },
-  methods: {
-    thSort: function(cell) {
-      // 只允许最后一层的 th 返回 sort 事件
-      if (cell.colSpan) return
-      this.$emit('table:sort', cell)
-    },
   },
 };
 </script>
