@@ -23,7 +23,7 @@
           :hide-serial="hideSerial"
           :hide-select="hideSelect"
           :select-status="status"
-          @table:sort="cell => $emit('table:sort', cell)"
+          @table:sort="tableSort"
         />
       </table>
     </div>
@@ -128,6 +128,7 @@ export default {
       colgroup: [],
       fieldcolumns: [],
       theadSelected: false,
+      dataSort: this.sort || [],
       selectedOptions: this.selected
     };
   },
@@ -177,9 +178,6 @@ export default {
     },
     dataFoot: function() {
       return this.foot || [];
-    },
-    dataSort: function() {
-      return this.sort || [];
     },
     hideHead: function() {
       return !this.dataHead || this.dataHead.length == 0;
@@ -239,6 +237,17 @@ export default {
       let arr = []
       head.forEach(e => e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e))
       return arr
+    },
+    tableSort: function(cell) {
+      let field = cell.field
+      let index = this.dataSort.findIndex && this.dataSort.findIndex(e => e && e.field === field)
+
+      if (index >= 0) {
+        this.dataSort[index].value = this.dataSort[index].value === 'asc' ? 'desc' : 'asc'
+      } else {
+        this.dataSort.push({field: field, value: 'asc'})
+      }
+      this.$emit('table:sort', cell)
     },
   }
 };

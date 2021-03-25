@@ -14,7 +14,7 @@
         {{ cell.title }}
       </font>
       <i
-        v-if="cell.field && !cell.children && sort.includes(cell.field)"
+        v-if="cell.field && !cell.children && sort.find(e => e && e.field === cell.field)"
         :class="iconClass"
       />
     </div>
@@ -36,8 +36,9 @@ export default {
       return config.ui.icon;
     },
     iconClass: function() {
-      if (this.sort[this.cell.field] === "asc") return this.icon.sortUp;
-      if (this.sort[this.cell.field] === "desc") return this.icon.sortDown;
+      let index = this.sort.findIndex(e => e && e.field === this.cell.field)
+      if (this.sort[index].value === "asc") return this.icon.sortUp;
+      if (this.sort[index].value === "desc") return this.icon.sortDown;
       else return "";
     }
   }
