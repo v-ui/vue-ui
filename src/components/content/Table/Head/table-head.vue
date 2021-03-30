@@ -12,7 +12,20 @@
         :hide-select="hideSelect"
         :select-status="selectStatus"
         @tr:sort="cell => $emit('th:sort', cell)"
-      />
+      >
+        <template #tHeadSerial>
+          <slot name="tHeadSerial" />
+        </template>
+        <template #tHeadSelect="{ checked }">
+          <slot name="tHeadSelect" :checked="checked" />
+        </template>
+        <template #tHeadOperate>
+          <slot name="tHeadOperate" />
+        </template>
+        <template #tHeadCell="{ cell, value }">
+          <slot name="tHeadCell" :cell="cell" :value="value" />
+        </template>
+      </table-head-tr>
       <table-head-tr
         v-else
         :key="index"
@@ -21,7 +34,11 @@
         hide-select
         :sort="sort"
         @tr:sort="cell => $emit('th:sort', cell)"
-      />
+      >
+        <template #tHeadCell="{ cell }">
+          <slot name="tHeadCell" :cell="cell" />
+        </template>
+      </table-head-tr>
     </template>
   </thead>
 </template>

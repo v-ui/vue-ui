@@ -24,7 +24,20 @@
           :hide-select="hideSelect"
           :select-status="status"
           @th:sort="thSort"
-        />
+        >
+          <template #tHeadSerial>
+            <slot name="tHeadSerial" />
+          </template>
+          <template #tHeadSelect="{ checked }">
+            <slot name="tHeadSelect" :checked="checked" />
+          </template>
+          <template #tHeadOperate>
+            <slot name="tHeadOperate" />
+          </template>
+          <template #tHeadCell="{ cell, value }">
+          <slot name="tHeadCell" :cell="cell" :value="value" />
+        </template>
+        </table-head>
       </table>
     </div>
     <!-- body -->
@@ -54,7 +67,20 @@
             :thead-selected="theadSelected"
             @tr:click="row => $emit('tr:click', row)"
             @tr:dbclick="row => $emit('tr:dbclick', row)"
-          />
+          >
+            <template #tBodySerial>
+              <slot name="tBodySerial" />
+            </template>
+            <template #tBodySelect="{ checked }">
+              <slot name="tBodySelect" :checked="checked" />
+            </template>
+            <template #tBodyOperate="{ operate }">
+              <slot name="tBodyOperate" :operate="operate" />
+            </template>
+            <template #tBodyCell="{ cell, col, value }">
+              <slot name="tBodyCell" :cell="cell" :col="col" :value="value" />
+            </template>
+          </table-body>
         </table>
       </template>
     </div>
@@ -260,6 +286,7 @@ export default {
       this.data.sort((a, b) => {
         let sa = a && a[field]
         let sb = b && b[field]
+        // TODO: 根据不同的数据类型进行排序，目前的方法不准确
         if (sort === 'asc') {
           return sa && sa.localeCompare && sb && sb.localeCompare
             ? sa.localeCompare(sb)

@@ -5,14 +5,16 @@
       :rowspan="rowCount"
       :aria-rowspan="rowCount"
     >
-      No.
+      <slot name="tHeadSerial">No.</slot>
     </table-serial-td>
     <table-select-td
       v-model="isChecked"
-      :hide-select="hideSelect || selectStatus != 2"
+      :hide-select="hideSelect || selectStatus !== 2"
       :rowspan="rowCount"
       :aria-rowspan="rowCount"
-    />
+    >
+      <slot name="tHeadSelect" :checked="isChecked" />
+    </table-select-td>
     <template v-for="(cell, cellIndex) in row">
       <table-operate-td
         v-if="cell.$operate"
@@ -21,7 +23,7 @@
         :rowspan="rowCount"
         :aria-rowspan="rowCount"
       >
-        Operate
+        <slot name="tHeadOperate">Operate</slot>
       </table-operate-td>
       <table-head-th
         v-else
@@ -29,7 +31,11 @@
         :cell="cell"
         :sort="sort"
         @cell:sort="$emit('tr:sort', cell)"
-      />
+      >
+        <template #tHeadCell="{ cell, value }">
+          <slot name="tHeadCell" :cell="cell" :value="value" />
+        </template>
+      </table-head-th>
     </template>
   </tr>
 </template>

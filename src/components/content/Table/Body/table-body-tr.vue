@@ -7,24 +7,34 @@
     <table-serial-td
       :hide-serial="hideSerial"
       :number="index"
-    />
+    >
+      <slot name="tBodySerial" />
+    </table-serial-td>
     <table-select-td
       v-model="isSelected"
-      :hide-select="hideSelect || selectStatus != 2"
-    />
+      :hide-select="hideSelect || selectStatus !== 2"
+    >
+      <slot name="tBodySelect" :checked="isChecked" />
+    </table-select-td>
     <template v-for="(col, colIndex) in columns">
       <table-operate-td
-        v-if="col.$operate >= 0"
+        v-if="col.$operate"
         :key="colIndex"
         :operate="operate"
         @tr:oper="type => $emit('tr:oper', {type: type, data: row})"
-      />
+      >
+        <slot name="tBodyOperate" :operate="operate" />
+      </table-operate-td>
       <table-body-td
         v-else
         :key="colIndex"
         :cell="row[col.field] || '-'"
         :col="col"
-      />
+      >
+        <template #tBodyCell="{ cell, col, value }">
+          <slot name="tBodyCell" :cell="cell" :col="col" :value="value" />
+        </template>
+      </table-body-td>
     </template>
   </tr>
 </template>

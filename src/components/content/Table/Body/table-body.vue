@@ -17,7 +17,20 @@
       @click.native="$emit('tr:click', formatRowData(row))"
       @tr:oper="data => trOper(data)"
       @dblclick.native="$emit('tr:dblclick', formatRowData(row))"
-    />
+    >
+      <template #tBodySerial>
+        <slot name="tBodySerial" />
+      </template>
+      <template #tBodySelect="{ checked }">
+        <slot name="tBodySelect" :checked="checked" />
+      </template>
+      <template #tBodyOperate="{ operate }">
+        <slot name="tBodyOperate" :operate="operate" />
+      </template>
+      <template #tBodyCell="{ cell, col, value }">
+        <slot name="tBodyCell" :cell="cell" :col="col" :value="value" />
+      </template>
+    </table-body-tr>
   </tbody>
 </template>
 
@@ -41,7 +54,7 @@ export default {
     operate: util.props.Array,
     hideSerial: util.props.Boolean,
     hideSelect: util.props.Boolean,
-    selectStatus: Number, // 0: 默认, 1: 单选, 2: 多选
+    selectStatus: util.props.UNumber, // 0: 默认, 1: 单选, 2: 多选
     selected: [Array, Object],
     theadSelected: util.props.Boolean
   },

@@ -9,7 +9,9 @@
     :rowspan="cell.rowSpan"
     :aria-rowspan="cell.rowSpan"
   >
-    {{ col.format ? col.format(value) : value || '-' }}
+    <slot name="tBodyCell" :cell="cell" :col="col" :value="value" >
+      {{ value }}
+    </slot>
   </td>
 </template>
 
@@ -24,7 +26,8 @@ export default {
   },
   computed: {
     value: function() {
-      return this.cell.value || this.cell;
+      let value = this.cell.value || this.cell;
+      return this.col.format ? this.col.format(value) : value || '-'
     },
     ObjStyle: function() {
       return this.col.cellStyle && typeof this.col.cellStyle == "function"

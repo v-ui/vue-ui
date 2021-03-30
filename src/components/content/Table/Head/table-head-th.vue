@@ -10,9 +10,11 @@
     @click="cellSort"
   >
     <div class="d-flex justify-content-center align-items-center h-100">
-      <font class="px-1">
-        {{ cell.title }}
-      </font>
+      <slot name="tHeadCell" :cell="cell" :value="value">
+        <font class="px-1">
+          {{ value }}
+        </font>
+      </slot>
       <i
         v-if="cell.field && !cell.children && sort.find(e => e && e.field === cell.field)"
         :class="iconClass"
@@ -47,6 +49,9 @@ export default {
     },
     style: function() {
       return this.lastColumnCell ? 'cursor: pointer' : ''
+    },
+    value: function() {
+      return this.cell.title || this.cell
     },
   },
   methods: {
