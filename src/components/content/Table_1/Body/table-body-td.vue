@@ -1,9 +1,8 @@
 <template>
   <td
-    v-if="!cell.hide"
     class="align-middle"
-    :class="[ObjStyle && ObjStyle.class]"
-    :style="[ObjStyle && ObjStyle.style]"
+    :class="[cell.class, ObjStyle && ObjStyle.class]"
+    :style="[cell.style, ObjStyle && ObjStyle.style]"
     style="min-width: 30px;"
     :colspan="cell.colSpan"
     :aria-colspan="cell.colSpan"
@@ -28,12 +27,12 @@ export default {
   computed: {
     value: function() {
       let value = this.cell.value || this.cell;
-      return this.col.format ? this.col.format(value) : value
+      return this.col.format ? this.col.format(value) : value || '-'
     },
     ObjStyle: function() {
       return this.col.cellStyle && typeof this.col.cellStyle == "function"
         ? this.col.cellStyle(this.value)
-        : this.col.cellStyle
+        : this.col.cellStyle;
     }
   }
 };

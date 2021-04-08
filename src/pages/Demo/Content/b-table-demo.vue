@@ -1,91 +1,130 @@
 <template>
-  <b-table
+  <div>
+    <b-table
     :head="head"
-    :list="list"
+    :list="data"
     :operate="operate"
     :rowStyle="rowStyle"
-  />
+    :multiple="isMultiple"
+    v-model="selectedValue"
+  >
+    <template #body-_serial="{ index }">
+      <b-table-serial :index="index" />
+    </template>
+    <template #head-check>
+      <b-button color='link' class="px-0" @click="headClick" value="反选" />
+    </template>
+    <template #body-check="{ row }">
+      <b-checkbox :checked="isSelected(row)" @input="input($event, row)" />
+    </template>
+    <template #body-_operate>
+      <b-table-operate :operate="operate.value" />
+    </template>
+    <template #body-1-1-1>
+      slot
+    </template>
+  </b-table>
+  {{ selectedValue }}
+  </div>
 </template>
 
 <script>
-import BTable from '@/components/content/Table/b-table.vue'
+import util from "@/components/util/index.js";
 
+import BTable from '@/components/content/Table/b-table.vue'
+import BTableSerial from '@/components/content/Table/container/b-table-serial.vue'
+import BTableOperate from '@/components/content/Table/container/b-table-operate.vue'
+
+import BButton from '@/components/basic/Button/basic-button.vue';
+import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
 export default {
   name: 'b-table-demo',
-  components: { BTable },
+  components: { BTable, BTableSerial, BTableOperate, BButton, BCheckbox },
+  mixins: [ util.mixins.select.check ],
   data() {
     return {
+      isMultiple: true,
       head: [
         {
-          title: "id",
+          icon: "hash",
+          field: "_serial",
+          colStyle: 'width: 35px;',
+          canNotSort: true,
+        },
+        {
+          label: "id",
+          icon: 'key-fill',
           field: "id",
           colClass: "bg-info",
           colStyle: "width: 58px;"
         },
         {
-          title: "name",
+          field: "check",
+          colStyle: "width: 58px;",
+          canNotSort: true,
+        },
+        {
+          label: "name",
           field: "name",
           colStyle: "width: 100px;",
           format: value => "name_" + value
         },
-        { title: "sex", field: "sex", colStyle: "width: 100px;" },
+        { label: "sex", field: "sex", colStyle: "width: 100px;" },
         {
-          title: "age",
+          label: "age",
           field: "age",
           colStyle: "width: 58px;",
-          cellStyle: value => {
-            return { class: Number(value) ? "bg-success" : "bg-danger" };
-          }
+          cellStyle: value => ({ class: Number(value) ? "bg-success" : "bg-danger" })
         },
         {
-          title: "1",
+          label: "1",
           field: "1",
           children: [
             {
-              title: "1-1",
+              label: "1-1",
               field: "1-1",
               children: [
-                { title: "1-1-1", field: "1-1-1" },
-                { title: "1-1-2", field: "1-1-2" }
+                { label: "1-1-1", field: "1-1-1" },
+                { label: "1-1-2", field: "1-1-2" }
               ]
             },
-            { title: "1-2", field: "1-2" },
+            { label: "1-2", field: "1-2" },
             {
-              title: "1-3",
+              label: "1-3",
               field: "1-3",
               children: [
-                { title: "1-3-1", field: "1-3-1" },
-                { title: "1-3-2", field: "1-3-2" }
+                { label: "1-3-1", field: "1-3-1" },
+                { label: "1-3-2", field: "1-3-2" }
               ]
             }
           ]
         },
         {
-          title: "2",
+          label: "2",
           field: "2",
           children: [
             {
-              title: "2-1",
+              label: "2-1",
               field: "2-1",
               children: [
-                { title: "2-1-1", field: "2-1-1" },
-                { title: "2-1-2", field: "2-1-2" }
+                { label: "2-1-1", field: "2-1-1" },
+                { label: "2-1-2", field: "2-1-2" }
               ]
             },
             {
-              title: "2-2",
+              label: "2-2",
               field: "2-2",
               children: [
-                { title: "2-2-1", field: "2-2-1" },
-                { title: "2-2-2", field: "2-2-2" }
+                { label: "2-2-1", field: "2-2-1" },
+                { label: "2-2-2", field: "2-2-2" }
               ]
             },
-            { title: "2-3", field: "2-3" }
+            { label: "2-3", field: "2-3" }
           ]
         }
       ],
       operate: {
-        index: 2,
+        index: 3,
         value: ["check", "view", "edit", "delete", "flow"]
       },
       rowStyle: {
@@ -93,10 +132,10 @@ export default {
           if (row && row.age && Number(row.age) == 5) return "text-warning";
         }
       },
-      list: [
+      data: [
         { id: "id_1", name: "mack", sex: "man", age: 1 },
         { id: "id_2", name: "jack", sex: "man", age: 2 },
-        { id: "id_3", name: "mack", sex: "man" },
+        { id: "id_3", name: "mack", sex: "man", },
         { id: "id_4", name: "mack", sex: "man", age: 3 },
         { id: "id_5", name: "mack", sex: "man", age: 4 },
         { id: "id_6", name: "mack", sex: "man", age: 5 },
@@ -110,6 +149,39 @@ export default {
 
       ]
     }
+  },
+  methods: {
+    itemClick: function(item) {
+      if (this.isMultiple) {
+        const value = this.getValue(item)
+        let index = this.selectedMap.indexOf(value)
+        index >= 0
+          ? this.selectedValue.splice(index, 1)
+          : this.selectedValue.push(item)
+      } else {
+        this.selectedValue = item
+      }
+      this.$emit('item:click', this.selectedValue)
+    },
+    input: function(event, item) {
+      if (event.target.checked) {
+        this.selectedValue.push(item);
+      } else {
+        const value = this.getValue(item)
+        let index = this.selectedMap.indexOf(value);
+        if (index >= 0) this.selectedValue.splice(index, 1);
+      }
+    },
+    headClick: function() {
+      this.data.forEach(e => {
+        const value = this.getValue(e)
+        let index = this.selectedMap.indexOf(value);
+        index >= 0
+          ? this.selectedValue.splice(index, 1)
+          : this.selectedValue.push(e)
+      })
+
+    },
   },
 }
 </script>

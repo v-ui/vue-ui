@@ -11,7 +11,9 @@
   >
     <div class="d-flex justify-content-center align-items-center h-100">
       <slot name="tHeadCell" :cell="cell" :value="value">
-        <basic-label :label="value" :icon="cell.icon" />
+        <font class="px-1">
+          {{ value }}
+        </font>
       </slot>
       <i
         v-if="cell.field && !cell.children && sort.find(e => e && e.field === cell.field)"
@@ -25,12 +27,9 @@
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
-import BasicLabel from '@/components/basic/basic-label.vue'
 export default {
   name: "TableHeadTh",
-  components: { BasicLabel, },
   props: {
-
     cell: util.props.Object,
     sort: util.props.Array,
   },
@@ -44,23 +43,21 @@ export default {
       if (this.sort[index].value === "desc") return this.icon.sortDown;
       else return "";
     },
-    canSort: function() {
-      // 默认只允许最后一层的 cell 返回 sort 事件
-      // canNotSort 只应用于特殊的 th
-      return !this.cell.colSpan && !this.cell.canNotSort
+    lastColumnCell: function() {
+      debugger
+      return !this.cell.colSpan
     },
     style: function() {
-      return this.canSort ? 'cursor: pointer' : ''
+      return this.lastColumnCell ? 'cursor: pointer' : ''
     },
     value: function() {
-      return this.cell.icon
-        ? this.cell.label
-        : this.cell.label || this.cell
+      return this.cell.title || this.cell
     },
   },
   methods: {
     cellSort: function(cell) {
-      if (!this.canSort) return
+      // 只允许最后一层的 cell 返回 sort 事件
+      if (!this.lastColumnCell) return
       this.$emit('cell:sort', cell)
     },
   },
