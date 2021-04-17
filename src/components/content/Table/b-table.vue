@@ -145,7 +145,7 @@ export default {
   methods: {
     thSort: function(cell) {
       this.cellSort(cell)
-      this.$emit('table:sort', cell)
+      this.$emit('table:sort', this.dataSort)
     },
   }
 };

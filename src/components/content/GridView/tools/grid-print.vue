@@ -3,6 +3,7 @@
     v-tip="'Print'"
     color="secondary"
     size="sm"
+
     @click="print(opts)"
   >
     <i :class="icon.print" />
@@ -17,7 +18,7 @@ import BButton from "@/components/basic/Button/basic-button.vue";
 export default {
   name: 'GridPrint',
   components: { BButton, },
-  mixins: [ util.mixins.print, ],
+  mixins: [ util.mixins.print.print, ],
   props: {
     data: util.props.Array,
     title: util.props.String,
@@ -34,7 +35,7 @@ export default {
         repeatTableHeader: true,
         properties: this.columns.map(e => ({
           field: e.field,
-          displayName: e.title
+          displayName: e.label || ''
         })),
         header: this.title
           ? `

@@ -45,69 +45,67 @@
               >
                 <i :class="icon.sync" />
               </b-button>
-              <grid-print :data="data" :columns="lastcolumns" :title="'printTitle'" />
+              <grid-print :data="list" :columns="lastcolumns" :title="'printTitle'" />
             </b-button-group>
              <!-- export dropdown -->
-            <grid-export :data="data" />
+            <grid-export :data="list" />
           </b-button-toolbar>
         </div>
       </div>
       <!-- tableContainer -->
-      <grid-sort id="sortmodal" :column="lastcolumns" v-model="sort" @sort:done="sortDone" />
+      <grid-sort id="sortmodal" :column="lastcolumns" v-model="dataSort" />
       <div
         id="printWrap"
         class="border row m-0"
       >
         <b-table
           ref="fixedTable"
-          v-model="selectedOptions"
           :class="fixedNum > 0 ? `col-${fixedSizeNum}` : ''"
-          :list="fixedList"
-          :table-theme="tableTheme"
-          :table-sm="tableSm"
-          :table-hover="tableHover"
-          :table-striped="tableStriped"
-          :table-bordered="tableBordered"
-          :table-borderless="tableBorderless"
-          :thead-theme="theadTheme"
+          :head="fixedData.head"
+          :list="data"
+          :foot="foot"
+          :sort="dataSort"
+          :operate="operate"
+          :row-style="rowStyle"
+          v-bind="$attrs"
           :hide-head="hideHead"
           :hide-data="hideData"
           :hide-foot="hideFoot"
           :hide-serial="hideSerial"
-          :select-status="selectStatus"
           :primary-key="primaryKey"
-          @table:sort="cell => tableSort(cell)"
+          @table:sort="tableSort"
           @table:scroll="(event, type) => scroll(event, type)"
-        />
+        >
+          <template #body-_serial="{ index }">
+            <b-table-serial :index="index + paginate.start" />
+          </template>
+          <template #body-_operate>
+            <b-table-operate :operate="operate.value" />
+          </template>
+        </b-table>
         <!-- fixedTableContainer -->
         <b-table
           v-if="fixedNum > 0"
           ref="activeTable"
-          :list="activeList"
+          :head="activeData.head"
+          :list="data"
+          :foot="foot"
+          :sort="dataSort"
+          :row-style="rowStyle"
+          v-bind="$attrs"
           is-active
-          hide-serial
-          hide-select
           :class="`col-${12 - fixedSizeNum}`"
-          :table-theme="tableTheme"
-          :table-sm="tableSm"
-          :table-hover="tableHover"
-          :table-striped="tableStriped"
-          :table-bordered="tableBordered"
-          :table-borderless="tableBorderless"
-          :thead-theme="theadTheme"
           :hide-head="hideHead"
           :hide-data="hideData"
           :hide-foot="hideFoot"
-          :selected="selectedOptions"
-          :select-status="selectStatus"
           :primary-key="primaryKey"
-          @table:sort="cell => tableSort(cell)"
+          @table:sort="tableSort"
           @table:scroll="(event, type) => scroll(event, type)"
         />
         <!-- activeTableContainer -->
       </div>
        <!-- pagination -->
-      <grid-pagination ref="pagination" :dataCount="data.length" v-model="paginate" />
+      <grid-pagination ref="pagination" :dataCount="list.length" v-model="paginate" />
     </template>
     <grid-helper v-else :hide-data="hideData" :loading="loading" />
   </div>
@@ -121,6 +119,8 @@ import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 import BTable from "@/components/content/Table/b-table.vue";
+import BTableSerial from '@/components/content/Table/container/b-table-serial.vue'
+import BTableOperate from '@/components/content/Table/container/b-table-operate.vue'
 
 import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
 import BButtonToolbar from "@/components/base/ButtonGroup/b-btn-toolbar.vue";
@@ -134,8 +134,11 @@ import GridPagination from './Basic/grid-pagination'
 
 export default {
   name: "BGridView",
+  inheritAttrs: false,
   components: {
     BTable,
+    BTableSerial,
+    BTableOperate,
     BButton,
     BButtonGroup,
     BButtonToolbar,
@@ -146,92 +149,58 @@ export default {
     GridPagination,
   },
   props: {
-    list: util.props.Object,
+    list: util.props.Array,
+    head: util.props.Array,
+    foot: util.props.Array,
+    sort: util.props.Array,
+    operate: util.props.Object,
+    rowStyle: util.props.Object,
     primaryKey: {
       ...util.props.String,
       default: "id",
     },
     fixed: util.props.UInt,
     fixedSize: util.props.size,
-    tableTheme: util.props.theme,
-    tableSm: util.props.Boolean,
-    tableHover: util.props.Boolean,
-    tableStriped: util.props.Boolean,
-    tableBordered: util.props.Boolean,
-    tableBorderless: util.props.Boolean,
-    theadTheme: util.props.theme,
-    theadSticky: util.props.Boolean,
     hideSerial: util.props.Boolean,
-    selectStatus: {
-      ...util.props.UInt,
-      validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value))
-    },// 0: 默认, 1: 单选, 2: 多选
-    selected: [Array, Object],
     printTitle: util.props.String
   },
   data() {
     return {
       loading: false, // 未使用
-      selectedOptions: this.selected,
-      sort: [],
       // pagination
       paginate: 1,
+      dataSort: this.sort,
     };
   },
   computed: {
     icon: function() {
       return config.ui.icon;
     },
-    head: function() {
-      return this.list && this.list.head || [];
-    },
     data: function() {
-      return this.list && this.list.data || [];
-    },
-    fillData: function() {
-      return this.data.slice(this.paginate.start, this.paginate.end);
-    },
-    foot: function() {
-      return this.list && this.list.foot || [];
-    },
-    rowStyle: function() {
-      return this.list && this.list.rowStyle || {};
+      return this.list.slice(this.paginate.start, this.paginate.end);
     },
     lastcolumns: function() {
-      return this.getLastColumns();
+      return this.getLastColumns(this.head);
     },
     fixedNum: function() {
       return Number(this.fixed);
     },
     fixedSizeNum: function() {
-      if (this.fixedNum <= 0) return 12;
+      if (this.fixedNum <= 0 || this.fixedNum > this.head.length) return 12;
       if (this.fixedSize == "sm") return 4;
       else if (this.fixedSize == "") return 6;
       else if (this.fixedSize == "lg") return 9;
       else return 12;
     },
-    fixedList: function() {
-      return {
-        head: this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head,
-        operate: this.list.operate,
-        sort: this.sort,
-        data: this.fillData,
-        foot: this.foot,
-        rowStyle: this.rowStyle
-      };
+    fixedData: function() {
+      return { head: this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head, };
     },
-    activeList: function() {
+    activeData: function() {
       if (this.fixedNum <= 0) return {};
-      return {
-        head: this.head.slice(this.fixedNum),
-        sort: this.sort,
-        data: this.fillData,
-        foot: this.foot,
-        rowStyle: this.rowStyle
-      };
+      return { head: this.head.slice(this.fixedNum), };
     },
     sortActive: function() {
-      return this.sort && this.sort.length !== 0
+      return this.dataSort && this.dataSort.length !== 0
     },
     hideHead: function() {
       return !this.head || this.head.length == 0;
@@ -267,16 +236,16 @@ export default {
       return this.activeTable && this.activeTable.$refs.TFoot
     },
   },
+  mounted() {
+    this.init();
+  },
   watch: {
     sort: {
       handler: function(value) {
-        this.$$emit('table:sort', value)
+        this.dataSort = value
       },
       deep: true,
     },
-  },
-  mounted() {
-    this.init();
   },
   methods: {
     init: async function() {
@@ -389,12 +358,19 @@ export default {
     },
     getLastColumns: function(head = this.head) {
       let arr = [];
-      head.forEach(e => e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e));
+      head.forEach(e =>
+        e.children
+          ? arr.push(...this.getLastColumns(e.children))
+          : e.field[0] !== '_' ? arr.push(e) : null
+      );
       return arr;
     },
+    tableSort: function(sort) {
+      this.dataSort = sort
+    },
     reset: function() {
-      this.selectedOptions = this.selected;
       this.paginate = 1
+      this.dataSort = []
     },
   }
 };

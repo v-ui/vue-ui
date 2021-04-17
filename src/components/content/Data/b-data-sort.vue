@@ -7,7 +7,7 @@
       <template>
         <span v-for="(item, index) in dataList" :key="index" class="d-flex justify-content-between align-items-center">
           <div class="d-flex row w-100 align-items-center">
-            <b-dropdown-list class="col-6 my-1" :list="list" hide-null :primary-key="primaryKey" :display-name="displayName" v-model="item.value" />
+            <b-dropdown-list class="col-6 my-1" :list="column" hide-null :primary-key="primaryKey" :display-name="displayName" v-model="item.value" />
             <b-dropdown-list class="col-6 my-1" :list="sort" hide-null v-model="item.data" />
           </div>
           <b-button v-tip="'Delete'" class="p-0" color="link" @click="del(index)">
@@ -54,8 +54,11 @@ export default {
   },
   data() {
     return {
-      sort: [ 'Ascending', 'Descending',],
-      defaultData: 'Ascending',
+      sort: [
+        { value: 'asc', label: 'Ascending' },
+        { value: 'desc', label: 'Descending' },
+      ],
+      defaultData: 'asc',
     }
   },
 }

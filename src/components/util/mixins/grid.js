@@ -21,10 +21,11 @@ const col = {
   methods: {
     initCol: function(head = this.dataHead) {
       if (this.hideHead) return;
-      let columns = this.getLastColumns(head);
-      columns.forEach(e => {
+      this.columns = this.getLastColumns(head);
+
+      this.columns.forEach(e => {
         this.intColgroup(e)
-        this.initColumns(e)
+        // this.initColumns(e)
       })
     },
     intColgroup: function(e) {
@@ -168,15 +169,19 @@ const sort = {
   },
   methods: {
     cellSort: function(cell) {
-      let field = cell.field
-      let index = this.dataSort.findIndex && this.dataSort.findIndex(e => e && e.field === field)
       let sort = 'asc'
+      let field = cell.field
+      let index = this.dataSort.findIndex && this.dataSort.findIndex(e => e && (e.value.field || e.value) === field)
+
       if (index >= 0) {
-        sort = this.dataSort[index].value === 'asc' ? 'desc' : 'asc'
-        this.dataSort[index].value = sort
+        let item = this.dataSort[index]
+        sort = item && (item.data.value || item.data) === 'asc' ? 'desc' : 'asc'
+        this.dataSort[index].value = cell
+        this.dataSort[index].data = sort
       } else {
-        this.dataSort.push({field: field, value: sort})
+        this.dataSort.push({value: cell, data: sort})
       }
+      debugger
       this.list.sort((a, b) => {
         let sa = a && a[field]
         let sb = b && b[field]

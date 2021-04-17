@@ -8,8 +8,6 @@
       :column="column"
       hide-header
       primary-key="field"
-      display-name="title"
-
     />
     <template #footer>
       <b-button
@@ -73,7 +71,7 @@ export default {
   },
   methods: {
     done: function() {
-      this.$$emit('sort:done', this.dataSort)
+      this.$emit('sort:done', this.dataSort)
     },
   },
 }

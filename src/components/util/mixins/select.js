@@ -7,10 +7,10 @@ const install = function(selected, multiple) {
     : tools.obj.isTrue(selected) ? selected : ''
 }
 
-const label = function(selected, multiple, name, key) {
+const label = function(selected, list, multiple, name, key) {
   return multiple
-    ? selected && selected.map && selected.map(e => getDisplay(e, name, key)) || null
-    : getDisplay(selected, name, key) || null
+    ? selected && selected.map && selected.map(e => getDisplay(getItem(e, list, key), name, key)) || null
+    : getDisplay(getItem(selected, list, key), name, key) || null
 }
 
 const map = function(selected, multiple, key) {
@@ -32,6 +32,10 @@ const getValue = function(item, key) {
 
 const getDisplay = function(item, name, key) {
   return item && (item[name] || item[key]) || item
+}
+
+const getItem = function(selected, list, key) {
+  return list && list.find && list.find(e => getValue(e, key) === getValue(selected, key))
 }
 
 const basic = {
@@ -81,7 +85,7 @@ const base = {
   },
   computed: {
     showLabel: function() {
-      return this.label || label(this.selectedValue, this.isMultiple, this.displayName, this.key)
+      return this.label || label(this.selectedValue, this.list, this.isMultiple, this.displayName, this.key)
     },
     selectedMap: function () {
       return map(this.selectedValue, this.isMultiple, this.key)

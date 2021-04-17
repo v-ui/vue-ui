@@ -1,30 +1,30 @@
 <template>
   <div>
     <b-table
-    :head="head"
-    :list="data"
-    :operate="operate"
-    :rowStyle="rowStyle"
-    :multiple="isMultiple"
-    v-model="selectedValue"
-  >
-    <template #body-_serial="{ index }">
-      <b-table-serial :index="index" />
-    </template>
-    <template #head-check>
-      <b-button color='link' class="px-0" @click="headClick" value="反选" />
-    </template>
-    <template #body-check="{ row }">
-      <b-checkbox :checked="isSelected(row)" @input="input($event, row)" />
-    </template>
-    <template #body-_operate>
-      <b-table-operate :operate="operate.value" />
-    </template>
-    <template #body-1-1-1>
-      slot
-    </template>
-  </b-table>
-  {{ selectedValue }}
+      :head="head"
+      :list="data"
+      :operate="operate"
+      :rowStyle="rowStyle"
+      :multiple="isMultiple"
+      v-model="selectedValue"
+    >
+      <template #body-_serial="{ index }">
+        <b-table-serial :index="index" />
+      </template>
+      <template #head-check>
+        <b-button color='link' class="px-0" @click="headClick" value="反选" />
+      </template>
+      <template #body-check="{ row }">
+        <b-checkbox :checked="isSelected(row)" @input="input($event, row)" />
+      </template>
+      <template #body-_operate>
+        <b-table-operate :operate="operate.value" />
+      </template>
+      <template #body-1-1-1>
+        slot
+      </template>
+    </b-table>
+    {{ selectedValue }}
   </div>
 </template>
 
@@ -43,6 +43,7 @@ export default {
   mixins: [ util.mixins.select.check ],
   data() {
     return {
+
       isMultiple: true,
       head: [
         {

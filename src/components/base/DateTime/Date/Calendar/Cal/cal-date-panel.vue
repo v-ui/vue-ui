@@ -67,7 +67,7 @@ export default {
       this.initValue(this.format().add(1, 'day'))
     },
     dateChecked: function(value) {
-      this.$$emit('date:checked', this.format(this.year, this.month, value))
+      this.$emit('date:checked', this.format(this.year, this.month, value))
     },
   },
 }

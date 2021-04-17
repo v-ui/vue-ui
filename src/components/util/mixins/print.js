@@ -1,14 +1,19 @@
-import { print } from './plugin/print'
+// 参考：https://printjs.crabbly.com/
+import printJS from "print-js"
 
-export default {
+const print = {
   computed: {
     opts: function() {
-      return null
+      return {}
     }
   },
   methods: {
-    print: function() {
-      print(this.opts);
+    print: function(opts = this.opts) {
+      printJS(opts);
     },
   },
+}
+
+export default {
+  print,
 }

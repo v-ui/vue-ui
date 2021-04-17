@@ -13,10 +13,7 @@
       <slot name="tHeadCell" :cell="cell" :value="value">
         <basic-label :label="value" :icon="cell.icon" />
       </slot>
-      <i
-        v-if="cell.field && !cell.children && sort.find(e => e && e.field === cell.field)"
-        :class="iconClass"
-      />
+      <i v-if="canSort && iconClass" class="mx-1" :class="iconClass" />
     </div>
   </th>
 </template>
@@ -30,7 +27,6 @@ export default {
   name: "TableHeadTh",
   components: { BasicLabel, },
   props: {
-
     cell: util.props.Object,
     sort: util.props.Array,
   },
@@ -39,9 +35,10 @@ export default {
       return config.ui.icon;
     },
     iconClass: function() {
-      let index = this.sort.findIndex(e => e && e.field === this.cell.field)
-      if (this.sort[index].value === "asc") return this.icon.sortUp;
-      if (this.sort[index].value === "desc") return this.icon.sortDown;
+      let item = this.sort.find(e => e && (e.value.field || e.value) === this.cell.field)
+      if (!item) return ''
+      if ((item.data.value || item.data) === "asc") return this.icon.sortUp;
+      else if ((item.data.value || item.data) === "desc") return this.icon.sortDown;
       else return "";
     },
     canSort: function() {

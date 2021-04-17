@@ -15,7 +15,7 @@
         class="mr-1"
       />
     </slot>
-    <slot>{{ value | worldUpperCase | firstUpperCase }}</slot>
+    <slot>{{ value }}</slot>
     <sr-msg>{{ fillsrMsg }}</sr-msg>
   </button>
   <base-a
@@ -38,7 +38,7 @@
         class="mr-1"
       />
     </slot>
-    <slot>{{ value | worldUpperCase | firstUpperCase }}</slot>
+    <slot>{{ value }}</slot>
     <sr-msg>{{ fillsrMsg }}</sr-msg>
   </base-a>
 </template>

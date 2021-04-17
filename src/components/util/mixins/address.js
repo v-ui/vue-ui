@@ -266,7 +266,7 @@ const base = {
     },
     init: function(value) {
       this.primaryKey = value === this.enumTypeStatus.country ? 'id' : value
-      debugger
+
       // this.list = this[`get${value[0].toUpperCase()}${value.slice(1)}`]
       switch(value) {
         case this.enumTypeStatus.country:

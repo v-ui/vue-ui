@@ -17,7 +17,7 @@
             :class="item.icon || 'fas fa-dot-circle'"
           />
           <font class="text-truncate">
-            {{ item.SubsystemName | worldUpperCase | firstUpperCase }}
+            {{ item.SubsystemName }}
           </font>
         </router-link>
       </NavItem>

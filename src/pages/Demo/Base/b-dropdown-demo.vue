@@ -238,11 +238,14 @@
       </font>
       <b-dropdown-list
         class="col-5"
+        v-model="value1"
+        :list="list"
         disabled
       />
       <b-dropdown-list
         v-model="value2"
         class="col-5"
+        :list="list"
         multiple
         disabled
       />
