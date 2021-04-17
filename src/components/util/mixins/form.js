@@ -48,6 +48,7 @@ export default {
     },
   }, // base
   btn: {
+    filters: { ...filters },
     props: {
       value: {
         ...props.String,
