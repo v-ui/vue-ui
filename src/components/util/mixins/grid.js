@@ -1,4 +1,5 @@
 import props from "../props";
+import mixinsSelect from "../mixins/select"
 
 const lastCol = {
   methods: {
@@ -181,7 +182,7 @@ const sort = {
       } else {
         this.dataSort.push({value: cell, data: sort})
       }
-      debugger
+
       this.list.sort((a, b) => {
         let sa = a && a[field]
         let sb = b && b[field]
@@ -200,10 +201,72 @@ const sort = {
   },
 }
 
+const enumSelect = {
+  data() {
+    return {
+      enumSelect: {
+        default: null,
+        check: 'check',
+        select: 'select',
+      },
+    }
+  },
+}
+
+const select = {
+  mixins: [ enumSelect, mixinsSelect.check, ],
+  props: {
+    selectStatus: {
+      type: String,
+      default: 'default',
+    },
+  },
+  data() {
+    return {
+      check: { field: "_check", label: 'Check', colStyle: 'width: 35px;', canNotSort: true, }
+    }
+  },
+  computed: {
+    hideCheck: function() {
+      return !(this.selectStatus === this.enumSelect.check || this.selectStatus === this.enumSelect.select)
+    },
+  },
+  mounted() {
+    this.initSelect()
+    this.initSelectedValue()
+  },
+  methods: {
+    initSelect: function() {
+      switch(this.selectStatus) {
+        case this.enumSelect.check:
+          this.isMultiple = false
+          break;
+        case this.enumSelect.select:
+          this.isMultiple = true
+          break;
+      }
+    },
+    multiSelect: function(checked, item) {
+      if (checked) {
+        this.selectedValue.push(item);
+      } else {
+        const value = this.getValue(item)
+        let index = this.selectedMap.indexOf(value);
+        if (index >= 0) this.selectedValue.splice(index, 1);
+      }
+    },
+    unMultiSelect: function(item) {
+      this.selectedValue = item
+    },
+  },
+}
+
 export default {
   col,
   lastCol,
   thead,
   operate,
   sort,
+  enumSelect,
+  select,
 }

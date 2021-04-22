@@ -60,12 +60,14 @@
       >
         <b-table
           ref="fixedTable"
+          :multiple="isMultiple"
+          v-model="selectedValue"
           :class="fixedNum > 0 ? `col-${fixedSizeNum}` : ''"
           :head="fixedData.head"
           :list="data"
           :foot="foot"
           :sort="dataSort"
-          :operate="operate"
+          :operate="!hideCheck ? null : operate"
           :row-style="rowStyle"
           v-bind="$attrs"
           :hide-head="hideHead"
@@ -79,6 +81,12 @@
           <template #body-_serial="{ index }">
             <b-table-serial :index="index + paginate.start" />
           </template>
+          <template #body-_check="{ row }">
+            <div class="d-flex justify-content-center">
+              <b-checkbox v-if="selectStatus === enumSelect.select" :checked="isSelected(row)" @input="input($event, row)" />
+              <base-icon v-else-if="selectStatus === enumSelect.check" icon="check-circle-fill" class="text-primary" style="cursor: pointer" @click.native="itemClick(row)" />
+            </div>
+          </template>
           <template #body-_operate>
             <b-table-operate :operate="operate.value" />
           </template>
@@ -87,6 +95,8 @@
         <b-table
           v-if="fixedNum > 0"
           ref="activeTable"
+          :multiple="isMultiple"
+          v-model="selectedValue"
           :head="activeData.head"
           :list="data"
           :foot="foot"
@@ -132,6 +142,8 @@ import GridExport from './tools/grid-export'
 import GridHelper from './Basic/grid-helper'
 import GridPagination from './Basic/grid-pagination'
 
+import BaseIcon from "@/components/basic/basic-icon.vue"
+import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
 export default {
   name: "BGridView",
   inheritAttrs: false,
@@ -147,7 +159,10 @@ export default {
     GridExport,
     GridHelper,
     GridPagination,
+    BaseIcon,
+    BCheckbox,
   },
+  mixins: [ util.mixins.grid.select, ],
   props: {
     list: util.props.Array,
     head: util.props.Array,
@@ -193,7 +208,11 @@ export default {
       else return 12;
     },
     fixedData: function() {
-      return { head: this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head, };
+      let head = this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head
+      let serial = { field: "_serial", icon: "hash", colStyle: 'width: 35px;', canNotSort: true, }
+      if (!this.hideSerial) head.unshift(serial)
+      if (!this.hideCheck) head.splice(this.operate.index || 0, 0, this.check)
+      return { head: head, };
     },
     activeData: function() {
       if (this.fixedNum <= 0) return {};
@@ -367,6 +386,14 @@ export default {
     },
     tableSort: function(sort) {
       this.dataSort = sort
+    },
+    // 单选
+    input: function(event, row) {
+      this.multiSelect(event.target.checked, row)
+    },
+    // 多选
+    itemClick: function(row) {
+      this.unMultiSelect(row)
     },
     reset: function() {
       this.paginate = 1

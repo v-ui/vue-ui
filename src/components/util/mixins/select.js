@@ -81,7 +81,7 @@ const base = {
     }
   },
   created() {
-    this.selectedValue = install(this.selected, this.isMultiple)
+    this.initSelectedValue()
   },
   computed: {
     showLabel: function() {
@@ -109,6 +109,9 @@ const base = {
     },
   },
   methods: {
+    initSelectedValue: function() {
+      this.selectedValue = install(this.selected, this.isMultiple)
+    },
     getValue: function(item, key = this.key) {
       return getValue(item, key)
     },
