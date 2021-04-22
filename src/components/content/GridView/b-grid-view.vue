@@ -87,8 +87,8 @@
               <base-icon v-else-if="selectStatus === enumSelect.check" icon="check-circle-fill" class="text-primary" style="cursor: pointer" @click.native="itemClick(row)" />
             </div>
           </template>
-          <template #body-_operate>
-            <b-table-operate :operate="operate.value" />
+          <template #body-_operate="{ row }">
+            <b-table-operate :operate="operate.value" @tr:oper="type => oper(type, row)" />
           </template>
         </b-table>
         <!-- fixedTableContainer -->
@@ -394,6 +394,9 @@ export default {
     // 多选
     itemClick: function(row) {
       this.unMultiSelect(row)
+    },
+    oper: function(type, row) {
+      this.$emit(`oper:${type}`, row)
     },
     reset: function() {
       this.paginate = 1

@@ -9,7 +9,6 @@
     thead-theme="dark"
     :list="list"
     :head="head"
-    selectStatus="select"
     :operate="operate"
     :row-style="rowStyle"
   />
