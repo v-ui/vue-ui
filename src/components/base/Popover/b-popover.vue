@@ -21,7 +21,7 @@
           name="header"
         >
           <h6 class="m-0 p-0">
-            {{ title }}
+            <basic-label :label="title" :icon="icon" :info="info" />
           </h6>
         </slot>
       </div>
@@ -40,10 +40,10 @@ import tools from '@/tools'
 import util from "@/components/util/index.js";
 
 import tranDrop from "@/components/transition/tran-drop.vue"
-
+import BasicLabel from "@/components/basic/basic-label.vue"
 export default {
   name: "BPopover",
-  components: { tranDrop, },
+  components: { tranDrop, BasicLabel, },
   mixins: [ util.mixins.popper.base, ],
   props: {
     for: {
@@ -53,6 +53,8 @@ export default {
     title: util.props.String,
     content: util.props.String,
     set: util.props.popperSet,
+    icon: util.props.String,
+    info: util.props.String,
   },
   data() {
     return {

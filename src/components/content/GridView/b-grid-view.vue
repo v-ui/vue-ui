@@ -29,7 +29,7 @@
                 <i :class="icon.searchPlus" />
               </b-button>
               <b-button
-                v-modal="'#sortmodal'"
+                id="SortPopover"
                 v-tip="'Sort'"
                 color="secondary"
                 size="sm"

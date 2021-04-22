@@ -1,7 +1,10 @@
 <template>
-  <b-modal
+  <b-popover
+    for="SortPopover"
+    set="bottom-start"
     title="Sort Plus"
-    :icon="icon.sort"
+    icon="arrow-down-up"
+    style="min-width: 400px"
   >
     <b-data-sort
       v-model="dataSort"
@@ -24,7 +27,7 @@
         Done
       </b-button>
     </template>
-  </b-modal>
+  </b-popover>
 </template>
 
 <script>
@@ -35,10 +38,11 @@ import BModal from "@/components/base/Modal/b-modal.vue";
 
 import BButton from "@/components/basic/Button/basic-button.vue";
 import BDataSort from '@/components/content/Data/b-data-sort.vue'
+import BPopover from '@/components/base/Popover/b-popover.vue'
 
 export default {
   name: 'GridSort',
-  components: { BModal, BButton, BDataSort, },
+  components: { BModal, BButton, BDataSort, BPopover },
   model: {
     prop: 'sort',
     event: 'sort:changed'
