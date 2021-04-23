@@ -23,6 +23,16 @@
     </div>
     <div class="row py-1">
       <font class="col-1">
+        drop:
+      </font>
+      <b-list
+        class="col-11"
+        :list="list"
+        drop
+      />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
         select:
       </font>
       <b-list

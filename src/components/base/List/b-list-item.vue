@@ -7,6 +7,7 @@
     :class="objClass"
     :disabled="disabled"
   >
+    <base-icon v-if="drop" class="mr-1 py-2 handle" icon="view-list" style="cursor: move" />
     <slot>{{ label }}</slot>
     <sr-msg>{{ srMsg || color }}</sr-msg>
   </base-a>
@@ -16,6 +17,7 @@
     :class="objClass"
     :aria-disabled="disabled"
   >
+    <base-icon v-if="drop" class="mr-1 py-2 handle" icon="view-list" style="cursor: move" />
     <slot>{{ label }}</slot>
     <sr-msg>{{ srMsg }}</sr-msg>
   </li>
@@ -25,11 +27,12 @@
 import util from "@/components/util/index.js";
 
 import BaseA from "@/components/basic/A/basic-a.vue";
+import BaseIcon from '@/components/basic/basic-icon.vue'
 import srMsg from "@/components/basic/basic-sr-msg.vue";
 
 export default {
   name: "BListItem",
-  components: { BaseA, srMsg },
+  components: { BaseA, BaseIcon, srMsg },
   props: {
     href: util.props.href,
     label: util.props.String,
@@ -37,6 +40,7 @@ export default {
       ...util.props.color,
       default: "white"
     },
+    drop: util.props.Boolean,
     active: util.props.Boolean,
     disabled: util.props.Boolean,
     srMsg: util.props.String
@@ -47,7 +51,10 @@ export default {
       c += this.color ? ` list-group-item-${this.color} ` : " ";
       c += this.active ? " active " : " ";
       return c;
-    }
+    },
+    iconStyle: function() {
+      return this.disabled ? '' : 'cursor: move'
+    },
   }
 };
 </script>

@@ -1,35 +1,43 @@
 <template>
-  <ul
+  <draggable
     class="list-group"
+    tag="ul"
+    v-model="dataList"
+    v-bind="dragOptions"
+    handle=".handle"
     :class="{'list-group-flush': flush, 'list-group-horizontal': inline, }"
+    @start="status = true"
+    @end="status = false"
   >
-    <slot v-if="$slots.default" />
-    <list-items
-      v-for="(item, index) in list"
-      v-else
-      :key="index"
-      :class="{'flex-fill': fill}"
-      :label="item.label"
-      :href="item.href"
-      :color="item.color || color"
-      :sr-msg="item.srMsg"
-      :disabled="disabled || item.disabled"
-      :active="select ? select == item.value || select == item.label : item.active"
-      @click.native="$emit('click', item.value || item.label)"
-    >
-      <slot name="item" :item="item" />
-    </list-items>
-  </ul>
+    <transition-group type="transition" :name="!status ? 'flip-list' : null">
+      <list-items
+        v-for="(item, index) in dataList"
+        :key="'item' + index"
+        :class="{'flex-fill': fill}"
+        :drop="drop"
+        :label="item.label"
+        :href="item.href"
+        :color="item.color || color"
+        :sr-msg="item.srMsg"
+        :disabled="disabled || item.disabled"
+        :active="select ? select == item.value || select == item.label : item.active"
+        @click.native="$emit('click', item.value || item.label)"
+      >
+        <slot name="item" :item="item" />
+      </list-items>
+    </transition-group>
+  </draggable>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
 
+import draggable from 'vuedraggable'
 import listItems from "./b-list-item";
 
 export default {
   name: "BList",
-  components: { listItems },
+  components: { draggable, listItems },
   model: {
     prop: "select",
     event: "click"
@@ -40,12 +48,30 @@ export default {
       ...util.props.color,
       default: "white"
     },
+    drop: util.props.Boolean,
     select: util.props.String,
     disabled: util.props.Boolean,
     flush: util.props.Boolean,
     inline: util.props.Boolean,
     fill: util.props.Boolean,
-  }
+  },
+  data() {
+    return {
+      dragOptions: {
+        animation: 200,
+        group: "description",
+        disabled: !this.drop,
+        ghostClass: "ghost"
+      },
+      dataList: this.list,
+      status: false,
+    }
+  },
 };
 </script>
 
+<style>
+.ghost {
+  opacity: 0.5;
+}
+</style>
