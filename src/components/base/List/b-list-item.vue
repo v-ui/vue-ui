@@ -7,8 +7,10 @@
     :class="objClass"
     :disabled="disabled"
   >
-    <base-icon v-if="drop" class="mr-1 py-2 handle" icon="view-list" style="cursor: move" />
-    <slot>{{ label }}</slot>
+    <div class="d-flex align-items-center">
+      <slot>{{ label }}</slot>
+      <base-icon v-if="drop" class="ml-auto py-2 handle" icon="list" style="cursor: move" />
+    </div>
     <sr-msg>{{ srMsg || color }}</sr-msg>
   </base-a>
   <li
@@ -17,8 +19,10 @@
     :class="objClass"
     :aria-disabled="disabled"
   >
-    <base-icon v-if="drop" class="mr-1 py-2 handle" icon="view-list" style="cursor: move" />
-    <slot>{{ label }}</slot>
+    <div class="d-flex align-items-center">
+      <slot>{{ label }}</slot>
+      <base-icon v-if="drop" class="ml-auto py-2 handle" icon="list" style="cursor: move" />
+    </div>
     <sr-msg>{{ srMsg }}</sr-msg>
   </li>
 </template>
