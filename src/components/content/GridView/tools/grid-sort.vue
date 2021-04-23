@@ -1,8 +1,8 @@
 <template>
   <b-popover
     for="SortPopover"
-    set="bottom-start"
-    title="Sort Plus"
+    set="bottom"
+    title="Sort plus"
     icon="arrow-down-up"
     style="min-width: 400px"
   >
@@ -12,21 +12,6 @@
       hide-header
       primary-key="field"
     />
-    <template #footer>
-      <b-button
-        color="secondary"
-        data-dismiss="modal"
-      >
-        Close
-      </b-button>
-      <b-button
-        color="primary"
-        data-dismiss="modal"
-        @click.native="done"
-      >
-        Done
-      </b-button>
-    </template>
   </b-popover>
 </template>
 
@@ -34,15 +19,12 @@
 import util from "@/components/util/index.js";
 import config from "@/config/index.js";
 
-import BModal from "@/components/base/Modal/b-modal.vue";
-
-import BButton from "@/components/basic/Button/basic-button.vue";
 import BDataSort from '@/components/content/Data/b-data-sort.vue'
 import BPopover from '@/components/base/Popover/b-popover.vue'
 
 export default {
   name: 'GridSort',
-  components: { BModal, BButton, BDataSort, BPopover },
+  components: { BDataSort, BPopover },
   model: {
     prop: 'sort',
     event: 'sort:changed'
