@@ -19,14 +19,22 @@
                 color="secondary"
                 size="sm"
               >
-                <i :class="icon.search" />
+                <basic-icon icon="search" />
               </b-button>
               <b-button
                 v-tip="'Search Plus'"
                 color="secondary"
                 size="sm"
               >
-                <i :class="icon.searchPlus" />
+                <basic-icon icon="patch-plus" />
+              </b-button>
+              <b-button
+                id="Properties"
+                v-tip="'Properties'"
+                color="secondary"
+                size="sm"
+              >
+                <basic-icon icon="list-ul" />
               </b-button>
               <b-button
                 id="SortPopover"
@@ -35,7 +43,7 @@
                 size="sm"
                 :active="sortActive"
               >
-                <i :class="icon.sort" />
+                <basic-icon icon="arrow-down-up" />
               </b-button>
               <b-button
                 v-tip="'Reset'"
@@ -43,7 +51,7 @@
                 size="sm"
                 @click="reset"
               >
-                <i :class="icon.sync" />
+                <basic-icon icon="arrow-clockwise" />
               </b-button>
               <grid-print :data="list" :columns="lastcolumns" :title="'printTitle'" />
             </b-button-group>
@@ -53,7 +61,8 @@
         </div>
       </div>
       <!-- tableContainer -->
-      <grid-sort id="sortmodal" :column="lastcolumns" v-model="dataSort" />
+      <grid-properties :head="head" />
+      <grid-sort :column="lastcolumns" v-model="dataSort" />
       <div
         id="printWrap"
         class="border row m-0"
@@ -125,7 +134,6 @@
 <script>
 
 import tools from "@/tools/index.js";
-import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 import BTable from "@/components/content/Table/b-table.vue";
@@ -135,12 +143,14 @@ import BTableOperate from '@/components/content/Table/container/b-table-operate.
 import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
 import BButtonToolbar from "@/components/base/ButtonGroup/b-btn-toolbar.vue";
 import BButton from "@/components/basic/Button/basic-button.vue";
+import BasicIcon from "@/components/basic/basic-icon.vue"
 
 import GridSort from './tools/grid-sort'
 import GridPrint from './tools/grid-print'
 import GridExport from './tools/grid-export'
 import GridHelper from './Basic/grid-helper'
 import GridPagination from './Basic/grid-pagination'
+import GridProperties from "./tools/Properties/grid-properties"
 
 import BaseIcon from "@/components/basic/basic-icon.vue"
 import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
@@ -152,12 +162,14 @@ export default {
     BTableSerial,
     BTableOperate,
     BButton,
+    BasicIcon,
     BButtonGroup,
     BButtonToolbar,
     GridSort,
     GridPrint,
     GridExport,
     GridHelper,
+    GridProperties,
     GridPagination,
     BaseIcon,
     BCheckbox,
@@ -188,9 +200,6 @@ export default {
     };
   },
   computed: {
-    icon: function() {
-      return config.ui.icon;
-    },
     data: function() {
       return this.list.slice(this.paginate.start, this.paginate.end);
     },

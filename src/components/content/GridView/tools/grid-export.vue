@@ -11,8 +11,8 @@
           color="secondary"
           size="sm"
         >
-          <i :class="icon.fileExport" />
-          <i :class="icon.caretDown" class="pl-1" />
+          <basic-icon icon="file-earmark" />
+          <basic-icon icon="caret-down-fill" class="pl-1" />
         </b-button>
       </template>
     </b-dropdown>
@@ -23,12 +23,13 @@ import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
+import BasicIcon from "@/components/basic/basic-icon.vue"
 import BButton from "@/components/basic/Button/basic-button.vue";
 import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
 
 export default {
   name: 'GridExport',
-  components: { BButton, BDropdown, },
+  components: { BasicIcon, BButton, BDropdown, },
   props: {
     data: util.props.Array,
   },

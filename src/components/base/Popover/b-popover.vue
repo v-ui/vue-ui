@@ -4,6 +4,7 @@
       ref="popover"
       class="popover fade"
       :class="objClass"
+      :style="objStyle"
       role="tooltip"
       style="position: absolute; will-change: transform;"
     >
@@ -63,10 +64,11 @@ export default {
   },
   computed: {
     objClass: function() {
-      let c = "";
-      if (this.show) c += " show ";
-      return c;
-    }
+      return this.show ? 'show' : ''
+    },
+    objStyle: function() {
+      return this.show ? '' : 'z-index: 0'
+    },
   },
   watch: {
     for: function() {

@@ -6,7 +6,7 @@
 
     @click="print(opts)"
   >
-    <i :class="icon.print" />
+    <basic-icon icon="printer" />
   </b-button>
 </template>
 
@@ -14,10 +14,11 @@
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
+import BasicIcon from "@/components/basic/basic-icon.vue"
 import BButton from "@/components/basic/Button/basic-button.vue";
 export default {
   name: 'GridPrint',
-  components: { BButton, },
+  components: { BasicIcon, BButton, },
   mixins: [ util.mixins.print.print, ],
   props: {
     data: util.props.Array,

@@ -24,35 +24,37 @@
         </button>
       </div>
       <b-collapse id="collapse" class="row align-items-center mx-3">
-        <div class="row align-items-start m-1">
-          <font class="col-1">填充：</font>
-          <b-radio-group class="col" :list="[ 'all', 'fill', 'half' ]" name="fill" v-model="radioFill" inline />
-        </div>
-        <div class="row align-items-start m-1">
-          <font class="col-1">方向：</font>
-          <b-checkbox-group class="col" :list="[ 'up', 'right', 'down', 'left', 'start', 'center', 'middle', 'end', 'clockwise' ]" name="type" v-model="checkTypes" inline />
-        </div>
-        <div class="row align-items-start m-1">
-          <font class="col-1">样式：</font>
-          <b-radio-group class="col" :list="[ 'all', 'triangle', 'square', 'journal', 'diamond', 'octagon', 'bookmark', 'bag', 'circle', 'shield', 'cloud', 'patch', ]" name="style" v-model="radioStyle" inline />
-        </div>
-        <div class="row align-items-start m-1">
-          <font class="col-1">种类：</font>
-          <b-radio-group
-            v-model="radioType"
-            class="col"
-            :list="[ 'all',
-                    'arrow', 'badge', 'box', 'calendar', 'card', 'chat', 'chevron', 'dice', 'suit', 'emoji',
-                    'file', 'folder',
-                    'gear', 'text', 'type',
-                    'grid', 'table', 'collection', 'list',
-                    'layout', 'justify', 'align', 'sort', 'filter' ]"
-            name="kind"
-            inline />
-        </div>
-        <div class="row align-items-center m-1">
-          <b-info class="m-1" info="以上选项均为包含全部选项" />
-          <button class="btn btn-link" @click="clear" >清除选择</button>
+        <div class="card card-body">
+          <div class="row align-items-start m-1">
+            <font class="col-1">填充：</font>
+            <b-radio-group class="col" :list="[ 'all', 'fill', 'half' ]" name="fill" v-model="radioFill" inline />
+          </div>
+          <div class="row align-items-start m-1">
+            <font class="col-1">方向：</font>
+            <b-checkbox-group class="col" :list="[ 'up', 'right', 'down', 'left', 'start', 'center', 'middle', 'end', 'clockwise' ]" name="type" v-model="checkTypes" inline />
+          </div>
+          <div class="row align-items-start m-1">
+            <font class="col-1">样式：</font>
+            <b-radio-group class="col" :list="[ 'all', 'triangle', 'square', 'journal', 'diamond', 'octagon', 'bookmark', 'bag', 'circle', 'shield', 'cloud', 'patch', ]" name="style" v-model="radioStyle" inline />
+          </div>
+          <div class="row align-items-start m-1">
+            <font class="col-1">种类：</font>
+            <b-radio-group
+              v-model="radioType"
+              class="col"
+              :list="[ 'all',
+                      'arrow', 'badge', 'box', 'calendar', 'card', 'chat', 'chevron', 'dice', 'suit', 'emoji',
+                      'file', 'folder',
+                      'gear', 'text', 'type',
+                      'grid', 'table', 'collection', 'list',
+                      'layout', 'justify', 'align', 'sort', 'filter' ]"
+              name="kind"
+              inline />
+          </div>
+          <div class="row align-items-center m-1">
+            <b-info class="m-1" info="以上选项均为包含全部选项" />
+            <button class="btn btn-link" @click="clear" >清除选择</button>
+          </div>
         </div>
       </b-collapse>
       <p class="mb-3">共 {{ searchIcons.length }} 个</p>

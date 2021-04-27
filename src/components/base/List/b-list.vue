@@ -10,18 +10,19 @@
     @end="status = false"
   >
     <transition-group type="transition" :name="!status ? 'flip-list' : null">
+      <slot v-if="$slots.default" />
       <list-items
         v-for="(item, index) in dataList"
+        v-else
         :key="'item' + index"
         :class="{'flex-fill': fill}"
         :drop="drop"
+        :hide-hanlder="hideHanlder"
         :label="item.label"
         :href="item.href"
         :color="item.color || color"
         :sr-msg="item.srMsg"
         :disabled="disabled || item.disabled"
-        :active="select ? select == item.value || select == item.label : item.active"
-        @click.native="$emit('click', item.value || item.label)"
       >
         <slot name="item" :item="item" />
       </list-items>
@@ -38,10 +39,6 @@ import listItems from "./b-list-item";
 export default {
   name: "BList",
   components: { draggable, listItems },
-  model: {
-    prop: "select",
-    event: "click"
-  },
   props: {
     list: util.props.Array,
     color: {
@@ -49,7 +46,7 @@ export default {
       default: "white"
     },
     drop: util.props.Boolean,
-    select: util.props.String,
+    hideHanlder: util.props.Boolean,
     disabled: util.props.Boolean,
     flush: util.props.Boolean,
     inline: util.props.Boolean,
@@ -60,12 +57,17 @@ export default {
       dragOptions: {
         animation: 200,
         group: "description",
-        disabled: !this.drop,
+        disabled: !this.drop && this.disabled,
         ghostClass: "ghost"
       },
       dataList: this.list,
       status: false,
     }
+  },
+  watch: {
+    dataList: function(value) {
+      this.$emit('drop:changed', value)
+    },
   },
 };
 </script>

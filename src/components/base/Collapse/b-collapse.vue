@@ -1,10 +1,6 @@
 <template>
-  <div
-    class="collapse"
-  >
-    <div class="card card-body">
-      <slot />
-    </div>
+  <div class="collapse">
+    <slot />
   </div>
 </template>
 

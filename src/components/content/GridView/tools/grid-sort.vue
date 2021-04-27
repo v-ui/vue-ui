@@ -17,7 +17,6 @@
 
 <script>
 import util from "@/components/util/index.js";
-import config from "@/config/index.js";
 
 import BDataSort from '@/components/content/Data/b-data-sort.vue'
 import BPopover from '@/components/base/Popover/b-popover.vue'
@@ -37,11 +36,6 @@ export default {
     return {
       dataSort: this.sort,
     }
-  },
-  computed: {
-    icon: function() {
-      return config.ui.icon;
-    },
   },
   watch: {
     sort: {
