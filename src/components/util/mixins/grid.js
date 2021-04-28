@@ -110,41 +110,32 @@ const thead = {
   }
 } // thead
 
-import config from '@/config/index.js'
 const operate = {
   props: {
     operate: props.Object,
   },
   computed: {
-    dataOperate: function() {
-      if (this.isActive || !this.operate) return {};
-      let index = this.operate.index >= 0
-          ? this.operate.index
-          : this.head.length;
-      let value = this.operate.value &&
-        this.operate.value.filter &&
-        this.operate.value.filter(e => config.ui.table.operate[e].permissions(this.status)) ||
-        []
-      let colStyle = `width: ${
-          2 * value.length < 5
-            ? 5
-            : 2.3 * value.length + 1
-        }em;`
-      let colClass = "text-center"
-      let n = Math.min(...this.head.map((e, index) => e.children ? index : Infinity))
-      if (index > n) index = n;
-      return { index: index, value: value, colStyle: colStyle, colClass: colClass };
-    },
     dataHead: function() {
       let arr = Array.from(this.head || []);
       if (
         !this.isActive &&
-        this.dataOperate &&
-        this.dataOperate.index >= 0 &&
-        this.dataOperate.value &&
-        this.dataOperate.value.length > 0
+        this.operate &&
+        this.operate.index >= 0 &&
+        this.operate.value &&
+        this.operate.value.length > 0
       ) {
-        arr.splice(this.dataOperate.index, 0, { field: '_operate', label: 'Operate', canNotSort: true, ...this.dataOperate });
+        let index = this.operate.index >= 0
+          ? this.operate.index
+          : this.head.length;
+        let n = Math.min(index, ...this.head.map((e, index) => e.children ? index : Infinity))
+
+        arr.splice(n, 0, {
+          field: '_operate',
+          label: 'Operate',
+          canNotSort: true,
+          colClass: "text-center",
+          colStyle: `width: ${Math.max(5, 2.3 * this.operate.value.length, 2.3 * this.operate.value.length + 1)}em;`,
+        });
       }
       return arr;
     },

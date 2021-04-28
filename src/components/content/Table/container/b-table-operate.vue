@@ -33,10 +33,16 @@ export default {
   },
   computed: {
     oper: function() {
-      return this.operate.map(e => ({
-        type: e,
-        value: config.ui.table.operate[e]
-      }));
+      this.operate.value &&
+        this.operate.value.filter &&
+        this.operate.value.filter(e => config.ui.table.operate[e].permissions(this.status)) ||
+        []
+      return this.operate
+              .filter(e => config.ui.table.operate[e].permissions(this.status))
+              .map(e => ({
+                type: e,
+                value: config.ui.table.operate[e]
+              }));
     }
   }
 }
