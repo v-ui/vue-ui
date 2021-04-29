@@ -9,13 +9,13 @@
     @start="status = true"
     @end="status = false"
   >
-    <transition-group type="transition" :name="!status ? 'flip-list' : null">
+    <transition-group type="transition" :name="!status ? 'flip-list' : null" :class="{ 'd-inline-flex': inline, }">
       <slot v-if="$slots.default" />
       <list-items
         v-for="(item, index) in dataList"
         v-else
         :key="'item' + index"
-        :class="{'flex-fill': fill}"
+        :class="{'flex-fill': fill, 'border-0': borderLess}"
         :drop="drop"
         :hide-hanlder="hideHanlder"
         :label="item.label"
@@ -51,6 +51,7 @@ export default {
     flush: util.props.Boolean,
     inline: util.props.Boolean,
     fill: util.props.Boolean,
+    borderLess: util.props.Boolean,
   },
   data() {
     return {

@@ -33,16 +33,6 @@
     </div>
     <div class="row py-1">
       <font class="col-1">
-        select:
-      </font>
-      <b-list
-        class="col-11"
-        :list="list2"
-        select="label1"
-      />
-    </div>
-    <div class="row py-1">
-      <font class="col-1">
         flush:
       </font>
       <b-list

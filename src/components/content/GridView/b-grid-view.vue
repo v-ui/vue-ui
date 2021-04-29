@@ -61,7 +61,7 @@
         </div>
       </div>
       <!-- tableContainer -->
-      <grid-properties :head="head" />
+      <grid-properties :head="lastcolumns" />
       <grid-sort :column="lastcolumns" v-model="dataSort" />
       <div
         id="printWrap"
@@ -72,7 +72,7 @@
           :multiple="isMultiple"
           v-model="selectedValue"
           :class="fixedNum > 0 ? `col-${fixedSizeNum}` : ''"
-          :head="fixedData.head"
+          :head="fixedHead"
           :list="data"
           :foot="foot"
           :sort="dataSort"
@@ -106,7 +106,7 @@
           ref="activeTable"
           :multiple="isMultiple"
           v-model="selectedValue"
-          :head="activeData.head"
+          :head="activeHead"
           :list="data"
           :foot="foot"
           :sort="dataSort"
@@ -216,16 +216,16 @@ export default {
       else if (this.fixedSize == "lg") return 9;
       else return 12;
     },
-    fixedData: function() {
+    fixedHead: function() {
       let head = this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head
       let serial = { field: "_serial", icon: "hash", colStyle: 'width: 35px;', canNotSort: true, }
       if (!this.hideSerial) head.unshift(serial)
       if (!this.hideCheck) head.splice(this.operate.index || 0, 0, this.check)
-      return { head: head, };
+      return head
     },
-    activeData: function() {
+    activeHead: function() {
       if (this.fixedNum <= 0) return {};
-      return { head: this.head.slice(this.fixedNum), };
+      return this.head.slice(this.fixedNum)
     },
     sortActive: function() {
       return this.dataSort && this.dataSort.length !== 0

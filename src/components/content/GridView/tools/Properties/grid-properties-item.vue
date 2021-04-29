@@ -9,7 +9,7 @@
       <base-icon class="ml-auto h5 handle" icon="list" style="cursor: move" />
     </div>
     <b-collapse :id="'PropertiesCollapse'+item.field" class="border-0 w-100">
-      <grid-properties-list :list="item.children" />
+      <grid-properties-list :list="item.children" class="border-0" />
     </b-collapse>
   </div>
 </template>

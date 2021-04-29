@@ -4,11 +4,9 @@
     set="bottom"
     title="Properties"
     icon="card-checklist"
-    style="min-width: 400px"
+    style="min-width: 400px;"
   >
-    <div class="overflow-auto">
-      <grid-properties-list :list="head" />
-    </div>
+    <grid-properties-list class="d-block" style="max-height: 500px;" :list="head" />
   </b-popover>
 </template>
 

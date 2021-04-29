@@ -1,5 +1,5 @@
 <template>
-  <b-list :list="list" drop hideHanlder>
+  <b-list :list="list" class=" overflow-auto" borderLess drop hideHanlder>
     <template #item="{ item }">
       <grid-properties-item :item="item" />
     </template>
