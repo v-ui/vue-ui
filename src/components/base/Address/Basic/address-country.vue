@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-for="(alpha, index) in alphas" :key="index">
+    <div
+      v-for="(alpha, index) in alphas"
+      :key="index"
+    >
       <h5>{{ alpha.toUpperCase() }}</h5>
       <address-temp
         v-model="selectedValue"
@@ -9,7 +12,7 @@
         :display-name="displayKey"
         @item:click="itemClick"
       >
-        <template #item='{ item }'>
+        <template #item="{ item }">
           <address-item
             :item="item"
             :primary-key="key"
@@ -32,7 +35,7 @@ import util from "@/components/util/index.js";
 import AddressTemp from './address-temp'
 import AddressItem from './address-item'
 export default {
-  name: 'address-country',
+  name: 'AddressCountry',
   components: { AddressTemp, AddressItem, },
   mixins: [ util.mixins.select.select, ],
   data() {

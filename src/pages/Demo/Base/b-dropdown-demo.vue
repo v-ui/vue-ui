@@ -3,9 +3,15 @@
     <h2>b-dropdown-menu</h2>
     <hr>
     <div class="row">
-      <font class="col-2 text-center">list</font>
-      <font class="col-2 text-center">disabled</font>
-      <font class="col-2 text-center">slot:header</font>
+      <font class="col-2 text-center">
+        list
+      </font>
+      <font class="col-2 text-center">
+        disabled
+      </font>
+      <font class="col-2 text-center">
+        slot:header
+      </font>
       <font class="col-2 text-center">
         v-model multiple='false'(default)<br>
         {{ value1 }}
@@ -37,15 +43,15 @@
         </template>
       </b-dropdown-menu>
       <b-dropdown-menu
+        v-model="value1"
         class="col-2"
         :list="list"
-        v-model="value1"
       />
       <b-dropdown-menu
+        v-model="value2"
         class="col-2"
         :list="list"
         multiple
-        v-model="value2"
       />
     </div>
     <h2>b-dropdown</h2>
@@ -237,8 +243,8 @@
         disabled:
       </font>
       <b-dropdown-list
-        class="col-5"
         v-model="value1"
+        class="col-5"
         :list="list"
         disabled
       />
@@ -408,7 +414,10 @@
       </b-dropdown-list>
     </div>
     <h2>b-dropdown-panel</h2>
-    基于 <basic-a href="base-b-grid" text="b-grid" />
+    基于 <basic-a
+      href="base-b-grid"
+      text="b-grid"
+    />
     <hr>
     <h4>基础属性</h4>
     <hr>

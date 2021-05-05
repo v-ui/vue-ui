@@ -1,5 +1,5 @@
 <template>
-  <datalist :id="id" >
+  <datalist :id="id">
     <template v-for="(value, index) in datalist">
       <option
         :key="index"

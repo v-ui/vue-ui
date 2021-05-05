@@ -10,7 +10,12 @@
     :rowspan="cell.rowSpan"
     :aria-rowspan="cell.rowSpan"
   >
-    <slot name="tBodyCell" :cell="cell" :col="col" :value="value" >
+    <slot
+      name="tBodyCell"
+      :cell="cell"
+      :col="col"
+      :value="value"
+    >
       {{ value }}
     </slot>
   </td>

@@ -1,21 +1,29 @@
 <template>
   <div>
     <b-table
+      v-model="selectedValue"
       :head="head"
       :list="data"
       :operate="operate"
-      :rowStyle="rowStyle"
+      :row-style="rowStyle"
       :multiple="isMultiple"
-      v-model="selectedValue"
     >
       <template #body-_serial="{ index }">
         <b-table-serial :index="index" />
       </template>
       <template #head-check>
-        <b-button color='link' class="px-0" @click="headClick" value="反选" />
+        <b-button
+          color="link"
+          class="px-0"
+          value="反选"
+          @click="headClick"
+        />
       </template>
       <template #body-check="{ row }">
-        <b-checkbox :checked="isSelected(row)" @input="input($event, row)" />
+        <b-checkbox
+          :checked="isSelected(row)"
+          @input="input($event, row)"
+        />
       </template>
       <template #body-_operate>
         <b-table-operate :operate="operate.value" />
@@ -38,7 +46,7 @@ import BTableOperate from '@/components/content/Table/container/b-table-operate.
 import BButton from '@/components/basic/Button/basic-button.vue';
 import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
 export default {
-  name: 'b-table-demo',
+  name: 'BTableDemo',
   components: { BTable, BTableSerial, BTableOperate, BButton, BCheckbox },
   mixins: [ util.mixins.select.check ],
   data() {

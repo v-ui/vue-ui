@@ -27,7 +27,7 @@ import util from "@/components/util/index.js";
 import BLoading from "@/components/base/Loading/b-loading.vue";
 
 export default {
-  name: 'grid-helper',
+  name: 'GridHelper',
   components: { BLoading, },
   props: {
     hideData: util.props.Boolean,

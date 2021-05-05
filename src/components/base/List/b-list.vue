@@ -1,15 +1,19 @@
 <template>
   <draggable
+    v-model="dataList"
     class="list-group"
     tag="ul"
-    v-model="dataList"
     v-bind="dragOptions"
     handle=".handle"
     :class="{'list-group-flush': flush, 'list-group-horizontal': inline, }"
     @start="status = true"
     @end="status = false"
   >
-    <transition-group type="transition" :name="!status ? 'flip-list' : null" :class="{ 'd-inline-flex': inline, }">
+    <transition-group
+      type="transition"
+      :name="!status ? 'flip-list' : null"
+      :class="{ 'd-inline-flex': inline, }"
+    >
       <slot v-if="$slots.default" />
       <list-items
         v-for="(item, index) in dataList"
@@ -24,7 +28,10 @@
         :sr-msg="item.srMsg"
         :disabled="disabled || item.disabled"
       >
-        <slot name="item" :item="item" />
+        <slot
+          name="item"
+          :item="item"
+        />
       </list-items>
     </transition-group>
   </draggable>

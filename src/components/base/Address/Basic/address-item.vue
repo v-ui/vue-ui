@@ -18,7 +18,7 @@ import util from "@/components/util/index.js";
 
 import BButton from "@/components/basic/Button/basic-button.vue";
 export default {
-  name: 'address-item',
+  name: 'AddressItem',
   components: { BButton },
   mixins: [ util.mixins.select.selectItem ],
   props: {

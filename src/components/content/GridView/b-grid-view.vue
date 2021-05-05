@@ -53,24 +53,31 @@
               >
                 <basic-icon icon="arrow-clockwise" />
               </b-button>
-              <grid-print :data="list" :columns="lastcolumns" :title="'printTitle'" />
+              <grid-print
+                :data="list"
+                :columns="lastcolumns"
+                :title="'printTitle'"
+              />
             </b-button-group>
-             <!-- export dropdown -->
+            <!-- export dropdown -->
             <grid-export :data="list" />
           </b-button-toolbar>
         </div>
       </div>
       <!-- tableContainer -->
       <grid-properties :head="lastcolumns" />
-      <grid-sort :column="lastcolumns" v-model="dataSort" />
+      <grid-sort
+        v-model="dataSort"
+        :column="lastcolumns"
+      />
       <div
         id="printWrap"
         class="border row m-0"
       >
         <b-table
           ref="fixedTable"
-          :multiple="isMultiple"
           v-model="selectedValue"
+          :multiple="isMultiple"
           :class="fixedNum > 0 ? `col-${fixedSizeNum}` : ''"
           :head="fixedHead"
           :list="data"
@@ -92,20 +99,33 @@
           </template>
           <template #body-_check="{ row }">
             <div class="d-flex justify-content-center">
-              <b-checkbox v-if="selectStatus === enumSelect.select" :checked="isSelected(row)" @input="input($event, row)" />
-              <base-icon v-else-if="selectStatus === enumSelect.check" icon="check-circle-fill" class="text-primary" style="cursor: pointer" @click.native="itemClick(row)" />
+              <b-checkbox
+                v-if="selectStatus === enumSelect.select"
+                :checked="isSelected(row)"
+                @input="input($event, row)"
+              />
+              <base-icon
+                v-else-if="selectStatus === enumSelect.check"
+                icon="check-circle-fill"
+                class="text-primary"
+                style="cursor: pointer"
+                @click.native="itemClick(row)"
+              />
             </div>
           </template>
           <template #body-_operate="{ row }">
-            <b-table-operate :operate="operate.value" @tr:oper="type => oper(type, row)" />
+            <b-table-operate
+              :operate="operate.value"
+              @tr:oper="type => oper(type, row)"
+            />
           </template>
         </b-table>
         <!-- fixedTableContainer -->
         <b-table
           v-if="fixedNum > 0"
           ref="activeTable"
-          :multiple="isMultiple"
           v-model="selectedValue"
+          :multiple="isMultiple"
           :head="activeHead"
           :list="data"
           :foot="foot"
@@ -123,10 +143,18 @@
         />
         <!-- activeTableContainer -->
       </div>
-       <!-- pagination -->
-      <grid-pagination ref="pagination" :dataCount="list.length" v-model="paginate" />
+      <!-- pagination -->
+      <grid-pagination
+        ref="pagination"
+        v-model="paginate"
+        :data-count="list.length"
+      />
     </template>
-    <grid-helper v-else :hide-data="hideData" :loading="loading" />
+    <grid-helper
+      v-else
+      :hide-data="hideData"
+      :loading="loading"
+    />
   </div>
   <!-- gridView -->
 </template>
@@ -156,7 +184,6 @@ import BaseIcon from "@/components/basic/basic-icon.vue"
 import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
 export default {
   name: "BGridView",
-  inheritAttrs: false,
   components: {
     BTable,
     BTableSerial,
@@ -175,6 +202,7 @@ export default {
     BCheckbox,
   },
   mixins: [ util.mixins.grid.select, ],
+  inheritAttrs: false,
   props: {
     list: util.props.Array,
     head: util.props.Array,
@@ -264,9 +292,6 @@ export default {
       return this.activeTable && this.activeTable.$refs.TFoot
     },
   },
-  mounted() {
-    this.init();
-  },
   watch: {
     sort: {
       handler: function(value) {
@@ -274,6 +299,9 @@ export default {
       },
       deep: true,
     },
+  },
+  mounted() {
+    this.init();
   },
   methods: {
     init: async function() {

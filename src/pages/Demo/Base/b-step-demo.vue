@@ -6,19 +6,29 @@
       <font class="col-1">
         default:
       </font>
-      <b-step class="col-10" :list="defaultList" />
+      <b-step
+        class="col-10"
+        :list="defaultList"
+      />
     </div>
     <div class="row py-1">
       <font class="col-1">
         active:
       </font>
-      <b-step class="col-10" :list="list2" />
+      <b-step
+        class="col-10"
+        :list="list2"
+      />
     </div>
     <div class="row py-1">
       <font class="col-1">
         column:
       </font>
-      <b-step class="col-10" column :list="list" />
+      <b-step
+        class="col-10"
+        column
+        :list="list"
+      />
     </div>
     <div class="row py-1">
       <font class="col-1">
@@ -27,15 +37,29 @@
       <font class="col-1">
         sm:
       </font>
-      <b-step class="col-2" column size="sm" :list="list" />
+      <b-step
+        class="col-2"
+        column
+        size="sm"
+        :list="list"
+      />
       <font class="col-1">
         (default):
       </font>
-      <b-step class="col-2" column :list="list" />
+      <b-step
+        class="col-2"
+        column
+        :list="list"
+      />
       <font class="col-1">
         lg:
       </font>
-      <b-step class="col-2" column size="lg" :list="list" />
+      <b-step
+        class="col-2"
+        column
+        size="lg"
+        :list="list"
+      />
     </div>
     <div class="row py-1">
       <font class="col-1">
@@ -46,25 +70,41 @@
           <font class="col-1">
             up:
           </font>
-          <b-step class="col-10" set="up" :list="list" />
+          <b-step
+            class="col-10"
+            set="up"
+            :list="list"
+          />
         </div>
         <div class="row py-1">
           <font class="col-1">
             right(default):
           </font>
-          <b-step class="col-10" set="right" :list="list" />
+          <b-step
+            class="col-10"
+            set="right"
+            :list="list"
+          />
         </div>
         <div class="row py-1">
           <font class="col-1">
             down:
           </font>
-          <b-step class="col-10" set="down" :list="list" />
+          <b-step
+            class="col-10"
+            set="down"
+            :list="list"
+          />
         </div>
         <div class="row py-1">
           <font class="col-1">
             left:
           </font>
-          <b-step class="col-10" set="left" :list="list" />
+          <b-step
+            class="col-10"
+            set="left"
+            :list="list"
+          />
         </div>
       </div>
     </div>

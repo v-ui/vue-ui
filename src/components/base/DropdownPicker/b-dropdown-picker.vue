@@ -37,11 +37,17 @@
               />
             </b-badge>
           </div>
-          <font v-else :class="fontClass">
+          <font
+            v-else
+            :class="fontClass"
+          >
             {{ label && label.length === 0 && multiple ? placeholder : (label || placeholder) }}
           </font>
         </slot>
-        <slot v-if="!hideToggle" name="icon">
+        <slot
+          v-if="!hideToggle"
+          name="icon"
+        >
           <i :class="icon.caretDown" />
         </slot>
       </div>
@@ -55,7 +61,10 @@
         :style="[menuStyle, { 'min-width': '15em', 'max-height': '50em'}]"
         style="z-index: 1090"
       >
-        <div v-if="isShow" class="m-0 y-0">
+        <div
+          v-if="isShow"
+          class="m-0 y-0"
+        >
           <slot />
         </div>
       </div>

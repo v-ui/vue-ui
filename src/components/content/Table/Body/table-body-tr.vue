@@ -11,7 +11,12 @@
       :col="col"
     >
       <template #tBodyCell="{ cell, col, value }">
-        <slot name="tBodyCell" :cell="cell" :col="col" :value="value" />
+        <slot
+          name="tBodyCell"
+          :cell="cell"
+          :col="col"
+          :value="value"
+        />
       </template>
     </table-body-td>
   </tr>

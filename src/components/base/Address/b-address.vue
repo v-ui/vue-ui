@@ -35,7 +35,7 @@ import BCard from '@/components/base/Card/b-card.vue'
 import BNav from '@/components/base/Navigation/Nav/b-nav.vue'
 
 export default {
-  name: 'b-address',
+  name: 'BAddress',
   components: { AddressTemp, AddressCountry, BCard, BNav, },
   mixins: [ util.mixins.address.base, ],
   computed: {

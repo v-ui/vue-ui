@@ -15,7 +15,10 @@
           <slot />
         </div>
       </slot>
-      <div v-if="$slots.footer" class="card-footer">
+      <div
+        v-if="$slots.footer"
+        class="card-footer"
+      >
         <slot name="footer" />
       </div>
     </slot>

@@ -11,7 +11,14 @@
       @dblclick.native="$emit('tr:dblclick', row)"
     >
       <template #tBodyCell="{ cell, col, value }">
-        <slot name="tBodyCell" :row="row" :cell="cell" :col="col" :value="value" :index="index" />
+        <slot
+          name="tBodyCell"
+          :row="row"
+          :cell="cell"
+          :col="col"
+          :value="value"
+          :index="index"
+        />
       </template>
     </table-body-tr>
   </tbody>
@@ -26,15 +33,15 @@ export default {
   name: "TableBody",
   components: { tableBodyTr },
   mixins: [ util.mixins.select.check, ],
-  data() {
-    return {
-      key: 'id',
-    }
-  },
   props: {
     data: util.props.Array,
     columns: util.props.Array,
     rowStyle: util.props.Object,
+  },
+  data() {
+    return {
+      key: 'id',
+    }
   },
 };
 </script>

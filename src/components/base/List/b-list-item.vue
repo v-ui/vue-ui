@@ -9,7 +9,12 @@
   >
     <div class="d-flex align-items-center">
       <slot>{{ label }}</slot>
-      <base-icon v-if="drop" class="ml-auto h5 handle" icon="list" style="cursor: move" />
+      <base-icon
+        v-if="drop"
+        class="ml-auto h5 handle"
+        icon="list"
+        style="cursor: move"
+      />
     </div>
     <sr-msg>{{ srMsg || color }}</sr-msg>
   </base-a>
@@ -21,7 +26,12 @@
   >
     <div class="d-flex align-items-center">
       <slot>{{ label }}</slot>
-      <base-icon v-if="drop && !hideHanlder" class="ml-auto h5 handle m-0" icon="list" style="cursor: move" />
+      <base-icon
+        v-if="drop && !hideHanlder"
+        class="ml-auto h5 handle m-0"
+        icon="list"
+        style="cursor: move"
+      />
     </div>
     <sr-msg>{{ srMsg }}</sr-msg>
   </li>

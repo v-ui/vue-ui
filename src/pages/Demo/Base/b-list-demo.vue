@@ -66,7 +66,10 @@
       <font class="col-1">
         solt:
       </font>
-      <b-list class="col-11" :list="list4">
+      <b-list
+        class="col-11"
+        :list="list4"
+      >
         <template #item="{ item }">
           <div class="d-flex justify-content-between w-100">
             {{ item.label }}

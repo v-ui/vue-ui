@@ -5,7 +5,11 @@
     :aria-disabled="disabled"
     @mousedown.left.exact="barDown"
   >
-    <div v-if="filter" class="filter" :style="filter" />
+    <div
+      v-if="filter"
+      class="filter"
+      :style="filter"
+    />
     <span
       class="thumb"
       :style="thumbStyle"

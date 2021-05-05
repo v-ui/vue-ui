@@ -3,9 +3,19 @@
     <div class="row mx-0 align-items-center">
       <label class="m-0 px-0 pr-1">{{ dataMin }}</label>
       <div class="col">
-        <div class="progress px-0" ref="bar" :style="barStyle">
-          <b-slide-bar class="bg-transparent" :value="pStart" />
-          <b-slide-bar :class="barClass" :value="pEnd" />
+        <div
+          ref="bar"
+          class="progress px-0"
+          :style="barStyle"
+        >
+          <b-slide-bar
+            class="bg-transparent"
+            :value="pStart"
+          />
+          <b-slide-bar
+            :class="barClass"
+            :value="pEnd"
+          />
         </div>
         <b-slide-coltroller
           v-if="!readonly"
@@ -27,7 +37,10 @@
           @mouseenter.native="initPopper('end')"
           @mousedown.native.left.exact.stop.prevent="$event => mouseDown($event, 'end')"
         />
-        <b-tootip :for="refId" :content="refTip" />
+        <b-tootip
+          :for="refId"
+          :content="refTip"
+        />
       </div>
       <label class=" m-0 p-0 pl-1">{{ dataMax }}</label>
     </div>

@@ -1,8 +1,21 @@
 <template>
-  <table class="table table-sm text-center w-100 m-1" :class="border ? 'table-bordered' : 'table-borderless'">
-    <tr v-for="index in rowCount" :key="'tr-'+index">
-      <td v-for="(item, itemIndex) in getList(index)" :key="'td-'+itemIndex" class="p-0">
-        <slot name="item" :item="item">
+  <table
+    class="table table-sm text-center w-100 m-1"
+    :class="border ? 'table-bordered' : 'table-borderless'"
+  >
+    <tr
+      v-for="index in rowCount"
+      :key="'tr-'+index"
+    >
+      <td
+        v-for="(item, itemIndex) in getList(index)"
+        :key="'td-'+itemIndex"
+        class="p-0"
+      >
+        <slot
+          name="item"
+          :item="item"
+        >
           <b-grid-item
             :item="item"
             class="text-center"

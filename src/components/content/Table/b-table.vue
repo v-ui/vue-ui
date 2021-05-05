@@ -21,7 +21,11 @@
           @th:sort="thSort"
         >
           <template #tHeadCell="{ cell, value }">
-            <slot :name="`head-${cell.field}`" :cell="cell" :value="value" />
+            <slot
+              :name="`head-${cell.field}`"
+              :cell="cell"
+              :value="value"
+            />
           </template>
         </table-head>
       </table>
@@ -51,7 +55,14 @@
           @tr:dbclick="row => $emit('tr:dbclick', row)"
         >
           <template #tBodyCell="{ row, cell, col, value, index }">
-            <slot :name="`body-${col.field}`" :row="row" :cell="cell" :col="col" :value="value" :index="index" />
+            <slot
+              :name="`body-${col.field}`"
+              :row="row"
+              :cell="cell"
+              :col="col"
+              :value="value"
+              :index="index"
+            />
           </template>
         </table-body>
       </table>

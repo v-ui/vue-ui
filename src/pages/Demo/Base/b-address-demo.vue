@@ -4,15 +4,30 @@
     <hr>
     type:
     country {{ country }}
-    <b-address type="country" v-model="country" />
+    <b-address
+      v-model="country"
+      type="country"
+    />
     province {{ province }}
-    <b-address type="province" v-model="province" />
+    <b-address
+      v-model="province"
+      type="province"
+    />
     city {{ city }}
-    <b-address type="city" v-model="city" />
+    <b-address
+      v-model="city"
+      type="city"
+    />
     area {{ area }}
-    <b-address type="area" v-model="area" />
+    <b-address
+      v-model="area"
+      type="area"
+    />
     town(default) {{ town }}
-    <b-address type="town" v-model="town" />
+    <b-address
+      v-model="town"
+      type="town"
+    />
   </div>
 </template>
 

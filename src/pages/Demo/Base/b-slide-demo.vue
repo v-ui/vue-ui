@@ -12,19 +12,31 @@
       <font class="col-1">
         start/end:
       </font>
-      <b-slide class="col-10" :value="value" />
+      <b-slide
+        class="col-10"
+        :value="value"
+      />
     </div>
     <div class="row py-1">
       <font class="col-1">
         min/max:
       </font>
-      <b-slide class="col-10" min="-100" max="0" :value="{start: -80, end: -50}" />
+      <b-slide
+        class="col-10"
+        min="-100"
+        max="0"
+        :value="{start: -80, end: -50}"
+      />
     </div>
     <div class="row py-1">
       <font class="col-1">
         step:
       </font>
-      <b-slide class="col-10" :value="value" step="2" />
+      <b-slide
+        class="col-10"
+        :value="value"
+        step="2"
+      />
     </div>
     <div class="row py-1">
       <font class="col-1">
@@ -42,8 +54,8 @@
         {{ `{start: ${value2.start}, end: ${value2.end} }` }}
       </font>
       <b-slide
-        class="col-10"
         v-model="value2"
+        class="col-10"
       />
     </div>
     <div class="row py-1">
@@ -74,7 +86,7 @@
       <b-slide
         class="col-2"
         :value="value"
-        startDisabled
+        start-disabled
       />
       <font class="col-1">
         endDisabled:
@@ -82,7 +94,7 @@
       <b-slide
         class="col-2"
         :value="value"
-        endDiabled
+        end-diabled
       />
     </div>
     <div class="row py-1">

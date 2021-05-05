@@ -22,7 +22,13 @@
         start="1"
         :end="pageCount"
       >
-        <b-number length="5" min="1" :max="pageCount" hide-button v-model.number="pageNumber" />
+        <b-number
+          v-model.number="pageNumber"
+          length="5"
+          min="1"
+          :max="pageCount"
+          hide-button
+        />
         <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
       </b-pagination>
     </font>
@@ -37,7 +43,7 @@ import BSelect from "@/components/form/b-select.vue";
 import BPagination from "@/components/base/Pagination/b-pag";
 
 export default {
-  name: 'grid-pagination',
+  name: 'GridPagination',
   components: { BNumber, BSelect, BPagination, },
   model: {
     prop: 'page',
@@ -56,9 +62,6 @@ export default {
       pageNumber: this.page || 1, // 页码
       pageSize: 25 // 每页条数
     }
-  },
-  mounted() {
-    this.$emit('page:changed', { start: this.start, end: this.start + this.pageSize })
   },
   computed: {
     start: function() {
@@ -86,6 +89,9 @@ export default {
     pageCount: function(value) {
       if (this.pageNumber > value) this.pageNumber = value
     },
+  },
+  mounted() {
+    this.$emit('page:changed', { start: this.start, end: this.start + this.pageSize })
   },
 }
 </script>

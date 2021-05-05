@@ -26,7 +26,10 @@
           :null-value="placeholder"
           :show-null="!searchText && !hideNull"
         >
-          <template #header v-if="search">
+          <template
+            v-if="search"
+            #header
+          >
             <b-text
               v-model="searchText"
               class="cannt-hide"
@@ -36,7 +39,10 @@
             />
           </template>
           <template #item="{ item }">
-            <slot name="item" :item="item" />
+            <slot
+              name="item"
+              :item="item"
+            />
           </template>
         </b-dropdown-menu>
       </slot>

@@ -4,7 +4,7 @@
     table-hover
     thead-sticky
     table-bordered
-    fixedSize="sm"
+    fixed-size="sm"
     fixed="4"
     thead-theme="dark"
     :list="list"

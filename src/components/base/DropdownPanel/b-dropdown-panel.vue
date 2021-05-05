@@ -3,9 +3,8 @@
     <b-dropdown-picker
       ref="dropdownpanel"
       :class="[readonlyClass]"
-      menu-width
       :label="showLabel"
-      :menuWidth="false"
+      :menu-width="false"
       :can-hide="canHide"
       :placeholder="fillPlaceholder"
       :disabled="disabled"

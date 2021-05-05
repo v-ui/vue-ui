@@ -36,7 +36,10 @@
         :disabled="disabled || item.disabled"
         @click.native="itemClick(item)"
       >
-        <slot name="item" :item="item" />
+        <slot
+          name="item"
+          :item="item"
+        />
       </b-dropdown-item>
     </div>
   </div>

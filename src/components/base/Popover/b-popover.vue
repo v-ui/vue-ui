@@ -22,7 +22,11 @@
           name="header"
         >
           <h6 class="m-0 p-0">
-            <basic-label :label="title" :icon="icon" :info="info" />
+            <basic-label
+              :label="title"
+              :icon="icon"
+              :info="info"
+            />
           </h6>
         </slot>
       </div>

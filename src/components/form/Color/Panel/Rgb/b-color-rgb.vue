@@ -1,15 +1,60 @@
 <template>
   <div class="d-flex flex-column align-items-center p-1">
-    <div v-if="!hideInput" class="d-flex align-items-center justify-content-around">
-      R: <b-number v-model="rgb.r" class="mx-1" max="255" size="sm" length="3" hideButton />
-      G: <b-number v-model="rgb.g" class="mx-1" max="255" size="sm" length="3" hideButton />
-      B: <b-number v-model="rgb.b" class="mx-1" max="255" size="sm" length="3" hideButton />
-      A: <b-number v-model="alpha" class="mx-1" max="1" step="0.01" size="sm" length="4" hideButton />
+    <div
+      v-if="!hideInput"
+      class="d-flex align-items-center justify-content-around"
+    >
+      R: <b-number
+        v-model="rgb.r"
+        class="mx-1"
+        max="255"
+        size="sm"
+        length="3"
+        hide-button
+      />
+      G: <b-number
+        v-model="rgb.g"
+        class="mx-1"
+        max="255"
+        size="sm"
+        length="3"
+        hide-button
+      />
+      B: <b-number
+        v-model="rgb.b"
+        class="mx-1"
+        max="255"
+        size="sm"
+        length="3"
+        hide-button
+      />
+      A: <b-number
+        v-model="alpha"
+        class="mx-1"
+        max="1"
+        step="0.01"
+        size="sm"
+        length="4"
+        hide-button
+      />
     </div>
-    <b-color-red-bar class="my-1" v-model="rgb.r" />
-    <b-color-green-bar class="my-1" v-model="rgb.g" />
-    <b-color-blue-bar class="my-1" v-model="rgb.b" />
-    <b-color-alpha-bar class="my-1" :style="{ background: rgbCss }" v-model="alpha" />
+    <b-color-red-bar
+      v-model="rgb.r"
+      class="my-1"
+    />
+    <b-color-green-bar
+      v-model="rgb.g"
+      class="my-1"
+    />
+    <b-color-blue-bar
+      v-model="rgb.b"
+      class="my-1"
+    />
+    <b-color-alpha-bar
+      v-model="alpha"
+      class="my-1"
+      :style="{ background: rgbCss }"
+    />
   </div>
 </template>
 

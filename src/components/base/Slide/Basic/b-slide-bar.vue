@@ -1,5 +1,8 @@
 <template>
-  <div class="round rounded-pill" :style="`width: ${value || 0}%`" />
+  <div
+    class="round rounded-pill"
+    :style="`width: ${value || 0}%`"
+  />
 </template>
 
 <script>

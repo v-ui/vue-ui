@@ -1,11 +1,15 @@
 <template>
-<div>
-  <h2>b-data</h2>
-  <hr>
-  <h2>b-panel-list</h2>
-  <hr>
-  <b-data-sort class="border " :column="column" v-model="sort" />
-  {{ sort }}
+  <div>
+    <h2>b-data</h2>
+    <hr>
+    <h2>b-panel-list</h2>
+    <hr>
+    <b-data-sort
+      v-model="sort"
+      class="border "
+      :column="column"
+    />
+    {{ sort }}
   </div>
 </template>
 

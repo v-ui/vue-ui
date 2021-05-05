@@ -8,7 +8,11 @@
       @cell:sort="$emit('tr:sort', cell)"
     >
       <template #tHeadCell="{ cell, value }">
-        <slot name="tHeadCell" :cell="cell" :value="value" />
+        <slot
+          name="tHeadCell"
+          :cell="cell"
+          :value="value"
+        />
       </template>
     </table-head-th>
   </tr>

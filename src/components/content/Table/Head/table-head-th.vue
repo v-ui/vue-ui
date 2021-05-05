@@ -10,10 +10,21 @@
     @click="cellSort"
   >
     <div class="d-flex justify-content-center align-items-center h-100">
-      <slot name="tHeadCell" :cell="cell" :value="value">
-        <basic-label :label="value" :icon="cell.icon" />
+      <slot
+        name="tHeadCell"
+        :cell="cell"
+        :value="value"
+      >
+        <basic-label
+          :label="value"
+          :icon="cell.icon"
+        />
       </slot>
-      <i v-if="canSort && iconClass" class="mx-1" :class="iconClass" />
+      <i
+        v-if="canSort && iconClass"
+        class="mx-1"
+        :class="iconClass"
+      />
     </div>
   </th>
 </template>

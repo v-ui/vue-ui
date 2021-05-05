@@ -16,7 +16,10 @@
         <slot name="header" />
       </template>
     </date-panel-header>
-    <hr v-show="!$slots.week && !hideHeader" class="my-1">
+    <hr
+      v-show="!$slots.week && !hideHeader"
+      class="my-1"
+    >
     <slot name="week" />
     <slot>
       <b-grid-table
@@ -27,7 +30,10 @@
         :disabled="disabled"
       >
         <template #item="{ item }">
-          <slot name="item" :item="item">
+          <slot
+            name="item"
+            :item="item"
+          >
             <date-panel-item
               :item="item"
               class="w-100"

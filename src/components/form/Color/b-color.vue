@@ -5,9 +5,16 @@
     :disabled="disabled"
   >
     <template #trigger>
-      <b-color-label class="w-100" :color="color" />
+      <b-color-label
+        class="w-100"
+        :color="color"
+      />
     </template>
-    <b-color-picker :mode="mode" :hideInput="hideInput" v-model="color" />
+    <b-color-picker
+      v-model="color"
+      :mode="mode"
+      :hide-input="hideInput"
+    />
   </b-drop-panel>
 </template>
 

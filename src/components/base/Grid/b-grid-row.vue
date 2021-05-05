@@ -1,7 +1,12 @@
 <template>
   <span class="row m-1">
     <template v-for="(item, index) in list">
-      <slot name="item" :item="item" :itemClass="itemClass" :disabled="disabled">
+      <slot
+        name="item"
+        :item="item"
+        :itemClass="itemClass"
+        :disabled="disabled"
+      >
         <b-grid-item
           :key="index"
           :item="item"
