@@ -1,31 +1,24 @@
 <template>
   <tr
-    :class="[row.$class, rowStyle.class && rowStyle.class(row), {'table-active': isSelected }]"
-    :style="[row.$style, rowStyle.style && rowStyle.style(row)]"
-    :aria-selected="isSelected"
+    :class="[rowStyle.class && rowStyle.class(row), {'table-active': isActive }]"
+    :style="[rowStyle.style && rowStyle.style(row)]"
+    :aria-selected="isActive"
   >
-    <table-serial-td
-      :hide-serial="hideSerial"
-      :number="index"
-    />
-    <table-select-td
-      v-model="isSelected"
-      :hide-select="hideSelect || selectStatus != 2"
-    />
-    <template v-for="(col, colIndex) in columns">
-      <table-operate-td
-        v-if="col.$operate >= 0"
-        :key="colIndex"
-        :operate="operate"
-        @tr:oper="type => $emit('tr:oper', {type: type, data: row})"
-      />
-      <table-body-td
-        v-else
-        :key="colIndex"
-        :cell="row[col.field] || '-'"
-        :col="col"
-      />
-    </template>
+    <table-body-td
+      v-for="(col, index) in columns"
+      :key="index"
+      :cell="row[col.field] || ''"
+      :col="col"
+    >
+      <template #tBodyCell="{ cell, col, value }">
+        <slot
+          name="tBodyCell"
+          :cell="cell"
+          :col="col"
+          :value="value"
+        />
+      </template>
+    </table-body-td>
   </tr>
 </template>
 
@@ -33,55 +26,16 @@
 import util from "@/components/util/index.js";
 
 import tableBodyTd from "./table-body-td";
-import tableSerialTd from "./../Td/table-serial-td";
-import tableSelectTd from "./../Td/table-select-td";
-import tableOperateTd from "./../Td/table-operate-td";
-
 export default {
-  name: "TableBodyTr",
-  components: { tableBodyTd, tableSerialTd, tableSelectTd, tableOperateTd },
+  name: 'TableBodyTr',
+  components: { tableBodyTd, },
   props: {
-    primaryKey: util.props.String,
     row: util.props.Object,
-    index: Number,
     columns: util.props.Array,
     rowStyle: util.props.Object,
-    operate: util.props.Array,
-    hideSerial: util.props.Boolean,
-    hideSelect: util.props.Boolean,
-    selectStatus: Number,
-    selectedOptions: [Array, Object]
+    isActive: util.props.Boolean,
   },
-  data() {
-    return {
-      isSelected: this.selected
-    };
-  },
-  computed: {
-    selected: function() {
-      let value = this.row[this.primaryKey].value || this.row[this.primaryKey];
-      if (!this.selectedOptions || this.selectStatus == 0) return false;
-      if (this.selectStatus == 1)
-        return this.selectedOptions[this.primaryKey] == value;
-      else if (this.selectStatus == 2)
-        return (
-          this.selectedOptions.some &&
-          this.selectedOptions.some(
-            e => e[this.primaryKey] && e[this.primaryKey] == value
-          )
-        );
-      else return false;
-    }
-  },
-  watch: {
-    selected: function(value) {
-      this.isSelected = value;
-    },
-    isSelected: function(value) {
-      this.$emit("tr:selected", value);
-    }
-  }
-};
+}
 </script>
 
 <style scoped>

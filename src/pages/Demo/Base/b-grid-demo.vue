@@ -3,9 +3,15 @@
     <h2>b-grid-row</h2>
     <hr>
     <div class="row">
-      <font class="col-2 text-center">list</font>
-      <font class="col-2 text-center">colCount</font>
-      <font class="col-2 text-center">disabled</font>
+      <font class="col-2 text-center">
+        list
+      </font>
+      <font class="col-2 text-center">
+        colCount
+      </font>
+      <font class="col-2 text-center">
+        disabled
+      </font>
       <font class="col-2 text-center">
         v-model multiple='false'(default)<br>
         {{ value1 }}
@@ -21,10 +27,14 @@
         :list="list"
       />
       <div class="col-2">
-        <b-range min="1" max="12" v-model="col" />
+        <b-range
+          v-model="col"
+          min="1"
+          max="12"
+        />
         <b-grid-row
           :list="list"
-          :colCount="col"
+          :col-count="col"
         />
       </div>
       <b-grid-row
@@ -33,24 +43,32 @@
         disabled
       />
       <b-grid-row
+        v-model="value1"
         class="col-2"
         :list="list"
-        v-model="value1"
       />
       <b-grid-row
+        v-model="value2"
         class="col-2"
         :list="list"
         multiple
-        v-model="value2"
       />
     </div>
     <h2>b-grid-table</h2>
     <hr>
     <div class="row">
-      <font class="col-2 text-center">list</font>
-      <font class="col-2 text-center">colCount</font>
-      <font class="col-2 text-center">border</font>
-      <font class="col-2 text-center">disabled</font>
+      <font class="col-2 text-center">
+        list
+      </font>
+      <font class="col-2 text-center">
+        colCount
+      </font>
+      <font class="col-2 text-center">
+        border
+      </font>
+      <font class="col-2 text-center">
+        disabled
+      </font>
       <font class="col-2 text-center">
         v-model multiple='false'(default)<br>
         {{ value1 }}
@@ -66,10 +84,14 @@
         :list="list"
       />
       <div class="col-2">
-        <b-range min="1" max="12" v-model="col" />
+        <b-range
+          v-model="col"
+          min="1"
+          max="12"
+        />
         <b-grid-table
           :list="list"
-          :colCount="col"
+          :col-count="col"
         />
       </div>
       <b-grid-table
@@ -83,15 +105,15 @@
         border
       />
       <b-grid-table
+        v-model="value1"
         class="col-2"
         :list="list"
-        v-model="value1"
       />
       <b-grid-table
+        v-model="value2"
         class="col-2"
         :list="list"
         multiple
-        v-model="value2"
       />
     </div>
   </div>

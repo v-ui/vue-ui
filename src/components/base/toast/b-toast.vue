@@ -15,7 +15,10 @@
       style="font-size: 1.2em"
     >
       <slot name="header">
-        <slot v-if="$slots.icon || showIcon" name="icon">
+        <slot
+          v-if="$slots.icon || showIcon"
+          name="icon"
+        >
           <i
             class="mr-2"
             :class="iconClass"

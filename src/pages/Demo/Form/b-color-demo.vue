@@ -63,19 +63,25 @@
         <font class="col-2">
           hsl:
         </font>
-        <b-color-picker hideInput />
+        <b-color-picker hide-input />
       </div>
       <div class="col-3 row">
         <font class="col-3">
           rgb:
         </font>
-        <b-color-picker mode="rgb" hideInput />
+        <b-color-picker
+          mode="rgb"
+          hide-input
+        />
       </div>
       <div class="col-3 row">
         <font class="col-3">
           cmyk:
         </font>
-        <b-color-picker mode="cmyk" hideInput />
+        <b-color-picker
+          mode="cmyk"
+          hide-input
+        />
       </div>
     </div>
     <h2>b-color</h2>
@@ -135,19 +141,25 @@
         <font class="col-2">
           hsl:
         </font>
-        <b-color hideInput />
+        <b-color hide-input />
       </div>
       <div class="col-3 row">
         <font class="col-3">
           rgb:
         </font>
-        <b-color mode="rgb" hideInput />
+        <b-color
+          mode="rgb"
+          hide-input
+        />
       </div>
       <div class="col-3 row">
         <font class="col-3">
           cmyk:
         </font>
-        <b-color mode="cmyk" hideInput />
+        <b-color
+          mode="cmyk"
+          hide-input
+        />
       </div>
     </div>
   </div>

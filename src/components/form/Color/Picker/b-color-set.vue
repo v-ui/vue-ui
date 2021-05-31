@@ -8,7 +8,8 @@
         color="light"
         :value="item"
         :active="isSelected(item)"
-        @click="selectedValue = item" />
+        @click="selectedValue = item"
+      />
     </div>
   </div>
 </template>

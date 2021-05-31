@@ -1,21 +1,29 @@
 <template>
   <th
     class="text-center align-middle"
-    :rowspan="cell.rowspan"
-    :aria-rowspan="cell.rowspan"
-    :colspan="cell.colspan"
-    :aria-colspan="cell.colspan"
+    :style="style"
+    :rowspan="cell.rowSpan"
+    :aria-rowspan="cell.rowSpan"
+    :colspan="cell.colSpan"
+    :aria-colspan="cell.colSpan"
     :data-field="cell.field"
+    @click="cellSort"
   >
-    <div class="d-flex justify-content-center align-items-center">
-      <font class="px-1">
-        {{ cell.title }}
-      </font>
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <slot
+        name="tHeadCell"
+        :cell="cell"
+        :value="value"
+      >
+        <basic-label
+          :label="value"
+          :icon="cell.icon"
+        />
+      </slot>
       <i
-        v-if="cell.field && !cell.children && sort.includes(cell.field)"
+        v-if="canSort && iconClass"
+        class="mx-1"
         :class="iconClass"
-        style="cursor: pointer"
-        @click="$emit('table:sort', cell)"
       />
     </div>
   </th>
@@ -25,11 +33,12 @@
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
+import BasicLabel from '@/components/basic/basic-label.vue'
 export default {
   name: "TableHeadTh",
+  components: { BasicLabel, },
   props: {
     cell: util.props.Object,
-    sortObj: util.props.Object,
     sort: util.props.Array,
   },
   computed: {
@@ -37,12 +46,31 @@ export default {
       return config.ui.icon;
     },
     iconClass: function() {
-      if (!this.sortObj || !this.sortObj[this.cell.field])
-        return `${this.icon.sort} text-secondary`;
-      if (this.sortObj[this.cell.field] == "asc") return this.icon.sortUp;
-      if (this.sortObj[this.cell.field] == "desc") return this.icon.sortDown;
+      let item = this.sort.find(e => e && (e.value.field || e.value) === this.cell.field)
+      if (!item) return ''
+      if ((item.data.value || item.data) === "asc") return this.icon.sortUp;
+      else if ((item.data.value || item.data) === "desc") return this.icon.sortDown;
       else return "";
-    }
-  }
+    },
+    canSort: function() {
+      // 默认只允许最后一层的 cell 返回 sort 事件
+      // canNotSort 只应用于特殊的 th
+      return !this.cell.colSpan && !this.cell.canNotSort
+    },
+    style: function() {
+      return this.canSort ? 'cursor: pointer' : ''
+    },
+    value: function() {
+      return this.cell.icon
+        ? this.cell.label
+        : this.cell.label || this.cell
+    },
+  },
+  methods: {
+    cellSort: function(cell) {
+      if (!this.canSort) return
+      this.$emit('cell:sort', cell)
+    },
+  },
 };
 </script>

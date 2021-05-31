@@ -9,12 +9,12 @@
         v-if="item.dropdown"
         :key="index"
         :list="item.list"
-        :label="item.label || item.value || item"
+        :label="getDisplay(item)"
       />
       <nav-item
         v-else
         :key="index"
-        :label="item.label || item.value || item"
+        :label="getDisplay(item)"
         :href="item.href"
         :disabled="item.disabled"
         :active="isSelected(item) || item.active"

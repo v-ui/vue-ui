@@ -1,14 +1,20 @@
 <template>
   <span class="row m-1">
     <template v-for="(item, index) in list">
-      <slot name="item" :item="item" :itemClass="itemClass" :disabled="disabled">
+      <slot
+        name="item"
+        :item="item"
+        :itemClass="itemClass"
+        :disabled="disabled"
+      >
         <b-grid-item
           :key="index"
           :item="item"
           class="text-center"
           :class="itemClass"
+          :primary-key="key"
+          :display-name="displayKey"
           :multiple="isMultiple"
-          :primary-key="primaryKey"
           :selected="selectedValue"
           :disabled="item.disabled || disabled"
           @item:click="itemClick"
@@ -39,7 +45,8 @@ export default {
   methods: {
     itemClick: function(item) {
       if (this.isMultiple) {
-        let index = this.selectedValue.findIndex(e => (e && e[this.primaryKey || 'value'] || e) === (item && item[this.primaryKey || 'value'] || item))
+        const value = this.getValue(item)
+        let index = this.selectedMap.indexOf(value)
         index >= 0
           ? this.selectedValue.splice(index, 1)
           : this.selectedValue.push(item)

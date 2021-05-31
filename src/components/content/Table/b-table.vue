@@ -9,55 +9,63 @@
       @scroll="isActive && $emit('table:scroll', $event, 'activeTableHeader')"
     >
       <table
-        class="table table-sm m-0"
+        class="table table-sm table-bordered m-0"
         :class="tableClass"
         style="table-layout: fixed"
       >
         <table-colgroup :colgroup="colgroup" />
         <table-head
-          v-model="theadSelected"
           :head="theadData"
-          :sort="sort"
-          :sort-obj="sortObj"
+          :sort="dataSort"
           :class="theadClass"
-          :thead-row-count="theadRowCount"
-          :hide-serial="hideSerial"
-          :hide-select="hideSelect"
-          :select-status="status"
-          @table:sort="cell => $emit('table:sort', cell)"
-        />
+          @th:sort="thSort"
+        >
+          <template #tHeadCell="{ cell, value }">
+            <slot
+              :name="`head-${cell.field}`"
+              :cell="cell"
+              :value="value"
+            />
+          </template>
+        </table-head>
       </table>
     </div>
     <!-- body -->
     <div
+      v-if="!hideData"
       ref="TBody"
       class="p-0 overflow-auto"
       style="min-height: 98px"
       @scroll="$emit('table:scroll', $event, isActive ? 'activeTableBody' : 'fixedTableBody' )"
     >
-      <template v-if="!hideData">
-        <table
-          class="table m-0"
-          :class="tableClass"
-          style="table-layout: fixed"
+      <table
+        class="table m-0"
+        :class="tableClass"
+        style="table-layout: fixed"
+      >
+        <table-colgroup :colgroup="colgroup" />
+        <table-body
+          v-model="selectedValue"
+          :data="list"
+          :columns="columns"
+          :row-style="rowStyle"
+          :multiple="isMultiple"
+          :primary-key="primaryKey"
+          @tr:click="row => $emit('tr:click', row)"
+          @tr:dbclick="row => $emit('tr:dbclick', row)"
         >
-          <table-colgroup :colgroup="colgroup" />
-          <table-body
-            v-model="selectedOptions"
-            :data="data"
-            :row-style="rowStyle"
-            :columns="fieldcolumns"
-            :primary-key="primaryKey"
-            :operate="operate.value"
-            :hide-serial="hideSerial"
-            :hide-select="hideSelect"
-            :select-status="status"
-            :thead-selected="theadSelected"
-            @tr:click="row => $emit('tr:click', row)"
-            @tr:dbclick="row => $emit('tr:dbclick', row)"
-          />
-        </table>
-      </template>
+          <template #tBodyCell="{ row, cell, col, value, index }">
+            <slot
+              :name="`body-${col.field}`"
+              :row="row"
+              :cell="cell"
+              :col="col"
+              :value="value"
+              :index="index"
+            />
+          </template>
+        </table-body>
+      </table>
     </div>
     <!-- footer -->
     <div
@@ -79,7 +87,6 @@
 </template>
 
 <script>
-import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 import tableColgroup from "./Colgroup/table-colgroup";
@@ -89,17 +96,21 @@ import tableBody from "./Body/table-body";
 export default {
   name: "BTable",
   components: { tableColgroup, tableHead, tableBody },
-  mixins: [util.mixins.grid.thead],
-  model: {
-    prop: "selected",
-    event: "table:selected"
-  },
+  mixins: [
+    util.mixins.grid.col,
+    util.mixins.grid.thead,
+    util.mixins.grid.operate,
+    util.mixins.grid.sort,
+    util.mixins.select.select,
+  ],
   props: {
-    list: util.props.Object,
-    primaryKey: util.props.String,
+    foot: util.props.Array,
+    rowStyle: util.props.Object,
+    primaryKey: {
+      ...util.props.String,
+      default: 'id',
+    },
     isActive: util.props.Boolean,
-    hideSerial: util.props.Boolean,
-    hideSelect: util.props.Boolean,
     // class table
     tableTheme: util.props.theme,
     tableSm: util.props.Boolean,
@@ -109,21 +120,6 @@ export default {
     tableBorderless: util.props.Boolean,
     // class thead
     theadTheme: util.props.theme,
-    selectStatus: {
-      ...util.props.UInt,
-      // 0: 默认, 1: 单选, 2: 多选
-      validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value))
-    },
-    selected: [Array, Object],
-    sortObj: util.props.Object
-  },
-  data() {
-    return {
-      colgroup: [],
-      fieldcolumns: [],
-      theadSelected: false,
-      selectedOptions: this.selected
-    };
   },
   computed: {
     // class table
@@ -140,101 +136,28 @@ export default {
     theadClass: function() {
       return this.theadTheme ? `thead-${this.theadTheme}` : "";
     },
-    status: function() {
-      return isNaN(this.selectStatus) ? 0 : Number(this.selectStatus);
-    },
-    operate: function() {
-      if (this.isActive || this.status == 2 || !this.list || !this.list.operate) return {};
-      let index = this.list.operate.index >= 0
-          ? this.list.operate.index
-          : this.list.head.length;
-      let value = this.list.operate.value &&
-        this.list.operate.value.forEach &&
-        this.list.operate.value.filter(e => config.ui.table.operate[e].permissions(this.status)) ||
-        []
-      let n = Math.min(...this.list.head.map((e, index) => e.children ? index : Infinity))
-      if (index > n) index = n;
-      return { index: index, value: value };
-    },
-    head: function() {
-      let arr = Array.from(this.list && this.list.head || []);
-      if (
-        !this.isActive &&
-        this.status != 2 &&
-        this.operate &&
-        this.operate.index >= 0 &&
-        this.operate.value
-      ) {
-        arr.splice(this.operate.index, 0, { $operate: this.operate.value });
-      }
-      return arr;
-    },
-    data: function() {
-      return this.list && this.list.data || [];
-    },
-    foot: function() {
-      return this.list && this.list.foot || [];
-    },
-    sort: function() {
-      return this.list && this.list.sort || [];
+    dataFoot: function() {
+      return this.foot || [];
     },
     hideHead: function() {
-      return !this.head || this.head.length == 0;
+      return !this.dataHead || this.dataHead.length == 0;
     },
     hideData: function() {
-      return !this.data || this.data.length == 0 || this.hideHead;
+      return !this.list || this.list.length == 0
     },
     hideFoot: function() {
-      return !this.foot || this.foot.length == 0;
+      return !this.dataFoot || this.dataFoot.length == 0;
     },
-    rowStyle: function() {
-      return this.list && this.list.rowStyle || {};
-    }
-  },
-  watch: {
-    selected: function(value) {
-      this.selectedOptions = value;
-    },
-    selectedOptions: function(value) {
-      this.$emit("table:selected", value);
-    }
   },
   async mounted() {
-    await this.InitColgroupAndcolumns();
+    await this.initCol();
     await this.initHead();
   },
   methods: {
-    // head and colgroup
-    InitColgroupAndcolumns: function() {
-      if (this.hideHead) return;
-      (this.colgroup = []), (this.fieldcolumns = []);
-      if (!this.hideSerial)
-        this.colgroup.push({ class: "text-center", style: "width: 58px;" });
-      if (this.status == 2 && !this.hideSelect)
-        this.colgroup.push({ class: "text-center", style: "width: 35px;" });
-
-      let columns = this.getLastColumns();
-      columns.forEach(e => {
-        if (e.$operate) {
-          this.colgroup.push({
-            class: "text-center",
-            style: `width: ${
-              2 * this.operate.value.length < 5
-                ? 5
-                : 1.8 * this.operate.value.length + 1
-            }em;`
-          });
-          this.fieldcolumns.push({ $operate: this.operate.index });
-        } else {
-          this.colgroup.push({ class: e.colClass, style: e.colStyle });
-          this.fieldcolumns.push({
-            field: e.field,
-            format: e.format,
-            cellStyle: e.cellStyle
-          });
-        }
-      });
-    }
+    thSort: function(cell) {
+      this.cellSort(cell)
+      this.$emit('table:sort', this.dataSort)
+    },
   }
 };
 </script>

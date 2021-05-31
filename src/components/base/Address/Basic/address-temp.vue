@@ -1,13 +1,18 @@
 <template>
   <b-grid-row
     :list="list"
-    :primary-key="primaryKey"
+    :primary-key="key"
+    :display-name="displayKey"
   >
     <template #item="{ item }">
-      <slot name="item" :item="item">
+      <slot
+        name="item"
+        :item="item"
+      >
         <address-item
           :item="item"
-          :primary-key="primaryKey"
+          :primary-key="key"
+          :display-name="displayKey"
           :selected="selectedValue"
           :disabled="item.disabled"
           @item:click="itemClick"
@@ -24,7 +29,7 @@ import AddressItem from './address-item'
 import BGridRow from '@/components/base/Grid/b-grid-row.vue'
 
 export default {
-  name: 'address-temp',
+  name: 'AddressTemp',
   components: { AddressItem, BGridRow },
   mixins: [ util.mixins.select.select, ],
   methods: {

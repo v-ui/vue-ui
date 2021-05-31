@@ -4,7 +4,11 @@
     :aria-disabled="disabled"
     @mousedown.left.exact="panelDown"
   >
-    <div v-if="filter" class="filter" :style="filter" />
+    <div
+      v-if="filter"
+      class="filter"
+      :style="filter"
+    />
     <span
       class="cursor"
       :aria-disabled="disabled"

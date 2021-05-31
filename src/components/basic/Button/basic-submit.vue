@@ -6,7 +6,7 @@
     data-toggle="submit"
     :disabled="disabled"
     :aria-disabled="disabled"
-    :value="value | worldUpperCase | firstUpperCase"
+    :value="value"
   >
 </template>
 

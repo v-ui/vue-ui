@@ -72,12 +72,14 @@ export default {
     },
     computed: {
       objClass: function () {
-        return `btn-${this.outline ? 'outline-' : ''}${this.color}
+        let c = `btn-${this.outline ? 'outline-' : ''}${this.color}
                 ${this.textColor ? `text-${this.textColor}` : ''}
                 ${this.size ? `btn-${this.size}` : ''}
                 ${this.block ? 'btn-block' : ''}
                 ${this.active ? 'active' : ''}
                 ${(this.disabled && this.href) ? 'disabled' : ''}`
+        if (this.color === 'link') c += ' text-decoration-none'
+        return c
       },
       fillsrMsg: function () {
         return this.srMsg ? this.color : this.srMsg

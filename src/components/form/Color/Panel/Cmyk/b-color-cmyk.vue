@@ -1,15 +1,62 @@
 <template>
   <div class="d-flex flex-column align-items-center p-1">
-    <div v-if="!hideInput" class="d-flex align-items-center justify-content-around">
-      C: <b-number v-model="cmyk.c" class="mx-1" max="1" step="0.01" size="sm" length="4" hideButton />
-      M: <b-number v-model="cmyk.m" class="mx-1" max="1" step="0.01" size="sm" length="4" hideButton />
-      Y: <b-number v-model="cmyk.y" class="mx-1" max="1" step="0.01" size="sm" length="4" hideButton />
-      K: <b-number v-model="cmyk.k" class="mx-1" max="1" step="0.01" size="sm" length="4" hideButton />
+    <div
+      v-if="!hideInput"
+      class="d-flex align-items-center justify-content-around"
+    >
+      C: <b-number
+        v-model="cmyk.c"
+        class="mx-1"
+        max="1"
+        step="0.01"
+        size="sm"
+        length="4"
+        hide-button
+      />
+      M: <b-number
+        v-model="cmyk.m"
+        class="mx-1"
+        max="1"
+        step="0.01"
+        size="sm"
+        length="4"
+        hide-button
+      />
+      Y: <b-number
+        v-model="cmyk.y"
+        class="mx-1"
+        max="1"
+        step="0.01"
+        size="sm"
+        length="4"
+        hide-button
+      />
+      K: <b-number
+        v-model="cmyk.k"
+        class="mx-1"
+        max="1"
+        step="0.01"
+        size="sm"
+        length="4"
+        hide-button
+      />
     </div>
-    <b-color-cyan-bar class="my-1" v-model="cmyk.c" />
-    <b-color-magenta-bar class="my-1" v-model="cmyk.m" />
-    <b-color-yellow-bar class="my-1" v-model="cmyk.y" />
-    <b-color-key-bar class="my-1" v-model="cmyk.k" />
+    <b-color-cyan-bar
+      v-model="cmyk.c"
+      class="my-1"
+    />
+    <b-color-magenta-bar
+      v-model="cmyk.m"
+      class="my-1"
+    />
+    <b-color-yellow-bar
+      v-model="cmyk.y"
+      class="my-1"
+    />
+    <b-color-key-bar
+      v-model="cmyk.k"
+      class="my-1"
+    />
     <!-- <b-color-alpha-bar class="my-1" :style="{ background: rgbCss }" v-model="alpha" /> -->
   </div>
 </template>

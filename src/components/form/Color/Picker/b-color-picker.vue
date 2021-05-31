@@ -1,19 +1,47 @@
 <template>
   <div style="width: 300px">
     <div class="d-flex align-items-center px-2 py-1">
-      <strong class="text-center w-100" v-if="setting">Set color model</strong>
-      <b-color-label v-else class="w-100" :color="rgba" />
-      <basic-icon v-if="!disabled" :icon="setting ? 'x' : 'gear'" style="cursor:pointer" @click.native="setting = !setting" />
+      <strong
+        v-if="setting"
+        class="text-center w-100"
+      >Set color model</strong>
+      <b-color-label
+        v-else
+        class="w-100"
+        :color="rgba"
+      />
+      <basic-icon
+        v-if="!disabled"
+        :icon="setting ? 'x' : 'gear'"
+        style="cursor:pointer"
+        @click.native="setting = !setting"
+      />
     </div>
     <template v-if="!disabled && selectValue">
       <hr class="my-1">
       <!-- set-panel -->
-      <b-color-set v-if="setting" :list="modes" v-model="selectedMode" />
+      <b-color-set
+        v-if="setting"
+        v-model="selectedMode"
+        :list="modes"
+      />
       <!-- color-panel -->
       <template v-else>
-        <b-color-hsl v-if="selectedMode === 'hsl'" :hideInput="hideInput" v-model="selectValue" />
-        <b-color-rgb v-if="selectedMode === 'rgb'" :hideInput="hideInput" v-model="selectValue" />
-        <b-color-cmyk v-if="selectedMode === 'cmyk'" :hideInput="hideInput" v-model="selectValue" />
+        <b-color-hsl
+          v-if="selectedMode === 'hsl'"
+          v-model="selectValue"
+          :hide-input="hideInput"
+        />
+        <b-color-rgb
+          v-if="selectedMode === 'rgb'"
+          v-model="selectValue"
+          :hide-input="hideInput"
+        />
+        <b-color-cmyk
+          v-if="selectedMode === 'cmyk'"
+          v-model="selectValue"
+          :hide-input="hideInput"
+        />
       </template>
     </template>
   </div>

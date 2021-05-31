@@ -1,7 +1,15 @@
 <template>
-  <i v-if="icon" :class="iconColor ? 'text-' + iconColor : ''">
-    <svg class="svg-icon" focusable="false" role="img" aria-hidden="true">
-      <use :xlink:href="iconName"></use>
+  <i
+    v-if="icon"
+    :class="iconColor ? 'text-' + iconColor : ''"
+  >
+    <svg
+      class="svg-icon"
+      focusable="false"
+      role="img"
+      aria-hidden="true"
+    >
+      <use :xlink:href="iconName" />
     </svg>
   </i>
 </template>

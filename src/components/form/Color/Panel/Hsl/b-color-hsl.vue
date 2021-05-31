@@ -1,17 +1,66 @@
 <template>
   <div class="d-flex flex-column align-items-center p-1">
-    <div v-if="!hideInput" class="d-flex align-items-center justify-content-around">
-      H: <b-number v-model="hsl.h" class="mx-1" max="360" size="sm" length="3" hideButton />
-      S: <b-number v-model="lt.l" class="mx-1" max="1" step="0.01" size="sm" length="4" hideButton />
-      L: <b-number v-model="lt.t" class="mx-1" max="1" step="0.01" size="sm" length="4" hideButton />
-      A: <b-number v-model="alpha" class="mx-1" max="1" step="0.01" size="sm" length="4" hideButton />
+    <div
+      v-if="!hideInput"
+      class="d-flex align-items-center justify-content-around"
+    >
+      H: <b-number
+        v-model="hsl.h"
+        class="mx-1"
+        max="360"
+        size="sm"
+        length="3"
+        hide-button
+      />
+      S: <b-number
+        v-model="lt.l"
+        class="mx-1"
+        max="1"
+        step="0.01"
+        size="sm"
+        length="4"
+        hide-button
+      />
+      L: <b-number
+        v-model="lt.t"
+        class="mx-1"
+        max="1"
+        step="0.01"
+        size="sm"
+        length="4"
+        hide-button
+      />
+      A: <b-number
+        v-model="alpha"
+        class="mx-1"
+        max="1"
+        step="0.01"
+        size="sm"
+        length="4"
+        hide-button
+      />
     </div>
     <div class="d-flex p-1">
-      <b-color-sl-panel class="m-1" :disabled="disabled" :style="{ background: color(hsl.h, 1, .5, 'hsl') }" v-model="lt"/>
-      <b-color-hue-bar class="m-1" :disabled="disabled" status="column" v-model="hsl.h" />
+      <b-color-sl-panel
+        v-model="lt"
+        class="m-1"
+        :disabled="disabled"
+        :style="{ background: color(hsl.h, 1, .5, 'hsl') }"
+      />
+      <b-color-hue-bar
+        v-model="hsl.h"
+        class="m-1"
+        :disabled="disabled"
+        status="column"
+      />
     </div>
     <div class="p-1">
-      <b-color-alpha-bar class="m-1" :disabled="disabled" :style="{ background: rgbCss }" v-model="alpha" />
+      <b-color-alpha-bar
+        v-model="alpha"
+        class="m-1"
+        :disabled="disabled"
+        :style="{ background: rgbCss }"
+      />
     </div>
   </div>
 </template>

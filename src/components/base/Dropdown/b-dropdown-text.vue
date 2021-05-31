@@ -1,5 +1,5 @@
 <template>
-  <span class="dropdown-item-text">
+  <span class="dropdown-item-text px-2">
     <slot>
       <b-label
         :label="text"

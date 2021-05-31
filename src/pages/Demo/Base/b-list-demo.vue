@@ -23,12 +23,12 @@
     </div>
     <div class="row py-1">
       <font class="col-1">
-        select:
+        drop:
       </font>
       <b-list
         class="col-11"
-        :list="list2"
-        select="label1"
+        :list="list"
+        drop
       />
     </div>
     <div class="row py-1">
@@ -66,27 +66,16 @@
       <font class="col-1">
         solt:
       </font>
-      <b-list class="col-11">
-        <b-list-item>
-          no 'd-flex justify-content-between align-items-center 'class
-          <span class="badge badge-primary badge-pill">14</span>
-        </b-list-item>
-        <b-list-item class="d-flex justify-content-between align-items-center">
-          add `d-flex justify-content-between align-items-center` class
-          <span class="badge badge-primary badge-pill">14</span>
-        </b-list-item>
-        <b-list-item>
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">
-              List group item heading
-            </h5>
-            <small>5 days ago</small>
+      <b-list
+        class="col-11"
+        :list="list4"
+      >
+        <template #item="{ item }">
+          <div class="d-flex justify-content-between w-100">
+            {{ item.label }}
+            <span class="badge badge-primary badge-pill">14</span>
           </div>
-          <p class="mb-1">
-            More difficult DOM you can add in
-          </p>
-          <small>More label...</small>
-        </b-list-item>
+        </template>
       </b-list>
     </div>
     <div class="row py-1">
@@ -111,7 +100,6 @@ import variables from '@/components/util/variables.js'
 
 import BList from '@/components/base/List/b-list.vue'
 import BListItem from '@/components/base/List/b-list-item.vue'
-
 export default {
     name: 'BListDemo',
     components: { BList, BListItem, },
@@ -120,17 +108,17 @@ export default {
             colors: variables.base.color.bg,
             list: [
                 {label: 'label1'},
-                {label: 'label2', active: true,},
+                {label: 'label2',  },
                 {label: 'label3', disabled: true,},
                 {label: 'href1', href: "#"},
-                {label: 'href2', href: "#", active: true,},
+                {label: 'href2', href: "#", },
                 {label: 'href3', href: "#", disabled: true,},
             ],
             list2: [
                 {label: 'label1'},
-                {label: 'label2', active: true,},
+                {label: 'label2', },
                 {label: 'href1', href: "#"},
-                {label: 'href2', href: "#", active: true,},
+                {label: 'href2', href: "#", },
             ],
             list3: [
                 {label: 'label1'},

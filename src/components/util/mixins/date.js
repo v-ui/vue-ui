@@ -234,8 +234,6 @@ let year = {
       this.start += this.total;
     },
     checked: function(value) {
-      // TODO: 解决 mixins-select 中遇到 0 的问题，
-      // 待解决后改回： this.year = value
       this.year = value
       this.selectedValue = this.format()
       this.$emit('year:checked', this.selectedValue)
@@ -364,8 +362,6 @@ let month = {
       this.year += 1;
     },
     checked: function(value) {
-      // TODO: 解决 mixins-select 中遇到 0 的问题，
-      // 待解决后改回： this.month = value
       this.month = value
       this.selectedValue = this.format()
       this.$emit('month:checked', this.selectedValue)
@@ -381,9 +377,6 @@ let week = {
     }
   },
   computed: {
-    // total: function() {
-    //   return this.moment([this.year]).weeksInYear()
-    // },
     headerText: function() {
       return this.moment([this.year, this.month]).format(config.ui.date.month)
     },

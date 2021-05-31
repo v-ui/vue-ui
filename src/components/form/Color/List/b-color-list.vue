@@ -2,9 +2,10 @@
   <div class="d-flex align-items-center p-1">
     <b-color-check
       v-for="(item, index) in list"
-      :key="index" :item="item"
+      :key="index"
+      :item="item"
       class="m-1"
-      primaryKey="color"
+      primary-key="color"
       :selected="selected"
       :disabled="disabled"
       :aria-disabled="disabled"

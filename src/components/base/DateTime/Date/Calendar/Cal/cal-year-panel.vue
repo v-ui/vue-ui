@@ -20,7 +20,9 @@
         @date:checked="dateChecked"
       >
         <template #header>
-          <p class="h6 text-primary">{{ moment([year, item.value, 1]).format("MMMM") }}</p>
+          <p class="h6 text-primary">
+            {{ moment([year, item.value, 1]).format("MMMM") }}
+          </p>
         </template>
       </date-date-panel>
     </template>

@@ -1,5 +1,5 @@
 <template>
-  <th
+  <div
     class="d-print-none align-middle text-center mx-1"
     data-type="operate"
   >
@@ -15,14 +15,14 @@
         <i :class="item.value.icon" />
       </span>
     </slot>
-  </th>
+  </div>
 </template>
 
 <script>
 import config from "@/config/index.js";
 
 export default {
-  name: "TableOperateTd",
+  name: 'BTableOperate',
   props: {
     operate: {
       type: Array,
@@ -33,11 +33,17 @@ export default {
   },
   computed: {
     oper: function() {
-      return this.operate.map(e => ({
-        type: e,
-        value: config.ui.table.operate[e]
-      }));
+      this.operate.value &&
+        this.operate.value.filter &&
+        this.operate.value.filter(e => config.ui.table.operate[e].permissions(this.status)) ||
+        []
+      return this.operate
+              .filter(e => config.ui.table.operate[e].permissions(this.status))
+              .map(e => ({
+                type: e,
+                value: config.ui.table.operate[e]
+              }));
     }
   }
-};
+}
 </script>

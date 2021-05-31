@@ -3,9 +3,8 @@
     <b-dropdown-picker
       ref="dropdownpanel"
       :class="[readonlyClass]"
-      menu-width
       :label="showLabel"
-      :menuWidth="false"
+      :menu-width="false"
       :can-hide="canHide"
       :placeholder="fillPlaceholder"
       :disabled="disabled"
@@ -23,9 +22,10 @@
           v-if="type === 'row'"
           v-model="selectedValue"
           :list="list"
-          :primary-key="primaryKey"
-          :multiple="isMultiple"
+          :primary-key="key"
+          :display-name="displayKey"
           :col-count="colCount"
+          :multiple="isMultiple"
         />
         <b-grid-table
           v-else-if="type === 'table'"
@@ -33,10 +33,11 @@
           class="h-100"
           :list="list"
           :border="border"
+          :primary-key="key"
+          :display-name="displayKey"
           :disabled="disabled"
-          :primary-key="primaryKey"
-          :multiple="isMultiple"
           :col-count="colCount"
+          :multiple="isMultiple"
         />
       </slot>
     </b-dropdown-picker>

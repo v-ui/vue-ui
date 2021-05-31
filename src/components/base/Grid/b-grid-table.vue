@@ -1,13 +1,27 @@
 <template>
-  <table class="table table-sm text-center w-100 m-1" :class="border ? 'table-bordered' : 'table-borderless'">
-    <tr v-for="index in rowCount" :key="'tr-'+index">
-      <td v-for="(item, itemIndex) in getList(index)" :key="'td-'+itemIndex" class="p-0">
-        <slot name="item" :item="item">
+  <table
+    class="table table-sm text-center w-100 m-1"
+    :class="border ? 'table-bordered' : 'table-borderless'"
+  >
+    <tr
+      v-for="index in rowCount"
+      :key="'tr-'+index"
+    >
+      <td
+        v-for="(item, itemIndex) in getList(index)"
+        :key="'td-'+itemIndex"
+        class="p-0"
+      >
+        <slot
+          name="item"
+          :item="item"
+        >
           <b-grid-item
             :item="item"
             class="text-center"
             :multiple="isMultiple"
-            :primary-key="primaryKey"
+            :primary-key="key"
+            :display-name="displayKey"
             :selected="selectedValue"
             :disabled="item.disabled || disabled"
             @item:click="itemClick"
@@ -42,7 +56,8 @@ export default {
   methods: {
     itemClick: function(item) {
       if (this.isMultiple) {
-        let index = this.selectedValue.findIndex(e => (e && e[this.primaryKey || 'value'] || e) === (item && item[this.primaryKey || 'value'] || item))
+        const value = this.getValue(item)
+        let index = this.selectedMap.indexOf(value)
         index >= 0
           ? this.selectedValue.splice(index, 1)
           : this.selectedValue.push(item)

@@ -1,6 +1,15 @@
 <template>
-  <i v-if="size !== 'sm'" :class="icon" class="align-self-center m-2" :style="`font-size: ${iconSize}px;`" />
-  <b-badge v-else :color="color" class="align-self-center m-2" />
+  <i
+    v-if="size !== 'sm'"
+    :class="icon"
+    class="align-self-center m-2"
+    :style="`font-size: ${iconSize}px;`"
+  />
+  <b-badge
+    v-else
+    :color="color"
+    class="align-self-center m-2"
+  />
 </template>
 
 <script>

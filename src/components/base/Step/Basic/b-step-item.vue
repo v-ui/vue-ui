@@ -1,7 +1,20 @@
 <template>
-  <div class="d-inline-flex m-2" :class="ObjClass" style="width: 15em;">
-    <b-step-icon :size="size" :color="dataColor" :icon="iconClass" />
-    <b-step-content :color="dataColor" :title="dataTitle" :info="info" :active="active" />
+  <div
+    class="d-inline-flex m-2"
+    :class="ObjClass"
+    style="width: 15em;"
+  >
+    <b-step-icon
+      :size="size"
+      :color="dataColor"
+      :icon="iconClass"
+    />
+    <b-step-content
+      :color="dataColor"
+      :title="dataTitle"
+      :info="info"
+      :active="active"
+    />
   </div>
 </template>
 

@@ -1,5 +1,8 @@
 <template>
-  <li class="nav-item" @click="click">
+  <li
+    class="nav-item"
+    @click="click"
+  >
     <base-a
       class="nav-link text-truncate"
       :class="objClass"

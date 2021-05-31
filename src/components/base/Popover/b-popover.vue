@@ -4,6 +4,7 @@
       ref="popover"
       class="popover fade"
       :class="objClass"
+      :style="objStyle"
       role="tooltip"
       style="position: absolute; will-change: transform;"
     >
@@ -21,7 +22,11 @@
           name="header"
         >
           <h6 class="m-0 p-0">
-            {{ title }}
+            <basic-label
+              :label="title"
+              :icon="icon"
+              :info="info"
+            />
           </h6>
         </slot>
       </div>
@@ -40,10 +45,10 @@ import tools from '@/tools'
 import util from "@/components/util/index.js";
 
 import tranDrop from "@/components/transition/tran-drop.vue"
-
+import BasicLabel from "@/components/basic/basic-label.vue"
 export default {
   name: "BPopover",
-  components: { tranDrop, },
+  components: { tranDrop, BasicLabel, },
   mixins: [ util.mixins.popper.base, ],
   props: {
     for: {
@@ -53,6 +58,8 @@ export default {
     title: util.props.String,
     content: util.props.String,
     set: util.props.popperSet,
+    icon: util.props.String,
+    info: util.props.String,
   },
   data() {
     return {
@@ -61,10 +68,11 @@ export default {
   },
   computed: {
     objClass: function() {
-      let c = "";
-      if (this.show) c += " show ";
-      return c;
-    }
+      return this.show ? 'show' : ''
+    },
+    objStyle: function() {
+      return this.show ? '' : 'z-index: 0'
+    },
   },
   watch: {
     for: function() {

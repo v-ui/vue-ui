@@ -32,7 +32,7 @@
 import util from "@/components/util/index.js";
 
 import BasicSelectOption from "./basic-select-option.vue";
-
+// TODO: util.mixins.select.select 暂缓
 export default {
   name: "BasicSelect",
   components: { BasicSelectOption },

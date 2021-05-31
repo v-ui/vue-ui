@@ -1,14 +1,16 @@
 <template>
-  <div class="border border-dark rounded p-1">
+  <div class="p-1">
     <template v-if="!hideData">
+      <!-- toolbar -->
       <div
         ref="toolbar"
         class="d-flex d-print-none align-items-center justify-content-between"
       >
+        <!-- toolbar left -->
         <div class="m-1 row">
           <slot name="toolbar" />
         </div>
-        <!-- tiilbar left -->
+        <!-- tiilbar right -->
         <div class="m-1 row">
           <b-button-toolbar>
             <b-button-group>
@@ -17,23 +19,31 @@
                 color="secondary"
                 size="sm"
               >
-                <i :class="icon.search" />
+                <basic-icon icon="search" />
               </b-button>
               <b-button
                 v-tip="'Search Plus'"
                 color="secondary"
                 size="sm"
               >
-                <i :class="icon.searchPlus" />
+                <basic-icon icon="patch-plus" />
               </b-button>
               <b-button
-                v-modal="'#sortmodal'"
-                v-tip="'Sort Plus'"
+                id="Properties"
+                v-tip="'Properties'"
                 color="secondary"
                 size="sm"
-                @click="sortPlusObj = Object.create(sortObj)"
               >
-                <i :class="icon.sort" />
+                <basic-icon icon="list-ul" />
+              </b-button>
+              <b-button
+                id="SortPopover"
+                v-tip="'Sort'"
+                color="secondary"
+                size="sm"
+                :active="sortActive"
+              >
+                <basic-icon icon="arrow-down-up" />
               </b-button>
               <b-button
                 v-tip="'Reset'"
@@ -41,361 +51,218 @@
                 size="sm"
                 @click="reset"
               >
-                <i :class="icon.sync" />
+                <basic-icon icon="arrow-clockwise" />
               </b-button>
-              <b-button
-                v-tip="'Print'"
-                color="secondary"
-                size="sm"
-                @click="print"
-              >
-                <i :class="icon.print" />
-              </b-button>
+              <grid-print
+                :data="list"
+                :columns="lastcolumns"
+                :title="'printTitle'"
+              />
             </b-button-group>
-            <b-dropdown
-              :list="downloadList"
-              hide-toggle
-              menu-align="right"
-              @menu-click="item => dataExport(item)"
-            >
-              <template #trigger>
-                <b-button
-                  v-tip="'Export'"
-                  color="secondary"
-                  size="sm"
-                >
-                  <i :class="icon.fileExport" />
-                  <i
-                    :class="icon.caretDown"
-                    class="pl-1"
-                  />
-                </b-button>
-              </template>
-            </b-dropdown>
-            <!-- download dropdown -->
+            <!-- export dropdown -->
+            <grid-export :data="list" />
           </b-button-toolbar>
         </div>
-        <!-- tiilbar right -->
       </div>
-      <!-- toolbar -->
+      <!-- tableContainer -->
+      <grid-properties :head="lastcolumns" />
+      <grid-sort
+        v-model="dataSort"
+        :column="lastcolumns"
+      />
       <div
         id="printWrap"
         class="border row m-0"
       >
         <b-table
           ref="fixedTable"
-          v-model="selectedOptions"
+          v-model="selectedValue"
+          :multiple="isMultiple"
           :class="fixedNum > 0 ? `col-${fixedSizeNum}` : ''"
-          :list="fixedList"
-          :sort-obj="sortObj"
-          :table-theme="tableTheme"
-          :table-sm="tableSm"
-          :table-hover="tableHover"
-          :table-striped="tableStriped"
-          :table-bordered="tableBordered"
-          :table-borderless="tableBorderless"
-          :thead-theme="theadTheme"
+          :head="fixedHead"
+          :list="data"
+          :foot="foot"
+          :sort="dataSort"
+          :operate="!hideCheck ? null : operate"
+          :row-style="rowStyle"
+          v-bind="$attrs"
           :hide-head="hideHead"
           :hide-data="hideData"
           :hide-foot="hideFoot"
           :hide-serial="hideSerial"
-          :select-status="selectStatus"
           :primary-key="primaryKey"
-          @table:sort="cell => tableSort(cell)"
+          @table:sort="tableSort"
           @table:scroll="(event, type) => scroll(event, type)"
-        />
+        >
+          <template #body-_serial="{ index }">
+            <b-table-serial :index="index + paginate.start" />
+          </template>
+          <template #body-_check="{ row }">
+            <div class="d-flex justify-content-center">
+              <b-checkbox
+                v-if="selectStatus === enumSelect.select"
+                :checked="isSelected(row)"
+                @input="input($event, row)"
+              />
+              <base-icon
+                v-else-if="selectStatus === enumSelect.check"
+                icon="check-circle-fill"
+                class="text-primary"
+                style="cursor: pointer"
+                @click.native="itemClick(row)"
+              />
+            </div>
+          </template>
+          <template #body-_operate="{ row }">
+            <b-table-operate
+              :operate="operate.value"
+              @tr:oper="type => oper(type, row)"
+            />
+          </template>
+        </b-table>
         <!-- fixedTableContainer -->
         <b-table
           v-if="fixedNum > 0"
           ref="activeTable"
-          :list="activeList"
+          v-model="selectedValue"
+          :multiple="isMultiple"
+          :head="activeHead"
+          :list="data"
+          :foot="foot"
+          :sort="dataSort"
+          :row-style="rowStyle"
+          v-bind="$attrs"
           is-active
-          hide-serial
-          hide-select
           :class="`col-${12 - fixedSizeNum}`"
-          :sort-obj="sortObj"
-          :table-theme="tableTheme"
-          :table-sm="tableSm"
-          :table-hover="tableHover"
-          :table-striped="tableStriped"
-          :table-bordered="tableBordered"
-          :table-borderless="tableBorderless"
-          :thead-theme="theadTheme"
           :hide-head="hideHead"
           :hide-data="hideData"
           :hide-foot="hideFoot"
-          :selected="selectedOptions"
-          :select-status="selectStatus"
           :primary-key="primaryKey"
-          @table:sort="cell => tableSort(cell)"
+          @table:sort="tableSort"
           @table:scroll="(event, type) => scroll(event, type)"
         />
         <!-- activeTableContainer -->
       </div>
-      <!-- tableContainer -->
-      <div
-        ref="pagination"
-        class="d-flex d-print-none align-items-end justify-content-between py-1"
-      >
-        <!-- <font>共 {{ count }} 条数据，本页 {{ num }} 条，共 {{ pageCount }} 页，第 {{ pageNumber }} 页，每页 {{ pageSize }} 条，跳转至第 {{ pageNumber }} 页</font> -->
-        <font
-          class="d-flex align-items-center"
-          style="min-width: 550px"
-        >
-          {{ dataSize }} /
-          {{ dataCount }} 条&nbsp;&nbsp;
-          {{ pageNumber }} /
-          {{ pageCount }} 页&nbsp;&nbsp;
-          每页
-          <b-select
-            v-model="pageSize"
-            class="d-inline-block mx-1"
-            :list="pageSizeList"
-            size="sm"
-            hide-null
-          />条&nbsp;&nbsp;
-          <b-pagination
-            v-model.number="pageNumber"
-            start="1"
-            :end="pageCount"
-          >
-            <b-number length="5" min="1" :max="pageCount" hide-button v-model.number="pageNumber" />
-            <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
-          </b-pagination>
-        </font>
-      </div>
       <!-- pagination -->
+      <grid-pagination
+        ref="pagination"
+        v-model="paginate"
+        :data-count="list.length"
+      />
     </template>
-    <div
+    <grid-helper
       v-else
-      class="d-block d-print-none text-center h-100 align-items-center justify-content-center"
-    >
-      <template v-if="hideData">
-        <p class="display-4">
-          No Related Data
-        </p>
-        <small class="text-secondary">
-          <i
-            class="text-primary px-1"
-            :class="icon.info"
-          />No related data found or Data format error
-        </small>
-      </template>
-      <template v-else-if="loading">
-        <b-loading color="primary" />
-        <p class="display-4">
-          Loading...
-        </p>
-      </template>
-    </div>
-    <b-modal
-      id="sortmodal"
-      title="Sort Plus"
-      :icon="icon.sort"
-    >
-      <template>
-        <div
-          v-for="item in sort"
-          :key="item"
-          class="row my-1"
-        >
-          <font class="col-3">
-            {{ lastcolumns.filter(e => e.field == item)[0].title || item }}:
-          </font>
-          <div class="col-9">
-            <b-select
-              :list="['asc', 'desc']"
-              size="sm"
-              :value="sortPlusObj[item]"
-              @change="sortPlusChanged($event, item)"
-            />
-          </div>
-        </div>
-      </template>
-      <template #footer>
-        <b-button
-          color="secondary"
-          data-dismiss="modal"
-        >
-          Close
-        </b-button>
-        <b-button
-          color="primary"
-          data-dismiss="modal"
-          @click="clearSort"
-        >
-          Clear Sort
-        </b-button>
-        <b-button
-          color="primary"
-          data-dismiss="modal"
-          @click="sortPlus"
-        >
-          Sort
-        </b-button>
-      </template>
-    </b-modal>
+      :hide-data="hideData"
+      :loading="loading"
+    />
   </div>
   <!-- gridView -->
 </template>
 
 <script>
-// 参考： https://printjs.crabbly.com/
-import printJS from "print-js";
 
 import tools from "@/tools/index.js";
-import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 import BTable from "@/components/content/Table/b-table.vue";
+import BTableSerial from '@/components/content/Table/container/b-table-serial.vue'
+import BTableOperate from '@/components/content/Table/container/b-table-operate.vue'
 
-import BButton from "@/components/basic/Button/basic-button.vue";
 import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
 import BButtonToolbar from "@/components/base/ButtonGroup/b-btn-toolbar.vue";
-import BDropdown from "@/components/base/Dropdown/b-dropdown.vue";
+import BButton from "@/components/basic/Button/basic-button.vue";
+import BasicIcon from "@/components/basic/basic-icon.vue"
 
-import BNumber from "@/components/form/b-number.vue";
-import BSelect from "@/components/form/b-select.vue";
-import BPagination from "@/components/base/Pagination/b-pag";
+import GridSort from './tools/grid-sort'
+import GridPrint from './tools/grid-print'
+import GridExport from './tools/grid-export'
+import GridHelper from './Basic/grid-helper'
+import GridPagination from './Basic/grid-pagination'
+import GridProperties from "./tools/Properties/grid-properties"
 
-import BModal from "@/components/base/Modal/b-modal.vue";
-
-import BLoading from "@/components/base/Loading/b-loading.vue";
-
+import BaseIcon from "@/components/basic/basic-icon.vue"
+import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
 export default {
   name: "BGridView",
   components: {
     BTable,
+    BTableSerial,
+    BTableOperate,
     BButton,
+    BasicIcon,
     BButtonGroup,
     BButtonToolbar,
-    BDropdown,
-    BNumber,
-    BSelect,
-    BPagination,
-    BLoading,
-    BModal
+    GridSort,
+    GridPrint,
+    GridExport,
+    GridHelper,
+    GridProperties,
+    GridPagination,
+    BaseIcon,
+    BCheckbox,
   },
+  mixins: [ util.mixins.grid.select, ],
+  inheritAttrs: false,
   props: {
-    list: util.props.Object,
+    list: util.props.Array,
+    head: util.props.Array,
+    foot: util.props.Array,
+    sort: util.props.Array,
+    operate: util.props.Object,
+    rowStyle: util.props.Object,
     primaryKey: {
       ...util.props.String,
       default: "id",
     },
     fixed: util.props.UInt,
     fixedSize: util.props.size,
-    tableTheme: util.props.theme,
-    tableSm: util.props.Boolean,
-    tableHover: util.props.Boolean,
-    tableStriped: util.props.Boolean,
-    tableBordered: util.props.Boolean,
-    tableBorderless: util.props.Boolean,
-    theadTheme: util.props.theme,
-    theadSticky: util.props.Boolean,
     hideSerial: util.props.Boolean,
-    selectStatus: {
-      ...util.props.UInt,
-      validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value))
-    },// 0: 默认, 1: 单选, 2: 多选
-    selected: [Array, Object],
     printTitle: util.props.String
   },
   data() {
     return {
       loading: false, // 未使用
-      selectedOptions: this.selected,
-      downloadList: [
-        { value: "XML", type: "xml" },
-        { value: "CSV", type: "csv" },
-        { value: "TXT", type: "txt" },
-        // { value: 'SQL', type: 'sql', },
-        // { value: 'PDF', type: 'pdf', },
-        { value: "JSON", type: "json" }
-        // { value: 'MS-EXCEL', type: 'ms-excel', },
-      ],
-      sortObj: {},
-      sortPlusObj: {},
-      pageSizeList: [10, 25, 50, 75, 100],
-      pageNumber: 1, // 页码
-      pageSize: 25 // 每页条数
+      // pagination
+      paginate: 1,
+      dataSort: this.sort,
     };
   },
   computed: {
-    icon: function() {
-      return config.ui.icon;
-    },
-    head: function() {
-      return this.list && this.list.head || [];
-    },
-    sort: function() {
-      return this.list && this.list.sort || [];
-    },
     data: function() {
-      return this.list && this.list.data || [];
-    },
-    fillData: function() {
-      return this.data.slice(
-        this.pageSize * (this.pageNumber - 1),
-        this.pageSize * this.pageNumber
-      );
-    },
-    foot: function() {
-      return this.list && this.list.foot || [];
-    },
-    dataCount: function() {
-      // 总条数
-      return this.data.length;
-    },
-    pageCount: function() {
-      // 总页数
-      return Number.parseInt(this.dataCount / this.pageSize) +
-        this.dataCount % this.pageSize == 0 ? 0 : 1
-    },
-    dataSize: function() {
-      // 本页条数
-      return this.fillData.length;
-    },
-    rowStyle: function() {
-      return this.list && this.list.rowStyle || {};
+      return this.list.slice(this.paginate.start, this.paginate.end);
     },
     lastcolumns: function() {
-      return this.getLastColumns();
+      return this.getLastColumns(this.head);
     },
     fixedNum: function() {
       return Number(this.fixed);
     },
     fixedSizeNum: function() {
-      if (this.fixedNum <= 0) return 12;
+      if (this.fixedNum <= 0 || this.fixedNum > this.head.length) return 12;
       if (this.fixedSize == "sm") return 4;
       else if (this.fixedSize == "") return 6;
       else if (this.fixedSize == "lg") return 9;
       else return 12;
     },
-    fixedList: function() {
-      return {
-        head: this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head,
-        operate: this.list.operate,
-        sort: this.sort,
-        data: this.fillData,
-        foot: this.foot,
-        rowStyle: this.rowStyle
-      };
+    fixedHead: function() {
+      let head = this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head
+      let serial = { field: "_serial", icon: "hash", colStyle: 'width: 35px;', canNotSort: true, }
+      if (!this.hideSerial) head.unshift(serial)
+      if (!this.hideCheck) head.splice(this.operate.index || 0, 0, this.check)
+      return head
     },
-    activeList: function() {
+    activeHead: function() {
       if (this.fixedNum <= 0) return {};
-      return {
-        head: this.head.slice(this.fixedNum),
-        sort: this.sort,
-        data: this.fillData,
-        foot: this.foot,
-        rowStyle: this.rowStyle
-      };
+      return this.head.slice(this.fixedNum)
+    },
+    sortActive: function() {
+      return this.dataSort && this.dataSort.length !== 0
     },
     hideHead: function() {
       return !this.head || this.head.length == 0;
     },
     hideData: function() {
-      return !this.data || this.data.length == 0 || this.hideHead;
+      return this.loading || this.hideHead || !this.data || this.data.length == 0
     },
     hideFoot: function() {
       return !this.foot || this.foot.length == 0;
@@ -425,13 +292,16 @@ export default {
       return this.activeTable && this.activeTable.$refs.TFoot
     },
   },
+  watch: {
+    sort: {
+      handler: function(value) {
+        this.dataSort = value
+      },
+      deep: true,
+    },
+  },
   mounted() {
     this.init();
-  },
-  watch: {
-    pageCount: function(value) {
-      if(this.pageNumber > value) this.pageNumber = this.pageCount
-    },
   },
   methods: {
     init: async function() {
@@ -465,7 +335,7 @@ export default {
       let ToolbarHeight = this.$refs.toolbar ? this.$refs.toolbar.offsetHeight : 0;
       let THeadHeight = this.$refs.fixedTable.$refs.THead ? this.$refs.fixedTable.$refs.THead.offsetHeight : 0;
       let TFootHeight = this.$refs.fixedTable.$refs.TFoot ? this.$refs.fixedTable.$refs.TFoot.offsetHeight : 0;
-      let PaginationHeight = this.$refs.pagination ? this.$refs.pagination.offsetHeight : 0;
+      let PaginationHeight = this.$refs.pagination ? this.$refs.pagination.$el.offsetHeight : 0;
       let TBodyHeight = this.$parent.$el.offsetHeight - ToolbarHeight - THeadHeight - TFootHeight - PaginationHeight - 10;
 
       if (this.fixedTableTBody) this.fixedTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + "px";
@@ -544,81 +414,31 @@ export default {
     },
     getLastColumns: function(head = this.head) {
       let arr = [];
-      head.forEach(e => e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e));
+      head.forEach(e =>
+        e.children
+          ? arr.push(...this.getLastColumns(e.children))
+          : e.field[0] !== '_' ? arr.push(e) : null
+      );
       return arr;
     },
-    dataExport: function(item) {
-      if (!item || !item.type) return;
-      switch (item.type) {
-        case "xml":
-          tools.file.xml.writer(this.data);
-          break;
-        case "csv":
-          tools.file.csv.writer(this.data);
-          break;
-        case "txt":
-          tools.file.txt.writer(this.data);
-          break;
-        // case 'sql':
-
-        //     break;
-        // case 'pdf':
-
-        //     break;
-        case "json":
-          tools.file.json.writer(this.data);
-          break;
-        case "ms-excel":
-          tools.file.excel.writer(this.data);
-          break;
-        default:
-          break;
-      }
-      return false;
+    tableSort: function(sort) {
+      this.dataSort = sort
     },
-    tableSort: function(cell) {
-      this.$set(
-        this.sortObj,
-        cell.field,
-        this.sortObj && this.sortObj[cell.field] == "asc" ? "desc" : "asc"
-      );
-      this.$emit("table:sort", { sort: this.sortObj, cell: cell });
+    // 单选
+    input: function(event, row) {
+      this.multiSelect(event.target.checked, row)
     },
-    sortPlusChanged: function(value, field) {
-      value
-        ? this.$set(this.sortPlusObj, field, value)
-        : this.$delete(this.sortPlusObj, field);
+    // 多选
+    itemClick: function(row) {
+      this.unMultiSelect(row)
     },
-    sortPlus: function() {
-      this.sortObj = Object.create(this.sortPlusObj);
-      this.$emit("table:sortPlus", this.sortObj);
-    },
-    clearSort: function() {
-      this.sortObj = {};
-      this.sortPlusObj = {};
-      this.$emit("table:sortClear");
+    oper: function(type, row) {
+      this.$emit(`oper:${type}`, row)
     },
     reset: function() {
-      this.selectedOptions = this.selected;
-      this.sortObj = {};
-      this.pageNumber = 1; // 页码
-      this.pageSize = 25; // 每页条数
+      this.paginate = 1
+      this.dataSort = []
     },
-    print: function() {
-      printJS({
-        type: "json",
-        printable: this.data,
-        repeatTableHeader: true,
-        properties: this.lastcolumns.map(e => ({
-          field: e.field,
-          displayName: e.title
-        })),
-        header: this.printTitle
-          ? '<h3 class="text-center">' + this.printTitle + "</h3>"
-          : null
-      });
-      this.$emit("table:print");
-    }
   }
 };
 </script>

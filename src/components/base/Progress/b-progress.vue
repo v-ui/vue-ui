@@ -65,6 +65,17 @@ export default {
     src: util.props.String,
     info: util.props.String,
   },
+  data() {
+    let vm = this
+    return {
+      opt: {
+        delay: 0.25,
+        onUpdate: function() {
+          vm.$emit('animate:updating', vm.tweenNumber)
+        },
+      },
+    }
+  },
   computed: {
     width: function() {
       return this.strong * 14;
@@ -99,17 +110,6 @@ export default {
       let c = this.color.find(e => this.value <= e.value)
       return c && c.color || 'primary'
     },
-  },
-  data() {
-    let vm = this
-    return {
-      opt: {
-        delay: 0.25,
-        onUpdate: function() {
-          vm.$emit('animate:updating', vm.tweenNumber)
-        },
-      },
-    }
   },
   mounted() {
     if (this.state) this.color.sort((a, b) => a.value - b.value)

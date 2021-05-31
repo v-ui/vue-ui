@@ -20,7 +20,7 @@
           class="list-group-item bg-light text-dark border-top-0 text-decoration-none d-flex justify-content-between"
         >
           <font class="text-truncate">
-            {{ model.SubsystemName | worldUpperCase | firstUpperCase }}
+            {{ model.SubsystemName }}
           </font>
           <i
             v-if="!open"

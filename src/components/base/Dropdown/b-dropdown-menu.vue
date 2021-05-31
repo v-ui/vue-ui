@@ -27,8 +27,8 @@
         :icon="item.icon"
       />
       <b-dropdown-item
-        v-else-if="item.value"
-        :label="item.label || item.value"
+        v-else
+        :label="getDisplay(item)"
         :href="item.href"
         :info="item.info"
         :icon="item.icon"
@@ -36,7 +36,10 @@
         :disabled="disabled || item.disabled"
         @click.native="itemClick(item)"
       >
-        <slot name="item" :item="item" />
+        <slot
+          name="item"
+          :item="item"
+        />
       </b-dropdown-item>
     </div>
   </div>
@@ -70,7 +73,7 @@ export default {
   methods: {
     itemClick: function(item) {
       if (this.isMultiple) {
-        const value = item && item[this.primaryKey || 'value'] || item
+        const value = this.getValue(item)
         let index = this.selectedMap.indexOf(value)
         index >= 0
           ? this.selectedValue.splice(index, 1)

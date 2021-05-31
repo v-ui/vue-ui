@@ -1,7 +1,18 @@
 <template>
-  <div class="d-flex flex-column h-100" style="min-width: 9em">
-    <div v-if="item.value" class="d-flex align-middle p-1 w-100 h5">
-      <div v-if="item.value === 1" class="my-1">{{ moment([year, month, item.value]).format("MMMM") }}</div>
+  <div
+    class="d-flex flex-column h-100"
+    style="min-width: 9em"
+  >
+    <div
+      v-if="item.value"
+      class="d-flex align-middle p-1 w-100 h5"
+    >
+      <div
+        v-if="item.value === 1"
+        class="my-1"
+      >
+        {{ moment([year, month, item.value]).format("MMMM") }}
+      </div>
       <date-panel-item
         :item="item"
         class="ml-1 mr-auto"
@@ -9,8 +20,16 @@
       />
       <div class="my-1" />
     </div>
-    <div v-if="item.value" class="h-100">
-      <slot name="list" :year="year" :month="month" :date="item.value" />
+    <div
+      v-if="item.value"
+      class="h-100"
+    >
+      <slot
+        name="list"
+        :year="year"
+        :month="month"
+        :date="item.value"
+      />
     </div>
   </div>
 </template>

@@ -1,8 +1,24 @@
 <template>
   <div class="align-self-center">
-    <b-badge v-if="active" :color="color">{{ title }}</b-badge>
-    <font v-else class="d-block text-wrap w-100 text-truncate" :class="fontClass" style="max-height: 3em">{{ title }}</font>
-    <b-info class="d-block text-wrap w-100 text-truncate" style="max-height: 3em" :info="info" />
+    <b-badge
+      v-if="active"
+      :color="color"
+    >
+      {{ title }}
+    </b-badge>
+    <font
+      v-else
+      class="d-block text-wrap w-100 text-truncate"
+      :class="fontClass"
+      style="max-height: 3em"
+    >
+      {{ title }}
+    </font>
+    <b-info
+      class="d-block text-wrap w-100 text-truncate"
+      style="max-height: 3em"
+      :info="info"
+    />
   </div>
 </template>
 

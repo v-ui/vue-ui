@@ -7,7 +7,15 @@
     :class="objClass"
     :disabled="disabled"
   >
-    <slot>{{ label }}</slot>
+    <div class="d-flex align-items-center">
+      <slot>{{ label }}</slot>
+      <base-icon
+        v-if="drop"
+        class="ml-auto h5 handle"
+        icon="list"
+        style="cursor: move"
+      />
+    </div>
     <sr-msg>{{ srMsg || color }}</sr-msg>
   </base-a>
   <li
@@ -16,7 +24,15 @@
     :class="objClass"
     :aria-disabled="disabled"
   >
-    <slot>{{ label }}</slot>
+    <div class="d-flex align-items-center">
+      <slot>{{ label }}</slot>
+      <base-icon
+        v-if="drop && !hideHanlder"
+        class="ml-auto h5 handle m-0"
+        icon="list"
+        style="cursor: move"
+      />
+    </div>
     <sr-msg>{{ srMsg }}</sr-msg>
   </li>
 </template>
@@ -25,11 +41,12 @@
 import util from "@/components/util/index.js";
 
 import BaseA from "@/components/basic/A/basic-a.vue";
+import BaseIcon from '@/components/basic/basic-icon.vue'
 import srMsg from "@/components/basic/basic-sr-msg.vue";
 
 export default {
   name: "BListItem",
-  components: { BaseA, srMsg },
+  components: { BaseA, BaseIcon, srMsg },
   props: {
     href: util.props.href,
     label: util.props.String,
@@ -37,6 +54,8 @@ export default {
       ...util.props.color,
       default: "white"
     },
+    drop: util.props.Boolean,
+    hideHanlder: util.props.Boolean,
     active: util.props.Boolean,
     disabled: util.props.Boolean,
     srMsg: util.props.String
@@ -47,7 +66,10 @@ export default {
       c += this.color ? ` list-group-item-${this.color} ` : " ";
       c += this.active ? " active " : " ";
       return c;
-    }
+    },
+    iconStyle: function() {
+      return this.disabled ? '' : 'cursor: move'
+    },
   }
 };
 </script>

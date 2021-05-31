@@ -17,7 +17,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
-            <slot v-if="$slots.icon || showIcon" name="icon">
+            <slot
+              v-if="$slots.icon || showIcon"
+              name="icon"
+            >
               <i
                 class="mr-2"
                 :class="iconClass"

@@ -123,7 +123,7 @@
       <font class="col-1">
         v-model:
         <br>
-        ({{ checked }})
+        {{ checked }}
       </font>
       <b-checkbox
         v-model="checked"
@@ -241,28 +241,13 @@
       <font class="col-1">
         v-model:
         <br>
-        ({{ values1 }})
+        {{ values1 }}
       </font>
       <b-checkbox-group
         v-model="values1"
         class="col-11"
         :list="list"
         name="checkbox-v-model"
-        inline
-      />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        v-model:
-        <br>
-        ({{ values }})
-      </font>
-      <b-checkbox-group
-        v-model="values"
-        class="col-11"
-        :list="list"
-        name="checkbox-v-model"
-        primary-key="value"
         inline
       />
     </div>
@@ -374,7 +359,7 @@
       <font class="col-1">
         v-model:
         <br>
-        ({{ checked }})
+        {{ checked }}
       </font>
       <b-checkbox-button-group
         v-model="checked"

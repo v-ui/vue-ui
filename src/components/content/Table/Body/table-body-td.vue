@@ -1,15 +1,23 @@
 <template>
   <td
+    v-if="!cell.hide"
     class="align-middle"
-    :class="[cell.class, ObjStyle && ObjStyle.class]"
-    :style="[cell.style, ObjStyle && ObjStyle.style]"
+    :class="[ObjStyle && ObjStyle.class]"
+    :style="[ObjStyle && ObjStyle.style]"
     style="min-width: 30px;"
-    :colspan="cell.colspan"
-    :aria-colspan="cell.colspan"
-    :rowspan="cell.rowspan"
-    :aria-rowspan="cell.rowspan"
+    :colspan="cell.colSpan"
+    :aria-colspan="cell.colSpan"
+    :rowspan="cell.rowSpan"
+    :aria-rowspan="cell.rowSpan"
   >
-    {{ col.format ? col.format(value) : value || '-' }}
+    <slot
+      name="tBodyCell"
+      :cell="cell"
+      :col="col"
+      :value="value"
+    >
+      {{ value }}
+    </slot>
   </td>
 </template>
 
@@ -24,12 +32,13 @@ export default {
   },
   computed: {
     value: function() {
-      return this.cell.value || this.cell;
+      let value = this.cell.value || this.cell;
+      return this.col.format ? this.col.format(value) : value
     },
     ObjStyle: function() {
       return this.col.cellStyle && typeof this.col.cellStyle == "function"
         ? this.col.cellStyle(this.value)
-        : this.col.cellStyle;
+        : this.col.cellStyle
     }
   }
 };
