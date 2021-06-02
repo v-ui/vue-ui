@@ -12,7 +12,7 @@
       />
       <hr class="my-1">
     </div>
-    <div class="row no-gutters">
+    <div class="row  g-0">
       <b-button
         v-for="i in array"
         :key="i"

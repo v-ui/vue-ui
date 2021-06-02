@@ -7,7 +7,7 @@
   >
     <!-- Position it -->
     <div
-      class="position-absolute overflow-auto pr-2"
+      class="position-absolute overflow-auto pe-2"
       style="max-height: 480px; top: 0; right: 0;"
     >
       <b-toast

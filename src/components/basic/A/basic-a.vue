@@ -8,7 +8,7 @@
   >
     <i
       v-if="!hideIcon && iconClass"
-      class="pr-1 align-self-baseline"
+      class="pe-1 align-self-baseline"
       :class="iconClass"
     />
     <slot>{{ fillText }}</slot>

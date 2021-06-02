@@ -24,7 +24,7 @@
     </div>
     <label
       v-if="!hideValue"
-      class="col-1 m-0 p-0 pl-1"
+      class="col-1 m-0 p-0 ps-1"
     >{{ parseInt(value) || 0 }}%</label>
   </div>
 </template>

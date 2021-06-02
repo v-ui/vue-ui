@@ -1,51 +1,53 @@
 <template>
   <header class="d-print-none shadow-sm">
     <div class="shadow-sm navbar navbar-expand-lg navbar-dark bg-primary">
-      <a
-        class="navbar-brand d-inline-block text-truncate"
-        href="#"
-      >
-        <img
-          src="@/assets/logo.png"
-          width="30"
-          height="30"
-          alt="logo"
+      <div class="container-fluid">
+        <a
+          class="navbar-brand d-inline-block text-truncate"
+          href="#"
         >
-        {{ $t('systemName') }}
-        <small class="navbar-text">(bate 1.0)</small>
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon" />
-      </button>
-      <div
-        id="navbarSupportedContent"
-        class="collapse navbar-collapse"
-      >
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item navbar-text dropdown" />
-        </ul>
-        <ul class="navbar-nav my-lg-0">
-          <li class="nav-item dropdown navbar-text px-1">
-            <lang-select class="nav-link" />
-          </li>
-          <li class="nav-item dropdown navbar-text px-1">
-            <theme-select class="nav-link" />
-          </li>
-          <li class="nav-item dropdown navbar-text px-1">
-            <user-card class="nav-link" />
-          </li>
-          <li class="nav-item px-1">
-            <screenfull class="nav-link" />
-          </li>
-        </ul>
+          <img
+            src="@/assets/logo.png"
+            width="30"
+            height="30"
+            alt="logo"
+          >
+          {{ $t('systemName') }}
+          <small class="navbar-text">(bate 1.0)</small>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon" />
+        </button>
+        <div
+          id="navbarSupportedContent"
+          class="collapse navbar-collapse"
+        >
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item navbar-text dropdown" />
+          </ul>
+          <ul class="navbar-nav my-lg-0">
+            <li class="nav-item dropdown navbar-text px-1">
+              <lang-select class="nav-link" />
+            </li>
+            <li class="nav-item dropdown navbar-text px-1">
+              <theme-select class="nav-link" />
+            </li>
+            <li class="nav-item dropdown navbar-text px-1">
+              <user-card class="nav-link" />
+            </li>
+            <li class="nav-item px-1">
+              <screenfull class="nav-link" />
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="bg-primary border-bottom border-light shadow-sm d-flex w-100">

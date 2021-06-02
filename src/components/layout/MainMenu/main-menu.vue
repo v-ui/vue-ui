@@ -13,7 +13,7 @@
           to
         >
           <i
-            class="mr-2"
+            class="me-2"
             :class="item.icon || 'fas fa-dot-circle'"
           />
           <font class="text-truncate">

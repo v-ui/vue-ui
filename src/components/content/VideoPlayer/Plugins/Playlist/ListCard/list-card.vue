@@ -5,7 +5,7 @@
       :key="index"
       class="list-group-item list-group-item-action p-1"
     >
-      <div class="row no-gutters">
+      <div class="row  g-0">
         <div class="col-5 align-self-center">
           <b-image
             :src="item.poster && (item.poster.list ? '' : item.poster.src || 'http://vjs.zencdn.net/v/oceans.png')"
@@ -34,7 +34,7 @@
     </a>
   </div>
   <!-- <div class="card my-1 border-secondary">
-      <div class="row no-gutters">
+      <div class="row  g-0">
         <div class="col-5 align-self-center">
           <b-image src="http://vjs.zencdn.net/v/oceans.png" alt="video poster" class="card-img" style="height: 110px" />
         </div>

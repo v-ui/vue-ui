@@ -1,7 +1,7 @@
 <template>
   <button
     v-show="icon && icon.length > 0"
-    class="btn btn-outline-primary rounded-circle text-center ml-1"
+    class="btn btn-outline-primary rounded-circle text-center ms-1"
   >
     <i :class="icon" />
   </button>

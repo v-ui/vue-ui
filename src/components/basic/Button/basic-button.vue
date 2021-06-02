@@ -12,7 +12,7 @@
       <b-loading
         v-show="loading"
         size="sm"
-        class="mr-1"
+        class="me-1"
       />
     </slot>
     <slot>{{ value }}</slot>
@@ -35,7 +35,7 @@
       <b-loading
         v-show="loading"
         size="sm"
-        class="mr-1"
+        class="me-1"
       />
     </slot>
     <slot>{{ value }}</slot>

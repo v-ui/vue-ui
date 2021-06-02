@@ -35,7 +35,7 @@
     <ul
       v-show="open"
       v-if="model.Modules"
-      class="list-group bg-light p-0 pl-3 border-0 w-100"
+      class="list-group bg-light p-0 ps-3 border-0 w-100"
     >
       <item
         v-for="(Module, key) in model.Modules"

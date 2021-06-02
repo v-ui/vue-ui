@@ -22,7 +22,7 @@
               name="icon"
             >
               <i
-                class="mr-2"
+                class="me-2"
                 :class="iconClass"
               />
             </slot>
@@ -108,10 +108,10 @@ export default {
       let set = ''
       switch (this.set) {
         case 'left':
-          set = 'w-25 ml-0 d-flex align-items-right'
+          set = 'w-25 ms-0 d-flex align-items-right'
           break;
         case 'right':
-          set = 'w-25 mr-0 d-flex align-items-right'
+          set = 'w-25 me-0 d-flex align-items-right'
           break;
         case 'center':
           set = 'd-flex align-items-center'

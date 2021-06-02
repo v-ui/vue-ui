@@ -11,7 +11,7 @@
       <slot>{{ label }}</slot>
       <base-icon
         v-if="drop"
-        class="ml-auto h5 handle"
+        class="ms-auto h5 handle"
         icon="list"
         style="cursor: move"
       />
@@ -28,7 +28,7 @@
       <slot>{{ label }}</slot>
       <base-icon
         v-if="drop && !hideHanlder"
-        class="ml-auto h5 handle m-0"
+        class="ms-auto h5 handle m-0"
         icon="list"
         style="cursor: move"
       />

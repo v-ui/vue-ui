@@ -2,7 +2,7 @@
   <li class="media">
     <slot name="icon">
       <i
-        class="mt-2 mr-3 align-self-start"
+        class="mt-2 me-3 align-self-start"
         :class="item.icon"
       />
     </slot>

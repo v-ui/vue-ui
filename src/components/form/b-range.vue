@@ -3,7 +3,7 @@
     <div class="row align-items-center mx-1">
       <span
         v-if="prompt || minValue"
-        class="col-auto text-right text-monospace pl-0 pr-1"
+        class="col-auto text-right text-monospace ps-0 pe-1"
       >{{ fillMinValue }}</span>
       <input
         ref="range"
@@ -18,7 +18,7 @@
       >
       <span
         v-if="prompt || maxValue"
-        class="col-auto text-left text-monospace pl-1 pr-0"
+        class="col-auto text-left text-monospace ps-1 pe-0"
       >{{ fillMaxValue }}</span>
       <span
         v-if="!hideValue"

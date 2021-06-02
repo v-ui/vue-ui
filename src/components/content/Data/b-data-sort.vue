@@ -56,7 +56,7 @@
       </b-button>
       <b-button
         :disabled="disabledTrash"
-        class="ml-auto"
+        class="ms-auto"
         color="link"
         @click="clear"
       >

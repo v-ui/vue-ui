@@ -31,7 +31,7 @@
               {{ item }}
               <i
                 v-if="!disabled"
-                class="fas fa-times-circle text-muted pl-1"
+                class="fas fa-times-circle text-muted ps-1"
                 style="cursor: pointer"
                 @click.stop="$emit('delete:item', key)"
               />

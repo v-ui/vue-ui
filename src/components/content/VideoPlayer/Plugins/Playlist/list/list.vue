@@ -11,7 +11,7 @@
           <slot>{{ item.title || 'Video Title' }}</slot>
         </h5>
         <small
-          class="border-left pl-1 text-nowrap text-muted text-right align-self-center"
+          class="border-left ps-1 text-nowrap text-muted text-right align-self-center"
         >{{ item.durationTime || '1:00' }}</small>
       </div>
     </a>

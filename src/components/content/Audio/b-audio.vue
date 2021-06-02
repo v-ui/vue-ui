@@ -48,7 +48,7 @@
         @mouseleave="audoMouseleave"
       >
         <b-controller-button
-          class="mr-1"
+          class="me-1"
           :icon="mute ? icon.volumeMute : icon.volumeUp"
           :disabled="disabledMute"
           @click.native="audioMuteClick"

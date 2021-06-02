@@ -2,11 +2,11 @@
   <div class="d-flex align-items-start flex-column w-100">
     <div class="d-flex align-items-between w-100">
       <div class="d-flex align-items-start w-100">
-        <base-icon v-coll:control="'#PropertiesCollapse'+item.field" v-if="item.children" class="pr-2" icon="chevron-down" />
+        <base-icon v-coll:control="'#PropertiesCollapse'+item.field" v-if="item.children" class="pe-2" icon="chevron-down" />
         <base-label :label="item.label" :icon="item.icon" />
       </div>
       <b-switch class="mx-2" checked />
-      <base-icon class="ml-auto h5 handle" icon="list" style="cursor: move" />
+      <base-icon class="ms-auto h5 handle" icon="list" style="cursor: move" />
     </div>
     <b-collapse :id="'PropertiesCollapse'+item.field" class="border-0 w-100">
       <grid-properties-list :list="item.children" class="border-0" />

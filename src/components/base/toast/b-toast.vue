@@ -20,18 +20,18 @@
           name="icon"
         >
           <i
-            class="mr-2"
+            class="me-2"
             :class="iconClass"
           />
         </slot>
-        <strong class="mr-auto">
+        <strong class="me-auto">
           <font>{{ dataTitle }}</font>
         </strong>
         <b-info :info="info" />
       </slot>
       <button
         type="button"
-        class="ml-2 mb-1 close"
+        class="ms-2 mb-1 close"
         data-dismiss="toast"
         aria-label="Close"
         @click="hide"

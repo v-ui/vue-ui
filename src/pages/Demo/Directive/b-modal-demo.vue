@@ -215,7 +215,7 @@
       <div class="col-1">
         <input
           id="drawer"
-          class="mr-1"
+          class="me-1"
           type="checkbox"
           @change="drawer=!drawer"
         >
@@ -229,7 +229,7 @@
       <div class="col-1">
         <input
           id="scrol"
-          class="mr-1"
+          class="me-1"
           type="checkbox"
           @change="scrol=!scrol"
         >
@@ -243,47 +243,47 @@
       <div class="col-3">
         <input
           id="null"
-          class="mr-1"
+          class="me-1"
           type="radio"
           name="size"
           checked
           @change="size=''"
         >
         <label
-          class="mr-2"
+          class="me-2"
           for="null"
         >default</label>
         <input
           id="xl"
-          class="mr-1"
+          class="me-1"
           type="radio"
           name="size"
           @change="size='xl'"
         >
         <label
-          class="mr-2"
+          class="me-2"
           for="xl"
         >xl</label>
         <input
           id="lg"
-          class="mr-1"
+          class="me-1"
           type="radio"
           name="size"
           @change="size='lg'"
         >
         <label
-          class="mr-2"
+          class="me-2"
           for="lg"
         >lg</label>
         <input
           id="sm"
-          class="mr-1"
+          class="me-1"
           type="radio"
           name="size"
           @change="size='sm'"
         >
         <label
-          class="mr-2"
+          class="me-2"
           for="sm"
         >sm</label>
       </div>

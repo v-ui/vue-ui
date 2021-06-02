@@ -2,7 +2,7 @@
   <span>
     <font class="d-flex align-items-center">
       <b-icon
-        class="pr-1"
+        class="pe-1"
         :icon="icon"
         :icon-color="iconColor"
       />

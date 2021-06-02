@@ -215,7 +215,7 @@
     <h2>button toolbar</h2>
     <hr>
     <b-button-toolbar>
-      <b-button-group class="mr-2">
+      <b-button-group class="me-2">
         <basic-button value="button text" />
         <basic-button value="button text" />
         <basic-button value="button text" />

@@ -16,7 +16,7 @@
         class="nav-item w-100"
       >
         <b-scrollspy-nav-item
-          class="pl-2"
+          class="ps-2"
           :list="item.children"
         />
       </li>

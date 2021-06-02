@@ -15,7 +15,7 @@
       </div>
       <date-panel-item
         :item="item"
-        class="ml-1 mr-auto"
+        class="ms-1 me-auto"
         @item:click="$emit('item:click', item.value)"
       />
       <div class="my-1" />
