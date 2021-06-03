@@ -183,8 +183,8 @@
 </template>
 
 <script>
-import BToast from "@/components/base/toast/b-toast.vue";
-import BToasts from "@/components/base/toast/b-toasts.vue";
+import BToast from "@/components/base/Toast/b-toast.vue";
+import BToasts from "@/components/base/Toast/b-toasts.vue";
 import BaseA from "@/components/basic/A/basic-a.vue";
 
 export default {
