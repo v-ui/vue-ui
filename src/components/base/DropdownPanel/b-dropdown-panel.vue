@@ -23,7 +23,7 @@
           v-model="selectedValue"
           :list="list"
           :primary-key="key"
-          :display-name="displayKey"
+          :display-name="display"
           :col-count="colCount"
           :multiple="isMultiple"
         />
@@ -34,7 +34,7 @@
           :list="list"
           :border="border"
           :primary-key="key"
-          :display-name="displayKey"
+          :display-name="display"
           :disabled="disabled"
           :col-count="colCount"
           :multiple="isMultiple"

@@ -21,7 +21,7 @@
             class="text-center"
             :multiple="isMultiple"
             :primary-key="key"
-            :display-name="displayKey"
+            :display-name="display"
             :selected="selectedValue"
             :disabled="item.disabled || disabled"
             @item:click="itemClick"

@@ -40,7 +40,7 @@
           :list="list"
           :disabled="disabled"
           :primary-key="key"
-          :display-name="displayKey"
+          :display-name="display"
           @item:click="item => $emit('item:click', item)"
         />
       </slot>

@@ -9,7 +9,7 @@
       :disabled="disabled"
       :hide-null="hideNull"
       :primary-key="key"
-      :display-name="displayKey"
+      :display-name="display"
       v-bind="$attrs"
       v-on="$listeners"
       @change.native="validator($event, selectedValue)"

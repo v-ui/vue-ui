@@ -2,7 +2,7 @@
   <b-grid-row
     :list="list"
     :primary-key="key"
-    :display-name="displayKey"
+    :display-name="display"
   >
     <template #item="{ item }">
       <slot
@@ -12,7 +12,7 @@
         <address-item
           :item="item"
           :primary-key="key"
-          :display-name="displayKey"
+          :display-name="display"
           :selected="selectedValue"
           :disabled="item.disabled"
           @item:click="itemClick"

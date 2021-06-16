@@ -13,7 +13,7 @@
           class="text-center"
           :class="itemClass"
           :primary-key="key"
-          :display-name="displayKey"
+          :display-name="display"
           :multiple="isMultiple"
           :selected="selectedValue"
           :disabled="item.disabled || disabled"

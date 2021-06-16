@@ -40,6 +40,7 @@ const getDisplay = function(item, name, key) {
   return item && (item[name] || item[key]) || item
 }
 
+// 根据选中获取 item
 const getItem = function(selected, list, key) {
   return list && list.find && list.find(e => getKey(e, key) === getKey(selected, key))
 }
@@ -86,7 +87,7 @@ const base = {
     return {
       isMultiple: this.multiple,
       key: this.primaryKey,
-      displayKey: this.displayName,
+      display: this.displayName,
       selectedValue: null,
       nullValue: '<Place select...>',
     }
@@ -107,7 +108,7 @@ const base = {
       this.key = value
     },
     displayName: function(value) {
-      this.displayKey = value
+      this.display = value
     },
     multiple: function(value) {
       this.isMultiple = value
@@ -135,7 +136,7 @@ const base = {
     getKey: function(item, key = this.key) {
       return getKey(item, key)
     },
-    getDisplay: function(item, name = this.displayKey, key = this.key) {
+    getDisplay: function(item, name = this.display, key = this.key) {
       return getDisplay(item, name, key)
     },
   },

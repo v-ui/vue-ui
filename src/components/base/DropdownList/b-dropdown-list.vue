@@ -21,7 +21,7 @@
           v-model="selectedValue"
           :list="searchList"
           :primary-key="key"
-          :display-name="displayKey"
+          :display-name="display"
           :multiple="isMultiple"
           :null-value="placeholder"
           :show-null="!searchText && !hideNull"

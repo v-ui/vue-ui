@@ -22,7 +22,7 @@
         :item="item"
         :multiple="isMultiple"
         :primary-key="key"
-        :display-name="displayKey"
+        :display-name="display"
         :selected="selectedValue"
       />
     </slot>
