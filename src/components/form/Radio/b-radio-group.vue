@@ -6,7 +6,7 @@
         :mix-class="validateClass"
         unvalid
         :name="name"
-        :value="getValue(item)"
+        :value="getKey(item)"
         :label="getDisplay(item)"
         :checked="isSelected(item)"
         :disabled="item.disabled || disabled"

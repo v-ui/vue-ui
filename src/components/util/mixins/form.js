@@ -226,6 +226,7 @@ export default {
       }
     },
   }, // validator
+
   readonly: {
     props: {
       readonly: props.Boolean,

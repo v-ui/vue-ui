@@ -4,12 +4,12 @@
 const themes = ['', 'light', 'dark']
 // color
 const baseColors = ['', 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white']
-const colors = [...baseColors, 'transparent']
+const background = [...baseColors, 'transparent']
 const textColor = [...baseColors, 'body', 'muted', 'black-50', 'white-50']
 // size
 const size = ['', 'lg', 'sm']
 // set
-const setX = ['left', 'right', 'center']
+const setX = ['start', 'end', 'center']
 const setY = ['up', 'down']
 const set = ['', ...setX, ...setY]
 const popperSet = [
@@ -32,11 +32,11 @@ const position = [...positionT, ...positionB]
 // border
 const borders = ['border', ...[set.map(e => `border-${e}`)]]
 const border0 = borders.map(e => `${e}-0`)
-const borderColor = colors.map(e => `border-${e}`)
+const borderColor = baseColors.map(e => `border-${e}`)
 const borderRadius = ['rounded', 'rounded-circle', 'rounded-pill', 'rounded-0', ...[set.map(e => `rounded-${e}`)]]
 const borderRadiusSize = size.map(e => `rounded-${e}`)
 // justify
-const justify = ['', 'start', 'center', 'end', 'between', 'around']
+const justify = ['', 'start', 'center', 'end', 'between', 'around', 'evenly']
 // status
 const baseStatus = ['', 'default', "success", "warning", "error", "danger"]
 const messageStatus = [ "system", "info", "issue", ...baseStatus ]
@@ -47,7 +47,7 @@ export default {
     themes: themes,
     color: {
       base: baseColors,
-      bg: colors,
+      bg: background,
       text: textColor,
     },
     size: size,

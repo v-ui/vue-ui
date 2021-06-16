@@ -238,12 +238,12 @@ const base = {
     },
   },
   mounted() {
-    this.selectedValue = this.getValue(this.selected)
+    this.selectedValue = this.getKey(this.selected)
     this.pickerType = this.type !== this.enumTypeStatus.country ? this.enumTypeStatus.province : this.enumTypeStatus.country
     this.init(this.pickerType)
   },
   methods: {
-    getValue: function(value) {
+    getKey: function(value) {
       let select = []
       switch(this.type) {
         case this.enumTypeStatus.country:

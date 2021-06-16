@@ -5,10 +5,11 @@
       :list="list"
       :size="size"
       :row="row"
-      :multiple="multiple"
+      :multiple="isMultiple"
       :disabled="disabled"
       :hide-null="hideNull"
-      :primary-key="primaryKey"
+      :primary-key="key"
+      :display-name="displayKey"
       v-bind="$attrs"
       v-on="$listeners"
       @change.native="validator($event, selectedValue)"
@@ -31,7 +32,7 @@
         {{ invalidInfo }}
       </slot>
     </b-valid>
-    <b-info :info="info" />
+    <b-form-text :info="info" />
   </div>
 </template>
 
@@ -40,12 +41,16 @@ import util from "@/components/util/index.js";
 
 import BasicSelect from '@/components/form/Basic/Select/basic-select.vue'
 import BValid from "@/components/form/Other/b-form-valid.vue";
-import BInfo from "@/components/basic/basic-info.vue";
-// TODO: util.mixins.select.select 暂缓
+import BFormText from "@/components/form/Other/b-form-text";
+
 export default {
   name: "BSelect",
-  components: { BasicSelect, BValid, BInfo },
-  mixins: [util.mixins.form.base, util.mixins.select.select, util.mixins.form.validator],
+  components: { BasicSelect, BValid, BFormText },
+  mixins: [
+    util.mixins.form.base,
+    util.mixins.select.select,
+    util.mixins.form.validator,
+  ],
   inheritAttrs: false,
   props: {
     disabled: util.props.Boolean,

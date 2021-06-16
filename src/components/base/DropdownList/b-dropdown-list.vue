@@ -113,7 +113,7 @@ export default {
     searchList: function() {
       return this.searchText
         ? this.list.filter(e => {
-          let value = this.getValue(e)
+          let value = this.getKey(e)
           let label = this.getDisplay(e)
           return value && label && (value.includes(this.searchText) || label.includes(this.searchText))
         })

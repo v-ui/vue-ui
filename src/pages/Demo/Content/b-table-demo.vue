@@ -162,7 +162,7 @@ export default {
   methods: {
     itemClick: function(item) {
       if (this.isMultiple) {
-        const value = this.getValue(item)
+        const value = this.getKey(item)
         let index = this.selectedMap.indexOf(value)
         index >= 0
           ? this.selectedValue.splice(index, 1)
@@ -176,14 +176,14 @@ export default {
       if (event.target.checked) {
         this.selectedValue.push(item);
       } else {
-        const value = this.getValue(item)
+        const value = this.getKey(item)
         let index = this.selectedMap.indexOf(value);
         if (index >= 0) this.selectedValue.splice(index, 1);
       }
     },
     headClick: function() {
       this.data.forEach(e => {
-        const value = this.getValue(e)
+        const value = this.getKey(e)
         let index = this.selectedMap.indexOf(value);
         index >= 0
           ? this.selectedValue.splice(index, 1)

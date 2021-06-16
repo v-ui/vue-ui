@@ -1,41 +1,47 @@
 import tools from '@/tools/index.js'
 import props from '@/components/util/props.js'
 
+// 数据初始化/合法性校验
 const install = function(selected, multiple) {
   return multiple
     ? tools.obj.type.isArray(selected) ? selected : []
     : tools.obj.isTrue(selected) ? selected : ''
 }
 
-const label = function(selected, list, multiple, name, key) {
+// 获取用于展示的数据
+const getLabel = function(selected, list, multiple, name, key) {
   return multiple
     ? selected && selected.map && selected.map(e => getDisplay(getItem(e, list, key), name, key)) || null
     : getDisplay(getItem(selected, list, key), name, key) || null
 }
 
-const map = function(selected, multiple, key) {
+// 获取选中1的 key
+const getMap = function(selected, multiple, key) {
   return multiple
-    ? selected && selected.map && selected.map(e => getValue(e, key))
-    : getValue(selected, key)
+    ? selected && selected.map && selected.map(e => getKey(e, key))
+    : getKey(selected, key)
 }
 
+// 判断是否选中
 const isSelected = function(map, item, multiple, key) {
   if (!tools.obj.isTrue(map)) return false
   return multiple
-    ? map && map.includes && map.includes(getValue(item, key))
-    : getValue(item, key) === map
+    ? map && map.includes && map.includes(getKey(item, key))
+    : getKey(item, key) === map
 }
 
-const getValue = function(item, key) {
+// 获取单个 item 的 key
+const getKey = function(item, key) {
   return item && item[key] || item
 }
 
+// 获取单个 item 的 displayName
 const getDisplay = function(item, name, key) {
   return item && (item[name] || item[key]) || item
 }
 
 const getItem = function(selected, list, key) {
-  return list && list.find && list.find(e => getValue(e, key) === getValue(selected, key))
+  return list && list.find && list.find(e => getKey(e, key) === getKey(selected, key))
 }
 
 const basic = {
@@ -52,8 +58,8 @@ const basic = {
     multiple: props.Boolean,
   },
   methods: {
-    getValue: function(item, key = this.primaryKey) {
-      return getValue(item, key)
+    getKey: function(item, key = this.primaryKey) {
+      return getKey(item, key)
     },
     getDisplay: function(item, name = this.displayName, key = this.primaryKey) {
       return getDisplay(item, name, key)
@@ -69,6 +75,11 @@ const base = {
   },
   props: {
     list: props.Array,
+    return: {
+      type: props.String,
+      default: null,
+      validator: value => [ null, 'primary', 'display' ].includes(value)
+    },
     label: [ Array, String, Number, Object, Date, ],
   },
   data() {
@@ -85,10 +96,10 @@ const base = {
   },
   computed: {
     showLabel: function() {
-      return this.label || label(this.selectedValue, this.list, this.isMultiple, this.displayName, this.key)
+      return this.label || getLabel(this.selectedValue, this.list, this.isMultiple, this.displayName, this.key)
     },
     selectedMap: function () {
-      return map(this.selectedValue, this.isMultiple, this.key)
+      return getMap(this.selectedValue, this.isMultiple, this.key)
     },
   },
   watch: {
@@ -102,18 +113,27 @@ const base = {
       this.isMultiple = value
     },
     selected: function (value) {
-      this.selectedValue = value
+      this.selectedValue = value // install(value, this.isMultiple)
     },
     selectedValue: function (value) {
-      this.$emit('selected:change', value)
+      let data = value
+      switch (this.return) {
+        case 'primary':
+          data = this.getKey(value)
+          break;
+        case 'display':
+          data = this.getDisplay(value)
+          break;
+      }
+      this.$emit('selected:change', data)
     },
   },
   methods: {
     initSelectedValue: function() {
       this.selectedValue = install(this.selected, this.isMultiple)
     },
-    getValue: function(item, key = this.key) {
-      return getValue(item, key)
+    getKey: function(item, key = this.key) {
+      return getKey(item, key)
     },
     getDisplay: function(item, name = this.displayKey, key = this.key) {
       return getDisplay(item, name, key)
@@ -143,7 +163,7 @@ export default {
     },
     computed: {
       selectedMap: function () {
-        return map(this.selected, this.multiple, this.primaryKey)
+        return getMap(this.selected, this.multiple, this.primaryKey)
       },
       isSelected: function () {
         return isSelected(this.selectedMap, this.item, this.multiple, this.primaryKey)

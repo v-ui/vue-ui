@@ -56,7 +56,7 @@ export default {
   methods: {
     itemClick: function(item) {
       if (this.isMultiple) {
-        const value = this.getValue(item)
+        const value = this.getKey(item)
         let index = this.selectedMap.indexOf(value)
         index >= 0
           ? this.selectedValue.splice(index, 1)

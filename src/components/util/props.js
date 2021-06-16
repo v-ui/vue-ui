@@ -70,7 +70,7 @@ export default {
   },
   setX: {
     type: String,
-    default: 'left',
+    default: 'start',
     validator: (value) => {
       // 这个值必须匹配下列字符串中的一个
       return v.base.set.x.includes(value)

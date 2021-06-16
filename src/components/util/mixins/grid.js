@@ -241,7 +241,7 @@ const select = {
       if (checked) {
         this.selectedValue.push(item);
       } else {
-        const value = this.getValue(item)
+        const value = this.getKey(item)
         let index = this.selectedMap.indexOf(value);
         if (index >= 0) this.selectedValue.splice(index, 1);
       }

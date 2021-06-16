@@ -7,7 +7,7 @@
         :mix-class="validateClass"
         unvalid
         :label="getDisplay(item)"
-        :value="getValue(item)"
+        :value="getKey(item)"
         :checked="isSelected(item)"
         :disabled="item.disabled || disabled"
         v-bind="$attrs"
