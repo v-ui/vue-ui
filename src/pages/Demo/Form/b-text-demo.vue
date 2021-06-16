@@ -68,7 +68,7 @@
       />
     </div>
     <br>
-    <h4>b-form-label</h4>
+    <h4>size</h4>
     <hr>
     <div class="row">
       <font class="col-1">

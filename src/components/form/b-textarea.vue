@@ -2,6 +2,7 @@
   <div>
     <basic-textarea
       v-model="dataValue"
+      :size="size"
       :resize="resize"
       :rows="Number(rows)"
       :cols="Number(cols)"
@@ -28,7 +29,7 @@
         {{ invalidInfo }}
       </slot>
     </b-valid>
-    <b-info :info="message" />
+    <b-form-text :info="message" />
   </div>
 </template>
 <script>
@@ -38,11 +39,11 @@ import util from "@/components/util/index.js";
 import BasicTextarea from "@/components/form/Basic/basic-textarea.vue";
 
 import BValid from "@/components/form/Other/b-form-valid.vue";
-import BInfo from "@/components/basic/basic-info.vue";
+import BFormText from "@/components/form/Other/b-form-text.vue";
 
 export default {
   name: "BTextarea",
-  components: { BasicTextarea, BValid, BInfo },
+  components: { BasicTextarea, BValid, BFormText },
   mixins: [
     util.mixins.form.readonly,
     util.mixins.form.validator
@@ -63,6 +64,7 @@ export default {
       ...util.props.UInt,
       default: 1024
     },
+    size: util.props.size,
     info: util.props.String,
     prompt: util.props.Boolean,
     resize: util.props.Boolean
@@ -80,26 +82,27 @@ export default {
     }
   },
   mounted() {
-    this.message = this.info || "";
-    if (this.prompt) {
-      this.message += this.info
-        ? `(已输入 0 个字符，还可输入 ${this.maxlength} 个字符)`
-        : `已输入 0 个字符，还可输入 ${this.maxlength} 个字符`;
-    }
+    let codeCount = tools.string.codePointLength(this.value);
+      this.showCodeCount(codeCount)
   },
   methods: {
     change: function(e) {
+      let codeCount = tools.string.codePointLength(e.target.value);
+      this.showCodeCount(codeCount)
+    },
+    showCodeCount: function(codeCount) {
       if (!this.prompt) return;
       let message = "";
-      let codeCount = tools.string.codePointLength(e.target.value);
-      if (this.maxlength >= codeCount)
+      if (this.maxlength > codeCount)
         message = `已输入 ${codeCount} 个字符，还可输入 ${this.maxlength -
           codeCount} 个字符`;
+      else if (this.maxlength === codeCount)
+        message = `已输入 ${codeCount} 个字符，不能输入更多字符`;
       else
         message = `已输入 ${codeCount} 个字符，已超出 ${codeCount -
           this.maxlength} 个字符`;
 
-      this.message = this.info ? this.info + `(${message})` : message;
+      this.message = this.info + ` (${message})`
     }
   }
 };

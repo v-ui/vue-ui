@@ -64,6 +64,18 @@
       />
     </div>
     <div class="row">
+      <font class="col-1">size(lg)</font>
+      <b-textarea class="col-11" size="lg" value="size" />
+    </div>
+     <div class="row">
+      <font class="col-1">size(default)</font>
+      <b-textarea class="col-11" value="size" />
+    </div>
+     <div class="row">
+      <font class="col-1">size(sm)</font>
+      <b-textarea class="col-11" size="sm" value="size" />
+    </div>
+    <div class="row">
       <font class="col-1">
         prompt:
       </font>
@@ -88,6 +100,7 @@
       </font>
       <b-textarea
         class="col-11"
+        value="abc"
         info="info text"
         prompt
       />

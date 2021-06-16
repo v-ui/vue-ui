@@ -30,7 +30,7 @@
         {{ invalidInfo }}
       </slot>
     </b-valid>
-    <b-info :info="info" />
+    <b-form-text :info="info" />
     <i
       v-if="!hideIcon && cIcon"
       class="text-muted text-center position-absolute"
@@ -47,11 +47,11 @@ import util from "@/components/util/index.js";
 import BasicText from "@/components/form/Basic/basic-text.vue";
 
 import BValid from "@/components/form/Other/b-form-valid.vue";
-import BInfo from "@/components/basic/basic-info.vue";
+import BFormText from "@/components/form/Other/b-form-text.vue";
 
 export default {
   name: "BText",
-  components: { BasicText, BValid, BInfo },
+  components: { BasicText, BValid, BFormText },
   mixins: [
     util.mixins.form.readonly,
     util.mixins.form.validator
