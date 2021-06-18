@@ -33,11 +33,11 @@ export default {
   name: "BDatePicker",
   components: { BDateSelect, BDropdownPanel, },
   mixins: [
+    // TODO: remove util.mixins.form.base
     util.mixins.form.base,
     util.mixins.date.base,
     util.mixins.date.type,
     util.mixins.date.select,
-    util.mixins.form.readonly,
   ],
   model: {
     prop: "value",

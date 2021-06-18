@@ -39,7 +39,6 @@ export default {
     util.mixins.date.type,
     util.mixins.date.base,
     util.mixins.date.select,
-    util.mixins.form.readonly,
   ],
   model: {
     prop: "value",

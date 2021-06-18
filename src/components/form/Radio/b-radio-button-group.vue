@@ -1,54 +1,53 @@
 <template>
   <div>
     <div
-      class="btn-group btn-group-toggle w-100"
+      class="btn-group"
       :class="groupClass"
-      data-toggle="buttons"
+      role="group"
     >
-      <label
-        v-for="(item, index) in list"
-        :key="index"
-        class="btn"
-        :class="[`btn-${item.color || color}`, { active: item.value == value, disabled: disabled || item.disabled }]"
-        @click="selected = item.value"
-      >
-        <input
-          :id="item.id"
-          type="radio"
+      <template v-for="(item, index) in list">
+        <b-radio
+          :key="'radio-'+index"
+          :id="`${id}-${index}`"
+          class="btn-check"
           :name="name"
           autocomplete="off"
-          :value="item.value"
-          :checked="item.value == value"
-          :aria-checked="item.value == selected"
+          :checked="isSelected(item)"
+          :value="getKey(item)"
           :disabled="disabled || item.disabled"
-          :aria-diasbled="disabled || item.disabled"
+        />
+        <label
+          :key="'label-'+index"
+          :for="`${id}-${index}`"
+          class="btn"
+          :class="`btn-${item.color || color}`"
+          @click="click(item)"
         >
-        {{ item.label }}
-      </label>
+          {{ getDisplay(item) }}
+        </label>
+
+      </template>
     </div>
     <b-info :info="info" />
   </div>
 </template>
 
 <script>
+import tool from "@/tools/index.js"
 import util from "@/components/util/index.js";
 
+import BRadio from "./b-radio.vue"
 import BInfo from "@/components/basic/basic-info.vue";
 
 export default {
   name: "BRadioButtonGroup",
-  components: { BInfo },
-  model: {
-    prop: "value",
-    event: "raido:change"
-  },
+  components: { BRadio, BInfo },
+  mixins: [ util.mixins.select.check, ],
   props: {
-    value: util.props.String,
-    list: util.props.Array,
-    info: util.props.String,
     size: util.props.size,
-    disabled: util.props.Boolean,
     color: util.props.color,
+    info: util.props.String,
+    disabled: util.props.Boolean,
     name: {
       ...util.props.String,
       required: true
@@ -56,7 +55,7 @@ export default {
   },
   data() {
     return {
-      selected: this.value,
+      id: 'radio-buton' + tool.random.getRandomString()
     }
   },
   computed: {
@@ -65,12 +64,9 @@ export default {
       return `${size}`
     },
   },
-  watch: {
-    value: function(value) {
-      this.selected = value
-    },
-    selected: function(value) {
-      this.$emit('raido:change', value)
+  methods: {
+    click: function(item) {
+      this.selectedValue = item
     },
   },
 };

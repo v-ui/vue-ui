@@ -90,7 +90,6 @@ export default {
     util.mixins.date.type,
     util.mixins.date.base,
     util.mixins.date.select,
-    util.mixins.form.readonly,
   ],
   computed: {
     canHide: function () {

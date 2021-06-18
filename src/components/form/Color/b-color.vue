@@ -32,7 +32,6 @@ export default {
   components: {  BDropPanel, BColorLabel, BColorPicker, },
   mixins: [
     util.mixins.color.base,
-    util.mixins.form.readonly,
   ],
   model: {
     prop: 'value',
@@ -48,6 +47,7 @@ export default {
       default: 'hsl',
     },
     hideInput: util.props.Boolean,
+    disabled: util.props.Boolean,
   },
   data() {
     return {

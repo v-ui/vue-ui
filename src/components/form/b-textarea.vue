@@ -60,11 +60,11 @@ export default {
       default: 3
     },
     cols: util.props.UInt,
+    size: util.props.size,
     maxlength: {
       ...util.props.UInt,
       default: 1024
     },
-    size: util.props.size,
     info: util.props.String,
     prompt: util.props.Boolean,
     resize: util.props.Boolean

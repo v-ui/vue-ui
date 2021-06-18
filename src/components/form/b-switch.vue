@@ -1,16 +1,16 @@
 <template>
-  <div class="custom-control custom-switch">
+  <div class="form-check form-switch">
     <input
       :id="id"
       type="checkbox"
-      class="custom-control-input"
+      class="form-check-input"
       :checked="checked"
       :aria-checked="checked"
       v-bind="$attrs"
       v-on="inputListeners"
     >
     <label
-      class="custom-control-label"
+      class="form-check-label"
       :for="id"
     >{{ label }}</label>
     <b-info :info="info" />
@@ -26,7 +26,6 @@ import BInfo from "@/components/basic/basic-info.vue";
 export default {
   name: "BSwitch",
   components: { BInfo },
-  mixins: [util.mixins.form.base],
   inheritAttrs: false,
   model: {
     prop: "checked",

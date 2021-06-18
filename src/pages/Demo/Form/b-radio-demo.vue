@@ -8,133 +8,49 @@
       <font class="col-1">
         default:
       </font>
-      <b-radio class="col-11" />
+      <div class="col-11">
+        <b-radio />
+      </div>
+
     </div>
     <div class="row">
       <font class="col-1">
         checked:
       </font>
-      <b-radio
-        class="col-11"
-        :checked="Boolean(true)"
-      />
+      <div class="col-11">
+        <b-radio :checked="true" />
+      </div>
     </div>
     <div class="row">
       <font class="col-1">
         disabled:
       </font>
-      <b-radio
-        class="col-11"
-        disabled
-      />
+      <div class="col-11">
+        <b-radio disabled />
+      </div>
     </div>
     <div class="row">
       <font class="col-1">
         value:
       </font>
-      <b-radio
-        class="col-11"
-        value="value"
-      />
+      <div class="col-11">
+        <b-radio value="value" />
+      </div>
     </div>
-    <div class="row">
-      <font class="col-1">
-        label:
-      </font>
-      <b-radio
-        class="col-11"
-        label="label text"
-      />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        inline:
-      </font>
-      <b-radio
-        class="col-auto"
-        label="radio1"
-        inline
-      />
-      <b-radio
-        class="col-auto"
-        label="radio2"
-        inline
-      />
-      <b-radio
-        class="col-auto"
-        label="radio3"
-        inline
-      />
-      <b-radio
-        class="col-auto"
-        label="radio4"
-        inline
-      />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        name:
-      </font>
-      <b-radio
-        class="col-auto"
-        label="radio1"
-        name="inline-radio"
-      />
-      <b-radio
-        class="col-auto"
-        label="radio2"
-        name="inline-radio"
-      />
-      <b-radio
-        class="col-auto"
-        label="radio3"
-        name="inline-radio"
-      />
-      <b-radio
-        class="col-auto"
-        label="radio4"
-        name="inline-radio"
-      />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        info:
-      </font>
-      <b-radio
-        class="col-11"
-        label="label text"
-        info="a radio help info"
-      />
-    </div>
-    <br>
-    <h4>v-model</h4>
-    <hr>
     <div class="row">
       <font class="col-1">
         v-model:
         <br>
         {{ checked }}
       </font>
-      <b-radio
-        v-model="checked"
-        class="col-auto"
-        value="one"
-        label="one"
-        name="v-model-radio"
-      />
-      <b-radio
-        v-model="checked"
-        class="col-auto"
-        value="two"
-        label="two"
-        name="v-model-radio"
-      />
+      <div class="col-11">
+        <b-radio v-model="checked" />
+      </div>
     </div>
     <hr>
     <h2>b-radio-group</h2>
     <hr>
     <h4>基础属性</h4>
-    <hr>
     <hr>
     <div class="row">
       <font class="col-1">
@@ -253,6 +169,7 @@
         default:
       </font>
       <b-radio-button-group
+        class="col-auto"
         name="default-button-group"
         :list="buttongrouplist"
       />
@@ -262,6 +179,7 @@
         disabled:
       </font>
       <b-radio-button-group
+        class="col-auto"
         name="disabled-button-group"
         :list="buttongrouplist"
         disabled
@@ -272,6 +190,7 @@
         value:
       </font>
       <b-radio-button-group
+        class="col-auto"
         name="value-button-group"
         :list="buttongrouplist"
         value="value1"
@@ -282,6 +201,7 @@
         info:
       </font>
       <b-radio-button-group
+        class="col-auto"
         name="info-button-group"
         :list="buttongrouplist"
         info="button group info"
@@ -294,6 +214,7 @@
         {{ buttongroupvalue }}
       </font>
       <b-radio-button-group
+        class="col-auto"
         v-model="buttongroupvalue"
         name="v-model-button-group"
         :list="buttongrouplist"
@@ -309,10 +230,10 @@ import BRadioButtonGroup from "@/components/form/Radio/b-radio-button-group.vue"
 
 export default {
   name: "BRadioDemo",
-  components: { BRadio, BRadioGroup, BRadioButtonGroup, },
+  components: { BRadio, BRadioGroup, BRadioButtonGroup,},
   data() {
     return {
-      checked: "one",
+      checked: true,
       list: [
         { value: "value1", label: "value1" },
         { value: "value2", label: "value2" },

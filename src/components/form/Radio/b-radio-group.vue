@@ -1,65 +1,89 @@
 <template>
   <div>
-    <template v-for="(item, index) in list">
-      <b-redio
-        :key="index"
-        :mix-class="validateClass"
-        unvalid
+    <div
+      v-for="(item, index) in list"
+      :key="index"
+      class="form-check"
+      :class="{ 'form-check-inline': inline}"
+    >
+      <b-radio
+        :id="`${id}-${index}`"
+        :class="validateClass"
         :name="name"
-        :value="getKey(item)"
-        :label="getDisplay(item)"
         :checked="isSelected(item)"
-        :disabled="item.disabled || disabled"
+        :value="getKey(item)"
+        :disabled="disabled || item.disabled"
         v-bind="$attrs"
         v-on="$listeners"
-        @input="input($event, item)"
+        @input.native="input($event, item)"
+      />
+      <label
+        class="form-check-label"
+        :for="`${id}-${index}`"
       >
-        <template
-          v-if="list.length - 1 == index"
-          #valid
+        <slot>{{ getDisplay(item) }}</slot>
+      </label>
+      <template v-if="list.length - 1 == index">
+        <b-valid
+          v-if="validInfo || $slots.valid"
+          state="valid"
         >
           <slot name="valid">
             {{ validInfo }}
           </slot>
-        </template>
-        <template
-          v-if="list.length - 1 == index"
-          #invalid
+        </b-valid>
+        <b-valid
+          v-if="invalidInfo || $slots.invalid"
+          state="invalid"
         >
           <slot name="invalid">
             {{ invalidInfo }}
           </slot>
-        </template>
-      </b-redio>
-    </template>
-    <b-info :info="info" />
+        </b-valid>
+      </template>
+    </div>
+    <b-info
+      :class="{ 'pl-1': inline }"
+      :info="info"
+    />
   </div>
+
 </template>
 
 <script>
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import BRedio from "./b-radio";
+import BRadio from "./b-radio.vue"
 import BInfo from "@/components/basic/basic-info.vue";
+import BValid from "@/components/form/Other/b-form-valid.vue";
 
 export default {
-  name: "BRadioGroup",
-  components: { BRedio, BInfo },
-  mixins: [util.mixins.select.check, util.mixins.form.validator],
+  name: "BRaidoGroup",
+  components: { BRadio, BInfo, BValid },
+  mixins: [
+    util.mixins.base.style,
+    util.mixins.select.check,
+    util.mixins.form.validator
+  ],
   inheritAttrs: false,
   props: {
+    name: util.props.String,
     info: util.props.String,
     disabled: util.props.Boolean,
-    name: {
-      ...util.props.String,
-      required: true,
-    }
+    id: {
+      type: String,
+      default: function() {
+        return "Radio-" + tools.random.getRandomString();
+      }
+    },
+    inline: util.props.Boolean,
   },
   data() {
     return {
       validateClass: "",
       isMultiple: false,
-    };
+    }
   },
   methods: {
     input: function(event, item) {

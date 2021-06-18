@@ -230,7 +230,6 @@ export default {
   readonly: {
     props: {
       readonly: props.Boolean,
-      disabled: props.Boolean,
     },
     computed: {
       readonlyClass: function () {

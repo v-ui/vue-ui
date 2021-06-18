@@ -2,7 +2,6 @@
   <div class="form-group">
     <b-dropdown-picker
       ref="dropdownlist"
-      :class="[readonlyClass]"
       menu-width
       :label="showLabel"
       :placeholder="placeholder"
@@ -87,14 +86,15 @@ export default {
     BInfo
   },
   mixins: [
+    // TODO: remove util.mixins.form.base
     util.mixins.form.base,
-    util.mixins.form.readonly,
     util.mixins.form.validator,
     util.mixins.select.select,
   ],
   props: {
     info: util.props.String,
     search: util.props.Boolean,
+    disabled: util.props.Boolean,
     hideNull: {
       ...util.props.Boolean,
       default: function() {

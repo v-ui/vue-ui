@@ -53,7 +53,6 @@ export default {
   mixins: [
     util.mixins.date.type,
     util.mixins.date.base,
-    util.mixins.form.readonly,
   ],
   data() {
     return {

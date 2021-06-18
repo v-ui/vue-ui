@@ -47,7 +47,6 @@ export default {
   name: "BSelect",
   components: { BasicSelect, BValid, BFormText },
   mixins: [
-    util.mixins.form.base,
     util.mixins.select.select,
     util.mixins.form.validator,
   ],
@@ -56,6 +55,7 @@ export default {
     disabled: util.props.Boolean,
     info: util.props.String,
     hideNull: util.props.Boolean,
+    size: util.props.size,
     row: {
       type: [Number, String],
       default: function() {

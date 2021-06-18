@@ -306,14 +306,14 @@
       <font class="col-1">
         default:
       </font>
-      <b-checkbox-button-group class="col-11" />
+      <b-checkbox-button-group class="col-auto" />
     </div>
     <div class="row">
       <font class="col-1">
         checked:
       </font>
       <b-checkbox-button-group
-        class="col-11"
+        class="col-auto"
         :checked="Boolean(true)"
       />
     </div>
@@ -322,7 +322,7 @@
         disabled:
       </font>
       <b-checkbox-button-group
-        class="col-11"
+        class="col-auto"
         disabled
       />
     </div>
@@ -331,7 +331,7 @@
         label:
       </font>
       <b-checkbox-button-group
-        class="col-11"
+        class="col-auto"
         label="label Text"
       />
     </div>
@@ -340,7 +340,7 @@
         value:
       </font>
       <b-checkbox-button-group
-        class="col-11"
+        class="col-auto"
         name="value-button-group"
         value="value"
       />
@@ -350,7 +350,7 @@
         info:
       </font>
       <b-checkbox-button-group
-        class="col-11"
+        class="col-auto"
         name="info-button-group"
         info="button group info"
       />
@@ -363,7 +363,7 @@
       </font>
       <b-checkbox-button-group
         v-model="checked"
-        class="col-11"
+        class="col-auto"
         name="v-model-button-group"
       />
     </div>
