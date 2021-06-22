@@ -12,6 +12,7 @@ export default {
       textColor: props.textColor,
       textAlign: props.setX,
       size: props.size,
+      disabled: props.Boolean,
       border: {
         ...props.Boolean,
         default: true,

@@ -89,6 +89,7 @@ export default {
       default: 64,
     },
     icon: util.props.String,
+    disabled: util.props.Boolean,
     hideIcon: util.props.Boolean,
     info: util.props.String
   },

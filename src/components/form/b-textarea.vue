@@ -66,6 +66,7 @@ export default {
       default: 1024
     },
     info: util.props.String,
+    disabled: util.props.Boolean,
     prompt: util.props.Boolean,
     resize: util.props.Boolean
   },

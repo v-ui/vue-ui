@@ -1,18 +1,17 @@
 <template>
   <div>
-    <b-input-group :size="size">
-      <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
-        <basic-button
-          class="border-0"
-          color="light"
-          :disabled="subButtomDisabled"
-          @click="subn"
-        >
-          <slot name="sub">
-            {{ subValue }}
-          </slot>
-        </basic-button>
-      </b-input-group-prepend>
+    <b-input-group :size="size" class="flex-nowrap">
+      <basic-button
+        v-if="!readonly && !disabled && !hideButton"
+        class="border-0"
+        color="light"
+        :disabled="subButtomDisabled"
+        @click="subn"
+      >
+        <slot name="sub">
+          {{ subValue }}
+        </slot>
+      </basic-button>
       <basic-text
         ref="input"
         v-model.number="number"
@@ -32,18 +31,17 @@
         @keyup.native.shift.exact.up="superAdd"
         @keyup.native.shift.exact.down="superSub"
       />
-      <b-input-group-prepend v-if="!readonly && !disabled && !hideButton">
-        <basic-button
-          class="border-0"
-          color="light"
-          :disabled="addButtonDisabled"
-          @click="add"
-        >
-          <slot name="add">
-            {{ addValue }}
-          </slot>
-        </basic-button>
-      </b-input-group-prepend>
+      <basic-button
+        v-if="!readonly && !disabled && !hideButton"
+        class="border-0"
+        color="light"
+        :disabled="addButtonDisabled"
+        @click="add"
+      >
+        <slot name="add">
+          {{ addValue }}
+        </slot>
+      </basic-button>
     </b-input-group>
     <b-info :info="info" />
   </div>
@@ -56,8 +54,6 @@ import BasicText from "@/components/form/Basic/basic-text.vue";
 import BasicButton from "@/components/basic/Button/basic-button.vue";
 
 import BInputGroup from "@/components/form/InputGroup/b-input-group.vue";
-import BInputGroupPrepend from "@/components/form/InputGroup/b-input-group-prepend.vue";
-// import BInputGroupText from "@/components/form/InputGroup/b-input-group-text.vue";
 
 import BInfo from "@/components/basic/basic-info.vue";
 
@@ -67,7 +63,6 @@ export default {
     BasicText,
     BasicButton,
     BInputGroup,
-    BInputGroupPrepend,
     BInfo
   },
   mixins: [util.mixins.form.readonly],
@@ -111,6 +106,7 @@ export default {
     },
     textReadonly: util.props.Boolean,
     size: util.props.size,
+    disabled: util.props.Boolean,
     hideButton: util.props.Boolean,
     info: util.props.String
   },

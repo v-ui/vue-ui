@@ -8,13 +8,14 @@
       <font class="col-1">
         default:
       </font>
-      <b-number />
+      <b-number class="col-auto" />
     </div>
     <div class="row">
       <font class="col-1">
         step:
       </font>
       <b-number
+        class="col-auto"
         value="0.5"
         step="0.1"
       />
@@ -23,25 +24,25 @@
       <font class="col-1">
         readonly:
       </font>
-      <b-number readonly />
+      <b-number class="col-auto" readonly />
     </div>
     <div class="row">
       <font class="col-1">
         disabled:
       </font>
-      <b-number disabled />
+      <b-number class="col-auto" disabled />
     </div>
     <div class="row">
       <font class="col-1">
         textReadonly:
       </font>
-      <b-number text-readonly />
+      <b-number class="col-auto" text-readonly />
     </div>
     <div class="row">
       <font class="col-1">
         placeholder:
       </font>
-      <b-number placeholder="placeholder text" />
+      <b-number class="col-auto" placeholder="placeholder text" />
     </div>
     <div class="row">
       <font class="col-1">
@@ -49,6 +50,7 @@
         <br>max:
       </font>
       <b-number
+        class="col-auto"
         min="5"
         max="10"
       />
@@ -58,6 +60,7 @@
         hideButton:
       </font>
       <b-number
+        class="col-auto"
         hide-button
       />
     </div>
@@ -65,19 +68,19 @@
       <font class="col-1">
         size(lg):
       </font>
-      <b-number size="lg" />
+      <b-number class="col-auto" size="lg" />
     </div>
     <div class="row">
       <font class="col-1">
         size(sm):
       </font>
-      <b-number size="sm" />
+      <b-number class="col-auto" size="sm" />
     </div>
     <div class="row">
       <font class="col-1">
         info:
       </font>
-      <b-number info="info text" />
+      <b-number class="col-auto" info="info text" />
     </div>
     <div class="row">
       <font class="col-1">
@@ -85,6 +88,7 @@
         <br>addValue
       </font>
       <b-number
+        class="col-auto"
         sub-value="sub"
         add-value="add"
         step="0.1"
@@ -95,7 +99,7 @@
         sub slot
         <br>add slot
       </font>
-      <b-number step="0.1">
+      <b-number class="col-auto" step="0.1">
         <template slot="sub">
           sub slot
         </template>
@@ -127,7 +131,7 @@
     <hr>
     <div>
       default(accuracy 小于 0, value = 1，step = 1（默认）, 无小数位)
-      <b-number value="1" />
+      <b-number class="col-auto" value="1" />
     </div>
     <div>
       default(accuracy 小于 0, value = 1， step = 0.1, 1 位小数)
@@ -139,6 +143,7 @@
     <div>
       default(accuracy 小于 0, 初始化传入 value = 0.1 step = 0.02, 2 位小数)
       <b-number
+        class="col-auto"
         value="0.1"
         step="0.002"
       />
@@ -146,6 +151,7 @@
     <div>
       default(accuracy = 3, 初始化传入 value = 0.1 step = 0.02, 3 位小数)
       <b-number
+        class="col-auto"
         value="0.1"
         step="0.02"
         accuracy="3"
@@ -160,7 +166,7 @@
         <br>
         ({{ number }})
       </font>
-      <b-number v-model.number="number" />
+      <b-number class="col-auto" v-model.number="number" />
     </div>
   </div>
 </template>
