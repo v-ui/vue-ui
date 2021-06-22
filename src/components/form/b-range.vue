@@ -8,7 +8,7 @@
       <input
         ref="range"
         type="range"
-        class="custom-range col"
+        class="form-range col"
         :min="min"
         :max="max"
         :step="step"
