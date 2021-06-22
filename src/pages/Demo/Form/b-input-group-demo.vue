@@ -26,7 +26,7 @@
         <b-input-group>
           <b-input-group-prepend>
             <b-input-group-text>
-              <b-checkbox />
+              <b-check type="checkbox" />
             </b-input-group-text>
           </b-input-group-prepend>
           <basic-text />
@@ -35,7 +35,7 @@
         <b-input-group>
           <b-input-group-prepend>
             <b-input-group-text>
-              <b-radio />
+              <b-check type="radio" />
             </b-input-group-text>
           </b-input-group-prepend>
           <basic-text />
@@ -186,8 +186,7 @@ import BInputGroupText from "@/components/form/InputGroup/b-input-group-text.vue
 
 import BasicText from "@/components/form/Basic/basic-text.vue";
 import BTextarea from "@/components/form/b-textarea.vue";
-import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
-import BRadio from "@/components/form/Radio/b-radio.vue";
+import BCheck from "@/components/form/Check/b-check.vue";
 import BasicSelect from "@/components/form/Basic/Select/basic-select.vue";
 import BasicButton from "@/components/basic/Button/basic-button.vue";
 
@@ -199,8 +198,7 @@ export default {
     BInputGroupText,
     BasicText,
     BTextarea,
-    BCheckbox,
-    BRadio,
+    BCheck,
     BasicSelect,
     BasicButton
   },

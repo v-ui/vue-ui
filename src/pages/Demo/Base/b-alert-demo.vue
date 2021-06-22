@@ -47,8 +47,9 @@
       <font class="col-1">
         position
       </font>
-      <b-radio-group
+      <b-check-group
         v-model="position"
+        type="radio"
         name="position"
         :list="list"
       />
@@ -142,12 +143,12 @@
 import BAlert from "@/components/base/Alert/b-alert.vue";
 import BAlertLink from "@/components/base/Alert/b-alert-link.vue";
 
-import BRadioGroup from "@/components/form/Radio/b-radio-group.vue";
+import BCheckGroup from "@/components/form/Check/b-check-group.vue";
 
 import variables from "@/components/util/variables.js";
 export default {
   name: "BAlertDemo",
-  components: { BAlert, BAlertLink, BRadioGroup },
+  components: { BAlert, BAlertLink, BCheckGroup },
   data() {
     return {
       position: { value: "top-center" },

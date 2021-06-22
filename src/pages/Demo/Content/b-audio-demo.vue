@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>b-radio</h2>
+    <h2>b-audio</h2>
     <pre />
     <b-audio />
   </div>

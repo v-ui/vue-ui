@@ -6,22 +6,23 @@
       role="group"
     >
       <template v-for="(item, index) in list">
-        <b-radio
-          :key="'radio-'+index"
+        <b-check
+          :key="'check-'+index"
           :id="`${id}-${index}`"
+          :type="type"
           class="btn-check"
           :name="name"
           autocomplete="off"
           :checked="isSelected(item)"
           :value="getKey(item)"
           :disabled="disabled || item.disabled"
+          @input.native="click(item)"
         />
         <label
           :key="'label-'+index"
           :for="`${id}-${index}`"
           class="btn"
           :class="`btn-${item.color || color}`"
-          @click="click(item)"
         >
           {{ getDisplay(item) }}
         </label>
@@ -36,14 +37,19 @@
 import tool from "@/tools/index.js"
 import util from "@/components/util/index.js";
 
-import BRadio from "./b-radio.vue"
+import BCheck from "./b-check.vue"
 import BInfo from "@/components/basic/basic-info.vue";
 
 export default {
-  name: "BRadioButtonGroup",
-  components: { BRadio, BInfo },
+  name: "BCheckButtonGroup",
+  components: { BCheck, BInfo },
   mixins: [ util.mixins.select.check, ],
   props: {
+    type: {
+      type: String,
+      default: 'radio',
+      validator: value => ['radio', 'checkbox'].includes(value),
+    },
     size: util.props.size,
     color: util.props.color,
     info: util.props.String,
@@ -51,11 +57,17 @@ export default {
     name: {
       ...util.props.String,
       required: true
-    }
+    },
+    id: {
+      type: String,
+      default: function() {
+        return "check-button-group-" + tool.random.getRandomString();
+      }
+    },
   },
   data() {
     return {
-      id: 'radio-buton' + tool.random.getRandomString()
+      isMultiple: this.type !== 'radio',
     }
   },
   computed: {
@@ -66,7 +78,15 @@ export default {
   },
   methods: {
     click: function(item) {
-      this.selectedValue = item
+      if (this.isMultiple) {
+        const value = this.getKey(item)
+        let index = this.selectedMap.indexOf(value)
+        index >= 0
+          ? this.selectedValue.splice(index, 1)
+          : this.selectedValue.push(item)
+      } else {
+        this.selectedValue = item
+      }
     },
   },
 };

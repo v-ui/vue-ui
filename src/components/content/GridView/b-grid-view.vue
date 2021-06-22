@@ -99,8 +99,9 @@
           </template>
           <template #body-_check="{ row }">
             <div class="d-flex justify-content-center">
-              <b-checkbox
+              <b-check
                 v-if="selectStatus === enumSelect.select"
+                type="checkbox"
                 :checked="isSelected(row)"
                 @input="input($event, row)"
               />
@@ -181,7 +182,7 @@ import GridPagination from './Basic/grid-pagination'
 import GridProperties from "./tools/Properties/grid-properties"
 
 import BaseIcon from "@/components/basic/basic-icon.vue"
-import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
+import BCheck from "@/components/form/Check/b-check.vue";
 export default {
   name: "BGridView",
   components: {
@@ -199,7 +200,7 @@ export default {
     GridProperties,
     GridPagination,
     BaseIcon,
-    BCheckbox,
+    BCheck,
   },
   mixins: [ util.mixins.grid.select, ],
   inheritAttrs: false,

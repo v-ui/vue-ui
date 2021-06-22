@@ -20,7 +20,8 @@
         />
       </template>
       <template #body-check="{ row }">
-        <b-checkbox
+        <b-check
+          type="checkbox"
           :checked="isSelected(row)"
           @input="input($event, row)"
         />
@@ -44,10 +45,10 @@ import BTableSerial from '@/components/content/Table/container/b-table-serial.vu
 import BTableOperate from '@/components/content/Table/container/b-table-operate.vue'
 
 import BButton from '@/components/basic/Button/basic-button.vue';
-import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
+import BCheck from "@/components/form/Check/b-check.vue";
 export default {
   name: 'BTableDemo',
-  components: { BTable, BTableSerial, BTableOperate, BButton, BCheckbox },
+  components: { BTable, BTableSerial, BTableOperate, BButton, BCheck },
   mixins: [ util.mixins.select.check ],
   data() {
     return {

@@ -115,7 +115,7 @@ const base = {
       this.isMultiple = value
     },
     selected: function (value) {
-      this.selectedValue = value // install(value, this.isMultiple)
+      this.selectedValue = value
     },
     selectedValue: function (value) {
       let data = value

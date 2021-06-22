@@ -4,10 +4,11 @@
       v-for="(item, index) in list"
       :key="index"
       class="form-check"
-      :class="{ 'form-check-inline': inline}"
+      :class="{ 'form-check-inline': inline, }"
     >
-      <b-radio
+      <b-check
         :id="`${id}-${index}`"
+        :type="type"
         :class="validateClass"
         :name="name"
         :checked="isSelected(item)"
@@ -54,27 +55,31 @@
 import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
-import BRadio from "./b-radio.vue"
+import BCheck from "./b-check.vue"
 import BInfo from "@/components/basic/basic-info.vue";
 import BValid from "@/components/form/Other/b-form-valid.vue";
 
 export default {
-  name: "BRaidoGroup",
-  components: { BRadio, BInfo, BValid },
+  name: "BCheckGroup",
+  components: { BCheck, BInfo, BValid },
   mixins: [
-    util.mixins.base.style,
     util.mixins.select.check,
     util.mixins.form.validator
   ],
   inheritAttrs: false,
   props: {
+    type: {
+      type: String,
+      default: 'radio',
+      validator: value => ['radio', 'checkbox'].includes(value),
+    },
     name: util.props.String,
     info: util.props.String,
     disabled: util.props.Boolean,
     id: {
       type: String,
       default: function() {
-        return "Radio-" + tools.random.getRandomString();
+        return "check-group-" + tools.random.getRandomString();
       }
     },
     inline: util.props.Boolean,
@@ -82,21 +87,27 @@ export default {
   data() {
     return {
       validateClass: "",
-      isMultiple: false,
+      isMultiple: this.type !== 'radio',
     }
   },
   methods: {
     input: function(event, item) {
-      if (event.target.checked) {
+      if (this.isMultiple) {
+        const key = this.getKey(item)
+        let index = this.selectedMap.indexOf(key)
+        index >= 0
+          ? this.selectedValue.splice(index, 1)
+          : this.selectedValue.push(item)
+      } else {
         this.selectedValue = item
-        this.validator(
-          event,
-          this.selectedValue,
-          () => { this.validateClass = '' },
-          () => { this.validateClass = this.validClass },
-          () => { this.validateClass = this.inValidClass },
-        )
       }
+      this.validator(
+        event,
+        this.selectedValue,
+        () => { this.validateClass = '' },
+        () => { this.validateClass = this.validClass },
+        () => { this.validateClass = this.inValidClass },
+      )
     },
     // 验证集合 通过返回 true，不通过返回 false
     validating: function (value) {
