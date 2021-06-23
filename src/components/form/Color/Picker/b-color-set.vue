@@ -5,7 +5,7 @@
         v-for="(item, index) in list"
         :key="index"
         class="col m-1"
-        color="light"
+        outline
         :value="item"
         :active="isSelected(item)"
         @click="selectedValue = item"
