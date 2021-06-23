@@ -72,6 +72,30 @@
         {{ radio }}
       </div>
     </div>
+    <div class="row">
+      <font class="col-2">
+        indeterminate:<br>
+        仅 type=“checkbox” 时
+      </font>
+      <font class="col-1">
+        indeterminate="0"
+      </font>
+      <div class="col-1">
+        <b-check type="checkbox" indeterminate="0" />
+      </div>
+     <font class="col-1">
+        indeterminate="1"
+      </font>
+      <div class="col-1">
+        <b-check type="checkbox" indeterminate="1" />
+      </div>
+      <font class="col-1">
+        indeterminate="2"
+      </font>
+      <div class="col-1">
+        <b-check type="checkbox" indeterminate="2" />
+      </div>
+    </div>
     <h2>b-check-group</h2>
     <hr>
     <h4>基础属性</h4>
