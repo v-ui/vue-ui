@@ -5,6 +5,7 @@
     :target="filTarget"
     :rel="`noopener norefferrer ${rel}`"
     :aria-disabled="disabled"
+    :tabindex="{disabled: -1}"
   >
     <i
       v-if="!hideIcon && iconClass"

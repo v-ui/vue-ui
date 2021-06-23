@@ -169,8 +169,8 @@ import BTable from "@/components/content/Table/b-table.vue";
 import BTableSerial from '@/components/content/Table/container/b-table-serial.vue'
 import BTableOperate from '@/components/content/Table/container/b-table-operate.vue'
 
-import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
-import BButtonToolbar from "@/components/base/ButtonGroup/b-btn-toolbar.vue";
+import BButtonGroup from "@/components/basic/Button/basic-button-group.vue";
+import BButtonToolbar from "@/components/basic/Button/basic-button-toolbar.vue";
 import BButton from "@/components/basic/Button/basic-button.vue";
 import BasicIcon from "@/components/basic/basic-icon.vue"
 

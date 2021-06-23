@@ -1,4 +1,5 @@
 import base from './base'
+import btn from './btn'
 import size from './size'
 import form from './form'
 import grid from './grid'
@@ -20,6 +21,7 @@ import administrative from './plugin/administrative'
 
 export default {
   base,
+  btn,
   size,
   form,
   grid,

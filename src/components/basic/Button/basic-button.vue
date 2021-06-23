@@ -1,20 +1,15 @@
 <template>
   <button
     v-if="!href"
+    :type="btnType"
     class="btn"
     :class="objClass"
-    :disabled="isDisabled"
-    :aria-disabled="isDisabled"
+    :disabled="disabled"
+    :aria-disabled="disabled"
     :aria-pressed="active"
+    :data-bs-toggle="{active: 'button'}"
     v-on="$listeners"
   >
-    <slot name="loading">
-      <b-loading
-        v-show="loading"
-        size="sm"
-        class="me-1"
-      />
-    </slot>
     <slot>{{ value }}</slot>
     <sr-msg>{{ fillsrMsg }}</sr-msg>
   </button>
@@ -23,21 +18,12 @@
     class="btn"
     :class="objClass"
     :href="href"
-    :active="active"
+    :disabled="disabled"
     :aria-pressed="active"
-    :disabled="isDisabled"
-    :aria-disabled="isDisabled"
-    data-toggle="button"
+    :data-bs-toggle="{active: 'button'}"
     role="button"
     v-on="$listeners"
   >
-    <slot name="loading">
-      <b-loading
-        v-show="loading"
-        size="sm"
-        class="me-1"
-      />
-    </slot>
     <slot>{{ value }}</slot>
     <sr-msg>{{ fillsrMsg }}</sr-msg>
   </base-a>
@@ -47,12 +33,11 @@
 import util from "@/components/util/index.js";
 
 import BaseA from "@/components/basic/A/basic-a.vue";
-import BLoading from '@/components/base/Loading/b-loading.vue'
 import srMsg from "@/components/basic/basic-sr-msg.vue";
 
 export default {
   name: "BasicButton",
-  components: { BaseA, BLoading, srMsg },
-  mixins: [util.mixins.form.btn]
+  components: { BaseA, srMsg },
+  mixins: [util.mixins.btn.base,]
 };
 </script>

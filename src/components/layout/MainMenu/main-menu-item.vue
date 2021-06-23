@@ -11,7 +11,7 @@
           :class=" $route.path == model.path ? 'text-primary font-weight-bold' : 'text-dark'"
         >
           <font class="text-truncate w-100 d-inline-block">
-            {{ model.name | upperToHyphenLower }}
+            {{ model.name }}
           </font>
         </router-link>
         <router-link
@@ -56,7 +56,6 @@ export default {
   components: {
     item: () => import("./main-menu-item.vue")
   },
-  filters: { ...util.filters, },
   props: {
     model: util.props.Object,
   },
