@@ -22,7 +22,7 @@
           :key="'label-'+index"
           :for="`${id}-${index}`"
           class="btn"
-          :class="`btn-${item.color || color}`"
+          :class="btnClass"
         >
           {{ getDisplay(item) }}
         </label>
@@ -52,6 +52,7 @@ export default {
     },
     size: util.props.size,
     color: util.props.color,
+    outline: util.props.Boolean,
     info: util.props.String,
     disabled: util.props.Boolean,
     name: {
@@ -74,6 +75,9 @@ export default {
     groupClass: function() {
       let size = this.size ? `btn-group-${this.size}` : ''
       return `${size}`
+    },
+    btnClass: function() {
+      return `btn-${this.outline ? 'outline-' : ''}${this.color}`
     },
   },
   methods: {
