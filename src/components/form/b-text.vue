@@ -1,8 +1,9 @@
 <template>
-  <div class=" position-relative p-0">
+  <div class="position-relative p-0" :class="{'form-floating': floatLabel}">
     <basic-text
       ref="text"
       v-model="dataValue"
+      :id="id"
       :type="cImputType"
       :style="cStyle"
       :size="size"
@@ -13,6 +14,12 @@
       v-bind="$attrs"
       v-on="$listeners"
       @blur.native="validator($event)"
+    />
+    <i
+      v-if="!hideIcon && cIcon"
+      class="text-muted text-center align-self-center position-absolute"
+      :class="cIcon"
+      :style="iconStyle"
     />
     <b-valid
       v-if="$slots.valid || validInfo"
@@ -31,12 +38,7 @@
       </slot>
     </b-valid>
     <b-form-text :info="info" />
-    <i
-      v-if="!hideIcon && cIcon"
-      class="text-muted text-center position-absolute"
-      :class="cIcon"
-      :style="iconStyle"
-    />
+    <label :style="cStyle" :for="id">{{ floatLabel }}</label>
   </div>
 </template>
 <script>
@@ -81,9 +83,10 @@ export default {
       }
     },
     value: util.props.String,
+    floatLabel: util.props.String,
     placeholder: util.props.String,
-    length: util.props.UInt,
     size: util.props.size,
+    length: util.props.UInt,
     maxlength: {
       ...util.props.UInt,
       default: 64,
@@ -91,7 +94,13 @@ export default {
     icon: util.props.String,
     disabled: util.props.Boolean,
     hideIcon: util.props.Boolean,
-    info: util.props.String
+    info: util.props.String,
+    id: {
+      type: String,
+      default: function() {
+        return "text-" + tools.random.getRandomString();
+      }
+    },
   },
   data() {
     return {
@@ -130,13 +139,14 @@ export default {
         : (o && o.value) || null;
     },
     iconStyle: function() {
-      let style = `top: 0.7em; left: 0.6em; width: 1em;`
+      if (this.floatLabel) return `top: 1.3em; left: 0.6em;`
+      let style = `top: 0.7em; left: 0.6em;`
       switch(this.size) {
         case 'sm':
-          style = `top: 0.5em; left: 0.5em; width: 1em;`
+          style = `top: 0.5em; left: 0.6em;`
           break;
         case 'lg':
-          style = `top: 1.1em; left: 0.9em; width: 1em;`
+          style = `top: 1.1em; left: 1.1em;`
           break;
       }
       return style

@@ -45,6 +45,17 @@
     </div>
     <div class="row">
       <font class="col-1">
+        floating:
+      </font>
+      <b-textarea
+        class="col-11"
+        rows="2"
+        placeholder="placeholder value"
+        float-label="float label"
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
         cols:
       </font>
       <b-textarea

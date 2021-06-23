@@ -65,6 +65,22 @@
     </div>
     <div class="row">
       <font class="col-1">
+        floating:
+      </font>
+      <b-select
+        class="col-5"
+        :list="list"
+        float-label="float label"
+      />
+      <b-select
+        class="col-5"
+        :list="list"
+        multiple
+        float-label="float label"
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
         hideNull:
       </font>
       <b-select

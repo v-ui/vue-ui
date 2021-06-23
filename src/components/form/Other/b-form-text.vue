@@ -1,5 +1,5 @@
 <template>
-  <span class="form-text">
+  <span v-if="$slots.default" class="form-text">
     <slot>{{ info }}</slot>
   </span>
 </template>

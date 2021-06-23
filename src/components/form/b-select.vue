@@ -1,7 +1,8 @@
 <template>
-  <div class="form-group my-0">
+  <div class="p-0" :class="{'form-floating': floatLabel}">
     <basic-select
       v-model="selectedValue"
+      :id="id"
       :list="list"
       :size="size"
       :row="row"
@@ -33,10 +34,12 @@
       </slot>
     </b-valid>
     <b-form-text :info="info" />
+    <label :for="id">{{ floatLabel }}</label>
   </div>
 </template>
 
 <script>
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BasicSelect from '@/components/form/Basic/Select/basic-select.vue'
@@ -52,6 +55,7 @@ export default {
   ],
   inheritAttrs: false,
   props: {
+    floatLabel: util.props.String,
     disabled: util.props.Boolean,
     info: util.props.String,
     hideNull: util.props.Boolean,
@@ -61,6 +65,12 @@ export default {
       default: function() {
         return this.multiple ? this.list.length + 1 : null;
       },
+    },
+    id: {
+      type: String,
+      default: function() {
+        return "text-" + tools.random.getRandomString();
+      }
     },
   },
   methods: {

@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="p-0" :class="{'form-floating': floatLabel}">
     <basic-textarea
       v-model="dataValue"
+      :id="id"
       :size="size"
       :resize="resize"
       :rows="Number(rows)"
@@ -30,6 +31,7 @@
       </slot>
     </b-valid>
     <b-form-text :info="message" />
+    <label :for="id">{{ floatLabel }}</label>
   </div>
 </template>
 <script>
@@ -55,6 +57,7 @@ export default {
   },
   props: {
     value: util.props.String,
+    floatLabel: util.props.String,
     rows: {
       ...util.props.UInt,
       default: 3
@@ -68,7 +71,13 @@ export default {
     info: util.props.String,
     disabled: util.props.Boolean,
     prompt: util.props.Boolean,
-    resize: util.props.Boolean
+    resize: util.props.Boolean,
+    id: {
+      type: String,
+      default: function() {
+        return "textarea-" + tools.random.getRandomString();
+      }
+    },
   },
   data() {
     return {

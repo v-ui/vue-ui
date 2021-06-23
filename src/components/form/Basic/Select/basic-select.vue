@@ -1,7 +1,7 @@
 <template>
   <select
     class="form-select"
-    :class="[cClass, sizeClass]"
+    :class="[sizeClass]"
     :size="row"
     :multiple="isMultiple"
     :disabled="disabled"
