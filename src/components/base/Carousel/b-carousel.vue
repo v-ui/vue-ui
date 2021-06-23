@@ -40,8 +40,8 @@
           aria-hidden="true"
         />
         <sr-msg>Previous</sr-msg>
-      </base-a>
-      <base-a
+      </-a>
+      <basic-a
         class="carousel-control-next"
         :href="'#' + guid"
         role="button"
@@ -53,7 +53,7 @@
           aria-hidden="true"
         />
         <sr-msg>Next</sr-msg>
-      </base-a>
+      </basic-a>
     </template>
   </div>
 </template>

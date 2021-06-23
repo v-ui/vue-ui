@@ -1,7 +1,7 @@
 <template>
   <span
     v-if="$slots.default"
-    class="sr-only sr-only-focusable"
+    class="visually-hidden visually-hidden-focusable"
   >
     <slot />
   </span>

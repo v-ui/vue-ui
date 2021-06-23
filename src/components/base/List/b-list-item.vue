@@ -9,7 +9,7 @@
   >
     <div class="d-flex align-items-center">
       <slot>{{ label }}</slot>
-      <base-icon
+      <basic-icon
         v-if="drop"
         class="ms-auto h5 handle"
         icon="list"
