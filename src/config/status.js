@@ -1,16 +1,16 @@
 const base = {
-    default: { title: 'Default', color: 'primary', icon: 'far fa-dot-circle' },
-    success: { title: 'Success', color: 'success', icon: 'far fa-check-circle' },
-    warning: { title: 'Warning', color: 'warning', icon: 'far fa-exclamation-triangle'},
-    error: { title: 'Error', color: 'danger', icon: 'far fa-times-circle'},
-    danger: { title: 'Danger', color: 'danger', icon: 'far fa-exclamation-circle'},
+    default: { title: 'Default', color: 'primary', icon: 'record-circle-fill' },
+    success: { title: 'Success', color: 'success', icon: 'check-circle-fill' },
+    warning: { title: 'Warning', color: 'warning', icon: 'exclamation-triangle-fill'},
+    error: { title: 'Error', color: 'danger', icon: 'x-circle-fill'},
+    danger: { title: 'Danger', color: 'danger', icon: 'exclamation-circle-fill'},
 }
 
 const message = {
   ...base,
-  system: { title: 'System Info', color: 'info', icon: 'far fa-cog' },
-  info: { title: 'Info', color: 'info', icon: 'far fa-info-circle' },
-  issue: { title: 'Issue', color: 'secondary', icon: 'far fa-question-circle' },
+  system: { title: 'System Info', color: 'info', icon: 'info-lg' },
+  info: { title: 'Info', color: 'info', icon: 'info-circle-fill' },
+  issue: { title: 'Issue', color: 'secondary', icon: 'question-circle-fill' },
 }
 
 const method = {
