@@ -1,7 +1,7 @@
 // v-tip
 // 注册一个全局自定义指令 `v-tip`(用于提示弹窗)
 
-import jQuery from 'jquery'
+import { Tooltip, Popover } from 'bootstrap'
 
 const name = "tip"
 const func = (element, binding) => {
@@ -20,23 +20,23 @@ const func = (element, binding) => {
   }
 
   if (arg == 'tooltip') {
-    let obj = {
+    let opt = {
       toggle: arg,
       placement: modifiers,
       title: binding.value.content || binding.value,
       container: binding.value.container || 'body'
     }
-    jQuery(el).tooltip(obj)
+    new Tooltip(el, opt)
   } else {
-    let obj = {
+    let opt = {
       toggle: arg,
       placement: modifiers,
       content: binding.value.content || binding.value,
       title: binding.value.title || '',
       container: binding.value.container || 'body',
     }
-    if (binding.value.trigger) obj.trigger = binding.value.trigger
-    jQuery(el).popover(obj)
+    if (binding.value.trigger) opt.trigger = binding.value.trigger
+    new Popover(el, opt)
   }
 }
 

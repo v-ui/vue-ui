@@ -10,7 +10,6 @@
       <div
         ref="arrow"
         class="tooltip-arrow"
-        data-popper-arrow
       />
       <div
         ref="body"
@@ -110,7 +109,7 @@ export default {
 .tooltip[data-popper-placement^="top"] .tooltip-arrow::before {
   top: 0;
   border-width: 0.4rem 0.4rem 0;
-  border-top-color: #000;
+  border-top-color: rgb(0, 0, 0);
 }
 
 .tooltip[data-popper-placement^="right"] {
@@ -126,7 +125,7 @@ export default {
 .tooltip[data-popper-placement^="right"] .tooltip-arrow::before {
   right: 0;
   border-width: 0.4rem 0.4rem 0.4rem 0;
-  border-right-color: #000;
+  border-right-color: rgb(0, 0, 0);
 }
 
 .tooltip[data-popper-placement^="bottom"] {
@@ -140,7 +139,7 @@ export default {
 .tooltip[data-popper-placement^="bottom"] .tooltip-arrow::before {
   bottom: 0;
   border-width: 0 0.4rem 0.4rem;
-  border-bottom-color: #000;
+  border-bottom-color: rgb(0, 0, 0);
 }
 
 .tooltip[data-popper-placement^="left"] {
@@ -156,6 +155,6 @@ export default {
 .tooltip[data-popper-placement^="left"] .tooltip-arrow::before {
   left: 0;
   border-width: 0.4rem 0 0.4rem 0.4rem;
-  border-left-color: #000;
+  border-left-color: rgb(0, 0, 0);
 }
 </style>

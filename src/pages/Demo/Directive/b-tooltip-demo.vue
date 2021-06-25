@@ -168,7 +168,7 @@
       </font>
       <a
         v-tip:popover="{trigger: 'focus', content: 'this is popover`s content just for <a>'}"
-        class="btn btn-primary"
+        class="btn btn-primary col-auto"
         tabindex="0"
         role="button"
       >Dismissible popover</a>
