@@ -7,13 +7,13 @@ Vue.directive('coll', {
 
     if (!target) return
     tools.dom.addAttrs(el, {
-      'data-toggle': 'collapse',
+      'data-bs-toggle': 'collapse',
       'aria-controls': binding.arg || 'Collapse Controller',
       'aria-expanded': binding.modifiers.show || false,
     })
 
     el.tagName.toLowerCase() == 'a'
       ? tools.dom.addAttr(el, 'href', target)
-      : tools.dom.addAttr(el, 'data-target', target)
+      : tools.dom.addAttr(el, 'data-bs-target', target)
   }
 })
