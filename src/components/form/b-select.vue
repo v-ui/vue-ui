@@ -34,7 +34,7 @@
       </slot>
     </b-valid>
     <b-form-text :info="info" />
-    <label :for="id">{{ floatLabel }}</label>
+    <label v-if="floatLabel" :for="id">{{ floatLabel }}</label>
   </div>
 </template>
 

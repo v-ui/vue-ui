@@ -31,7 +31,7 @@
       </slot>
     </b-valid>
     <b-form-text :info="message" />
-    <label :for="id">{{ floatLabel }}</label>
+    <label v-if="floatLabel" :for="id">{{ floatLabel }}</label>
   </div>
 </template>
 <script>

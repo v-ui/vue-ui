@@ -22,7 +22,7 @@
         />
         <button
           v-coll:control="'#collapse'"
-          class="btn btn-primary"
+          class="btn btn-primary col-auto"
           type="button"
         >
           高级搜索
@@ -63,7 +63,7 @@
             <font class="col-1">
               样式：
             </font>
-            <b-radio-group
+            <b-check-group
               v-model="radioStyle"
               class="col"
               :list="[ 'all', 'triangle', 'square', 'journal', 'diamond', 'octagon', 'bookmark', 'bag', 'circle', 'shield', 'cloud', 'patch', ]"
