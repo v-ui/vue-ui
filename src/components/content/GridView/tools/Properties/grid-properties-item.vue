@@ -20,7 +20,7 @@ import util from "@/components/util/index.js";
 import BSwitch from "@/components/form/b-switch.vue"
 import BaseIcon from '@/components/basic/basic-icon.vue'
 import BaseLabel from "@/components/basic/basic-label.vue"
-import BCollapse from "@/components/base/Collapse/index.js";
+import BCollapse from "@/components/base/Collapse/b-collapse.vue"
 export default {
   name: 'GridPropertiesItem',
   components: { GridPropertiesList: async () => await import('./grid-properties-list.vue'), BSwitch, BaseIcon, BaseLabel, BCollapse },

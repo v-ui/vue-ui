@@ -149,7 +149,7 @@ import BText from "@/components/form/b-text.vue";
 import BCheckGroup from "@/components/form/Check/b-check-group.vue";
 
 import BInfo from '@/components/basic/basic-info.vue'
-import BCollapse from "@/components/base/Collapse/index.js";
+import BCollapse from "@/components/base/Collapse/b-collapse.vue"
 
 export default {
   name: "BasicIconDemo",

@@ -12,6 +12,11 @@ Vue.directive(tip.name, tip.func) // v-tip
 import modal from './modal'
 Vue.directive(modal.name, modal.func) // v-modal
 
+// v-coll
+// 注册一个全局自定义指令
+import coll from './coll'
+Vue.directive(coll.name, coll.func) // v-coll
+
 // v-canvas
 // 注册一个全局自定义指令
 import canvas from './canvas'

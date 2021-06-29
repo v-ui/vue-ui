@@ -23,7 +23,7 @@
 <script>
 import tools from "@/tools/index.js";
 
-import BCollapse from "@/components/base/Collapse/index.js";
+import BCollapse from "@/components/base/Collapse/b-collapse.vue"
 
 export default {
   name: "BCollapseDemo",
@@ -36,11 +36,5 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      control: "control info",
-
-    };
-  }
 };
 </script>
