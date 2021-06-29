@@ -7,9 +7,11 @@ const name = 'canvas'
 const func = (el, binding) => {
   tools.dom.addAttrs(el, {
     'data-bs-toggle': 'offcanvas',
-    'data-bs-target': binding.value,
     'aria-controls': binding.value.slice(1),
   })
+  el.tagName.toLowerCase() == 'a'
+    ? tools.dom.addAttr(el, 'href', binding.value)
+    : tools.dom.addAttr(el, 'data-bs-target', binding.value)
 }
 
 export default {

@@ -9,8 +9,10 @@ const func = (el, binding) => {
 
   tools.dom.addAttrs(el, {
     'data-bs-toggle': 'modal',
-    'data-bs-target': target
   })
+  el.tagName.toLowerCase() == 'a'
+    ? tools.dom.addAttr(el, 'href', target)
+    : tools.dom.addAttr(el, 'data-bs-target', target)
 }
 
 export default {
