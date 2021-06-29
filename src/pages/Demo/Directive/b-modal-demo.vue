@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h2>b-modal(v-modal)</h2>
+    <hr>
     <b-modal
       id="exampleModal"
       title="title text"

@@ -8,7 +8,6 @@ export default {
     { path: 'b-data', name: 'b-data', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-data-demo.vue'), },
     { path: 'b-tabs', name: 'b-tabs', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-tabs-demo.vue'), },
     { path: 'b-swiper', name: 'b-swiper', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-swiper-demo.vue'), },
-    { path: 'b-collapse', name: 'b-collapse', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-collapse-demo.vue'), },
     { path: 'b-scrollspy', name: 'b-scrollspy', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-scrollspy-demo.vue'), },
     { path: 'b-audio', name: 'b-audio', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-audio-demo.vue'), },
     { path: 'b-video', name: 'b-video', component: async () => await import(/* webpackChunkName: "content" */'@/pages/Demo/Content/b-video-demo.vue'), },

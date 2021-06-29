@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h2>b-offcanvas(v-canvas)</h2>
+    <hr>
     <b-offcanvas
       id="exampleOffcanvas"
       title="title text"
