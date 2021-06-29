@@ -4,8 +4,8 @@
     :class="ObjClass"
     tabindex="-1"
     role="dialog"
-    :data-bs-keyboard="!backdrop && keyboard"
-    :data-bs-backdrop="backdrop ? 'static' : true"
+    :data-bs-keyboard="keyboard.toString()"
+    :data-bs-backdrop="backdrop.toString()"
     :aria-modal="show"
     :aria-hidden="!show"
   >
@@ -71,7 +71,7 @@ export default {
   props: {
     info: util.props.String,
     content: util.props.String,
-    backdrop: util.props.Boolean,//
+    backdrop: [ String, Boolean ],
     keyboard: util.props.Boolean,
     scrol: util.props.Boolean, // modal-dialog-scrollable
     center: util.props.Boolean,// modal-dialog-centered

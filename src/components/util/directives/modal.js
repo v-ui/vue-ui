@@ -5,9 +5,11 @@ import tools from '@/tools/index.js'
 
 const name = 'modal'
 const func = (el, binding) => {
+  let target = binding.value.target || binding.value
+
   tools.dom.addAttrs(el, {
     'data-bs-toggle': 'modal',
-    'data-bs-target': binding.value
+    'data-bs-target': target
   })
 }
 

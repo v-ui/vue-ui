@@ -13,7 +13,6 @@
     <b-modal
       id="slotModal"
       title="slot Modal"
-      :size="size"
     >
       you can add any string and DOM
     </b-modal>
@@ -229,23 +228,6 @@
     </div>
     <div class="row align-items-center py-1">
       <font class="col-1">
-        backdrop
-      </font>
-      <div class="col-1">
-        <b-switch v-model="backdrop" label="backdrop" />
-      </div>
-    </div>
-    <div class="row align-items-center py-1">
-      <font class="col-1">
-        keyboard
-      </font>
-      <div class="col-1">
-        <b-switch v-model="keyboard" label="keyboard" />
-      </div>
-    </div>
-
-    <div class="row align-items-center py-1">
-      <font class="col-1">
         size
       </font>
       <div class="col-3">
@@ -297,12 +279,65 @@
       </div>
     </div>
 
+    以下两种属性不具有响应性特性（以第一次打开时为准）
+    <div class="row align-items-center py-1">
+      <font class="col-1">
+        keyboard
+      </font>
+      <div class="col-1">
+        <b-switch v-model="keyboard" label="keyboard" />
+      </div>
+    </div>
+
+    <div class="row align-items-center py-1">
+      <font class="col-1">
+        backdrop
+      </font>
+      <div class="col-3">
+        <input
+          id="true"
+          class="me-1"
+          type="radio"
+          name="backdrop"
+          checked
+          @change="backdrop=true"
+        >
+        <label
+          class="me-2"
+          for="true"
+        >true(default)</label>
+        <input
+          id="false"
+          class="me-1"
+          type="radio"
+          name="backdrop"
+          @change="backdrop=false"
+        >
+        <label
+          class="me-2"
+          for="false"
+        >false</label>
+        <input
+          id="static"
+          class="me-1"
+          type="radio"
+          name="backdrop"
+          @change="backdrop='static'"
+        >
+        <label
+          class="me-2"
+          for="static"
+        >static</label>
+      </div>
+    </div>
+
+
     <div class="row py-1">
       <font class="col-1">
         show model
       </font>
       <button
-        v-modal="'#exampleModal'"
+        v-modal="{ target:'#exampleModal', keyboard: false }"
         type="button"
         class="col-auto btn btn-primary"
         @click="show=true"
@@ -326,7 +361,7 @@ export default {
         status: '',
         show: false,
         center: false,
-        backdrop: true,
+        backdrop: 'true',
         keyboard: true,
         size: '',
         icon: '',
