@@ -15,7 +15,7 @@ import util from '@/components/util/index.js'
 import BasicLabel from '@/components/basic/basic-label.vue'
 export default {
   name: 'BasicStatus',
-  mixins: [ util.mixins.status.message ],
+  mixins: [ util.mixins.status.message, ],
   components: { BasicLabel },
   props: {
     info: util.props.String,
