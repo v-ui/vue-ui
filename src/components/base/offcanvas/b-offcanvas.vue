@@ -9,6 +9,7 @@
     <div class="offcanvas-header">
       <h5 class="offcanvas-title">
         <basic-status
+          strong
           :title="title"
           :icon="icon"
           :info="info"

@@ -1,43 +1,43 @@
 <template>
-  <div
-    v-if="showToast"
-    class="toast fade px-0"
-    :class="{show: showToast}"
-    style="min-width: 300px;"
-    role="alert"
-    aria-live="assertive"
-    aria-atomic="true"
-    data-animation="true"
-  >
-    <!-- header -->
+  <tran-out-in>
     <div
-      class="toast-header"
-      style="font-size: 1.2em"
+      v-if="showToast"
+      class="toast"
+      :class="{show: showToast}"
+      style="min-width: 300px;"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
     >
-      <slot name="header">
-        <basic-status
-          :title="title"
-          :icon="icon"
-          :info="info"
-          :status="status"
-        />
-        <b-info class="ms-auto" :info="addTime" />
-      </slot>
-      <button
-        type="button"
-        class="ms-2 mb-1 close"
-        data-dismiss="toast"
-        aria-label="Close"
-        @click="hide"
+      <!-- header -->
+      <div
+        class="toast-header"
+        style="font-size: 1.2em"
       >
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <slot name="header">
+          <basic-status
+            strong
+            :title="title"
+            :icon="icon"
+            :info="info"
+            :status="status"
+          />
+          <b-info class="ms-auto" :info="addTime" />
+        </slot>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="toast"
+          aria-label="Close"
+          @click="hide"
+        />
+      </div>
+      <!-- body -->
+      <div class="toast-body">
+        <slot>{{ content }}</slot>
+      </div>
     </div>
-    <!-- body -->
-    <div class="toast-body">
-      <slot>{{ content }}</slot>
-    </div>
-  </div>
+  </tran-out-in>
 </template>
 
 <script>
@@ -45,9 +45,11 @@ import util from "@/components/util/index.js";
 
 import BasicStatus from "@/components/basic/basic-status.vue"
 import BInfo from "@/components/basic/basic-info.vue";
+
+import TranOutIn from "@/components/transition/tran-out-in.vue";
 export default {
   name: "BToast",
-  components: { BasicStatus, BInfo, },
+  components: { BasicStatus, BInfo, TranOutIn },
   mixins: [ util.mixins.moment.base, ],
   props: {
     autohide: util.props.Boolean,

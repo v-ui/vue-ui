@@ -18,6 +18,7 @@
         <div class="modal-header">
           <h5 class="modal-title">
             <basic-status
+              strong
               :title="title"
               :icon="icon"
               :info="info"

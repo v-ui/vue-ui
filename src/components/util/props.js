@@ -92,6 +92,13 @@ export default {
       return v.base.position.default.includes(value)
     },
   },
+  placement: {
+    type: String,
+    default: 'top-start',
+    validator: (value) => {
+      return v.base.position.placement.includes(value)
+    }
+  },
   justify: {
     type: String,
     default: '',

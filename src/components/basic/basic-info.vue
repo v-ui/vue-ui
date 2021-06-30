@@ -1,7 +1,6 @@
 <template>
   <small
     v-if="info"
-    class="form-text text-truncate"
     :class="['text-' + infoColor,]"
   >
     {{ info }}

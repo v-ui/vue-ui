@@ -20,15 +20,20 @@ const popperSet = [
   'left', 'left-start', 'left-end',
 ]
 // position
-const positionST = ['top-left', 'top-right']
-const positionSB = ['bottom-left', 'bottom-right']
+const positionST = ['top-start', 'top-end']
+const positionSB = ['bottom-start', 'bottom-end']
 const positionCT = ['top-center']
 const positionCB = ['bottom-center']
+const positionSM = ['middle-start']
+const positionCM = ['middle-center']
+const positionEM = ['middle-end']
 const positionT = [...positionST, ...positionCT]
+const positionM = [...positionSM, ...positionEM, ...positionCM,]
 const positionB = [...positionSB, ...positionCB]
 const positionS = [...positionST, ...positionSB]
 const positionC = [...positionCT, ...positionCB]
 const position = [...positionT, ...positionB]
+const placement = [...positionT, ...positionM, ...positionB]
 // border
 const borders = ['border', ...[set.map(e => `border-${e}`)]]
 const border0 = borders.map(e => `${e}-0`)
@@ -67,6 +72,7 @@ export default {
       bottom: positionB,
       side: positionS,
       center: positionC,
+      placement: placement,
     },
     border: {
       set: borders,

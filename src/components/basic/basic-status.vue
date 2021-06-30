@@ -1,5 +1,6 @@
 <template>
   <basic-label
+    :strong="strong"
     :label="dataTitle"
     :icon="dataIcon"
     :info="info"
@@ -19,6 +20,7 @@ export default {
   components: { BasicLabel },
   props: {
     info: util.props.String,
+    strong: util.props.Boolean,
     labelColor: util.props.textColor,
     infoColor: util.props.textColor,
   },
