@@ -8,10 +8,10 @@
       :index="index"
       :allways-open="allwaysOpen"
     >
-      <template #header="item">
+      <template #header="{item}">
         <slot name="header" :item="item" />
       </template>
-      <template #body="item">
+      <template #body="{item}">
         <slot name="body" :item="item" />
       </template>
     </b-accordion-item>

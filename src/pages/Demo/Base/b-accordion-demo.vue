@@ -44,8 +44,8 @@
         class="col-11"
         :list="list"
       >
-        <template #header="item">{{ item }}</template>
-        <template #body="item">{{ item }}</template>
+        <template #header="{item}">{{ item }}</template>
+        <template #body="{item}">{{ item }}</template>
       </b-accordion>
     </div>
   </div>
@@ -55,7 +55,7 @@
 import BAccordion from "@/components/base/Accordion/b-accordion.vue"
 
 export default {
-  name: 'b-accordion-demo',
+  name: 'BAccordionDemo',
   components: { BAccordion, },
   data() {
     return {
