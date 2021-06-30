@@ -165,7 +165,7 @@
 </template>
 
 <script>
-import BOffcanvas from '@/components/base/offcanvas/b-offcanvas.vue'
+import BOffcanvas from '@/components/base/Offcanvas/b-offcanvas.vue'
 
 import BSwitch from '@/components/form/b-switch.vue'
 
