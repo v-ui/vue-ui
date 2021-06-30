@@ -5,6 +5,7 @@
     <b-modal
       id="exampleModal"
       title="title text"
+      info="info text"
       content="content text"
       :size="size"
       :center="center"

@@ -20,12 +20,6 @@ const base = {
     dataIcon: function() {
       return this.icon || (this.enumStatus && this.enumStatus.value && this.enumStatus.value.icon)
     },
-    iconClass: function() {
-      return `${this.dataIcon} text-${this.dataColor}`;
-    },
-    showIcon: function() {
-      return this.dataIcon
-    },
   },
 }
 

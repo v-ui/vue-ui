@@ -17,11 +17,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
-            <basic-label
-              :label="dataTitle"
-              :icon="dataIcon"
+            <basic-status
+              :title="title"
+              :icon="icon"
               :info="info"
-              :iconColor="dataColor"
+              :status="status"
             />
           </h5>
           <button
@@ -62,18 +62,29 @@
 <script>
 import util from "@/components/util/index.js";
 
-import BasicLabel from '@/components/basic/basic-label.vue'
+import BasicStatus from "@/components/basic/basic-status.vue"
 
 export default {
   name: "BModal",
-  components: { BasicLabel, },
-  mixins: [ util.mixins.status.message, ],
+  components: { BasicStatus, },
   props: {
+    title: util.props.String,
+    icon: util.props.String,
+    status: util.props.messageStatus,
     info: util.props.String,
     content: util.props.String,
-    backdrop: [ String, Boolean ],
-    keyboard: util.props.Boolean,
-    scrol: util.props.Boolean, // modal-dialog-scrollable
+    backdrop: {
+      type: [ String, Boolean ],
+      default: true,
+    },
+    keyboard: {
+      ...util.props.Boolean,
+      default: true,
+    },
+    scrol: {
+      ...util.props.Boolean,
+      default: true,
+    }, // modal-dialog-scrollable
     center: util.props.Boolean,// modal-dialog-centered
     hideFooter: util.props.Boolean,
     size: {

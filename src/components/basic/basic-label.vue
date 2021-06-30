@@ -32,8 +32,8 @@ export default {
     icon: util.props.String,
     info: util.props.String,
     labelColor: util.props.textColor,
-    infoColor: util.props.textColor,
     iconColor: util.props.textColor,
+    infoColor: util.props.textColor,
   },
 }
 </script>

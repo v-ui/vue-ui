@@ -15,6 +15,7 @@
         :key="index"
         :time="item.time"
         :icon="item.icon"
+        :info="item.info"
         :delay="item.delay"
         :titke="item.title"
         :status="item.status"

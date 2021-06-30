@@ -8,11 +8,11 @@
   >
     <div class="offcanvas-header">
       <h5 class="offcanvas-title">
-        <basic-label
-          :label="dataTitle"
-          :icon="dataIcon"
+        <basic-status
+          :title="title"
+          :icon="icon"
           :info="info"
-          :iconColor="dataColor"
+          :status="status"
         />
       </h5>
       <button
@@ -31,22 +31,30 @@
 <script>
 import util from "@/components/util/index.js";
 
-import BasicLabel from '@/components/basic/basic-label.vue'
+import BasicStatus from "@/components/basic/basic-status.vue"
 
 export default {
   name: 'BOffcanvas',
-  components: { BasicLabel, },
-  mixins: [ util.mixins.status.message, ],
+  components: { BasicStatus, },
   props: {
     set: {
       type: String,
       default: 'start',
       validator: value => ['top', 'end', 'bottom', 'start'].includes(value)
     },
+    title: util.props.String,
+    icon: util.props.String,
+    status: util.props.messageStatus,
     info: util.props.String,
     content: util.props.String,
-    scroll: util.props.Boolean,
-    backdrop: util.props.Boolean,
+    scroll: {
+      ...util.props.Boolean,
+      default: true,
+    },
+    backdrop: {
+      ...util.props.Boolean,
+      default: true,
+    },
   },
   computed: {
     ObjClass: function() {

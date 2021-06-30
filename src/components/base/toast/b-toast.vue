@@ -15,19 +15,13 @@
       style="font-size: 1.2em"
     >
       <slot name="header">
-        <slot
-          v-if="$slots.icon || showIcon"
-          name="icon"
-        >
-          <i
-            class="me-2"
-            :class="iconClass"
-          />
-        </slot>
-        <strong class="me-auto">
-          <font>{{ dataTitle }}</font>
-        </strong>
-        <b-info :info="info" />
+        <basic-status
+          :title="title"
+          :icon="icon"
+          :info="info"
+          :status="status"
+        />
+        <b-info class="ms-auto" :info="addTime" />
       </slot>
       <button
         type="button"
@@ -49,15 +43,19 @@
 <script>
 import util from "@/components/util/index.js";
 
+import BasicStatus from "@/components/basic/basic-status.vue"
 import BInfo from "@/components/basic/basic-info.vue";
-
 export default {
   name: "BToast",
-  components: { BInfo, },
-  mixins: [ util.mixins.moment.base, util.mixins.status.message, ],
+  components: { BasicStatus, BInfo, },
+  mixins: [ util.mixins.moment.base, ],
   props: {
     autohide: util.props.Boolean,
     time: [String, Number, Array],
+    title: util.props.String,
+    icon: util.props.String,
+    status: util.props.messageStatus,
+    info: util.props.String,
     content: util.props.String,
     delay: {
       ...util.props.UInt,
@@ -73,7 +71,7 @@ export default {
     showToast: function() {
       return (this.content || this.$slots.default) && this.show;
     },
-    info: function() {
+    addTime: function() {
       return this.moment(this.time || this.moment()).from();
     }
   },

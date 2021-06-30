@@ -49,15 +49,15 @@
         class="col-11"
         autohide
         title="title text"
-        icon="fas fa-envelope"
+        icon="envelope-fill"
       >
-        icon='fas fa-envelope'
+        icon='envelope-fill'
         <br>参考：
         <base-a
-          href="https://fontawesome.com"
+          href="https://icons.getbootstrap.com/"
           target="_blank"
         >
-          https://fontawesome.com
+          https://icons.getbootstrap.com/
         </base-a>
       </b-toast>
     </div>
