@@ -110,12 +110,9 @@ export default {
     "$slots.default": function(newVal, oldVal) {
       if (newVal !== oldVal) this.reset();
     },
-    variant: function(newVal, oldVal) {
-      if (newVal !== oldVal) this.reset();
-    }
   },
   created() {
-    this.alert()
+    if (this.countDownDisdismis) this.countDown();
   },
   destroyed() {
     this.clearTimer();
