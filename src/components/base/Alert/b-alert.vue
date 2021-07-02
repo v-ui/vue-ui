@@ -1,8 +1,7 @@
 <template>
-  <tran-out-in>
     <div
       v-show="$slots.default && isShow"
-      class="alert position-absolute"
+      class="alert fade show position-absolute"
       :class="objClass"
       style="min-width: 300px;"
       :style="objStyle"
@@ -10,18 +9,24 @@
       @mouseenter="clearTimer"
       @mouseleave="countDown"
     >
-      <h4
+      <h5
         v-if="$slots.header"
         class="alert-heading"
       >
         <slot name="header" />
-      </h4>
+        <button
+          v-if="showDismisLable"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        />
+      </h5>
       <div
         class="overflow-auto"
         style="max-height: 200px;"
       >
         <slot />
-        <sr-msg>{{ fillsrMsg }}</sr-msg>
       </div>
       <div v-if="$slots.footer">
         <hr>
@@ -30,35 +35,24 @@
         </p>
       </div>
       <button
-        v-if="showDismisLable"
+        v-if="showDismisLable && !$slots.header"
         type="button"
-        class="close"
-        data-dismiss="alert"
+        class="btn-close"
+        data-bs-dismiss="alert"
         aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
+      />
     </div>
-  </tran-out-in>
 </template>
 <script>
 import util from "@/components/util/index.js";
 
-import srMsg from "@/components/basic/basic-sr-msg.vue";
-import TranOutIn from "@/components/transition/tran-out-in.vue";
-
 export default {
   name: "BAlert",
-  components: {
-    srMsg,
-    TranOutIn
-  },
   props: {
     show: util.props.Boolean,
     color: util.props.color,
     size: util.props.size,
     position: util.props.position,
-    srMsg: util.props.String,
     dismissible: util.props.Boolean,
     countDownDisdismis: util.props.Boolean,
     countDownSec: {
@@ -88,16 +82,16 @@ export default {
         case "top-center":
           position = { left: `${document.body.offsetWidth / 4}px` };
           break;
-        case "top-right":
+        case "top-end":
           position = { right: 0 };
           break;
-        case "bottom-left":
+        case "bottom-start":
           position = { bottom: 0, left: 0 };
           break;
         case "bottom-center":
           position = { bottom: 0, left: `${document.body.offsetWidth / 4}px` };
           break;
-        case "bottom-right":
+        case "bottom-end":
           position = { bottom: 0, right: 0 };
           break;
       }
@@ -108,9 +102,6 @@ export default {
       return !this.countDownDisdismis || this.dismissible;
       //return this.dismissible
     },
-    fillsrMsg: function() {
-      return this.srMsg || this.color;
-    }
   },
   watch: {
     show: function(newVal) {
@@ -124,7 +115,7 @@ export default {
     }
   },
   created() {
-    if (this.countDownDisdismis) this.countDown();
+    this.alert()
   },
   destroyed() {
     this.clearTimer();
@@ -137,8 +128,8 @@ export default {
     },
     close: function() {
       this.$emit("close");
-      this.clearTimer();
       this.isShow = false;
+      this.clearTimer();
     },
     reset: async function() {
       await this.close();
@@ -149,17 +140,13 @@ export default {
         window.clearInterval(this.dismissCountDownTimerId);
     },
     countDown: function() {
-      if (Number(this.countDownSec) < 1) return;
+      let countDownSec = Number(this.countDownSec);
+      if (countDownSec < 1) return;
       // 每一次计时前都会先清空可能存在的计时器
       this.clearTimer();
-      let countDownSec = Number(this.countDownSec);
-      this.dismissCountDownTimerId = setInterval(() => {
-        if (countDownSec < 1) {
-          this.close();
-          return;
-        }
-        countDownSec--;
-      }, 1000);
+      this.dismissCountDownTimerId = setInterval(() =>
+        countDownSec < 1 ? this.close() : countDownSec--
+      , 1000);
     }
   },
 };
