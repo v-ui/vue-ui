@@ -26,7 +26,7 @@ export default {
   name: "BBreadcrumb",
   components: { BaseA },
   props: {
-    list: util.props.String,
+    list: util.props.Array,
     divider: {
       ...util.props.String,
       default: '>',
