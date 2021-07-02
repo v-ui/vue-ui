@@ -5,21 +5,16 @@
     :style="objStyle"
   >
     <slot />
-    <sr-msg v-if="!this.$slots.default">{{ fillsrMsg }}</sr-msg>
   </span>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
 
-import srMsg from "@/components/basic/basic-sr-msg.vue";
-
 export default {
   name: "BBadge",
-  components: { srMsg },
   props: {
     color: util.props.color,
-    srMsg: util.props.String,
     pill: util.props.Boolean,
   },
   computed: {
@@ -33,9 +28,6 @@ export default {
       let height = !this.$slots.default ? "height: 16px" : null;
       return `${height}; `
     },
-    fillsrMsg: function() {
-      return this.srMsg || this.color;
-    }
   }
 };
 </script>
