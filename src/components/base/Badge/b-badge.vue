@@ -1,6 +1,5 @@
 <template>
   <span
-    v-if="!href"
     class="badge"
     :class="objClass"
     :style="objStyle"
@@ -8,48 +7,30 @@
     <slot />
     <sr-msg v-if="!this.$slots.default">{{ fillsrMsg }}</sr-msg>
   </span>
-  <base-a
-    v-else
-    class="badge"
-    :class="objClass"
-    :href="href"
-    :style="objStyle"
-  >
-    <slot />
-    <sr-msg v-if="!this.$slots.default">
-      {{ fillsrMsg }}
-    </sr-msg>
-  </base-a>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
 
-import BaseA from "@/components/basic/A/basic-a.vue";
-
 import srMsg from "@/components/basic/basic-sr-msg.vue";
 
 export default {
   name: "BBadge",
-  components: { BaseA, srMsg },
+  components: { srMsg },
   props: {
-    color: {
-      ...util.props.color,
-      default: "info"
-    },
-    href: util.props.href,
+    color: util.props.color,
     srMsg: util.props.String,
     pill: util.props.Boolean,
   },
   computed: {
     objClass: function() {
-      let color = this.color ? `badge-${this.color}` : ''
+      let color = this.color ? `bg-${this.color}` : ''
       let border = this.color ? `border border-${this.color}`: 'border border-dark'
-      let pill = !this.$slots.default || this.pill ? 'badge-pill' : ''
+      let pill = !this.$slots.default || this.pill ? 'rounded-pill' : ''
       return `${color} ${border} ${pill}`;
     },
     objStyle: function() {
-      let height = !this.$slots.default ? "height: 15px" : null;
+      let height = !this.$slots.default ? "height: 16px" : null;
       return `${height}; `
     },
     fillsrMsg: function() {
