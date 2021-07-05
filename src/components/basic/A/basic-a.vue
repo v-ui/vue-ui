@@ -5,7 +5,7 @@
     :target="filTarget"
     :rel="`noopener norefferrer ${rel}`"
     :aria-disabled="disabled"
-    :tabindex="{disabled: -1}"
+    :tabindex="tabindex"
   >
     <i
       v-if="!hideIcon && iconClass"
@@ -78,7 +78,10 @@ export default {
     },
     filTarget: function() {
       return ["url", "download"].includes(this.kind) ? "_blank" : this.target;
-    }
+    },
+    tabindex: function() {
+      return this.disabled ? -1 : null
+    },
   },
   watch: {
     disabled: function(val) {

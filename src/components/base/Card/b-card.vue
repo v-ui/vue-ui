@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card"
+    class="card p-0"
   >
     <slot name="card">
       <div
