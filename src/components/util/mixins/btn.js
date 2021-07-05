@@ -37,6 +37,9 @@ export default {
         let active = `${this.active ? 'active' : ''}`
         return `${btnStyle} ${size} ${active}`
       },
+      toggle: function() {
+        return this.active ? 'button' : null
+      },
     },
   }, // btn
 }

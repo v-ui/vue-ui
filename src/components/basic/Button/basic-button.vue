@@ -7,7 +7,7 @@
     :disabled="disabled"
     :aria-disabled="disabled"
     :aria-pressed="active"
-    :data-bs-toggle="{active: 'button'}"
+    :data-bs-toggle="toggle"
     v-on="$listeners"
   >
     <slot>{{ value }}</slot>
@@ -19,7 +19,7 @@
     :href="href"
     :disabled="disabled"
     :aria-pressed="active"
-    :data-bs-toggle="{active: 'button'}"
+    :data-bs-toggle="toggle"
     role="button"
     v-on="$listeners"
   >
