@@ -87,27 +87,41 @@
     <div class="row mx-1">
       <font class="col-1">set=""(default)</font>
       <b-card class="text-primary col-auto">
-        <template #image>
-          <b-card-image src="https://unsplash.it/720/560?random" />
+        <template #top>
+          <b-card-image src="https://unsplash.it/360/240?random" />
         </template>
-        <b-card-title>Card Title</b-card-title>
-        <b-card-subtitle>Card Subtitle</b-card-subtitle>
-        <b-card-text>Card text</b-card-text>
+        <b-card-img-overlay>
+          <b-card-title>Card Title</b-card-title>
+          <b-card-subtitle>Card Subtitle</b-card-subtitle>
+          <b-card-text>Card text</b-card-text>
+        </b-card-img-overlay>
         <template #footer>
           <b-card-text>Card Footer</b-card-text>
         </template>
       </b-card>
       <font class="col-1">set="top"</font>
       <b-card class="text-primary col-auto">
-        <template #image>
-          <b-card-image src="https://unsplash.it/720/560?random" set="top" />
+        <template #top>
+          <b-card-image src="https://unsplash.it/360/240?random" set="top" />
         </template>
         <template #body>
-          <b-card-img-overlay>
-            <b-card-title>Card Title</b-card-title>
-            <b-card-subtitle>Card Subtitle</b-card-subtitle>
-            <b-card-text>Card text</b-card-text>
-          </b-card-img-overlay>
+          <b-card-title>Card Title</b-card-title>
+          <b-card-subtitle>Card Subtitle</b-card-subtitle>
+          <b-card-text>Card text</b-card-text>
+        </template>
+        <template #footer>
+          <b-card-text>Card Footer</b-card-text>
+        </template>
+      </b-card>
+      <font class="col-1">set="bottom"</font>
+      <b-card class="text-primary col-auto">
+        <template #bottom>
+          <b-card-image src="https://unsplash.it/360/240?random" set="bottom" />
+        </template>
+        <template #body>
+          <b-card-title>Card Title</b-card-title>
+          <b-card-subtitle>Card Subtitle</b-card-subtitle>
+          <b-card-text>Card text</b-card-text>
         </template>
         <template #footer>
           <b-card-text>Card Footer</b-card-text>
