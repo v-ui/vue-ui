@@ -11,7 +11,6 @@
     v-on="$listeners"
   >
     <slot>{{ value }}</slot>
-    <sr-msg>{{ fillsrMsg }}</sr-msg>
   </button>
   <base-a
     v-else
@@ -25,7 +24,6 @@
     v-on="$listeners"
   >
     <slot>{{ value }}</slot>
-    <sr-msg>{{ fillsrMsg }}</sr-msg>
   </base-a>
 </template>
 
@@ -33,11 +31,10 @@
 import util from "@/components/util/index.js";
 
 import BaseA from "@/components/basic/A/basic-a.vue";
-import srMsg from "@/components/basic/basic-sr-msg.vue";
 
 export default {
   name: "BasicButton",
-  components: { BaseA, srMsg },
+  components: { BaseA },
   mixins: [util.mixins.btn.base,]
 };
 </script>

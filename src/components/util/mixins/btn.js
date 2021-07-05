@@ -37,9 +37,6 @@ export default {
         let active = `${this.active ? 'active' : ''}`
         return `${btnStyle} ${size} ${active}`
       },
-      fillsrMsg: function () {
-        return this.srMsg ? this.color : this.srMsg
-      },
     },
   }, // btn
 }
