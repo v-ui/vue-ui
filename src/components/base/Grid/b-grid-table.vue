@@ -10,11 +10,12 @@
       <td
         v-for="(item, itemIndex) in getList(index)"
         :key="'td-'+itemIndex"
-        class="p-0"
+        class="p-1"
       >
         <slot
           name="item"
           :item="item"
+          :disabled="disabled"
         >
           <b-grid-item
             :item="item"

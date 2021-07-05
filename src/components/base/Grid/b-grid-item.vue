@@ -1,6 +1,6 @@
 <template>
   <b-button
-    class="rounded-pill my-1 p-1"
+    class="rounded-pill w-100 m-1 p-2"
     style="min-width: 2.2em"
     :class="objClass"
     :disabled="disabled"
@@ -32,7 +32,7 @@ export default {
   computed: {
     objClass: function() {
       return this.isSelected
-        ? "bg-transparent text-body"
+        ? "border-2 border-primary bg-transparent text-body"
         : "border-0 bg-transparent text-body";
     },
   }

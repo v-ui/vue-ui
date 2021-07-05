@@ -1,25 +1,24 @@
 <template>
   <span class="row m-1">
     <template v-for="(item, index) in list">
-      <slot
-        name="item"
-        :item="item"
-        :itemClass="itemClass"
-        :disabled="disabled"
-      >
-        <b-grid-item
-          :key="index"
+      <div :key="index" :class="itemClass">
+        <slot
+          name="item"
           :item="item"
-          class="text-center"
-          :class="itemClass"
-          :primary-key="key"
-          :display-name="display"
-          :multiple="isMultiple"
-          :selected="selectedValue"
-          :disabled="item.disabled || disabled"
-          @item:click="itemClick"
-        />
-      </slot>
+          :disabled="disabled"
+        >
+          <b-grid-item
+            :item="item"
+            class="text-center"
+            :primary-key="key"
+            :display-name="display"
+            :multiple="isMultiple"
+            :selected="selectedValue"
+            :disabled="item.disabled || disabled"
+            @item:click="itemClick"
+          />
+        </slot>
+      </div>
     </template>
   </span>
 </template>
@@ -39,7 +38,7 @@ export default {
   },
   computed: {
     itemClass: function() {
-      return 12 % this.colCount == 0 ? `col-${12 / this.colCount}` : "col-auto";
+      return 12 % this.colCount == 0 && this.list.length >= this.colCount ? `col-${12 / this.colCount}` : "col-auto";
     },
   },
   methods: {
