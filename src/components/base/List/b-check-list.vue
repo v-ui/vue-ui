@@ -46,6 +46,11 @@ export default {
     inline: util.props.Boolean,
     fill: util.props.Boolean,
   },
+  data() {
+    return {
+      isMultiple: this.type !== 'radio',
+    }
+  },
    methods: {
     input: function(item) {
       if (this.isMultiple) {
