@@ -1,10 +1,11 @@
 <template>
-  <div class="form-group">
+  <div class="p-0">
     <b-dropdown-picker
       ref="dropdownlist"
+      class="form-control"
       menu-width
-      :label="showLabel"
-      :placeholder="placeholder"
+      :selected="label"
+      :placeholder="placeholder || nullValue"
       :disabled="disabled"
       :multiple="isMultiple"
       @delete:item="deleteItem"
@@ -18,25 +19,15 @@
       <slot>
         <b-dropdown-menu
           v-model="selectedValue"
-          :list="searchList"
+          :list="list"
+          :search="search"
           :primary-key="key"
           :display-name="display"
           :multiple="isMultiple"
           :null-value="placeholder"
-          :show-null="!searchText && !hideNull"
+          :show-null="!hideNull || !isMultiple"
+          @item:click="validator($refs.dropdownlist.$el, selectedValue)"
         >
-          <template
-            v-if="search"
-            #header
-          >
-            <b-text
-              v-model="searchText"
-              class="cannt-hide"
-              type="search"
-              hide-icon
-              size="sm"
-            />
-          </template>
           <template #item="{ item }">
             <slot
               name="item"
@@ -47,7 +38,7 @@
       </slot>
     </b-dropdown-picker>
     <b-valid
-      v-if="validInfo || $slots.valid"
+      v-if="$slots.valid || validInfo"
       state="valid"
     >
       <slot name="valid">
@@ -55,7 +46,7 @@
       </slot>
     </b-valid>
     <b-valid
-      v-if="invalidInfo || $slots.invalid"
+      v-if="$slots.invalid || invalidInfo"
       state="invalid"
     >
       <slot name="invalid">
@@ -71,7 +62,6 @@ import util from "@/components/util/index.js";
 
 import BDropdownPicker from "@/components/base/DropdownPicker/b-dropdown-picker.vue";
 import BDropdownMenu from '@/components/base/Dropdown/b-dropdown-menu.vue'
-import BText from "@/components/form/b-text.vue";
 
 import BValid from "@/components/form/Other/b-form-valid.vue";
 import BInfo from "@/components/basic/basic-info.vue";
@@ -81,13 +71,10 @@ export default {
   components: {
     BDropdownPicker,
     BDropdownMenu,
-    BText,
     BValid,
     BInfo
   },
   mixins: [
-    // TODO: remove util.mixins.form.base
-    util.mixins.form.base,
     util.mixins.form.validator,
     util.mixins.select.select,
   ],
@@ -95,40 +82,18 @@ export default {
     info: util.props.String,
     search: util.props.Boolean,
     disabled: util.props.Boolean,
-    hideNull: {
-      ...util.props.Boolean,
-      default: function() {
-        return this.multiple
-      }
-    },
+    placeholder: util.props.String,
+    hideNull: util.props.Boolean,
   },
   data() {
     return {
-      searchText: null,
       menuHeight: "0px",
-      placeholder: this.nullValue,
     };
-  },
-  computed: {
-    searchList: function() {
-      return this.searchText
-        ? this.list.filter(e => {
-          let value = this.getKey(e)
-          let label = this.getDisplay(e)
-          return value && label && (value.includes(this.searchText) || label.includes(this.searchText))
-        })
-        : this.list
-    },
-  },
-  watch: {
-    selectedValue: function(value) {
-      this.searchText = null
-      this.validator(this.$refs.dropdownlist.$el, value)
-    },
   },
   methods: {
     deleteItem: function(index) {
       if (index >= 0) this.selectedValue.splice(index, 1)
+      this.validator(this.$refs.dropdownlist.$el, this.selectedValue)
     },
   }
 };

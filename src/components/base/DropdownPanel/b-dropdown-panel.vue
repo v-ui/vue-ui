@@ -1,11 +1,12 @@
 <template>
-  <div class="form-group">
+  <div class=" p-0">
     <b-dropdown-picker
       ref="dropdownpanel"
-      :label="showLabel"
+      class="form-control"
+      :selected="label"
       :menu-width="false"
       :can-hide="canHide"
-      :placeholder="fillPlaceholder"
+      :placeholder="placeholder || nullValue"
       :disabled="disabled"
       :multiple="isMultiple"
       @delete:item="deleteItem"
@@ -25,6 +26,7 @@
           :display-name="display"
           :col-count="colCount"
           :multiple="isMultiple"
+          @item:click="validator($refs.dropdownpanel.$el, selectedValue)"
         />
         <b-grid-table
           v-else-if="type === 'table'"
@@ -37,6 +39,7 @@
           :disabled="disabled"
           :col-count="colCount"
           :multiple="isMultiple"
+          @item:click="validator($refs.dropdownpanel.$el, selectedValue)"
         />
       </slot>
     </b-dropdown-picker>
@@ -80,8 +83,6 @@ export default {
     BInfo,
   },
   mixins: [
-    // TODO: remove util.mixins.form.base
-    util.mixins.form.base,
     util.mixins.form.validator,
     util.mixins.select.select,
   ],
@@ -103,19 +104,10 @@ export default {
     disabled: util.props.Boolean,
     placeholder: util.props.String,
   },
-  computed: {
-    fillPlaceholder: function() {
-      return this.placeholder || this.nullValue
-    },
-  },
-  watch: {
-    selectedValue: function(value) {
-      this.validator(this.$refs.dropdownpanel.$el, value)
-    },
-  },
   methods: {
     deleteItem: function(index) {
       if (index >= 0) this.selectedValue.splice(index, 1)
+      this.validator(this.$refs.dropdownpanel.$el, this.selectedValue)
     },
   },
 }

@@ -9,6 +9,9 @@
       <font class="col-2 text-center">
         disabled
       </font>
+       <font class="col-2 text-center">
+        search
+      </font>
       <font class="col-2 text-center">
         slot:header
       </font>
@@ -32,6 +35,12 @@
         :header="{ text: 'header label', info: 'info text', icon: 'circle-fill' }"
         :list="list2"
         disabled
+      />
+      <b-dropdown-menu
+        class="col-2"
+        :header="{ text: 'header label', info: 'info text', icon: 'circle-fill' }"
+        :list="list2"
+        search
       />
       <b-dropdown-menu
         class="col-2"
@@ -325,6 +334,7 @@
         :list="list"
         disabled
       />
+      <span class="col-1" />
       <b-dropdown-list
         v-model="value2"
         class="col-5"
@@ -372,111 +382,12 @@
         multiple
       />
     </div>
-    <br>
-    <h4>v-model</h4>
-    <hr>
     <div class="row">
       <font class="col-1">
-        v-model
-        <br>
-        {{ value1 }}:
+        slot:
       </font>
       <b-dropdown-list
-        v-model="value1"
         class="col-11"
-        :list="list"
-      />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        v-model
-        <br>
-        {{ value2 }}:
-      </font>
-      <b-dropdown-list
-        v-model="value2"
-        class="col-11"
-        :list="list"
-        multiple
-      />
-    </div>
-    <br>
-    <h4>校验</h4>
-    <hr>
-    <div class="row">
-      <font class="col-1">
-        required:
-      </font>
-      <b-dropdown-list
-        class="col-5"
-        :list="list"
-        required
-      />
-      <b-dropdown-list
-        class="col-5"
-        :list="list"
-        multiple
-        required
-      />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        success
-        <br>error:
-      </font>
-      <b-dropdown-list
-        class="col-5"
-        :list="list"
-        invalid-info="error"
-        valid-info="success"
-        required
-      />
-      <b-dropdown-list
-        class="col-5"
-        :list="list"
-        invalid-info="error"
-        valid-info="success"
-        multiple
-        required
-      />
-    </div>
-    <div class="row">
-      <font class="col-1">
-        success
-        <br>error(2):
-      </font>
-      <b-dropdown-list
-        class="col-5"
-        :list="list"
-        required
-      >
-        <template #invalid>
-          you can add anlything invalidInfo or DOM
-        </template>
-        <template #valid>
-          you can add anlything validInfo or DOM
-        </template>
-      </b-dropdown-list>
-      <b-dropdown-list
-        class="col-5"
-        :list="list"
-        multiple
-        required
-      >
-        <template #invalid>
-          you can add anlything invalidInfo or DOM
-        </template>
-        <template #valid>
-          you can add anlything validInfo or DOM
-        </template>
-      </b-dropdown-list>
-    </div>
-    <br>
-    <h4>slot</h4>
-    <hr>
-    <div class="row">
-      <b-dropdown-list
-        class="col-12"
         :list="list"
       >
         <template #trigger>
@@ -490,6 +401,108 @@
         </template>
       </b-dropdown-list>
     </div>
+    <br>
+    <h4>v-model</h4>
+    <br>
+    <div class="row">
+      <font class="col-1">
+        v-model
+        <br>
+        {{ value1 }}:
+      </font>
+      <b-dropdown-list
+        v-model="value1"
+        class="col-11"
+        :list="list"
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        v-model
+        <br>
+        {{ value2 }}:
+      </font>
+      <b-dropdown-list
+        v-model="value2"
+        class="col-11"
+        :list="list"
+        multiple
+      />
+    </div>
+    <br>
+    <h4>校验</h4>
+    <br>
+    <div class="row">
+      <font class="col-1">
+        required:
+      </font>
+      <b-dropdown-list
+        class="col-5"
+        :list="list"
+        required
+      />
+      <span class="col-1" />
+      <b-dropdown-list
+        class="col-5"
+        :list="list"
+        multiple
+        required
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        success
+        <br>error:
+      </font>
+      <b-dropdown-list
+        class="col-5"
+        :list="list"
+        invalid-info="error"
+        valid-info="success"
+        required
+      />
+      <span class="col-1" />
+      <b-dropdown-list
+        class="col-5"
+        :list="list"
+        invalid-info="error"
+        valid-info="success"
+        multiple
+        required
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        success
+        <br>error(2):
+      </font>
+      <b-dropdown-list
+        class="col-5"
+        :list="list"
+        required
+      >
+        <template #invalid>
+          you can add anlything invalidInfo or DOM
+        </template>
+        <template #valid>
+          you can add anlything validInfo or DOM
+        </template>
+      </b-dropdown-list>
+      <span class="col-1" />
+      <b-dropdown-list
+        class="col-5"
+        :list="list"
+        multiple
+        required
+      >
+        <template #invalid>
+          you can add anlything invalidInfo or DOM
+        </template>
+        <template #valid>
+          you can add anlything validInfo or DOM
+        </template>
+      </b-dropdown-list>
+    </div>
     <h2>b-dropdown-panel</h2>
     基于 <basic-a
       href="base-b-grid"
@@ -497,24 +510,24 @@
     />
     <hr>
     <h4>基础属性</h4>
-    <hr>
+    <br>
     <div class="row">
       <font class="col-1">
         default:
       </font>
-      <b-dropdown-panel class="col-auto" />
+      <b-dropdown-panel class="col-11" />
     </div>
     <div class="row">
       <font class="col-1">
         disabled:
       </font>
       <b-dropdown-panel
-        class="col-auto"
+        class="col-11"
         disabled
       />
       <b-dropdown-panel
         v-model="value2"
-        class="col-auto"
+        class="col-11"
         multiple
         disabled
       />
@@ -527,7 +540,7 @@
         row(default)
       </font>
       <b-dropdown-panel
-        class="col-auto"
+        class="col-11"
         type="row"
         :list="list"
       />
@@ -535,7 +548,7 @@
         table
       </font>
       <b-dropdown-panel
-        class="col-auto"
+        class="col-11"
         type="table"
         :list="list"
       />
@@ -545,7 +558,7 @@
         list:
       </font>
       <b-dropdown-panel
-        class="col-auto"
+        class="col-11"
         :list="list"
       />
     </div>
@@ -554,14 +567,14 @@
         info:
       </font>
       <b-dropdown-panel
-        class="col-auto"
+        class="col-11"
         :list="list"
         info="info label"
       />
     </div>
     <br>
     <h4>v-model</h4>
-    <hr>
+    <br>
     <div class="row">
       <font class="col-1">
         v-model
@@ -570,7 +583,7 @@
       </font>
       <b-dropdown-panel
         v-model="value1"
-        class="col-auto"
+        class="col-11"
         :list="list"
       />
     </div>
@@ -582,25 +595,26 @@
       </font>
       <b-dropdown-panel
         v-model="value2"
-        class="col-auto"
+        class="col-11"
         :list="list"
         multiple
       />
     </div>
     <br>
     <h4>校验</h4>
-    <hr>
+    <br>
     <div class="row">
       <font class="col-1">
         required:
       </font>
       <b-dropdown-panel
-        class="col-auto"
+        class="col-5"
         :list="list"
         required
       />
+      <span class="col-1" />
       <b-dropdown-panel
-        class="col-auto"
+        class="col-5"
         :list="list"
         multiple
         required
@@ -612,14 +626,15 @@
         <br>error:
       </font>
       <b-dropdown-panel
-        class="col-auto"
+        class="col-5"
         :list="list"
         invalid-info="error"
         valid-info="success"
         required
       />
+      <span class="col-1" />
       <b-dropdown-panel
-        class="col-auto"
+        class="col-5"
         :list="list"
         invalid-info="error"
         valid-info="success"
@@ -633,7 +648,7 @@
         <br>error(2):
       </font>
       <b-dropdown-panel
-        class="col-auto"
+        class="col-5"
         :list="list"
         required
       >
@@ -644,8 +659,9 @@
           you can add anlything validInfo or DOM
         </template>
       </b-dropdown-panel>
+      <span class="col-1" />
       <b-dropdown-panel
-        class="col-auto"
+        class="col-5"
         :list="list"
         multiple
         required

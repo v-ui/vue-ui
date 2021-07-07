@@ -1,5 +1,14 @@
 <template>
   <div>
+    <b-dropdown-header v-if="search">
+      <b-text
+        v-model="query"
+        class="cannt-hide"
+        type="search"
+        hide-icon
+        size="sm"
+      />
+    </b-dropdown-header>
     <b-dropdown-header v-if="header || $slots.header">
       <slot name="header">
         <b-label
@@ -10,13 +19,13 @@
       </slot>
     </b-dropdown-header>
     <b-dropdown-item
-      v-if="showNull"
+      v-if="showNull && !query"
       :label="nullValue"
       :disabled="disabled"
       @click.native="itemClick(null)"
     />
     <div
-      v-for="(item, index) in list"
+      v-for="(item, index) in queryList"
       :key="index"
     >
       <b-dropdown-divider v-if="item.divider" />
@@ -54,6 +63,7 @@ import BDropdownItem from "./b-dropdown-item.vue";
 import BDropdownText from "./b-dropdown-text.vue";
 
 import BLabel from '@/components/basic/basic-label.vue'
+import BText from "@/components/form/b-text.vue";
 
 export default {
   name: "BDropdownMenu",
@@ -63,12 +73,32 @@ export default {
     BDropdownItem,
     BDropdownText,
     BLabel,
+    BText,
   },
   mixins: [ util.mixins.select.check, ],
   props: {
     showNull: util.props.Boolean,
     header: [ String, Number, Object ],
     disabled: util.props.Boolean,
+    search: util.props.Boolean,
+  },
+  data() {
+    return {
+      query: null,
+    }
+  },
+  computed: {
+    queryList: function() {
+      return this.query
+        ? this.list.filter(e => {
+            if (e.divider || e.text) return false
+            let value = this.getKey(e)
+            let label = this.getDisplay(e)
+            return value && value.toLowerCase && value.toLowerCase().includes(this.query.toLowerCase()) ||
+                  label && label.toLowerCase && label.toLowerCase().includes(this.query.toLowerCase())
+          })
+        : this.list
+    },
   },
   methods: {
     itemClick: function(item) {

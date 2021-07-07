@@ -10,7 +10,6 @@
     <div
       ref="dropdownPicker"
       class="h-100"
-      aria-describedby="tooltip"
       @click="clickTrigger"
     >
       <div
@@ -19,35 +18,30 @@
       >
         <slot name="trigger">
           <div
-            v-if="multiple && label.length > 0"
+            v-if="multiple && selected && selected.length > 0"
             class="d-flex align-content-between flex-wrap"
           >
             <b-badge
-              v-for="(item, key) in label"
+              v-for="(item, key) in selected"
               :key="key"
               class="m-1"
               color="primary"
             >
               {{ item }}
-              <i
+              <button
                 v-if="!disabled"
-                class="fas fa-times-circle text-muted ps-1"
-                style="cursor: pointer"
+                type="button"
+                class="btn-close btn-close-white p-0"
+                aria-label="Close"
                 @click.stop="$emit('delete:item', key)"
               />
             </b-badge>
           </div>
-          <font
-            v-else
-            :class="fontClass"
-          >
-            {{ label && label.length === 0 && multiple ? placeholder : (label || placeholder) }}
+          <font v-else :class="fontClass">
+            {{ selected && selected.length !== 0 ? selected : placeholder }}
           </font>
         </slot>
-        <slot
-          v-if="!hideToggle"
-          name="icon"
-        >
+        <slot name="icon">
           <i :class="icon.caretDown" />
         </slot>
       </div>
@@ -61,12 +55,7 @@
         :style="[menuStyle, { 'min-width': '15em', 'max-height': '50em'}]"
         style="z-index: 1090"
       >
-        <div
-          v-if="isShow"
-          class="m-0 y-0"
-        >
-          <slot />
-        </div>
+        <slot />
       </div>
     </tran-drop>
   </div>
@@ -102,9 +91,8 @@ export default {
     },
     multiple: util.props.Boolean,
     disabled: util.props.Boolean,
-    hideToggle: util.props.Boolean,
     menuWidth: util.props.Boolean,
-    label: [ Array, String, Number, Object, Date, ],
+    selected: [ Array, String, Number, Object, Date, ],
   },
   data() {
     return {
@@ -117,7 +105,7 @@ export default {
       return config.ui.icon;
     },
     fontClass: function() {
-      return this.label ? "" : "text-muted";
+      return this.selected && this.selected.length !== 0 ? "" : "text-muted";
     }
   },
   watch: {
@@ -145,7 +133,7 @@ export default {
       this.popEle = this.$refs.dropdownMenu
     },
     initMenuWidth: function() {
-       this.menuStyle = this.menuWidth && {
+      this.menuStyle = this.menuWidth && {
         width: `${this.$refs.dropdownPicker.offsetWidth}px`
       };
     },
@@ -165,11 +153,9 @@ export default {
       if (tools.dom.isElementIm(this.$refs.dropdownTrigger, event.target)) return
       // 临时解决方法，如不采用延时会影响 menu 中的事件
       setTimeout(() => {
-        if (this.canHide) {
-          this.isShow = !this.isShow
-          return
-        }
-        this.isShow = tools.dom.isElementIm(this.$refs.dropdownMenu, event.target)
+        this.isShow = this.canHide
+          ? !this.isShow
+          : tools.dom.isElementIm(this.$refs.dropdownMenu, event.target)
       }, 200)
 
     },

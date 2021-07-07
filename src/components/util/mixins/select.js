@@ -82,7 +82,6 @@ const base = {
       default: null,
       validator: value => [ null, 'primary', 'display' ].includes(value)
     },
-    label: [ Array, String, Number, Object, Date, ],
   },
   data() {
     return {
@@ -97,8 +96,8 @@ const base = {
     this.initSelectedValue()
   },
   computed: {
-    showLabel: function() {
-      return this.label || getLabel(this.selectedValue, this.list, this.isMultiple, this.displayName, this.key)
+    label: function() {
+      return getLabel(this.selectedValue, this.list, this.isMultiple, this.displayName, this.key)
     },
     selectedMap: function () {
       return getMap(this.selectedValue, this.isMultiple, this.key)
