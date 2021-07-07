@@ -126,7 +126,6 @@
         :list="listCheck"
         name="check-list-item"
         type="checkbox"
-        multiple
       />
     </div>
   </div>

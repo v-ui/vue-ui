@@ -52,7 +52,7 @@
       <div class="col-4">
         <b-check type="radio" disabled />
         <span class="mx-1" />
-        <b-check type="checkbox" :checked="true" disabled />
+        <b-check type="radio" :checked="true" disabled />
       </div>
     </div>
     <div class="row">
@@ -233,7 +233,6 @@
         type="checkbox"
         :list="list"
         name="group-required"
-        inline
         required
       />
       <font class="col-1">
@@ -243,7 +242,6 @@
         type="radio"
         :list="list"
         name="group-required"
-        inline
         required
       />
     </div>
