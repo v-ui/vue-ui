@@ -57,7 +57,7 @@
     <h2>b-dropdown</h2>
     <hr>
     <h4>基础属性</h4>
-    <hr>
+    <br>
     <div class="row">
       <font class="col-1">
         default:
@@ -174,17 +174,6 @@
     </div>
     <div class="row">
       <font class="col-1">
-        hide-toggle:
-      </font>
-      <b-dropdown
-        class="col-auto"
-        hide-toggle
-      >
-        <b-dropdown-item label="item label" />
-      </b-dropdown>
-    </div>
-    <div class="row">
-      <font class="col-1">
         menu-weight:
       </font>
       <b-dropdown
@@ -199,22 +188,99 @@
         menu-align:
       </font>
       <font class="col-1">
-        left(default)
+        start(default)
       </font>
       <b-dropdown
         class="col-3"
-        menu-align="left"
+        menu-align="start"
         menu-weight
       >
         <b-dropdown-item label="item label" />
       </b-dropdown>
       <font class="col-1">
-        right
+        end
       </font>
       <b-dropdown
         class="col-3"
-        menu-align="right"
+        menu-align="end"
         menu-weight
+      >
+        <b-dropdown-item label="item label" />
+      </b-dropdown>
+    </div>
+     <div class="row">
+      <font class="col-1">
+        set:
+      </font>
+      <b-dropdown
+        class="col-auto"
+        trigger="set='up'"
+        set="up"
+      >
+        <b-dropdown-item label="item label" />
+      </b-dropdown>
+      <b-dropdown
+        class="col-auto"
+        trigger="set='down'(default)"
+        set="down"
+      >
+        <b-dropdown-item label="item label" />
+      </b-dropdown>
+      <b-dropdown
+        class="col-auto"
+        trigger="set='start'"
+        set="start"
+      >
+        <b-dropdown-item label="item label" />
+      </b-dropdown>
+      <b-dropdown
+        class="col-auto"
+        trigger="set='end'"
+        set="end"
+      >
+        <b-dropdown-item label="item label" />
+      </b-dropdown>
+    </div>
+    <div class="row">
+      <font class="col-1">
+        offset
+      </font>
+      <b-dropdown
+        class="col-auto"
+        offset="10,20"
+      >
+        <b-dropdown-item label="item label" />
+      </b-dropdown>
+    </div>
+     <div class="row">
+      <font class="col-1">
+        autoClose:
+      </font>
+      <b-dropdown
+        class="col-auto"
+        trigger="Default - set='true'"
+        auto-close="true"
+      >
+        <b-dropdown-item label="item label" />
+      </b-dropdown>
+      <b-dropdown
+        class="col-auto"
+        trigger="Manual close - set='false'"
+        auto-close="false"
+      >
+        <b-dropdown-item label="item label" />
+      </b-dropdown>
+      <b-dropdown
+        class="col-auto"
+        trigger="Clickable inside set='inside'"
+        auto-close="inside"
+      >
+        <b-dropdown-item label="item label" />
+      </b-dropdown>
+      <b-dropdown
+        class="col-auto"
+        trigger="Clickable outside - set='outside'"
+        auto-close="outside"
       >
         <b-dropdown-item label="item label" />
       </b-dropdown>
@@ -222,7 +288,7 @@
     <h2>b-dropdown-list</h2>
     <hr>
     <h4>基础属性</h4>
-    <hr>
+    <br>
     <div class="row">
       <font class="col-1">
         default:

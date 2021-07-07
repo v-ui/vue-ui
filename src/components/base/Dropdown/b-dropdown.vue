@@ -1,38 +1,29 @@
 <template>
-  <div
-    ref="divDropdown"
-    class="py-0"
-    :class="dropClass"
-  >
+  <div :class="dropClass">
     <div
-      :id="guid"
+      :id="id"
       class="d-flex justify-content-between align-items-center px-1"
-      data-toggle="dropdown"
+      :class="{'dropdown-toggle' : !$slots.icon}"
+      data-bs-toggle="dropdown"
+      :data-bs-offset="offset"
+      :data-bs-auto-close="autoClose"
       aria-haspopup="true"
       aria-expanded="false"
       @click="click"
     >
       <slot name="trigger">
         <font style="cursor: default;">
-          {{ trigger }}
+          {{ trigger || nullValue }}
         </font>
       </slot>
-      <slot
-        v-if="!hideToggle"
-        name="icon"
-      >
-        <i
-          :class="icon.caretDown"
-          class="px-1"
-        />
-      </slot>
+      <slot name="icon" />
     </div>
     <div
       ref="menu"
       class="dropdown-menu overflow-auto shadow-sm"
       :class="menuClass"
       :style="{'max-height': menuHeight}"
-      :aria-labelledby="guid"
+      :aria-labelledby="id"
     >
       <slot>
         <b-dropdown-menu
@@ -49,7 +40,6 @@
 </template>
 <script>
 import tools from "@/tools/index.js";
-import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 import BDropdownMenu from "./b-dropdown-menu";
@@ -59,53 +49,35 @@ export default {
   components: { BDropdownMenu },
   mixins: [ util.mixins.select.select, ],
   props: {
-    disabled: util.props.Boolean,
     set: util.props.set,
-    trigger: {
+    trigger: util.props.String,
+    offset: [String, Number],
+    autoClose: {
       ...util.props.String,
-      default: "<Place select...>"
+      default: 'true',
+      validator: value => [ 'true', 'false', 'inside', 'outside' ].includes(value)
     },
-    hideToggle: util.props.Boolean,
-    menuAlign: {
-      type: String,
-      default: "",
-      validator: value => ["", "left", "right"].includes(value)
-    },
+    scroll: util.props.UInt,
+    menuAlign: util.props.setX,
     menWidth: util.props.Boolean,
+    menuThem: util.props.themes,
     menuHeight: util.props.String,
-    scroll: util.props.UInt
-  },
-  data() {
-    return {
-      menuStyle: 0
-    };
+    disabled: util.props.Boolean,
+    id: {
+      type: String,
+      default: "dropdown-" + tools.random.getRandomString()
+    },
   },
   computed: {
-    guid: function() {
-      return "dropdown-" + tools.random.getRandomString();
-    },
-    icon: function() {
-      return config.ui.icon;
-    },
     dropClass: function() {
-      return this.set == "up" ? "drop" : "drop" + this.set;
+      return "drop" + this.set;
     },
     menuClass: function() {
-      return `${this.menuAlign ? `dropdown-menu-${this.menuAlign}` : ""}
-                    ${this.menuWidth ? "w-100" : ""} `;
+      let align = this.menuAlign ? `dropdown-menu-${this.menuAlign}` : ""
+      let theme = this.menuThem ? `dropdown-menu-${this.menuThem}` : ""
+      let width = this.menuWidth ? "w-100" : ""
+      return `${align} ${width} ${theme}`;
     }
-  },
-  mounted() {
-    const el = this.$refs.divDropdown;
-    if (!el) return;
-    let node = el;
-    if (!node) return;
-    tools.dom.addAttrs(node, {
-      id: this.guid,
-      "data-toggle": "dropdown",
-      "aria-haspopup": "true",
-      "aria-expanded": "false"
-    });
   },
   methods: {
     click: function() {
