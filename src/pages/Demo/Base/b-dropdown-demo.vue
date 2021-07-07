@@ -146,6 +146,17 @@
     </div>
     <div class="row">
       <font class="col-1">
+        toggleSplit:
+      </font>
+      <b-dropdown
+        class="col-auto"
+        toggle-split
+      >
+        <b-dropdown-item label="item label" />
+      </b-dropdown>
+    </div>
+    <div class="row">
+      <font class="col-1">
         trigger(2):
       </font>
       <b-dropdown class="col-auto">

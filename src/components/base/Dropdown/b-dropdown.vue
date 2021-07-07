@@ -3,7 +3,7 @@
     <div
       :id="id"
       class="d-flex justify-content-between align-items-center px-1"
-      :class="{'dropdown-toggle' : !$slots.icon}"
+      :class="{'dropdown-toggle' : !$slots.icon, 'dropdown-toggle-split': toggleSplit}"
       data-bs-toggle="dropdown"
       :data-bs-offset="offset"
       :data-bs-auto-close="autoClose"
@@ -11,7 +11,8 @@
       aria-expanded="false"
       @click="click"
     >
-      <slot name="trigger">
+      <span v-if="toggleSplit" class="visually-hidden">Toggle Dropdown</span>
+      <slot v-else name="trigger">
         <font style="cursor: default;">
           {{ trigger || nullValue }}
         </font>
@@ -62,6 +63,7 @@ export default {
     menWidth: util.props.Boolean,
     menuThem: util.props.themes,
     menuHeight: util.props.String,
+    toggleSplit: util.props.Boolean,
     disabled: util.props.Boolean,
     id: {
       type: String,
