@@ -7,6 +7,7 @@
         name="picker-type"
         :list="typeList"
         size="sm"
+        outline
       />
     </div>
     <cal-year-panel
@@ -66,10 +67,10 @@ export default {
   },
   mounted() {
     this.typeList = [
-      { value: this.enumTypeStatus.year, label: '年', },
-      { value: this.enumTypeStatus.month, label: '月', },
-      { value: this.enumTypeStatus.week, label: '周', },
-      { value: this.enumTypeStatus.date, label: '日', },
+      this.enumTypeStatus.year,
+      this.enumTypeStatus.month,
+      this.enumTypeStatus.week,
+      this.enumTypeStatus.date,
     ],
     this.selectedValue = this.moment(this.value)
   },
