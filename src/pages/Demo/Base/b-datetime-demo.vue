@@ -2,7 +2,7 @@
   <div>
     <h2>b-date-panel</h2>
     <hr>
-    <div class="row mx-0">
+    <h4 class="row mx-0">
       <font class="col-1">
         type:
       </font>
@@ -21,7 +21,7 @@
       <font class="col-2">
         date
       </font>
-    </div>
+    </h4>
     <div class="row mx-0">
       <font class="col-1">
         default
@@ -228,6 +228,8 @@
     </div>
     <h2>b-date-picker</h2>
     <hr>
+    <h4>基本属性</h4>
+    <br>
     <div class="row mx-0">
       <font class="col-1">
         default:
@@ -261,7 +263,49 @@
         placeholder="Place Check the Date"
       />
     </div>
-    <div class="row mx-0">
+    <br>
+    <h4>校验</h4>
+    <br>
+    <div class="row">
+      <font class="col-1">
+        required:
+      </font>
+      <b-date-picker
+        class="col-11"
+        required
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        success
+        <br>error:
+      </font>
+      <b-date-picker
+        class="col-11"
+        invalid-info="error"
+        valid-info="success"
+        required
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        success
+        <br>error(2):
+      </font>
+      <b-date-picker
+        class="col-11"
+        required
+      >
+        <template #invalid>
+          you can add anlything invalidInfo or DOM
+        </template>
+        <template #valid>
+          you can add anlything validInfo or DOM
+        </template>
+      </b-date-picker>
+    </div>
+    <br>
+    <h4 class="row mx-0">
       <font class="col-1">
         type:
       </font>
@@ -269,18 +313,13 @@
         year
       </font>
       <font class="col-2">
-        quarter
-      </font>
-      <font class="col-2">
         month
-      </font>
-      <font class="col-2">
-        week
       </font>
       <font class="col-2">
         date
       </font>
-    </div>
+    </h4>
+    <br>
     <div class="row mx-0">
       <font class="col-1">
         default:
@@ -291,15 +330,7 @@
       />
       <b-date-picker
         class="col-2"
-        type="quarter"
-      />
-      <b-date-picker
-        class="col-2"
         type="month"
-      />
-      <b-date-picker
-        class="col-2"
-        type="week"
       />
       <b-date-picker
         class="col-2"
@@ -317,18 +348,8 @@
       />
       <b-date-picker
         class="col-2"
-        type="quarter"
-        value="2018-03"
-      />
-      <b-date-picker
-        class="col-2"
         type="month"
         value="2018-03"
-      />
-      <b-date-picker
-        class="col-2"
-        type="week"
-        value="2018-03-05"
       />
       <b-date-picker
         class="col-2"
@@ -349,22 +370,9 @@
       />
       <b-date-picker
         class="col-2"
-        type="quarter"
-        min="2018-02"
-        max="2019-09"
-      />
-      <b-date-picker
-        class="col-2"
         type="month"
         min="2018-02"
         max="2019-09"
-      />
-      <b-date-picker
-        class="col-2"
-        type="week"
-        min="2019-09-15"
-        max="2019-09-30"
-        info="info text"
       />
       <b-date-picker
         class="col-2"
@@ -386,7 +394,6 @@
           type="year"
         />
       </div>
-      <div class="col-2" />
       <div class="col-2">
         {{ month }}:
         <br>
@@ -395,7 +402,6 @@
           type="month"
         />
       </div>
-      <div class="col-2" />
       <div class="col-2">
         {{ date }}:
         <br>
@@ -418,7 +424,6 @@
           range
         />
       </div>
-      <div class="col-2" />
       <div class="col-2">
         {{ monthR }}:
         <br>
@@ -428,7 +433,6 @@
           range
         />
       </div>
-      <div class="col-2" />
       <div class="col-2">
         {{ dateR }}:
         <br>

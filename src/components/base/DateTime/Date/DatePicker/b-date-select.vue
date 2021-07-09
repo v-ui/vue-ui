@@ -44,6 +44,13 @@ export default {
     prop: "value",
     event: "change",
   },
+  props: {
+    type: {
+      type: String,
+      default: "date",
+      validator: value => ["year", "month", "date"].includes(value),
+    },
+  },
   data() {
     return {
       // 默认使用 selectedValueStart，

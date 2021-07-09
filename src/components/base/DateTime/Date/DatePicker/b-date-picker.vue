@@ -1,5 +1,5 @@
 <template>
-  <div class=" p-0">
+  <div class="p-0">
     <b-dropdown-picker
       ref="datepicekr"
       class="form-control"
@@ -27,22 +27,22 @@
       </template>
     </b-dropdown-picker>
     <b-valid
-        v-if="validInfo || $slots.valid"
-        state="valid"
-      >
-        <slot name="valid">
-          {{ validInfo }}
-        </slot>
-      </b-valid>
-      <b-valid
-        v-if="invalidInfo || $slots.invalid"
-        state="invalid"
-      >
-        <slot name="invalid">
-          {{ invalidInfo }}
-        </slot>
-      </b-valid>
-      <b-info :info="info" />
+      v-if="validInfo || $slots.valid"
+      state="valid"
+    >
+      <slot name="valid">
+        {{ validInfo }}
+      </slot>
+    </b-valid>
+    <b-valid
+      v-if="invalidInfo || $slots.invalid"
+      state="invalid"
+    >
+      <slot name="invalid">
+        {{ invalidInfo }}
+      </slot>
+    </b-valid>
+    <b-info :info="info" />
   </div>
 </template>
 
