@@ -6,23 +6,42 @@
       <font class="col-1">
         type:
       </font>
-      <font class="col-1">
+      <font class="col-2">
         year
+      </font>
+      <font class="col-2">
+        quarter
+      </font>
+      <font class="col-2">
+        month
+      </font>
+      <font class="col-2">
+        week
+      </font>
+      <font class="col-2">
+        date
+      </font>
+    </div>
+    <div class="row mx-0">
+      <font class="col-1">
+        default
       </font>
       <b-date-panel
         class="col-2"
         type="year"
       />
-      <font class="col-1">
-        month
-      </font>
+      <b-date-panel
+        class="col-2"
+        type="quarter"
+      />
       <b-date-panel
         class="col-2"
         type="month"
       />
-      <font class="col-1">
-        date
-      </font>
+      <b-date-panel
+        class="col-2"
+        type="week"
+      />
       <b-date-panel
         class="col-2"
         type="date"
@@ -32,25 +51,26 @@
       <font class="col-1">
         hideHeader:
       </font>
-      <font class="col-1">
-        year
-      </font>
       <b-date-panel
         class="col-2"
         type="year"
         hide-header
       />
-      <font class="col-1">
-        month
-      </font>
+      <b-date-panel
+        class="col-2"
+        type="quarter"
+        hide-header
+      />
       <b-date-panel
         class="col-2"
         type="month"
         hide-header
       />
-      <font class="col-1">
-        date
-      </font>
+      <b-date-panel
+        class="col-2"
+        type="week"
+        hide-header
+      />
       <b-date-panel
         class="col-2"
         type="date"
@@ -61,118 +81,150 @@
       <font class="col-1">
         min/max:
       </font>
-      <font class="col-1">
-        year
-        <br>
+      <div class="col-2">
         min="2015"
         max="2020"
-      </font>
-      <b-date-panel
-        class="col-2"
-        type="year"
-        min="2015"
-        max="2020"
-      />
-      <font class="col-1">
-        month
         <br>
+        <b-date-panel
+          type="year"
+          min="2015"
+          max="2020"
+        />
+      </div>
+      <div class="col-2">
         min="2020-01"
         max="2020-10"
-      </font>
-      <b-date-panel
-        class="col-2"
-        type="month"
+        <br>
+        <b-date-panel
+          type="quarter"
+          min="2020-01"
+          max="2020-10"
+        />
+      </div>
+      <div class="col-2">
         min="2020-01"
         max="2020-10"
-      />
-      <font class="col-1">
-        date
         <br>
+        <b-date-panel
+          type="month"
+          min="2020-01"
+          max="2020-10"
+        />
+      </div>
+      <div class="col-2">
         min="2020-01-10"
         max="2020-01-20"
-      </font>
-      <b-date-panel
-        class="col-2"
-        type="date"
+        <br>
+        <b-date-panel
+          type="week"
+          min="2020-01-10"
+          max="2020-01-20"
+        />
+      </div>
+      <div class="col-2">
         min="2020-01-10"
         max="2020-01-20"
-      />
+        <br>
+        <b-date-panel
+          type="date"
+          min="2020-01-10"
+          max="2020-01-20"
+        />
+      </div>
     </div>
     <div class="row mx-0">
       <font class="col-1">
         v-model:
       </font>
-      <font class="col-1">
-        year
-        <br>
+      <div class="col-2">
         {{ year }}
-      </font>
-      <b-date-panel
-        v-model="year"
-        class="col-2"
-        type="year"
-      />
-      <font class="col-1">
-        month
         <br>
+        <b-date-panel
+          v-model="year"
+          type="year"
+        />
+      </div>
+      <div class="col-2">
+        {{ quarter }}
+        <br>
+        <b-date-panel
+          v-model="quarter"
+          type="quarter"
+        />
+      </div>
+      <div class="col-2">
         {{ month }}
-      </font>
-      <b-date-panel
-        v-model="month"
-        class="col-2"
-        type="month"
-      />
-      <font class="col-1">
-        date
         <br>
+        <b-date-panel
+          v-model="month"
+          type="month"
+        />
+      </div>
+      <div class="col-2">
+        {{ week }}
+        <br>
+        <b-date-panel
+          v-model="week"
+          type="week"
+        />
+      </div>
+      <div class="col-2">
         {{ date }}
-      </font>
-      <b-date-panel
-        v-model="date"
-        class="col-2"
-        type="date"
-      />
+        <br>
+        <b-date-panel
+          v-model="date"
+          type="date"
+        />
+      </div>
     </div>
     <h2>b-date-select</h2>
     b-date-select 拥有 b-date-panel 的所有功能，b-date-panel 更简洁，在单独选择日期时推荐使用 b-date-panel，仅当需要选择时间范围时才使用 b-date-select
     <hr>
+    <div class="row">
+      <font class="col-1">
+        type:
+      </font>
+      <font class="col-3">
+        year
+      </font>
+      <font class="col-3">
+        month
+      </font>
+      <font class="col-3">
+        date
+      </font>
+    </div>
     <div class="row mx-0">
       <font class="col-1">
         v-model(range):
       </font>
-      <font class="col-1">
-        yearR
-        <br>
+      <div class="col-3">
         {{ yearR }}
-      </font>
-      <b-date-select
-        v-model="yearR"
-        type="year"
-        range
-      />
-      <font class="col-1">
-        monthR
         <br>
+        <b-date-select
+          v-model="yearR"
+          type="year"
+          range
+        />
+      </div>
+      <div class="col-3 mx-5">
         {{ monthR }}
-      </font>
-      <b-date-select
-        v-model="monthR"
-        type="month"
-        range
-      />
-    </div>
-    <div class="row">
-      <font class="col-1" />
-      <font class="col-1">
-        date
         <br>
+        <b-date-select
+          v-model="monthR"
+          type="month"
+          range
+        />
+      </div>
+      <div class="col-4">
         {{ dateR }}
-      </font>
-      <b-date-select
-        v-model="dateR"
-        type="date"
-        range
-      />
+        <br>
+        <b-date-select
+          v-model="dateR"
+          type="date"
+          range
+        />
+      </div>
     </div>
     <h2>b-date-picker</h2>
     <hr>
@@ -213,23 +265,42 @@
       <font class="col-1">
         type:
       </font>
+      <font class="col-2">
+        year
+      </font>
+      <font class="col-2">
+        quarter
+      </font>
+      <font class="col-2">
+        month
+      </font>
+      <font class="col-2">
+        week
+      </font>
+      <font class="col-2">
+        date
+      </font>
+    </div>
+    <div class="row mx-0">
       <font class="col-1">
-        year:
+        default:
       </font>
       <b-date-picker
         class="col-2"
         type="year"
       />
-      <font class="col-1">
-        month:
-      </font>
+      <b-date-picker
+        class="col-2"
+        type="quarter"
+      />
       <b-date-picker
         class="col-2"
         type="month"
       />
-      <font class="col-1">
-        date:
-      </font>
+      <b-date-picker
+        class="col-2"
+        type="week"
+      />
       <b-date-picker
         class="col-2"
         type="date"
@@ -239,29 +310,30 @@
       <font class="col-1">
         value:
       </font>
-      <font class="col-1">
-        year:
-      </font>
       <b-date-picker
         class="col-2"
         type="year"
         value="2018"
       />
-      <font class="col-1">
-        month:
-      </font>
+      <b-date-picker
+        class="col-2"
+        type="quarter"
+        value="2018-03"
+      />
       <b-date-picker
         class="col-2"
         type="month"
-        value="2018"
+        value="2018-03"
       />
-      <font class="col-1">
-        date:
-      </font>
+      <b-date-picker
+        class="col-2"
+        type="week"
+        value="2018-03-05"
+      />
       <b-date-picker
         class="col-2"
         type="date"
-        value="2018"
+        value="2018-03-05"
       />
     </div>
     <div class="row mx-0">
@@ -269,31 +341,35 @@
         min
         <br>max:
       </font>
-      <font class="col-1">
-        year:
-      </font>
       <b-date-picker
         class="col-2"
         type="year"
         min="2018"
         max="2020"
       />
-      <font class="col-1">
-        month:
-      </font>
+      <b-date-picker
+        class="col-2"
+        type="quarter"
+        min="2018-02"
+        max="2019-09"
+      />
       <b-date-picker
         class="col-2"
         type="month"
-        min="2018"
+        min="2018-02"
         max="2019-09"
       />
-      <font class="col-1">
-        date:
-      </font>
+      <b-date-picker
+        class="col-2"
+        type="week"
+        min="2019-09-15"
+        max="2019-09-30"
+        info="info text"
+      />
       <b-date-picker
         class="col-2"
         type="date"
-        min="2018"
+        min="2019-09-15"
         max="2019-09-30"
         info="info text"
       />
@@ -302,74 +378,66 @@
       <font class="col-1">
         v-model:
       </font>
-      <font class="col-1">
-        year
-        <br>
+      <div class="col-2">
         {{ year }}:
-      </font>
-      <b-date-picker
-        v-model="year"
-        class="col-2"
-        type="year"
-      />
-      <font class="col-1">
-        month
         <br>
+        <b-date-picker
+          v-model="year"
+          type="year"
+        />
+      </div>
+      <div class="col-2" />
+      <div class="col-2">
         {{ month }}:
-      </font>
-      <b-date-picker
-        v-model="month"
-        class="col-2"
-        type="month"
-      />
-      <font class="col-1">
-        date
         <br>
+        <b-date-picker
+          v-model="month"
+          type="month"
+        />
+      </div>
+      <div class="col-2" />
+      <div class="col-2">
         {{ date }}:
-      </font>
-      <b-date-picker
-        v-model="date"
-        class="col-2"
-        type="date"
-      />
+        <br>
+        <b-date-picker
+          v-model="date"
+          type="date"
+        />
+      </div>
     </div>
     <div class="row mx-0">
       <font class="col-1">
         v-model(range):
       </font>
-      <font class="col-1">
-        year
-        <br>
+      <div class="col-2">
         {{ yearR }}:
-      </font>
-      <b-date-picker
-        v-model="yearR"
-        class="col-2"
-        type="year"
-        range
-      />
-      <font class="col-1">
-        month
         <br>
+        <b-date-picker
+          v-model="yearR"
+          type="year"
+          range
+        />
+      </div>
+      <div class="col-2" />
+      <div class="col-2">
         {{ monthR }}:
-      </font>
-      <b-date-picker
-        v-model="monthR"
-        class="col-2"
-        type="month"
-        range
-      />
-      <font class="col-1">
-        date
         <br>
+        <b-date-picker
+          v-model="monthR"
+          type="month"
+          range
+        />
+      </div>
+      <div class="col-2" />
+      <div class="col-2">
         {{ dateR }}:
-      </font>
-      <b-date-picker
-        v-model="dateR"
-        class="col-2"
-        type="date"
-        range
-      />
+        <br>
+        <b-date-picker
+          v-model="dateR"
+          type="date"
+          range
+        />
+      </div>
     </div>
     <h2>b-datetime</h2>
     <hr>
@@ -511,16 +579,20 @@ export default {
   data() {
     return {
       year: "2018",
+      quarter: "2018-05",
       month: "2018-05",
+      week: "2018-05-03",
       date: "2018-05-03",
       yearR: {
         start: '2018',
         end: '2020',
       },
+      quarterR: "2018-05",
       monthR: {
         start: '2018-05',
         end: '2018-09',
       },
+      weekR: "2018-05-03",
       dateR: {
         start: '2018-05-03',
         end: '2018-05-15',

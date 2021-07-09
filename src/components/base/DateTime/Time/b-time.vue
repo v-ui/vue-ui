@@ -34,6 +34,7 @@ export default {
     },
     value: util.props.String,
     info: util.props.String,
+    disabled: util.props.Boolean,
     min: {
       type: [String, Date]
       // default: '00:00:00',

@@ -1,25 +1,49 @@
 <template>
-  <b-dropdown-panel
-    :placeholder="fillPlaceholder"
-    :label="showValue"
-    :info="message"
-    :can-hide="canHide"
-    :disabled="disabled"
-  >
-    <template #icon>
-      <i class="far fa-calendar-alt" />
-    </template>
-    <template>
-      <b-date-select
-        v-model="selectedValue"
-        :hide-header="hideHeader"
-        :type="pickerType"
-        :min="dateMin"
-        :max="dateMax"
-        :range="range"
-      />
-    </template>
-  </b-dropdown-panel>
+  <div class=" p-0">
+    <b-dropdown-picker
+      ref="datepicekr"
+      class="form-control"
+      :selected="showValue"
+      :can-hide="canHide"
+      :disabled="disabled"
+      :placeholder="fillPlaceholder"
+      @picker:hide="pickerHide"
+    >
+      <template #trigger>
+        <slot name="trigger" />
+      </template>
+      <template #icon>
+        <i class="far fa-calendar-alt" />
+      </template>
+      <template>
+        <b-date-select
+          v-model="selectedValue"
+          :hide-header="hideHeader"
+          :type="pickerType"
+          :min="dateMin"
+          :max="dateMax"
+          :range="range"
+        />
+      </template>
+    </b-dropdown-picker>
+    <b-valid
+        v-if="validInfo || $slots.valid"
+        state="valid"
+      >
+        <slot name="valid">
+          {{ validInfo }}
+        </slot>
+      </b-valid>
+      <b-valid
+        v-if="invalidInfo || $slots.invalid"
+        state="invalid"
+      >
+        <slot name="invalid">
+          {{ invalidInfo }}
+        </slot>
+      </b-valid>
+      <b-info :info="info" />
+  </div>
 </template>
 
 <script>
@@ -27,23 +51,37 @@ import config from '@/config/index.js'
 import util from "@/components/util/index.js";
 
 import BDateSelect from '@/components/base/DateTime/Date/DatePicker/b-date-select.vue'
-import BDropdownPanel from "@/components/base/DropdownPanel/b-dropdown-panel.vue";
+import BDropdownPicker from "@/components/base/DropdownPicker/b-dropdown-picker.vue";
 
+import BValid from "@/components/form/Other/b-form-valid.vue";
+import BInfo from "@/components/basic/basic-info.vue"
 export default {
   name: "BDatePicker",
-  components: { BDateSelect, BDropdownPanel, },
+  components: {
+    BDateSelect,
+    BDropdownPicker,
+    BValid,
+    BInfo,
+  },
   mixins: [
-    // TODO: remove util.mixins.form.base
-    util.mixins.form.base,
-    util.mixins.date.base,
+    util.mixins.moment.base,
     util.mixins.date.type,
     util.mixins.date.select,
+    util.mixins.form.validator,
   ],
   model: {
     prop: "value",
-    event: "change",
+    event: "selected:change",
   },
   props: {
+    value: [String, Number, Date, Object],
+    type: {
+      type: String,
+      default: "date",
+      validator: value => ["year", "month", "date"].includes(value),
+    },
+    hideHeader: util.props.Boolean,
+    disabled: util.props.Boolean,
     info: util.props.String,
     placeholder: util.props.String,
   },
@@ -58,17 +96,11 @@ export default {
 
       switch (this.type) {
         case this.enumTypeStatus.year:
-          return this.range
-            ? config.ui.date.year + " - " +  config.ui.date.year
-            : config.ui.date.year
         case this.enumTypeStatus.month:
-          return this.range
-            ? config.ui.date.month + " - " +  config.ui.date.month
-            : config.ui.date.month
         case this.enumTypeStatus.date:
           return this.range
-            ? config.ui.date.date + " - " +  config.ui.date.date
-            : config.ui.date.date
+            ? config.ui.date[this.type] + " - " +  config.ui.date[this.type]
+            : config.ui.date[this.type]
         default:
           return "error";
       }
@@ -117,7 +149,7 @@ export default {
     selectedValue: {
       handler: function (value) {
         // 配合 v-model 工作
-        this.$emit("change", value);
+        this.$emit("selected:change", value);
       },
       deep: true,
     },
@@ -127,12 +159,22 @@ export default {
       if (!value || !value.isValid || !value.isValid()) return;
       switch (this.type) {
         case this.enumTypeStatus.year:
-          return value.format(config.ui.date.year)
         case this.enumTypeStatus.month:
-          return value.format(config.ui.date.month)
         case this.enumTypeStatus.date:
-          return value.format(config.ui.date.date)
+          return value.format(config.ui.date[this.type])
       }
+    },
+    pickerHide: function() {
+      this.validator(this.$refs.datepicekr.$el, this.selectedValue)
+    },
+    // 验证集合 通过返回 true，不通过返回 false
+    validating: function (value) {
+      // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
+      if (!this.validateRequired(value)) return false
+      // 自定义验证（用户自定义验证函数，验证通过返回 true）
+      if (!this.validateCustomize(value, this.valid)) return false
+      // 验证成功
+      return true
     },
   },
 };

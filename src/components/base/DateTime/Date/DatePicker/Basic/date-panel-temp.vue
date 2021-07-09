@@ -35,11 +35,13 @@
             :item="item"
           >
             <date-panel-item
+              v-if="item.label"
               :item="item"
               class="w-100"
               :disabled="item.disabled"
               @item:click="click"
             />
+            <span v-else />
           </slot>
         </template>
       </b-grid-table>

@@ -1,6 +1,6 @@
 
 <template>
-  <div :class="{ 'cannt-hide': range }">
+  <div class="m-1" :class="{ 'cannt-hide': range }">
     <date-year-panel
       v-if="pickerType === enumTypeStatus.year"
       v-model="selectedValue"
@@ -118,11 +118,11 @@ export default {
     },
     // quarter
     quarter2Year: function(value) {
-      if (value) this.selectedValue = this.formatDate(value.year(), value.month(), 1)
+      if (value) this.selectedValue = this.formatDate(value.year())
       this.pickerType = this.enumTypeStatus.year;
     },
     quarterChecked: function(value) {
-      this.selectedValue = this.formatDate(value.year(), value.month(), 1)
+      this.selectedValue = this.formatDate(value.year()).quarter(value.quarter())
       if (this.canHide) return
       this.pickerType = this.enumTypeStatus.quarter
     },
@@ -138,17 +138,17 @@ export default {
     },
     // week
     week2Month: function(value) {
-      if (value) this.selectedValue = this.formatDate(value.year(), value.month(), 1)
+      if (value) this.selectedValue = this.formatDate(value.year(), value.month())
       this.pickerType = this.enumTypeStatus.month;
     },
     weekChecked: function(value) {
-      this.selectedValue = this.formatDate(value.year(), value.month(), 1)
+      this.selectedValue = this.formatDate(value.year(), value.month()).week(value.week())
       if (this.canHide) return
       this.pickerType = this.enumTypeStatus.week
     },
     // date
     date2Month: function (value) {
-      if (value) this.selectedValue = this.formatDate(value.year(), value.month(), value.date())
+      if (value) this.selectedValue = this.formatDate(value.year(), value.month())
       this.pickerType = this.enumTypeStatus.month;
     },
     dateChecked: function (value) {

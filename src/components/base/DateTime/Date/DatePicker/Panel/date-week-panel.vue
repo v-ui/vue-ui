@@ -15,8 +15,11 @@
     <template #header>
       <slot name="header" />
     </template>
-    <b-dropdown-menu
-      :list="list"
+    <date-list-item
+      v-for="(item, index) in list"
+      :key="index"
+      :item="item"
+      :disabled="disabled"
       @item:click="checked"
     />
   </date-panel-temp>
@@ -26,11 +29,11 @@
 import util from "@/components/util/index.js";
 
 import DatePanelTemp from '../Basic/date-panel-temp.vue'
-import BDropdownMenu from '@/components/base/Dropdown/b-dropdown-menu.vue'
+import DateListItem from '../Basic/date-list-item.vue'
 
 export default {
   name: 'DateWeekPanel',
-  components: { DatePanelTemp, BDropdownMenu },
+  components: { DatePanelTemp, DateListItem, },
   mixins: [
     util.mixins.date.select,
     util.mixins.date.validator,

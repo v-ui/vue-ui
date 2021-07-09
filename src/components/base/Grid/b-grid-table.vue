@@ -10,7 +10,7 @@
       <td
         v-for="(item, itemIndex) in getList(index)"
         :key="'td-'+itemIndex"
-        class="p-1"
+        class="p-0"
       >
         <slot
           name="item"

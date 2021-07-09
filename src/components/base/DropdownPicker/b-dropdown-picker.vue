@@ -110,6 +110,7 @@ export default {
   },
   watch: {
     isShow: function(value) {
+      if (!value) this.$emit('picekr:hide')
       value
         ? document.addEventListener("mousedown", this.hindeMenu)
         : document.removeEventListener("mousedown", this.hindeMenu)
