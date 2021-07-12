@@ -55,6 +55,7 @@ export default {
   ],
   inheritAttrs: false,
   props: {
+    list: util.props.Array,
     floatLabel: util.props.String,
     disabled: util.props.Boolean,
     info: util.props.String,

@@ -38,6 +38,9 @@ export default {
   name: 'AddressCountry',
   components: { AddressTemp, AddressItem, },
   mixins: [ util.mixins.select.select, ],
+  props: {
+    list: util.props.Array,
+  },
   data() {
     return {
       alphas: [

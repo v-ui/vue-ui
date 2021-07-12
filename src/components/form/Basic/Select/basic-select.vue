@@ -38,6 +38,7 @@ export default {
   components: { BasicSelectOption },
   mixins: [util.mixins.form.base, util.mixins.select.select],
   props: {
+    list: util.props.Array,
     disabled: util.props.Boolean,
     hideNull: util.props.Boolean,
     row: {

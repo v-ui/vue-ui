@@ -50,6 +50,7 @@ export default {
   components: { BDropdownMenu },
   mixins: [ util.mixins.select.select, ],
   props: {
+    list: util.props.Array,
     set: util.props.set,
     trigger: util.props.String,
     offset: [String, Number],

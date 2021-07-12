@@ -87,6 +87,7 @@ export default {
     util.mixins.select.select,
   ],
   props: {
+    list: util.props.Array,
     canHide: {
       ...util.props.Boolean,
       default: true,
@@ -103,6 +104,11 @@ export default {
     border: util.props.Boolean,
     disabled: util.props.Boolean,
     placeholder: util.props.String,
+  },
+  computed: {
+    label: function() {
+      return util.mixins.select.tools.getLabel(this.selectedValue, this.list, this.isMultiple, this.display, this.key)
+    },
   },
   methods: {
     deleteItem: function(index) {

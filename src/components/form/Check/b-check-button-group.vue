@@ -45,6 +45,7 @@ export default {
   components: { BCheck, BInfo },
   mixins: [ util.mixins.select.check, ],
   props: {
+    list: util.props.Array,
     type: {
       type: String,
       default: 'radio',

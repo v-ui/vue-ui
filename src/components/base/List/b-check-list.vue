@@ -29,13 +29,13 @@ export default {
   components: { BList, BCheck },
   mixins: [ util.mixins.select.check,],
   props: {
+    list: util.props.Array,
     type: {
       type: String,
       default: 'radio',
       validator: value => ['radio', 'checkbox'].includes(value),
     },
     name: util.props.String,
-    list: util.props.Array,
     color: {
       ...util.props.color,
       default: "white"

@@ -33,6 +33,7 @@ export default {
   components: { BGridItem },
   mixins: [ util.mixins.select.select, ],
   props: {
+    list: util.props.Array,
     disabled: util.props.Boolean,
     colCount: util.props.UInt,
   },

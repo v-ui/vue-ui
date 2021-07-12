@@ -32,6 +32,9 @@ export default {
   name: 'AddressTemp',
   components: { AddressItem, BGridRow },
   mixins: [ util.mixins.select.select, ],
+  props: {
+    list: util.props.Array,
+  },
   methods: {
     itemClick: function(item) {
       this.selectedValue = item

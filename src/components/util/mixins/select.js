@@ -33,12 +33,12 @@ const isSelected = function(map, item, multiple, key) {
 
 // 获取单个 item 的 key
 const getKey = function(item, key) {
-  return item && tools.obj.isTrue(item[key]) ? item[key] : item
+  return item && (tools.obj.isTrue(item[key]) ? item[key] : item) || item
 }
 
 // 获取单个 item 的 displayName
 const getDisplay = function(item, name, key) {
-  return item && tools.obj.isTrue(item[name]) ? item[name] : tools.obj.isTrue(item[key]) ? item[key] : item
+  return item && (tools.obj.isTrue(item[name]) ? item[name] : tools.obj.isTrue(item[key]) ? item[key] : item) || item
 }
 
 // 根据选中获取 item
@@ -76,7 +76,6 @@ const base = {
     event: 'selected:change',
   },
   props: {
-    list: props.Array,
     return: {
       type: props.String,
       default: null,
@@ -96,9 +95,6 @@ const base = {
     this.initSelectedValue()
   },
   computed: {
-    label: function() {
-      return getLabel(this.selectedValue, this.list, this.isMultiple, this.displayName, this.key)
-    },
     selectedMap: function () {
       return getMap(this.selectedValue, this.isMultiple, this.key)
     },
@@ -143,6 +139,15 @@ const base = {
 }
 
 export default {
+  tools: {
+    install,
+    getMap,
+    getKey,
+    getItem,
+    getLabel,
+    getDisplay,
+    isSelected,
+  },
   check: {
     mixins: [ base, ],
     methods: {

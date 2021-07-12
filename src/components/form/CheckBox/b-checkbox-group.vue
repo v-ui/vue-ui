@@ -48,6 +48,7 @@ export default {
   mixins: [util.mixins.select.check, util.mixins.form.validator],
   inheritAttrs: false,
   props: {
+    list: util.props.Array,
     info: util.props.String,
     disabled: util.props.Boolean
   },

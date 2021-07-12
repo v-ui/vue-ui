@@ -23,5 +23,8 @@ export default {
   name: 'BColorSet',
   components: { BasicButton, },
   mixins: [ util.mixins.select.check ],
+  props: {
+    list: util.props.Array,
+  },
 }
 </script>

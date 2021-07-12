@@ -68,6 +68,7 @@ export default {
   ],
   inheritAttrs: false,
   props: {
+    list: util.props.Array,
     type: {
       type: String,
       default: 'radio',

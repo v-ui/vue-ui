@@ -59,6 +59,7 @@
 
 <script>
 import util from "@/components/util/index.js";
+import tools from "@/components/util/mixins/select.js"
 
 import BDropdownPicker from "@/components/base/DropdownPicker/b-dropdown-picker.vue";
 import BDropdownMenu from '@/components/base/Dropdown/b-dropdown-menu.vue'
@@ -77,8 +78,10 @@ export default {
   mixins: [
     util.mixins.form.validator,
     util.mixins.select.select,
+    util.mixins.select.tools,
   ],
   props: {
+    list: util.props.Array,
     info: util.props.String,
     search: util.props.Boolean,
     disabled: util.props.Boolean,
@@ -89,6 +92,11 @@ export default {
     return {
       menuHeight: "0px",
     };
+  },
+  computed: {
+    label: function() {
+      return tools.tools.getLabel(this.selectedValue, this.list, this.isMultiple, this.display, this.key)
+    },
   },
   methods: {
     deleteItem: function(index) {

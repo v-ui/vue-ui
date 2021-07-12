@@ -25,6 +25,7 @@ export default {
   components: { BGridRow, BGridTable, },
   mixins: [ util.mixins.select.select, ],
   props: {
+    list: util.props.Array,
     type: {
       type: String,
       default: 'row',
