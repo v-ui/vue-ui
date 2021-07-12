@@ -1,5 +1,6 @@
 <template>
   <b-dropdown-menu
+    v-model="selectedValue"
     :list="list"
   />
 </template>
@@ -10,6 +11,9 @@ import BDropdownMenu from '@/components/base/Dropdown/b-dropdown-menu.vue'
 export default {
   name: 'DateTimeList',
   components: { BDropdownMenu, },
-  mixins: [ util.mixins.date.time ],
+  mixins: [
+    util.mixins.date.time,
+    util.mixins.select.select,
+  ],
 }
 </script>

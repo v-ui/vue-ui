@@ -553,7 +553,6 @@ const localBase = {
   },
 }
 
-
 const localType = {
   mixins: [ localBase, ],
   props: {
@@ -605,7 +604,7 @@ let time = {
       return Math.min(num, this.max)
     },
     list: function() {
-      return tools.number.range(this.min, this.max, this.step).map(e => ({
+      return tools.number.range(this.min, this.end, this.step).map(e => ({
         value: e,
         label: e,
       }))

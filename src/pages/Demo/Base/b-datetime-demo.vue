@@ -592,6 +592,67 @@
         step="1"
       />
     </div>
+    <div class="row">
+      <font class="col-1">
+        v-model
+      </font>
+      <div class="col-1">
+        {{ months }}
+        <b-date-list
+          v-model="months"
+          local="months"
+        />
+      </div>
+      <div class="col-1">
+        {{ monthsShort }}
+        <b-date-list
+          v-model="monthsShort"
+          local="monthsShort"
+        />
+      </div>
+      <div class="col-1">
+        {{ weekdays }}
+        <b-date-list
+          v-model="weekdays"
+          local="weekdays"
+        />
+      </div>
+      <div class="col-1">
+        {{ weekdaysShort }}
+        <b-date-list
+          v-model="weekdaysShort"
+          local="weekdaysShort"
+        />
+      </div>
+      <div class="col-1">
+        {{ weekdaysMin }}
+        <b-date-list
+          v-model="weekdaysMin"
+          local="weekdaysMin"
+        />
+      </div>
+      <div class="col-1">
+        {{ hour }}
+        <b-date-list
+          v-model="hour"
+          local="hour"
+        />
+      </div>
+      <div class="col-1">
+        {{ minute }}
+        <b-date-list
+          v-model="minute"
+          local="minute"
+        />
+      </div>
+      <div class="col-1">
+        {{ second }}
+        <b-date-list
+          v-model="second"
+          local="second"
+        />
+      </div>
+    </div>
     <h2>b-datetime</h2>
     <hr>
     <div class="row mx-0">
@@ -754,6 +815,14 @@ export default {
       hhmmss: "06:31:59",
       year1: "2015",
       month1: "3",
+      months: 6,
+      monthsShort: 6,
+      weekdays: 5,
+      weekdaysShort: 5,
+      weekdaysMin: 5,
+      hour: 10,
+      minute: 10,
+      second: 10,
     };
   },
 };
