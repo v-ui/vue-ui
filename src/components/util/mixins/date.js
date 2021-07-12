@@ -537,10 +537,78 @@ let date = {
   },
 }
 
-let weekList = {
+const localBase = {
+  mixins: [ moment.base, ],
+  props: {
+    local: {
+      type: String,
+      default: 'weekdaysMin',
+      validator: value => ['months', 'monthsShort', 'weekdays', 'weekdaysShort', 'weekdaysMin', 'hour', 'minute', 'second'].includes(value)
+    },
+    min: props.UInt,
+    max: {
+      ...props.UInt,
+      default: 59,
+    }
+  },
+}
+
+
+const localType = {
+  mixins: [ localBase, ],
+  props: {
+    step: {
+      ...props.UInt,
+      default: 5,
+    },
+  },
+}
+
+const local = {
+  mixins: [ localBase, ],
+  props: {
+    local: {
+      type: String,
+      default: 'weekdaysMin',
+      validator: value => ['months', 'monthsShort', 'weekdays', 'weekdaysShort', 'weekdaysMin'].includes(value)
+    },
+  },
   computed: {
-    weekList: function() {
-      return this.moment.weekdaysMin()
+    list: function() {
+      return this.moment[this.local]()
+        .filter((e, index) => index >= this.min && index <= this.max)
+        .map((e, index) => ({
+        value: 0 + index,
+        label: e,
+      }))
+    },
+  },
+}
+
+import tools from "@/tools/index.js"
+let time = {
+  mixins: [ localBase, ],
+  props: {
+    local: {
+      type: String,
+      default: 'hour',
+      validator: value => ['hour', 'minute', 'second'].includes(value)
+    },
+    step: {
+      ...props.UInt,
+      default: 1,
+    },
+  },
+  computed: {
+    end: function() {
+      let num = this.local === 'hour' ? 23 : 59
+      return Math.min(num, this.max)
+    },
+    list: function() {
+      return tools.number.range(this.min, this.max, this.step).map(e => ({
+        value: e,
+        label: e,
+      }))
     },
   },
 }
@@ -555,5 +623,7 @@ export default {
   month,
   week,
   date,
-  weekList,
+  localType,
+  local,
+  time,
 }

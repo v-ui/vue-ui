@@ -17,10 +17,13 @@
       </template>
     </date-panel-header>
     <hr
-      v-show="!$slots.week && !hideHeader"
+      v-show="!showWeek && !hideHeader"
       class="my-1"
     >
-    <slot name="week" />
+    <date-week-grid
+      v-if="showWeek"
+      disabled
+    />
     <slot>
       <b-grid-table
         :list="list"
@@ -54,16 +57,17 @@ import util from "@/components/util/index.js";
 
 import DatePanelHeader from "./date-panel-header";
 import DatePanelItem from './date-panel-item'
+import DateWeekGrid from './date-week-grid.vue'
 import BGridTable from '@/components/base/Grid/b-grid-table.vue';
-
 export default {
   name: 'DatePanelTemp',
-  components: { DatePanelHeader, DatePanelItem, BGridTable, },
+  components: { DatePanelHeader, DatePanelItem, DateWeekGrid, BGridTable, },
   props: {
     list: util.props.Array,
     colCount: util.props.UInt,
     border: util.props.Boolean,
     disabled: util.props.Boolean,
+    showWeek : util.props.Boolean,
     headerText: util.props.String,
     hideHeader: util.props.Boolean,
     disabledNow: util.props.Boolean,

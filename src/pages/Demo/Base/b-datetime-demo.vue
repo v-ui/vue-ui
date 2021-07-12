@@ -19,7 +19,7 @@
         week
       </font>
       <font class="col-2">
-        date
+        date(default)
       </font>
     </h4>
     <div class="row mx-0">
@@ -191,7 +191,7 @@
         month
       </font>
       <font class="col-3">
-        date
+        date(default)
       </font>
     </div>
     <div class="row mx-0">
@@ -316,7 +316,7 @@
         month
       </font>
       <font class="col-2">
-        date
+        date(default)
       </font>
     </h4>
     <br>
@@ -442,6 +442,155 @@
           range
         />
       </div>
+    </div>
+    <h2>b-date-list</h2>
+    <hr>
+    <h4 class="row mx-0">
+      <font class="col-1">
+        type:
+      </font>
+      <font class="col-1">
+        months
+      </font>
+      <font class="col-1">
+        monthsShort
+      </font>
+      <font class="col-1">
+        weekdays
+      </font>
+      <font class="col-1">
+        weekdaysShort
+      </font>
+       <font class="col-2">
+        weekdaysMin(default)
+      </font>
+      <font class="col-1">
+        hour
+      </font>
+      <font class="col-1">
+        minute
+      </font>
+      <font class="col-1">
+        second
+      </font>
+    </h4>
+    <div class="row">
+      <font class="col-1">
+        default
+      </font>
+      <b-date-list
+        class="col-1"
+        local="months"
+      />
+      <b-date-list
+        class="col-1"
+        local="monthsShort"
+      />
+      <b-date-list
+        class="col-1"
+        local="weekdays"
+      />
+      <b-date-list
+        class="col-1"
+        local="weekdaysShort"
+      />
+      <b-date-list
+        class="col-2"
+        local="weekdaysMin"
+      />
+      <b-date-list
+        class="col-1"
+        local="hour"
+      />
+      <b-date-list
+        class="col-1"
+        local="minute"
+      />
+      <b-date-list
+        class="col-1"
+        local="second"
+      />
+    </div>
+    <div class="row my-3">
+      <font class="col-1">
+        step
+      </font>
+      <div class="col-1">无 step 属性</div>
+      <div class="col-1">无 step 属性</div>
+      <div class="col-1">无 step 属性</div>
+      <div class="col-1">无 step 属性</div>
+      <div class="col-2">无 step 属性</div>
+      <b-date-list
+        class="col-1"
+        local="hour"
+        step="3"
+      />
+      <b-date-list
+        class="col-1"
+        local="minute"
+        step="10"
+      />
+      <b-date-list
+        class="col-1"
+        local="second"
+        step="10"
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        min<br>max
+      </font>
+      <b-date-list
+        class="col-1"
+        local="months"
+        min="5"
+        max="7"
+      />
+      <b-date-list
+        class="col-1"
+        local="monthsShort"
+        min="5"
+        max="7"
+      />
+      <b-date-list
+        class="col-1"
+        local="weekdays"
+        min="1"
+        max="5"
+      />
+      <b-date-list
+        class="col-1"
+        local="weekdaysShort"
+        min="1"
+        max="5"
+      />
+      <b-date-list
+        class="col-2"
+        local="weekdaysMin"
+        min="1"
+        max="5"
+      />
+      <b-date-list
+        class="col-1"
+        local="hour"
+        min="9"
+        max="17"
+        step="1"
+      />
+      <b-date-list
+        class="col-1"
+        local="minute"
+        min="10"
+        max="20"
+        step="1"
+      />
+      <b-date-list
+        class="col-1"
+        local="second"
+        min="10"
+        max="20"
+        step="1"
+      />
     </div>
     <h2>b-datetime</h2>
     <hr>
@@ -576,10 +725,10 @@ import BDatePanel from '@/components/base/DateTime/Date/DatePicker/b-date-panel.
 import BDateSelect from '@/components/base/DateTime/Date/DatePicker/b-date-select.vue'
 import BDatePicker from "@/components/base/DateTime/Date/DatePicker/b-date-picker.vue";
 import BTime from "@/components/base/DateTime/Time/b-time.vue";
-
+import BDateList from '@/components/base/DateTime/DateList/b-date-list.vue'
 export default {
   name: "BDatetimeDemo",
-  components: { BDatePanel, BDateSelect, BDatePicker, BTime,  },
+  components: { BDatePanel, BDateSelect, BDatePicker, BTime, BDateList },
   data() {
     return {
       year: "2018",

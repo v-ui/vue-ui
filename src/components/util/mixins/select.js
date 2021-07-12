@@ -33,12 +33,12 @@ const isSelected = function(map, item, multiple, key) {
 
 // 获取单个 item 的 key
 const getKey = function(item, key) {
-  return item && item[key] || item
+  return item && tools.obj.isTrue(item[key]) ? item[key] : item
 }
 
 // 获取单个 item 的 displayName
 const getDisplay = function(item, name, key) {
-  return item && (item[name] || item[key]) || item
+  return item && tools.obj.isTrue(item[name]) ? item[name] : tools.obj.isTrue(item[key]) ? item[key] : item
 }
 
 // 根据选中获取 item
@@ -80,7 +80,7 @@ const base = {
     return: {
       type: props.String,
       default: null,
-      validator: value => [ null, 'primary', 'display' ].includes(value)
+      validator: value => [ null, 'primaryKey', 'displayName' ].includes(value)
     },
   },
   data() {
@@ -119,10 +119,10 @@ const base = {
     selectedValue: function (value) {
       let data = value
       switch (this.return) {
-        case 'primary':
+        case 'primaryKey':
           data = this.getKey(value)
           break;
-        case 'display':
+        case 'displayName':
           data = this.getDisplay(value)
           break;
       }

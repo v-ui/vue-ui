@@ -60,11 +60,6 @@ export default {
       typeList: [],
     }
   },
-  watch: {
-    pickerType: function() {
-
-    },
-  },
   mounted() {
     this.typeList = [
       this.enumTypeStatus.year,
@@ -72,6 +67,12 @@ export default {
       this.enumTypeStatus.week,
       this.enumTypeStatus.date,
     ],
+    // this.typeList = [
+    //   { value: this.enumTypeStatus.year, label: '年', },
+    //   { value: this.enumTypeStatus.month, label: '月', },
+    //   { value: this.enumTypeStatus.week, label: '周', },
+    //   { value: this.enumTypeStatus.date, label: '日', },
+    // ],
     this.selectedValue = this.moment(this.value)
   },
   methods: {

@@ -4,6 +4,7 @@
     border
     class="h-100"
     style="min-width: 66em;"
+    show-week
     :col-count="colCount"
     :hide-header="hideHeader"
     :header-text="headerText"
@@ -13,14 +14,6 @@
     @panel:backward="backward"
     @panel:checked="checked"
   >
-    <template #week>
-      <b-grid-table
-        class="border-bottom border-primary font-weight-bolder mb-1"
-        :list="weekList"
-        :col-count="colCount"
-        disabled
-      />
-    </template>
     <template #item="{ item }">
       <cal-panel-item
         :item="item"
@@ -37,15 +30,13 @@ import util from "@/components/util/index.js";
 
 import CalPanelItem from '../Basic/cal-panel-item'
 import DatePanelTemp from "@/components/base/DateTime/Date/DatePicker/Basic/date-panel-temp.vue";
-import BGridTable from "@/components/base/Grid/b-grid-table.vue"
 
 export default {
   name: 'CalWeekPanel',
-  components: { CalPanelItem, BGridTable, DatePanelTemp },
+  components: { CalPanelItem, DatePanelTemp },
   mixins: [
     util.mixins.date.validator,
     util.mixins.date.date,
-    util.mixins.date.weekList,
   ],
   computed: {
     total: function() {
