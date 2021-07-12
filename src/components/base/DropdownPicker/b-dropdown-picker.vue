@@ -15,6 +15,7 @@
       <div
         ref="dropdownTrigger"
         class="d-flex justify-content-between align-items-center h-100 px-1"
+        style="cursor: default;"
       >
         <slot name="trigger">
           <div

@@ -1,8 +1,8 @@
 <template>
   <date-time-list
-    v-if="['hour', 'minute', 'second'].includes(this.local)"
+    v-if="['hour', 'minute', 'second'].includes(this.type)"
     v-model="selectedValue"
-    :local="local"
+    :type="type"
     :step="step"
     :min="min"
     :max="max"
@@ -10,7 +10,7 @@
   <date-local-list
     v-else
     v-model="selectedValue"
-    :local="local"
+    :type="type"
     :min="min"
     :max="max"
   />

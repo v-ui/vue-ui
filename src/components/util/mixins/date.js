@@ -540,7 +540,7 @@ let date = {
 const localBase = {
   mixins: [ moment.base, ],
   props: {
-    local: {
+    type: {
       type: String,
       default: 'weekdaysMin',
       validator: value => ['months', 'monthsShort', 'weekdays', 'weekdaysShort', 'weekdaysMin', 'hour', 'minute', 'second'].includes(value)
@@ -566,7 +566,7 @@ const localType = {
 const local = {
   mixins: [ localBase, ],
   props: {
-    local: {
+    type: {
       type: String,
       default: 'weekdaysMin',
       validator: value => ['months', 'monthsShort', 'weekdays', 'weekdaysShort', 'weekdaysMin'].includes(value)
@@ -574,7 +574,7 @@ const local = {
   },
   computed: {
     list: function() {
-      return this.moment[this.local]()
+      return this.moment[this.type]()
         .filter((e, index) => index >= this.min && index <= this.max)
         .map((e, index) => ({
         value: 0 + index,
@@ -588,7 +588,7 @@ import tools from "@/tools/index.js"
 let time = {
   mixins: [ localBase, ],
   props: {
-    local: {
+    type: {
       type: String,
       default: 'hour',
       validator: value => ['hour', 'minute', 'second'].includes(value)
@@ -600,7 +600,7 @@ let time = {
   },
   computed: {
     end: function() {
-      let num = this.local === 'hour' ? 23 : 59
+      let num = this.type === 'hour' ? 23 : 59
       return Math.min(num, this.max)
     },
     list: function() {

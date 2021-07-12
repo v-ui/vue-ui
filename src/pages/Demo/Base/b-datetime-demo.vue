@@ -445,6 +445,7 @@
     </div>
     <h2>b-date-list</h2>
     <hr>
+    b-date-list 的属性与 b-date-list-picker 的基本属性部分完全相同，此处不再一一列举
     <h4 class="row mx-0">
       <font class="col-1">
         type:
@@ -474,44 +475,167 @@
         second
       </font>
     </h4>
-    <div class="row">
+    <div class="row my-1">
       <font class="col-1">
         default
       </font>
       <b-date-list
         class="col-1"
-        local="months"
+        type="months"
       />
       <b-date-list
         class="col-1"
-        local="monthsShort"
+        type="monthsShort"
       />
       <b-date-list
         class="col-1"
-        local="weekdays"
+        type="weekdays"
       />
       <b-date-list
         class="col-1"
-        local="weekdaysShort"
+        type="weekdaysShort"
       />
       <b-date-list
         class="col-2"
-        local="weekdaysMin"
+        type="weekdaysMin"
       />
       <b-date-list
         class="col-1"
-        local="hour"
+        type="hour"
       />
       <b-date-list
         class="col-1"
-        local="minute"
+        type="minute"
       />
       <b-date-list
         class="col-1"
-        local="second"
+        type="second"
       />
     </div>
-    <div class="row my-3">
+    <h2>b-date-list-picker</h2>
+    <hr>
+    <h4>通用属性</h4>
+    <br>
+    <div class="row my-1">
+      <font class="col-1">
+        disabled
+      </font>
+      <b-date-list-picker
+        class="col-11"
+        disabled
+      />
+    </div>
+    <br>
+    <h4>校验</h4>
+    <br>
+    <div class="row">
+      <font class="col-1">
+        required:
+      </font>
+      <b-date-list-picker
+        class="col-11"
+        required
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        success
+        <br>error:
+      </font>
+      <b-date-list-picker
+        class="col-11"
+        invalid-info="error"
+        valid-info="success"
+        required
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
+        success
+        <br>error(2):
+      </font>
+      <b-date-list-picker
+        class="col-11"
+        required
+      >
+        <template #invalid>
+          you can add anlything invalidInfo or DOM
+        </template>
+        <template #valid>
+          you can add anlything validInfo or DOM
+        </template>
+      </b-date-list-picker>
+    </div>
+    <br>
+    <h4>基本属性</h4>
+    <br>
+    <h4 class="row mx-0">
+      <font class="col-1">
+        type:
+      </font>
+      <font class="col-1">
+        months
+      </font>
+      <font class="col-1">
+        monthsShort
+      </font>
+      <font class="col-1">
+        weekdays
+      </font>
+      <font class="col-1">
+        weekdaysShort
+      </font>
+       <font class="col-2">
+        weekdaysMin(default)
+      </font>
+      <font class="col-1">
+        hour
+      </font>
+      <font class="col-1">
+        minute
+      </font>
+      <font class="col-1">
+        second
+      </font>
+    </h4>
+    <div class="row my-1">
+      <font class="col-1">
+        default
+      </font>
+      <b-date-list-picker
+        class="col-1"
+        type="months"
+      />
+      <b-date-list-picker
+        class="col-1"
+        type="monthsShort"
+      />
+      <b-date-list-picker
+        class="col-1"
+        type="weekdays"
+      />
+      <b-date-list-picker
+        class="col-1"
+        type="weekdaysShort"
+      />
+      <b-date-list-picker
+        class="col-2"
+        type="weekdaysMin"
+      />
+      <b-date-list-picker
+        class="col-1"
+        type="hour"
+      />
+      <b-date-list-picker
+        class="col-1"
+        type="minute"
+      />
+      <b-date-list-picker
+        class="col-1"
+        type="second"
+      />
+    </div>
+    <div class="row my-1">
       <font class="col-1">
         step
       </font>
@@ -520,136 +644,136 @@
       <div class="col-1">无 step 属性</div>
       <div class="col-1">无 step 属性</div>
       <div class="col-2">无 step 属性</div>
-      <b-date-list
+      <b-date-list-picker
         class="col-1"
-        local="hour"
+        type="hour"
         step="3"
       />
-      <b-date-list
+      <b-date-list-picker
         class="col-1"
-        local="minute"
+        type="minute"
         step="10"
       />
-      <b-date-list
+      <b-date-list-picker
         class="col-1"
-        local="second"
+        type="second"
         step="10"
       />
     </div>
-    <div class="row">
+    <div class="row my-1">
       <font class="col-1">
         min<br>max
       </font>
-      <b-date-list
+      <b-date-list-picker
         class="col-1"
-        local="months"
+        type="months"
         min="5"
         max="7"
       />
-      <b-date-list
+      <b-date-list-picker
         class="col-1"
-        local="monthsShort"
+        type="monthsShort"
         min="5"
         max="7"
       />
-      <b-date-list
+      <b-date-list-picker
         class="col-1"
-        local="weekdays"
+        type="weekdays"
         min="1"
         max="5"
       />
-      <b-date-list
+      <b-date-list-picker
         class="col-1"
-        local="weekdaysShort"
+        type="weekdaysShort"
         min="1"
         max="5"
       />
-      <b-date-list
+      <b-date-list-picker
         class="col-2"
-        local="weekdaysMin"
+        type="weekdaysMin"
         min="1"
         max="5"
       />
-      <b-date-list
+      <b-date-list-picker
         class="col-1"
-        local="hour"
+        type="hour"
         min="9"
         max="17"
         step="1"
       />
-      <b-date-list
+      <b-date-list-picker
         class="col-1"
-        local="minute"
+        type="minute"
         min="10"
         max="20"
         step="1"
       />
-      <b-date-list
+      <b-date-list-picker
         class="col-1"
-        local="second"
+        type="second"
         min="10"
         max="20"
         step="1"
       />
     </div>
-    <div class="row">
+    <div class="row my-1">
       <font class="col-1">
         v-model
       </font>
       <div class="col-1">
         {{ months }}
-        <b-date-list
+        <b-date-list-picker
           v-model="months"
-          local="months"
+          type="months"
         />
       </div>
       <div class="col-1">
         {{ monthsShort }}
-        <b-date-list
+        <b-date-list-picker
           v-model="monthsShort"
-          local="monthsShort"
+          type="monthsShort"
         />
       </div>
       <div class="col-1">
         {{ weekdays }}
-        <b-date-list
+        <b-date-list-picker
           v-model="weekdays"
-          local="weekdays"
+          type="weekdays"
         />
       </div>
       <div class="col-1">
         {{ weekdaysShort }}
-        <b-date-list
+        <b-date-list-picker
           v-model="weekdaysShort"
-          local="weekdaysShort"
+          type="weekdaysShort"
         />
       </div>
-      <div class="col-1">
+      <div class="col-2">
         {{ weekdaysMin }}
-        <b-date-list
+        <b-date-list-picker
           v-model="weekdaysMin"
-          local="weekdaysMin"
+          type="weekdaysMin"
         />
       </div>
       <div class="col-1">
         {{ hour }}
-        <b-date-list
+        <b-date-list-picker
           v-model="hour"
-          local="hour"
+          type="hour"
         />
       </div>
       <div class="col-1">
         {{ minute }}
-        <b-date-list
+        <b-date-list-picker
           v-model="minute"
-          local="minute"
+          type="minute"
         />
       </div>
       <div class="col-1">
         {{ second }}
-        <b-date-list
+        <b-date-list-picker
           v-model="second"
-          local="second"
+          type="second"
         />
       </div>
     </div>
@@ -785,11 +909,12 @@
 import BDatePanel from '@/components/base/DateTime/Date/DatePicker/b-date-panel.vue';
 import BDateSelect from '@/components/base/DateTime/Date/DatePicker/b-date-select.vue'
 import BDatePicker from "@/components/base/DateTime/Date/DatePicker/b-date-picker.vue";
-import BTime from "@/components/base/DateTime/Time/b-time.vue";
 import BDateList from '@/components/base/DateTime/DateList/b-date-list.vue'
+import BDateListPicker from '@/components/base/DateTime/DateList/b-date-list-picker.vue';
+import BTime from "@/components/base/DateTime/Time/b-time.vue";
 export default {
   name: "BDatetimeDemo",
-  components: { BDatePanel, BDateSelect, BDatePicker, BTime, BDateList },
+  components: { BDatePanel, BDateSelect, BDatePicker, BDateListPicker, BTime, BDateList },
   data() {
     return {
       year: "2018",
