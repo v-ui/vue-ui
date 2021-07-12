@@ -59,7 +59,6 @@
 
 <script>
 import util from "@/components/util/index.js";
-import tools from "@/components/util/mixins/select.js"
 
 import BDropdownPicker from "@/components/base/DropdownPicker/b-dropdown-picker.vue";
 import BDropdownMenu from '@/components/base/Dropdown/b-dropdown-menu.vue'
@@ -95,7 +94,7 @@ export default {
   },
   computed: {
     label: function() {
-      return tools.tools.getLabel(this.selectedValue, this.list, this.isMultiple, this.display, this.key)
+      return util.mixins.select.tools.getLabel(this.selectedValue, this.list, this.isMultiple, this.display, this.key)
     },
   },
   methods: {
