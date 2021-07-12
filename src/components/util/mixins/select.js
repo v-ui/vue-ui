@@ -33,12 +33,18 @@ const isSelected = function(map, item, multiple, key) {
 
 // 获取单个 item 的 key
 const getKey = function(item, key) {
-  return item && (tools.obj.isTrue(item[key]) ? item[key] : item) || item
+  return item && tools.obj.isTrue(item[key])
+    ? item && item[key]
+    : item
 }
 
 // 获取单个 item 的 displayName
 const getDisplay = function(item, name, key) {
-  return item && (tools.obj.isTrue(item[name]) ? item[name] : tools.obj.isTrue(item[key]) ? item[key] : item) || item
+  return item && tools.obj.isTrue(item[name])
+    ? item[name]
+    : item && tools.obj.isTrue(item[key])
+      ? item[key]
+      : item
 }
 
 // 根据选中获取 item
