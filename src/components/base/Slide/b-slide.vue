@@ -69,12 +69,6 @@ export default {
   props: {
     color: util.props.color,
     value: util.props.Object,
-    // start: util.props.Number,
-    // end: {
-    //   ...util.props.Number,
-    //   default: 0,
-    //   validator: (value) => util.props.Number.validator(value),
-    // },
     min: util.props.Number,
     max: {
       ...util.props.Number,

@@ -8,17 +8,27 @@
         :key="'item' + key"
         :set="set"
         :size="size"
-        :title="item.title"
+        :title="getDisplay(item)"
         :info="item.info"
         :status="item.status"
-        :active="item.active"
-      />
+        :select="isSelected(item)"
+      >
+        <template #item="{ color, title, select, info }">
+          <slot
+            name="item"
+            :color="color"
+            :title="title"
+            :select="select"
+            :info="info"
+          />
+        </template>
+      </b-step-item>
       <div
         v-if="list.length -1 != key"
         :key="'line' + key"
         class="align-self-center w-100 round rounded-pill"
         :class="lineClass"
-        style="height: 1px"
+        style="height: 2px"
       />
     </template>
   </div>
@@ -32,12 +42,13 @@ import BStepItem from './Basic/b-step-item'
 export default {
   name: 'BStep',
   components: { BStepItem, },
+  mixins: [ util.mixins.select.check, ],
   props: {
     list: util.props.array,
     size: util.props.size,
     set: {
       ...util.props.set,
-      default: 'right'
+      default: 'end'
     },
     column: util.props.Boolean,
   },
