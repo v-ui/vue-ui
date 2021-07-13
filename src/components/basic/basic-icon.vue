@@ -1,6 +1,7 @@
 <template>
   <i
     v-if="icon"
+    class="d-flex align-items-center"
     :class="iconColor ? 'text-' + iconColor : ''"
   >
     <svg
