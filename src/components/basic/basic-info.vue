@@ -1,7 +1,7 @@
 <template>
   <small
     v-if="info"
-    :class="['text-' + infoColor,]"
+    :class="['text-' + color,]"
   >
     {{ info }}
   </small>
