@@ -24,7 +24,6 @@
           :primary-key="key"
           :display-name="display"
           :multiple="isMultiple"
-          :null-value="placeholder"
           :hide-null="hideNull || isMultiple"
           @item:click="validator($refs.dropdownlist.$el, selectedValue)"
         >
