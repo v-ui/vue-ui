@@ -166,6 +166,18 @@
     </div>
     <div class="row">
       <font class="col-1">
+        hideToggle:
+      </font>
+      <b-dropdown
+        class="col-auto"
+        trigger="trigger text"
+        hide-toggle
+      >
+        <b-dropdown-item label="item label" />
+      </b-dropdown>
+    </div>
+    <div class="row">
+      <font class="col-1">
         trigger(2):
       </font>
       <b-dropdown class="col-auto">

@@ -3,7 +3,7 @@
     <div
       :id="id"
       class="d-flex justify-content-between align-items-center px-1"
-      :class="{'dropdown-toggle' : !$slots.icon, 'dropdown-toggle-split': toggleSplit}"
+      :class="{'dropdown-toggle' : !hideDropdownToggle, 'dropdown-toggle-split': toggleSplit}"
       data-bs-toggle="dropdown"
       :data-bs-offset="offset"
       :data-bs-auto-close="autoClose"
@@ -66,6 +66,7 @@ export default {
     menWidth: util.props.Boolean,
     menuThem: util.props.themes,
     menuHeight: util.props.String,
+    hideToggle: util.props.Boolean,
     toggleSplit: util.props.Boolean,
     disabled: util.props.Boolean,
     id: {
@@ -82,7 +83,10 @@ export default {
       let theme = this.menuThem ? `dropdown-menu-${this.menuThem}` : ""
       let width = this.menuWidth ? "w-100" : ""
       return `${align} ${width} ${theme}`;
-    }
+    },
+    hideDropdownToggle: function() {
+      return this.hideToggle ? this.hideToggle : this.$slots.icon
+    },
   },
   methods: {
     click: function() {
