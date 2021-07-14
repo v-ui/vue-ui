@@ -2,14 +2,14 @@
   <basic-icon
     v-if="size === 'sm'"
     icon="circle-fill"
-    :icon-color="color"
+    :color="color"
     class="align-self-center m-2"
     style="font-size: .8em;"
   />
   <basic-icon
     v-else
     :icon="icon"
-    :icon-color="color"
+    :color="color"
     class="align-self-center m-2"
     :style="`font-size: ${iconSize}px;`"
   />

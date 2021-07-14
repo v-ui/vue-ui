@@ -2,7 +2,7 @@
   <i
     v-if="icon"
     class="d-flex align-items-center"
-    :class="iconColor ? 'text-' + iconColor : ''"
+    :class="color ? 'text-' + color : ''"
   >
     <svg
       class="svg-icon"
@@ -25,7 +25,7 @@ export default {
       ...util.props.string,
       required: true
     },
-    iconColor: util.props.textColor,
+    color: util.props.textColor,
   },
   computed: {
     iconName() {

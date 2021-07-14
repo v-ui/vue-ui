@@ -13,7 +13,7 @@ export default {
   name: "BasicInfo",
   props: {
     info: util.props.String,
-    infoColor: util.props.textColor,
+    color: util.props.textColor,
   }
 };
 </script>

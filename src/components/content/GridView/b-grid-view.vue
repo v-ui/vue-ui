@@ -105,7 +105,7 @@
                 :checked="isSelected(row)"
                 @input="input($event, row)"
               />
-              <base-icon
+              <basic-icon
                 v-else-if="selectStatus === enumSelect.check"
                 icon="check-circle-fill"
                 class="text-primary"
@@ -181,7 +181,6 @@ import GridHelper from './Basic/grid-helper'
 import GridPagination from './Basic/grid-pagination'
 import GridProperties from "./tools/Properties/grid-properties"
 
-import BaseIcon from "@/components/basic/basic-icon.vue"
 import BCheck from "@/components/form/Check/b-check.vue";
 export default {
   name: "BGridView",
@@ -199,7 +198,6 @@ export default {
     GridHelper,
     GridProperties,
     GridPagination,
-    BaseIcon,
     BCheck,
   },
   mixins: [ util.mixins.grid.select, ],

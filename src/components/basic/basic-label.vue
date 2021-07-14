@@ -4,7 +4,7 @@
       <b-icon
         class="me-2"
         :icon="icon"
-        :icon-color="iconColor"
+        :color="iconColor"
       />
       <strong
         v-if="strong"
@@ -21,7 +21,7 @@
     </font>
     <b-info
       :info="info"
-      :info-color="infoColor"
+      :color="infoColor"
     />
   </div>
 </template>
