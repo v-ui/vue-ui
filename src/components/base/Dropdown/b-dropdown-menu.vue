@@ -19,7 +19,7 @@
       </slot>
     </b-dropdown-header>
     <b-dropdown-item
-      v-if="showNull && !query"
+      v-if="!hideNull"
       :label="nullValue"
       :disabled="disabled"
       @click.native="itemClick(null)"
@@ -78,7 +78,7 @@ export default {
   mixins: [ util.mixins.select.check, ],
   props: {
     list: util.props.Array,
-    showNull: util.props.Boolean,
+    hideNull: util.props.Boolean,
     header: [ String, Number, Object ],
     disabled: util.props.Boolean,
     search: util.props.Boolean,

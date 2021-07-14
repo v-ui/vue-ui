@@ -14,23 +14,23 @@
       Add a sort rule
     </template>
     <template>
-      <span
+      <div
         v-for="(item, index) in dataList"
         :key="index"
         class="d-flex justify-content-between align-items-center"
       >
-        <div class="d-flex row w-100 align-items-center">
+        <div class="d-flex row w-100 align-items-center mx-1">
           <b-dropdown-list
             v-model="item.value"
-            class="col-6 my-1"
-            :list="column"
-            hide-null
+            class="col m-1"
             :primary-key="primaryKey"
             :display-name="displayName"
+            :list="column"
+            hide-null
           />
           <b-dropdown-list
             v-model="item.data"
-            class="col-6 my-1"
+            class="col m-1"
             :list="sort"
             hide-null
           />
@@ -43,7 +43,7 @@
         >
           <b-icon icon="x" />
         </b-button>
-      </span>
+      </div>
     </template>
     <template #footer>
       <b-button
@@ -51,8 +51,10 @@
         color="link"
         @click="add"
       >
-        <b-icon icon="plus" />
-        Add a new sort rule
+        <div class="row">
+          <b-icon icon="plus" class="col pe-0" />
+          <font class="col-auto ps-0">Add a new sort rule</font>
+        </div>
       </b-button>
       <b-button
         :disabled="disabledTrash"
@@ -60,8 +62,10 @@
         color="link"
         @click="clear"
       >
-        <b-icon icon="trash" />
-        Clear sort
+        <div class="row">
+        <b-icon icon="trash" class="col pe-0" />
+        <font class="col-auto ps-0">Clear sort</font>
+        </div>
       </b-button>
     </template>
   </b-data-temp>

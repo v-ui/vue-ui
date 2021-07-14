@@ -2,6 +2,7 @@
   <b-dropdown-menu
     v-model="selectedValue"
     :list="list"
+    hide-null
   />
 </template>
 

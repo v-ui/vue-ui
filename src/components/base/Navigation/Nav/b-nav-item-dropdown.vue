@@ -8,7 +8,7 @@
       aria-expanded="false"
     >{{ label }}</a>
     <div class="dropdown-menu">
-      <b-dropdown-menu :list="list" />
+      <b-dropdown-menu hide-null :list="list" />
     </div>
   </li>
 </template>

@@ -33,6 +33,7 @@
           :disabled="disabled"
           :primary-key="key"
           :display-name="display"
+          :hide-null="hideNull"
           @item:click="item => $emit('item:click', item)"
         />
       </slot>
@@ -53,6 +54,7 @@ export default {
     list: util.props.Array,
     set: util.props.set,
     trigger: util.props.String,
+    hideNull: util.props.Boolean,
     offset: [String, Number],
     autoClose: {
       ...util.props.String,

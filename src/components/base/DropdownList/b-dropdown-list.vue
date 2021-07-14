@@ -25,7 +25,7 @@
           :display-name="display"
           :multiple="isMultiple"
           :null-value="placeholder"
-          :show-null="!hideNull || !isMultiple"
+          :hide-null="hideNull || isMultiple"
           @item:click="validator($refs.dropdownlist.$el, selectedValue)"
         >
           <template #item="{ item }">
