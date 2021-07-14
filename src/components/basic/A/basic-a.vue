@@ -3,7 +3,7 @@
     :href="href"
     :class="{disabled: disabled}"
     :target="filTarget"
-    :rel="`noopener norefferrer ${rel}`"
+    :download="download"
     :aria-disabled="disabled"
     :tabindex="tabindex"
   >
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import tools from "@/tools/index.js";
 import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
@@ -29,8 +28,8 @@ export default {
       required: true
     },
     text: util.props.String,
-    rel: util.props.String,
     icon: util.props.String,
+    color: util.props.bgColor,
     target: {
       ...util.props.String,
       default: "_self",
@@ -66,7 +65,7 @@ export default {
       if (this.icon) return this.icon;
       if (!this.kind) return;
       const o = Object.getOwnPropertyDescriptor(config.ui.icon, this.kind);
-      return o && o.value ? o.value : null;
+      return o?.value || null;
     },
     fillText: function() {
       if (this.text) return this.text;
@@ -83,16 +82,5 @@ export default {
       return this.disabled ? -1 : null
     },
   },
-  watch: {
-    disabled: function(val) {
-      val
-        ? tools.dom.addAttr(this.$el, "index", "-1")
-        : tools.dom.removeAttr(this.$el, "index");
-    }
-  },
-  mounted() {
-    if (this.disabled) tools.dom.addAttr(this.$el, "index", "-1");
-    if (this.download) tools.dom.addAttr(this.$el, "download", this.download);
-  }
 };
 </script>

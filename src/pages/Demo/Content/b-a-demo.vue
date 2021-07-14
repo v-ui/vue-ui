@@ -54,10 +54,10 @@
             mailto:
           </font>
           <base-a class="col-auto" href="mailto:邮件地址" />
-          （详情：<base-a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Email_links">
+        </div>
+        （详情：<base-a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Email_links">
             Email links | MDN
           </base-a>）
-        </div>
         <div class="row">
           <font class="col-2">
             link:
