@@ -1,6 +1,7 @@
 <template>
   <b-dropdown
       :list="list"
+      hide-null
       hide-toggle
       menu-align="right"
       @item:click="dataExport"

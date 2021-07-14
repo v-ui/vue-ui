@@ -4,6 +4,7 @@
     v-model="theme"
     trigger="Theme"
     :list="list"
+    hide-null
   />
 </template>
 
