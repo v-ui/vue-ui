@@ -13,7 +13,7 @@
           to
         >
           <i
-            class="mr-2"
+            class="me-2"
             :class="item.icon || 'fas fa-dot-circle'"
           />
           <font class="text-truncate">
@@ -26,14 +26,11 @@
 </template>
 
 <script>
-import util from '@/components/util/index.js'
-
 export default {
   name: "MainMenu",
   components: {
     NavItem: () => import("./main-menu-item.vue")
   },
-  filters: { ...util.filters, },
   data() {
     return {
       open: false,

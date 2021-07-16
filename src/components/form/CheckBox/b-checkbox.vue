@@ -1,13 +1,13 @@
 <template>
   <div
-    class="custom-control custom-checkbox"
-    :class="{ 'custom-control-inline': inline}"
+    class="form-check"
+    :class="{ 'form-check-inline': inline}"
   >
     <input
       :id="id"
       ref="checkbox"
       type="checkbox"
-      class="custom-control-input"
+      class="form-check-input"
       :class="mixClass"
       :style="mixStyle"
       :value="value"
@@ -19,7 +19,7 @@
       v-on="inputListeners"
     >
     <label
-      class="custom-control-label"
+      class="form-check-label"
       :for="id"
     >
       <slot>{{ label || value }}</slot>
@@ -57,7 +57,7 @@ import BInfo from "@/components/basic/basic-info.vue";
 export default {
   name: "BCheckbox",
   components: { BValid, BInfo },
-  mixins: [ util.mixins.base.style, util.mixins.form.base, util.mixins.form.validator ],
+  mixins: [ util.mixins.base.style, util.mixins.form.validator ],
   inheritAttrs: false,
   model: {
     prop: "checked",

@@ -1,21 +1,29 @@
 <template>
-  <span>
+  <div>
     <font class="d-flex align-items-center">
       <b-icon
-        class="pr-1"
+        class="me-2"
         :icon="icon"
-        :icon-color="iconColor"
+        :color="iconColor"
       />
+      <strong
+        v-if="strong"
+        class="text-truncate"
+        :class="labelColor ? 'text-' + labelColor : ''"
+      >
+        {{ label }}
+      </strong>
       <span
-        class="d-inline-block text-truncate"
+        v-else
+        class="text-truncate"
         :class="labelColor ? 'text-' + labelColor : ''"
       >{{ label }}</span>
     </font>
     <b-info
       :info="info"
-      :info-color="infoColor"
+      :color="infoColor"
     />
-  </span>
+  </div>
 </template>
 
 <script>
@@ -31,9 +39,10 @@ export default {
     label: util.props.String,
     icon: util.props.String,
     info: util.props.String,
+    strong: util.props.boolean,
     labelColor: util.props.textColor,
-    infoColor: util.props.textColor,
     iconColor: util.props.textColor,
+    infoColor: util.props.textColor,
   },
 }
 </script>

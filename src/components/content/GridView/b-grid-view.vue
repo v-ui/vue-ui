@@ -99,12 +99,13 @@
           </template>
           <template #body-_check="{ row }">
             <div class="d-flex justify-content-center">
-              <b-checkbox
+              <b-check
                 v-if="selectStatus === enumSelect.select"
+                type="checkbox"
                 :checked="isSelected(row)"
                 @input="input($event, row)"
               />
-              <base-icon
+              <basic-icon
                 v-else-if="selectStatus === enumSelect.check"
                 icon="check-circle-fill"
                 class="text-primary"
@@ -168,8 +169,8 @@ import BTable from "@/components/content/Table/b-table.vue";
 import BTableSerial from '@/components/content/Table/container/b-table-serial.vue'
 import BTableOperate from '@/components/content/Table/container/b-table-operate.vue'
 
-import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
-import BButtonToolbar from "@/components/base/ButtonGroup/b-btn-toolbar.vue";
+import BButtonGroup from "@/components/basic/Button/basic-button-group.vue";
+import BButtonToolbar from "@/components/basic/Button/basic-button-toolbar.vue";
 import BButton from "@/components/basic/Button/basic-button.vue";
 import BasicIcon from "@/components/basic/basic-icon.vue"
 
@@ -180,8 +181,7 @@ import GridHelper from './Basic/grid-helper'
 import GridPagination from './Basic/grid-pagination'
 import GridProperties from "./tools/Properties/grid-properties"
 
-import BaseIcon from "@/components/basic/basic-icon.vue"
-import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
+import BCheck from "@/components/form/Check/b-check.vue";
 export default {
   name: "BGridView",
   components: {
@@ -198,8 +198,7 @@ export default {
     GridHelper,
     GridProperties,
     GridPagination,
-    BaseIcon,
-    BCheckbox,
+    BCheck,
   },
   mixins: [ util.mixins.grid.select, ],
   inheritAttrs: false,

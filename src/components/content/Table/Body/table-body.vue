@@ -34,6 +34,7 @@ export default {
   components: { tableBodyTr },
   mixins: [ util.mixins.select.check, ],
   props: {
+    list: util.props.Array,
     data: util.props.Array,
     columns: util.props.Array,
     rowStyle: util.props.Object,

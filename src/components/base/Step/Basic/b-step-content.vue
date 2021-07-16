@@ -1,7 +1,7 @@
 <template>
   <div class="align-self-center">
     <b-badge
-      v-if="active"
+      v-if="select"
       :color="color"
     >
       {{ title }}
@@ -35,7 +35,7 @@ export default {
     color: util.props.color,
     title: util.props.string,
     info: util.props.string,
-    active: util.props.Boolean,
+    select: util.props.Boolean,
   },
   computed: {
     fontClass: function() {

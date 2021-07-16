@@ -65,6 +65,22 @@
     </div>
     <div class="row">
       <font class="col-1">
+        floating:
+      </font>
+      <b-select
+        class="col-5"
+        :list="list"
+        float-label="float label"
+      />
+      <b-select
+        class="col-5"
+        :list="list"
+        multiple
+        float-label="float label"
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
         hideNull:
       </font>
       <b-select
@@ -170,43 +186,6 @@
           class="col-3"
           :list="list3"
           :info="'selected: ' + value3"
-          multiple
-        />
-      </div>
-    </div>
-    <div class="row">
-      <font class="col-1">
-        接收/返回对象
-      </font>
-      <div class="col-10 row">
-        <b-select
-          v-model="value4"
-          class="col-3"
-          :list="list"
-          :info="'selected: ' + value4"
-          primary-key
-        />
-        <b-select
-          v-model="value5"
-          class="col-3"
-          :list="list"
-          :info="'selected: ' + value5"
-          primary-key
-          multiple
-        />
-        <b-select
-          v-model="value6"
-          class="col-3"
-          :list="list3"
-          :info="'selected: ' + value6"
-          primary-key
-        />
-        <b-select
-          v-model="value7"
-          class="col-3"
-          :list="list3"
-          :info="'selected: ' + value7"
-          primary-key
           multiple
         />
       </div>

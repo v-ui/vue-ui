@@ -15,13 +15,14 @@
         <slot
           name="item"
           :item="item"
+          :disabled="disabled"
         >
           <b-grid-item
             :item="item"
             class="text-center"
             :multiple="isMultiple"
             :primary-key="key"
-            :display-name="displayKey"
+            :display-name="display"
             :selected="selectedValue"
             :disabled="item.disabled || disabled"
             @item:click="itemClick"
@@ -42,6 +43,7 @@ export default {
   components: { BGridItem, },
   mixins: [ util.mixins.select.select, ],
   props: {
+    list: util.props.Array,
     colCount: util.props.UInt,
     border: util.props.Boolean,
     disabled: util.props.Boolean,
@@ -56,7 +58,7 @@ export default {
   methods: {
     itemClick: function(item) {
       if (this.isMultiple) {
-        const value = this.getValue(item)
+        const value = this.getKey(item)
         let index = this.selectedMap.indexOf(value)
         index >= 0
           ? this.selectedValue.splice(index, 1)

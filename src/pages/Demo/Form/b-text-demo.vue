@@ -46,6 +46,16 @@
     </div>
     <div class="row">
       <font class="col-1">
+        floating:
+      </font>
+      <b-text
+        class="col-11"
+        placeholder="placeholder value"
+        float-label="float label"
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
         length:
       </font>
       <b-text
@@ -68,7 +78,7 @@
       />
     </div>
     <br>
-    <h4>b-form-label</h4>
+    <h4>size</h4>
     <hr>
     <div class="row">
       <font class="col-1">
@@ -87,6 +97,7 @@
         value="sm size"
         icon="fas fa-user-circle"
         size="sm"
+        placeholder="placeholder value"
       />
     </div>
     <div class="row">

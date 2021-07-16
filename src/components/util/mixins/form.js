@@ -1,6 +1,5 @@
 import tools from '@/tools/index.js'
 import props from '@/components/util/props.js'
-import filters from '@/components/util/filters.js'
 
 export default {
   base: {
@@ -12,6 +11,7 @@ export default {
       textColor: props.textColor,
       textAlign: props.setX,
       size: props.size,
+      disabled: props.Boolean,
       border: {
         ...props.Boolean,
         default: true,
@@ -47,48 +47,6 @@ export default {
       },
     },
   }, // base
-  btn: {
-    filters: { ...filters },
-    props: {
-      value: {
-        ...props.String,
-        default: `Button`,
-      },
-      color: {
-        ...props.color,
-        validator: value => 'link' === value || props.color.validator(value)
-      },
-      textColor: props.textColor,
-      size: props.size,
-      href: {
-        ...props.href,
-        default: '',
-      },
-      active: props.Boolean,
-      disabled: props.Boolean,
-      outline: props.Boolean,
-      block: props.Boolean,
-      loading: props.Boolean,
-    },
-    computed: {
-      objClass: function () {
-        let c = `btn-${this.outline ? 'outline-' : ''}${this.color}
-                ${this.textColor ? `text-${this.textColor}` : ''}
-                ${this.size ? `btn-${this.size}` : ''}
-                ${this.block ? 'btn-block' : ''}
-                ${this.active ? 'active' : ''}
-                ${(this.disabled && this.href) ? 'disabled' : ''}`
-        if (this.color === 'link') c += ' text-decoration-none'
-        return c
-      },
-      fillsrMsg: function () {
-        return this.srMsg ? this.color : this.srMsg
-      },
-      isDisabled: function () {
-        return this.disabled || this.loading
-      },
-    },
-  }, // btn
   validator: {
     props: {
       unvalid: props.Boolean,
@@ -229,7 +187,6 @@ export default {
   readonly: {
     props: {
       readonly: props.Boolean,
-      disabled: props.Boolean,
     },
     computed: {
       readonlyClass: function () {

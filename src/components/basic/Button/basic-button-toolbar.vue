@@ -1,14 +1,14 @@
 <template>
-  <span
+  <div
     v-if="$slots.default"
-    class="input-group-prepend"
+    class="btn-toolbar"
+    role="toolbar"
   >
     <slot />
-  </span>
+  </div>
 </template>
-
 <script>
 export default {
-  name: 'BInputGroupPrepend',
-}
+  name: "BasicButtonToolbar"
+};
 </script>

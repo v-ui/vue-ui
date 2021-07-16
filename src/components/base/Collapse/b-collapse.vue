@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: "BCollapseItem"
+  name: "BCollapse"
 };
 </script>

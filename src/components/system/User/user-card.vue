@@ -1,7 +1,7 @@
 <template>
   <b-dropdown
     hide-toggle
-    menu-align="right"
+    menu-align="end"
   >
     <template #trigger>
       <Avatar />

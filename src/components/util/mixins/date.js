@@ -65,7 +65,7 @@ let validator = {
         isSelected = (selected && this.validSelect(value, selected)) || false
       }
       let isWeekend = this.validWeekend(value)
-      return { now: isNow, selected: isSelected, start: isStart, end: isEnd, between: isBetween, isWeekend: isWeekend }
+      return { now: isNow, selected: isSelected, start: isStart, end: isEnd, between: isBetween, weekend: isWeekend }
     },
     validNow: function(value, now) {
       return value.isSame(now)
@@ -108,6 +108,7 @@ let base = {
       now: null,
       colCount: 0,
       selectedValue: null,
+      disabledNow: false,
     }
   },
   computed: {
@@ -145,11 +146,6 @@ let select = {
     range: props.Boolean,
     selectedStart: [String, Number, Date, Object],
     selectedEnd: [String, Number, Date, Object],
-  },
-  data() {
-    return {
-      disabledNow: false,
-    }
   },
   computed: {
     dateMin: function() {
@@ -259,12 +255,14 @@ let quarter = {
        for (let i = 0; i < this.total; i++) {
           let value = i + 1
           let date = this.format(this.year).quarter(value)
+          let start = date.startOf('quarter')
+          let end = date.clone().endOf('quarter')
 
           arr.push({
             value: value,
             label: date.format("Qo"),
-            info: `${date.startOf('quarter').format("ll")}-${date.endOf('quarter').format("ll")}`,
-            status: this.validator && this.validator(date),
+            info: `${start.format("ll")}-${end.format("ll")}`,
+            status: this.validator && this.validator(start, this.now.startOf('quarter'), this.selectedValue?.startOf('quarter')),
             disabled: this.disabledItem && this.disabledItem(date),
           });
        }
@@ -384,17 +382,17 @@ let week = {
       if (!this.year || isNaN(this.year)) return;
       if (isNaN(this.month) || this.month < 0 ) return
       let arr = [];
-      let date = this.format().startOf('week').isBefore(this.format())
-                  ? this.format().endOf('week').add(1, 'day')
-                  : this.format()
-      let end = this.format().endOf("month").endOf('week')
+      let date = this.format(this.year, this.month).startOf('month')
+      let breakDate = date.clone().endOf('month')
 
-      while(date.isSameOrBefore(end)) {
+      while(date.isSameOrBefore(breakDate)) {
+        let start = date.startOf('week')
+        let end = date.clone().endOf('week')
         arr.push({
           value: date.week(),
           label: date.format("wo"),
-          info: `${date.startOf('week').format("ll")}-${date.endOf('week').format("ll")}`,
-          status: this.validator && this.validator(date),
+          info: `${start.format("ll")}-${end.format("ll")}`,
+          status: this.validator && this.validator(start, this.now.startOf('week'), this.selectedValue?.startOf('week')),
           disabled: this.disabledItem && this.disabledItem(date),
         });
         date.add(1, 'week')
@@ -406,10 +404,11 @@ let week = {
     this.now = this.moment([this.moment().year(), this.moment().month(), this.moment().date()])
     this.disabledNow = this.disabledItem && this.disabledItem(this.now)
     this.initValue && this.initValue(this.value)
-    this.selectedValue = this.value && this.value.isValid && this.value.isValid() ? this.format().endOf('week') : null
+    this.selectedValue = this.value && this.value.isValid && this.value.isValid() ? this.format().week(this.week) : null
   },
   methods: {
     initValue: function(value) {
+
       let date = value && value.isValid && value.isValid() ? value : (this.disabledNow ? this.dateMin : this.moment())
       this.year = date.year()
       this.month = date.month()
@@ -428,9 +427,9 @@ let week = {
     },
     checknow: function() {
       this.year = this.moment().year();
-      this.month = this.moment().month();
       this.week = this.moment().week();
       this.selectedValue = this.format().week(this.week)
+      this.month = this.selectedValue.month();
       this.$emit('week:checked', this.selectedValue)
     },
     backward: function() {
@@ -441,16 +440,10 @@ let week = {
         this.month += 1
       }
     },
-    checked: function() {
-      this.week = this.moment().week();
+    checked: function(value) {
+      this.week = value.value
       this.selectedValue = this.format().week(this.week)
       this.$emit('week:checked', this.selectedValue)
-    },
-    validNow: function(value, now) {
-      return value.isSame(now.startOf('week'))
-    },
-    validSelect: function(value, selected) {
-      return value.isSame(selected.startOf('week'))
     },
   },
 }
@@ -476,7 +469,7 @@ let date = {
       if (isNaN(this.month) || this.month < 0 ) return
 
       let day = this.moment([this.year, this.month, 1]).day()
-      let arr = Array(day).fill({ label: "  " });
+      let arr = Array(day).fill({ label: null });
 
       for (let i = 0; i < this.total; i++) {
         let value = i + this.start
@@ -544,10 +537,77 @@ let date = {
   },
 }
 
-let weekList = {
+const localBase = {
+  mixins: [ moment.base, ],
+  props: {
+    type: {
+      type: String,
+      default: 'weekdaysMin',
+      validator: value => ['months', 'monthsShort', 'weekdays', 'weekdaysShort', 'weekdaysMin', 'hour', 'minute', 'second'].includes(value)
+    },
+    min: props.UInt,
+    max: {
+      ...props.UInt,
+      default: 59,
+    }
+  },
+}
+
+const localType = {
+  mixins: [ localBase, ],
+  props: {
+    step: {
+      ...props.UInt,
+      default: 5,
+    },
+  },
+}
+
+const local = {
+  mixins: [ localBase, ],
+  props: {
+    type: {
+      type: String,
+      default: 'weekdaysMin',
+      validator: value => ['months', 'monthsShort', 'weekdays', 'weekdaysShort', 'weekdaysMin'].includes(value)
+    },
+  },
   computed: {
-    weekList: function() {
-      return this.moment.weekdaysMin()
+    list: function() {
+      return this.moment[this.type]()
+        .filter((e, index) => index >= this.min && index <= this.max)
+        .map((e, index) => ({
+        value: 0 + index,
+        label: e,
+      }))
+    },
+  },
+}
+
+import tools from "@/tools/index.js"
+let time = {
+  mixins: [ localBase, ],
+  props: {
+    type: {
+      type: String,
+      default: 'hour',
+      validator: value => ['hour', 'minute', 'second'].includes(value)
+    },
+    step: {
+      ...props.UInt,
+      default: 1,
+    },
+  },
+  computed: {
+    end: function() {
+      let num = this.type === 'hour' ? 23 : 59
+      return Math.min(num, this.max)
+    },
+    list: function() {
+      return tools.number.range(this.min, this.end, this.step).map(e => ({
+        value: e,
+        label: e,
+      }))
     },
   },
 }
@@ -562,5 +622,7 @@ export default {
   month,
   week,
   date,
-  weekList,
+  localType,
+  local,
+  time,
 }

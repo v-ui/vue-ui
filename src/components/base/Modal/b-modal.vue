@@ -4,38 +4,33 @@
     :class="ObjClass"
     tabindex="-1"
     role="dialog"
-    :aria-labelledby="labelledby"
+    :data-bs-keyboard="keyboard.toString()"
+    :data-bs-backdrop="backdrop.toString()"
     :aria-modal="show"
-    aria-hidden="false"
+    :aria-hidden="!show"
   >
     <div
       class="modal-dialog my-0"
       :class="documentClass"
-      :style="documentStyle"
       role="document"
     >
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
-            <slot
-              v-if="$slots.icon || showIcon"
-              name="icon"
-            >
-              <i
-                class="mr-2"
-                :class="iconClass"
-              />
-            </slot>
-            {{ dataTitle }}
+            <basic-status
+              strong
+              :title="title"
+              :icon="icon"
+              :info="info"
+              :status="status"
+            />
           </h5>
           <button
             type="button"
-            class="close"
-            data-dismiss="modal"
+            class="btn-close"
+            data-bs-dismiss="modal"
             aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
+          />
         </div>
         <div class="modal-body">
           <slot>{{ content }}</slot>
@@ -45,11 +40,10 @@
           class="modal-footer"
         >
           <slot name="footer">
-            <!-- TODO: 关闭方式存在问题 -->
             <button
               type="button"
               class="btn btn-secondary"
-              data-dismiss="modal"
+              data-bs-dismiss="modal"
             >
               Close
             </button>
@@ -69,14 +63,31 @@
 <script>
 import util from "@/components/util/index.js";
 
+import BasicStatus from "@/components/basic/basic-status.vue"
+
 export default {
   name: "BModal",
-  mixins: [ util.mixins.status.message, ],
+  components: { BasicStatus, },
   props: {
+    title: util.props.String,
+    icon: util.props.String,
+    status: util.props.messageStatus,
+    info: util.props.String,
     content: util.props.String,
-    scrol: util.props.Boolean, //modal-dialog-scrollable
+    backdrop: {
+      type: [ String, Boolean ],
+      default: true,
+    },
+    keyboard: {
+      ...util.props.Boolean,
+      default: true,
+    },
+    scrol: {
+      ...util.props.Boolean,
+      default: true,
+    }, // modal-dialog-scrollable
+    center: util.props.Boolean,// modal-dialog-centered
     hideFooter: util.props.Boolean,
-    drawer: util.props.Boolean,
     size: {
       type: String,
       default: "",
@@ -84,14 +95,6 @@ export default {
         return ["", "xl", "lg", "sm"].includes(val);
       }
     }, // modal-xl modal-lg modal-sm
-    set: {
-      ...util.props.set,
-      default: 'up',
-    },
-    labelledby: {
-      ...util.props.String,
-      default: "Modal Dialog"
-    },
   },
   data() {
     return {
@@ -103,46 +106,11 @@ export default {
       return this.show ? "show" : "";
     },
     documentClass: function() {
-      let scrol = this.scrol ? "modal-dialog-scrollable" : "";
       let size = this.size ? `modal-${this.size}` : "";
-      let set = ''
-      switch (this.set) {
-        case 'left':
-          set = 'w-25 ml-0 d-flex align-items-right'
-          break;
-        case 'right':
-          set = 'w-25 mr-0 d-flex align-items-right'
-          break;
-        case 'center':
-          set = 'd-flex align-items-center'
-          break;
-        case 'down':
-          set = 'd-flex align-items-end'
-          break;
-        default:
-          set = ''
-      }
-      return `${scrol} ${set} ${size}`;
-    },
-    documentStyle: function() {
-      let set = ''
-      switch (this.set) {
-        case 'left':
-          set = this.drawer ? 'min-height: 100%' : ''
-          break;
-        case 'right':
-          set = this.drawer ? 'min-height: 100%' : ''
-          break;
-        case 'center':
-          set = this.drawer ? 'min-height: 100%; min-width: 100%' : 'min-height: 100%;'
-          break;
-        case 'down':
-          set = this.drawer ? 'min-height: 100%; min-width: 100%' : 'min-height: 100%'
-          break;
-        default:
-          set = this.drawer ? 'min-width: 100%' : ''
-      }
-      return set
+      let scrol = this.scrol ? "modal-dialog-scrollable" : "";
+      let center = this.center ? 'modal-dialog-centered' : ''
+
+      return `${scrol} ${size} ${center}`;
     },
   },
   methods: {

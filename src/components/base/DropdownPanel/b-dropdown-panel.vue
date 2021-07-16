@@ -1,12 +1,12 @@
 <template>
-  <div class="form-group">
+  <div class=" p-0">
     <b-dropdown-picker
       ref="dropdownpanel"
-      :class="[readonlyClass]"
-      :label="showLabel"
+      class="form-control"
+      :selected="label"
       :menu-width="false"
       :can-hide="canHide"
-      :placeholder="fillPlaceholder"
+      :placeholder="placeholder || nullValue"
       :disabled="disabled"
       :multiple="isMultiple"
       @delete:item="deleteItem"
@@ -23,9 +23,10 @@
           v-model="selectedValue"
           :list="list"
           :primary-key="key"
-          :display-name="displayKey"
+          :display-name="display"
           :col-count="colCount"
           :multiple="isMultiple"
+          @item:click="validator($refs.dropdownpanel.$el, selectedValue)"
         />
         <b-grid-table
           v-else-if="type === 'table'"
@@ -34,10 +35,11 @@
           :list="list"
           :border="border"
           :primary-key="key"
-          :display-name="displayKey"
+          :display-name="display"
           :disabled="disabled"
           :col-count="colCount"
           :multiple="isMultiple"
+          @item:click="validator($refs.dropdownpanel.$el, selectedValue)"
         />
       </slot>
     </b-dropdown-picker>
@@ -81,12 +83,11 @@ export default {
     BInfo,
   },
   mixins: [
-    util.mixins.form.base,
-    util.mixins.form.readonly,
     util.mixins.form.validator,
     util.mixins.select.select,
   ],
   props: {
+    list: util.props.Array,
     canHide: {
       ...util.props.Boolean,
       default: true,
@@ -101,21 +102,18 @@ export default {
     info: util.props.String,
     colCount: util.props.UInt,
     border: util.props.Boolean,
+    disabled: util.props.Boolean,
     placeholder: util.props.String,
   },
   computed: {
-    fillPlaceholder: function() {
-      return this.placeholder || this.nullValue
-    },
-  },
-  watch: {
-    selectedValue: function(value) {
-      this.validator(this.$refs.dropdownpanel.$el, value)
+    label: function() {
+      return util.mixins.select.tools.getLabel(this.selectedValue, this.list, this.isMultiple, this.display, this.key)
     },
   },
   methods: {
     deleteItem: function(index) {
       if (index >= 0) this.selectedValue.splice(index, 1)
+      this.validator(this.$refs.dropdownpanel.$el, this.selectedValue)
     },
   },
 }

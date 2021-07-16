@@ -49,15 +49,15 @@
         class="col-11"
         autohide
         title="title text"
-        icon="fas fa-envelope"
+        icon="envelope-fill"
       >
-        icon='fas fa-envelope'
+        icon='envelope-fill'
         <br>参考：
         <base-a
-          href="https://fontawesome.com"
+          href="https://icons.getbootstrap.com/"
           target="_blank"
         >
-          https://fontawesome.com
+          https://icons.getbootstrap.com/
         </base-a>
       </b-toast>
     </div>
@@ -84,6 +84,17 @@
       >
         you can add any string or DOM
       </b-toast>
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
+        placement
+      </font>
+      <b-select
+        class="col-11"
+        v-model="placement"
+        :list="placList"
+        hide-null
+      />
     </div>
     <div class="row py-1">
       <font class="col-1">
@@ -174,7 +185,7 @@
     </div>
     <b-toasts
       :list="list"
-      style="top: 115px; right: 2px;"
+      :placement="placement"
     />
     <!-- <b-toast class="position-fixed" autohide status="info" content="left-top position-fixed" style="top: 115px; left: 2px;"></b-toast>
         <b-toast class="position-fixed" autohide status="info" content="left-bottom position-fixed" style="bottom: 2px; left: 2px;"></b-toast>
@@ -183,13 +194,14 @@
 </template>
 
 <script>
-import BToast from "@/components/base/toast/b-toast.vue";
-import BToasts from "@/components/base/toast/b-toasts.vue";
+import variables from '@/components/util/variables.js'
+import BToast from "@/components/base/Toast/b-toast.vue";
+import BToasts from "@/components/base/Toast/b-toasts.vue";
 import BaseA from "@/components/basic/A/basic-a.vue";
-
+import BSelect from "@/components/form/b-select.vue"
 export default {
   name: "BToastDemo",
-  components: { BToast, BToasts, BaseA },
+  components: { BToast, BToasts, BaseA, BSelect },
   data() {
     return {
       list: [
@@ -200,8 +212,11 @@ export default {
         { autohide: true, content: "content text", status: "warning" },
         { autohide: true, content: "content text", status: "error" },
         { autohide: true, content: "content text", status: "danger" }
-      ]
+      ],
+      placement: 'top-end',
+      placList: variables.base.position.placement,
     };
+
   }
 };
 </script>

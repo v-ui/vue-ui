@@ -33,17 +33,23 @@ import util from "@/components/util/index.js";
 
 import BDatePanel from './b-date-panel'
 export default {
-  name: 'BDateSelet',
+  name: 'BDateSelect',
   components: { BDatePanel, },
   mixins: [
     util.mixins.date.type,
     util.mixins.date.base,
     util.mixins.date.select,
-    util.mixins.form.readonly,
   ],
   model: {
     prop: "value",
     event: "change",
+  },
+  props: {
+    type: {
+      type: String,
+      default: "date",
+      validator: value => ["year", "month", "date"].includes(value),
+    },
   },
   data() {
     return {
@@ -57,7 +63,7 @@ export default {
   },
   computed: {
     rangeStartMax: function() {
-      if (this.selectedValueEnd && this.selectedValueEnd.isValid && this.selectedValueEnd.isValid()) {
+      if (this.range && this.selectedValueEnd && this.selectedValueEnd.isValid && this.selectedValueEnd.isValid()) {
         let end = this.selectedValueEnd.clone()
         switch (this.type) {
           case this.enumTypeStatus.year:
@@ -74,7 +80,7 @@ export default {
       }
     },
     rangeEndMin: function() {
-      if (this.selectedValueStart && this.selectedValueStart.isValid && this.selectedValueStart.isValid()) {
+      if (this.range && this.selectedValueStart && this.selectedValueStart.isValid && this.selectedValueStart.isValid()) {
         let start = this.selectedValueStart.clone()
         switch (this.type) {
           case this.enumTypeStatus.year:

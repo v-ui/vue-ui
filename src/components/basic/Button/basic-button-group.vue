@@ -12,7 +12,7 @@
 import util from "@/components/util/index.js"
 
 export default {
-  name: "BButtonGroup",
+  name: "BasicButtonGroup",
   props: {
     size: util.props.size,
     vertical: util.props.Boolean

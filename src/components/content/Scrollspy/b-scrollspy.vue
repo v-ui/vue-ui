@@ -1,6 +1,6 @@
 <template>
   <section
-    class="row no-gutters h-100 mx-auto"
+    class="row  g-0 h-100 mx-auto"
     :class="{row: set != 'top',}"
     role="main"
   >
@@ -17,7 +17,7 @@
     <div class="col-3 bg-light h-100">
       <div
         v-if="artices && artices.length && artices.length > 0"
-        class="row no-gutters h-100"
+        class="row  g-0 h-100"
       >
         <div class="col" />
         <b-scrollspy-nav
@@ -51,7 +51,7 @@
           >
             {{ title }}
           </h1>
-          <div class=" mr-3 text-right text-muted">
+          <div class=" me-3 text-right text-muted">
             <span v-if="author">{{ author }}</span><br>
             <span v-if="time"><time>{{ time }}</time></span>
           </div>

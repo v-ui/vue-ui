@@ -1,17 +1,18 @@
 <template>
-  <nav aria-label="breadcrumb">
+  <nav :style="`--bs-breadcrumb-divider: '${divider}';`" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li
-        v-for="(obj, index) in content"
+        v-for="(item, index) in list"
         :key="index"
         class="breadcrumb-item"
-        :class="{active: obj.isActive}"
-        :aria-current="obj.isActive ? 'page' : ''"
+        :class="{active: item.active}"
+        :aria-current="item.active ? 'page' : ''"
       >
         <slot>
-          <base-a :href="obj.path">
-            {{ obj.label }}
+          <base-a v-if="!item.active" :href="item.path || '#'">
+            {{ item.label }}
           </base-a>
+          <template v-else>{{ item.label }}</template>
         </slot>
       </li>
     </ol>
@@ -25,7 +26,11 @@ export default {
   name: "BBreadcrumb",
   components: { BaseA },
   props: {
-    content: util.props.String,
+    list: util.props.Array,
+    divider: {
+      ...util.props.String,
+      default: '>',
+    },
   }
 };
 </script>

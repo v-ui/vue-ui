@@ -5,9 +5,11 @@ export default {
   icon: 'fab fa-bootstrap',
   Modules: [
     { path: 'basic-icon', name: 'basic-icon', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/basic-icon-demo.vue'), },
+    { path: 'b-accordion', name: 'b-accordion', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-accordion-demo.vue'), },
     { path: 'b-address', name: 'b-address', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-address-demo.vue'), },
     { path: 'b-alert', name: 'b-alert', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-alert-demo.vue'), },
     { path: 'b-badge', name: 'b-badge', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-badge-demo.vue'), },
+    { path: 'b-breadcrumb', name: 'b-breadcrumb', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-breadcrumb-demo.vue'), },
     { path: 'b-card', name: 'b-card', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-card-demo.vue'), },
     { path: 'b-calendar', name: 'b-calendar', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-calendar-demo.vue'), },
     { path: 'b-datetime', name: 'b-datetime', component: async () => await import(/* webpackChunkName: "base" */'@/pages/Demo/Base/b-datetime-demo.vue'), },

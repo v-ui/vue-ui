@@ -1,6 +1,7 @@
 <template>
   <b-dropdown
       :list="list"
+      hide-null
       hide-toggle
       menu-align="right"
       @item:click="dataExport"
@@ -12,7 +13,7 @@
           size="sm"
         >
           <basic-icon icon="file-earmark" />
-          <basic-icon icon="caret-down-fill" class="pl-1" />
+          <basic-icon icon="caret-down-fill" class="ps-1" />
         </b-button>
       </template>
     </b-dropdown>

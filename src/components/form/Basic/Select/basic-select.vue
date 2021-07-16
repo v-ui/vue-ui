@@ -1,9 +1,9 @@
 <template>
   <select
-    class="custom-select"
-    :class="[cClass, sizeClass]"
+    class="form-select"
+    :class="[sizeClass]"
     :size="row"
-    :multiple="multiple"
+    :multiple="isMultiple"
     :disabled="disabled"
     :aria-disabled="disabled"
     v-on="inputListeners"
@@ -12,16 +12,17 @@
     <slot>
       <option
         v-if="!hideNull"
-        :selected="selected && selected.length == 0"
-        :aria-selected="selected && selected.length == 0"
+        :selected="selectedValue && selectedValue.length == 0"
+        :aria-selected="selectedValue && selectedValue.length == 0"
         v-text="nullValue"
       />
       <basic-select-option
         v-for="(item, index) in list"
         :key="index"
         :item="item"
-        :multiple="multiple"
-        :primary-key="primaryKey"
+        :multiple="isMultiple"
+        :primary-key="key"
+        :display-name="display"
         :selected="selectedValue"
       />
     </slot>
@@ -32,12 +33,12 @@
 import util from "@/components/util/index.js";
 
 import BasicSelectOption from "./basic-select-option.vue";
-// TODO: util.mixins.select.select 暂缓
 export default {
   name: "BasicSelect",
   components: { BasicSelectOption },
   mixins: [util.mixins.form.base, util.mixins.select.select],
   props: {
+    list: util.props.Array,
     disabled: util.props.Boolean,
     hideNull: util.props.Boolean,
     row: {
@@ -49,7 +50,7 @@ export default {
   },
   computed: {
     sizeClass: function() {
-      return this.size ? `custom-select-${this.size}` : "";
+      return this.size ? `form-select-${this.size}` : "";
     }
   },
   methods: {
@@ -57,18 +58,21 @@ export default {
       // ie 和 edge 不支持 flat
       // this.list.map(e => e.children ? [...e.children] : e).flat())
       // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat#替代方案
+
       let list = this.list
         .map(e => (e.children ? [...e.children] : e))
         .reduce((acc, val) => acc.concat(val), []);
 
-      if (this.multiple) {
-        this.selectedValue = Array.prototype.filter
-            .call(event.target.options, o => o.selected && o.value)
-            .map(o => o.value === this.nullValue ? null : list.find(e => (e.value || e) == o.value))
-            .filter(e => e).map(e => this.primaryKey ? e : e && e.value || e)
+      if (this.isMultiple) {
+        let value = Array.prototype.filter
+          .call(event.target.options, o => o.selected)
+          .map(e => this.getKey(e))
+        this.selectedValue = list.filter(e => value.some(o => this.getKey(e) === o))
       } else {
-        let result = list.find(e => (e.value || e) == event.target.value)
-        this.selectedValue = this.primaryKey ? result : result && result.value || result || ''
+        let item = Array.prototype.find
+          .call(event.target.options, e => e.selected)
+        this.selectedValue = list.find(e => this.getKey(e) === this.getKey(item)) || ''
+
       }
     }
   }

@@ -10,75 +10,55 @@
       </font>
       <div class="col-11">
         <b-input-group>
-          <b-input-group-prepend>
-            <b-input-group-text>Text</b-input-group-text>
-          </b-input-group-prepend>
+          <b-input-group-text>Text</b-input-group-text>
           <basic-text />
         </b-input-group>
         <br>
         <b-input-group>
-          <b-input-group-prepend>
-            <b-input-group-text>Textarea</b-input-group-text>
-          </b-input-group-prepend>
+          <b-input-group-text>Textarea</b-input-group-text>
           <b-textarea />
         </b-input-group>
         <br>
         <b-input-group>
-          <b-input-group-prepend>
-            <b-input-group-text>
-              <b-checkbox />
-            </b-input-group-text>
-          </b-input-group-prepend>
+          <b-input-group-text>
+            <b-check type="checkbox" />
+          </b-input-group-text>
           <basic-text />
         </b-input-group>
         <br>
         <b-input-group>
-          <b-input-group-prepend>
-            <b-input-group-text>
-              <b-radio />
-            </b-input-group-text>
-          </b-input-group-prepend>
+          <b-input-group-text>
+            <b-check type="radio" />
+          </b-input-group-text>
           <basic-text />
         </b-input-group>
         <br>
         <b-input-group>
-          <b-input-group-prepend>
-            <b-input-group-text>Select</b-input-group-text>
-          </b-input-group-prepend>
+          <b-input-group-text>Select</b-input-group-text>
           <basic-select />
         </b-input-group>
         <br>
         <b-input-group>
-          <b-input-group-prepend>
-            <b-input-group-text>Select and Button</b-input-group-text>
-          </b-input-group-prepend>
+          <b-input-group-text>Select and Button</b-input-group-text>
           <basic-select />
-          <b-input-group-prepend>
-            <basic-button />
-          </b-input-group-prepend>
+          <basic-button />
         </b-input-group>
         <br>
         <b-input-group>
-          <b-input-group-prepend>
-            <b-input-group-text>one text</b-input-group-text>
-            <b-input-group-text>two text</b-input-group-text>
-            <b-input-group-text>...</b-input-group-text>
-          </b-input-group-prepend>
+          <b-input-group-text>one text</b-input-group-text>
+          <b-input-group-text>two text</b-input-group-text>
+          <b-input-group-text>...</b-input-group-text>
           <basic-select />
         </b-input-group>
         <br>
         <b-input-group>
-          <b-input-group-prepend>
-            <b-input-group-text>More Controls</b-input-group-text>
-          </b-input-group-prepend>
+          <b-input-group-text>More Controls</b-input-group-text>
           <basic-text />
           <basic-text />
         </b-input-group>
         <br>
         <b-input-group>
-          <b-input-group-prepend>
-            <b-input-group-text>More Controls</b-input-group-text>
-          </b-input-group-prepend>
+          <b-input-group-text>More Controls</b-input-group-text>
           <basic-text />
           <basic-select />
         </b-input-group>
@@ -89,9 +69,7 @@
         info:
       </font>
       <b-input-group info="info text">
-        <b-input-group-prepend>
-          <b-input-group-text>More Controls</b-input-group-text>
-        </b-input-group-prepend>
+        <b-input-group-text>More Controls</b-input-group-text>
         <basic-text />
         <basic-select />
       </b-input-group>
@@ -107,21 +85,15 @@
           </div>
           <div class="col-5">
             <b-input-group size="sm">
-              <b-input-group-prepend>
-                <b-input-group-text>Text</b-input-group-text>
-              </b-input-group-prepend>
+              <b-input-group-text>Text</b-input-group-text>
               <basic-text />
             </b-input-group>
           </div>
           <div class="col-5">
             <b-input-group size="sm">
-              <b-input-group-prepend>
-                <b-input-group-text>select and button</b-input-group-text>
-              </b-input-group-prepend>
+              <b-input-group-text>select and button</b-input-group-text>
               <basic-select />
-              <b-input-group-prepend>
-                <basic-button />
-              </b-input-group-prepend>
+              <basic-button />
             </b-input-group>
           </div>
         </div>
@@ -131,21 +103,15 @@
           </div>
           <div class="col-5">
             <b-input-group>
-              <b-input-group-prepend>
-                <b-input-group-text>Text</b-input-group-text>
-              </b-input-group-prepend>
+              <b-input-group-text>Text</b-input-group-text>
               <basic-text />
             </b-input-group>
           </div>
           <div class="col-5">
             <b-input-group>
-              <b-input-group-prepend>
-                <b-input-group-text>select and button</b-input-group-text>
-              </b-input-group-prepend>
+              <b-input-group-text>select and button</b-input-group-text>
               <basic-select />
-              <b-input-group-prepend>
-                <basic-button />
-              </b-input-group-prepend>
+              <basic-button />
             </b-input-group>
           </div>
         </div>
@@ -155,21 +121,15 @@
           </div>
           <div class="col-5">
             <b-input-group size="lg">
-              <b-input-group-prepend>
-                <b-input-group-text>Text</b-input-group-text>
-              </b-input-group-prepend>
+              <b-input-group-text>Text</b-input-group-text>
               <basic-text />
             </b-input-group>
           </div>
           <div class="col-5">
             <b-input-group size="lg">
-              <b-input-group-prepend>
-                <b-input-group-text>select and button</b-input-group-text>
-              </b-input-group-prepend>
+              <b-input-group-text>select and button</b-input-group-text>
               <basic-select />
-              <b-input-group-prepend>
-                <basic-button />
-              </b-input-group-prepend>
+              <basic-button />
             </b-input-group>
           </div>
         </div>
@@ -181,13 +141,11 @@
 <script>
 
 import BInputGroup from "@/components/form/InputGroup/b-input-group.vue";
-import BInputGroupPrepend from "@/components/form/InputGroup/b-input-group-prepend.vue";
 import BInputGroupText from "@/components/form/InputGroup/b-input-group-text.vue";
 
 import BasicText from "@/components/form/Basic/basic-text.vue";
 import BTextarea from "@/components/form/b-textarea.vue";
-import BCheckbox from "@/components/form/CheckBox/b-checkbox.vue";
-import BRadio from "@/components/form/Radio/b-radio.vue";
+import BCheck from "@/components/form/Check/b-check.vue";
 import BasicSelect from "@/components/form/Basic/Select/basic-select.vue";
 import BasicButton from "@/components/basic/Button/basic-button.vue";
 
@@ -195,12 +153,10 @@ export default {
   name: "BUnputGroupDemo",
   components: {
     BInputGroup,
-    BInputGroupPrepend,
     BInputGroupText,
     BasicText,
     BTextarea,
-    BCheckbox,
-    BRadio,
+    BCheck,
     BasicSelect,
     BasicButton
   },

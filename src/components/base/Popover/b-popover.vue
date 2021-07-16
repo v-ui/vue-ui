@@ -11,7 +11,6 @@
       <div
         ref="arrow"
         class="popover-arrow"
-        data-popper-arrow
       />
       <div
         ref="header"
@@ -139,7 +138,7 @@ export default {
 .popover[data-popper-placement^='top'] > .popover-arrow::after {
   bottom: 1px;
   border-width: 0.5rem 0.5rem 0;
-  border-top-color: var(--white);
+  border-top-color: rgb(255, 255, 255);
 }
 
 /* bottom */
@@ -160,7 +159,7 @@ export default {
 .popover[data-popper-placement^='bottom'] > .popover-arrow::after {
   top: 1px;
   border-width: 0 0.5rem 0.5rem 0.5rem;
-  border-bottom-color: var(--white);
+  border-bottom-color: rgb(255, 255, 255);
 }
 
 /* .popover[data-popper-placement='top-start'] > .popover-arrow,
@@ -202,7 +201,7 @@ export default {
 .popover[data-popper-placement^='left'] > .popover-arrow::after {
   right: 1px;
   border-width: 0.5rem 0 0.5rem 0.5rem;
-  border-left-color: var(--white);
+  border-left-color: rgb(255, 255, 255);
 }
 
 /* right */
@@ -226,7 +225,7 @@ export default {
 .popover[data-popper-placement^='right'] > .popover-arrow::after {
   left: 1px;
   border-width: 0.5rem 0.5rem 0.5rem 0;
-  border-right-color: var(--white);
+  border-right-color: rgb(255, 255, 255);
 }
 
 /* .popover[data-popper-placement='left-start'] > .popover-arrow,

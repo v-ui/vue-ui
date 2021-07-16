@@ -1,8 +1,8 @@
 <template>
   <div
-    class="btn-group-toggle w-100"
+    class="btn-group w-100"
     :class="groupClass"
-    data-toggle="buttons"
+    role="group"
   >
     <label
       class="btn"
@@ -13,6 +13,7 @@
     >
       <input
         type="checkbox"
+        class="btn-check"
         :value="value"
         :checked="selected"
         :aria-checked="selected"

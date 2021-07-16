@@ -49,7 +49,7 @@ import config from "@/config/index.js";
 import util from "@/components/util/index.js";
 
 import BTree from "@/components/content/Tree/Tree/b-tree.vue";
-import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
+import BButtonGroup from "@/components/basic/Button/basic-button-group.vue";
 import BButton from "@/components/basic/Button/basic-button.vue";
 
 export default {

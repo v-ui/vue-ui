@@ -12,6 +12,16 @@ Vue.directive(tip.name, tip.func) // v-tip
 import modal from './modal'
 Vue.directive(modal.name, modal.func) // v-modal
 
+// v-coll
+// 注册一个全局自定义指令
+import coll from './coll'
+Vue.directive(coll.name, coll.func) // v-coll
+
+// v-canvas
+// 注册一个全局自定义指令
+import canvas from './canvas'
+Vue.directive(canvas.name, canvas.func) // v-canvas
+
 // v-lazy
 // 延迟调用 在元素进入/快进入可是范围时执行回调函数
 // 常用于图片等数据的延迟加载

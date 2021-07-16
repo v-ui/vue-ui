@@ -11,7 +11,7 @@
     </slot>
     <template v-if="!hideController">
       <b-button
-        class="cannt-hide border-0 bg-transparent text-body"
+        class="cannt-hide col-auto border-0 bg-transparent text-body"
         style="height: 2.5em"
         :disabled="disabled"
         @click.stop="$emit('forward')"
@@ -19,7 +19,7 @@
         <i class="fas fa-angle-left" />
       </b-button>
       <b-button
-        class="border-0 bg-transparent text-body"
+        class="col-auto border-0 bg-transparent text-body"
         :class="{ 'cannt-hide': disabled || disabledNow }"
         style="height: 2.5em"
         :disabled="disabled || disabledNow"
@@ -28,7 +28,7 @@
         <i class="fas fa-circle" />
       </b-button>
       <b-button
-        class="cannt-hide border-0 bg-transparent text-body"
+        class="cannt-hide col-auto border-0 bg-transparent text-body"
         style="height: 2.5em"
         :disabled="disabled"
         @click.stop="$emit('backward')"

@@ -2,7 +2,7 @@
   <b-grid-row
     :list="list"
     :primary-key="key"
-    :display-name="displayKey"
+    :display-name="display"
   >
     <template #item="{ item }">
       <slot
@@ -12,7 +12,7 @@
         <address-item
           :item="item"
           :primary-key="key"
-          :display-name="displayKey"
+          :display-name="display"
           :selected="selectedValue"
           :disabled="item.disabled"
           @item:click="itemClick"
@@ -32,6 +32,9 @@ export default {
   name: 'AddressTemp',
   components: { AddressItem, BGridRow },
   mixins: [ util.mixins.select.select, ],
+  props: {
+    list: util.props.Array,
+  },
   methods: {
     itemClick: function(item) {
       this.selectedValue = item

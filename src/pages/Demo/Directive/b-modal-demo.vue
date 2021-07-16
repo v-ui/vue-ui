@@ -1,37 +1,35 @@
 <template>
   <div>
+    <h2>b-modal(v-modal)</h2>
+    <hr>
     <b-modal
-      v-if="show"
       id="exampleModal"
       title="title text"
+      info="info text"
       content="content text"
       :size="size"
+      :center="center"
+      :backdrop="backdrop"
+      :keyboard="keyboard"
       :status="status"
     />
     <b-modal
-      v-if="show"
       id="slotModal"
       title="slot Modal"
-      :set="set"
-      :size="size"
-      :drawer="drawer"
-      :scrol="scrol"
     >
       you can add any string and DOM
     </b-modal>
     <b-modal
-      v-if="show"
       id="iconModal"
       title="icon Modal"
       content="content text"
       :icon="icon"
     />
     <b-modal
-      v-if="show"
       id="scrolModal"
       title="scrol Modal"
       content="content text"
-      :status="status"
+      scrol
     >
       there is too long<br>
       there is too long<br>
@@ -107,7 +105,7 @@
       <button
         v-modal="'#exampleModal'"
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary col-auto"
         @click="show=true"
       >
         default Modal
@@ -120,8 +118,8 @@
       <button
         v-modal="'#iconModal'"
         type="button"
-        class="btn btn-primary"
-        @click="show=true; icon='fas fa-envelope'"
+        class="btn btn-primary col-auto"
+        @click="show=true; icon='envelope-fill'"
       >
         Modal`s icon
       </button>
@@ -133,7 +131,7 @@
       <button
         v-modal="'#slotModal'"
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary col-auto"
         @click="show=true;"
       >
         Modal`s slot
@@ -146,7 +144,7 @@
       <button
         v-modal="'#exampleModal'"
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary col-auto"
         @click="status='default'; show=true"
       >
         status: default
@@ -154,7 +152,7 @@
       <button
         v-modal="'#exampleModal'"
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary col-auto"
         @click="status='info'; show=true"
       >
         status: info
@@ -162,7 +160,7 @@
       <button
         v-modal="'#exampleModal'"
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary col-auto"
         @click="status='system'; show=true"
       >
         status: system
@@ -170,7 +168,7 @@
       <button
         v-modal="'#exampleModal'"
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary col-auto"
         @click="status='issue'; show=true"
       >
         status: issue
@@ -178,7 +176,7 @@
       <button
         v-modal="'#exampleModal'"
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary col-auto"
         @click="status='warning'; show=true"
       >
         status: warning
@@ -186,7 +184,7 @@
       <button
         v-modal="'#exampleModal'"
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary col-auto"
         @click="status='error'; show=true"
       >
         status: error
@@ -194,7 +192,7 @@
       <button
         v-modal="'#exampleModal'"
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary col-auto"
         @click="status='success'; show='true'"
       >
         status: success
@@ -202,7 +200,7 @@
       <button
         v-modal="'#exampleModal'"
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary col-auto"
         @click="status='danger'; show='true'"
       >
         status: danger
@@ -210,30 +208,25 @@
     </div>
     <div class="row align-items-center py-1">
       <font class="col-1">
-        drawer
+        scrol
       </font>
       <div class="col-1">
-        <input
-          id="drawer"
-          class="mr-1"
-          type="checkbox"
-          @change="drawer=!drawer"
+
+        <button
+          v-modal="'#scrolModal'"
+          type="button"
+          class="btn btn-primary col-auto"
         >
-        <label for="drawer">drawer</label>
+          scrol
+        </button>
       </div>
     </div>
     <div class="row align-items-center py-1">
       <font class="col-1">
-        scrol
+        center
       </font>
       <div class="col-1">
-        <input
-          id="scrol"
-          class="mr-1"
-          type="checkbox"
-          @change="scrol=!scrol"
-        >
-        <label for="scrol">scrol</label>
+        <b-switch v-model="center" label="center" />
       </div>
     </div>
     <div class="row align-items-center py-1">
@@ -243,107 +236,116 @@
       <div class="col-3">
         <input
           id="null"
-          class="mr-1"
+          class="me-1"
           type="radio"
           name="size"
           checked
           @change="size=''"
         >
         <label
-          class="mr-2"
+          class="me-2"
           for="null"
         >default</label>
         <input
           id="xl"
-          class="mr-1"
+          class="me-1"
           type="radio"
           name="size"
           @change="size='xl'"
         >
         <label
-          class="mr-2"
+          class="me-2"
           for="xl"
         >xl</label>
         <input
           id="lg"
-          class="mr-1"
+          class="me-1"
           type="radio"
           name="size"
           @change="size='lg'"
         >
         <label
-          class="mr-2"
+          class="me-2"
           for="lg"
         >lg</label>
         <input
           id="sm"
-          class="mr-1"
+          class="me-1"
           type="radio"
           name="size"
           @change="size='sm'"
         >
         <label
-          class="mr-2"
+          class="me-2"
           for="sm"
         >sm</label>
       </div>
     </div>
+
+    以下两种属性不具有响应性特性（以第一次打开时为准）
+    <div class="row align-items-center py-1">
+      <font class="col-1">
+        keyboard
+      </font>
+      <div class="col-1">
+        <b-switch v-model="keyboard" label="keyboard" />
+      </div>
+    </div>
+
+    <div class="row align-items-center py-1">
+      <font class="col-1">
+        backdrop
+      </font>
+      <div class="col-3">
+        <input
+          id="true"
+          class="me-1"
+          type="radio"
+          name="backdrop"
+          checked
+          @change="backdrop=true"
+        >
+        <label
+          class="me-2"
+          for="true"
+        >true(default)</label>
+        <input
+          id="false"
+          class="me-1"
+          type="radio"
+          name="backdrop"
+          @change="backdrop=false"
+        >
+        <label
+          class="me-2"
+          for="false"
+        >false</label>
+        <input
+          id="static"
+          class="me-1"
+          type="radio"
+          name="backdrop"
+          @change="backdrop='static'"
+        >
+        <label
+          class="me-2"
+          for="static"
+        >static</label>
+      </div>
+    </div>
+
+
     <div class="row py-1">
       <font class="col-1">
         show model
       </font>
       <button
-        v-modal="'#slotModal'"
+        v-modal="{ target:'#exampleModal', keyboard: false }"
         type="button"
         class="col-auto btn btn-primary"
         @click="show=true"
       >
         Modal
-      </button>
-    </div>
-    <div class="row py-1">
-      <font class="col-1">
-        position
-      </font>
-      <button
-        v-modal="'#slotModal'"
-        type="button"
-        class="btn btn-primary"
-        @click="set='up'; show=true"
-      >
-        position: top(default)
-      </button>
-      <button
-        v-modal="'#slotModal'"
-        type="button"
-        class="btn btn-primary"
-        @click="set='center'; show=true"
-      >
-        position: center
-      </button>
-      <button
-        v-modal="'#slotModal'"
-        type="button"
-        class="btn btn-primary"
-        @click="set='down'; show=true"
-      >
-        position: down
-      </button>
-      <button
-        v-modal="'#slotModal'"
-        type="button"
-        class="btn btn-primary"
-        @click="set='left'; show=true"
-      >
-        position: left
-      </button>
-      <button
-        v-modal="'#slotModal'"
-        type="button"
-        class="btn btn-primary"
-        @click="set='right'; show=true"
-      >
-        position: right
       </button>
     </div>
   </div>
@@ -352,16 +354,18 @@
 <script>
 import BModal from '@/components/base/Modal/b-modal.vue'
 
+import BSwitch from '@/components/form/b-switch.vue'
+
 export default {
     name: 'BModalDemo',
-    components: { BModal, },
+    components: { BModal, BSwitch, },
     data () {
       return {
         status: '',
         show: false,
-        scrol: false,
-        drawer: false,
-        set: '',
+        center: false,
+        backdrop: 'true',
+        keyboard: true,
         size: '',
         icon: '',
       }

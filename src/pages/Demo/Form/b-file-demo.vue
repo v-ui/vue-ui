@@ -5,13 +5,13 @@
       filepond-instance
     </base-a>
     <hr>
-    <div class="row no-gutters py-1">
+    <div class="row  g-0 py-1">
       <font class="col-1">
         default:
       </font>
       <b-file class="col-11" />
     </div>
-    <div class="row no-gutters py-1">
+    <div class="row  g-0 py-1">
       <font class="col-1">
         multiple:
       </font>
@@ -20,7 +20,7 @@
         multiple
       />
     </div>
-    <div class="row no-gutters py-1">
+    <div class="row  g-0 py-1">
       <font class="col-1">
         disabled:
       </font>

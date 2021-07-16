@@ -1,18 +1,19 @@
 <template>
-  <div class="custom-control custom-switch">
-    <input
+  <div class="form-check form-switch">
+    <b-check
       :id="id"
       type="checkbox"
-      class="custom-control-input"
       :checked="checked"
-      :aria-checked="checked"
       v-bind="$attrs"
-      v-on="inputListeners"
-    >
+      v-on="$listeners"
+      @input.native="input"
+    />
     <label
-      class="custom-control-label"
+      class="form-check-label"
       :for="id"
-    >{{ label }}</label>
+    >
+      {{ label }}
+    </label>
     <b-info :info="info" />
   </div>
 </template>
@@ -21,16 +22,16 @@
 import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
+import BCheck from '@/components/form/Check/b-check.vue'
 import BInfo from "@/components/basic/basic-info.vue";
 
 export default {
   name: "BSwitch",
-  components: { BInfo },
-  mixins: [util.mixins.form.base],
+  components: { BCheck, BInfo },
   inheritAttrs: false,
   model: {
     prop: "checked",
-    event: "input"
+    event: "check:changed"
   },
   props: {
     label: util.props.String,
@@ -39,28 +40,14 @@ export default {
     id: {
       type: String,
       default: function() {
-        return "Switch-" + tools.random.getRandomString();
+        return "switch-" + tools.random.getRandomString();
       }
     }
   },
-  computed: {
-    inputListeners: function() {
-      var vm = this;
-      // `Object.assign` 将所有的对象合并为一个新对象
-      return Object.assign(
-        {},
-        // 我们从父级添加所有的监听器
-        this.$listeners,
-        // 然后我们添加自定义监听器，
-        // 或覆写一些监听器的行为
-        {
-          // 这里确保组件配合 `v-model` 的工作
-          input: function(event) {
-            vm.$emit("input", event.target.checked);
-          }
-        }
-      );
+  methods: {
+    input: function(event) {
+      this.$emit("check:changed", event.target.checked);
     }
-  }
+  },
 };
 </script>

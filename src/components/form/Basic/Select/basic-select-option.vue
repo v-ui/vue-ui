@@ -1,14 +1,12 @@
 <template>
   <option
     v-if="!item.children"
-    :value="item.value || item"
+    v-text="getDisplay(item)"
+    :value="getKey(item)"
     :selected="isSelected"
-    :aria-selected="isSelected"
     :disabled="item.disabled"
     :aria-disabled="item.disabled"
-  >
-    {{ item.label || item.value || item }}
-  </option>
+  />
   <optgroup
     v-else
     :label="item.label"
@@ -21,6 +19,7 @@
       :item="child"
       :selected="selected"
       :primary-key="primaryKey"
+      :diaplay-name="displayName"
       :multiple="multiple"
     />
   </optgroup>
@@ -28,7 +27,6 @@
 
 <script>
 import util from "@/components/util/index.js";
-// TODO: util.mixins.select.select 暂缓
 export default {
   name: "BasicSelectOption",
   components: { BasicSelectOption: () => import("./basic-select-option.vue") },

@@ -23,6 +23,28 @@
     </div>
     <div class="row py-1">
       <font class="col-1">
+        size(sm):
+      </font>
+      <b-pag
+        class="col-11"
+        size="sm"
+        end="25"
+        active="10"
+      />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
+        size(lg):
+      </font>
+      <b-pag
+        class="col-11"
+        size="lg"
+        end="25"
+        active="10"
+      />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
         v-model<br>{{ value }}:
       </font>
       <b-pag

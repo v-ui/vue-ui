@@ -7,7 +7,7 @@
         :mix-class="validateClass"
         unvalid
         :label="getDisplay(item)"
-        :value="getValue(item)"
+        :value="getKey(item)"
         :checked="isSelected(item)"
         :disabled="item.disabled || disabled"
         v-bind="$attrs"
@@ -48,6 +48,7 @@ export default {
   mixins: [util.mixins.select.check, util.mixins.form.validator],
   inheritAttrs: false,
   props: {
+    list: util.props.Array,
     info: util.props.String,
     disabled: util.props.Boolean
   },

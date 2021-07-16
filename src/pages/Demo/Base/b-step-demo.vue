@@ -8,16 +8,33 @@
       </font>
       <b-step
         class="col-10"
-        :list="defaultList"
+        :list="list"
       />
     </div>
     <div class="row py-1">
       <font class="col-1">
-        active:
+        slot:
       </font>
       <b-step
         class="col-10"
-        :list="list2"
+        :list="list"
+      >
+        <template #item="{ color, title, select, info }">
+          color: {{ color }}
+          title: {{ title }}
+          select: {{ select }}
+          info: {{ info }}
+        </template>
+      </b-step>
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
+        v-model:
+      </font>
+      <b-step
+        v-model="select"
+        class="col-10"
+        :list="list"
       />
     </div>
     <div class="row py-1">
@@ -38,25 +55,32 @@
         sm:
       </font>
       <b-step
-        class="col-2"
-        column
+        class="col-9"
         size="sm"
         :list="list"
       />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
+        size:
+      </font>
       <font class="col-1">
         (default):
       </font>
       <b-step
-        class="col-2"
-        column
+        class="col-9"
         :list="list"
       />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
+        size:
+      </font>
       <font class="col-1">
         lg:
       </font>
       <b-step
-        class="col-2"
-        column
+        class="col-9"
         size="lg"
         :list="list"
       />
@@ -78,11 +102,11 @@
         </div>
         <div class="row py-1">
           <font class="col-1">
-            right(default):
+            end(default):
           </font>
           <b-step
             class="col-10"
-            set="right"
+            set="end"
             :list="list"
           />
         </div>
@@ -98,11 +122,11 @@
         </div>
         <div class="row py-1">
           <font class="col-1">
-            left:
+            start:
           </font>
           <b-step
             class="col-10"
-            set="left"
+            set="start"
             :list="list"
           />
         </div>
@@ -119,27 +143,14 @@ export default {
   components: { BStep, },
   data() {
     return {
-      defaultList: [
-        { status: 'default',},
-        { status: 'success',},
-        { status: 'warning',},
-        { status: 'error',},
-        { status: 'danger',},
-      ],
       list: [
-        { status: 'default', title: 'title', info: "info text is tooo ooooooo ooooooo oooooo long",},
-        { status: 'success', title: "title", info: "info text",},
-        { status: 'warning', title: "title", info: "info text",},
-        { status: 'error', title: "title ", info: "info text",},
-        { status: 'danger', title: "title", info: "info text",},
+        { status: 'default', label: 'default', value: 'default', info: "info text is tooo ooooooo ooooooo oooooo long",},
+        { status: 'success', label: 'success', value: 'success', info: "info text",},
+        { status: 'warning', label: 'warning', value: 'warning', info: "info text",},
+        { status: 'error',   label: 'error',   value: 'error',    info: "info text",},
+        { status: 'danger',  label: 'danger',  value: 'danger',  info: "info text",},
       ],
-      list2: [
-        { status: 'default', title: 'active item', info: "It is a active item", active: true,},
-        { status: 'success',},
-        { status: 'warning',},
-        { status: 'error',},
-        { status: 'danger',},
-      ],
+      select: { status: 'success', label: 'success', value: 'success', info: "info text",},
     }
   },
 }

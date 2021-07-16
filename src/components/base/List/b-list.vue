@@ -1,87 +1,67 @@
 <template>
-  <draggable
-    v-model="dataList"
+  <ul
     class="list-group"
-    tag="ul"
-    v-bind="dragOptions"
-    handle=".handle"
-    :class="{'list-group-flush': flush, 'list-group-horizontal': inline, }"
-    @start="status = true"
-    @end="status = false"
+    :class="{'list-group-flush': flush, 'list-group-horizontal': inline }"
   >
-    <transition-group
-      type="transition"
-      :name="!status ? 'flip-list' : null"
-      :class="{ 'd-inline-flex': inline, }"
+    <slot v-if="$slots.default" :list="list" />
+    <list-items
+      v-for="(item, index) in list"
+      v-else
+      :key="'item' + index"
+      :class="{'flex-fill': fill}"
+      :index="index + 1"
+      :numbered="numbered"
+      :label="getDisplay(item)"
+      :href="item.href"
+      :icon="item.icon"
+      :info="item.info"
+      :active="isSelected(item)"
+      :color="item.color || color"
+      :disabled="disabled || item.disabled"
+      @click.native="itemClick(item)"
     >
-      <slot v-if="$slots.default" />
-      <list-items
-        v-for="(item, index) in dataList"
-        v-else
-        :key="'item' + index"
-        :class="{'flex-fill': fill, 'border-0': borderLess}"
-        :drop="drop"
-        :hide-hanlder="hideHanlder"
-        :label="item.label"
-        :href="item.href"
-        :color="item.color || color"
-        :sr-msg="item.srMsg"
-        :disabled="disabled || item.disabled"
-      >
-        <slot
-          name="item"
-          :item="item"
-        />
-      </list-items>
-    </transition-group>
-  </draggable>
+      <slot
+        name="item"
+        :item="item"
+      />
+    </list-items>
+  </ul>
 </template>
 
 <script>
 import util from "@/components/util/index.js";
 
-import draggable from 'vuedraggable'
 import listItems from "./b-list-item";
 
 export default {
   name: "BList",
-  components: { draggable, listItems },
+  components: { listItems },
+  mixins: [ util.mixins.select.check ],
   props: {
     list: util.props.Array,
     color: {
       ...util.props.color,
       default: "white"
     },
-    drop: util.props.Boolean,
-    hideHanlder: util.props.Boolean,
+    numbered: util.props.Boolean,
     disabled: util.props.Boolean,
     flush: util.props.Boolean,
     inline: util.props.Boolean,
     fill: util.props.Boolean,
-    borderLess: util.props.Boolean,
   },
-  data() {
-    return {
-      dragOptions: {
-        animation: 200,
-        group: "description",
-        disabled: !this.drop && this.disabled,
-        ghostClass: "ghost"
-      },
-      dataList: this.list,
-      status: false,
-    }
-  },
-  watch: {
-    dataList: function(value) {
-      this.$emit('drop:changed', value)
+  methods: {
+    itemClick: function(item) {
+      if (this.isMultiple) {
+        const value = this.getKey(item)
+        let index = this.selectedMap.indexOf(value)
+        index >= 0
+          ? this.selectedValue.splice(index, 1)
+          : this.selectedValue.push(item)
+      } else {
+        this.selectedValue = item
+      }
+      this.$emit('item:click', this.selectedValue)
     },
   },
 };
 </script>
-
-<style>
-.ghost {
-  opacity: 0.5;
-}
-</style>

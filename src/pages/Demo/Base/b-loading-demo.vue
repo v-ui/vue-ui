@@ -22,7 +22,7 @@
       </font>
       <b-loading status="grow" />
     </div>
-    <div class="row py-1">
+    <div class="row my-1">
       <font class="col-1">
         size:
       </font>
@@ -33,11 +33,13 @@
       <font class="col-1">
         sm:
       </font>
-      <b-loading size="sm" />
-      <b-loading
-        size="sm"
-        status="grow"
-      />
+      <div class="col-auto">
+        <b-loading size="sm" />
+        <b-loading
+          size="sm"
+          status="grow"
+        />
+      </div>
     </div>
     <div class="row py-1">
       <font class="col-1">

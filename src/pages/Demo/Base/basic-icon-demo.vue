@@ -22,7 +22,7 @@
         />
         <button
           v-coll:control="'#collapse'"
-          class="btn btn-primary"
+          class="btn btn-primary col-auto"
           type="button"
         >
           高级搜索
@@ -37,9 +37,10 @@
             <font class="col-1">
               填充：
             </font>
-            <b-radio-group
+            <b-check-group
               v-model="radioFill"
               class="col"
+              type="radio"
               :list="[ 'all', 'fill', 'half' ]"
               name="fill"
               inline
@@ -49,8 +50,9 @@
             <font class="col-1">
               方向：
             </font>
-            <b-checkbox-group
+            <b-check-group
               v-model="checkTypes"
+              type="checkbox"
               class="col"
               :list="[ 'up', 'right', 'down', 'left', 'start', 'center', 'middle', 'end', 'clockwise' ]"
               name="type"
@@ -61,7 +63,7 @@
             <font class="col-1">
               样式：
             </font>
-            <b-radio-group
+            <b-check-group
               v-model="radioStyle"
               class="col"
               :list="[ 'all', 'triangle', 'square', 'journal', 'diamond', 'octagon', 'bookmark', 'bag', 'circle', 'shield', 'cloud', 'patch', ]"
@@ -73,9 +75,10 @@
             <font class="col-1">
               种类：
             </font>
-            <b-radio-group
+            <b-check-group
               v-model="radioType"
               class="col"
+              type="radio"
               :list="[ 'all',
                        'arrow', 'badge', 'box', 'calendar', 'card', 'chat', 'chevron', 'dice', 'suit', 'emoji',
                        'file', 'folder',
@@ -143,15 +146,14 @@ import BasicIcon from '@/components/basic/basic-icon.vue'
 
 import BaseA from "@/components/basic/A/basic-a.vue";
 import BText from "@/components/form/b-text.vue";
-import BRadioGroup from "@/components/form/Radio/b-radio-group.vue";
-import BCheckboxGroup from "@/components/form/CheckBox/b-checkbox-group.vue"
+import BCheckGroup from "@/components/form/Check/b-check-group.vue";
 
 import BInfo from '@/components/basic/basic-info.vue'
-import BCollapse from "@/components/base/Collapse/index.js";
+import BCollapse from "@/components/base/Collapse/b-collapse.vue"
 
 export default {
   name: "BasicIconDemo",
-  components: { BasicIcon, BaseA, BText, BRadioGroup, BCheckboxGroup, BInfo, BCollapse, },
+  components: { BasicIcon, BaseA, BText, BCheckGroup, BInfo, BCollapse, },
   mixins: [ util.mixins.clip.base, ],
   data() {
     return {

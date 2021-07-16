@@ -6,47 +6,19 @@
       <font class="col-1">
         default
       </font>
-      <font class="mx-1">
-        span:
-      </font>
-      <b-badge />
-      <font class="mx-1">
-        a:
-      </font>
-      <b-badge href="#" />
+      <b-badge class="col-auto" />
     </div>
     <div class="row my-1">
       <font class="col-1">
         slot
       </font>
-      <font class="mx-1">
-        span:
-      </font>
-      <b-badge>text</b-badge>
-      <font class="mx-1">
-        a:
-      </font>
-      <b-badge href="#">
-        text
-      </b-badge>
+      <b-badge class="col-auto">text</b-badge>
     </div>
     <div class="row my-1">
       <font class="col-1">
         pill
       </font>
-      <font class="mx-1">
-        span:
-      </font>
-      <b-badge pill>
-        text
-      </b-badge>
-      <font class="mx-1">
-        a:
-      </font>
-      <b-badge
-        href="#"
-        pill
-      >
+      <b-badge class="col-auto" pill>
         text
       </b-badge>
     </div>
@@ -54,18 +26,18 @@
       <font class="col-1">
         color
       </font>
-      <div class="col-11">
+      <div class="col-11 p-0">
         <b-badge
           v-for="item in colors"
           :key="item + '1'"
-          class="m-1"
+          class="col-auto m-1"
           :color="item"
         />
         <br>
         <b-badge
           v-for="item in colors"
           :key="item + '2'"
-          class="m-1"
+          class="col-auto m-1"
           :color="item"
         >
           {{ item }}
@@ -85,7 +57,7 @@ export default {
   components: { BBadge },
   data() {
     return {
-      colors: variables.base.color.base
+      colors: variables.base.color.base.filter(e => e)
     };
   }
 };

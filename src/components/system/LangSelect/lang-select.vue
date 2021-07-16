@@ -5,6 +5,7 @@
     primary-key="code"
     trigger="language"
     :list="langs"
+    hide-null
   />
 </template>
 

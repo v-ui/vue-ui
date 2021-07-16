@@ -2,19 +2,26 @@
   <div
     class="d-inline-flex m-2"
     :class="ObjClass"
-    style="width: 15em;"
   >
     <b-step-icon
       :size="size"
       :color="dataColor"
-      :icon="iconClass"
+      :icon="dataIcon"
     />
-    <b-step-content
+    <slot
+      name="item"
       :color="dataColor"
       :title="dataTitle"
+      :select="select"
       :info="info"
-      :active="active"
-    />
+    >
+      <b-step-content
+        :color="dataColor"
+        :title="dataTitle"
+        :select="select"
+        :info="info"
+      />
+    </slot>
   </div>
 </template>
 
@@ -29,22 +36,22 @@ export default {
   components: { BStepIcon, BStepContent, },
   mixins: [ util.mixins.status.message, ],
   props: {
-    active: util.props.boolean,
+    select: util.props.boolean,
     info: util.props.string,
     size: util.props.size,
     set: {
       ...util.props.set,
-      default: 'rihgt'
+      default: 'end'
     },
   },
   computed: {
     ObjClass: function() {
       let set = ''
-      if (!this.set || this.set === 'right') return set
+      if (!this.set || this.set === 'end') return set
       else if (this.set === 'down') {
         set = 'flex-column text-center'
-      } else if (this.set === 'left') {
-        set = 'flex-row-reverse text-right'
+      } else if (this.set === 'start') {
+        set = 'flex-row-reverse text-end'
       } else if (this.set === 'up') {
         set = 'flex-column-reverse text-center'
       }

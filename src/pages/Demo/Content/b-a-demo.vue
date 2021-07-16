@@ -16,7 +16,7 @@
       <font class="col-1">
         default
       </font>
-      <base-a href="#">
+      <base-a class="col-auto" href="#">
         text
       </base-a>
     </div>
@@ -25,6 +25,7 @@
         disabled
       </font>
       <base-a
+        class="col-auto"
         href="#"
         disabled
       >
@@ -40,33 +41,34 @@
           <font class="col-2">
             tel:
           </font>
-          <base-a href="tel:电话号码" />
+          <base-a class="col-auto" href="tel:电话号码" />
         </div>
         <div class="row">
           <font class="col-2">
             sms:
           </font>
-          <base-a href="sms:电话号码" />
+          <base-a class="col-auto" href="sms:电话号码" />
         </div>
         <div class="row">
           <font class="col-2">
             mailto:
           </font>
-          <base-a href="mailto:邮件地址" />（详情：<base-a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Email_links">
+          <base-a class="col-auto" href="mailto:邮件地址" />
+        </div>
+        （详情：<base-a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Email_links">
             Email links | MDN
           </base-a>）
-        </div>
         <div class="row">
           <font class="col-2">
             link:
           </font>
           <base-a
-            class="px-1"
+            class="col-auto px-1"
             href="http://www.bing.com"
             text="Bing"
           />
           <base-a
-            class="px-1"
+            class="col-auto px-1"
             href="b-About"
           />
         </div>
@@ -75,15 +77,15 @@
             Anchor point:
           </font>
           <base-a
-            class="px-1"
+            class="col-auto px-1"
             href="#"
           />
           <base-a
-            class="px-1"
+            class="col-auto px-1"
             href="#top"
           />
           <base-a
-            class="px-1"
+            class="col-auto px-1"
             href="#1-1"
           />
         </div>
@@ -94,6 +96,7 @@
         download
       </font>
       <base-a
+        class="col-auto"
         href="b-About"
         download="b-About.vue"
       />
@@ -103,6 +106,7 @@
         hideIcon
       </font>
       <base-a
+        class="col-auto"
         href="http://www.bing.com"
         text="Bing"
         hide-icon
@@ -113,6 +117,7 @@
         icon
       </font>
       <base-a
+        class="col-auto"
         href="#"
         text="text"
         icon="fas fa-info"

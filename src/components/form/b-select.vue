@@ -1,14 +1,16 @@
 <template>
-  <div class="form-group my-0">
+  <div class="p-0" :class="{'form-floating': floatLabel}">
     <basic-select
       v-model="selectedValue"
+      :id="id"
       :list="list"
       :size="size"
       :row="row"
-      :multiple="multiple"
+      :multiple="isMultiple"
       :disabled="disabled"
       :hide-null="hideNull"
-      :primary-key="primaryKey"
+      :primary-key="key"
+      :display-name="display"
       v-bind="$attrs"
       v-on="$listeners"
       @change.native="validator($event, selectedValue)"
@@ -31,31 +33,45 @@
         {{ invalidInfo }}
       </slot>
     </b-valid>
-    <b-info :info="info" />
+    <b-form-text :info="info" />
+    <label v-if="floatLabel" :for="id">{{ floatLabel }}</label>
   </div>
 </template>
 
 <script>
+import tools from "@/tools/index.js";
 import util from "@/components/util/index.js";
 
 import BasicSelect from '@/components/form/Basic/Select/basic-select.vue'
 import BValid from "@/components/form/Other/b-form-valid.vue";
-import BInfo from "@/components/basic/basic-info.vue";
-// TODO: util.mixins.select.select 暂缓
+import BFormText from "@/components/form/Other/b-form-text";
+
 export default {
   name: "BSelect",
-  components: { BasicSelect, BValid, BInfo },
-  mixins: [util.mixins.form.base, util.mixins.select.select, util.mixins.form.validator],
+  components: { BasicSelect, BValid, BFormText },
+  mixins: [
+    util.mixins.select.select,
+    util.mixins.form.validator,
+  ],
   inheritAttrs: false,
   props: {
+    list: util.props.Array,
+    floatLabel: util.props.String,
     disabled: util.props.Boolean,
     info: util.props.String,
     hideNull: util.props.Boolean,
+    size: util.props.size,
     row: {
       type: [Number, String],
       default: function() {
         return this.multiple ? this.list.length + 1 : null;
       },
+    },
+    id: {
+      type: String,
+      default: function() {
+        return "text-" + tools.random.getRandomString();
+      }
     },
   },
   methods: {

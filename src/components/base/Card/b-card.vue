@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card"
+    class="card p-0"
   >
     <slot name="card">
       <div
@@ -9,12 +9,13 @@
       >
         <slot name="header" />
       </div>
-      <slot name="image" />
+      <slot name="top" />
       <slot name="body">
         <div class="card-body">
           <slot />
         </div>
       </slot>
+      <slot name="bottom" />
       <div
         v-if="$slots.footer"
         class="card-footer"

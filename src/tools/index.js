@@ -7,6 +7,7 @@ import obj from './object'
 import array from './array'
 import string from './string'
 import random from './random'
+import number from './number'
 import documents from './document'
 import { clone } from './clone'
 
@@ -24,6 +25,7 @@ export default {
     // serviceWorker: serviceWorker,
     clone: clone,
     random: random,
+    number: number,
     dom: dom,
     string: string,
     obj: obj,

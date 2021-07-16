@@ -9,14 +9,14 @@
         v-model="selectedValue"
         :list="list.filter(e => e.name[0].toUpperCase() === alpha.toUpperCase())"
         :primary-key="key"
-        :display-name="displayKey"
+        :display-name="display"
         @item:click="itemClick"
       >
         <template #item="{ item }">
           <address-item
             :item="item"
             :primary-key="key"
-            :display-name="displayKey"
+            :display-name="display"
             :selected="selectedValue"
             :disabled="item.disabled"
             @item:click="itemClick"
@@ -38,6 +38,9 @@ export default {
   name: 'AddressCountry',
   components: { AddressTemp, AddressItem, },
   mixins: [ util.mixins.select.select, ],
+  props: {
+    list: util.props.Array,
+  },
   data() {
     return {
       alphas: [

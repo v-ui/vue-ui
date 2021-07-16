@@ -45,6 +45,17 @@
     </div>
     <div class="row">
       <font class="col-1">
+        floating:
+      </font>
+      <b-textarea
+        class="col-11"
+        rows="2"
+        placeholder="placeholder value"
+        float-label="float label"
+      />
+    </div>
+    <div class="row">
+      <font class="col-1">
         cols:
       </font>
       <b-textarea
@@ -62,6 +73,18 @@
         value="rows 2"
         rows="2"
       />
+    </div>
+    <div class="row">
+      <font class="col-1">size(lg)</font>
+      <b-textarea class="col-11" size="lg" value="size" />
+    </div>
+     <div class="row">
+      <font class="col-1">size(default)</font>
+      <b-textarea class="col-11" value="size" />
+    </div>
+     <div class="row">
+      <font class="col-1">size(sm)</font>
+      <b-textarea class="col-11" size="sm" value="size" />
     </div>
     <div class="row">
       <font class="col-1">
@@ -88,6 +111,7 @@
       </font>
       <b-textarea
         class="col-11"
+        value="abc"
         info="info text"
         prompt
       />

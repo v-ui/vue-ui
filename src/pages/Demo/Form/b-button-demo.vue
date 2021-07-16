@@ -1,107 +1,88 @@
 <template>
   <div>
-    <h2>b-button</h2>basic-button 中的属性在 basic-reset basic-submit 中是通用的
+    <h2>b-button</h2>
     <hr>
     <div class="row py-1">
       <font class="col-1">
         default:
       </font>
-      <font class="mx-1">
+      <font class="col-1">
         button:
       </font>
-      <basic-button />
-      <font class="mx-1">
+      <basic-button class="col-auto" />
+      <font class="col-1">
         a:
       </font>
-      <basic-button href="#" />
+      <basic-button class="col-auto" href="#" />
+    </div>
+    <div class="row py-1">
+      <font class="col-1">
+        type:
+      </font>
+      <font class="col-1">
+        button(default):
+      </font>
+      <basic-button class="col-auto" type="button" />
+      <font class="col-1">
+        submit:
+      </font>
+      <basic-button class="col-auto" type="submit" />
+      <font class="col-1">
+        reset:
+      </font>
+      <basic-button class="col-auto" type="reset" />
     </div>
     <div class="row py-1">
       <font class="col-1">
         active:
       </font>
-      <basic-button active />
+      <basic-button class="col-auto" active />
     </div>
     <div class="row py-1">
       <font class="col-1">
         disabled:
       </font>
-      <basic-button disabled />
+      <basic-button class="col-auto" disabled />
     </div>
     <div class="row py-1">
       <font class="col-1">
         value:
       </font>
-      <basic-button value="button text" />
+      <basic-button class="col-auto" value="button text" />
     </div>
     <div class="row py-1">
       <font class="col-1">
         outline:
       </font>
       <basic-button
+        class="col-auto"
         value="button text"
         outline
       />
     </div>
     <div class="row py-1">
       <font class="col-1">
-        block:
+        size(default):
       </font>
-      <basic-button
-        class="col-10"
-        value="button text"
-        block
-      />
+      <basic-button class="col-auto" value="text" />
     </div>
     <div class="row py-1">
       <font class="col-1">
-        size:
-      </font>
-      <font class="col-auto">
-        default:
-      </font>
-      <basic-button value="text" />
-      <font class="col-auto">
-        lg:
+        size(lg):
       </font>
       <basic-button
+        class="col-auto"
         value="lg size"
         size="lg"
       />
-      <font class="col-auto">
-        sm:
-      </font>
-      <basic-button
-        value="sm size"
-        size="sm"
-      />
     </div>
     <div class="row py-1">
       <font class="col-1">
-        loading:
-      </font>
-      <font class="col-auto">
-        default:
-      </font>
-      <basic-button loading />
-      <font class="col-auto">
-        outline:
+        size(sm):
       </font>
       <basic-button
-        loading
-        outline
-      />
-      <font class="col-auto">
-        lg size:
-      </font>
-      <basic-button
-        loading
-        size="lg"
-      />
-      <font class="col-auto">
-        sm size:
-      </font>
-      <basic-button
-        loading
+        class="col-auto"
+        value="sm size"
         size="sm"
       />
     </div>
@@ -136,32 +117,13 @@
         </basic-button>
       </div>
     </div>
-    <h2>basic-reset</h2>
-    <font class="text-danger">
-      不建议使用 使用 v-model 绑定数据的控件均不能正确响应 b-reset
-    </font>
-    <hr>
-    <div class="row py-1">
-      <font class="col-1">
-        default:
-      </font>
-      <basic-reset />
-    </div>
-    <h2>b-submit</h2>
-    <hr>
-    <div class="row py-1">
-      <font class="col-1">
-        default:
-      </font>
-      <basic-submit />
-    </div>
     <h2>button group</h2>
     <hr>
     <div class="row py-1">
       <font class="col-1">
         default:
       </font>
-      <b-button-group>
+      <b-button-group class="col-auto">
         <basic-button value="button text" />
         <basic-button value="button text" />
         <basic-button value="button text" />
@@ -171,7 +133,7 @@
       <font class="col-1">
         vertical:
       </font>
-      <b-button-group vertical>
+      <b-button-group class="col-auto" vertical>
         <basic-button value="button text" />
         <basic-button value="button text" />
         <basic-button value="button text" />
@@ -184,7 +146,7 @@
       <font class="col-1">
         default:
       </font>
-      <b-button-group>
+      <b-button-group class="col-auto">
         <basic-button value="button text" />
         <basic-button value="button text" />
         <basic-button value="button text" />
@@ -195,7 +157,7 @@
       <font class="col-1">
         lg:
       </font>
-      <b-button-group size="lg">
+      <b-button-group class="col-auto" size="lg">
         <basic-button value="button text" />
         <basic-button value="button text" />
         <basic-button value="button text" />
@@ -206,7 +168,7 @@
       <font class="col-1">
         sm:
       </font>
-      <b-button-group size="sm">
+      <b-button-group class="col-auto" size="sm">
         <basic-button value="button text" />
         <basic-button value="button text" />
         <basic-button value="button text" />
@@ -214,8 +176,8 @@
     </div>
     <h2>button toolbar</h2>
     <hr>
-    <b-button-toolbar>
-      <b-button-group class="mr-2">
+    <b-button-toolbar class="col-auto">
+      <b-button-group class="me-2">
         <basic-button value="button text" />
         <basic-button value="button text" />
         <basic-button value="button text" />
@@ -233,18 +195,16 @@
 import variables from "@/components/util/variables.js";
 
 import BasicButton from "@/components/basic/Button/basic-button.vue";
-import BasicReset from "@/components/basic/Button/basic-reset.vue";
-import BasicSubmit from "@/components/basic/Button/basic-submit.vue";
 
-import BButtonGroup from "@/components/base/ButtonGroup/b-button-group.vue";
-import BButtonToolbar from "@/components/base/ButtonGroup/b-btn-toolbar.vue";
+import BButtonGroup from "@/components/basic/Button/basic-button-group.vue";
+import BButtonToolbar from "@/components/basic/Button/basic-button-toolbar.vue";
 
 export default {
   name: "BButtonDemo",
-  components: { BasicButton, BasicReset, BasicSubmit, BButtonGroup, BButtonToolbar },
+  components: { BasicButton, BButtonGroup, BButtonToolbar },
   data() {
     return {
-      colors: variables.base.color.base,
+      colors: [...variables.base.color.base, 'link'],
       BTextValue: "BTextValue",
       list: [
         { value: "value1", text: "text1" },

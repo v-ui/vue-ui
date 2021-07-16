@@ -1,8 +1,7 @@
 <template>
   <small
     v-if="info"
-    class="form-text text-truncate"
-    :class="['text-' + infoColor,]"
+    :class="['text-' + color,]"
   >
     {{ info }}
   </small>
@@ -14,10 +13,7 @@ export default {
   name: "BasicInfo",
   props: {
     info: util.props.String,
-    infoColor: {
-      ...util.props.textColor,
-      default: "muted"
-    }
+    color: util.props.textColor,
   }
 };
 </script>

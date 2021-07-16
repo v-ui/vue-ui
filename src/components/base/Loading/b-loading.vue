@@ -3,7 +3,7 @@
     :class="objClass"
     role="status"
   >
-    <span class="sr-only">Loading...</span>
+    <span class="visually-hidden">Loading...</span>
   </div>
 </template>
 
@@ -31,8 +31,8 @@ export default {
   computed: {
     objClass: function() {
       let color = this.color ? `text-${this.color}` : "";
-      let size = this.size ? `spinner-border-${this.size}` : "";
-      return `spinner-${this.status} ${color} ${size}`;
+      let size = this.size ? `spinner-${this.status}-${this.size}` : "";
+      return `spinner-${this.status} ${size} ${color}`;
     }
   }
 };

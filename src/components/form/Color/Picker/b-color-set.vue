@@ -5,7 +5,7 @@
         v-for="(item, index) in list"
         :key="index"
         class="col m-1"
-        color="light"
+        outline
         :value="item"
         :active="isSelected(item)"
         @click="selectedValue = item"
@@ -23,5 +23,8 @@ export default {
   name: 'BColorSet',
   components: { BasicButton, },
   mixins: [ util.mixins.select.check ],
+  props: {
+    list: util.props.Array,
+  },
 }
 </script>

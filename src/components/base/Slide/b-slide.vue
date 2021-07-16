@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row mx-0 align-items-center">
-      <label class="m-0 px-0 pr-1">{{ dataMin }}</label>
+      <label class="col-auto m-0 px-0 pe-1">{{ dataMin }}</label>
       <div class="col">
         <div
           ref="bar"
@@ -42,7 +42,7 @@
           :content="refTip"
         />
       </div>
-      <label class=" m-0 p-0 pl-1">{{ dataMax }}</label>
+      <label class="col-auto m-0 p-0 ps-1">{{ dataMax }}</label>
     </div>
     <b-info :info="info" />
   </div>
@@ -69,12 +69,6 @@ export default {
   props: {
     color: util.props.color,
     value: util.props.Object,
-    // start: util.props.Number,
-    // end: {
-    //   ...util.props.Number,
-    //   default: 0,
-    //   validator: (value) => util.props.Number.validator(value),
-    // },
     min: util.props.Number,
     max: {
       ...util.props.Number,

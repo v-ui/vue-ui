@@ -1,32 +1,34 @@
 <template>
   <div>
-    <h2>b-grid-row</h2>
-    <hr>
     <div class="row">
-      <font class="col-2 text-center">
-        list
+      <font class="col-2">
       </font>
-      <font class="col-2 text-center">
-        colCount
+      <font class="col-4">
+        b-grid-row
       </font>
-      <font class="col-2 text-center">
-        disabled
-      </font>
-      <font class="col-2 text-center">
-        v-model multiple='false'(default)<br>
-        {{ value1 }}
-      </font>
-      <font class="col-2 text-center">
-        v-model multiple='true'(default)<br>
-        {{ value2 }}
+      <font class="col-4">
+        b-grid-table
       </font>
     </div>
     <div class="row">
-      <b-grid-row
-        class="col-2"
+      <font class="col-2">
+        list
+      </font>
+       <b-grid-row
+        class="col-4"
         :list="list"
       />
-      <div class="col-2">
+      <div class="col-4">
+        <b-grid-table
+          :list="list"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <font class="col-2">
+        colCount
+      </font>
+      <div class="col-4">
         <b-range
           v-model="col"
           min="1"
@@ -37,53 +39,7 @@
           :col-count="col"
         />
       </div>
-      <b-grid-row
-        class="col-2"
-        :list="list"
-        disabled
-      />
-      <b-grid-row
-        v-model="value1"
-        class="col-2"
-        :list="list"
-      />
-      <b-grid-row
-        v-model="value2"
-        class="col-2"
-        :list="list"
-        multiple
-      />
-    </div>
-    <h2>b-grid-table</h2>
-    <hr>
-    <div class="row">
-      <font class="col-2 text-center">
-        list
-      </font>
-      <font class="col-2 text-center">
-        colCount
-      </font>
-      <font class="col-2 text-center">
-        border
-      </font>
-      <font class="col-2 text-center">
-        disabled
-      </font>
-      <font class="col-2 text-center">
-        v-model multiple='false'(default)<br>
-        {{ value1 }}
-      </font>
-      <font class="col-2 text-center">
-        v-model multiple='true'(default)<br>
-        {{ value2 }}
-      </font>
-    </div>
-    <div class="row">
-      <b-grid-table
-        class="col-2"
-        :list="list"
-      />
-      <div class="col-2">
+      <div class="col-4">
         <b-range
           v-model="col"
           min="1"
@@ -94,27 +50,58 @@
           :col-count="col"
         />
       </div>
-      <b-grid-table
-        class="col-2"
+    </div>
+    <div class="row">
+      <font class="col-2">
+        disabled
+      </font>
+      <b-grid-row
+        class="col-4"
         :list="list"
         disabled
       />
-      <b-grid-table
-        class="col-2"
-        :list="list"
-        border
-      />
-      <b-grid-table
+      <div class="col-4">
+        <b-grid-table
+          :list="list"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="row">
+      <font class="col-2">
+        v-model multiple='false'(default)<br>
+        {{ value1 }}
+      </font>
+      <b-grid-row
         v-model="value1"
-        class="col-2"
+        class="col-4"
         :list="list"
       />
-      <b-grid-table
+      <div class="col-4">
+        <b-grid-table
+          :list="list"
+          border
+        />
+      </div>
+    </div>
+    <div class="row">
+      <font class="col-2">
+        v-model multiple='true'(default)<br>
+        {{ value2 }}
+      </font>
+      <b-grid-row
         v-model="value2"
-        class="col-2"
+        class="col-4"
         :list="list"
         multiple
       />
+      <div class="col-4">
+        <b-grid-table
+          v-model="value2"
+          :list="list"
+          multiple
+        />
+      </div>
     </div>
   </div>
 </template>

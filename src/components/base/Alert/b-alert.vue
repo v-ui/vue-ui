@@ -1,86 +1,72 @@
 <template>
-  <tran-out-in>
-    <div
-      v-show="$slots.default && isShow"
-      class="alert position-absolute"
-      :class="objClass"
-      style="min-width: 300px;"
-      :style="objStyle"
-      role="alert"
-      @mouseenter="clearTimer"
-      @mouseleave="countDown"
+  <div
+    v-show="$slots.default && isShow"
+    class="alert fade show position-absolute"
+    :class="objClass"
+    style="min-width: 300px;"
+    :style="objStyle"
+    role="alert"
+  >
+    <h5
+      v-if="$slots.header"
+      class="alert-heading"
     >
-      <h4
-        v-if="$slots.header"
-        class="alert-heading"
-      >
-        <slot name="header" />
-      </h4>
-      <div
-        class="overflow-auto"
-        style="max-height: 200px;"
-      >
-        <slot />
-        <sr-msg>{{ fillsrMsg }}</sr-msg>
-      </div>
-      <div v-if="$slots.footer">
-        <hr>
-        <p class="mb-0">
-          <slot name="footer" />
-        </p>
-      </div>
+      <slot name="header" />
       <button
-        v-if="showDismisLable"
+        v-if="dismissible"
         type="button"
-        class="close"
-        data-dismiss="alert"
+        class="btn-close"
+        data-bs-dismiss="alert"
         aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
+      />
+    </h5>
+    <div
+      class="overflow-auto"
+      style="max-height: 200px;"
+    >
+      <slot />
     </div>
-  </tran-out-in>
+    <div v-if="$slots.footer">
+      <hr>
+      <p class="mb-0">
+        <slot name="footer" />
+      </p>
+    </div>
+    <button
+      v-if="dismissible && !$slots.header"
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    />
+  </div>
 </template>
 <script>
 import util from "@/components/util/index.js";
 
-import srMsg from "@/components/basic/basic-sr-msg.vue";
-import TranOutIn from "@/components/transition/tran-out-in.vue";
-
 export default {
   name: "BAlert",
-  components: {
-    srMsg,
-    TranOutIn
-  },
   props: {
     show: util.props.Boolean,
     color: util.props.color,
     size: util.props.size,
     position: util.props.position,
-    srMsg: util.props.String,
     dismissible: util.props.Boolean,
-    countDownDisdismis: util.props.Boolean,
-    countDownSec: {
-      ...util.props.UInt,
-      default: 5,
-    }
   },
   data() {
     return {
       isShow: this.show,
-      dismissCountDownTimerId: null
     };
   },
   computed: {
     objClass: function() {
       let color = this.color ? `alert-${this.color}` : ''
-      let showDismisLable = `${this.showDismisLable ? "alert-dismissible" : ""}`
+      let dismissible = `${this.dismissible ? "alert-dismissible" : ""}`
       let size = ''
       if (this.size === 'lg') size = 'w-75'
       else if (this.size == 'sm') size = 'w-25'
       else size = 'w-50'
-      return `${color} ${showDismisLable} ${size}`
+      return `${color} ${dismissible} ${size}`
     },
     objStyle: function() {
       let position = {};
@@ -88,79 +74,26 @@ export default {
         case "top-center":
           position = { left: `${document.body.offsetWidth / 4}px` };
           break;
-        case "top-right":
+        case "top-end":
           position = { right: 0 };
           break;
-        case "bottom-left":
+        case "bottom-start":
           position = { bottom: 0, left: 0 };
           break;
         case "bottom-center":
           position = { bottom: 0, left: `${document.body.offsetWidth / 4}px` };
           break;
-        case "bottom-right":
+        case "bottom-end":
           position = { bottom: 0, right: 0 };
           break;
       }
       return position
     },
-    showDismisLable: function() {
-      // 保证在任何时候弹出框都可以关闭
-      return !this.countDownDisdismis || this.dismissible;
-      //return this.dismissible
-    },
-    fillsrMsg: function() {
-      return this.srMsg || this.color;
-    }
   },
   watch: {
     show: function(newVal) {
       this.isShow = newVal;
     },
-    "$slots.default": function(newVal, oldVal) {
-      if (newVal !== oldVal) this.reset();
-    },
-    variant: function(newVal, oldVal) {
-      if (newVal !== oldVal) this.reset();
-    }
-  },
-  created() {
-    if (this.countDownDisdismis) this.countDown();
-  },
-  destroyed() {
-    this.clearTimer();
-  },
-  methods: {
-    alert: function() {
-      this.$emit("alert");
-      this.isShow = true;
-      if (this.countDownDisdismis) this.countDown();
-    },
-    close: function() {
-      this.$emit("close");
-      this.clearTimer();
-      this.isShow = false;
-    },
-    reset: async function() {
-      await this.close();
-      await this.alert();
-    },
-    clearTimer: function() {
-      if (this.dismissCountDownTimerId)
-        window.clearInterval(this.dismissCountDownTimerId);
-    },
-    countDown: function() {
-      if (Number(this.countDownSec) < 1) return;
-      // 每一次计时前都会先清空可能存在的计时器
-      this.clearTimer();
-      let countDownSec = Number(this.countDownSec);
-      this.dismissCountDownTimerId = setInterval(() => {
-        if (countDownSec < 1) {
-          this.close();
-          return;
-        }
-        countDownSec--;
-      }, 1000);
-    }
   },
 };
 </script>

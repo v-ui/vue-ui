@@ -17,19 +17,19 @@
       @drop.stop.prevent="drop"
     >
       <div
-        class="d-table-cell pl-1"
+        class="d-table-cell ps-1"
         :class="itemClass"
         @click.stop="open = !open"
       >
         <div v-if="isFolder">
           <i
-            class="mr-2"
+            class="me-2"
             :class="open ? icon.caretDown : icon.caretRight"
             style="width: 10px"
             @dblclick.stop
           />
           <i
-            class="mr-2"
+            class="me-2"
             :class="open ? icon.folderOpen : icon.folder"
             @click.stop
           />
@@ -41,7 +41,7 @@
         />
       </div>
       <!-- icon -->
-      <div class="d-table-cell pr-1">
+      <div class="d-table-cell pe-1">
         <font v-if="!editItem">
           {{ item.value }}
         </font>

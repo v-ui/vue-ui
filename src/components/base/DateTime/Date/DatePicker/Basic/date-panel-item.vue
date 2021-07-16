@@ -1,6 +1,6 @@
 <template>
   <b-button
-    class="rounded-pill p-1"
+    class="m-1 p-1"
     style="min-width: 2.2em"
     :class="objClass"
     :style="objStyle"
@@ -29,11 +29,11 @@ export default {
       if (this.item.status) {
         if (this.item.status.now) style = 'border-0 bg-transparent text-danger '
         if (this.item.status.start || this.item.status.end || this.item.status.between) style = this.item.status.now ? 'border-0 rounded-0 bg-danger' : 'border-0 rounded-0 bg-primary'
-        if (this.item.status.selected) style = this.item.status.now ? "border-danger bg-transparent text-danger" : "bg-transparent text-primary"
+        if (this.item.status.selected) style = this.item.status.now ? "rounded-pill border-2 border-danger bg-transparent text-danger" : "rounded-pill border-2 border-primary bg-transparent text-primary"
         if (style.length === 0) style = 'border-0 bg-transparent text-body'
-        style += this.item.status.isWeekend ? ' font-weight-light' : ' font-weight-bolder'
+        style += this.item.status.weekend ? ' font-weight-light' : ' font-weight-bolder'
       } else {
-        style = 'border-0 bg-transparent text-body'
+        style = 'rounded-pill bg-transparent text-body'
       }
       return `${style}`
     },

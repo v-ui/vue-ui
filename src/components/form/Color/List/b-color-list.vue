@@ -24,6 +24,7 @@ export default {
   components: { BColorCheck, },
   mixins: [ util.mixins.select.select ],
   props: {
+    list: util.props.Array,
     disabled: util.props.Boolean,
   },
   data() {

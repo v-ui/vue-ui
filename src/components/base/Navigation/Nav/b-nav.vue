@@ -35,6 +35,7 @@ export default {
   components: { NavItem, NavItemDropdown },
   mixins: [ util.mixins.select.check, ],
   props: {
+    list: util.props.Array,
     set: util.props.justify,
     column: util.props.Boolean,
     tabs: util.props.Boolean,

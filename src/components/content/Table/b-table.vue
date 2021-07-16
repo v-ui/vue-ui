@@ -104,6 +104,7 @@ export default {
     util.mixins.select.select,
   ],
   props: {
+    list: util.props.Array,
     foot: util.props.Array,
     rowStyle: util.props.Object,
     primaryKey: {

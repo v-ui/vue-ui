@@ -5,10 +5,14 @@ import tools from '@/tools/index.js'
 
 const name = 'modal'
 const func = (el, binding) => {
+  let target = binding.value.target || binding.value
+
   tools.dom.addAttrs(el, {
-    'data-toggle': 'modal',
-    'data-target': binding.value
+    'data-bs-toggle': 'modal',
   })
+  el.tagName.toLowerCase() == 'a'
+    ? tools.dom.addAttr(el, 'href', target)
+    : tools.dom.addAttr(el, 'data-bs-target', target)
 }
 
 export default {

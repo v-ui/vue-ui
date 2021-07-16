@@ -1,12 +1,13 @@
 <template>
   <div class="m-1 h-100">
     <div class="d-flex justify-content-center">
-      <b-radio-button-group
+      <b-check-button-group
         v-model="pickerType"
         class="d-flex justify-content-center w-25"
         name="picker-type"
         :list="typeList"
         size="sm"
+        outline
       />
     </div>
     <cal-year-panel
@@ -46,32 +47,32 @@ import CalYearPanel from './Cal/cal-year-panel'
 import CalMonthPanel from './Cal/cal-month-panel'
 import CalWeekPanel from './Cal/cal-week-panel'
 import CalDatePanel from './Cal/cal-date-panel'
-import BRadioButtonGroup from "@/components/form/Radio/b-radio-button-group.vue";
+import BCheckButtonGroup from "@/components/form/Check/b-check-button-group.vue";
 export default {
   name: 'BCalendar',
-  components: { CalYearPanel, CalMonthPanel, CalWeekPanel, CalDatePanel, BRadioButtonGroup },
+  components: { CalYearPanel, CalMonthPanel, CalWeekPanel, CalDatePanel, BCheckButtonGroup },
   mixins: [
     util.mixins.date.type,
     util.mixins.date.base,
-    util.mixins.form.readonly,
   ],
   data() {
     return {
       typeList: [],
     }
   },
-  watch: {
-    pickerType: function() {
-
-    },
-  },
   mounted() {
     this.typeList = [
-      { value: this.enumTypeStatus.year, label: '年', },
-      { value: this.enumTypeStatus.month, label: '月', },
-      { value: this.enumTypeStatus.week, label: '周', },
-      { value: this.enumTypeStatus.date, label: '日', },
+      this.enumTypeStatus.year,
+      this.enumTypeStatus.month,
+      this.enumTypeStatus.week,
+      this.enumTypeStatus.date,
     ],
+    // this.typeList = [
+    //   { value: this.enumTypeStatus.year, label: '年', },
+    //   { value: this.enumTypeStatus.month, label: '月', },
+    //   { value: this.enumTypeStatus.week, label: '周', },
+    //   { value: this.enumTypeStatus.date, label: '日', },
+    // ],
     this.selectedValue = this.moment(this.value)
   },
   methods: {

@@ -1,9 +1,9 @@
 <template>
   <img
     :src="src"
-    :class="isTop"
+    :class="objClass"
     :alt="alt"
-  >
+  />
 </template>
 <script>
 import util from "@/components/util/index.js";
@@ -12,15 +12,17 @@ export default {
   name: "BCardImage",
   props: {
     src: util.props.src,
-    top: {
-      ...util.props.Boolean,
-      default: true
+    set: {
+      type: String,
+      default: 'top',
+      validator: value => ['', 'top', 'bottom'].includes(value),
     },
     alt: util.props.String,
   },
   computed: {
-    isTop: function() {
-      return this.top ? "card-img-top" : "card-img";
+    objClass: function() {
+      let set = this.set ? `card-img-${this.set}` : 'card-img'
+      return `${set}`
     }
   }
 };
