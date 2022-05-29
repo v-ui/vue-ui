@@ -19,6 +19,7 @@ Run
 npm run serve
 ```
 
+Node version
 ```
 Binaries:
     Node: 14.8.0
