@@ -2,6 +2,25 @@
 
  vue-ui
 
-> 本项目来自 [WMS](http://localhost:8080/Demo-Content-video-player) 的 view 部分，现将其作为单独项目开发
+> 基于 Bootstrap 4 和 vue 2 的 vue 组件库
 
+Clone
+```
+git clone https://github.com/v-ui/vue-ui.git
+```
 
+Install
+```
+npm install
+```
+
+Run 
+```
+npm run serve
+```
+
+```
+Binaries:
+    Node: 14.8.0
+    npm: 6.14.7
+```
